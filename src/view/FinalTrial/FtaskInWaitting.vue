@@ -15,13 +15,13 @@
             <span class="keywordText">证件号码：</span>
             <el-input class="" v-model="certCode" placeholder="请输入证件号码"></el-input>
           </el-col>
-            <el-col :span="6"  class="search-btn">
-                  <el-button class="btn query " type="primary" @click="search">查询</el-button>
+          <el-col :span="6" class="search-btn">
+            <el-button class="btn query " type="primary" @click="search">查询</el-button>
             <el-button class="btn reset" @click="reset">重置</el-button>
           </el-col>
         </el-row>
       </div>
-        <div class="title titleContainer edit-div">
+      <div class="title titleContainer edit-div">
         <span class="titleText">
           <i class="el-icon title-icon"></i>
           信审任务列表
@@ -56,10 +56,9 @@
           <el-table-column prop="approveTimeLong" label="进入本环节时长（小时）" min-width="180">
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
         <div class="page">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-            :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+            :page-sizes="[10, 20,50]" :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
           </el-pagination>
         </div>
       </div>
@@ -72,14 +71,11 @@
       return {
         activeNames: ['1'],
         totals: {},
-        currentPage: 1, // 默认显示的当前页
-        //data:[],
+        currentPage: 1,
         datas: [],
         applySubNo: '',
         custName_la: '',
         certCode: '',
-        //pageNum:1,
-        //pageSize:20,
         setPageSize: 10,
         queryParam: {
           processTemplateId: '',
@@ -93,16 +89,13 @@
           custName_la: '',
           certCode: ''
         },
-        //taskType:'',
-        // timeColor:false,
       }
     },
     mounted() {
-      //一进入页面就发送请求
       this.toinner();
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/FtaskInWaitting') {
           this.toinner();
         }
@@ -110,32 +103,25 @@
     },
     methods: {
       toinner() {
-        // if (this.$route.fullPath.indexOf('?') != -1 && this.$route.fullPath.indexOf('%') == -1) {var par = this.$route.fullPath.split('?')[1].split('=')[1];}
-       var par='';
-       if (this.$route.fullPath.indexOf('?') != -1) { par = this.$route.fullPath.split('?')[1].split('&')[0].split('=')[1];}
-      this.queryParam.taskNodeName = par || JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;        
-      // console.log(this.queryParam.taskNodeName )
-      this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).processTemplateId;
-        // this.queryParam.taskNodeName = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
+        var par = '';
+        if (this.$route.fullPath.indexOf('?') != -1) {
+          par = this.$route.fullPath.split('?')[1].split('&')[0].split('=')[1];
+        }
+        this.queryParam.taskNodeName = par || JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
+        this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).processTemplateId;
         this.queryParam.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
-        //this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
-        //this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
-        // 登录 单独存  userCode  orgCode 
         this.queryParam.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
         this.queryParam.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
-        //console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 
         this.request(this.queryParam);
       },
       request(param) {
-        // console.log(this.queryParam);
         this.post('/workFlowTaskQuery/getTaskToDoList',
           param
         ).then(res => {
-          if (res.statusCode == 200 && 　res.data.taskDetailList != null) {
+          if (res.statusCode == 200 && res.data.taskDetailList != null) {
             this.totals = res.data;
             this.datas = res.data.taskDetailList;
-            // console.log(this.datas.length)
             for (var i = 0; i < this.datas.length; i++) {
               if (this.datas[i].taskType == '00') { //00
                 this.datas[i].taskType = "新任务";
@@ -184,19 +170,15 @@
       },
       //跳转到详情页
       goDetail(row, event, column) {
-        // this.$router.push({
-        //   path: '/FSplitScreen'
-        // });
-        	this.$router.push({
-            name: 'FSplitScreen',
-            params: {
-              newOne: true,
-            }
-          });
+        this.$router.push({
+          name: 'FSplitScreen',
+          params: {
+            newOne: true,
+          }
+        });
         localStorage.setItem("FtaskInWaitting", JSON.stringify(row));
       },
       handleSizeChange(val) {
-        console.log('每页 ${val} 条');
         this.queryParam.pageSize = val;
         this.queryParam.pageNum = 1;
         if (this.currentPage !== 1 || this.setPageSize !== 10) {
@@ -207,7 +189,6 @@
         };
       },
       handleCurrentChange(val) {
-        console.log('当前页: ${val}');
         this.queryParam.pageNum = val;
         this.request(this.queryParam);
       },

@@ -107,7 +107,7 @@
   import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
-  import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue";
+  import FCreditForm from "../FinalTrial/FCreditForm.vue";
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   import CreditApproval from "./CreditApproval";

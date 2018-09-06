@@ -41,7 +41,7 @@
             <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
             <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>
-            <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aMAntiApplyInf>
+            <aAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aAntiApplyInf>
             <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
             <RFinanceInformation v-if=" this.tabContent1==10">财务信息</RFinanceInformation>
             <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
@@ -98,7 +98,7 @@
           <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>
-          <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aMAntiApplyInf>
+          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
           <RFinanceInformation v-if=" this.tabContent2==10">财务信息</RFinanceInformation>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
@@ -153,14 +153,14 @@
   // 编辑
   import RAudioVisual from "./ReadComponent/RAudioVisual";
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
-  import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue"; //信审表
+  import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
   import Rremark from "./ReadComponent/Rremark"; //备注信息
   import creditInvestigation from "./detailComponent/creditInvestigation.vue"; //实地征信
-  import aMAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
+  import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
   import regularQT from "../QualityTesting/QTProcess/components/regularQT.vue"; //质检结论
   import QTResultCheck from "../QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue"; //质检结论-本人结论页
@@ -487,7 +487,7 @@
       RApprovalConclusion, //信审审批结论归结
       Rremark, // 备注信息
       creditInvestigation, //实地征信
-      aMAntiApplyInf, //反欺诈结论
+      aAntiApplyInf, //反欺诈结论
       InternalMatch,
       PhoneCredit,
       QTAprovalConclution, //反欺诈审批结论轨迹

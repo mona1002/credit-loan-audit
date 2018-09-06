@@ -44,7 +44,8 @@
     </div>
     <div class="listContainer">
       <!-- 编辑table -->
-      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange"
+        border>
         <el-table-column type="index" align='center' label=序号 width="55">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
@@ -80,12 +81,6 @@
         <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="120">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
-      <!-- <div class="paging">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div> -->
     </div>
   </div>
 </template>
@@ -111,45 +106,6 @@
         },
         userInf: null,
         tableData: [],
-        // tableData: [{
-        //   checkResult: '01',
-        //   isSecondIns: "1",
-        //   reconType: '02',
-        //   appType: null,
-        //   applyId: "879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
-        //   applyIdList: null,
-        //   applyMainNo: null,
-        //   applySubNo: "201511190111013763",
-        //   assignCode: null,
-        //   assignName: "system",
-        //   auditCodec: null,
-        //   auditCodez: null,
-        //   auditDatec: null,
-        //   auditDatez: null,
-        //   auditNamec: "林丹勘定",
-        //   auditNamez: "刘杰",
-        //   certCode: "431129198001010178",
-        //   checkState: "01",
-        //   checkStateTxt: "待质检员审批",
-        //   certType: null,
-        //   createTime: null,
-        //   custCode: null,
-        //   custName: "0508测试D009",
-        //   enterTime: "2018-05-23 11:06:25",
-        //   id: "Fwn2yzQIZ1GS8Czoqf7g4MoF1TVEeSGB",
-        //   insDate: null,
-        //   insMemberName: null,
-        //   instaskType: "00",
-        //   instaskTypeTxt: "常规质检",
-        //   lastModifyTime: null,
-        //   mobile: null,
-        //   proCode: null,
-        //   proName: null,
-        //   processInstanceId: null,
-        //   processInstanceIdSecond: null,
-        //   remark: null,
-        //   taskId: '98988',
-        // }],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
@@ -162,32 +118,18 @@
           custName_la: '',
           certCode: '',
           checkState: '',
-          //   pageNum: '', //页数（第几页）
-          //   pageSize: '', //页面显示行数
         },
-        // currentPage: 1, //分页选中页
-        // pageCount: 10, // 每页显示条数
-        // totalRecord: 0, //总条数
         value: '',
-
-
-
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/ManagerTaskList') {
           this.mountedInf();
         }
       }
     },
     methods: {
-      //   handleSizeChange(val) {
-      //     this.params.pageSize = val;
-      //     this.params.pageNum = 1;
-      //     // this.getInf(this.params);
-      //     this.inquire(this.params);
-      //   },
       mountedInf() {
         this.getQTsituation(); //获取质检下拉
         this.taskList = JSON.parse(localStorage.getItem('QTTrialManagerWorkbenchPass'))
@@ -195,12 +137,6 @@
         this.params.taskNodeName = this.taskList.taskNodeName;
         this.params.taskStatus = this.taskList.taskStatus;
         this.inquire(this.params);
-        // QTTrialManagerWorkbenchPass
-        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-        //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-        //   this.params.pageNum = this.currentPage, //页数（第几页）
-        //     this.params.pageSize = this.pageCount, //页面显示行数
       },
       getQTsituation() { //获取质检状态下拉
         this.get("/system/getAllCheckState?" + Math.random())
@@ -213,8 +149,6 @@
           });
       },
       handleCurrentChange(val) {
-        // this.params.pageNum = val;
-        // this.inquire(this.params);reconType
         if (val.reconType == '00') { //初终审主管首次
           this.query.listType = '初终审主管首次';
         } else if (val.reconType == '01') { //初终审主管二次
@@ -246,21 +180,12 @@
         this.inquire(this.params);
       },
       Rsearch() {
-        // this.params.pageNum = this.currentPage = 1;
         this.inquire(this.params);
       },
       inquire(pam) {
         // 基础接口-综合查询
         this.post("/insConclusion/queryCZSZGTaskList", pam).then(res => {
           if (res.statusCode == 200) {
-            // for (var i = 0; i < res.data.length; i++) {
-            //   if (res.data[i].certCode) {
-            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-            //   }
-            //   if (res.data[i].mobile) {
-            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-            //   }
-            // }
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);

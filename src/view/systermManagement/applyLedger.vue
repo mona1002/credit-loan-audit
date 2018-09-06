@@ -522,14 +522,13 @@
             this.creditTime = '';
             this.params.appDate_ge = this._getDate(-6);
             this.params.appDate_le = this._getDate();
-            // this.tableData = [];
             this.Routes[3].closed = true;
           }
         }
       },
     },
     methods: {
-      getExcel() { //导出Excel
+      getExcel() { //导出
         // 校验：
         if (this.applyData && this.applyData.length > 0) {
           let beginDate = new Date(this.applyData[0].replace(/-/g, '/')).getTime(),
@@ -554,11 +553,11 @@
         let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
-        axios({ // 用axios发送post请求
+        axios({
           method: 'post',
-          url: '/export/applyLedgers', // 请求地址
-          data: obj, // 参数
-          responseType: 'blob', // 表明返回服务器返回的数据类型
+          url: '/export/applyLedgers',
+          data: obj,
+          responseType: 'blob',
           headers: {
             'Content-Type': 'application/json'
           }
@@ -658,7 +657,6 @@
         this.params.busiState = ''; //	业务状态
         this.params.page = this.currentPage = 1; //	页码-页码重置
         this.totalRecord = 0;
-        // this.params.rows	='';//	每页条数
         this.applyData = ''; //申请日期
         this.creditTime = ''; //授信日期
         this.agencyCode = ''; //进件机构
@@ -687,12 +685,10 @@
         this.agencyCode != this.selectedAgenName ? (this.agencyCode = this.selectedAgenName = this.params.agencyCode =
           "") : "";
         this.post("/credit/getApplyLedger", pam).then(res => {
-          // this.post("http://10.1.26.47:8099/riskManagement/credit/getApplyLedger", pam).then(res => {
           if (res.statusCode == 200) {
             if (res.data) {
               this.tableData = res.data.rows;
               this.totalRecord = res.data.total; // 总数
-              // this.changeColor();
             } else {
               this.tableData = [];
               this.totalRecord = 0;
@@ -718,7 +714,6 @@
           if (res.statusCode == 200) {
             this.loanExp = res.data;
           } else {
-            // this.$message.error(res.msg);
             this.$message.error('获取借款期限失败！');
 
           }
@@ -734,7 +729,6 @@
           if (res.statusCode == 200) {
             this.agency = res.data;
           } else {
-            // this.$message.error(res.msg);
             this.$message.error('获取进件机构失败！');
 
           }

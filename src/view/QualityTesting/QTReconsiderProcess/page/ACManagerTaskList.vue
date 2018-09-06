@@ -30,7 +30,8 @@
     </div>
     <div class="listContainer">
       <!-- 编辑table -->
-      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange"
+        border>
         <el-table-column type="index" align='center' label=序号 width="55">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
@@ -91,45 +92,6 @@
         },
         userInf: null,
         tableData: [],
-        // tableData: [{
-        //   checkResult: '01',
-        //   isSecondIns: "1",
-        //   reconType: '02',
-        //   appType: null,
-        //   applyId: "879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
-        //   applyIdList: null,
-        //   applyMainNo: null,
-        //   applySubNo: "201511190111013763",
-        //   assignCode: null,
-        //   assignName: "system",
-        //   auditCodec: null,
-        //   auditCodez: null,
-        //   auditDatec: null,
-        //   auditDatez: null,
-        //   auditNamec: "林丹勘定",
-        //   auditNamez: "刘杰",
-        //   certCode: "431129198001010178",
-        //   checkState: "01",
-        //   checkStateTxt: "待质检员审批",
-        //   certType: null,
-        //   createTime: null,
-        //   custCode: null,
-        //   custName: "0508测试D009",
-        //   enterTime: "2018-05-23 11:06:25",
-        //   id: "Fwn2yzQIZ1GS8Czoqf7g4MoF1TVEeSGB",
-        //   insDate: null,
-        //   insMemberName: null,
-        //   instaskType: "00",
-        //   instaskTypeTxt: "常规质检",
-        //   lastModifyTime: null,
-        //   mobile: null,
-        //   proCode: null,
-        //   proName: null,
-        //   processInstanceId: null,
-        //   processInstanceIdSecond: null,
-        //   remark: null,
-        //   taskId: '98988',
-        // }],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
@@ -145,7 +107,7 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/ACManagerTaskList') {
           this.mountedInf();
         }
@@ -200,21 +162,12 @@
         this.inquire(this.params);
       },
       Rsearch() {
-        // this.params.pageNum = this.currentPage = 1;
         this.inquire(this.params);
       },
       inquire(pam) {
         // 基础接口
         this.post("/insConclusion/queryCZSZGTaskList", pam).then(res => {
           if (res.statusCode == 200) {
-            // for (var i = 0; i < res.data.length; i++) {
-            //   if (res.data[i].certCode) {
-            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-            //   }
-            //   if (res.data[i].mobile) {
-            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-            //   }
-            // }
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);

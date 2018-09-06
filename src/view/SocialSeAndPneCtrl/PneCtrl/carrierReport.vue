@@ -143,26 +143,6 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">运营商数据</span>
         </template>
-        <!-- <table id="t_4">
-          <thead>
-            <tr>
-              <th>运营商</th>
-              <th>号码</th>
-              <th>归属地</th>
-              <th>月份</th>
-              <th>呼叫次数</th>
-              <th>主叫次数</th>
-              <th>主叫时间(分钟)</th>
-              <th>被叫次数</th>
-              <th>被叫时间(分钟)</th>
-              <th>短信数量</th>
-              <th>流量(MB)</th>
-              <th>话费消费[元]</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table> -->
         <div class="height_auto">
           <el-table :data="cellBehavior" style="width:100%;" highlight-current-row border>
             <el-table-column prop="cell_operator_zh" label="运营商" min-width="100">
@@ -206,9 +186,6 @@
             <el-table-column prop="region_call_in_cnt" label="呼入次数" width="80">
             </el-table-column>
             <el-table-column prop="region_call_out_cnt" label="呼出次数" width="80">
-              <!-- <template slot-scope="scope">
-                <span>{{ scope.row.region_call_out_cnt | NumRound(4)}}</span>
-              </template> -->
             </el-table-column>
             <el-table-column label="呼入时间(分钟)" width="120">
               <template slot-scope="scope">

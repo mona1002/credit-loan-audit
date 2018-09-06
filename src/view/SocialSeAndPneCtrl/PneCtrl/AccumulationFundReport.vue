@@ -337,31 +337,9 @@
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         fundReport: {
-          // name:'',
-          // idcarduser_name:'',
-          // user_idcard:'',
-          // user_phone:'',
-          // name_match:'',
-          // idcard_match:'',
-          // monthly_income:'',
-          // customer_id:'',
-          // organization_type:'',
-          // status:'',
-          // company:'',
-          // corp_scale:'',
-          // corp_type:'',
-          // deposit_rate:'',
-          // deposit_amount:'',
-          // balance:'',
-          // current_corp_continuous_deposit_month:'',
-          // last_record_date:'',
-          // continuous_deposit_month:'',
-          // last_deposit_month:'',
-          // loan_count:'',
-          // loan_repay_amount:'',
         },
         fundRawReport: {},
-        insurances: [], //
+        insurances: [], 
         medicareFlow: [],
         pensionFlow: [],
         unemploymentFlow: [],
@@ -385,7 +363,6 @@
       getInf() {
         this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getFundReport.action', {
           applySubNo: this.applySubNo
-          //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
           if (res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);

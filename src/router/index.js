@@ -360,28 +360,5 @@ const routes = [{
 const router = new Router({
   routes
 });
-// router.beforeEach((to, from, next) => {
-// //   to.matched.some(r => console.log(r))
-// console.log(to)
-// // if( to.meta.keepAlive==false){
 
-// // }
-//   if (to.matched.some(r => r.meta.requireAuth)) {
-//     console.log(' ')
-//     if (getCookie("sessionId") !== "") {
-//       console.log(getCookie("sessionId"));
-//       next();
-//     } else {
-//       console.log(getCookie('sessionId'));
-//       next({
-//         path: '/login',
-//         query: {
-//           redirect: to.fullPath
-//         }
-//       })
-//     }
-//   } else {
-//     next();
-//   }
-// });
 export default router;

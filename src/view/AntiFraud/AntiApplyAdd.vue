@@ -9,21 +9,21 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-             <div class=" CreditForm_div_border clearFix">
-            <li>
-              <label class="label_width_190">
-                <i class="required_Red">* </i>进件编号：</label>
-              <span style="display:inline-block;width:160px">{{applySubNo}}</span>
-              <el-button icon="el-icon-search" style="width: 25px;height: 25px;" @click="coverFn('shwoList')"></el-button>
-            </li>
-            <li>
-              <label class="label_width_190">客户名称：</label>
-              <span>{{applyCustName}}</span>
-            </li>
-            <li>
-              <label class="label_width_190">证件类型：</label>
-              <span>{{certTypeTxt}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_190">
+                  <i class="required_Red">* </i>进件编号：</label>
+                <span style="display:inline-block;width:160px">{{applySubNo}}</span>
+                <el-button icon="el-icon-search" style="width: 25px;height: 25px;" @click="coverFn('shwoList')"></el-button>
+              </li>
+              <li>
+                <label class="label_width_190">客户名称：</label>
+                <span>{{applyCustName}}</span>
+              </li>
+              <li>
+                <label class="label_width_190">证件类型：</label>
+                <span>{{certTypeTxt}}</span>
+              </li>
             </div>
             <li>
               <label class="label_width_190">证件号码：</label>
@@ -66,7 +66,8 @@
               <label class="label_width_190">
                 <i class="required_Red">* </i>欺诈上报描述：</label>
               <span>
-                <el-input v-model="applyDesc" style='width:calc( 50% + 170px);' type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
+                <el-input v-model="applyDesc" style='width:calc( 50% + 170px);' type="textarea" :rows="5" resize=none
+                  :maxlength="500"></el-input>
               </span>
             </li>
             <li class='clearFloat'>
@@ -89,82 +90,6 @@
       <el-button plain @click="backRoute()">取消</el-button>
       <el-button type="primary" @click="submitForm('form')">提交</el-button>
     </div>
-    <!-- 弹窗 -->
-    <!-- <el-dialog :visible.sync="coverShow" :modal="false" top="10vh" width='1130px'>
-        <div class="detail-list">
-          <div class="form-title" style="position:relative;">
-            请选择一条信息
-            <el-tag closable @close="coverShow=false;" style="position:absolute;"></el-tag>
-          </div>
-          <div>
-            <div class="form-title">
-              高级查询
-            </div>
-            <div>
-              <li class="item-column3-list">
-                <div class="left-title-list">
-                  进件编号：
-                </div>
-                <div class="item-content-list">
-                  <el-input v-model="applySubNos"></el-input>
-                </div>
-              </li>
-              <li class="item-column3-list">
-                <div class="left-title-list">
-                  客户名称：
-                </div>
-                <div class="item-content-list">
-                  <el-input v-model="custName_la"></el-input>
-                </div>
-              </li>
-              <li class="item-column3-list">
-                <div class="left-title-list">
-                  证件号码：
-                </div>
-                <div class="item-content-list">
-                  <el-input v-model="subCertCode"></el-input>
-                </div>
-              </li>
-              <li class="item-column1">
-              </li>
-              <li class="item-column1 submit-class-list">
-                <el-button type="primary" @click="request">查询</el-button>
-                <el-button type="primary" @click="resetQuery">重置</el-button>
-              </li>
-            </div>
-            <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
-              <el-table-column type="index" label="序号" width="60">
-              </el-table-column>
-              <el-table-column prop="applySubno" label="进件编号" width="170">
-              </el-table-column>
-              <el-table-column prop="appDate" label="申请日期" width="170">
-              </el-table-column>
-              <el-table-column prop="custName" label="客户名称" width="120">
-              </el-table-column>
-              <el-table-column prop="certTypeTxt" label="证件类型" width="80">
-              </el-table-column>
-              <el-table-column prop="certCode" label="证件号码" width="170">
-              </el-table-column>
-              <el-table-column prop="operOrgName" label="进件机构名称" width="130">
-              </el-table-column>
-              <el-table-column prop="proName" label="产品名称" width="100">
-              </el-table-column>
-              <el-table-column prop="operName" label="进件客服" width="120" show-overflow-tooltip>
-              </el-table-column>
-            </el-table>
-            <div class="block tool-bar">
-              <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
-                :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord" v-show="tableData.totalRecord">
-              </el-pagination>
-            </div>
-          </div>
-          <div class="back-form-li" style="text-align:right;padding:10px;">
-            <el-button type="primary" @click="btnClick('sure')">确定</el-button>
-            <el-button plain @click="btnClick">取消</el-button>
-          </div>
-        </div>
-      </el-dialog> -->
-    <!-- =================================================== -->
     <el-dialog title="请选择一条信息" :visible.sync="coverShow" width='1130px'>
       <div>
         <div class="taskWinput search-div">
@@ -188,7 +113,8 @@
           </el-row>
         </div>
         <div>
-          <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
+          <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center
+            @row-click="itemClick">
             <el-table-column type="index" label="序号" width="60">
             </el-table-column>
             <el-table-column prop="applySubno" label="进件编号" width="170">
@@ -209,8 +135,9 @@
             </el-table-column>
           </el-table>
           <div class="block tool-bar">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
-              :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord" v-show="tableData.totalRecord">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum"
+              :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord"
+              v-show="tableData.totalRecord">
             </el-pagination>
           </div>
         </div>
@@ -227,18 +154,15 @@
     data() {
       return {
         activeName: ['1', '2'],
-        // isFull: true, // 全屏
         creditappTaskid: '', // 任务id
         userCode: '', // 用户编号
         orgCode: '', // 机构编号
         applyId: '', // 申请单ID
-        // id: '', // 主管/专员 用 列表id
         applySubNo: '', // 进件编号
         applyCode: '', // 申请人code
         applyPersonName: '', // 申请人姓名
         appOrgCode: '', // 申请机构code
         appDate: '', // 申请日期
-        //appOrgName: '', // 申请机构名称
         operOrgName: '', // 申请机构名称
         mainId: '', // 欺诈主原因id
         secondId: '', // 欺诈子原因id
@@ -259,19 +183,16 @@
         proName: '', // 产品名称
         mobile: '', // 移动电话
         dealroperDate: '', // 反欺诈申请日期
-
         certTypeTxt: '', // 证件类型
         mainReasons: [],
         secondReasons: [],
         antiFlag: '', // 标志
         coverShow: false, // 弹窗
         tableData: [], // 详情列表数据
-
         processTemplateId: '',
         taskNodeName: '',
         taskStatus: '',
         userCode: '',
-        // orgCode: '',
         pageNum: 1, // 页码
         pageSize: 10, // 每页条数
         applySubno: '',
@@ -286,7 +207,7 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/AntiApplyAdd' && this.$route.params.newOne) {
           this.mountedInf();
           // 请选择一条信息弹窗
@@ -326,56 +247,10 @@
             }
           }
         }
-
-        // 先判断是 初审 终审  /  专员  主管
-        // var judgeFlag = JSON.parse(localStorage.getItem('judge'));
-        // this.antiFlag = judgeFlag.flag;
-
-        // 初审 终审 取 applyId   
-        // if (this.antiFlag == '01') {
-        //   // taskInWaitting
-        //   this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
-        //   this.taskNodeName = JSON.parse(localStorage.getItem('taskInWaitting')).taskNodeName;
-        //   this.taskStatus = JSON.parse(localStorage.getItem('taskInWaitting')).taskStatus;
-        //   this.processTemplateId = JSON.parse(localStorage.getItem('taskInWaitting')).processTemplateId;
-        // }
-        // if (this.antiFlag == '02') {
-        //   // FtaskInWaitting
-        //   this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
-        //   this.taskNodeName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskNodeName;
-        //   this.taskStatus = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskStatus;
-        //   this.processTemplateId = JSON.parse(localStorage.getItem('FtaskInWaitting')).processTemplateId;
-        // }
-        // if (this.antiFlag == '03') {
-        //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-        //   this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
-
-        //   this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
-        //   this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
-        // }
-        // if (this.antiFlag == '04') {
-        //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-        //   this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
-
-        //   this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
-        //   this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
-        // }
-
-        // this.request();
-
-        // this.queryList();
-
-        // 获取到 id  反欺诈申请列表
-        // this.id = this.$route.params.id;
-
         // 请求系统时间
         this.getSystemDate();
-
         // 请求主原因
         this.firstNodeReason();
-
-        // 查询反欺诈信息
-        // this.getFraudApplyInfo();
       },
       // 请求系统时间
       getSystemDate() {
@@ -391,67 +266,6 @@
           this.mainReasons = res.data;
         })
       },
-      // 查询 反欺诈信息  , 发起反欺诈 , 根据 applyId 查询
-      // getFraudApplyInfo() {
-      //   // 测试 id
-      //   // this.id = 'ed353288-758d-4699-bec7-094bd6444556';
-
-      //   this.post('/fraudApplyInfoController/getFraudApplyInfo', {
-      //       applyId: this.id
-      //     })
-      //     .then(res => {
-      //       if (res.statusCode == 200) {
-      //         // 任务id
-      //         // this.creditappTaskid = res.data.applyInfoPool.id;
-      //         // 进件编号
-      //         this.applySubno = res.data.applyInfoPool.applySubno;
-      //         // 申请人code
-      //         this.applyCode = res.data.applyInfoPool.applyCode;
-      //         // 申请人姓名
-      //         this.applyPersonName = res.data.applyInfoPool.applyPersonName;
-      //         // 申请机构 code
-      //         this.appOrgCode = res.data.applyInfoPool.appOrgCode;
-      //         // 申请机构名称
-      //         this.appOrgName = res.data.applyInfoPool.appOrgName;
-      //         // 申请机构 id
-      //         this.appOrgId = res.data.applyInfoPool.appOrgId;
-      //         // 申请机构科室id
-      //         this.appSuborgId = res.data.applyInfoPool.appSuborgId;
-      //         // 申请机构科室code
-      //         this.appSuborgCode = res.data.applyInfoPool.appSuborgCode;
-      //         // 申请机构科室名称
-      //         this.appSuborgName = res.data.applyInfoPool.appSuborgName;
-      //         // 产品 id
-      //         this.proId = res.data.applyInfoPool.proId;
-      //         // 产品 code
-      //         this.proCode = res.data.applyInfoPool.proCode;
-      //         // 客户id
-      //         this.applyCustId = res.data.applyInfoPool.applyCustId;
-      //         // 客户姓名
-      //         this.applyCustName = res.data.applyInfoPool.custName;
-      //         // 客户编号
-      //         this.applyCustNo = res.data.applyInfoPool.applyCustNo;
-      //         // 渠道
-      //         this.channel = res.data.applyInfoPool.channel;
-      //         // 证件号码
-      //         this.certCode = res.data.applyInfoPool.certCode;
-      //         // 证件类型
-      //         this.certTypeTxt = res.data.applyInfoPool.certTypeTxt;
-      //         // 移动电话
-      //         this.mobile = res.data.applyInfoPool.mobile;
-      //         // 产品名称
-      //         this.proName = res.data.applyInfoPool.proName;
-      //       }
-      //     })
-      // },
-      // // 查询 反欺诈信息  , 从列表过来 , 根据列表 id 查询
-      // getFraudApplyInfoWithOpinionById() {
-      //   this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
-      //     id: this.id
-      //   }).then(res => {
-
-      //   })
-      // },
       submitForm() {
         // 判断必填
         if (!this.applySubNo) {
@@ -475,9 +289,6 @@
           });
           return;
         }
-
-
-
         const h = this.$createElement;
         this.$msgbox({
           title: '提示',
@@ -492,43 +303,7 @@
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = '执行中...';
-              //this.post('/fraudApplyInfoController/startAntiFraudApply', {
               this.post('/fraudApplyInfoController/startAntiFraudForFinishedApply', {
-                  /*userCode: this.userCode, // 用户编号
-                  orgCode: this.orgCode, // 机构编号
-                  currentTemplateId: '',
-                  fraudApplyInfo: {
-                    creditappTaskid: this.creditappTaskid, // 任务id
-
-                    applyId: this.applyId, // 申请单ID
-
-                    applySubno: this.applySubNo, // 进件编号
-                    // applyCode: this.applyCode, // 申请人code
-                    // applyPersonName: this.applyPersonName, // 申请人姓名
-                    // appOrgCode: this.appOrgCode, // 申请机构code
-                    // appOrgName: this.appOrgName, // 申请机构名称
-                    mainreasonId: this.mainId, // 欺诈主原因id
-                    subreasonId: this.secondId, // 欺诈子原因id
-
-                    applyDesc: this.applyDesc, // 反欺诈申请描述
-
-                    mainreaName: this.mainReason, // 欺诈主原因名称
-                    subreaName: this.secondReason, // 欺诈子原因名称
-                    // appOrgId: this.appOrgId, // 申请机构id
-                    // appSuborgId: this.appSuborgId, // 申请机构科室id
-                    // appSuborgCode: this.appSuborgCode, // 申请机构科室code
-                    // appSuborgName: this.appSuborgName, // 申请机构科室名称
-                    proId: this.proId, // 产品id
-                    proCode: this.proCode, // 产品code
-
-                    applyCustId: this.applyCustId, // 客户id
-                    applyCustName: this.applyCustName, // 客户姓名
-                    applyCustNo: this.applyCustNo, // 客户编号
-
-                    channel: this.channel, // 渠道
-                    certCode: this.certCode, // 证件号码
-                    proName: this.proName, // 产品名称
-                    processInstanceId: this.processInstanceId*/
                   fraudApplyInfo: {
                     applyCustId: this.applyCustId, // 客户id
                     applyCustName: this.applyCustName, // 客户姓名
@@ -551,13 +326,6 @@
                 })
                 .then(res => {
                   if (res.statusCode == '200') {
-                    // 更加标志来 选择跳转
-                    // 初审/终审 发起反欺诈 提交  -> 代办任务列表
-                    // if (this.antiFlag == '01') {
-                    //   this.$router.push('/taskInWaitting');
-                    // } else if (this.antiFlag == '02') {
-                    //   this.$router.push('/FtaskInWaitting');
-                    // } else if (this.antiFlag == '03' || this.antiFlag == '04') {
                     this.$router.push('/AntiFraud');
                     this.$store.dispatch('delVisitedViews', {
                       name: '反欺诈申请-添加'
@@ -585,9 +353,7 @@
                     instance.confirmButtonLoading = false;
                   }
                 })
-            } else {
-              // done();
-            }
+            } else {}
             done();
           }
         }).then(action => {
@@ -650,64 +416,14 @@
       // 每页条数
       handleSizeChange(val) {
         this.pageSize = val;
-        // this.queryDetailList();
         this.request();
       },
       // 页码
       handleCurrentChange(val) {
         this.pageNum = val;
-        // this.queryDetailList();
-        //this.request();
       },
       // 请求列表
       request() {
-        // this.post('/workFlowTaskQuery/getTaskToDoList', {
-        //   processTemplateId: 'creditApp',
-        //   taskNodeName: this.taskNodeName,
-        //   taskStatus: '01',
-        //   userCode: this.userCode,
-        //   orgCode: this.orgCode,
-        //   pageNum: this.pageNum,
-        //   pageSize: this.pageSize,
-        //   applySubNo: this.applySubNo,
-        //   custName_la: this.custName_la,
-        //   certCode: this.applyCustNo,
-        // }).then(res => {
-        //   if (res.statusCode == 200) {
-        //     this.detailData = res.data.taskDetailList;
-        //   } else {
-        //     this.directorTableData = [];
-        //   }
-
-        // })
-        // 
-        // // 请求列表
-        // this.post('/applyInfoPool/queryByPage', {
-        //   applySubno: this.applySubNo, // 进件编号
-        //   applyId: '', // 申请单id
-        //   certCode: this.subCertCode, // 证件号码
-        //   custName: this.custName, // 客户名称
-        //   busiStateList: ["04", "14", "21", "42"],
-        //   pageNum: this.pageNum,
-        //   pageSize: this.pageSize
-        // }).then(res => {
-        //   if (res.statusCode == 200) {
-        //     this.tableData = res.data;
-        //   }
-        // })
-        // 查询图标弹出层
-
-        /*this.post('/workFlowTaskQuery/getTaskToDoList', {
-          taskStatus: '01',
-          userCode: this.userCode,
-          orgCode: this.orgCode,
-          pageNum: this.pageNum,
-          pageSize: this.pageSize
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.tableData = res.data;
-          }
-        })*/
         if (!this.applySubNos && !this.custName_la && !this.subCertCode) {
           return
         } else {
@@ -724,13 +440,11 @@
               this.tableData = res.data;
               for (var i = 0; i < res.data.recordList.length; i++) {
                 var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
-                //this.appDate = res.data.recordList[i].appDate.replace(regs,'');
                 this.tableData.recordList[i].appDate = regs.exec(res.data.recordList[i].appDate)[0];
               }
             }
           })
         }
-
       },
       // 重置查询
       resetQuery() {
@@ -780,7 +494,6 @@
         }
         this.coverShow = false;
       }
-
     }
   }
 

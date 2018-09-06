@@ -109,7 +109,6 @@
             this.baseinfo = data.auth;
             if (data.auth.id_front_url) $('#image2').attr('src', data.auth.id_front_url);
             if (data.auth.id_back_url) $('#image3').attr('src', data.auth.id_back_url);
-            // if (data.auth.face_url) $('#image1').attr('src', data.auth.face_url);
           var ImgOrTv='';
             if (data.auth.face_url) {
               var face_url = data.auth.face_url; //获取face_url
@@ -121,10 +120,6 @@
               ImgOrTv == "rm") { //根据后缀，判断是否符合视频格式
               $('#image1').hide();
               if (data.auth.face_url) $('#video1').attr('src', data.auth.face_url);
-              //测试视频格式
-              // if(data.auth.face_url) $('#video1').attr('src','http://prefile.nuoyuan.com.cn/group1/M00/00/45/cjf4JFtZt4yAQE_5AD_4CTHqMxI875.mp4');
-              // if(data.auth.face_url) $('#video1').attr('src','http://prefile.nuoyuan.com.cn/group1/M00/00/54/cjf4JFtqUMqAYhK_AA9EQin5w8M193.MOV');
-              // $('#image1').hide();
             } else { //按照图片格式处理
               $('#video1').hide();
               if (data.auth.face_url) $('#image1').attr('src', data.auth.face_url);

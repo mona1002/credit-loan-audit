@@ -266,29 +266,6 @@
             </el-table-column>
           </el-table>
         </div>
-        <!-- <div class="table" style="padding-left: 0px">
-          <h5 class="h5">险种信息</h5>
-          <div class="tabbox">
-            <table id="t_1">
-              <thead>
-                <tr>
-                  <th>账户ID</th>
-                  <th>险种名称</th>
-                  <th>缴费基数[元]</th>
-                  <th>参保状态</th>
-                  <th>缴费状态</th>
-                  <th>个人缴费比例(%)</th>
-                  <th>单位缴费比例(%)</th>
-                  <th>参保单位</th>
-                  <th>本次参保年月</th>
-                  <th>首次参保年月</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-        </div> -->
       </el-collapse-item>
       <el-collapse-item name="4">
         <template slot="title">

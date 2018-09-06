@@ -37,8 +37,8 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="ProQuerySearch" placeholder="请输入内容"
-            @select="ProhandleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="ProQuerySearch"
+            placeholder="请输入内容" @select="ProhandleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -49,8 +49,8 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">应还款日期： </span>
-          <el-date-picker v-model="PaybackDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
-            value-format="yyyy-MM-dd">
+          <el-date-picker v-model="PaybackDate" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
       </el-row>
@@ -78,7 +78,8 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">放款日期：</span>
-          <el-date-picker v-model="loanDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
+          <el-date-picker v-model="loanDate" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
       </el-row>
@@ -113,30 +114,32 @@
             </div>
             <!-- 为下面的分页占位，避免下面分页absolute定位显示不全 -->
             <div class="select_pageination fixedWidth">
-              <el-pagination @size-change="handleSizeChange1" small @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
-                :current-page="BankNameCurrent" layout="   sizes, prev,pager, next,total,jumper" :total="BankTotal">
+              <el-pagination @size-change="handleSizeChange1" small @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]"
+                :page-size="BankNamePageCounts" :current-page="BankNameCurrent" layout="   sizes, prev,pager, next,total,jumper"
+                :total="BankTotal">
               </el-pagination>
             </div>
             <!-- 结束 -->
             <div class='select_pageination bankName_pagination_footer'>
-              <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
-                :current-page="BankNameCurrent" layout="sizes, prev,pager, next,total,jumper" :total="BankTotal">
+              <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]"
+                :page-size="BankNamePageCounts" :current-page="BankNameCurrent" layout="sizes, prev,pager, next,total,jumper"
+                :total="BankTotal">
               </el-pagination>
             </div>
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">还款到期日期：</span>
-          <el-date-picker v-model="expiritionDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
-            value-format="yyyy-MM-dd">
+          <el-date-picker v-model="expiritionDate" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">进件机构：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="agencyCode" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容"
-            @select="handleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="agencyCode" :debounce='0' :fetch-suggestions="querySearch"
+            placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -213,8 +216,8 @@
       </span>
     </div>
     <div class="listContainer">
-      <el-table :data="tableData" style="width: 100%" height="410" :summary-method="getSummaries" show-summary highlight-current-row
-        border @row-click='selectRow'>
+      <el-table :data="tableData" style="width: 100%" height="410" :summary-method="getSummaries" show-summary
+        highlight-current-row border @row-click='selectRow'>
         <el-table-column type="index" label=序号 width="50">
         </el-table-column>
         <el-table-column prop="loanAcNo" label="借款账号" width="130">
@@ -363,8 +366,9 @@
         </el-table-column>
       </el-table>
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]" :current-page.sync="currentPage"
-          :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]"
+          :current-page.sync="currentPage" :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper"
+          :total="this.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -709,13 +713,11 @@
         </el-table-column>
         <el-table-column prop='payoffFlagTxt' label="结清标志" width="80">
         </el-table-column>
-        <!-- <el-table-column prop='loanAcNo' label="借款账号" width="160">
-        </el-table-column> -->
       </el-table>
-      <!-- </div> -->
       <div class="page">
-        <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :page-sizes="[10, 20,50]" :current-page.sync="recycleCurrentPage"
-          :page-size="recyclePageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.recycleTotal">
+        <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :page-sizes="[10, 20,50]"
+          :current-page.sync="recycleCurrentPage" :page-size="recyclePageCount" layout="total, sizes, prev, pager, next, jumper"
+          :total="this.recycleTotal">
         </el-pagination>
       </div>
       <div slot="footer" class="dialog-footer">
@@ -724,7 +726,6 @@
     </el-dialog>
     <!-- 交易明细 -->
     <el-dialog title="交易明细" :visible.sync="dealShow" width="1000px">
-      <!-- <div class="el-talble_overflow_auto"> -->
       <el-table :data="dealData" border height="435" show-header show-summary highlight-current-row :summary-method="getDealSummaries">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
@@ -780,10 +781,10 @@
           </template>
         </el-table-column>
       </el-table>
-      <!-- </div> -->
       <div class="page">
-        <el-pagination @size-change="handleSizeChange3" @current-change="handleCurrentChange3" :page-sizes="[10, 20,50]" :current-page.sync="dealCurrentPage"
-          :page-size="dealPageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.dealTotal">
+        <el-pagination @size-change="handleSizeChange3" @current-change="handleCurrentChange3" :page-sizes="[10, 20,50]"
+          :current-page.sync="dealCurrentPage" :page-size="dealPageCount" layout="total, sizes, prev, pager, next, jumper"
+          :total="this.dealTotal">
         </el-pagination>
       </div>
       <div slot="footer" class="dialog-footer">
@@ -957,16 +958,6 @@
             value: '00',
             label: '其他'
           },
-          //  {
-          //   value: '02',
-          //   label: '银联'
-          // },{
-          // //     value: '01',
-          //     label: '通联'
-          //   }, {
-          //     value: '03',
-          //     label: '富友'
-          // }, 
           {
             value: '04',
             label: '融宝'
@@ -1110,14 +1101,13 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path == '/borrowLedger') {
           if (!this.Routes[4].closed) {
             this.currentRow = {};
             this.params.page = this.currentPage = 1;
             this.params.rows = this.pageCount = 10;
             this.Rreset();
-            // this.tableData = [];
             this.Routes[4].closed = true;
           }
         }
@@ -1185,11 +1175,11 @@
         let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
-        axios({ // 用axios发送post请求
+        axios({
           method: 'post',
-          url: '/export/loanLedgers', // 请求地址
-          data: obj, // 参数
-          responseType: 'blob', // 表明返回服务器返回的数据类型
+          url: '/export/loanLedgers',
+          data: obj,
+          responseType: 'blob',
           headers: {
             'Content-Type': 'application/json'
           }
@@ -1634,7 +1624,6 @@
           if (res.statusCode == 200) {
             this.loanExp = res.data;
           } else {
-            // this.$message.error(res.msg);
             this.$message.error('获取借款期限失败！');
           }
         })
@@ -1649,7 +1638,6 @@
           if (res.statusCode == 200) {
             this.agency = res.data;
           } else {
-            // this.$message.error(res.msg);
             this.$message.error('获取进件机构失败！');
           }
         })
@@ -1664,7 +1652,6 @@
             this.BankName = res.data.rows;
             this.BankTotal = res.data.total;
           } else {
-            // this.$message.error(res.msg);
             this.$message.error('获取进件机构失败！');
           }
         })

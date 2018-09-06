@@ -44,7 +44,8 @@
     </div>
     <div class="listContainer">
       <!-- 编辑table -->
-      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange"
+        border>
         <el-table-column type="index" label=序号 width="55">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" min-width="180">
@@ -68,13 +69,6 @@
         <el-table-column prop="remark" label="备注" min-width="150">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
-      <!-- <div class="paging">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div> -->
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -111,12 +105,7 @@
           custName_la: '',
           certCode: '',
           instaskType: '',
-          //   pageNum: '', //页数（第几页）
-          //   pageSize: '', //页面显示行数
         },
-        // currentPage: 1, //分页选中页
-        // pageCount: 10, // 每页显示条数
-        // totalRecord: 0, //总条数
         TaskType: [{ //任务类型
           value: '00',
           label: '常规质检'
@@ -130,31 +119,19 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/commissioner') {
           this.mountedInf();
         }
       }
     },
     methods: {
-      //   handleSizeChange(val) {
-      //     this.params.pageSize = val;
-      //     this.params.pageNum = 1;
-      //     // this.getInf(this.params);
-      //     this.inquire(this.params);
-      //   },
       mountedInf() {
         this.taskList = JSON.parse(localStorage.getItem('QTWorkbenchPass'))
         this.params.processTemplateId = this.taskList.processTemplateId;
         this.params.taskNodeName = this.taskList.taskNodeName;
         this.params.taskStatus = this.taskList.taskStatus;
         this.inquire(this.params);
-        // QTWorkbenchPass
-        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-        //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-        //   this.params.pageNum = this.currentPage, //页数（第几页）
-        //     this.params.pageSize = this.pageCount, //页面显示行数
       },
       handleCurrentChange(val) {
         // 根据两个条件去判断，首先根据 isSecondIns
@@ -187,8 +164,6 @@
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'QT'
         }));
-        // this.params.pageNum = val;
-        // this.inquire(this.params);
       },
       Rreset() {
         this.params.applySubno = '';
@@ -198,21 +173,12 @@
         this.inquire(this.params);
       },
       Rsearch() { //  查询
-        // this.params.pageNum = this.currentPage = 1;
         this.inquire(this.params);
       },
       inquire(pam) {
         //查询列表
         this.post("insConclusion/queryZJZYTaskList", pam).then(res => {
           if (res.statusCode == 200) {
-            // for (var i = 0; i < res.data.length; i++) {
-            //   if (res.data[i].certCode) {
-            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-            //   }
-            //   if (res.data[i].mobile) {
-            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-            //   }
-            // }
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);

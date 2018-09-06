@@ -20,18 +20,8 @@
             <el-button class="btn query" type="primary" @click="search">查询</el-button>
             <el-button class="btn reset" @click="reset">重置</el-button>
           </el-col>
-        <!-- </el-row> -->
         </el-row>
-        <!-- <el-row class="row row1" type="flex">
-          <el-col :span="22">
-            <el-button class="btn reset" type="primary" @click="reset">重置</el-button>
-            <el-button class="btn query" type="primary" @click="search">查询</el-button>
-          </el-col>
-        </el-row> -->
       </div>
-      <!-- <div class="taskWhead">
-        <p>复议申请任务列表</p>
-      </div> -->
          <div class="title titleContainer edit-div">
         <span class="titleText">
           <i class="el-icon title-icon"></i>
@@ -57,7 +47,6 @@
           <el-table-column prop="activationTime" label="进入本环节时间" width="170">
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
         <div class="page">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
             :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
@@ -74,13 +63,10 @@
         activeNames: ['1'],
         totals: {},
         currentPage: 1, // 默认显示的当前页
-        //data:[],
         datas: [],
         applySubNo: '',
         custName_la: '',
         certCode: '',
-        //pageNum:1,
-        //pageSize:20,
         setPageSize: 10,
         queryParam: {
           processTemplateId: '',
@@ -94,14 +80,10 @@
           custName_la: '',
           certCode: ''
         },
-        //taskType:'',
-        // timeColor:false,
-        //根据judgeFlag判断取 复议专员 还是 复议经理的申请ID
         judgeFlag: '',
       }
     },
     mounted() {
-      //一进入页面就发送请求
       this.oninner();
       localStorage.removeItem("house");
       localStorage.removeItem("car");
@@ -132,14 +114,12 @@
         this.request(this.queryParam);
       },
       request(param) {
-        console.log(this.queryParam);
         this.post('/workFlowTaskQuery/getTaskToDoList',
           param
         ).then(res => {
           if (res.statusCode == 200 && 　res.data.taskDetailList != null) {
             this.totals = res.data;
             this.datas = res.data.taskDetailList;
-            console.log(this.datas.length)
             for (var i = 0; i < this.datas.length; i++) {
               if (this.datas[i].taskType == '00') { //00
                 this.datas[i].taskType = "新任务";
@@ -181,18 +161,10 @@
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
         this.request(this.queryParam);
-        console.log(this.queryParam);
       },
       //跳转到详情页
       goDetail(row, event, column) {
-        console.log(row);
-        // this.$router.push({path:'/SplitScreen',query:row});
-        // if(this.judgeFlag.flag == '05'){
         localStorage.setItem("RtaskInWaitting", JSON.stringify(row));
-        // }else if(this.judgeFlag.flag == '06'){
-        // 		localStorage.setItem("RManagertaskInWaitting",JSON.stringify(row));
-        // }
-        //  this.$router.push({path:'/ReconsiderSplit'});
         this.$router.push({
           name: 'ReconsiderSplit',
           params: {

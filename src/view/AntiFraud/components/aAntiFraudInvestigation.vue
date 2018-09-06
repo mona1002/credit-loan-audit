@@ -187,7 +187,6 @@
               </template>
             </el-table-column>
           </el-table>
-          <!-- 分页 -->
           <div class="page">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
               :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
@@ -199,31 +198,12 @@
         <el-button type="primary" @click="sure">确定</el-button>
       </span>
     </el-dialog>
-    <!-- 解除弹框 -->
-    <!-- <div class="delLog">
-      <el-dialog title="提示" :visible.sync="deldialogVisible" width="420px" top="35vh">
-        <span>只能针对未解除状态数据进行操作，请重新选择！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="delSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
-    <!-- 恢复弹框 -->
-    <!-- <div class="backLog">
-      <el-dialog title="提示" :visible.sync="backdialogVisible" width="420px" top="35vh">
-        <span>只能针对已解除状态数据进行操作，请重新选择</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="backSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
   </div>
 </template>
 <script type="text/javascript">
   export default {
     data() {
       return {
-        // aa: '命中规则名称：',
         tableData: [],
         showBtn: this.PropshowBtn,
         ind: '',
@@ -254,7 +234,6 @@
         recordList: [],
         /*反欺诈申请ID*/
         appinfoId: '',
-        // applyId: '',
         /*命中规则列表参数*/
         ruleId: '',
         pageParam: {
@@ -263,10 +242,6 @@
         },
         /*存放多选时选中的数据*/
         multipleSelection: [],
-        /*解除弹框*/
-        // deldialogVisible: true,
-        /*恢复弹框*/
-        // backdialogVisible: false,
         //根据judgeFlag判断取 反欺诈专员 还是 反欺诈主管的申请ID
         judgeFlag: '',
         //理由：主原因+子原因+描述
@@ -346,8 +321,6 @@
       }
     },
     mounted() {
-      // /*获取 反欺诈申请ID*/
-      // this.appinfoId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId; //反欺诈专员+主管
       this.infoList();
     },
     methods: {
@@ -355,7 +328,6 @@
       searchInf(row) {
         if (this.PropshowBtn == true) {
           this.ind = this.tableData.indexOf(row);
-          console.log(this.ind)
           if (this.ind == '0') {
             this.showBtn = true;
           } else {
@@ -492,8 +464,6 @@
         }
       },
       regPhone(phone) {
-        // var isValidPhone = /^1[345789]\d{9}$/;
-        //   var regLandlinePhone = /^(0[0-9]{2,3}-)?([0-9]{7,8})$/;
         if (!this.isValidPhone.test(phone.phoneNum) && !this.regLandlinePhone.test(phone.phoneNum)) {
           phone.phoneNum = '';
         }
@@ -502,9 +472,6 @@
         this.dialogVisible = false;
       },
       handlDetail(index, row) {
-        // this.$router.push({
-        //   path: '/MatchingInf'
-        // });
         this.query.id = row.id;
         this.query.matchApplyId = row.applyId;
         this.query.isInterFlag = false;
@@ -516,11 +483,6 @@
           }
         });
         localStorage.setItem("internalObj", JSON.stringify(this.query));
-        // localStorage.setItem("internalObj", JSON.stringify({
-        //   id: row.id,
-        //   matchApplyId: row.applyId,
-        //   isInterFlag: false
-        // }));
       },
       /*命中客户数 查询*/
       inquiry(row) {
@@ -642,10 +604,6 @@
             }
           })
         }
-      },
-      /*恢复 弹框按钮*/
-      backSure() {
-        // this.backdialogVisible = false;
       },
     }
   }
@@ -776,11 +734,6 @@
   }
 
   /* 电核*/
-
-  /* .ElectroNuclear {
-    width: 100%;
-    padding-right: calc( 66.6% - 350px);
-  } */
 
   .left {
     float: left;

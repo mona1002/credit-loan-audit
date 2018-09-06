@@ -11,7 +11,7 @@
         <!-- 更改电话树 start-->
         <el-collapse class="phone-tree" v-model="activeTrees">
           <el-collapse-item :title="treeData[0].label" name="1">
-            <div v-for="item in treeData[0].children" :key="item">
+            <div v-for="item in treeData[0].children" :key="item.id">
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}
@@ -23,7 +23,7 @@
             </div>
           </el-collapse-item>
           <el-collapse-item :title="treeData[1].label" name="2">
-            <div v-for="item in treeData[1].children" :key="item">
+            <div v-for="item in treeData[1].children" :key="item.id">
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}
@@ -35,7 +35,7 @@
             </div>
           </el-collapse-item>
           <el-collapse-item :title="treeData[2].label" name="3">
-            <div v-for="item in treeData[2].children" :key="item">
+            <div v-for="item in treeData[2].children" :key="item.id">
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}
@@ -49,7 +49,7 @@
             </div>
           </el-collapse-item>
           <el-collapse-item :title="treeData[3].label" name="4">
-            <div v-for="item in treeData[3].children" :key="item">
+            <div v-for="item in treeData[3].children" :key="item.id">
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}
@@ -63,7 +63,7 @@
             </div>
           </el-collapse-item>
           <el-collapse-item :title="treeData[4].label" name="5">
-            <div v-for="item in treeData[4].children" :key="item">
+            <div v-for="item in treeData[4].children" :key="item.id">
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}

@@ -1,4 +1,4 @@
-<!-- 复议结论(经理06) -->
+<!-- 复议结论 -->
 <template>
   <div class="ReconsiderationConclusion">
     <el-collapse v-model="titleNames">
@@ -257,7 +257,6 @@
                     <el-input v-model="verIncome" @blur="moneyBlur(verIncome,'verIncome')"> </el-input>
                   </el-form-item>
                   <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
-                    <!-- <el-select v-model="proName"  @change="proSlelecChange"> -->
                     <el-select v-model="proName" disabled>
                       <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item.id">
                       </el-option>

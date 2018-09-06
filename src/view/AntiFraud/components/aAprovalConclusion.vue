@@ -51,9 +51,3 @@
   }
 
 </script>
-<style scoped>
-  /* .ApprovalConclusion {
-    min-width: 987px;
-  } */
-
-</style>

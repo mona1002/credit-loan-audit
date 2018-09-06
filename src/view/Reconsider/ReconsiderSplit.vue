@@ -56,7 +56,7 @@
   import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   import AborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
-  import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue"; //信审表
+  import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import ReconsiderApply from './ReconsiderComponents/ReconsiderApply.vue' //复议申请
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论

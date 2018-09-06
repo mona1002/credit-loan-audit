@@ -1,6 +1,6 @@
 <template>
   <!-- 网查征信报告 -->
-  <div class="SocialSecurity ZxReport" >
+  <div class="SocialSecurity ZxReport">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -53,7 +53,6 @@
             </div>
           </ul>
         </div>
-          
         <h6 class="sort">信用卡</h6>
         <table id="t_1_1" style="width:100%;">
           <tbody>
@@ -94,16 +93,6 @@
           <tbody>
           </tbody>
         </table>
-        <!-- <div class="height_auto">
-          <el-table :data="behaviorCheck" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="check_point_cn" label="检查项" min-width="180">
-            </el-table-column>
-            <el-table-column prop="result" label="结果" min-width="160">
-            </el-table-column>
-            <el-table-column prop="evidence" label="依据" min-width="180">
-            </el-table-column>
-          </el-table>
-        </div> -->
       </el-collapse-item>
       <el-collapse-item name="4">
         <template slot="title">
@@ -336,17 +325,11 @@
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
-          // if (!res.success) {
-          //   this.$messager.error("查询数据失败！");
-          //   return;
-          // }
           if ("" != res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10120'] && result.result['10120'].bizInfo) {
               this.zxReport = result.result['10120'].bizInfo.crawler_api_zx_viewReport_response; //code暂时未知
             }
-            console.log(result);
-            console.log(this.zxReport);
           }
           if (!this.zxReport) return;
           //   信用卡
@@ -408,64 +391,18 @@
           };
           this.zxReport.credit_card_detail && this.zxReport.credit_card_detail.length > 0 ? this.creditCardDetail =
             this.zxReport.credit_card_detail : '';
-          //   if (this.zxReport.credit_card_detail && this.zxReport.credit_card_detail.length > 0) {
-          //     $.each(this.zxReport.credit_card_detail, (i, eh) => {
-          //       this.addRow($(' #t_3 tbody'), ['bank', 'release_date', 'card_type', 'account_type',
-          //         'due_date', 'credit_amt', 'used_amt', 'over_due_amount', 'is_delq', 'is_active', 'balance',
-          //         'is_overdraft'
-          //       ], eh);
-          //     });
-          //   };
           this.zxReport.house_loan_detail && this.zxReport.house_loan_detail.length > 0 ? this.houseLoanDetail =
             this.zxReport.house_loan_detail : '';
-          if (this.zxReport.house_loan_detail && this.zxReport.house_loan_detail.length > 0) {
-            // $.each(this.zxReport.house_loan_detail, (i, eh) => {
-            //   this.addRow($('#div_zxCard #t_4 tbody'), ['bank', 'release_date', 'release_count', 'account_type',
-            //     'loan_type', 'deadline', 'due_date', 'is_delq', 'balance', 'overdue_amount', 'delq_l5y_amt',
-            //     'delq_l5y_90day_amt', 'status'
-            //   ], eh);
-            // });
-          };
+          if (this.zxReport.house_loan_detail && this.zxReport.house_loan_detail.length > 0) {};
           this.zxReport.other_loan_detail && this.zxReport.other_loan_detail.length > 0 ? this.otherloanDetail =
             this.zxReport.other_loan_detail : '';
-          //   if (this.zxReport.other_loan_detail && this.zxReport.other_loan_detail.length > 0) {
-          //     $.each(this.zxReport.other_loan_detail, (i, eh) => {
-          //       this.addRow($('#div_zxCard #t_5 tbody'), ['releaser', 'release_date', 'release_count',
-          //         'account_type', 'loan_type', 'is_delq', 'settle_date', 'overdue_amount', 'status',
-          //         'sts_happen_date'
-          //       ], eh);
-          //     });
-          //   };
           this.zxReport.guarantee_for_others && this.zxReport.guarantee_for_others.length > 0 ? this.guaranteeForOthers =
             this.zxReport.guarantee_for_others : '';
-          //   if (this.zxReport.guarantee_for_others && this.zxReport.guarantee_for_others.length > 0) {
-          //     $.each(this.zxReport.guarantee_for_others, (i, eh) => {
-          //       this.addRow($('#div_zxCard #t_7 tbody'), ['guarantor', 'guarantee_date', 'guarantee_place',
-          //         'card_type', 'card_num', 'loan_type', 'loan_count', 'guarantee_count', 'due_date',
-          //         'balance'
-          //       ], eh);
-          //     });
-          //   }
           this.zxReport.publiCrecords && this.zxReport.publiCrecords.compulsoryExecutionRecords && this.zxReport.publiCrecords
             .compulsoryExecutionRecords.length > 0 ? this.compulsoryExecutionRecords = this.zxReport.publiCrecords.compulsoryExecutionRecords :
             '';
-          //   if (this.zxReport.publiCrecords && this.zxReport.publiCrecords.compulsoryExecutionRecords && this.zxReport
-          //     .publiCrecords.compulsoryExecutionRecords.length > 0) {
-          //     $.each(this.zxReport.publiCrecords.compulsoryExecutionRecords, (i, eh) => {
-          //       this.addRow($('#div_zxCard #t_8 tbody'), ['applicationExecution', 'applicationExecutionAmount',
-          //         'caseNo', 'caseStatus', 'formatedClosedTime', 'closedWay', 'executed', 'executed_amt',
-          //         'executiveCourt', 'exe_reason', 'formatedFilingTime'
-          //       ], eh);
-          //     });
-          //   };
           this.zxReport.orgnizationQueryRecords && this.zxReport.orgnizationQueryRecords.length > 0 ? this.orgnizationQueryRecords =
             this.zxReport.orgnizationQueryRecords : '';
-          //   if (this.zxReport.orgnizationQueryRecords && this.zxReport.orgnizationQueryRecords.length > 0) {
-          //     $.each(this.zxReport.orgnizationQueryRecords, (i, eh) => {
-          //       this.addRow($('#div_zxCard #t_9 tbody'), ['queryID', 'queryOperator', 'queryReason', 'queryTime'],
-          //         eh);
-          //     });
-          //   }
           this.zxReport.personalQueryRecords && this.zxReport.personalQueryRecords.length > 0 ? this.personalQueryRecords =
             this.zxReport.personalQueryRecords : '';
           if (this.zxReport.personalQueryRecords && this.zxReport.personalQueryRecords.length > 0) {
@@ -500,7 +437,6 @@
           }
         });
       }
-
     },
     mounted() {
       this.getInf();

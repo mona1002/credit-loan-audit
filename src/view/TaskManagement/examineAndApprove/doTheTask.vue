@@ -17,8 +17,8 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model.trim="proCode" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容"
-            @select="handleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model.trim="proCode" :debounce='0' :fetch-suggestions="querySearch"
+            placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -38,12 +38,14 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
-          <el-date-picker v-model="applicationDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="applicationDate" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">本环节处理时间：</span>
-          <el-date-picker v-model="processingTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="processingTime" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-btn">
@@ -81,23 +83,16 @@
         </el-table-column>
         <el-table-column prop="activationTime" label="进入本环节时间" min-width="170">
         </el-table-column>
-        <!-- <el-table-column
-				      prop="approveTimeLong"
-				      label="进入本环节时长（小时）" 
-				      min-width="180">
-				    </el-table-column> -->
       </el-table>
-      <!-- 分页 -->
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-          :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+          :page-sizes="[10, 20,50]" :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
         </el-pagination>
       </div>
     </div>
   </div>
 </template>
 <script type="text/javascript">
-  //import baseU from'../../../util/constant';
   export default {
     data() {
       return {
@@ -176,7 +171,6 @@
       querySearch(queryString, cb) {
         var restaurants = this.productNames;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-        // 调用 callback 返回建议列表的数据
         cb(results);
       },
       createFilter(queryString) {
@@ -195,24 +189,8 @@
             for (let k in res.data) {
               this.productNames.push(res.data[k])
             }
-            // this.productNames = res.data;
-            // console.log(Object.prototype.toString.call(res.data))
-            // console.log(console.log(res.data))
           }
         });
-        /*this.post(baseU.path+'/remote/product/getProductForUser',{
-		           data:{
-		              orgId:this.orgId,
-		              validFlag:'1'
-		           }
-		          }).then(res => {
-		          	if(res.statusCode == 200){
-						this.productNames = res.data;
-					}else {
-			            this.$message.error(res.msg);
-			          }
-	            });*/
-
       },
       request(param) {
         this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.queryParam.proCode = "") :
@@ -220,7 +198,7 @@
         this.post('/workFlowTaskQuery/getTaskToDoList',
           param
         ).then(res => {
-          if (res.statusCode == 200 && 　res.data.taskDetailList != null) {
+          if (res.statusCode == 200 && res.data.taskDetailList != null) {
             this.totals = res.data;
             this.datas = res.data.taskDetailList;
             for (var i = 0; i < this.datas.length; i++) {
@@ -251,15 +229,10 @@
         this.selectedProName = '';
         this.proCode = ''; //产品code-查询
         this.emerType = ''; //紧急程度-查询
-        /*this.appDate_ge = '';//申请日期[大于等于]-查询
-        this.appDate_le = '';//申请日期[小于等于]-查询
-        this.completeTime_ge = '';//本环节处理时间[大于等于]-查询
-        this.completeTime_le = '';//本环节处理时间[小于等于]-查询*/
         //申请信息 时间 数组
         this.applicationDate = '',
           //本环节处理时间 时间 数组
           this.processingTime = '',
-
           this.queryParam.applySubNo = '';
         this.queryParam.custName_la = '';
         this.queryParam.certCode = '';
@@ -318,12 +291,7 @@
         this.queryParam.applySubNo = this.applySubNo;
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
-        // this.queryParam.proCode = this.proCode; //产品code-查询
         this.queryParam.emerType = this.emerType; //紧急程度-查询
-        //this.queryParam.appDate_ge = appgey+'-'+appgem+'-'+appged;//申请日期[大于等于]-查询
-        //this.queryParam.appDate_le = appley+'-'+applem+'-'+appled;//申请日期[小于等于]-查询
-        //this.queryParam.completeTime_ge = comgey+'-'+comgem+'-'+comged;//本环节处理时间[大于等于]-查询
-        //this.queryParam.completeTime_le = comley+'-'+comlem+'-'+comled; //本环节处理时间[小于等于]-查询
         this.request(this.queryParam);
       },
       //跳转到详情页

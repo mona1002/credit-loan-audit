@@ -31,15 +31,12 @@
               <span class="dropdownInput" v-show="subOrg">{{subOrg}}</span>
               <span class="dropdownInput" v-show="!subOrg" style="color:#B5BCCD;">请选择所属机构</span>
               <div class="dropList" v-show="dropdownFlag">
-                <el-tree :data="orgDatasEdit" node-key="id" :load="loadNode" lazy :props="defaultProps" :expand-on-click-node='false' @node-click="getItemSelect">
+                <el-tree :data="orgDatasEdit" node-key="id" :load="loadNode" lazy :props="defaultProps"
+                  :expand-on-click-node='false' @node-click="getItemSelect">
                 </el-tree>
               </div>
               <i id="dropdownInput-arrow" class="el-select__caret el-input__icon el-icon-arrow-down" :class="{reverse:isActive,reverse2:!isActive}"></i>
             </div>
-            <!-- <el-select v-model="params.orgName" placeholder="请选择">
-            <el-option v-for="item in orgnize" :key='item.value' :label="item.label" :value="item.value">
-            </el-option>
-          </el-select> -->
           </el-col>
           <el-col :span="6" class="search-item">
           </el-col>
@@ -97,7 +94,6 @@
           orgName: '',
         },
         Routes: [],
-        // orgnize: [],
         subOrg: '',
         orgCode: "",
         orgDatasEdit: [],
@@ -122,12 +118,12 @@
         ]
       }
     },
-  watch: {
-     '$route'(to, from) {
-        if(to.path=='/DirectSeller'){
-          if(!this.Routes[2].closed){
-            this. Rreset();
-            this.Routes[2].closed=true;
+    watch: {
+      '$route'(to, from) {
+        if (to.path == '/DirectSeller') {
+          if (!this.Routes[2].closed) {
+            this.Rreset();
+            this.Routes[2].closed = true;
           }
         }
       },
@@ -148,9 +144,6 @@
       },
       // 打开下拉菜单里的树形结构
       getDropDownSelect(event) {
-        // if (this.isActive == true) {
-        //   this.isActive = false;
-        // };
         // 查询的所属机构
         if ((!this.dropdownFlag && event.target.className === 'dropdownInput') || (!this.dropdownFlag && event.target.id ===
             'dropdownInput-arrow')) {
@@ -167,7 +160,6 @@
         if (this.subOrg) {
           this.isActive = false;
         };
-        // this.queryParam.orgId = row.id;
         this.params.orgName = row.text;
       },
       // 点击展开时加载
@@ -187,9 +179,6 @@
               }
               return resolve(data);
             }
-            // else {
-            //   this.$message.error(res.msg)
-            // }
           })
         } else {
           return resolve([])
@@ -203,7 +192,7 @@
         this.params.validFlag = '';
         this.params.orgName = '';
         this.subOrg = '';
-       this.tableData = [];////清空已查处列表
+        this.tableData = []; ////清空已查处列表
       },
       Rsearch() {
         if (this.params.userCode != '' || this.params.userName != '' || this.params.tel != '' || this.params.validFlag !=
