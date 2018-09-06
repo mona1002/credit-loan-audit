@@ -1,16 +1,11 @@
 <template>
   <div class="AudioVisual">
-    <!-- <div class="CompareShow"> -->
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
     </div>
-    <!-- ================================= -->
-    <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
-      <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
-      <!-- 折叠面板-手风琴List -->
       <p class="list_title clearFix">
         <span>影像名称
           <img src="../../../../static/images/BAA30772-8C58-4169-9CF3-C1ACA1DB9C62@1x.png" style="position:absolute;top:12px;right:17px">
@@ -58,7 +53,6 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='RFirstAud'>
-        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" /> -->
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"
           @dblclick='next' />
         <p v-show="myPdf" is="RpdfDiv" ID='ReadTril' v-bind:title="pdfArrys"></p>
@@ -93,7 +87,6 @@
         </figure>
       </div>
     </div>
-    <!-- </div> -->
   </div>
 </template>
 
@@ -103,7 +96,6 @@
   export default {
     data() {
       return {
-        // picData: [],
         imgBaseUrl: '',
         perfBtn: false,
         opendImg: [],
@@ -168,10 +160,8 @@
         });
       },
       pdfClose() {
-        console.log('ccc')
         this.SmallPicShow = false;
         this.showPage = 1;
-        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -187,7 +177,6 @@
           this.myPng = true;
           this.myPdf = false;
           this.pngAyyrs = this.imgPath;
-          console.log(this.pngAyyrs.length);
         };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
@@ -196,7 +185,6 @@
       hid() {
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
-        // this.$refs.PbtnIcons.style.right = 'calc( 50% - 97px)';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 135px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
         this.defaultBigPicCss();
@@ -204,7 +192,6 @@
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 417 + 'px';
-        // this.$refs.PbtnIcons.style.right = 'calc( 50% - 303px)';
         this.$refs.PbtnIcons.style.left = 'calc( 50% + 65px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
         this.defaultBigPicCss();
@@ -267,7 +254,7 @@
       },
       clockWise() {
         if (this.$refs.Big_pic_ref) {
-          if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
+          if (this.$refs.Big_pic_ref[0].style.transform == "") { 
             this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
           } else {
             this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
@@ -326,7 +313,7 @@
         val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + (val.toString().split(' ')[4]);
         return val;
       },
-      changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
+      changeSmallPicCss(ind) { 
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
           this.$refs.small_pic_ref[i].style.opacity = 1;
         }
@@ -397,7 +384,6 @@
       }
     },
     mounted() {
-      // this.odivMove("RFirstAud");
       this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag"))
       if (this.MatchFlag.MatchFlag == 'internal') {
         this.localInf = JSON.parse(localStorage.getItem("internalObj")) //匹配查看
@@ -410,8 +396,6 @@
       this.odivMove("RFirstAud");
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.matchApplyId,
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;

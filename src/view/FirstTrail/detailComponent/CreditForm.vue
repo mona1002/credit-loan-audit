@@ -20,11 +20,9 @@
               </p>
               <p v-show="this.InternetShow.commentS">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.excude" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wbeexEcutedtxt&&checkData.wbeexEcutedtxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 执行信息说明：</label>
-                <!--   @compositionend.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" @keyup.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt">
                 </el-input>
               </p>
@@ -40,11 +38,9 @@
               </p>
               <p v-show="this.InternetShow.commentS1">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.comExcude" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetHirecomtxt&&checkData.wnetHirecomtxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                <!-- @compositionend.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')" @keyup.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')" -->
                 <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
                 </el-input>
               </p>
@@ -52,7 +48,6 @@
             <li>
               <p>
                 <i class="hint">
-                  <!-- <span v-show="errors.has('BrokenRecord')" class="internet_sel">{{ errors.first('BrokenRecord') }}</span> -->
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(1)">
                   <span class="red"> * </span>客户在失信网是否有失信记录：</label>
@@ -63,11 +58,9 @@
               </p>
               <p v-show="this.InternetShow.commentS2">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.looseCre" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetEcutedBreatxt&&checkData.wnetEcutedBreatxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
-                <!--  @compositionend.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" @keyup.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" -->
                 <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
                 </el-input>
               </p>
@@ -83,11 +76,9 @@
               </p>
               <p v-show="this.InternetShow.commentS3">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.comLooseCre" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetHirecomBreatxt&&checkData.wnetHirecomBreatxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                <!--  @compositionend.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" @keyup.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
                 </el-input>
               </p>
@@ -95,7 +86,6 @@
             <li>
               <p>
                 <i class="hint">
-                  <!-- <span v-show="errors.has('abnormalPhone')" class="internet_sel">{{ errors.first('abnormalPhone') }}</span> -->
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">
                   <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
@@ -106,9 +96,7 @@
               </p>
               <p v-show="this.InternetShow.commentS4">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.phoneOUtS" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetPhonetxt&&  checkData.wnetPhonetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
-
                 </i>
                 <label class="InternetInf_right_label"> 手机异常信息说明： </label>
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetPhonetxt">
@@ -126,11 +114,9 @@
               </p>
               <p v-show="this.InternetShow.commentS5">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.ComName" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetHirecomNametxt&&checkData.wnetHirecomNametxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                <!--   @compositionend.native="wordarea(checkData.wnetHirecomNametxt,'单位名称异常')" @keyup.native="wordarea(checkData.wnetHirecomNametxt,'单位名称异常')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt">
                 </el-input>
               </p>
@@ -150,7 +136,6 @@
                   <b v-show="checkData.wnetHirecomPhonetxt&&checkData.wnetHirecomPhonetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                <!-- @compositionend.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')" @keyup.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt">
                 </el-input>
               </p>
@@ -166,11 +151,9 @@
               </p>
               <p v-show="this.InternetShow.commentS7">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.address" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetAddrandEstatetxt&&checkData.wnetAddrandEstatetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                <!-- @compositionend.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')" @keyup.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt">
                 </el-input>
               </p>
@@ -186,11 +169,9 @@
               </p>
               <p v-show="this.InternetShow.commentS8">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.comAddress" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetHirecomAddresstxt&&checkData.wnetHirecomAddresstxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                <!-- @compositionend.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')" @keyup.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt">
                 </el-input>
               </p>
@@ -198,7 +179,6 @@
             <li>
               <p>
                 <i class="hint">
-                  <!-- <span v-show="errors.has('registerInfor')" class="internet_sel">{{ errors.first('registerInfor') }}</span> -->
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(3)">
                   <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
@@ -210,11 +190,9 @@
               </p>
               <p v-show="this.InternetShow.commentS9">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.loginOrNot" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetCompanytxt&&checkData.wnetCompanytxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                <!--   @compositionend.native="wordarea(checkData.wnetCompanytxt,'工商登记')" @keyup.native="wordarea(checkData.wnetCompanytxt,'工商登记')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetCompanytxt">
                 </el-input>
               </p>
@@ -230,11 +208,9 @@
               </p>
               <p v-show="this.InternetShow.commentS10" class="bottom">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.Internet.institutionCode" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetAddrstatetxt&&checkData.wnetAddrstatetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                <!-- @compositionend.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')" @keyup.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt">
                 </el-input>
               </p>
@@ -261,11 +237,9 @@
               </p>
               <p v-show="this.checkId.declearNloaned">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.checkID.answerDec" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.iisselftxt&&checkData.iisselftxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class=" InternetInf_right_label "> 接听说明： </label>
-                <!-- @compositionend.native="wordarea(checkData.iisselftxt,'接听说明')" @keyup.native="wordarea(checkData.iisselftxt,'接听说明')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iisselftxt">
                 </el-input>
               </p>
@@ -281,13 +255,9 @@
               </p>
               <p v-show="this.checkId.loanNot">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.checkID.Declear" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.iloanBeforetxt&&checkData.iloanBeforetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
-
                 </i>
                 <label class=" InternetInf_right_label "> 说明： </label>
-
-                <!-- @compositionend.native="wordarea(checkData.iloanBeforetxt,'说明')" @keyup.native="wordarea(checkData.iloanBeforetxt,'说明')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanBeforetxt">
                 </el-input>
               </p>
@@ -317,11 +287,9 @@
               </p>
               <p v-show="this.checkId.loanNot" class="bottom">
                 <i class="hint">
-                  <!-- <b v-show="this.Wordhint.checkID.loanPurposed" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.iloanPurposetxt&&checkData.iloanPurposetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
-                <!-- @compositionend.native="wordarea(checkData.iloanPurposetxt,'详细用途')" @keyup.native="wordarea(checkData.iloanPurposetxt,'详细用途')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanPurposetxt">
                 </el-input>
               </p>
@@ -483,7 +451,6 @@
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li ref="compTypeDiv">
               <i class="hint">
-                <!-- <span v-show="errors.has('companyType')" class="Working_input">{{ errors.first('companyType') }}</span> -->
               </i>
               <label class="InternetInf_left_label ">
                 <span class="red"> * </span>企业类型：</label>
@@ -494,7 +461,6 @@
             </li>
             <li>
               <i class="hint">
-                <!-- <span v-show="errors.has('registerDate')" class="Working_middle">{{ errors.first('registerDate') }}</span> -->
               </i>
               <label class=" WorkInfs_left_label ">
                 <span class="red"> * </span> 公司注册时间： </label>
@@ -624,7 +590,6 @@
                   </el-option>
                 </el-select>
               </p>
-
               <p>
                 <i class="hint"> </i>
                 <label class="Family_right_label"> 配偶收入情况[月/元]： </label>
@@ -843,14 +808,10 @@
               </p>
               <p class="bottom">
                 <i class="hint">
-                  <!-- <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span> -->
                   <span v-show="this.Wordhint.family.acount" class="family_textarea">请输入正确金额</span>
                 </i>
                 <label class="Family_right_label">
                   <span class="red"> * </span> 可以承受的月还款[元]： </label>
-                <!-- <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatMoney(checkData.fbalance,$event,'月还款')"
-                  name="Paymonth" v-validate="'required'">
-                </el-input> -->
                 <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatSC('月还款')" name="Paymonth" v-validate="'required'">
                 </el-input>
               </p>
@@ -927,7 +888,6 @@
         </template>
         <div class="CreditForm_result">
           <i class="hint" style="top:27px;">
-            <!-- <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span> -->
             <b v-show="checkData.oother && checkData.oother.length>=1000" class="result_textarea"> 输入长度不能超过1000</b>
           </i>
           <p class="InternetInf_left_label" style="textAlign:right;">
@@ -1075,7 +1035,7 @@
           "是否为常住地址"
         ],
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"],
-        checkData: [],
+        checkData: {},
         // -------网上查询信息------------
         beexEcuted: [{ //（网上查询信息）客户在人法网是否有被执行信
           value: '1',
@@ -1490,14 +1450,6 @@
       mountedInf() {
         this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
         this.mountC();
-        // // 省    
-        // this.post("/credit/queryProvince").then(res => {
-        //   this.hirecomAddress = res.data;
-        // });
-        // // 所属行业 
-        // this.post("/credit/industry").then(res => {
-        //   this.hirecomKind = res.data;
-        // })
         this.Pwidth = document.getElementsByClassName("el-input")
         this.Txawidth = document.getElementsByClassName("el-textarea")
         this.CFwidth = document.getElementsByClassName("CreditForm")
@@ -1659,111 +1611,6 @@
             break;
         }
       },
-      // wordarea(val, el, txt) {
-      //   if (val.length >= 500) {
-      //     this.wordareaSC(val, el);
-      //   } else {
-      //     this.wordareaSCF(val, el);
-      //   }
-      // },
-      // wordareaSC(val, el) {
-      //   switch (el) {
-      //     case "执行信息":
-      //       this.Wordhint.Internet.excude = true;
-      //       break;
-      //     case "单位执行信息":
-      //       this.Wordhint.Internet.comExcude = true;
-      //       break;
-      //     case "失信记录":
-      //       this.Wordhint.Internet.looseCre = true;
-      //       break;
-      //     case "单位失信":
-      //       this.Wordhint.Internet.comLooseCre = true;
-      //       break;
-      //     case "手机异常":
-      //       this.Wordhint.Internet.phoneOUtS = true;
-      //       break;
-      //     case "单位名称异常":
-      //       this.Wordhint.Internet.ComName = true;
-      //       break;
-      //     case "单位电话异常":
-      //       this.Wordhint.Internet.comphoneOUtS = true;
-      //       break;
-      //     case "地址异常":
-      //       this.Wordhint.Internet.address = true;
-      //       break;
-      //     case "单位地址异常":
-      //       this.Wordhint.Internet.comAddress = true;
-      //       break;
-      //     case "工商登记":
-      //       this.Wordhint.Internet.loginOrNot = true;
-      //       break;
-      //     case "组织机构代码":
-      //       this.Wordhint.Internet.institutionCode = true;
-      //       break;
-      //     case "接听说明":
-      //       this.Wordhint.checkID.answerDec = true;
-      //       break;
-      //     case "说明":
-      //       this.Wordhint.checkID.Declear = true;
-      //       break;
-      //     case "详细用途":
-      //       this.Wordhint.checkID.loanPurposed = true;
-      //       break;
-      //     case "评价":
-      //       this.Wordhint.result = true;
-      //       break;
-      //   }
-      // },
-      // wordareaSCF(val, el) {
-      //   switch (el) {
-      //     case "执行信息":
-      //       this.Wordhint.Internet.excude = false;
-      //       break;
-      //     case "单位执行信息":
-      //       this.Wordhint.Internet.comExcude = false;
-      //       break;
-      //     case "失信记录":
-      //       this.Wordhint.Internet.looseCre = false;
-      //       break;
-      //     case "单位失信":
-      //       this.Wordhint.Internet.comLooseCre = false;
-      //       break;
-      //     case "手机异常":
-      //       this.Wordhint.Internet.phoneOUtS = false;
-      //       break;
-      //     case "单位名称异常":
-      //       this.Wordhint.Internet.ComName = false;
-      //       break;
-      //     case "单位电话异常":
-      //       this.Wordhint.Internet.comphoneOUtS = false;
-      //       break;
-      //     case "地址异常":
-      //       this.Wordhint.Internet.address = false;
-      //       break;
-      //     case "单位地址异常":
-      //       this.Wordhint.Internet.comAddress = false;
-      //       break;
-      //     case "工商登记":
-      //       this.Wordhint.Internet.loginOrNot = false;
-      //       break;
-      //     case "组织机构代码":
-      //       this.Wordhint.Internet.institutionCode = false;
-      //       break;
-      //     case "接听说明":
-      //       this.Wordhint.checkID.answerDec = false;
-      //       break;
-      //     case "说明":
-      //       this.Wordhint.checkID.Declear = false;
-      //       break;
-      //     case "详细用途":
-      //       this.Wordhint.checkID.loanPurposed = false;
-      //       break;
-      //     case "评价":
-      //       this.Wordhint.result = false;
-      //       break;
-      //   }
-      // },
       commentShow1(name, hidLabel) {
         if (name == "0") {
           switch (hidLabel) {
@@ -2032,11 +1879,8 @@
         this.checkData.workCounty = item;
       },
       makeSureBtn() {
-        // this.loadsitu = false;
-        // this.adbtn = '确定';
         this.$validator.validateAll().then((result) => {
           if (result) {
-            // this.Confirm = true;
             this.$confirm('您确定操作？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
@@ -2046,7 +1890,6 @@
               this.CFsave();
             }).catch(() => {});
           } else {
-            // this.$refs.wnetEcutedBrea.focus();
             this.$message.error('提交失败，有必填项未填写！');
           }
         });
@@ -2058,8 +1901,6 @@
         this.Confirm = false;
       },
       CFsave() {
-        // this.loadsitu = true;
-        // this.adbtn = '保存中';
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
@@ -2378,7 +2219,6 @@
           this.Txawidth[22].style.width = 'calc( 100% - 260px)';
           this.CFwidth[0].style.minWidth = 1665 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
-          // this.Alertbtn[0].style.marginLeft = " calc( 100% - 148px)";
           this.Alertbtn[0].style.marginLeft = "250px";
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
@@ -2471,8 +2311,6 @@
     },
     mounted() {
       this.mountedInf();
-      // this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
-      // this.mountC();
       // 省    
       this.post("/credit/queryProvince").then(res => {
         this.hirecomAddress = res.data;
@@ -2481,20 +2319,6 @@
       this.post("/credit/industry").then(res => {
         this.hirecomKind = res.data;
       })
-      // this.Pwidth = document.getElementsByClassName("el-input")
-      // this.Txawidth = document.getElementsByClassName("el-textarea")
-      // this.CFwidth = document.getElementsByClassName("CreditForm")
-      // this.inputWidth = document.getElementsByClassName("specialInput")
-      // this.comaddressb = document.getElementsByClassName("comaddressb")
-      // this.Alertbtn = document.getElementsByClassName("btn")
-      // if (this.myWatch) {
-      //   this.ElInputStyle(this.myWatch)
-      // } else {
-      //   for (var i = 0; i < this.Pwidth.length; i++) {
-      //     this.Pwidth[i].style.width = 150 + "px";
-      //     this.comaddressb[0].style.paddingLeft = 674 + "px";
-      //   }
-      // }
     },
     props: ["myWatch"],
     watch: {
@@ -2602,7 +2426,6 @@
     top: 12px;
     left: 14px
   }
-
 
   /* 上网查询左侧label */
 

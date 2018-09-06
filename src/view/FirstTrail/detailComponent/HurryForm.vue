@@ -29,7 +29,6 @@
       <li class="item-column3">
         <div class="left-title">
           <span class="require-icon" style="left:80px;">* </span>来源：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Hsource" placeholder="请选择来源" @change="changes('Hsource')">
             <el-option label="申请表" value="00"></el-option>
@@ -37,12 +36,10 @@
             <el-option label="其他" value="02"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column3">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">* </span>接听情况：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Hanswer" placeholder="请选择接听情况">
             <el-option label="无人接" value="00"></el-option>
@@ -52,12 +49,10 @@
             <el-option label="接通" value="04"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column3 Phone_credit_Form_search_bottom">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="HcheckStage" placeholder="请选择调查阶段">
             <el-option label="正在调查" value="00"></el-option>
@@ -66,7 +61,6 @@
             <el-option label="未调查" value="03"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column1" v-show="Hsource=='02'">
         <div class="left-title">其他来源说明：</div>
@@ -92,14 +86,12 @@
         <li class="item-column3">
           <div class="left-title">
             <span class="require-icon" style="left:0px;">* </span>三方查询是否异常：</div>
-          <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="HthreeQueries" placeholder="请选择调查情况" @change="changes('HthreeQueries')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
           </el-tooltip>
-          <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="HthreeQueries =='1'">
@@ -115,14 +107,12 @@
         <li class="item-column3">
           <div class="left-title left-title2">
             <span class="require-icon" style="top:-5px;left:0px;">* </span>微信/支付宝是否异常：</div>
-          <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="Hmobilepayment" placeholder="请选择调查情况" @change="changes('Hmobilepayment')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
           </el-tooltip>
-          <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="Hmobilepayment=='1'">
@@ -240,7 +230,6 @@
   export default {
     data() {
       return {
-
         Hsource: this.hurryList.source,
         Hanswer: this.hurryList.answer,
         HcheckStage: this.hurryList.checkStage,
@@ -257,42 +246,28 @@
         Hcontactfre: this.hurryList.contactfre,
         Hcontactfretxt: this.hurryList.contactfretxt,
         Hconclusion: this.hurryList.conclusion,
-
-
         phoneType: '04',
-
-
         HsourceDesc: this.hurryList.sourceDesc,
         HthreeQueries: this.hurryList.threeQueries,
-
-
         phoneId: '',
         resMsg: ''
       }
     },
-    /*props: ['custName', 'phoneNum', 'applyId', 'isFull','source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'relBorrower' , 'relBorrowertxt' , 'contactfre' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'conclusion'],*/
     props: ['custName', 'phoneNum', 'applyId', 'isFull', 'hurryList'],
     mounted() {
       this.phoneType = '04'; // 住址电话
       if (this.isFull == true) { // 全屏
-        console.log('全屏');
         $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
         $('.item-column1 textarea').css("width", "100%")
         $('.item-column1 textarea').css("width", "100%")
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2
-        // $('.item-column3').css({
-        //   "min-height": "50px"
-        // })
         $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
         $('.item-column2 textarea').css("width", "100%");
       } else if (this.isFull == false) { // 分屏
-        console.log("分屏");
-        // $(".textarea-class").css("minWidth", "300px")
         // 提交按钮
         $('.submit-class').css("margin-left", "370px")
-
         $('.item-column3').css({
           "min-height": "0px",
           "margin-bottom": "10px"
@@ -303,7 +278,6 @@
     },
     methods: {
       submitForm() {
-        console.log('submit!');
         // 检测必填项
         if (!this.Hsource || !this.Hanswer || !this.HcheckStage || !this.HthreeQueries || (this.HthreeQueries == '1' &&
             !this.HthreeQueriestxt) || !this.Hmobilepayment || (this.Hmobilepayment == '1' && !this.Hmobilepaymenttxt) ||
@@ -331,7 +305,6 @@
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = '执行中...';
-              console.log(this.taskId)
               // 点击 确认 提交 方法
               this.post('/creTelResearchHis/addTeleContract', {
                 cretelinvest: {
@@ -366,40 +339,18 @@
               }).then(res => {
                 if (res.statusCode == '200') {
                   this.phoneId = '';
-                  // 清数据
-                  /*this.source = '';
-                  this.answer = '';
-                  this.checkStage = '';
-                  this.sourceDesc = '';
-                  this.thirdResult = '';
-                  this.relBorrower = '';
-                  this.relBorrowertxt = '';
-                  this.checkWork = '';
-                  this.checkWorktxt = '';
-                  this.mobilepayment = '';
-                  this.mobilepaymenttxt = '';
-                  this.threeQueries = '';
-                  this.threeQueriestxt = '';
-                  this.maritalStatus = '';
-                  this.maritalStatustxt = '';
-                  this.contactfre = '';
-                  this.contactfretxt = '';
-                  this.conclusion = '';*/
                   // 提交数据成功,广播事件 重新刷新列表
                   this.$emit('updateList');
                   this.$emit('updateTree');
                   this.resMsg = res.msg;
                   done();
                 } else {
-                  // this.$message(res.msg);
                   this.resMsg = res.msg;
                   instance.confirmButtonText = '';
                 }
                 instance.confirmButtonLoading = false;
               });
             } else {
-              // this.$message({ message: this.resMsg, type: 'warning' });
-
               done();
             }
           }
@@ -442,23 +393,7 @@
       }
     },
     watch: {
-      /*source: function() {
-        this.sourceDesc = '';
-      },
-      threeQueries: function() {
-        this.threeQueriestxt = '';
-      },
-      mobilepayment: function() {
-        this.mobilepaymenttxt = '';
-      },
-      relBorrower: function() {
-        this.relBorrowertxt = '';
-      },
-      checkWork: function() {
-        this.checkWorktxt = '';
-      },*/
       hurryList(val) {
-        console.log(val);
         this.Hsource = val.source;
         this.Hanswer = val.answer;
         this.HcheckStage = val.checkStage;
@@ -482,23 +417,16 @@
       isFull: function (val) {
         this.phoneType = '01'; // 住址电话
         if (val == true) { // 全屏
-          console.log('全屏');
           $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
           $('.item-column1 textarea').css("width", "100%")
           // 提交按钮
           $('.submit-class').css("margin-left", "calc( 66% - 140px)")
           // 显示 column2
-          // $('.item-column3').css({
-          //   "min-height": "50px"
-          // })
           $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
           $('.item-column2 textarea').css("width", "100%");
         } else if (val == false) { // 分屏
-          console.log("分屏");
-          // $(".textarea-class").css("minWidth", "300px")
           // 提交按钮
           $('.submit-class').css("margin-left", "370px")
-
           $('.item-column3').css({
             "min-height": "0px",
             "margin-bottom": "10px"

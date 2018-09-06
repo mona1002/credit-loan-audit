@@ -774,33 +774,23 @@
         datas: '',
         /*房产信息*/
         accepCusEstates: [],
-
         /*车辆信息*/
         accepCusCarInfos: [],
-
         /*您的借款需求*/
         accepApplyLoan: '',
-
         /*您的个人信息*/
         accepCusBasicInfo: '',
-
         /*私人业主信息*/
         accepCusPrivate: '',
-
         /*同业贷情况*/
         accepCusInterBankLoan: '',
-
         /*保险信息*/
         accepCusInsurances: [],
-
         /*您的工作信息*/
         accepCusWorkInfo: '',
-
         /*联系人信息*/
         accepCusRelations: [],
-
         taskInWaitting: '',
-
         applyId: '',
         judgeFlag: '',
         //您的个人信息 投保地点
@@ -1136,7 +1126,6 @@
               custNo: this.datas.accepCusBasicInfo.custNo,
               //客户名称
               custName: this.datas.accepCusBasicInfo.custName
-
             };
             localStorage.setItem("applicationInformationDetail", JSON.stringify(query));
             /*将房产信息保存到本地*/
@@ -1167,24 +1156,14 @@
           name: delname
         }).then((views) => {
           const latestView = views.slice(-1)[0]
-          //   if (latestView) {
-          //     this.$router.push(latestView.StatefullPath);
-          //   } else {
-          //     this.$router.push('/')
-          //   }
         })
       },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
-        /*if(num == null){
-        };*/
-        //if(num != null || num != ''){
         num = num.toString().replace(/\$|\,/g, '');
-
         // 检查传入数值为数值类型
         if (isNaN(num))
           num = "0";
-
         // 获取符号(正/负数)
         let sign = (num == (num = Math.abs(num)));
 
@@ -1192,11 +1171,9 @@
         let cents = num % Math.pow(10, cent); // 求出小数位数值
         num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
         cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-
         // 补足小数位到指定的位数
         while (cents.length < cent)
           cents = "0" + cents;
-
         for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
           num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
 
@@ -1209,7 +1186,6 @@
         } else {
           return (((sign) ? '' : '-') + num);
         }
-        //};
       },
     },
   }
@@ -1220,7 +1196,6 @@
     width: 100%;
     min-width: 1327px;
     height: 100%;
-    /* background-color: #fafbfc; */
     font-size: 14px;
   }
 
@@ -1244,7 +1219,6 @@
     width: 166px;
     display: inline-block;
     text-align: right;
-    /* position: relative; */
   }
 
   ul li .firstP {

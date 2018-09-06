@@ -24,8 +24,6 @@
         <div class="taskWtable">
           <el-table :data="tableData" height="710" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}" show-header
             highlight-current-row @current-change="handleCurrentChange" border>
-            <!-- order两个参数，顺序和倒序: ascending, descending -->
-            <!-- @row-click="addHeight(backColor)" :class="{active: activeName == backColor}" -->
             <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
             <el-table-column prop="remarkTypeTxt" label="备注类型" width="90">
@@ -163,7 +161,6 @@
       },
       add() {
         this.dialogVisible = true;
-        // this.remark = '';
         this.FormAdd.remark = '';
         this.addSure = '确定';
         this.addLodaing = false;
@@ -172,7 +169,6 @@
         this.changeLoading = false;
         this.chSure = '确定';
         if (this.isChecked == '') {
-          //   this.isdialogVisible = true;
           this.title = '请选择一条记录！';
           this.promptSure();
         } else {
@@ -220,11 +216,9 @@
                     message: "保存失败！",
                     type: 'error'
                   })
-
                 }
               });
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
@@ -289,5 +283,4 @@
       },
     },
   }
-
 </script>

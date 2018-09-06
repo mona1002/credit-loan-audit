@@ -4,11 +4,8 @@
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
     </div>
-    <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
-      <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
-      <!-- 折叠面板-手风琴List -->
       <p class="list_title clearFix">
         <span>影像名称
           <img src="../../../../static/images/BAA30772-8C58-4169-9CF3-C1ACA1DB9C62@1x.png" style="position:absolute;top:12px;right:17px">
@@ -48,13 +45,10 @@
           </div>
         </el-collapse-item>
       </el-collapse>
-      <!-- 按钮 : 缩略图 对比  -->
       <div class="AudioVisualLeft_btn_wrap">
         <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
       </div>
     </div>
-    <!-- 中间 -->
-    <!-- <div class="AU_mid" id="auMID"></div> -->
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
@@ -72,7 +66,7 @@
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
       <span class="audioInd"> 第 {{showPage }} 页</span>
     </div>
-    <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
+    <!-- 缩略图弹出层  -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
@@ -94,7 +88,6 @@
     </div>
   </div>
 </template>
-
 <script>
   import imgUrl from '../../../util/ConstantSocialAndPn'
   import pdfDiv from '../../pdf'
@@ -117,7 +110,6 @@
         CompareAlert: true,
         ListParent: [],
         ListDetails: [],
-        // applyId: '', //入参
         imgPath: [],
         localInf: [], //localstorage 接收的所有参数,
         pdfArrys: [],
@@ -148,7 +140,6 @@
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.post("/productArchive/getProductArchiveParentList", {
-          // applyId: this.localInf.applyId,
            applyId:this. applyId
         }).then(res => {
           if (res.statusCode == 200) {
@@ -190,7 +181,6 @@
         // 二级（子）节点
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
-          // applyId: this.localInf.applyId,
           applyId:this. applyId,
           pid: id
         }).then(res => {
@@ -211,7 +201,6 @@
       pdfClose() {
         this.SmallPicShow = false;
         this.showPage = 1;
-        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -235,7 +224,6 @@
       hid() {
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
-        // this.$refs.PbtnIcons.style.right = 'calc( 50% - 97px)';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 135px)';
         this.$refs.AudioVisual_Img_ref.style.left = 0;
         this.defaultBigPicCss();
@@ -243,7 +231,6 @@
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 417 + 'px';
-        // this.$refs.PbtnIcons.style.right = 'calc( 50% - 303px)';
         this.$refs.PbtnIcons.style.left = 'calc( 50% + 65px)';
         this.$refs.AudioVisual_Img_ref.style.left = 412 + "px";
         this.defaultBigPicCss();
@@ -276,7 +263,6 @@
           }
           this.defaultBigPicCss();
         }
-
       },
       next() {
         if (this.pngAyyrs.length != 0) {
@@ -290,7 +276,6 @@
           }
           this.defaultBigPicCss();
         }
-
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
@@ -403,7 +388,6 @@
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
             event = event || window.event;
-            //  this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.wheelDelta < 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
@@ -415,7 +399,6 @@
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
-            //  this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.detail > 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                 .height) - 100 + "px";

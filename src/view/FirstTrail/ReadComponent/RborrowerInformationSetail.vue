@@ -77,7 +77,6 @@
             </el-table-column>
           </el-table>
         </div>
-
       </el-collapse-item>
       <el-collapse-item title="信用卡使用明细" name="3">
         <template slot="title">
@@ -420,7 +419,6 @@
         this.taskInWaitting = JSON.parse(localStorage.getItem("QT")) //综合查询
       }
       this.request(this.taskInWaitting.matchApplyId);
-      console.log(this.isFull);
       if (this.isFull == false) { // 分屏
         //信用卡使用总况
         $(".xinyongka").width('930px');
@@ -474,7 +472,6 @@
         this.post("/borrower/getBorrowerInfo", {
           'applyId': param
         }).then(res => {
-          /*console.log(res);*/
           /*房产信息*/
           if (res.data.borestateList != '') {
             this.borestateList = res.data.borestateList;
@@ -525,7 +522,6 @@
               if (this.borestateList[i].unitPrice != null) {
                 this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice, 2, 0);
               };
-
               //贷款余额 保留两位小数点
               if (this.borestateList[i].restLoans != null) {
                 this.borestateList[i].restLoans = this.formatNumber(this.borestateList[i].restLoans, 2, 0);
@@ -544,16 +540,10 @@
                 this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea, 2, 0).replace(
                   /,/g, '');
               };
-
             }
           } else if (res.data.borestateList == '') {
             this.borestateList = this.borestateList;
           };
-          /* if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
-          			       		this.borestateList=JSON.parse(localStorage.getItem('house'));
-          			       }else if(res.data.borestateList == '' && !JSON.parse(localStorage.getItem('house'))){
-          			       		this.borestateList = this.borestateList;
-          			       }*/
           /*车辆信息*/
           if (res.data.carInfoList != '') {
             this.carInfoList = res.data.carInfoList;
@@ -606,11 +596,6 @@
           } else if (res.data.carInfoList == '') {
             this.carInfoList = this.carInfoList;
           };
-          /* if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
-          		        	this.carInfoList=JSON.parse(localStorage.getItem('car'));
-          		        }else if(res.data.carInfoList == '' && !JSON.parse(localStorage.getItem('car'))){
-          		        	this.carInfoList = this.carInfoList;
-          		        }*/
           /*信用卡使用明细*/
           this.cardDetList = res.data.cardDetList;
           for (var i = 0; i < this.cardDetList.length; i++) {
@@ -803,49 +788,38 @@
           } else {
             this.otherInfo = res.data.otherInfo;
           };
-          /*console.log(this.datas);*/
         });
       },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');
-
         // 检查传入数值为数值类型
         if (isNaN(num))
           num = "0";
-
         // 获取符号(正/负数)
         let sign = (num == (num = Math.abs(num)));
-
         num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
         let cents = num % Math.pow(10, cent); // 求出小数位数值
         num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
         cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-
         // 补足小数位到指定的位数
         while (cents.length < cent)
           cents = "0" + cents;
-
         for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
           num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-
         if (cent > 0) {
-          //console.log(cent);
-          //console.log(((sign)?'':'-') + num + '.' + cents);
           if (sign == true) {
             return (((sign) ? '' : '-') + num + '.' + cents);
           } else if (sign == false) {
             return '0.00'
           }
         } else {
-          //console.log(((sign)?'':'-') + num);
           return (((sign) ? '' : '-') + num);
         }
       },
     },
     watch: {
       isFull: function (val) {
-        console.log(this.isFull);
         if (this.isFull == false) { // 分屏
           //信用卡使用总况
           $(".xinyongka").width('930px');
@@ -869,7 +843,6 @@
             'padding-right': 'calc( 49.9% - 155px )',
             'padding-left': 'calc( 16.6% - 155px )'
           });
-
         } else if (this.isFull == true) { // 全屏
           $(".xinyongka").width('100%');
           $(".xinyongka ul li span").width('200px');

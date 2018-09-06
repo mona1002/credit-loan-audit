@@ -4,12 +4,8 @@
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
     </div>
-    <!-- ================================= -->
-    <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
-      <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
-      <!-- 折叠面板-手风琴List -->
       <p class="list_title clearFix">
         <span>影像名称
           <img src="../../../../static/images/BAA30772-8C58-4169-9CF3-C1ACA1DB9C62@1x.png" style="position:absolute;top:12px;right:17px">
@@ -33,7 +29,7 @@
             </p>
           </template>
           <div class="list_title_div">
-            <!--  二级 内容 节点  @mouseenter.once.stop="fff && getImg(ind)"-->
+            <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind,$event)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
                 <span style="width:105px;marginLeft:20px;">{{item.arcName}}</span>
@@ -43,7 +39,6 @@
           </div>
         </el-collapse-item>
       </el-collapse>
-      <!-- 按钮 : 缩略图 对比  -->
       <div class="AudioVisualLeft_btn_wrap">
         <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
         <el-button type="primary" @click="compBtnShow" v-if="this.comBtn">对比</el-button>
@@ -52,8 +47,6 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" :id='msg'>
-        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
-          v-if="key==smallPicInd" /> -->
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" v-show="myPng" @dblclick='next' />
         <p v-show="myPdf" is="RpdfDivLeft" ID='ReadTrilLeft' v-bind:title="pdfArrys"></p>
@@ -78,12 +71,10 @@
           <div class="Small_pic">
             <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
           </div>
-
           <!-- <em class="Audio_thumb_img" :style="'background-image:url('+imgBaseUrl+val.imagePath+')'"></em> -->
           <!-- <em class="Audio_thumb_img" style="background-image:url(../../../../static/images/add.png)"></em> -->
           <!-- <em class="Audio_thumb_img" style="background-image:url(http://10.1.26.6:8080/ptopCredit/download/downloadAction!download.action?filepath=/creditFile&filename=upload\2015-12-29\201512290111014260\\D5-06.jpg)"></em> -->
           <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
-          <!-- <p v-if="SmallmyPic">{{imgBaseUrl+val.imagePath }} </p> -->
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
           <div class="Small_pic" @dblclick="pdfClose()">
@@ -94,9 +85,8 @@
         </figure>
       </div>
     </div>
-    <!--=================================  查询弹出层 ================================= -->
+    <!--  查询弹出层  -->
     <div v-show="dataa" class="posi">
-      <!-- 折叠 -->
       <p>内部匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:12px" @click="closeAlertSearch"></i>
       </p>
@@ -117,7 +107,6 @@
               </el-table>
             </div>
           </el-collapse-item>
-          <!-- 折叠2 -->
           <el-collapse-item title="内匹客户进件" name="2">
             <div class="height_auto">
               <el-table :data="others" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
@@ -132,15 +121,12 @@
                 </el-table-column>
               </el-table>
             </div>
-            <!-- 确认  取消 按钮 -->
             <div style="margin-top: 20px">
             </div>
           </el-collapse-item>
         </el-collapse>
       </div>
-
     </div>
-    <!-- ================================= 结束================================= -->
   </div>
 </template>
 
@@ -154,8 +140,6 @@
         judgeFlag: '',
         opendImg: [],
         imgBaseUrl: '',
-        // opendImg: [true, true, true, true],
-        // closedImg: [false, false, false, false],
         closedImg: [],
         uurl: '',
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
@@ -170,7 +154,6 @@
         applyId: '', //入参
         imgPath: [],
         imgPathDetail: [],
-        // ----------------------------------
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
         dataa: false,
         personal: [], // 匹配查询-个人
@@ -212,9 +195,6 @@
 
         this.post("/productArchive/getProductArchiveParentList", {
           applyId: this.localInf.matchApplyId,
-          // applyId: this.localInf.applyId,
-          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-          // applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
@@ -228,7 +208,6 @@
             this.$message.error(res.msg);
           }
         });
-
       },
       closeAlertSearch() {
         this.dataa = false;
@@ -243,8 +222,6 @@
         this.dataa = true;
         // 个人进件        
         this.post("/internalMatch/getPersonalInternalMatchList", {
-          // applySubNo: "201504130173041858",
-          // certCode: "341422198409070094",
           applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
@@ -254,14 +231,12 @@
             this.$message.error(res.msg);
           }
         });
-        // //他人进件（ 不包含个人）
+         //他人进件（ 不包含个人）
         this.post("/internalMatch/getNonPersonalInternalMatch", {
           pageParam: {
             pageNum: "1", //当前页
             pageSize: '1000' //每页的显示数量
           },
-          //  applySubNo: "201504130173041858",
-          // certCode: "341422198409070094",
           applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
@@ -274,9 +249,7 @@
       },
       getParentList(id) { //  未写 -----未对
         this.post("/productArchive/getProductArchiveParentList", {
-          applyId: id, //上面删除后 此处打开
-          // a2b23bbf-46ef-4d94-9872-322843cebb7d matchApplyId
-          // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//上面删除后 此处打开
+          applyId: id,
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
@@ -307,7 +280,6 @@
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.localInf.matchApplyId,
-          // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -326,7 +298,6 @@
       pdfClose() {
         this.SmallPicShow = false;
         this.showPage = 1;
-        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -342,7 +313,6 @@
           this.myPng = true;
           this.myPdf = false;
           this.pngAyyrs = this.imgPath;
-          console.log(this.pngAyyrs.length);
         };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
@@ -351,14 +321,12 @@
       hid() {
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
-        // this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 135px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 223 + 'px';
-        // this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 34px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
       },
@@ -552,8 +520,6 @@
 
 </script>
 <style scoped>
-  /* css */
-
   .AudioVisualLeft {
     height: 100%;
   }
@@ -567,7 +533,6 @@
   .hidBtn {
     right: 5px;
   }
-
 
   /*  放大、缩小 按钮 wrap */
 
@@ -590,24 +555,6 @@
   }
 
   /* 左侧折叠面板 */
-
-  /* 折叠面板上面的四个 th 表头 */
-
-  /* .AudioVisualLeft .list_title span:nth-of-type(1),
-  .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
-    width: 125px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-left: none;
-  } */
-
-  /* .AudioVisualLeft .list_title span:nth-of-type(2),
-  .AudioVisualLeft .list_title_div p span:nth-of-type(2) {
-    width: calc(100% - 125px);
-    border-right: none;
-    border-left: none;
-  } */
 
   .posi {
     position: absolute;

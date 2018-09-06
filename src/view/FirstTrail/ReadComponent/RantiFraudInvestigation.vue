@@ -1,7 +1,7 @@
 <!-- 反欺诈调查-(内匹、质检、复议详情用)-(调查记录只能查看,无添加删除按钮) -->
 <template>
   <div class="aAntiFraudInvestigation RaAntiFraudInvestigation AlertDialogBox">
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
           <i class="collapse_title_icon"></i>
@@ -55,7 +55,8 @@
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">理由：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="reason" disabled>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                v-model="reason" disabled>
               </el-input>
             </li>
           </ul>
@@ -87,23 +88,23 @@
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li triplet_textarea_width">
                 <label class="label_width_166">网查：</label>
-                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck"
-                  disabled>
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                  v-model="fraudAuditInfo.netCheck" disabled>
                 </el-input>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li triplet_textarea_width margin_top_5">
                 <label class="label_width_166">114：</label>
-                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof"
-                  disabled>
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                  v-model="fraudAuditInfo.oof" disabled>
                 </el-input>
               </li>
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">其他：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other"
-                disabled>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                v-model="fraudAuditInfo.other" disabled>
               </el-input>
             </li>
           </ul>
@@ -130,10 +131,10 @@
       </el-collapse-item>
     </el-collapse>
     <!-- 弹框 -->
-    <!-- <div class="numLog"> -->
     <el-dialog :title='aa' :visible.sync="dialogVisible" width="860px">
       <div class="numBody">
-        <el-table ref="multipleTable" :data="recordList" style="width: 100%" height="250" border highlight-current-row @selection-change="handleSelectionChange">
+        <el-table ref="multipleTable" :data="recordList" style="width: 100%" height="250" border highlight-current-row
+          @selection-change="handleSelectionChange">
           <el-table-column type="index" :index='1' label="序号" min-width="50">
           </el-table-column>
           <el-table-column type="selection" min-width="50">
@@ -151,10 +152,9 @@
             </template>
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
         <div class="page">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-            :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+            :page-sizes="[10, 20,50]" :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
           </el-pagination>
         </div>
       </div>
@@ -162,7 +162,6 @@
         <el-button type="primary" @click="sure">确定</el-button>
       </span>
     </el-dialog>
-    <!-- </div> -->
   </div>
 </template>
 <script type="text/javascript">
@@ -254,7 +253,6 @@
                 this.reason = this.fraudApplyInfo.mainreaName + this.fraudApplyInfo.subreaName + this.fraudApplyInfo
                   .applyDesc;
                 var reg = /null/g;
-                //var string = 'hdksjkdjnullfhdlfjl';
                 this.reason = this.reason.replace(reg, '');
               };
             };
@@ -313,9 +311,6 @@
           }
         })
       },
-      handleChange() {
-
-      },
       handleCurrentChanges(val) {
         if (val == null) {
           this.currentRow = '';
@@ -327,9 +322,6 @@
         this.dialogVisible = false;
       },
       handlDetail(index, row) {
-        // this.$router.push({
-        //   path: '/MatchingInfQuery'
-        // });
         this.query.id = row.id;
         this.query.matchApplyId = row.applyId;
         this.query.applySubNo = row.applySubNo;
@@ -342,12 +334,6 @@
           }
         });
         localStorage.setItem("Query", JSON.stringify(this.query));
-        // localStorage.setItem("Query", JSON.stringify({
-        //   id: row.id,
-        //   matchApplyId: row.applyId,
-        //   applySubNo: row.applySubNo,
-        //   isInterFlag: false
-        // }));
       },
       /*命中客户数 查询*/
       inquiry(row) {
@@ -377,7 +363,6 @@
           }
         })
       },
-      /*分页*/
       handleSizeChange(val) {
         this.pageParam.pageSize = val;
         this.pageParam.pageNum = 1;
@@ -392,7 +377,6 @@
         this.pageParam.pageNum = val;
         this.check(this.pageParam, this.ruleId);
       },
-      /*多选框*/
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
@@ -497,14 +481,14 @@
   /* 命中规则 */
 
   .tableDiv {
-    width: calc( 33.3% + 350px);
+    width: calc(33.3% + 350px);
   }
 
   /* 调查记录 */
 
   .record ul li {
     width: 100%;
-    padding-right: calc( 66.6% - 350px);
+    padding-right: calc(66.6% - 350px);
   }
 
   .record ul li label {
@@ -518,17 +502,12 @@
   }
 
   .record ul li div {
-    width: calc( 100% - 150px);
+    width: calc(100% - 150px);
     display: inline-block;
     margin-top: 20px;
   }
 
   /* 电核*/
-
-  /* .ElectroNuclear {
-    width: 100%;
-    padding-right: calc( 66.6% - 350px);
-  } */
 
   .left {
     float: left;
@@ -561,10 +540,6 @@
     font-size: 20px;
   }
 
-  /* .right .rightSpan:nth-of-type(2) img, .right .rightSpan:nth-of-type(3) img{
-		padding-left:24px;
-	} */
-
   /* 确定按钮 */
 
   .button {
@@ -572,7 +547,7 @@
   }
 
   .button button {
-    margin-right: calc( 66.6% - 350px);
+    margin-right: calc(66.6% - 350px);
     float: right;
     margin-top: 20px;
     margin-bottom: 20px;

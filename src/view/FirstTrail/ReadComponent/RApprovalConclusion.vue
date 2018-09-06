@@ -46,7 +46,6 @@
       }
       this.post("/creauditOpinion/queryByPage", {
         applyId: this.MatchInf.matchApplyId,
-        // applyId: "00542",
       }).then(res => {
         if (res.statusCode == 200) {
           this.ConclutionInf = res.data.recordList;

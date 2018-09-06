@@ -1,6 +1,6 @@
 <template>
   <tr class="my_cross_table" v-bind:id="ynum">
-    <td v-for="(tab,index) in tablejson[ytablemsg]">
+    <td v-for="(tab,index) in tablejson[ytablemsg]" :key="index">
         <div class="td_box" v-if="tab.val == 0 ">
         	{{ynum}}
         </div>
@@ -219,13 +219,6 @@ export default {
     }
   },
   props: ['ytablemsg','ynum'],
-  created () {
-
-  },
-  methods:{
-   
-  },
-
 }
 </script>
 

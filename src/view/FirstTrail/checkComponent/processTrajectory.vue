@@ -70,7 +70,6 @@
             this.taskDetailList = [];
             this.$message.error(res.msg);
           }
-
         })
       },
     },

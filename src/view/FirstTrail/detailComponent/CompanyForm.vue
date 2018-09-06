@@ -29,7 +29,6 @@
       <li class="item-column3">
         <div class="left-title">
           <span class="require-icon" style="left:80px;">* </span>来源：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWsource" @change="changes('DanWsource')">
             <el-option label="申请表" value="00"></el-option>
@@ -37,12 +36,10 @@
             <el-option label="其他" value="02"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column3">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">* </span>接听情况：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWanswer">
             <el-option label="无人接" value="00"></el-option>
@@ -52,12 +49,10 @@
             <el-option label="接通" value="04"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column3 Phone_credit_Form_search_bottom">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWcheckStage">
             <el-option label="正在调查" value="00"></el-option>
@@ -66,7 +61,6 @@
             <el-option label="未调查" value="03"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column1" v-show="DanWsource=='02'">
         <div class="left-title">其他来源说明：</div>
@@ -268,11 +262,7 @@
   export default {
     data() {
       return {
-        // custName: '',
         phoneType: '02',
-        // phoneNum: '',
-
-
         DanWsource: this.danweiList.source,
         DanWanswer: this.danweiList.answer,
         DanWcheckStage: this.danweiList.checkStage,
@@ -297,33 +287,23 @@
         DanWjobref1: this.danweiList.jobref1,
         DanWjobref2: this.danweiList.jobref2,
         DanWconclusion: this.danweiList.conclusion,
-
-
-
-        phoneId: '',
+    phoneId: '',
         resMsg: ''
       }
     },
-    /*props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull','source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'phone' , 'phonetxt' , 'answerIdentity' , 'answertxt' , 'company' , 'companytxt' , 'checkTime' , 'checkTimetxt' , 'checkIncome' , 'checkIncometxt' , 'payrollSituation' , 'payrollSituationtxt' , 'pensionInsurance' , 'employmentmode' , 'employmentmodetxt' , 'housingFund' , 'jobref1' , 'jobref2' , 'conclusion'],*/
     props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'danweiList'],
     mounted() {
       this.phoneType = '02'; // 单位电话
       if (this.isFull == true) { // 全屏
-        console.log('全屏');
         $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
         $('.item-column1 textarea').css("width", "100%")
         $('.item-column1 textarea').css("width", "100%")
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2
-        // $('.item-column3').css({
-        //   "min-height": "50px"
-        // })
         $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
         $('.item-column2 textarea').css("width", "100%");
       } else if (this.isFull == false) { // 分屏
-        console.log("分屏");
-        // $(".textarea-class").css("minWidth", "300px")
         // 提交按钮
         $('.submit-class').css("margin-left", "370px")
 
@@ -337,7 +317,6 @@
     },
     methods: {
       submitForm() {
-        console.log('submit!');
         if (!this.DanWsource || !this.DanWanswer || !this.DanWcheckStage || (this.DanWphone == '01' && !this.DanWphonetxt) ||
           !this.DanWconclusion) {
           this.$message({
@@ -363,7 +342,6 @@
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = '执行中...';
-              console.log(this.taskId)
               // 点击 确认 提交 方法
               this.post('/creTelResearchHis/addComTelLog', {
                 cretelinvest: {
@@ -411,13 +389,11 @@
                   done();
                 } else {
                   this.resMsg = res.msg;
-
                   instance.confirmButtonText = '';
                 }
                 instance.confirmButtonLoading = false;
               });
             } else {
-              // this.$message({ message: this.resMsg, type: 'warning' });
               done();
             }
           }
@@ -426,7 +402,6 @@
             type: 'success',
             message: this.resMsg
           });
-
         });
       },
       showMessage(value) {
@@ -477,29 +452,7 @@
       },
     },
     watch: {
-      /*source: function() {
-        this.sourceDesc = '';
-      },
-      phone: function() {
-        this.phonetxt = '';
-      },
-      answerIdentity: function() {
-        this.answertxt = '';
-      },
-      company: function() {
-        this.companytxt = '';
-      },
-      checkTime: function() {
-        this.checkTimetxt = '';
-      },
-      checkIncome: function() {
-        this.checkIncometxt = '';
-      },
-      payrollSituation: function() {
-        this.payrollSituationtxt = '';
-      },*/
       danweiList(val) {
-        console.log(val);
         this.DanWsource = val.source;
         this.DanWanswer = val.answer;
         this.DanWcheckStage = val.checkStage;
@@ -529,23 +482,16 @@
       // 判断全屏 , 更改样式
       isFull: function (val) {
         if (val == true) { // 全屏
-          console.log('全屏');
           $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
           $('.item-column1 textarea').css("width", "100%")
           // 提交按钮
           $('.submit-class').css("margin-left", "calc( 66% - 140px)")
           // 显示 column2
-          // $('.item-column3').css({
-          //   "min-height": "50px"
-          // })
           $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
           $('.item-column2 textarea').css("width", "100%");
         } else if (val == false) { // 分屏
-          console.log("分屏");
-          // $(".textarea-class").css("minWidth", "300px")
           // 提交按钮
           $('.submit-class').css("margin-left", "370px")
-
           $('.item-column3').css({
             "min-height": "0px",
             "margin-bottom": "10px"

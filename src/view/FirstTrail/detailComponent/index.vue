@@ -1,7 +1,7 @@
 <template>
   <div id="warp">
-    <el-button>默认按钮</el-button>  
-    <el-button type="primary" v-on:click="add_table('vehicle')" >车辆信息</el-button>  
+    <el-button>默认按钮</el-button>
+    <el-button type="primary" v-on:click="add_table('vehicle')">车辆信息</el-button>
     <el-button type="text">房产信息</el-button>
     <table class="mytable">
       <thead>
@@ -35,87 +35,69 @@
           <td></td>
           <td></td>
         </tr>
-        <cross-rable v-for="cro in cross_rable_ytablemsg" ytablemsg="vehicle" v-bind:ynum="cro"></cross-rable>
+        <cross-rable v-for="cro in cross_rable_ytablemsg" ytablemsg="vehicle" v-bind:ynum="cro" :key="cro"></cross-rable>
       </tbody>
     </table>
   </div>
 </template>
-
 <script>
-//import CrossRable from 'components/CrossRable'
-import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
-export default {
-  name: 'index',
-  data () {
-    return {
-      message: '211212',
-      cross_rable_ytablemsg: 0
-    }
-  },
-  components: {
-    CrossRable
-  },
-  created () {
-    // this.$http.get('/www/web/asyn_index').then((response) => {
-    //   console.log(response.body)
-    //   this.message = response.body
-    // });
-    // this.$vux.alert.show({
-    //   title: 'VUX is Cool',
-    //   content: 'Do you agree?',
-    //   onShow () {
-    //     console.log('Module: I\'m showing')
-    //   },
-    //   onHide () {
-    //     console.log('Module: I\'m hiding now')
-    //   }
-
-    // })
-  },
-  methods: {
-    add_table: function(str) {
-      this.cross_rable_ytablemsg += 1;
+  import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
+  export default {
+    name: 'index',
+    data() {
+      return {
+        message: '211212',
+        cross_rable_ytablemsg: 0
+      }
+    },
+    components: {
+      CrossRable
+    },
+    methods: {
+      add_table: function (str) {
+        this.cross_rable_ytablemsg += 1;
+      }
     }
   }
-}
-
-
-
 
 </script>
-
 <style scoped>
-#warp {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  #warp {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
   }
-  #warp .mesg{
-    color:#f00;
+
+  #warp .mesg {
+    color: #f00;
   }
-  table.mytable{
-    font-family: verdana,arial,sans-serif;
-    font-size:14px;
-    color:#333333;
+
+  table.mytable {
+    font-family: verdana, arial, sans-serif;
+    font-size: 14px;
+    color: #333333;
     border-width: 1px;
     border-color: #666666;
     border-collapse: collapse;
   }
+
   table.mytable th {
-        border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #666666;
-        background-color: #dedede;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
   }
+
   table.mytable td {
-        border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #666666;
-        background-color: #ffffff;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
   }
+
 </style>

@@ -1,7 +1,7 @@
 <!-- 电话征信 - 工作证明 历史 -->
 <template>
   <div>
-    <el-collapse ref="form" v-model="activeName">
+    <el-collapse  v-model="activeName">
       <el-collapse-item name='1'>
         <template slot="title">
           <i class="collapse_title_icon"></i>
@@ -84,7 +84,6 @@
     data() {
       return {
         activeName: ['1', '2'],
-        form: {}
       }
     },
     props: ['workData', 'isFull'],

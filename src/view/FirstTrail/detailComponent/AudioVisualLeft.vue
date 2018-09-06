@@ -4,11 +4,8 @@
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
     </div>
-    <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
-      <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
-      <!-- 折叠面板-手风琴List -->
       <p class="list_title clearFix">
         <span>影像名称
           <img src="../../../../static/images/BAA30772-8C58-4169-9CF3-C1ACA1DB9C62@1x.png" style="position:absolute;top:12px;right:17px">
@@ -32,7 +29,7 @@
             </p>
           </template>
           <div class="list_title_div">
-            <!--  二级 内容 节点  @mouseenter.once.stop="fff && getImg(ind)"-->
+            <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind,$event)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
                 <span style="width:105px;marginLeft:20px;">{{item.arcName}}</span>
@@ -42,19 +39,14 @@
           </div>
         </el-collapse-item>
       </el-collapse>
-      <!-- 按钮 : 缩略图 对比  -->
       <div class="AudioVisualLeft_btn_wrap">
-        <!-- {{AUpreWidth}} -->
         <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
         <el-button type="primary" @click="compBtnShow" v-if="this.comBtn">对比</el-button>
       </div>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <!-- <div ref="img_wrap" style="position:relative;" :id='msg'  @dblclick="next"> -->
       <div ref="img_wrap" style="position:relative;" :id='msg'>
-        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
-          v-if="key==smallPicInd" /> -->
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" v-show="myPng" @dblclick='next' />
         <p v-show="myPdf" is="pdfDivLeft" ID='firstTirlLeft' v-bind:title="pdfArrys"></p>
@@ -69,7 +61,7 @@
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
       <span class="audioInd"> 第 {{showPage}} 页</span>
     </div>
-    <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面  SmallPicShow-->
+    <!-- 缩略图弹出层   -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
@@ -79,10 +71,6 @@
           <div class="Small_pic">
             <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
           </div>
-          <!-- <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
-            /> -->
-          <!-- <em :style="'background:url('+imgBaseUrl+val.imagePath+') '" class="audio_img"></em> -->
-          <!-- <em style="background:url(http://10.1.26.6:8080/ptopCredit/download/downloadAction!download.action?filepath=/creditFile&filename=upload\2015-11-19\201511190173044032\B1-1.png)" class="audio_img"></em> -->
           <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
@@ -94,9 +82,7 @@
         </figure>
       </div>
     </div>
-    <!--=================================  查询弹出层 ================================= -->
     <div v-show="dataa" class="posi">
-      <!-- 折叠 -->
       <p>内部匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:12px" @click="closeAlertSearch"></i>
       </p>
@@ -117,7 +103,6 @@
               </el-table>
             </div>
           </el-collapse-item>
-          <!-- 折叠2 -->
           <el-collapse-item title="内匹客户进件" name="2">
             <div class="height_auto">
               <el-table :data="others" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
@@ -132,17 +117,14 @@
                 </el-table-column>
               </el-table>
             </div>
-            <!-- 确认  取消 按钮 -->
             <div style="margin-top: 20px">
             </div>
           </el-collapse-item>
         </el-collapse>
       </div>
     </div>
-    <!-- ================================= 结束================================= -->
   </div>
 </template>
-
 <script>
   import imgUrl from '../../../util/ConstantSocialAndPn'
   import pdfDivLeft from '../../pdf'
@@ -164,7 +146,6 @@
         CompareAlert: true,
         ListParent: [],
         ListDetails: [],
-        // applyId: '', //入参
         imgPath: [],
         imgPathDetail: [],
         // ----------------------------------
@@ -197,9 +178,6 @@
         } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
           this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
         }
-        // else if (this.judgeFlag.flag == '04') {
-        //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-        // }
         // 恢复到初始状态
         this.ListDetails = [];
         this.activeName = [];
@@ -318,7 +296,6 @@
       pdfClose() {
         this.SmallPicShow = false;
         this.showPage = 1;
-        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -342,16 +319,13 @@
       hid() {
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
-        // this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 135px)';
-        //  left: calc( 50% - 34px);
         this.$refs.AudioVisual_Img_ref.style.left = 0;
         this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 223 + 'px';
-        // this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 34px)';
         this.$refs.AudioVisual_Img_ref.style.left = "214px";
         this.defaultBigPicCss();
@@ -364,7 +338,6 @@
       SmallpicAlert() {
         this.SmallPicShow = true;
         if (this.myPdf) { //显示pdf
-          //alert("99999");
           this.SmallmyPdf = true;
           this.SmallmyPic = false;
           this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
@@ -539,7 +512,7 @@
       },
     },
     mounted() {
-      this.odivMove(this.msg); //移动
+      this.odivMove(this.msg); 
       this.mountedInf();
     },
     components: {
@@ -553,7 +526,6 @@
     height: 100%;
     width: 100%;
   }
-
 
   /* 图片功能按钮 */
 
@@ -586,23 +558,6 @@
   .AudioVisualLeft .AudioVisual_List {
     width: 203px;
   }
-
-  /* 左侧折叠面板 */
-
-  /* 折叠面板上面的四个 th 表头 */
-
-  /* .AudioVisualLeft .list_title span:nth-of-type(1),
-  .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
-    width: 125px;
-    border-left: none;
-  } */
-
-  /* .AudioVisualLeft .list_title span:nth-of-type(2),
-  .AudioVisualLeft .list_title_div p span:nth-of-type(2) {
-    width: calc(100% - 125px);
-    border-right: none;
-    border-left: none;
-  } */
 
   .posi {
     position: absolute;

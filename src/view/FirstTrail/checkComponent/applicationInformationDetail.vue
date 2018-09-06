@@ -285,20 +285,6 @@
                 <span>{{accepCusBasicInfo.comeYear}}</span>
               </li>
             </div>
-            <!-- <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_166">银行开户名称：</label>
-                <span>{{accepCusBasicInfo.bankName}}</span>
-              </li>
-              <li>
-                <label class="label_width_166">银行卡所属分行：</label>
-                <span>{{accepCusBasicInfo.bankBranch}}</span>
-              </li>
-              <li>
-                <label class="label_width_166">常用储蓄卡卡号：</label>
-                <span>{{accepCusBasicInfo.accountCode}}</span>
-              </li>
-            </div> -->
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">网查征信用户名：</label>
@@ -323,7 +309,6 @@
             </li>
           </ul>
         </div>
-
       </el-collapse-item>
       <el-collapse-item name="4" v-if="accepCusBasicInfo.privateOwnerFlag=='1'">
         <template slot="title">
@@ -546,7 +531,6 @@
             </el-table-column>
           </el-table>
         </div>
-
       </el-collapse-item>
       <el-collapse-item name="7">
         <template slot="title">
@@ -771,10 +755,8 @@
     <!-- 维护日志弹框 -->
     <div class="weihurizhi">
       <el-dialog title='维护日志' :visible.sync="sldialogVisible" :modal="false" width="860px" top="5vh">
-        <!-- <p class="freshen"> -->
         <p style="margin-bottom:5px;">
           <label @click="renovate">
-            <!-- <img src="/static/images/dasf.png">   -->
             <i class="el-icon-refresh" style="color:#409eff"></i>
             <span>刷新</span>
           </label>
@@ -798,10 +780,10 @@
               </template>
             </el-table-column>
           </el-table>
-          <!-- 分页 -->
           <div class="page">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-              :page-size="setPageSize" layout="total, sizes, prev, pager, next, jumper" :total="logDatas.total">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+              :page-sizes="[10, 20,50]" :page-size="setPageSize" layout="total, sizes, prev, pager, next, jumper"
+              :total="logDatas.total">
             </el-pagination>
           </div>
         </div>
@@ -821,10 +803,10 @@
             <el-table-column prop="propertyNewerValue" label="变更后" min-width="120">
             </el-table-column>
           </el-table>
-          <!-- 分页 -->
           <div class="page">
-            <el-pagination @size-change="dhandleSizeChange" @current-change="dhandleCurrentChange" :current-page="currentPage1" :page-sizes="[10, 20,50]"
-              :page-size='setPageSize1' layout="total, sizes, prev, pager, next, jumper" :total="detailLogDatas.total">
+            <el-pagination @size-change="dhandleSizeChange" @current-change="dhandleCurrentChange" :current-page="currentPage1"
+              :page-sizes="[10, 20,50]" :page-size='setPageSize1' layout="total, sizes, prev, pager, next, jumper"
+              :total="detailLogDatas.total">
             </el-pagination>
           </div>
         </div>
@@ -841,33 +823,23 @@
         datas: '',
         /*房产信息*/
         accepCusEstates: [],
-
         /*车辆信息*/
         accepCusCarInfos: [],
-
         /*您的借款需求*/
         accepApplyLoan: '',
-
         /*您的个人信息*/
         accepCusBasicInfo: '',
-
         /*私人业主信息*/
         accepCusPrivate: '',
-
         /*同业贷情况*/
         accepCusInterBankLoan: '',
-
         /*保险信息*/
         accepCusInsurances: [],
-
         /*您的工作信息*/
         accepCusWorkInfo: '',
-
         /*联系人信息*/
         accepCusRelations: [],
-
         taskInWaitting: '',
-
         applyId: '',
         judgeFlag: '',
         //您的个人信息 投保地点
@@ -1014,7 +986,6 @@
                 }
               };
             };
-
             /*车辆信息*/
             this.accepCusCarInfos = res.data.accepCusCarInfos;
             for (var i = 0; i < this.accepCusCarInfos.length; i++) {
@@ -1054,7 +1025,6 @@
               this.accepApplyLoan.loanAmt = this.formatNumber(this.accepApplyLoan.loanAmt, 2, 0);
               this.accepApplyLoan.eachTermAmt = this.formatNumber(this.accepApplyLoan.eachTermAmt, 2, 0);
             }
-
             /*您的个人信息*/
             if (res.data.accepCusBasicInfo == null) {
               this.accepCusBasicInfo = this.accepCusBasicInfo
@@ -1070,7 +1040,6 @@
                   this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress;
                 this.insurAddr = this.insurAddr.replace(reg, '');
               }
-
               //每月家庭支出
               if (this.accepCusBasicInfo.payAmt != null) {
                 this.accepCusBasicInfo.payAmt = this.formatNumber(this.accepCusBasicInfo.payAmt, 2, 0);
@@ -1084,12 +1053,9 @@
               //现住宅地址
               this.accepCusBasicInfo.liveAddr = this.accepCusBasicInfo.liveAddr.replace(reg, '');
             }
-
             /*私人业主信息*/
             if (res.data.accepCusPrivate == null) {
               this.accepCusPrivate = this.accepCusPrivate;
-              //alert(12345);
-              //return
             } else {
               this.accepCusPrivate = res.data.accepCusPrivate;
               //注册资金
@@ -1172,7 +1138,6 @@
               for (var i = 0; i < this.accepCusInsurances.length; i++) {
                 //期缴保费
                 if (this.accepCusInsurances[i].eachPayAmt != null) {
-                  //alert('hhh');
                   this.accepCusInsurances[i].eachPayAmt = this.formatNumber(this.accepCusInsurances[i].eachPayAmt,
                     2, 0);
                 };
@@ -1232,7 +1197,6 @@
             } else if (this.datas.sourcesChan == '06') {
               this.datas.sourcesChan = "其他";
             };
-            // var query={
             query = {
               appType: this.datas.appType,
               appTypeTxt: this.datas.appTypeTxt,
@@ -1266,7 +1230,6 @@
             };
             localStorage.setItem("applicationInformationDetail", JSON.stringify(query));
             /*将房产信息保存到本地*/
-            // localStorage.setItem("house",JSON.stringify(res.data.accepCusEstates));
             if (res.data.accepCusEstates != '') {
               localStorage.setItem("house", JSON.stringify(res.data.accepCusEstates));
             };
@@ -1280,11 +1243,6 @@
               this.del('初审详情');
               this.$router.push('/taskInWaitting?taskNodeName=creditApp_firstTrial&flag=01');
             } else if (this.judgeFlag.flag == '02') { // 终审
-              //   this.$route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[
-              //       0].split('=')[1] :
-              //     this.taskNodeName;
-              //   this.taskNodeName != '' ? this.$router.push('FtaskInWaitting?taskNodeName=' + this.taskNodeName +
-              //     '&flag=02') : '';
               this.del('终审详情');
               window.history.go(-1);
             } else if (this.judgeFlag.flag == '03') { //反欺诈专员
@@ -1338,16 +1296,9 @@
       comrequest(param) {
         this.post("/queryOperLogDetail/queryLogRecords", param).then(res => {
           if (res.statusCode == 200) {
-            console.log(res)
             if (res.data) {
-              console.log('存在')
               this.logDatas = res.data;
-            } else {
-              console.log('不存在')
-              // Object.assign(this.logDatas,this.DefaultTotal)
-              console.log(this.logDatas)
-              // this.logDatas = Ob;
-            };
+            }
             this.$message({
               message: "查询成功！",
               type: 'success'
@@ -1411,11 +1362,6 @@
           name: delname
         }).then((views) => {
           const latestView = views.slice(-1)[0]
-          //   if (latestView) {
-          //     this.$router.push(latestView.StatefullPath);
-          //   } else {
-          //     this.$router.push('/')
-          //   }
         })
       },
       dhandleSizeChange(val) {
@@ -1438,26 +1384,12 @@
 </script>
 <style type="text/css" scoped>
   .ellipsis {
-    /* float: left;
-    line-height: 30px; */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   /* 维护日志 */
-
-  /* .weihurizhi .freshen {
-    background: #ccc;
-    height: 30px;
-    line-height: 30px;
-  } */
-
-  /* .weihurizhi .freshen img {
-    width: 15px;
-    height: 15px;
-    margin: 7px 0 0 5px;
-  } */
 
   .weihurizhi .page {
     text-align: center;

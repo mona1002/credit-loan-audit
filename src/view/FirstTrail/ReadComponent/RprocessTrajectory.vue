@@ -63,9 +63,3 @@
   }
 
 </script>
-<style>
-  /* .processTrajectory{
-  height:100%;
-} */
-
-</style>
