@@ -1,6 +1,5 @@
 <template>
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
-      <!-- 进件人详情 -->
       <p class="PerDtl">
         <span> 借款人：{{custName}}</span>
         <span> 进件编号：{{customInf.applyMainNo}}</span>
@@ -15,14 +14,12 @@
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-            <!-- 左侧 title列表 -->
             <ul>
               <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
                 :class="{tab1Act:tab1Index==index}">
                 {{val}}</li>
             </ul>
           </div>
-          <!-- 左侧详情 -->
           <div ref="Left_detail" class="Left_detail_div">
             <p class="Left_right_Title"> {{this.title}}
               <span class="icon_FullScreen"  @click="FullScreen">
@@ -38,7 +35,6 @@
               <capplicationInformationDetail ref="applicationLeft" v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail ref="borrowLeft" v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
               <PhoneCredit ref="phoneLeft" v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
-              <!-- <cCreditForm ref="CreditFormLeft" v-if=" this.tabContent1==6"></cCreditForm> -->
               <FCreditForm ref="CreditFormLeft" v-if=" this.tabContent1==6"  :applyId='tastwaitingPass.applyId' :PhoneAndInterShow="false"></FCreditForm>
               <creditInvestigation ref="InvestigationLeft" v-if=" this.tabContent1==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
               <processTrajectory ref="processLeft" v-if=" this.tabContent1==8"></processTrajectory>
@@ -50,17 +46,13 @@
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <span class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen"></span>
-          <!-- <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen"> -->
-          <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
-            <!-- 左右滑动 图标  -->
             <span class="pre_next_btn_wrap" @click="leftMovingBtn">
               <img src="../../../static/images/Shape@1x.png">
             </span>
             <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
               <img src="../../../static/images/Shaperight@1x.png">
             </span>
-            <!-- tab 2 -->
             <div class="Right_tab_ul_wrap">
               <ul ref="right_tab_ul" style="left:0;right:0;">
                 <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
@@ -69,7 +61,6 @@
               </ul>
             </div>
           </div>
-          <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
             <AudioVisual :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" ></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
@@ -87,30 +78,24 @@
       <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
       <div class="AudioVisual_wrap_compare" v-if="CompareAlert" v-on:CompareShow="compBtnS">
         <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
-        <!-- 弹出层左侧 div -->
         <div class="AudioVisual_wrap_compare_left ">
           <p>影像资料</p>
-          <!-- h2 标题栏 -->
           <div class="AlertContent">
             <AudioVisualLeft ref="AudioLeftCom" msg="spLtwo" v-if="CompareAlert" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
-        <!-- 弹出层右侧 div -->
         <div class="AudioVisual_wrap_compare_right ">
-          <!-- 搜索框 -->
           <p class="customName">客户名称：
             <el-input v-model="AlertSearch" :disabled="true" ></el-input>
             <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
               <i class="el-icon-search" style="fontSize:16px"></i>
             </el-button>
           </p>
-          <!-- h2 标题栏 -->
           <div class="AlertContent">
             <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
       </div>
-      <!-- 对比弹出层结束 -->
     </div>
 </template>
 <script>
@@ -123,14 +108,9 @@
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
   import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue";
-  
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
-  // import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   import CreditApproval from "./CreditApproval";
-  // 查询
-  // import cCreditForm from "./checkComponent/cCreditForm";
-  // import cFinanceInformation from "./checkComponent/FinanceInformation";
   import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
@@ -142,7 +122,6 @@
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
-        // originLeft: '',
         loading: false,
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
@@ -205,7 +184,6 @@
     methods: {
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
-        // comJs.MyMove('#MID', '#AUL', this.AUpreWidth, 'AUclickX', 'AUleftOffset', 'bbr', 10);
       },
       inputInner(a, b) {
         this.AlertSearch = a + " " + b;
@@ -240,23 +218,19 @@
       },
       FullScreen() {
         this.showHalfBtn = true;
-        // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
         this.watchData = this.$refs.rRight.style.width = "100%";
         this.$refs.rRight.style.left = '0';
-        // this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
         this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
-        // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         this.watchData = this.$refs.rRight.style.width = this.$refs.RM.style.left = this.$refs.rLeft.style.width =
           "calc(50% - 2px)";
         this.$refs.rRight.style.left = '50%';
-        // this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
         this.midShow = true;
       },
@@ -344,9 +318,6 @@
         });
       }
     },
-    // activated() {
-    // deactivated(){
-    // beforeRouteLeave(to,from,next){
     mounted() {
       this.title = "影像资料";
       this.MyMove();
@@ -363,7 +334,6 @@
       FCreditForm,
       creditInvestigation,
       CreditApproval,
-      // cCreditForm,
       cremarkDetail,
       cborrowerInformationDetail,
       capplicationInformationDetail,
