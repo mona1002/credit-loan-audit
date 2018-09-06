@@ -249,6 +249,9 @@
         this.midShow = true;
       },
       tab1(ev, ind, val) {
+        if (ind == 0 || ind == 3) {
+          this.loading = true;
+        }
         this.title = val;
         this.tabContent1 = ind;
         this.tab1Index = ind;
@@ -263,6 +266,9 @@
         }
       },
       tab2(ev, ind, val) {
+        if (ind == 0 || ind == 3) {
+          this.loading = true;
+        }
         this.tabContent2 = ind;
         this.tab2Index = ind;
         this.tabActiveInd2 = ind;

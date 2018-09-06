@@ -237,11 +237,8 @@
         this.midShow = true;
       },
       tab1(ev, ind, val) {
-        if (ind==0||ind==3){
-          console.log(  this.loading)
-            this.loading = true;
-          console.log(  this.loading)
-            
+        if (ind == 0 || ind == 3) {
+          this.loading = true;
         }
         this.title = val;
         this.tabContent1 = ind;
@@ -257,8 +254,8 @@
         }
       },
       tab2(ev, ind, val) {
-         if (ind==0||ind==3){
-            this.loading = true;
+        if (ind == 0 || ind == 3) {
+          this.loading = true;
         }
         this.tabContent2 = ind;
         this.tab2Index = ind;
