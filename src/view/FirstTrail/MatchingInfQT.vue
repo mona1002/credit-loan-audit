@@ -412,23 +412,23 @@
           e.cancelBubble = true;
         });
       },
-      getPageInf() { //获取个人信息
-        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.ApplyId,
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.customInf = res.data;
-            if (res.data.accepCusBasicInfo) {
-              this.loading = false;
-              this.custName = res.data.accepCusBasicInfo.custName;
-              this.certCode = res.data.accepCusBasicInfo.certCode;
-              this.mobile = res.data.accepCusBasicInfo.mobile;
-            }
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-      },
+      // getPageInf() { //获取个人信息
+      //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+      //     id: this.tastwaitingPass.ApplyId,
+      //   }).then(res => {
+      //     if (res.statusCode == 200) {
+      //       this.customInf = res.data;
+      //       if (res.data.accepCusBasicInfo) {
+      //         this.loading = false;
+      //         this.custName = res.data.accepCusBasicInfo.custName;
+      //         this.certCode = res.data.accepCusBasicInfo.certCode;
+      //         this.mobile = res.data.accepCusBasicInfo.mobile;
+      //       }
+      //     } else {
+      //       this.$message.error(res.msg);
+      //     }
+      //   });
+      // },
       initialInfo() {
         var Nodename = this.$route.fullPath.split('?')[1];
         if (Nodename === 'checkApp_apply') {
@@ -485,7 +485,7 @@
         this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
         this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
         // console.log(1, this.QTC.tastwaitingPass)
-        this.getPageInf(); //获取页面个人信息      
+        // this.getPageInf(); //获取页面个人信息      
         // console.log(this.tastwaitingPass.ApplyId)
         // console.log('tastwaitingPass：', this.tastwaitingPass)
         // console.log('QTC：', this.QTC)

@@ -694,7 +694,8 @@
         // 请求历史数据 , 直接传给  his 组件
         this.post('creTelResearchHis/queryHomeTel', {
           id: this.id,
-          phoneType: this.phoneType
+          phoneType: this.phoneType,
+          applyId: this.applyId
         }).then(res => {
           this.newList = '';
           this.mobileData = res.data;
@@ -706,6 +707,7 @@
       queryComTelLog() {
         // 单位联系人历史
         this.post('/creTelResearchHis/queryComTelLog', {
+          applyId: this.applyId,
           id: this.id,
           phoneType: this.phoneType
         }).then(res => {
@@ -719,6 +721,7 @@
       queryTelfContract() {
         // 家庭联系人类似
         this.post('/creTelResearchHis/queryTelfContract', {
+          applyId: this.applyId,
           id: this.id,
           phoneType: this.phoneType
         }).then(res => {
@@ -732,6 +735,7 @@
       queryTeleContract() {
         // 紧急联系人历史
         this.post('/creTelResearchHis/queryTeleContract', {
+          applyId: this.applyId,
           id: this.id,
           phoneType: this.phoneType
         }).then(res => {
@@ -745,6 +749,7 @@
       queryTelJobRef() {
         // 工作联系人历史
         this.post('/creTelResearchHis/queryTelJobRef', {
+          applyId: this.applyId,
           id: this.id,
           phoneType: this.phoneType
         }).then(res => {
