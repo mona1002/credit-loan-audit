@@ -3,7 +3,6 @@
   <div class="phone-credit min_width_1200">
     <el-container style="height: 100%; border: 1px solid #eee">
       <!-- 左侧 导航列表 -->
-      <!-- width="200px" style="heightbackground-color: rgb(238, 241, 246)" -->
       <el-aside style="width:210px;">
         <!-- 手风琴效果 -->
         <!-- no-key 每个树节点用来作为唯一标识的属性,整棵树应是唯一的 -->
@@ -611,6 +610,9 @@
               };
               this.newList = res.data.message;
             }
+          }else{
+            this.listData.recordList=[];
+            this.$message.error(res.msg)
           }
         })
       },

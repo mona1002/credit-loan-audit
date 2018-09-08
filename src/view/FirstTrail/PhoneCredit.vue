@@ -116,14 +116,12 @@
                       </el-table-column>
                     </el-table>
                   </div>
-                  <!-- 分页 -->
                   <div class="page_top_bottom_10">
                     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum"
                       :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
                       :total="listData.totalRecord" v-show="listData.totalRecord>0">
                     </el-pagination>
                   </div>
-
                 </div>
               </el-collapse-item>
             </el-collapse>
@@ -848,6 +846,9 @@
               this.checkJob = '';
               this.checkJobtxt = '';
             }
+          }else{
+            this.listData.recordList=[];
+            this.$message.error(res.msg)
           }
         })
       },

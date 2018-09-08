@@ -22,8 +22,8 @@
           </div>
         </template>
         <div class="taskWtable">
-          <el-table :data="tableData" height="710" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}" show-header
-            highlight-current-row @current-change="handleCurrentChange" border>
+          <el-table :data="tableData" height="710" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}"
+            show-header highlight-current-row @current-change="handleCurrentChange" border>
             <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
             <el-table-column prop="remarkTypeTxt" label="备注类型" width="90">
@@ -58,11 +58,12 @@
     </div>
     <!-- 修改弹窗 -->
     <div class="Height_240 ">
-      <el-dialog title="请输入您要修改的备注信息" :visible.sync="chdialogVisible"  width='600px' :modal="false ">
+      <el-dialog title="请输入您要修改的备注信息" :visible.sync="chdialogVisible" width='600px' :modal="false ">
         <el-form :model="FormEdit" :rules="rules" ref="FormEdit">
           <div class="dialog_textarea ">
             <el-form-item label="备注：" label-width="50px" prop="changeRemarks">
-              <el-input type="textarea" :rows="7" placeholder="最多600字" v-model="FormEdit.changeRemarks" :maxlength="600" resize="none">
+              <el-input type="textarea" :rows="7" placeholder="最多600字" v-model="FormEdit.changeRemarks" :maxlength="600"
+                resize="none">
               </el-input>
             </el-form-item>
           </div>
@@ -184,11 +185,10 @@
       delet() {
         if (this.isChecked == '') {
           this.title = '请选择一条记录！';
-          this.promptSure();
         } else {
           this.title = '您要删除该备注吗？';
-          this.promptSure();
         }
+        this.promptSure();
       },
       deletCancle() {
         this.dedialogVisible = false;
@@ -197,6 +197,8 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.dialogVisible = false;
+            this.addLodaing = true;
+            this.addSure = '执行中';
             this.post('/applyRemark/addApplyRemark', {
                 applyId: this.applyId,
                 remarkType: this.remarkType,
@@ -283,4 +285,5 @@
       },
     },
   }
+
 </script>

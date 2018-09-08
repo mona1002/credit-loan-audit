@@ -287,7 +287,7 @@
         DanWjobref1: this.danweiList.jobref1,
         DanWjobref2: this.danweiList.jobref2,
         DanWconclusion: this.danweiList.conclusion,
-    phoneId: '',
+        phoneId: '',
         resMsg: ''
       }
     },
@@ -326,6 +326,14 @@
           return;
         }
         this.open();
+        // this.$confirm('您确定操作？', '提示', {
+        //   confirmButtonText: '确定',
+        //   type: 'warning',
+        //   cancelButtonText: '取消',
+        //   showCancelButton: true
+        // }).then(() => {
+        //   console.log('tijiao')
+        // }).catch(() => {});
       },
       // open 打开 是否确认提交弹窗
       open() {
