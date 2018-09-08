@@ -246,7 +246,7 @@ const routes = [{
     path: '/QTHistoryTask',
     component: QTHistoryTask,
   },
-  // ----------------台账------32  33-------
+  // ----------------台账-------------
   {
     path: '/appLedgerDetail',
     component: appLedgerDetail,

@@ -136,9 +136,8 @@
         judgeFlag: '',
         opendImg: [],
         closedImg: [],
-        uurl: '',
         imgBaseUrl: '',
-        localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
+        // localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
         showPage: 0,
@@ -166,19 +165,44 @@
         SmallmyPdf: false,
         SmallmyPic: false,
         pdfTitle: '',
+        applyId: this.list.applyId,
+        applySubNo: this.list.applySubNo,
+        certCode: this.list.certCode
       }
     },
-    props: ['applyId', 'msg', 'comBtn'],
+    props: {
+      list: {
+        type: Object,
+        required: true,
+        default: function () {
+          return {
+            applyId: '',
+            applySubNo: '',
+            certCode: ''
+          }
+        }
+      },
+      msg: {
+        default: "",
+        required: true,
+        type: String
+      },
+      comBtn: {
+        default: true,
+        type: Boolean
+      }
+    },
+
     methods: {
       mountedInf() {
-        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        if (this.judgeFlag.flag == '01') {
-          this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-        } else if (this.judgeFlag.flag == '02') {
-          this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-          this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
-        }
+        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        // if (this.judgeFlag.flag == '01') {
+        //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+        // } else if (this.judgeFlag.flag == '02') {
+        //   this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        // } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+        //   this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
+        // }
         // 恢复到初始状态
         this.ListDetails = [];
         this.activeName = [];
@@ -191,7 +215,8 @@
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.post("/productArchive/getProductArchiveParentList", {
-          applyId: this.localInf.applyId,
+          // applyId: this.localInf.applyId
+          applyId: this.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
@@ -222,8 +247,8 @@
         this.dataa = true;
         // 个人进件        
         this.post("/internalMatch/getPersonalInternalMatchList", {
-          applySubNo: this.localInf.applySubNo,
-          certCode: this.localInf.certCode,
+          applySubNo: this.applySubNo,
+          certCode: this.certCode,
         }).then(res => {
           if (res.statusCode == 200) {
             this.personal = res.data;
@@ -237,8 +262,8 @@
             pageNum: "1", //当前页
             pageSize: '1000' //每页的显示数量
           },
-          applySubNo: this.localInf.applySubNo,
-          certCode: this.localInf.certCode,
+          applySubNo: this.applySubNo,
+          certCode: this.certCode,
         }).then(res => {
           if (res.statusCode == 200) {
             this.others = res.data;
@@ -254,8 +279,10 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
-            this.localInf.applyId = id;
-            this.dataa = false;
+            this.applyId = id;
+            this.myPng = this.dataa = false;
+            this.activeName = [];
+            this.opendImg = [];//-----------------------------待更新
             this.custName = this.currentRow.matchApplyCustName;
             this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
             this.$emit('inputInf', this.custName, this.custmatchApplySubNo)
@@ -281,7 +308,8 @@
         this.openImg = ind
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.applyId,
+          // applyId: this.localInf.applyId
+          applyId: this.applyId,
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {

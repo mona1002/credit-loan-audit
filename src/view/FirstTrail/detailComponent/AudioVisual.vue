@@ -101,7 +101,7 @@
         litimgIndex: -1,
         litimgInd: -1,
         perfBtn: false, //功能按钮
-        judgeFlag: {},
+        // judgeFlag: {},
         opendImg: [],
         closedImg: [],
         showListDiv: true,
@@ -113,7 +113,6 @@
         ListParent: [],
         ListDetails: [],
         imgPath: [],
-        localInf: [], //localstorage 接收的所有参数,
         pdfArrys: [],
         pngAyyrs: [],
         myPng: false,
@@ -127,18 +126,18 @@
     },
     methods: {
       mountedInf() {
-        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        if (this.judgeFlag.flag == '01') {
-          this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-        } else if (this.judgeFlag.flag == '02') {
-          this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-          this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈
-        } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-          this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
-        } else if (this.judgeFlag.flag == '14' || this.judgeFlag.flag == '15') {
-          this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) // 任务管理
-        }
+        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        // if (this.judgeFlag.flag == '01') {
+        //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+        // } else if (this.judgeFlag.flag == '02') {
+        //   this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        // } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+        //   this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈
+        // } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+        //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
+        // } else if (this.judgeFlag.flag == '14' || this.judgeFlag.flag == '15') {
+        //   this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) // 任务管理
+        // }
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.post("/productArchive/getProductArchiveParentList", {
@@ -422,11 +421,14 @@
           event.preventDefault();
         }, false);
       },
-      compBtnShow() {
-        this.$emit('CompareShow')
-      },
     },
-    props: ['applyId', 'AURpreWidth', 'applyID'],
+    props: {
+      applyId:{
+        default:'',
+        required:true,
+        type:String
+      }
+    },
     mounted() {
       this.odivMove("FirstAud");
       this.mountedInf();

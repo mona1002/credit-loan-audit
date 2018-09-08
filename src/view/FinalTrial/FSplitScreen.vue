@@ -30,8 +30,7 @@
           </p>
           <div class="Left_right_BigImg ">
             <keep-alive v-if="Routes.closed">
-              <AudioVisualLeft ref="AudioLeft" :custom="customInf.applyId " v-if=" this.tabContent1==0" msg="FspLone"
-                v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
+              <AudioVisualLeft v-if=" this.tabContent1==0" msg="FspLone" :list='tastwaitingPass' v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
             <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
             <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
@@ -71,7 +70,7 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :applyId='tastwaitingPass.applyId'></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0"  :applyId='tastwaitingPass.applyId'></AudioVisual>
           </keep-alive>
           <remark v-if=" this.tabContent2==1"></remark>
           <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
@@ -92,13 +91,13 @@
         </div>
       </div>
     </div>
-    <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-    <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+    <!-- 对比弹出层-->
+    <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
       <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
       <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
         <div class="AlertContent">
-          <AudioVisualLeft ref="AudioLeftCom" :custom="customInf.applyId " msg="FspLtwo"></AudioVisualLeft>
+         <keep-alive v-if="Routes.closed"> <AudioVisualLeft  :list='tastwaitingPass'   msg="FspLtwo" :comBtn='false'></AudioVisualLeft></keep-alive>
         </div>
       </div>
       <div class="AudioVisual_wrap_compare_right ">
@@ -109,7 +108,7 @@
           </el-button>
         </p>
         <div class="AlertContent">
-          <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner" msg="FspLthree"></AudioVisualLeft>
+         <keep-alive v-if="Routes.closed"> <AudioVisualLeft  ref="audioChild"  :list='tastwaitingPass' v-on:inputInf="inputInner"  :comBtn='false' msg="FspLthree"></AudioVisualLeft></keep-alive>
         </div>
       </div>
     </div>
@@ -168,8 +167,6 @@
         }],
         Routes: this.$router.options.routes[8],
         isFull: false,
-        comBtn: true,
-        alertComBtn: false,
         midShow: true,
       }
     },
@@ -184,10 +181,6 @@
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
           this.flag1 = [true, true, true, false, true, true, true, true, true];
           this.flag2 = [true, true, true, true, true, true, true, true, true, true];
-          this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
-          this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
-          this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
-          // this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = '0';
           this.DblScreen();
           this.CompareAlert = false; //关闭弹出层

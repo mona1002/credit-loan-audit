@@ -30,8 +30,7 @@
           </p>
           <div class="Left_right_BigImg">
             <keep-alive v-if="Routes.closed">
-              <AudioVisualLeft ref="AudioLeft" msg="spLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"
-                :comBtn.sync='comBtn'></AudioVisualLeft>
+              <AudioVisualLeft v-if=" this.tabContent1==0" :list='tastwaitingPass' msg="spLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
             <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
             <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
@@ -70,7 +69,7 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS">
+            <AudioVisual :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0">
             </AudioVisual>
           </keep-alive>
           <remark v-if=" this.tabContent2==1"></remark>
@@ -91,13 +90,15 @@
         </div>
       </div>
     </div>
-    <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-    <div class="AudioVisual_wrap_compare" v-if="CompareAlert" v-on:CompareShow="compBtnS">
+    <!-- 对比弹出层  -->
+    <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
       <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
       <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
         <div class="AlertContent">
-          <AudioVisualLeft ref="AudioLeftCom" msg="spLtwo" v-if="CompareAlert" :comBtn.sync='alertComBtn'></AudioVisualLeft>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisualLeft :list='tastwaitingPass'  msg="spLtwo" :comBtn='false'></AudioVisualLeft>
+          </keep-alive>
         </div>
       </div>
       <div class="AudioVisual_wrap_compare_right ">
@@ -108,7 +109,9 @@
           </el-button>
         </p>
         <div class="AlertContent">
-          <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :comBtn.sync='alertComBtn'></AudioVisualLeft>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :list='tastwaitingPass' :comBtn='false'></AudioVisualLeft>
+          </keep-alive>
         </div>
       </div>
     </div>
@@ -169,8 +172,8 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
-        comBtn: true,
-        alertComBtn: false,
+        // comBtn: true,
+        // alertComBtn: false,
         midShow: true,
         RpreWidth: null,
         destroyInf: '',
@@ -189,9 +192,9 @@
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
           this.flag1 = [true, true, true, false, true, true, true, true, true];
           this.flag2 = [true, true, true, true, true, true, true, true, true, true];
-          this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
-          this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
-          this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
+          // this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
+          // this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
+          // this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           // this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
