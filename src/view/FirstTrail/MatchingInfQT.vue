@@ -33,8 +33,7 @@
           </p>
           <div class="Left_right_BigImg ">
             <keep-alive v-if="Routes.closed">
-              <RAudioVisualLeft ref="AudioLeft" msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"
-                :comBtn.sync='comBtn'></RAudioVisualLeft>
+              <AudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" :list='list' v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
             <Rremark v-if=" this.tabContent1==1"></Rremark>
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
@@ -100,7 +99,7 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.ApplyId'></AudioVisual>
           </keep-alive>
           <Rremark v-if=" this.tabContent2==1"></Rremark>
           <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
@@ -130,7 +129,6 @@
             <!-- 主管部分 -->
             <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
-
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
             <!-- 质检部分 -->
@@ -145,12 +143,14 @@
       </div>
     </div>
     <!-- 对比弹出层 -->
-    <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+    <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
       <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
       <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
         <div class="AlertContent">
-          <RAudioVisualLeft ref="AudioLeftCom" msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisualLeft :list='list' msg="MspLtwo" :comBtn='false'></AudioVisualLeft>
+          </keep-alive>
         </div>
       </div>
       <div class="AudioVisual_wrap_compare_right ">
@@ -161,7 +161,9 @@
           </el-button>
         </p>
         <div class="AlertContent">
-          <RAudioVisualLeft msg="MspLthree" ref="audioChild" :comBtn.sync='alertComBtn' v-on:inputInf="inputInner"></RAudioVisualLeft>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisualLeft :list='list' msg="MspLthree" ref="audioChild" :comBtn='false' v-on:inputInf="inputInner"></AudioVisualLeft>
+          </keep-alive>
         </div>
       </div>
     </div>
@@ -169,8 +171,8 @@
 </template>
 <script>
   // 编辑
-  import RAudioVisual from "./ReadComponent/RAudioVisual";
-  import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
+  import AudioVisual from "./detailComponent/AudioVisual.vue";
+  import AudioVisualLeft from "./detailComponent/AudioVisualLeft.vue";
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import applicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
@@ -193,6 +195,7 @@
         accepCusBasicInfo: {},
         customInf: {},
         tastwaitingPass: {},
+        list: {},
         QTConclutionMark: "",
         TaskList: '',
         LocalList: '',
@@ -244,8 +247,6 @@
         flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], //15
         AlertSearch: "",
         isFull: false,
-        comBtn: true,
-        alertComBtn: false,
         midShow: true,
         QTC: {
           applyId: '',
@@ -268,16 +269,13 @@
           this.Routes.closed = false;
           this.customInf = {};
           this.accepCusBasicInfo = {};
+          this.list = {};
           this.mountedInf();
           this.title = "影像资料";
           this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
           this.flag1 = [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true];
           this.flag2 = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
-          this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
-          this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
-          this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
-          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
           this.CompareAlert = false; //关闭弹出层
@@ -483,6 +481,9 @@
         this.initialInfo(); //判断角色   
         this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
         this.QTC.applyId = this.tastwaitingPass.ApplyId;
+        this.$set(this.list, 'applyId', this.tastwaitingPass.ApplyId); //将matchApplyId 赋值给 入参applyId
+        this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
+        this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
         // console.log(1, this.QTC.tastwaitingPass)
         this.getPageInf(); //获取页面个人信息      
         // console.log(this.tastwaitingPass.ApplyId)
@@ -499,8 +500,8 @@
       this.mountedInf();
     },
     components: {
-      RAudioVisual,
-      RAudioVisualLeft,
+      AudioVisual,
+      AudioVisualLeft,
       FCreditForm,
       applicationInformationDetail,
       RborrowerInformationSetail, //借款人资料

@@ -1,7 +1,6 @@
 <!-- 综合查询详情 -->
 <template>
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
-    <!-- 进件人详情 -->
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
@@ -32,8 +31,7 @@
           </p>
           <div class="Left_right_BigImg ">
             <keep-alive v-if="Routes.closed">
-              <RAudioVisualLeft ref="AudioLeft" msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"
-                :comBtn.sync='comBtn'></RAudioVisualLeft>
+              <AudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" :list='list' v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
             <Rremark v-if=" this.tabContent1==1"></Rremark>
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
@@ -78,7 +76,7 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.matchApplyId'></AudioVisual>
           </keep-alive>
           <Rremark v-if=" this.tabContent2==1"></Rremark>
           <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
@@ -102,12 +100,14 @@
       </div>
     </div>
     <!-- 对比弹出层 -->
-    <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+    <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
       <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
       <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
         <div class="AlertContent">
-          <RAudioVisualLeft ref="AudioLeftCom" msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisualLeft :list='list' msg="MspLtwo" :comBtn='false'></AudioVisualLeft>
+          </keep-alive>
         </div>
       </div>
       <div class="AudioVisual_wrap_compare_right ">
@@ -118,15 +118,17 @@
           </el-button>
         </p>
         <div class="AlertContent">
-          <RAudioVisualLeft msg="MspLthree" ref="audioChild" :comBtn.sync='alertComBtn' v-on:inputInf="inputInner"></RAudioVisualLeft>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisualLeft :list='list' msg="MspLthree" ref="audioChild" :comBtn='false' v-on:inputInf="inputInner"></AudioVisualLeft>
+          </keep-alive>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-  import RAudioVisual from "./ReadComponent/RAudioVisual";
-  import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
+  import AudioVisual from "./detailComponent/AudioVisual.vue";
+  import AudioVisualLeft from "./detailComponent/AudioVisualLeft.vue";
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
@@ -145,6 +147,7 @@
         watchData: '',
         loading: false,
         customInf: {},
+        list: {},
         accepCusBasicInfo: {},
         tastwaitingPass: {},
         showHalfBtn: false,
@@ -178,8 +181,6 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
-        comBtn: true,
-        alertComBtn: false,
         midShow: true,
         custName: '',
         certCode: '',
@@ -192,16 +193,13 @@
           this.Routes.closed = false;
           this.customInf = {};
           this.accepCusBasicInfo = {};
+          this.list = {};
           this.mountedInf();
           this.title = "影像资料";
           this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
           this.flag1 = [true, true, true, false, true, true, true, true, true, true, true, true, true];
           this.flag2 = [true, true, true, true, true, true, true, true, true, true, true, true, true];
-          this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
-          this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
-          this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
-          // this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
           this.CompareAlert = false; //关闭弹出层
@@ -335,6 +333,9 @@
         this.title = "影像资料";
         this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("Query"));
+        this.$set(this.list, 'applyId', this.tastwaitingPass.matchApplyId); //将matchApplyId 赋值给 入参applyId
+        this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
+        this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
       },
     },
     mounted() {
@@ -344,8 +345,8 @@
       this.mountedInf();
     },
     components: {
-      RAudioVisual,
-      RAudioVisualLeft,
+      AudioVisual,
+      AudioVisualLeft,
       FCreditForm,
       capplicationInformationDetail,
       RborrowerInformationSetail, //借款人资料

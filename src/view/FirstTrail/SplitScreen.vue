@@ -69,8 +69,7 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0">
-            </AudioVisual>
+            <AudioVisual :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0"> </AudioVisual>
           </keep-alive>
           <remark v-if=" this.tabContent2==1"></remark>
           <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
@@ -97,7 +96,7 @@
         <p>影像资料</p>
         <div class="AlertContent">
           <keep-alive v-if="Routes.closed">
-            <AudioVisualLeft :list='tastwaitingPass'  msg="spLtwo" :comBtn='false'></AudioVisualLeft>
+            <AudioVisualLeft :list='tastwaitingPass' msg="spLtwo" :comBtn='false'></AudioVisualLeft>
           </keep-alive>
         </div>
       </div>

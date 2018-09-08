@@ -1,5 +1,6 @@
 <template>
   <div class="AudioVisualLeft">
+        <!-- 已整合-待删除 -->
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
