@@ -1,4 +1,4 @@
-<!-- 内匹申请信息详情 -->
+<!-- 内匹申请信息详情==========已整合，待删除 -->
 <template>
   <div class="applicationInformationDetail min_width_1200">
     <el-collapse v-model="activeNames">

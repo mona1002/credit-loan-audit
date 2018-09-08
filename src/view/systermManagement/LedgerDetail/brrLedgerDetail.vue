@@ -8,7 +8,7 @@
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
       <span> 进件机构：{{customInf.appOrgName}}</span>
       <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
+      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
       <span>{{customInf.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap content_not_split">
@@ -29,9 +29,16 @@
           </div>
         </div>
         <div class="tab2_Content">
-          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
-          <creditInvestigation v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></creditInvestigation>
-          <AudioVisual v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></AudioVisual>
+          <keep-alive v-if="Routes.closed">
+            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId'
+              roles='borrowLedger'></capplicationInformationDetail>
+          </keep-alive>
+          <keep-alive v-if="Routes.closed">
+            <creditInvestigation v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+          </keep-alive>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisual v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></AudioVisual>
+          </keep-alive>
         </div>
       </div>
     </div>
@@ -45,43 +52,36 @@
     data() {
       return {
         loading: false,
-        accepCusBasicInfo: {
-          mobile: '',
-          custName: ''
-        },
+        accepCusBasicInfo: {},
         // 进件人信息
-        customInf: [], //申请信息页local字段
-        tastwaitingPass: [], //详情列表页信息--(含)取applyId
+        customInf: {}, //申请信息页local字段
+        tastwaitingPass: {}, //详情列表页信息--(含)取applyId
         tabContent2: 0,
         tabActiveInd2: 0,
         items2: ["申请信息", "实地征信", "影像资料"],
         tab2Index: 0,
+        Routes: this.$router.options.routes[33]
       }
     },
     watch: {
       '$route'(to, from) {
         if (to.path === '/brrLedgerDetail' && this.$route.params.newOne) {
+          this.Routes.closed = false;
+          this.customInf = {};
+          this.accepCusBasicInfo = {};
           this.mountedInf();
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 0;
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
         }
       }
     },
+    activated() {
+      this.Routes.closed = true;
+    },
     methods: {
       mountedInf() {
         this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("brrLedgerTW"));
-        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.applyId,
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.loading = false;
-            this.customInf = res.data;
-            res.data.accepCusBasicInfo ? this.accepCusBasicInfo = res.data.accepCusBasicInfo : '';
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {

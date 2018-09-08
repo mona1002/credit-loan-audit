@@ -71,7 +71,7 @@
     data() {
       return {
         taskName: '',
-        accepCusBasicInfo: '',
+        accepCusBasicInfo: {},
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
@@ -79,8 +79,8 @@
         type: '',
         loading: false,
         // 进件人信息
-        customInf: [], //申请信息页local字段
-        tastwaitingPass: [], //详情列表页信息--(含)取applyId
+        customInf: {}, //申请信息页local字段
+        tastwaitingPass: {}, //详情列表页信息--(含)取applyId
         CompareAlert: false,
         title: "",
         isShow: false,
@@ -127,25 +127,7 @@
         } else if (this.taskName == 'reconsiderApp_manager') { //复议经理结论
           this.type = 'manager';
         }
-        // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        //   id: this.tastwaitingPass.applyId,
-        // }).then(res => {
-        //   if (res.statusCode == 200) {
-        //     this.loading = false;
-        //     //this.custName = res.data.accepCusBasicInfo.custName;
-        //     this.customInf = res.data;
-        //     this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-        //   } else {
-        //     this.$message.error(res.msg);
-        //   }
-        // });
       },
-      // compBtnS() {
-      //   this.CompareAlert = true;
-      // },
-      // closeCompareBtn() {
-      //   this.CompareAlert = false;
-      // },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
           this.$refs.right_tab_ul.style.left = "0"

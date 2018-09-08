@@ -1294,6 +1294,12 @@
             } else if (this.roles == 'MatchingInf') { //匹配信息-查看
               this.del('匹配信息-查看'); 
               this.$router.push('/MatchingInf')
+            }else if (this.roles == 'applyLedger') { //申请台账
+              this.del('申请台账-详情'); 
+              this.$router.push('/applyLedger')
+            }else if (this.roles == 'borrowLedger') { //借款台账
+              this.del('借款台账-申请信息'); 
+              this.$router.push('/borrowLedger')
             }else if (this.roles == 'checkApp_apply') { //质检-专员
               this.del('质检详情'); 
               this.$router.push('/commissioner?taskNodeName=checkApp_apply&flag=07')
@@ -1316,6 +1322,7 @@
               this.del('质检详情'); 
               this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13')
             }
+            
             this.$parent.$data.loading = false;
           }
         });
