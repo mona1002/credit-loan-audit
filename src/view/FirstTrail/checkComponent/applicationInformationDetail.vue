@@ -749,7 +749,8 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-    <div v-show="this.judgeFlag.flag == '01' || this.judgeFlag.flag == '02'">
+    <!-- <div v-show="this.judgeFlag.flag == '01' || this.judgeFlag.flag == '02'"> -->
+    <div v-show="this.btn">
       <el-button type="primary" @click="maintenanceLog">维护日志</el-button>
     </div>
     <!-- 维护日志弹框 -->
@@ -840,7 +841,7 @@
         /*联系人信息*/
         accepCusRelations: [],
         taskInWaitting: '',
-        applyId: '',
+        // applyId: '',
         judgeFlag: '',
         //您的个人信息 投保地点
         insurAddr: '',
@@ -857,7 +858,7 @@
         setPageSize: 10,
         setPageSize1: 10,
         queryParam: {
-          businessId: '', //申请单基本信息id
+          businessId: this.applyId, //申请单基本信息id
           rows: '', //每页条数
           page: '', //页数
           sort: '', //排序字段
@@ -872,48 +873,69 @@
         },
       };
     },
-    mounted() {
+    props: {
+      applyId: {
+        default: '',
+        required: true,
+        type: String
+      },
+      roles: {
+        default: "",
+        type: String
+      },
+      btn: { //维护日志按钮
+        default: false,
+        type: Boolean
+      }
+    },
+    created() {
+      console.log("申请Created")
       this.mountedInf();
     },
     methods: {
       mountedInf() {
         //一进入页面就发送请求
-        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        if (this.judgeFlag.flag == '01') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-          this.applyId = this.taskInWaitting.applyId;
-          this.queryParam.businessId = this.taskInWaitting.applyId;
-        } else if (this.judgeFlag.flag == '02') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-          this.applyId = this.taskInWaitting.applyId;
-          this.queryParam.businessId = this.taskInWaitting.applyId;
-        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-          this.applyId = this.taskInWaitting.applyId;
-        } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
-          this.applyId = this.taskInWaitting.applyId;
-        } else if (this.judgeFlag.flag == '14') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-审批任务
-          this.applyId = this.taskInWaitting.applyId;
-        } else if (this.judgeFlag.flag == '15') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
-          this.applyId = this.taskInWaitting.applyId;
-        } else if (this.judgeFlag.flag == '16') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("appLedgerTW")) //申请台账
-          this.applyId = this.taskInWaitting.id; // id就为applyid
-        } else if (this.judgeFlag.flag == '17') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("brrLedgerTW")) //借款台账
-          this.applyId = this.taskInWaitting.applyId;
-        }
-        this.request();
-      },
-      request() {
+        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        console.log('子组件', this.applyId)
+        // if (this.judgeFlag.flag == '01') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+        //   this.applyId = this.taskInWaitting.applyId;
+        //   this.queryParam.businessId = this.taskInWaitting.applyId;
+        // } else  if (this.judgeFlag.flag == '02') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        //   this.applyId = this.taskInWaitting.applyId;
+        //   this.queryParam.businessId = this.taskInWaitting.applyId;
+        // }
+        // else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+        //   this.applyId = this.taskInWaitting.applyId;
+        // } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
+        //   this.applyId = this.taskInWaitting.applyId;
+        // } else if (this.judgeFlag.flag == '14') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-审批任务
+        //   this.applyId = this.taskInWaitting.applyId;
+        // } else if (this.judgeFlag.flag == '15') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
+        //   this.applyId = this.taskInWaitting.applyId;
+        // } else if (this.judgeFlag.flag == '16') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("appLedgerTW")) //申请台账
+        //   this.applyId = this.taskInWaitting.id; // id就为applyid
+        // } else if (this.judgeFlag.flag == '17') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("brrLedgerTW")) //借款台账
+        //   this.applyId = this.taskInWaitting.applyId;
+        // }
+        // this.request();
+        console.log('申请信息')
+        console.log(this.applyId)
+
         var query = {};
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           'id': this.applyId
         }).then(res => {
           if (res.statusCode == 200) {
+            this.$parent.$data.customInf = res.data;
+            res.data.accepCusBasicInfo ? this.$parent.$data.accepCusBasicInfo = res.data.accepCusBasicInfo : '';
             this.datas = res.data;
             /*房产信息*/
             this.accepCusEstates = res.data.accepCusEstates;
@@ -1016,7 +1038,10 @@
                 }
               };
             }
-
+            /*工作人员填写  加急费用*/ //合并前R的多余部分
+            // if (res.data != null) {
+            //   this.datas.emerAmt = this.formatNumber(this.datas.emerAmt, 2, 0);
+            // };
             /*您的借款需求*/
             if (res.data.accepApplyLoan == null) {
               this.accepApplyLoan = this.accepApplyLoan
@@ -1237,33 +1262,428 @@
             if (res.data.accepCusCarInfos != '') {
               localStorage.setItem("car", JSON.stringify(res.data.accepCusCarInfos));
             };
+            console.log(this.$parent.$data)
             this.$parent.$data.loading = false;
           } else {
             this.$message.error(res.msg);
-            if (this.judgeFlag.flag == '01') { // 初审 
+            if (this.roles == 'creditApp_firstTrial') { // 初审 
               this.del('初审详情');
               this.$router.push('/taskInWaitting?taskNodeName=creditApp_firstTrial&flag=01');
-            } else if (this.judgeFlag.flag == '02') { // 终审
+            } else if (this.roles == 'creditApp_finalTrial') { // 终审
               this.del('终审详情');
               window.history.go(-1);
-            } else if (this.judgeFlag.flag == '03') { //反欺诈专员
+            } else if (this.roles == 'antiFraudApp_commissioner') { //反欺诈专员
               this.del('反欺诈详情');
               this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_commissioner&flag=03');
-            } else if (this.judgeFlag.flag == '04') { //反欺诈主管
+            } else if (this.roles == 'antiFraudApp_manager') { //反欺诈主管
               this.del('反欺诈详情');
               this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_manager&flag=04');
-            } else if (this.judgeFlag.flag == '05') {
+            } else if (this.roles == 'reconsiderApp_commissioner') {//复议-专员
               this.del('复议详情');
               this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
-            } else if (this.judgeFlag.flag == '06') { //复议
+            } else if (this.roles == 'reconsiderApp_manager') { //复议
               this.del('复议详情');
               this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
+            } else if (this.roles == 'MatchingInfQuery') { //综合查询-详情
+              this.del('综合查询-详情');
+              this.$router.push('/IntegratedQuery')
+            } else if (this.roles == 'TaskManagement') { //审批任务管理-详情
+              this.del('审批任务管理-详情');
+              // this.$router.push('/TaskManagementSplit')
+               window.history.go(-1);
+            } else if (this.roles == 'MatchingInf') { //匹配信息-查看
+              this.del('匹配信息-查看'); 
+              this.$router.push('/MatchingInf')
+            }else if (this.roles == 'checkApp_apply') { //质检-专员
+              this.del('质检详情'); 
+              this.$router.push('/commissioner?taskNodeName=checkApp_apply&flag=07')
+            } else if (this.roles == 'checkApp_check_manager') { //质检-主管
+              this.del('质检详情'); 
+              this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
+            } else if (this.roles == 'checkApp_trial_self') { //质检-初终审本人
+              this.del('质检详情'); 
+              this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
+            } else if (this.roles == 'checkApp_trial_manager') { //质检-初终审主管
+              this.del('质检详情'); 
+              this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
+            } else if (this.roles == 'checkApp_check_recon_manager') { //质检-主管复核（首次）
+              this.del('质检详情'); 
+              this.$router.push('/ReManagerTaskList?taskNodeName=checkApp_check_recon_manager&flag=11')
+            } else if (this.roles == 'checkApp_regional_manager') { //质检-区域经理复核
+              this.del('质检详情'); 
+              this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12')
+            }else if (this.roles == 'checkApp_compliance_manager') { //质检-合规经理复核
+              this.del('质检详情'); 
+              this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13')
             }
             this.$parent.$data.loading = false;
           }
         });
 
       },
+      // request() {
+      //   console.log('申请信息')
+      //   var query = {};
+      //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+      //     'id': this.applyId
+      //   }).then(res => {
+      //     if (res.statusCode == 200) {
+      //       this.$parent.$data.customInf = res.data;
+      //       res.data.accepCusBasicInfo ? this.$parent.$data.accepCusBasicInfo = res.data.accepCusBasicInfo :'';
+      //       this.datas = res.data;
+      //       /*房产信息*/
+      //       this.accepCusEstates = res.data.accepCusEstates;
+      //       for (var i = 0; i < this.accepCusEstates.length; i++) {
+      //         if (this.accepCusEstates[i].mortgageStatus == '0') {
+      //           this.accepCusEstates[i].mortgageStatus = '已抵押'
+      //         } else if (this.accepCusEstates[i].mortgageStatus == '1') {
+      //           this.accepCusEstates[i].mortgageStatus = '未抵押'
+      //         };
+      //         if (this.accepCusEstates[i].estateType == '01') {
+      //           this.accepCusEstates[i].estateType = '租用'
+      //         } else if (this.accepCusEstates[i].estateType == '02') {
+      //           this.accepCusEstates[i].estateType = '商业按揭购房'
+      //         } else if (this.accepCusEstates[i].estateType == '03') {
+      //           this.accepCusEstates[i].estateType = '公积金按揭购房'
+      //         } else if (this.accepCusEstates[i].estateType == '04') {
+      //           this.accepCusEstates[i].estateType = '无按揭购房'
+      //         } else if (this.accepCusEstates[i].estateType == '05') {
+      //           this.accepCusEstates[i].estateType = '自建房'
+      //         } else if (this.accepCusEstates[i].estateType == '06') {
+      //           this.accepCusEstates[i].estateType = '亲属住房'
+      //         } else if (this.accepCusEstates[i].estateType == '07') {
+      //           this.accepCusEstates[i].estateType = '单位宿舍'
+      //         };
+      //         if (this.accepCusEstates[i].propertyType == '01') {
+      //           this.accepCusEstates[i].propertyType = '宅基地'
+      //         } else if (this.accepCusEstates[i].propertyType == '02') {
+      //           this.accepCusEstates[i].propertyType = '自建房'
+      //         } else if (this.accepCusEstates[i].propertyType == '03') {
+      //           this.accepCusEstates[i].propertyType = '小产权'
+      //         } else if (this.accepCusEstates[i].propertyType == '04') {
+      //           this.accepCusEstates[i].propertyType = '期房'
+      //         } else if (this.accepCusEstates[i].propertyType == '05') {
+      //           this.accepCusEstates[i].propertyType = '公租房'
+      //         } else if (this.accepCusEstates[i].propertyType == '06') {
+      //           this.accepCusEstates[i].propertyType = '经济适用房'
+      //         } else if (this.accepCusEstates[i].propertyType == '07') {
+      //           this.accepCusEstates[i].propertyType = '土地证'
+      //         } else if (this.accepCusEstates[i].propertyType == '08') {
+      //           this.accepCusEstates[i].propertyType = '大产权'
+      //         };
+      //         //建筑单价 保留两位小数点
+      //         if (this.accepCusEstates[i].unitPrice != null) {
+      //           this.accepCusEstates[i].unitPrice = this.formatNumber(this.accepCusEstates[i].unitPrice, 2, 0);
+      //         };
+
+      //         //贷款余额 保留两位小数点
+      //         if (this.accepCusEstates[i].restLoans != null) {
+      //           this.accepCusEstates[i].restLoans = this.formatNumber(this.accepCusEstates[i].restLoans, 2, 0);
+      //         };
+      //         //月供 保留两位小数点
+      //         if (this.accepCusEstates[i].monthlyPay != null) {
+      //           this.accepCusEstates[i].monthlyPay = this.formatNumber(this.accepCusEstates[i].monthlyPay, 2, 0);
+      //         };
+      //         //产权比例 保留两位小数点+%
+      //         if (this.accepCusEstates[i].equityRatio != null) {
+      //           this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio, 2, 0).replace(
+      //             /,/g, '');
+      //         };
+      //         //建筑面积
+      //         if (this.accepCusEstates[i].coveredArea != null) {
+      //           this.accepCusEstates[i].coveredArea = this.formatNumber(this.accepCusEstates[i].coveredArea, 2, 0).replace(
+      //             /,/g, '');
+      //         };
+      //         if (this.accepCusEstates[i].estateShare != null) {
+      //           if (this.accepCusEstates[i].estateShare == '0') {
+      //             this.accepCusEstates[i].estateShare = '否'
+      //           } else if (this.accepCusEstates[i].estateShare == '1') {
+      //             this.accepCusEstates[i].estateShare = '是'
+      //           }
+      //         };
+      //       };
+      //       /*车辆信息*/
+      //       this.accepCusCarInfos = res.data.accepCusCarInfos;
+      //       for (var i = 0; i < this.accepCusCarInfos.length; i++) {
+      //         //车辆购置价 保留两位小数点
+      //         if (this.accepCusCarInfos[i].carPrice != null) {
+      //           this.accepCusCarInfos[i].carPrice = this.formatNumber(this.accepCusCarInfos[i].carPrice, 2, 0);
+      //         };
+      //         //月供 保留两位小数点
+      //         if (this.accepCusCarInfos[i].monthlyPay != null) {
+      //           this.accepCusCarInfos[i].monthlyPay = this.formatNumber(this.accepCusCarInfos[i].monthlyPay, 2, 0);
+      //         };
+      //         //贷款余额 保留两位小数点
+      //         if (this.accepCusCarInfos[i].restLoans != null) {
+      //           this.accepCusCarInfos[i].restLoans = this.formatNumber(this.accepCusCarInfos[i].restLoans, 2, 0);
+      //         };
+      //         if (this.accepCusCarInfos[i].carShare != null) {
+      //           if (this.accepCusCarInfos[i].carShare == '0') {
+      //             this.accepCusCarInfos[i].carShare = '否'
+      //           } else if (this.accepCusCarInfos[i].carShare == '1') {
+      //             this.accepCusCarInfos[i].carShare = '是'
+      //           }
+      //         };
+      //         if (this.accepCusCarInfos[i].carMortgage != null) {
+      //           if (this.accepCusCarInfos[i].carMortgage == '0') {
+      //             this.accepCusCarInfos[i].carMortgage = '否'
+      //           } else if (this.accepCusCarInfos[i].carMortgage == '1') {
+      //             this.accepCusCarInfos[i].carMortgage = '是'
+      //           }
+      //         };
+      //       }
+      //       /*工作人员填写  加急费用*/ //合并前R的多余部分
+      //       // if (res.data != null) {
+      //       //   this.datas.emerAmt = this.formatNumber(this.datas.emerAmt, 2, 0);
+      //       // };
+      //       /*您的借款需求*/
+      //       if (res.data.accepApplyLoan == null) {
+      //         this.accepApplyLoan = this.accepApplyLoan
+      //       } else {
+      //         this.accepApplyLoan = res.data.accepApplyLoan;
+      //         this.accepApplyLoan.loanAmt = this.formatNumber(this.accepApplyLoan.loanAmt, 2, 0);
+      //         this.accepApplyLoan.eachTermAmt = this.formatNumber(this.accepApplyLoan.eachTermAmt, 2, 0);
+      //       }
+      //       /*您的个人信息*/
+      //       if (res.data.accepCusBasicInfo == null) {
+      //         this.accepCusBasicInfo = this.accepCusBasicInfo
+      //       } else {
+      //         this.accepCusBasicInfo = res.data.accepCusBasicInfo;
+      //         var reg = /null/g;
+      //         //投保地点
+      //         if (this.accepCusBasicInfo.insurProvinceName == null && this.accepCusBasicInfo.insurCityName == null &&
+      //           this.accepCusBasicInfo.insurCountyName == null && this.accepCusBasicInfo.insurAddress == null) {
+      //           this.insurAddr = '';
+      //         } else {
+      //           this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCityName +
+      //             this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress;
+      //           this.insurAddr = this.insurAddr.replace(reg, '');
+      //         }
+      //         //每月家庭支出
+      //         if (this.accepCusBasicInfo.payAmt != null) {
+      //           this.accepCusBasicInfo.payAmt = this.formatNumber(this.accepCusBasicInfo.payAmt, 2, 0);
+      //         };
+      //         //单张信用卡最高额度
+      //         if (this.accepCusBasicInfo.cardMaxAmt != null) {
+      //           this.accepCusBasicInfo.cardMaxAmt = this.formatNumber(this.accepCusBasicInfo.cardMaxAmt, 2, 0);
+      //         };
+      //         //户口所在地
+      //         this.accepCusBasicInfo.homeDetailAddr = this.accepCusBasicInfo.homeDetailAddr.replace(reg, '');
+      //         //现住宅地址
+      //         this.accepCusBasicInfo.liveAddr = this.accepCusBasicInfo.liveAddr.replace(reg, '');
+      //       }
+      //       /*私人业主信息*/
+      //       if (res.data.accepCusPrivate == null) {
+      //         this.accepCusPrivate = this.accepCusPrivate;
+      //       } else {
+      //         this.accepCusPrivate = res.data.accepCusPrivate;
+      //         //注册资金
+      //         if (this.accepCusPrivate.regCapitalAmt != null) {
+      //           this.accepCusPrivate.regCapitalAmt = this.formatNumber(this.accepCusPrivate.regCapitalAmt, 2, 0);
+      //         };
+      //         //每月净利润额
+      //         if (this.accepCusPrivate.profitAmountMAmt != null) {
+      //           this.accepCusPrivate.profitAmountMAmt = this.formatNumber(this.accepCusPrivate.profitAmountMAmt, 2,
+      //             0);
+      //         };
+      //         //月还款额/月租金
+      //         if (this.accepCusPrivate.monthRentAmt != null) {
+      //           this.accepCusPrivate.monthRentAmt = this.formatNumber(this.accepCusPrivate.monthRentAmt, 2, 0);
+      //         };
+      //         //淡季销售额
+      //         if (this.accepCusPrivate.slowMonthSaleAmt != null) {
+      //           this.accepCusPrivate.slowMonthSaleAmt = this.formatNumber(this.accepCusPrivate.slowMonthSaleAmt, 2,
+      //             0);
+      //         };
+      //         //旺季销售额
+      //         if (this.accepCusPrivate.peakMonthSaleAmt != null) {
+      //           this.accepCusPrivate.peakMonthSaleAmt = this.formatNumber(this.accepCusPrivate.peakMonthSaleAmt, 2,
+      //             0);
+      //         };
+      //         //平季销售额
+      //         if (this.accepCusPrivate.avgMonthSaleAmt != null) {
+      //           this.accepCusPrivate.avgMonthSaleAmt = this.formatNumber(this.accepCusPrivate.avgMonthSaleAmt, 2, 0);
+      //         };
+      //         //企业近一年利润
+      //         if (this.accepCusPrivate.oneYearProfitAmt != null) {
+      //           this.accepCusPrivate.oneYearProfitAmt = this.formatNumber(this.accepCusPrivate.oneYearProfitAmt, 2,
+      //             0);
+      //         };
+      //         //企业近两年利润
+      //         if (this.accepCusPrivate.twoYearProfitAmt != null) {
+      //           this.accepCusPrivate.twoYearProfitAmt = this.formatNumber(this.accepCusPrivate.twoYearProfitAmt, 2,
+      //             0);
+      //         };
+      //         //企业近三年利润
+      //         if (this.accepCusPrivate.threeYearProfitAmt != null) {
+      //           this.accepCusPrivate.threeYearProfitAmt = this.formatNumber(this.accepCusPrivate.threeYearProfitAmt,
+      //             2, 0);
+      //         };
+      //         //企业近一年纳税额
+      //         if (this.accepCusPrivate.oneYearTaxAmt != null) {
+      //           this.accepCusPrivate.oneYearTaxAmt = this.formatNumber(this.accepCusPrivate.oneYearTaxAmt, 2, 0);
+      //         };
+      //         //企业近两年纳税额
+      //         if (this.accepCusPrivate.twoYearTaxAmt != null) {
+      //           this.accepCusPrivate.twoYearTaxAmt = this.formatNumber(this.accepCusPrivate.twoYearTaxAmt, 2, 0);
+      //         };
+      //         //企业近三年纳税额
+      //         if (this.accepCusPrivate.threeYearTaxAmt != null) {
+      //           this.accepCusPrivate.threeYearTaxAmt = this.formatNumber(this.accepCusPrivate.threeYearTaxAmt, 2, 0);
+      //         };
+      //         //占股比例
+      //         if (this.accepCusPrivate.proShare != null) {
+      //           this.accepCusPrivate.proShare = this.formatNumber(this.accepCusPrivate.proShare, 2, 0) + "%";
+      //         };
+      //         //企业净利润率
+      //         if (this.accepCusPrivate.profitMargin != null) {
+      //           this.accepCusPrivate.profitMargin = this.formatNumber(this.accepCusPrivate.profitMargin, 2, 0) +
+      //             "%";
+      //         };
+      //         //营业面积
+      //         if (this.accepCusPrivate.busiArea != null) {
+      //           this.accepCusPrivate.busiArea = this.formatNumber(this.accepCusPrivate.busiArea, 2, 0) + "㎡";
+      //         };
+
+
+      //       };
+      //       //同业贷情况
+      //       if (res.data.accepCusInterBankLoan) {
+      //         this.accepCusInterBankLoan = res.data.accepCusInterBankLoan;
+      //       };
+      //       //保险信息
+      //       if (res.data.accepCusInsurances) {
+      //         this.accepCusInsurances = res.data.accepCusInsurances;
+      //         for (var i = 0; i < this.accepCusInsurances.length; i++) {
+      //           //期缴保费
+      //           if (this.accepCusInsurances[i].eachPayAmt != null) {
+      //             this.accepCusInsurances[i].eachPayAmt = this.formatNumber(this.accepCusInsurances[i].eachPayAmt,
+      //               2, 0);
+      //           };
+      //           //总保额
+      //           if (this.accepCusInsurances[i].totalPayAmt != null) {
+      //             this.accepCusInsurances[i].totalPayAmt = this.formatNumber(this.accepCusInsurances[i].totalPayAmt,
+      //               2, 0);
+      //           };
+      //         }
+      //       } else {
+      //         this.accepCusInsurances = this.accepCusInsurances;
+      //       };
+      //       /*您的工作信息*/
+      //       if (res.data.accepCusWorkInfo == null) {
+      //         this.accepCusWorkInfo = this.accepCusWorkInfo
+      //       } else {
+      //         this.accepCusWorkInfo = res.data.accepCusWorkInfo;
+      //         //社保缴纳基数
+      //         if (this.accepCusWorkInfo.insureBase != null) {
+      //           this.accepCusWorkInfo.insureBase = this.formatNumber(this.accepCusWorkInfo.insureBase, 2, 0);
+      //         };
+      //         //公积金缴纳基数
+      //         if (this.accepCusWorkInfo.fundBase != null) {
+      //           this.accepCusWorkInfo.fundBase = this.formatNumber(this.accepCusWorkInfo.fundBase, 2, 0);
+      //         };
+      //         //月均工资
+      //         if (this.accepCusWorkInfo.avgSalaryAmt != null) {
+      //           this.accepCusWorkInfo.avgSalaryAmt = this.formatNumber(this.accepCusWorkInfo.avgSalaryAmt, 2, 0);
+      //         };
+      //         //其他收入
+      //         if (this.accepCusWorkInfo.otherIncome != null) {
+      //           this.accepCusWorkInfo.otherIncome = this.formatNumber(this.accepCusWorkInfo.otherIncome, 2, 0);
+      //         };
+      //         //单位地址
+      //         var reg = /null/g;
+      //         this.accepCusWorkInfo.workAddr = this.accepCusWorkInfo.workAddr.replace(reg, '');
+      //       }
+
+      //       /*联系人信息*/
+      //       if (res.data.accepCusRelations) {
+      //         this.accepCusRelations = res.data.accepCusRelations;
+      //       } else {
+      //         this.accepCusRelations = this.accepCusRelations;
+      //       };
+      //       if (this.datas.sourcesChan == '00') { //00
+      //         this.datas.sourcesChan = "电销";
+      //       } else if (this.datas.sourcesChan == '01') {
+      //         this.datas.sourcesChan = "报纸";
+      //       } else if (this.datas.sourcesChan == '02') {
+      //         this.datas.sourcesChan = "网络";
+      //       } else if (this.datas.sourcesChan == '03') {
+      //         this.datas.sourcesChan = "促销活动";
+      //       } else if (this.datas.sourcesChan == '04') {
+      //         this.datas.sourcesChan = "朋友介绍";
+      //       } else if (this.datas.sourcesChan == '05') {
+      //         this.datas.sourcesChan = "销售开发";
+      //       } else if (this.datas.sourcesChan == '06') {
+      //         this.datas.sourcesChan = "其他";
+      //       };
+      //       query = {
+      //         appType: this.datas.appType,
+      //         appTypeTxt: this.datas.appTypeTxt,
+      //         certType: this.accepCusBasicInfo.certType,
+      //         certTypeTxt: this.accepCusBasicInfo.certTypeTxt,
+      //         certCode: this.accepCusBasicInfo.certCode,
+      //         proName: this.datas.proName,
+      //         loanTerm: this.accepApplyLoan.loanTerm,
+      //         applyMainNo: this.datas.applyMainNo,
+      //         applySubNo: this.datas.applySubNo,
+      //         salPerEmployDate: this.datas.salPerEmployDate,
+      //         appOrgRegisterDate: this.datas.appOrgRegisterDate,
+      //         adminIntroduce: this.datas.adminIntroduce,
+      //         applyId: this.datas.id,
+      //         workName: this.datas.accepCusWorkInfo.workName,
+      //         proId: this.datas.proId,
+      //         proCode: this.datas.proCode,
+      //         loanAmt: this.datas.accepApplyLoan.loanAmt,
+      //         eachTermAmt: this.datas.accepApplyLoan.eachTermAmt,
+      //         mainCustName: this.datas.mainCustName,
+      //         appOrgName: this.datas.appOrgName,
+      //         loanType: this.datas.accepApplyLoan.loanType,
+      //         loanTypeTxt: this.datas.accepApplyLoan.loanTypeTxt,
+      //         appOrgId: this.datas.appOrgId,
+      //         appOrgCode: this.datas.appOrgCode,
+      //         applyCustId: this.datas.accepCusBasicInfo.id,
+      //         custNo: this.datas.accepCusBasicInfo.custNo,
+      //         //客户名称
+      //         custName: this.datas.accepCusBasicInfo.custName
+
+      //       };
+      //       localStorage.setItem("applicationInformationDetail", JSON.stringify(query));
+      //       /*将房产信息保存到本地*/
+      //       if (res.data.accepCusEstates != '') {
+      //         localStorage.setItem("house", JSON.stringify(res.data.accepCusEstates));
+      //       };
+      //       /*将车辆信息保存到本地*/
+      //       if (res.data.accepCusCarInfos != '') {
+      //         localStorage.setItem("car", JSON.stringify(res.data.accepCusCarInfos));
+      //       };
+      //       console.log(this.$parent.$data)
+      //       this.$parent.$data.loading = false;
+      //     } else {
+      //       this.$message.error(res.msg);
+      //       if (this.roles == 'creditApp_firstTrial') { // 初审 
+      //         this.del('初审详情');
+      //         this.$router.push('/taskInWaitting?taskNodeName=creditApp_firstTrial&flag=01');
+      //       } else if (this.roles == 'creditApp_finalTrial') { // 终审
+      //         this.del('终审详情');
+      //         window.history.go(-1);
+      //       } else if (this.roles == 'antiFraudApp_commissioner') { //反欺诈专员
+      //         this.del('反欺诈详情');
+      //         this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_commissioner&flag=03');
+      //       } else if (this.roles == 'antiFraudApp_manager') { //反欺诈主管
+      //         this.del('反欺诈详情');
+      //         this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_manager&flag=04');
+      //       } else if (this.roles == '05') {
+      //         this.del('复议详情');
+      //         this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
+      //       } else if (this.roles == '06') { //复议
+      //         this.del('复议详情');
+      //         this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
+      //       }
+      //       this.$parent.$data.loading = false;
+      //     }
+      //   });
+
+      // },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
         if (!num) {

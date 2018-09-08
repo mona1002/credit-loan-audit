@@ -205,6 +205,7 @@
           RoutePath = '/ACManagerTaskList'
           this.LSworkbench = "QTComplianceWorkbenchPass";
         }
+        // 综合查询： 18
         // 任务管理： 信审-历史 、 信审已办 = 14 ； 质检-历史 、 质检已办 = 15 ；
         // 申请台账：16 - appLedgerTW  ；   借款台账：17  brrLedgerTW
         routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=" + this.judge.flag;

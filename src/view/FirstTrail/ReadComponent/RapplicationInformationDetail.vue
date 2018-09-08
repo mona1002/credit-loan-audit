@@ -285,20 +285,6 @@
                 <span>{{accepCusBasicInfo.comeYear}}</span>
               </li>
             </div>
-            <!-- <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_166">银行开户名称：</label>
-                <span>{{accepCusBasicInfo.bankName}}</span>
-              </li>
-              <li>
-                <label class="label_width_166">银行卡所属分行：</label>
-                <span>{{accepCusBasicInfo.bankBranch}}</span>
-              </li>
-              <li>
-                <label class="label_width_166">常用储蓄卡卡号：</label>
-                <span>{{accepCusBasicInfo.accountCode}}</span>
-              </li>
-            </div> -->
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">网查征信用户名：</label>

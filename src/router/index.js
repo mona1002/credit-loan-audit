@@ -116,18 +116,21 @@ const routes = [{
     component(resolve) {
       require(['../view/FirstTrail/SplitScreen.vue'], resolve)
     },
+    closed: true
   },
   // 匹配查看-页面
   {
     path: '/MatchingInf',
     component: MatchingInf,
-    name: 'MatchingInf'
+    name: 'MatchingInf',
+    closed: true
   },
   // ----------------终审----------------
   {
     path: '/FSplitScreen',
     name: 'FSplitScreen',
     component: FSplitScreen,
+    closed: true
   },
   {
     path: '/FtaskInWaitting',
@@ -137,7 +140,8 @@ const routes = [{
   {
     path: '/AntiAudit',
     component: AntiAudit,
-    name: 'AntiAudit'
+    name: 'AntiAudit',
+    closed: true
   },
   // 反欺诈列表
   {
@@ -197,46 +201,8 @@ const routes = [{
   }, {
     path: '/ReconsiderSplit',
     component: ReconsiderSplit,
-    name: 'ReconsiderSplit'
-  },
-  // ---------------------流程监控--------- 
-  {
-    path: '/processMoniAntiDistributed',
-    component: processMoniAntiDistributed,
-  }, {
-    path: '/processMoniAntiDone',
-    component: processMoniAntiDone,
-  }, {
-    path: '/processMoniAntiUndistributed',
-    component: processMoniAntiUndistributed,
-  }, {
-    path: '/processMoniQTUndistributed',
-    component: processMoniQTUndistributed,
-  },
-  {
-    path: '/processMoniQTDistributed',
-    component: processMoniQTDistributed,
-  }, {
-    path: '/processMoniQTDone',
-    component: processMoniQTDone,
-  }, {
-    path: '/processMoniReDistributed',
-    component: processMoniReDistributed,
-  }, {
-    path: '/processMoniReDone',
-    component: processMoniReDone,
-  }, {
-    path: '/processMoniReUndistributed',
-    component: processMoniReUndistributed,
-  }, {
-    path: '/processMoniTrilUndistributed',
-    component: processMoniTrilUndistributed,
-  }, {
-    path: '/processMoniTrilDone',
-    component: processMoniTrilDone,
-  }, {
-    path: '/processMoniTrilDistributed',
-    component: processMoniTrilDistributed,
+    name: 'ReconsiderSplit',
+    closed: true
   },
   // ------------------任务管理------------
   {
@@ -262,7 +228,8 @@ const routes = [{
   {
     path: '/TaskManagementSplit',
     component: TaskManagementSplit,
-    name: 'TaskManagementSplit'
+    name: 'TaskManagementSplit',
+    closed: true
   },
   {
     path: '/doTheTask',
@@ -279,6 +246,26 @@ const routes = [{
     path: '/QTHistoryTask',
     component: QTHistoryTask,
   },
+  // ----------------台账------32  33-------
+  {
+    path: '/appLedgerDetail',
+    component: appLedgerDetail,
+    name: 'appLedgerDetail',
+    closed: true
+  },
+  {
+    path: '/brrLedgerDetail',
+    component: brrLedgerDetail,
+    name: 'brrLedgerDetail',
+    closed: true
+  },
+  // ---------------大数据+社保-------------------
+  {
+    path: '/PneCtrl',
+    component: PneCtrl,
+    name: 'PneCtrl',
+    closed: true
+  },
   // ---------------质检--------------------
   {
     path: '/IntegratedQuery',
@@ -287,7 +274,12 @@ const routes = [{
   }, {
     path: '/MatchingInfQuery',
     component: MatchingInfQuery,
-    name: 'MatchingInfQuery'
+    name: 'MatchingInfQuery',
+    closed: true
+  }, {
+    path: "/MatchingInfQT",
+    component: MatchingInfQT,
+    closed: true
   }, {
     path: '/commissioner',
     component: commissioner
@@ -328,33 +320,49 @@ const routes = [{
   }, {
     path: "/ACManagerTaskList",
     component: ACManagerTaskList
+  },
+  // ---------------------流程监控--------- 
+  {
+    path: '/processMoniAntiDistributed',
+    component: processMoniAntiDistributed,
   }, {
-    path: "/MatchingInfQT",
-    component: MatchingInfQT,
-    // meta: {
-    //   newOne: false,
-    // }
-  },
-  // ---------------大数据+社保--------------------
-  {
-    path: '/PneCtrl',
-    component: PneCtrl,
-    name: 'PneCtrl'
+    path: '/processMoniAntiDone',
+    component: processMoniAntiDone,
   },
   {
-    path: '/appLedgerDetail',
-    component: appLedgerDetail,
-    name:'appLedgerDetail'
-  },
-    {
-    path: '/brrLedgerDetail',
-    component: brrLedgerDetail,
-    name:'brrLedgerDetail'
+    path: '/processMoniAntiUndistributed',
+    component: processMoniAntiUndistributed,
+  }, {
+    path: '/processMoniQTUndistributed',
+    component: processMoniQTUndistributed,
   },
   {
-    path: '/telBook',
-    component: telBook,
-  }
+    path: '/processMoniQTDistributed',
+    component: processMoniQTDistributed,
+  }, {
+    path: '/processMoniQTDone',
+    component: processMoniQTDone,
+  }, {
+    path: '/processMoniReDistributed',
+    component: processMoniReDistributed,
+  }, {
+    path: '/processMoniReDone',
+    component: processMoniReDone,
+  }, {
+    path: '/processMoniReUndistributed',
+    component: processMoniReUndistributed,
+  }, {
+    path: '/processMoniTrilUndistributed',
+    component: processMoniTrilUndistributed,
+  }, {
+    path: '/processMoniTrilDone',
+    component: processMoniTrilDone,
+  }, {
+    path: '/processMoniTrilDistributed',
+    component: processMoniTrilDistributed,
+  },
+
+
 ];
 
 const router = new Router({

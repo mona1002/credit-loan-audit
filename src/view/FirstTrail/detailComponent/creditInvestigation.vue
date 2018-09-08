@@ -1,5 +1,5 @@
 <template>
-  <!-- 实地征信 = 页面 -->
+  <!-- 实地征信= 页面 -->
   <div class="creditInvestigation">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">

@@ -1,9 +1,9 @@
 <template>
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
-      <span> 借款人：{{custName}}</span>
+      <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
-      <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+      <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
       <span> 进件机构：{{customInf.appOrgName}}</span>
       <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
@@ -29,16 +29,22 @@
             </span>
           </p>
           <div class="Left_right_BigImg ">
-            <AudioVisualLeft ref="AudioLeft" :custom="customInf.applyId " v-if=" this.tabContent1==0" msg="FspLone"
-              v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
+            <keep-alive v-if="Routes.closed">
+              <AudioVisualLeft ref="AudioLeft" :custom="customInf.applyId " v-if=" this.tabContent1==0" msg="FspLone"
+                v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
+            </keep-alive>
             <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
             <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
-            <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
+            <keep-alive v-if="Routes.closed">
+              <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.applyId'></capplicationInformationDetail>
+            </keep-alive>
             <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId=' this.tastwaitingPass.applyId' :TrilPersonShow='true'
               :FinalConCheckShow='true'></FCreditForm>
-            <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+            <keep-alive v-if="Routes.closed">
+              <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+            </keep-alive>
             <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
           </div>
         </div>
@@ -64,15 +70,23 @@
           </div>
         </div>
         <div class="tab2_Content">
-          <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :applyId='tastwaitingPass.applyId'></AudioVisual>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :applyId='tastwaitingPass.applyId'></AudioVisual>
+          </keep-alive>
           <remark v-if=" this.tabContent2==1"></remark>
           <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
-          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
+          <!-- ref="applicationInf" -->
+          <keep-alive v-if="Routes.closed">
+            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId' roles='creditApp_finalTrial'
+              :btn="true"></capplicationInformationDetail>
+          </keep-alive>
           <cborrowerInformationDetail v-if=" this.tabContent2==4" :isFull.sync="isFull"></cborrowerInformationDetail>
           <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId=' tastwaitingPass.applyId' :TrilPersonShow='true'
             :FinalConEditShow='true' :makeSureBtnShow="true"></FCreditForm>
-          <creditInvestigation v-if=" this.tabContent2==7" :applyId=' tastwaitingPass.applyId'></creditInvestigation>
+          <keep-alive v-if="Routes.closed">
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId=' tastwaitingPass.applyId'></creditInvestigation>
+          </keep-alive>
           <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
           <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
         </div>
@@ -118,15 +132,14 @@
   export default {
     data() {
       return {
-        custName: '',
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
         loading: false,
         // 进件人信息
-        accepCusBasicInfo: '',
-        customInf: [], //申请信息页local字段
-        tastwaitingPass: [], //详情列表页信息--(含)取applyId
+        accepCusBasicInfo: {},
+        customInf: {}, //申请信息页local字段
+        tastwaitingPass: {}, //详情列表页信息--(含)取applyId
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -153,6 +166,7 @@
           value: '选项3',
           label: '内匹客户姓名'
         }],
+        Routes: this.$router.options.routes[8],
         isFull: false,
         comBtn: true,
         alertComBtn: false,
@@ -162,8 +176,10 @@
     watch: {
       '$route'(to, from) {
         if (to.path === '/FSplitScreen' && this.$route.params.newOne) {
+          this.Routes.closed = false;
+          this.customInf = {};
+          this.accepCusBasicInfo = {};
           this.mountedInf();
-          this.title = "影像资料";
           this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
           this.flag1 = [true, true, true, false, true, true, true, true, true];
@@ -171,7 +187,7 @@
           this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
           this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
-          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
+          // this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = '0';
           this.DblScreen();
           this.CompareAlert = false; //关闭弹出层
@@ -179,23 +195,10 @@
         }
       }
     },
+    activated() {
+      this.Routes.closed = true;
+    },
     methods: {
-      mountedInf() {
-        this.loading = true;
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
-        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.applyId,
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.loading = false;
-            this.custName = res.data.accepCusBasicInfo.custName;
-            this.customInf = res.data;
-            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-      },
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
       },
@@ -249,9 +252,6 @@
         this.midShow = true;
       },
       tab1(ev, ind, val) {
-        if (ind == 0 || ind == 3) {
-          this.loading = true;
-        }
         this.title = val;
         this.tabContent1 = ind;
         this.tab1Index = ind;
@@ -266,9 +266,6 @@
         }
       },
       tab2(ev, ind, val) {
-        if (ind == 0 || ind == 3) {
-          this.loading = true;
-        }
         this.tabContent2 = ind;
         this.tab2Index = ind;
         this.tabActiveInd2 = ind;
@@ -318,11 +315,17 @@
           dragging = false;
           e.cancelBubble = true;
         });
-      }
+      },
+      mountedInf() {
+        this.title = "影像资料";
+        this.loading = true;
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
+      },
     },
     mounted() {
-      this.title = "影像资料";
       this.MyMove();
+    },
+    created() {
       this.mountedInf();
     },
     components: {

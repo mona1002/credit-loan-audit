@@ -102,7 +102,7 @@
           applySubNo: ''
         },
         judge: {
-          flag: '综合查询17'
+          flag: '18'//综合查询
         },
         userInf: null,
         tableData: [],

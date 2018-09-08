@@ -28,7 +28,9 @@
           </div>
         </div>
         <div class="tab2_Content">
-          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
+           <keep-alive v-if="Routes.closed">
+          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"  roles='TaskManagement'></capplicationInformationDetail>
+           </keep-alive>
           <AudioVisual v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></AudioVisual>
           <creditInvestigation v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></creditInvestigation>
           <processTrajectory v-if=" this.tabContent2==3"></processTrajectory>
@@ -53,16 +55,20 @@
         items2: ["申请信息", "影像资料", "实地征信", "流程轨迹"],
         tab2Index: 0,
         loading: false,
+          Routes: this.$router.options.routes[27],
       }
     },
     watch: {
       '$route'(to, from) {
         if (to.path === '/TaskManagementSplit' && this.$route.params.newOne) {
+           this.Routes.closed = false;
           this.mountedInf();
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 0;
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
         }
       }
+    },  activated() {
+      this.Routes.closed = true;
     },
     methods: {
       mountedInf() {

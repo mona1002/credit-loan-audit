@@ -1,14 +1,13 @@
 <template>
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
-    <!-- 进件人详情 -->
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
-      <span> 证件号码：{{certCode}}</span>
+      <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
       <span> 进件机构：{{customInf.appOrgName}}</span>
       <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
+      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
       <span>{{customInf.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
@@ -30,18 +29,26 @@
             </span>
           </p>
           <div class="Left_right_BigImg ">
-            <RAudioVisualLeft ref="AudioLeft" msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"
-              :comBtn.sync='comBtn'></RAudioVisualLeft>
+            <keep-alive v-if="Routes.closed">
+              <RAudioVisualLeft ref="AudioLeft" msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"
+                :comBtn.sync='comBtn'></RAudioVisualLeft>
+            </keep-alive>
             <Rremark v-if=" this.tabContent1==1"></Rremark>
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
-            <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
+            <keep-alive v-if="Routes.closed">
+              <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.matchApplyId'>申请信息</capplicationInformationDetail>
+            </keep-alive>
             <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
-            <RPhoneCredit v-if=" this.tabContent1==5" :applyId=' tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
-            <FCreditForm v-if=" this.tabContent1==6" :applyId=' tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
-            <creditInvestigation v-if=" this.tabContent1==7" :applyId=' tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
+            <RPhoneCredit v-if=" this.tabContent1==5" :applyId='tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
+            <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
+            <keep-alive v-if="Routes.closed">
+              <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
+            </keep-alive>
             <aAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aAntiApplyInf>
             <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
-            <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
+            <keep-alive v-if="Routes.closed">
+              <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
+            </keep-alive>
             <RprocessTrajectory v-if=" this.tabContent1==11">流程轨迹</RprocessTrajectory>
             <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
           </div>
@@ -69,17 +76,25 @@
           </div>
         </div>
         <div class="tab2_Content">
-          <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
+          <keep-alive v-if="Routes.closed">
+            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
+          </keep-alive>
           <Rremark v-if=" this.tabContent2==1"></Rremark>
           <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
-          <RapplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
+          <keep-alive v-if="Routes.closed">
+            <capplicationInformationDetail  v-if=" this.tabContent2==3" :applyId='tastwaitingPass.matchApplyId' roles='MatchingInf'>申请信息</capplicationInformationDetail>
+          </keep-alive>
           <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
-          <RPhoneCredit v-if=" this.tabContent2==5" :applyId=' tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
-          <FCreditForm v-if=" this.tabContent2==6" :applyId=' tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
-          <creditInvestigation v-if=" this.tabContent2==7" :applyId=' tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
+          <RPhoneCredit v-if=" this.tabContent2==5" :applyId='tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
+          <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
+          <keep-alive v-if="Routes.closed">
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
+          </keep-alive>
           <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
-          <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
+          <keep-alive v-if="Routes.closed">
+            <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
+          </keep-alive>
           <RprocessTrajectory v-if=" this.tabContent2==11">流程轨迹</RprocessTrajectory>
           <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
         </div>
@@ -114,7 +129,7 @@
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
-  import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
+  import capplicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RantiFraudInvestigation from "./ReadComponent/RantiFraudInvestigation"; //反欺诈调查
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
@@ -127,12 +142,12 @@
   export default {
     data() {
       return {
-        accepCusBasicInfo: '',
+        accepCusBasicInfo: {},
         certCode: '',
         watchData: '',
         loading: false,
-        customInf: [],
-        tastwaitingPass: [],
+        customInf: {},
+        tastwaitingPass: {},
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -167,13 +182,16 @@
         comBtn: true,
         alertComBtn: false,
         midShow: true,
+        Routes: this.$router.options.routes[7],
       }
     },
     watch: {
       '$route'(to, from) {
         if (to.path === '/MatchingInf' && this.$route.params.newOne) {
+          this.Routes.closed = false;
+          this.customInf = {};
+          this.accepCusBasicInfo = {};
           this.mountedInf();
-          this.title = "影像资料";
           this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
           this.flag1 = [true, true, true, false, true, true, true, true, true, true, true, true, true];
@@ -181,7 +199,6 @@
           this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
           this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
-          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
           this.CompareAlert = false; //关闭弹出层
@@ -189,23 +206,10 @@
         }
       }
     },
+    activated() {
+      this.Routes.closed = true;
+    },
     methods: {
-      mountedInf() {
-        this.loading = true;
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
-        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.matchApplyId,
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.loading = false;
-            this.customInf = res.data;
-            this.certCode = res.data.accepCusBasicInfo.certCode;
-            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-      },
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
       },
@@ -322,18 +326,24 @@
           dragging = false;
           e.cancelBubble = true;
         });
-      }
+      },
+      mountedInf() {
+        this.title = "影像资料";
+        this.loading = true;
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
+      },
     },
     mounted() {
-      this.mountedInf();
-      this.title = "影像资料";
       this.MyMove();
+    },
+    created() {
+      this.mountedInf();
     },
     components: {
       RAudioVisual,
       RAudioVisualLeft,
       FCreditForm,
-      RapplicationInformationDetail,
+      capplicationInformationDetail,
       RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息
       RApprovalConclusion, //信审审批结论归结

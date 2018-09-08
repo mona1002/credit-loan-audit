@@ -575,6 +575,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 .customName .el-button {
   width: 30px;
   height: 30px;
+  background: #ffffff;
 }
 
 /* 折叠面板title */

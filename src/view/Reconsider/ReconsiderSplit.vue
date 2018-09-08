@@ -1,7 +1,6 @@
 <template>
   <!-- 复议分屏-专员、主管 -->
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
-    <!-- 进件人详情 -->
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
@@ -13,11 +12,8 @@
       <span>{{customInf.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap content_not_split">
-      <!-- 右侧分屏部分 -->
       <div class="right" ref="rRight">
-        <!-- 右屏tab 表头 -->
         <div class="Right_tab_title_div">
-          <!-- 左右滑动 图标  -->
           <span class="pre_next_btn_wrap" @click="leftMovingBtn">
             <img src="../../../static/images/Shape@1x.png">
           </span>
@@ -33,15 +29,21 @@
           </div>
         </div>
         <div class="tab2_Content">
-          <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId'></AudioVisual>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId'></AudioVisual>
+          </keep-alive>
           <cremark v-if=" this.tabContent2==1"></cremark>
           <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
+          <keep-alive v-if="Routes.closed">
+            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId' :roles='Flag=="05"?"reconsiderApp_commissioner":"antiFraudApp_manager" '></capplicationInformationDetail>
+          </keep-alive>
           <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
           <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
           <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='tastwaitingPass.applyId'
             :FinalConCheckShow='true'></FCreditForm>
-          <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+          <keep-alive v-if="Routes.closed">
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+          </keep-alive>
           <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply>
           <aAntiApplyInf v-if=" this.tabContent2==9" :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==10" :isShow='false' :applyId='tastwaitingPass.applyId'></RantiFraudInvestigation>
@@ -69,12 +71,11 @@
     data() {
       return {
         taskName: '',
-        // Rcon: 0,
-        //custName: "",
         accepCusBasicInfo: '',
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
+        Flag: '',
         type: '',
         loading: false,
         // 进件人信息
@@ -88,16 +89,22 @@
         items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "复议申请", "反欺诈结论", "反欺诈调查", "复议结论"],
         tab2Index: 3,
         AlertSearch: "",
+        Routes: this.$router.options.routes[22],
       }
     },
     watch: {
       '$route'(to, from) {
         if (to.path === '/ReconsiderSplit' && this.$route.params.newOne) {
+          this.Routes.closed = false;
+          this.customInf = {};
+          this.accepCusBasicInfo = {};
           this.mountedInf();
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
-          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
         }
       }
+    },
+    activated() {
+      this.Routes.closed = true;
     },
     methods: {
       mountedInf() {
@@ -113,26 +120,25 @@
         this.type = '';
         this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
-        this.taskName = JSON.parse(localStorage.getItem("RtaskInWaitting")).taskName;
+        this.Flag = JSON.parse(localStorage.getItem("judge")).flag;
+        this.taskName = this.tastwaitingPass.taskName;
         if (this.taskName == 'reconsiderApp_commissioner') { //复议专员结论
           this.type = 'commissioner';
-          // this.Rcon = 1;
         } else if (this.taskName == 'reconsiderApp_manager') { //复议经理结论
           this.type = 'manager';
-          // this.Rcon = 2;
         }
-        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.applyId,
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.loading = false;
-            //this.custName = res.data.accepCusBasicInfo.custName;
-            this.customInf = res.data;
-            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
+        // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+        //   id: this.tastwaitingPass.applyId,
+        // }).then(res => {
+        //   if (res.statusCode == 200) {
+        //     this.loading = false;
+        //     //this.custName = res.data.accepCusBasicInfo.custName;
+        //     this.customInf = res.data;
+        //     this.accepCusBasicInfo = res.data.accepCusBasicInfo;
+        //   } else {
+        //     this.$message.error(res.msg);
+        //   }
+        // });
       },
       // compBtnS() {
       //   this.CompareAlert = true;
@@ -160,7 +166,7 @@
         this.tabActiveInd2 = ind;
       }
     },
-    mounted() {
+    created() {
       this.mountedInf();
     },
     components: {
