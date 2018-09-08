@@ -2,12 +2,13 @@
   <!-- 任务管理分屏 -->
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
-      <span> 借款人：{{custName}}</span>
+      <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
       <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+      <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
       <span> 进件机构：{{customInf.appOrgName}}</span>
-      <span> 门店成立时间:{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
+      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
+      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
       <span>{{customInf.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap content_not_split">
@@ -28,11 +29,15 @@
           </div>
         </div>
         <div class="tab2_Content">
-           <keep-alive v-if="Routes.closed">
-          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"  roles='TaskManagement'></capplicationInformationDetail>
-           </keep-alive>
-          <AudioVisual v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></AudioVisual>
-          <creditInvestigation v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+          <keep-alive v-if="Routes.closed">
+            <capplicationInformationDetail :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0" roles='TaskManagement'></capplicationInformationDetail>
+          </keep-alive>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisual v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></AudioVisual>
+          </keep-alive>
+          <keep-alive v-if="Routes.closed">
+            <creditInvestigation v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+          </keep-alive>
           <processTrajectory v-if=" this.tabContent2==3"></processTrajectory>
         </div>
       </div>
@@ -47,46 +52,35 @@
   export default {
     data() {
       return {
-        custName: '',
-        customInf: [],
-        tastwaitingPass: [],
+        customInf: {},
+        accepCusBasicInfo: {},
+        tastwaitingPass: {},
         tabContent2: 0,
         tabActiveInd2: 0,
         items2: ["申请信息", "影像资料", "实地征信", "流程轨迹"],
         tab2Index: 0,
         loading: false,
-          Routes: this.$router.options.routes[27],
+        Routes: this.$router.options.routes[27],
       }
     },
     watch: {
       '$route'(to, from) {
         if (to.path === '/TaskManagementSplit' && this.$route.params.newOne) {
-           this.Routes.closed = false;
+          this.Routes.closed = false;
+          this.customInf = {};
+          this.accepCusBasicInfo = {};
           this.mountedInf();
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 0;
-          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
         }
       }
-    },  activated() {
+    },
+    activated() {
       this.Routes.closed = true;
     },
     methods: {
       mountedInf() {
         this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("TtaskInWaitting")); //任务管理
-        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.applyId,
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.loading = false;
-            this.custName = res.data.accepCusBasicInfo.custName;
-            this.customInf = res.data;
-          } else {
-            this.$message.error(res.msg);
-            this.del('信审任务管理-详情');
-            window.history.go(-1);
-          }
-        });
       },
       tab(ev, ind, val) {
         this.tabContent2 = ind;
@@ -94,7 +88,7 @@
         this.tabActiveInd2 = ind;
       }
     },
-    mounted() {
+    created() {
       this.mountedInf();
     },
     components: {

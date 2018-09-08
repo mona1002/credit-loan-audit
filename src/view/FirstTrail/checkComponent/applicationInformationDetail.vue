@@ -889,14 +889,12 @@
       }
     },
     created() {
-      console.log("申请Created")
       this.mountedInf();
     },
     methods: {
       mountedInf() {
         //一进入页面就发送请求
         // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        console.log('子组件', this.applyId)
         // if (this.judgeFlag.flag == '01') {
         //   this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
         //   this.applyId = this.taskInWaitting.applyId;
@@ -926,9 +924,6 @@
         //   this.applyId = this.taskInWaitting.applyId;
         // }
         // this.request();
-        console.log('申请信息')
-        console.log(this.applyId)
-
         var query = {};
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           'id': this.applyId
@@ -1262,7 +1257,6 @@
             if (res.data.accepCusCarInfos != '') {
               localStorage.setItem("car", JSON.stringify(res.data.accepCusCarInfos));
             };
-            console.log(this.$parent.$data)
             this.$parent.$data.loading = false;
           } else {
             this.$message.error(res.msg);
@@ -1322,7 +1316,6 @@
               this.del('质检详情'); 
               this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13')
             }
-            
             this.$parent.$data.loading = false;
           }
         });
