@@ -787,11 +787,11 @@
     </div>
     <!-- 底部按钮 -->
     <div class="approve_btn_area approve_btn_area_width_700" v-if='BottomBtn'>
-      <span class="approve_item" @click="SaveInf('保存')" v-if="saveBtn">
+      <span class="approve_item" @click="SubmitAlert('保存')" v-if="saveBtn">
         <i class="approve_icon relieveIcon"></i>
         <span class="approve_text">保存</span>
       </span>
-      <span class="approve_item" @click="SubmitAlert" v-if="submitBtn">
+      <span class="approve_item" @click="SubmitAlert('提交')" v-if="submitBtn">
         <i class="approve_icon appro"></i>
         <span class="approve_text">提交</span>
       </span>
@@ -1635,14 +1635,14 @@
           this.others = true;
         }
       },
-      SubmitAlert() { //提交弹窗
-        this.$confirm('确定提交？', '提示', {
+      SubmitAlert(val) { //提交弹窗
+        this.$confirm(`确定${val}？`, '提示', {
           confirmButtonText: '确定',
           type: 'warning',
           cancelButtonText: '取消',
           showCancelButton: true
         }).then(() => {
-          this.SaveInf('提交');
+          this.SaveInf(val);
         }).catch(() => {});
       },
       // ---------------------------------按钮事件----------------
