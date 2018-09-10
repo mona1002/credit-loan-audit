@@ -157,7 +157,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" :loading=huituiLoading @click="hsure('FormReturn')"> {{huituiFont}}</el-button>
+          <el-button type="primary" :loading='huituiLoading' @click="hsure('FormReturn')"> {{huituiFont}}</el-button>
         </div>
       </el-dialog>
     </div>
@@ -196,7 +196,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="jdialogVisible = false">取 消</el-button>
-          <el-button type="primary" :loading=jujueLoading @click="jSure('FormReject')"> {{jujueFont}}</el-button>
+          <el-button type="primary" :loading='jujueLoading' @click="jSure('FormReject')"> {{jujueFont}}</el-button>
         </div>
       </el-dialog>
     </div>
@@ -594,6 +594,7 @@
       coverFn(flag) {
         switch (flag) {
           case 'back':
+            this.huituiLoading = false;
             this.huituiFont = '提交';
             this.dialogVisible = true;
             this.get('system/getSystemDate?' + Math.random()).then(res => {
@@ -910,6 +911,8 @@
       },
       //拒绝提交按钮
       jSure(formName) {
+        this.jujueLoading = true;
+        this.jujueFont = '提交中';
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.post("/creauditOpinion/approval", {
@@ -980,6 +983,8 @@
       },
       //回退提交按钮
       hsure(formName) {
+        this.huituiLoading = true;
+        this.huituiFont = '提交中';
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.post("/creauditOpinion/approval", {
@@ -1014,9 +1019,7 @@
                   message: res.msg,
                   type: 'warning'
                 })
-                return;
-              }
-              if (res.statusCode == '200') {
+              } else {
                 // this.taskId = '';
                 this.datas.custName = ''; // 客户名称
                 this.custNo = ''; // 客户code
@@ -1044,7 +1047,6 @@
                 this.del();
               }
             });
-            return
           } else {
             return false;
           }
