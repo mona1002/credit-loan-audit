@@ -508,7 +508,17 @@
         mobilePhone: /^1[345789]\d{9}$/,
       }
     },
-    props: ['isFull', 'SplitS', 'addBtn'],
+    // props: ['isFull', 'SplitS', 'addBtn'],
+    props:{
+      isFull:{type:Boolean},
+      SplitS:{
+        type:String
+      },
+      addBtn:{
+        default:false,
+        type:Boolean,
+      }
+    },
     mounted() {
       this.mountedInf();
     },
@@ -667,6 +677,7 @@
         });
       },
       handleNodeClick(data) {
+       this.formShow= this.addBtn;//初审点击表格变为查询后，点击二级节点切换到编辑页面
         if (this.isInterFlag == true || this.SplitS != 'right' || this.hisShow) {
           // 点击每条tree数据的事件
           this.treeId = data.id;

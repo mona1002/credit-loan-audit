@@ -392,7 +392,6 @@
         Addexpensestxt: this.Addlist.expensestxt,
         AddcheckHometeltxt: this.Addlist.checkHometeltxt,
         phoneId: '', // 用来区分是添加 还是 修改 
-        resMsg: ''
       }
     },
     props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', "Addlist"],
@@ -428,94 +427,76 @@
           });
           return;
         }
-        this.open();
-      },
-      // open 打开 是否确认提交弹窗
-      open() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '提示',
-          message: h('p', null, [
-            h('span', null, '确定操作? '),
-          ]),
-          showCancelButton: true,
+        this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
+          type: 'warning',
           cancelButtonText: '取消',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-              // 点击 确认 提交 方法
-              this.post('/creTelResearchHis/addHomeTelLog', {
-                cretelinvest: {
-                  custName: this.custName,
-                  phoneType: this.phoneType,
-                  phoneNum: this.phoneNum,
-                  source: this.Addsource,
-                  answer: this.Addanswer,
-                  checkStage: this.AddcheckStage,
-                  sourceDesc: this.AddsourceDesc, // 其他来源说明
-                  applyId: this.applyId,
-                  id: this.phoneId
-                },
-                cretelhometel: {
-                  applyId: this.applyId,
-                  id: this.phoneId,
-                  thirdResult: this.AddthirdResult,
-                  issameFam: this.AddissameFam,
-                  relBorrower: this.AddrelBorrower,
-                  checkWork: this.AddcheckWork,
-                  maritalStatustxt: this.AddmaritalStatustxt, // 核对子女情况说明
-                  maritalStatus: this.AddmaritalStatus,
-                  checkAddr: this.AddcheckAddr,
-                  checkEstate: this.AddcheckEstate, // 核对房产
-                  otherIncome: this.AddotherIncome,
-                  recentLargespend: this.AddrecentLargespend,
-                  parents: this.Addparents,
-                  brother: this.Addbrother,
-                  threeQueries: this.AddthreeQueries,
-                  exceptionState: this.AddexceptionState, // 异常项说明
-                  expenses: this.Addexpenses, // 支付家庭费用
-                  checkStage: this.AddcheckStage,
-                  checkHometel: this.AddcheckHometel, // 核对家庭固话
-                  hobbyandBehave: this.AddhobbyandBehave, // 借款人爱好和品行
-                  conclusion: this.Addconclusion, // 调查结果
-                  issameFamtxt: this.AddissameFamtxt, // 是否与家庭联系人为同一人接听说明
-                  relBorrowertxt: this.AddrelBorrowertxt, // 与借款人关系说明
-                  checkWorktxt: this.AddcheckWorktxt, // 工作情况说明
-                  checkAddrtxt: this.AddcheckAddrtxt, // 核对地址说明
-                  checkEstatetxt: this.AddcheckEstatetxt, // 核对房产说明
-                  otherIncometxt: this.AddotherIncometxt, // 其他收入说明
-                  recentlArgespendInfo: this.AddrecentlArgespendInfo, // 近期大项开销说明
-                  parentsInfo: this.AddparentsInfo, // 父母情况说明
-                  brothertxt: this.Addbrothertxt, // 兄弟姐妹情况说明
-                  expensestxt: this.Addexpensestxt, // 支付家庭费用说明
-                  checkHometeltxt: this.AddcheckHometeltxt, // 核对家庭固话说明
-                }
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  this.phoneId = '';
-                  // 提交数据成功,广播事件 重新刷新列表
-                  this.$emit('updateList');
-                  this.$emit('updateTree');
-                  this.resMsg = res.msg;
-                  done();
-                } else {
-                  this.resMsg = res.msg;
-                  instance.confirmButtonText = '';
-                }
-                instance.confirmButtonLoading = false;
-              });
-            } else {
-              done();
-            }
+          showCancelButton: true
+        }).then(() => {
+          this.open();
+        }).catch(() => {});
+      },
+      // 提交
+      open() {
+        this.post('/creTelResearchHis/addHomeTelLog', {
+          cretelinvest: {
+            custName: this.custName,
+            phoneType: this.phoneType,
+            phoneNum: this.phoneNum,
+            source: this.Addsource,
+            answer: this.Addanswer,
+            checkStage: this.AddcheckStage,
+            sourceDesc: this.AddsourceDesc, // 其他来源说明
+            applyId: this.applyId,
+            id: this.phoneId
+          },
+          cretelhometel: {
+            applyId: this.applyId,
+            id: this.phoneId,
+            thirdResult: this.AddthirdResult,
+            issameFam: this.AddissameFam,
+            relBorrower: this.AddrelBorrower,
+            checkWork: this.AddcheckWork,
+            maritalStatustxt: this.AddmaritalStatustxt, // 核对子女情况说明
+            maritalStatus: this.AddmaritalStatus,
+            checkAddr: this.AddcheckAddr,
+            checkEstate: this.AddcheckEstate, // 核对房产
+            otherIncome: this.AddotherIncome,
+            recentLargespend: this.AddrecentLargespend,
+            parents: this.Addparents,
+            brother: this.Addbrother,
+            threeQueries: this.AddthreeQueries,
+            exceptionState: this.AddexceptionState, // 异常项说明
+            expenses: this.Addexpenses, // 支付家庭费用
+            checkStage: this.AddcheckStage,
+            checkHometel: this.AddcheckHometel, // 核对家庭固话
+            hobbyandBehave: this.AddhobbyandBehave, // 借款人爱好和品行
+            conclusion: this.Addconclusion, // 调查结果
+            issameFamtxt: this.AddissameFamtxt, // 是否与家庭联系人为同一人接听说明
+            relBorrowertxt: this.AddrelBorrowertxt, // 与借款人关系说明
+            checkWorktxt: this.AddcheckWorktxt, // 工作情况说明
+            checkAddrtxt: this.AddcheckAddrtxt, // 核对地址说明
+            checkEstatetxt: this.AddcheckEstatetxt, // 核对房产说明
+            otherIncometxt: this.AddotherIncometxt, // 其他收入说明
+            recentlArgespendInfo: this.AddrecentlArgespendInfo, // 近期大项开销说明
+            parentsInfo: this.AddparentsInfo, // 父母情况说明
+            brothertxt: this.Addbrothertxt, // 兄弟姐妹情况说明
+            expensestxt: this.Addexpensestxt, // 支付家庭费用说明
+            checkHometeltxt: this.AddcheckHometeltxt, // 核对家庭固话说明
           }
-        }).then(action => {
-          this.$message({
-            type: 'success',
-            message: this.resMsg
-          });
-
+        }).then(res => {
+          if (res.statusCode == '200') {
+            this.phoneId = '';
+            // 提交数据成功,广播事件 重新刷新列表
+            this.$emit('updateList');
+            this.$emit('updateTree');
+            this.$message({
+              type: 'success',
+              message: '提交成功'
+            });
+          } else {
+            this.$message.error(res.msg)
+          }
         });
       },
       changes(flage) {

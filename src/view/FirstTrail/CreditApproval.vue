@@ -842,6 +842,8 @@
         // 清空原因
         this.mainReason = '';
         this.secondaryReason = '';
+        this.isLoading=false;
+          this.loadingTitle = '提交';        
         // 页面点击按钮出现 的 对应 弹窗
         // 统一处理    回退 02 ,拒绝 01, 放弃  07, 审批 03, 审批结论 spjl, 流程轨迹 lcgj
         switch (flag) {

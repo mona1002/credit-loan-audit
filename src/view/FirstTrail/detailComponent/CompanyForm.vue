@@ -288,7 +288,6 @@
         DanWjobref2: this.danweiList.jobref2,
         DanWconclusion: this.danweiList.conclusion,
         phoneId: '',
-        resMsg: ''
       }
     },
     props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'danweiList'],
@@ -325,99 +324,67 @@
           });
           return;
         }
-        this.open();
-        // this.$confirm('您确定操作？', '提示', {
-        //   confirmButtonText: '确定',
-        //   type: 'warning',
-        //   cancelButtonText: '取消',
-        //   showCancelButton: true
-        // }).then(() => {
-        //   console.log('tijiao')
-        // }).catch(() => {});
-      },
-      // open 打开 是否确认提交弹窗
-      open() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '提示',
-          message: h('p', null, [
-            h('span', null, '确定操作? '),
-          ]),
-          showCancelButton: true,
+        this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
+          type: 'warning',
           cancelButtonText: '取消',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-              // 点击 确认 提交 方法
-              this.post('/creTelResearchHis/addComTelLog', {
-                cretelinvest: {
-                  custName: this.custName,
-                  phoneType: this.phoneType,
-                  phoneNum: this.phoneNum,
-                  source: this.DanWsource,
-                  answer: this.DanWanswer,
-                  checkStage: this.DanWcheckStage,
-                  sourceDesc: this.DanWsourceDesc, // 其他来源说明
-                  applyId: this.applyId,
-                  id: this.phoneId
-                },
-                cretelcompany: {
-                  applyId: this.applyId,
-                  id: this.phoneId,
-                  thirdResult: this.DanWthirdResult,
-                  phone: this.DanWphone,
-                  phonetxt: this.DanWphonetxt,
-                  answer: this.DanWanswerIdentity,
-                  answertxt: this.DanWanswertxt,
-                  company: this.DanWcompany,
-                  companytxt: this.DanWcompanytxt,
-                  checkTime: this.DanWcheckTime,
-                  checkTimetxt: this.DanWcheckTimetxt,
-                  checkIncome: this.DanWcheckIncome,
-                  checkIncometxt: this.DanWcheckIncometxt,
-                  payrollSituation: this.DanWpayrollSituation,
-                  payrollSituationtxt: this.DanWpayrollSituationtxt,
-                  pensionInsurance: this.DanWpensionInsurance,
-                  employmentmodetxt: this.DanWemploymentmodetxt,
-                  employmentmode: this.DanWemploymentmode,
-                  housingFund: this.DanWhousingFund,
-                  jobref1: this.DanWjobref1,
-                  jobref2: this.DanWjobref2,
-                  conclusion: this.DanWconclusion
-                }
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  this.phoneId = '';
-                  // 提交数据成功,广播事件 重新刷新列表
-                  this.$emit('updateList');
-                  this.$emit('updateTree');
-                  this.resMsg = res.msg;
-                  done();
-                } else {
-                  this.resMsg = res.msg;
-                  instance.confirmButtonText = '';
-                }
-                instance.confirmButtonLoading = false;
-              });
-            } else {
-              done();
-            }
-          }
-        }).then(action => {
-          this.$message({
-            type: 'success',
-            message: this.resMsg
-          });
-        });
+          showCancelButton: true
+        }).then(() => {
+          this.open();
+        }).catch(() => {});
       },
-      showMessage(value) {
-        this.$message({
-          message: '输入长度不能超出' + value,
-          type: 'warning'
+      //  提交
+      open() {
+        this.post('/creTelResearchHis/addComTelLog', {
+          cretelinvest: {
+            custName: this.custName,
+            phoneType: this.phoneType,
+            phoneNum: this.phoneNum,
+            source: this.DanWsource,
+            answer: this.DanWanswer,
+            checkStage: this.DanWcheckStage,
+            sourceDesc: this.DanWsourceDesc, // 其他来源说明
+            applyId: this.applyId,
+            id: this.phoneId
+          },
+          cretelcompany: {
+            applyId: this.applyId,
+            id: this.phoneId,
+            thirdResult: this.DanWthirdResult,
+            phone: this.DanWphone,
+            phonetxt: this.DanWphonetxt,
+            answer: this.DanWanswerIdentity,
+            answertxt: this.DanWanswertxt,
+            company: this.DanWcompany,
+            companytxt: this.DanWcompanytxt,
+            checkTime: this.DanWcheckTime,
+            checkTimetxt: this.DanWcheckTimetxt,
+            checkIncome: this.DanWcheckIncome,
+            checkIncometxt: this.DanWcheckIncometxt,
+            payrollSituation: this.DanWpayrollSituation,
+            payrollSituationtxt: this.DanWpayrollSituationtxt,
+            pensionInsurance: this.DanWpensionInsurance,
+            employmentmodetxt: this.DanWemploymentmodetxt,
+            employmentmode: this.DanWemploymentmode,
+            housingFund: this.DanWhousingFund,
+            jobref1: this.DanWjobref1,
+            jobref2: this.DanWjobref2,
+            conclusion: this.DanWconclusion
+          }
+        }).then(res => {
+          if (res.statusCode == '200') {
+            this.phoneId = '';
+            // 提交数据成功,广播事件 重新刷新列表
+            this.$emit('updateList');
+            this.$emit('updateTree');
+            this.$message({
+              type: 'success',
+              message:'提交成功'
+            });
+          } else {
+            this.$message.error(res.msg)
+          }
         });
-        return;
       },
       changes(flage) {
         switch (flage) {

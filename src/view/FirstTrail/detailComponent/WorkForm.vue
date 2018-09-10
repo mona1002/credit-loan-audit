@@ -165,7 +165,6 @@
         mymobilepaymenttxt: this.mobilepaymenttxt,
         myconclusion: this.conclusion,
         phoneId: '',
-        resMsg: ''
       }
     },
     props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'source', 'answer', 'checkStage', 'sourceDesc',
@@ -203,71 +202,53 @@
           });
           return;
         }
-        this.open();
-      },
-      // open 打开 是否确认提交弹窗
-      open() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '提示',
-          message: h('p', null, [
-            h('span', null, '确定操作? '),
-          ]),
-          showCancelButton: true,
+        this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
+          type: 'warning',
           cancelButtonText: '取消',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-              // 点击 确认 提交 方法
-              this.post('/creTelResearchHis/addTeljobref', {
-                cretelinvest: {
-                  custName: this.custName,
-                  phoneType: this.phoneType,
-                  phoneNum: this.phoneNum,
-                  source: this.mysource,
-                  answer: this.myanswer,
-                  checkStage: this.mycheckStage,
-                  sourceDesc: this.mysourceDesc, // 其他来源说明
-                  applyId: this.applyId,
-                  id: this.phoneId
-                },
-                creteljobref: {
-                  applyId: this.applyId,
-                  id: this.phoneId,
-                  answer: this.myanswerIdentity, // 接电话人身份
-                  answertxt: this.myanswertxt,
-                  checkJob: this.mycheckJob,
-                  checkJobtxt: this.mycheckJobtxt,
-                  mobilepayment: this.mymobilepayment,
-                  mobilepaymenttxt: this.mymobilepaymenttxt,
-                  conclusion: this.myconclusion
-                }
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  this.phoneId = '';
-                  // 提交数据成功,广播事件 重新刷新列表
-                  this.$emit('updateList');
-                  this.$emit('updateTree');
-                  this.resMsg = res.msg;
-                  done();
-                } else {
-                  this.resMsg = res.msg;
-                  done();
-                  instance.confirmButtonText = '';
-                }
-                instance.confirmButtonLoading = false;
-              });
-            } else {
-              done();
-            }
+          showCancelButton: true
+        }).then(() => {
+          this.open();
+        }).catch(() => {});
+      },
+      // 提交
+      open() {
+        this.post('/creTelResearchHis/addTeljobref', {
+          cretelinvest: {
+            custName: this.custName,
+            phoneType: this.phoneType,
+            phoneNum: this.phoneNum,
+            source: this.mysource,
+            answer: this.myanswer,
+            checkStage: this.mycheckStage,
+            sourceDesc: this.mysourceDesc, // 其他来源说明
+            applyId: this.applyId,
+            id: this.phoneId
+          },
+          creteljobref: {
+            applyId: this.applyId,
+            id: this.phoneId,
+            answer: this.myanswerIdentity, // 接电话人身份
+            answertxt: this.myanswertxt,
+            checkJob: this.mycheckJob,
+            checkJobtxt: this.mycheckJobtxt,
+            mobilepayment: this.mymobilepayment,
+            mobilepaymenttxt: this.mymobilepaymenttxt,
+            conclusion: this.myconclusion
           }
-        }).then(action => {
-          this.$message({
-            type: 'success',
-            message: this.resMsg
-          });
+        }).then(res => {
+          if (res.statusCode == '200') {
+            this.phoneId = '';
+            // 提交数据成功,广播事件 重新刷新列表
+            this.$emit('updateList');
+            this.$emit('updateTree');
+            this.$message({
+              type: 'success',
+              message: '提交成功!'
+            });
+          } else {
+            this.$message.error(res.msg)
+          }
         });
       },
       changes(flage) {

@@ -284,7 +284,7 @@
     data() {
       return {
         phoneType: '03',
- Fsource: this.familyList.source,
+        Fsource: this.familyList.source,
         Fanswer: this.familyList.answer,
         FsourceDesc: this.familyList.sourceDesc,
         FcheckStage: this.familyList.checkStage,
@@ -350,85 +350,68 @@
           });
           return;
         }
-        this.open();
-      },
-      // open 打开 是否确认提交弹窗
-      open() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '提示',
-          message: h('p', null, [
-            h('span', null, '确定操作? '),
-          ]),
-          showCancelButton: true,
+        this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
+          type: 'warning',
           cancelButtonText: '取消',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-              // 点击 确认 提交 方法
-              this.post('/creTelResearchHis/addTelfContract', {
-                cretelinvest: {
-                  custName: this.custName,
-                  phoneType: this.phoneType,
-                  phoneNum: this.phoneNum,
-                  source: this.Fsource,
-                  answer: this.Fanswer,
-                  sourceDesc: this.FsourceDesc,
-                  checkStage: this.FcheckStage,
-                  applyId: this.applyId,
-                  id: this.phoneId
-                },
-                cretelfcontact: {
-                  applyId: this.applyId,
-                  id: this.phoneId,
-                  thirdResult: this.FthirdResult, // 第三方查询信息
-                  threeQueries: this.FthreeQueries, // 三方异常
-                  threeQueriestxt: this.FthreeQueriestxt, // 三方异常说明
-                  issameFam: this.FissameFam,
-                  issameFamtxt: this.FissameFamtxt,
-                  wetherThirdAbnormal: this.FwetherThirdAbnormal,
-                  wetherThirdAbnormaltxt: this.FwetherThirdAbnormaltxt,
-                  mobilepayment: this.Fmobilepayment,
-                  mobilepaymenttxt: this.Fmobilepaymenttxt, // 微信/支付宝异常说明
-                  relBorrower: this.FrelBorrower,
-                  relBorrowertxt: this.FrelBorrowertxt,
-                  checkWork: this.FcheckWork,
-                  checkWorktxt: this.FcheckWorktxt,
-                  maritalStatus: this.FmaritalStatus,
-                  maritalStatustxt: this.FmaritalStatustxt,
-                  checkAddr: this.FcheckAddr,
-                  checkAddrtxt: this.FcheckAddrtxt,
-                  checkEstate: this.FcheckEstate,
-                  checkEstatetxt: this.FcheckEstatetxt,
-                  otherIncome: this.FotherIncome,
-                  otherIncometxt: this.FotherIncometxt,
-                  conclusion: this.Fconclusion
-                }
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  this.phoneId = '';
-                  // 提交数据成功,广播事件 重新刷新列表
-                  this.$emit('updateList');
-                  this.$emit('updateTree');
-                  this.resMsg = res.msg;
-                  done();
-                } else {
-                  this.resMsg = res.msg;
-                  instance.confirmButtonText = '';
-                }
-                instance.confirmButtonLoading = false;
-              });
-            } else {
-              done();
-            }
+          showCancelButton: true
+        }).then(() => {
+          this.open();
+        }).catch(() => {});
+      },
+      // 提交
+      open() {
+        this.post('/creTelResearchHis/addTelfContract', {
+          cretelinvest: {
+            custName: this.custName,
+            phoneType: this.phoneType,
+            phoneNum: this.phoneNum,
+            source: this.Fsource,
+            answer: this.Fanswer,
+            sourceDesc: this.FsourceDesc,
+            checkStage: this.FcheckStage,
+            applyId: this.applyId,
+            id: this.phoneId
+          },
+          cretelfcontact: {
+            applyId: this.applyId,
+            id: this.phoneId,
+            thirdResult: this.FthirdResult, // 第三方查询信息
+            threeQueries: this.FthreeQueries, // 三方异常
+            threeQueriestxt: this.FthreeQueriestxt, // 三方异常说明
+            issameFam: this.FissameFam,
+            issameFamtxt: this.FissameFamtxt,
+            wetherThirdAbnormal: this.FwetherThirdAbnormal,
+            wetherThirdAbnormaltxt: this.FwetherThirdAbnormaltxt,
+            mobilepayment: this.Fmobilepayment,
+            mobilepaymenttxt: this.Fmobilepaymenttxt, // 微信/支付宝异常说明
+            relBorrower: this.FrelBorrower,
+            relBorrowertxt: this.FrelBorrowertxt,
+            checkWork: this.FcheckWork,
+            checkWorktxt: this.FcheckWorktxt,
+            maritalStatus: this.FmaritalStatus,
+            maritalStatustxt: this.FmaritalStatustxt,
+            checkAddr: this.FcheckAddr,
+            checkAddrtxt: this.FcheckAddrtxt,
+            checkEstate: this.FcheckEstate,
+            checkEstatetxt: this.FcheckEstatetxt,
+            otherIncome: this.FotherIncome,
+            otherIncometxt: this.FotherIncometxt,
+            conclusion: this.Fconclusion
           }
-        }).then(action => {
-          this.$message({
-            type: 'success',
-            message: this.resMsg
-          });
+        }).then(res => {
+          if (res.statusCode == '200') {
+            this.phoneId = '';
+            // 提交数据成功,广播事件 重新刷新列表
+            this.$emit('updateList');
+            this.$emit('updateTree');
+            this.$message({
+              type: 'success',
+              message: '提交成功!'
+            });
+          } else {
+            this.$message.error(res.msg)
+          }
         });
       },
       changes(flage) {

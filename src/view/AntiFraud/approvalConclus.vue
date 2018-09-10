@@ -102,7 +102,6 @@
         </div>
       </li>
       <li class="item-column1 item-column3-2">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:0px;top:10px;font-weight:bold;">*</span>
         <div class="left-title"><b class="required_Red"> * </b> 反欺诈决策反馈：</div>
         <div class="textarea-class2">
           <el-input v-model="auditDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>

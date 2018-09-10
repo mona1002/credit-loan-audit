@@ -250,7 +250,6 @@
         HsourceDesc: this.hurryList.sourceDesc,
         HthreeQueries: this.hurryList.threeQueries,
         phoneId: '',
-        resMsg: ''
       }
     },
     props: ['custName', 'phoneNum', 'applyId', 'isFull', 'hurryList'],
@@ -288,78 +287,60 @@
           });
           return;
         }
-        this.open();
-      },
-      // open 打开 是否确认提交弹窗
-      open() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '提示',
-          message: h('p', null, [
-            h('span', null, '确定操作? '),
-          ]),
-          showCancelButton: true,
+        this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
+          type: 'warning',
           cancelButtonText: '取消',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-              // 点击 确认 提交 方法
-              this.post('/creTelResearchHis/addTeleContract', {
-                cretelinvest: {
-                  custName: this.custName,
-                  phoneType: this.phoneType,
-                  phoneNum: this.phoneNum,
-                  source: this.Hsource,
-                  answer: this.Hanswer,
-                  checkStage: this.HcheckStage,
-                  sourceDesc: this.HsourceDesc, // 其他来源说明
-                  applyId: this.applyId,
-                  id: this.phoneId
-                },
-                cretelecontact: {
-                  applyId: this.applyId,
-                  id: this.phoneId,
-                  thirdResult: this.HthirdResult,
-                  relBorrower: this.HrelBorrower,
-                  relBorrowertxt: this.HrelBorrowertxt,
-                  checkWork: this.HcheckWork,
-                  checkWorktxt: this.HcheckWorktxt,
-                  mobilepayment: this.Hmobilepayment,
-                  mobilepaymenttxt: this.Hmobilepaymenttxt,
-                  threeQueries: this.HthreeQueries,
-                  threeQueriestxt: this.HthreeQueriestxt,
-                  maritalStatus: this.HmaritalStatus,
-                  maritalStatustxt: this.HmaritalStatustxt,
-                  contactfre: this.Hcontactfre,
-                  contactfretxt: this.Hcontactfretxt,
-                  conclusion: this.Hconclusion
-                }
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  this.phoneId = '';
-                  // 提交数据成功,广播事件 重新刷新列表
-                  this.$emit('updateList');
-                  this.$emit('updateTree');
-                  this.resMsg = res.msg;
-                  done();
-                } else {
-                  this.resMsg = res.msg;
-                  instance.confirmButtonText = '';
-                }
-                instance.confirmButtonLoading = false;
-              });
-            } else {
-              done();
-            }
+          showCancelButton: true
+        }).then(() => {
+          this.open();
+        }).catch(() => {});
+      },
+      //  提交
+      open() {
+        this.post('/creTelResearchHis/addTeleContract', {
+          cretelinvest: {
+            custName: this.custName,
+            phoneType: this.phoneType,
+            phoneNum: this.phoneNum,
+            source: this.Hsource,
+            answer: this.Hanswer,
+            checkStage: this.HcheckStage,
+            sourceDesc: this.HsourceDesc, // 其他来源说明
+            applyId: this.applyId,
+            id: this.phoneId
+          },
+          cretelecontact: {
+            applyId: this.applyId,
+            id: this.phoneId,
+            thirdResult: this.HthirdResult,
+            relBorrower: this.HrelBorrower,
+            relBorrowertxt: this.HrelBorrowertxt,
+            checkWork: this.HcheckWork,
+            checkWorktxt: this.HcheckWorktxt,
+            mobilepayment: this.Hmobilepayment,
+            mobilepaymenttxt: this.Hmobilepaymenttxt,
+            threeQueries: this.HthreeQueries,
+            threeQueriestxt: this.HthreeQueriestxt,
+            maritalStatus: this.HmaritalStatus,
+            maritalStatustxt: this.HmaritalStatustxt,
+            contactfre: this.Hcontactfre,
+            contactfretxt: this.Hcontactfretxt,
+            conclusion: this.Hconclusion
           }
-        }).then(action => {
-          this.$message({
-            type: 'success',
-            message: this.resMsg
-          });
-
+        }).then(res => {
+          if (res.statusCode == '200') {
+            this.phoneId = '';
+            // 提交数据成功,广播事件 重新刷新列表
+            this.$emit('updateList');
+            this.$emit('updateTree');
+            this.$message({
+              type: 'success',
+              message: '提交成功'
+            });
+          } else {
+            this.$message.error(res.msg)
+          }
         });
       },
       changes(flage) {

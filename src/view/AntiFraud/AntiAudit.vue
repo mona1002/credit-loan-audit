@@ -136,7 +136,6 @@
     },
     created() {
       this.mountedInf();
-      console.log( this.$router.options.routes)
     },
     components: {
       AudioVisual,
