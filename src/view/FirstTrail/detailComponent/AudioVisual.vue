@@ -182,7 +182,6 @@
         this.closeImg = ind;
         this.openImg = ind
         // 二级（子）节点
-        console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.applyId,
           pid: id

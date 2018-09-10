@@ -880,6 +880,7 @@
         this.loanRateYr = val.loanRateYr;
         // 还款方式  
         this.repayWay = val.repayWay;
+        this.calculateByAuditInfo();
       },
       // 计算审批结论数据
       calculateByAuditInfo() {
@@ -1077,7 +1078,6 @@
       },
       //分页
       handleSizeChange(val) {
-        console.log('每页 ${val} 条');
         /*this.queryParam.pageSize = val;
         this.queryParam.pageNum = 1;
         if (this.currentPage !== 1 || this.setPageSize !== 10) {
@@ -1088,7 +1088,6 @@
         };*/
       },
       handleCurrentChange(val) {
-        console.log('当前页: ${val}');
         /*this.queryParam.pageNum = val;
       		  this.request(this.queryParam);*/
       },

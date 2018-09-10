@@ -1580,15 +1580,6 @@
           // 审批结论数据
           if (res.statusCode == '200') {
             this.caculData = res.data;
-            // console.log('总负债率：' + (res.data.totalRate * 100), res.data.totalRate * 100)
-            // console.log('内部负债率：' + (res.data.inteDebitrate * 100), res.data.inteDebitrate * 100)
-            // console.log('月还款额:' + res.data.eachTermamt, res.data.eachTermamt)
-            // console.log(this.fbalance2)
-            // console.log('可接受最高每期还款额:' + this.fbalance, this.fbalance)
-            // console.log('产品负债率：' + this.debtRate, this.debtRate)
-            // console.log('流程角色最高审批金额:' + this.maxAuditAmt, this.maxAuditAmt)
-            // console.log('同意:' + this.opinionFlag, this.opinionFlag)
-            // console.log('终审' + this.judgeFlag, this.judgeFlag)
             if (res.data.eachTermamt > this.fbalance) { // fbalance 可接受最高每期还款额
               this.ploanAmt = '' //批准金额
               this.$message.error('月还款额不能大于可接受最高每期还款额，请重新输入！')
@@ -1599,7 +1590,6 @@
               return
             }
             if (this.opinionFlag == '00' && this.judgeFlag == '02') { //选中同意
-              // this.ploanAmtNum = Number(this.ploanAmt.split('.')[0].replace(/,/g, ''));//批准金额 number类型：ploanAmtNum            
               this.ploanAmt.indexOf(',') != -1 ? this.ploanAmtNum = this.ploanAmt.replace(/,/g, '') * 1 : this.ploanAmtNum =
                 this.ploanAmt * 1;
               if (this.ploanAmtNum > this.maxAuditAmt) { //流程角色最高审批金额:maxAuditAmt
@@ -1697,7 +1687,6 @@
 
             // 大于申请金额
             if (this.ploanAmt2 > Number(this.loanAmt.split('.')[0].replace(',', ''))) {
-              // this.ploanAmtError = true;
               this.$message({
                 showClose: true,
                 message: '此金额不能大于申请金额,请重新输入!',
@@ -1707,7 +1696,6 @@
               this.ploanAmt2 = '';
               return;
             }
-            // console.log(this.verIncome + "*****" + this.proId + "*****" + this.ploanTerm + "*****" + this.ploanAmt.length);
             if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length >
               0 &&
               this.loanRateYr && this.repayWay && this.synthesisRateM) {

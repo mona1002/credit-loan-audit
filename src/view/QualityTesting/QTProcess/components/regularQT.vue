@@ -1492,7 +1492,6 @@
             this.ManagerFirstTableData = []; //初终审主管首次
             this.ManagerSecondTableData = []; //初终审主管二次
             for (var m = 0; m < this.insReconApply.length; m++) {
-              console.log(this.insReconApply[m].reconType)
               this.insReconApply[m].reconType == '00' ? this.TrilSelfTableData.push(this.insReconApply[m]) : ''; //00:初终审本人---初终审复议申请信息
               this.insReconApply[m].reconType == '01' ? this.ManagerFirstTableData.push(this.insReconApply[m]) : ''; //01:初终审主管首次----审批主管第一次复议申请信息
               this.insReconApply[m].reconType == '02' ? this.ManagerSecondTableData.push(this.insReconApply[m]) :
@@ -1771,17 +1770,6 @@
               return
             }
           }
-          // console.log( '01',      this.checkResultCount01)
-          // console.log('02',       this.checkResultCount02)
-          // console.log('03',       this.checkResultCount03)
-          // console.log('04',       this.checkResultCount04)
-          // console.log('05',       this.checkResultCount05)
-          // console.log('06',       this.checkResultCount06)
-          // console.log('07',       this.checkResultCount07)
-          // console.log('08',       this.checkResultCount08)
-          // console.log('09',       this.checkResultCount09)
-          // console.log('10',       this.checkResultCount10)
-          // this.$message.error('return')
           // 微信支付宝+电话核实（除本人）合并为一个数组
           this.insTelVerifyListConcat = this.insTelVerifyListAddress.concat(this.insTelVerifyListCompany).concat(this.insTelVerifyListFamily)
             .concat(this.insTelVerifyListWork)
@@ -2215,7 +2203,7 @@
       },
     },
     mounted() {
-      console.log('propQTconclution:', this.propQTconclution)
+      // console.log('propQTconclution:', this.propQTconclution)
       this.URL = baseurl.imgBaseUrl;
       this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));

@@ -273,7 +273,6 @@
         });
       },
       getParentList(id) {
-        console.log("table选中-获取父节点")
         this.post("/productArchive/getProductArchiveParentList", {
           applyId: id, //上面删除后 此处打开
         }).then(res => {
@@ -292,7 +291,6 @@
         });
       },
       getChildrenList(id, ind, item) {
-        console.log("子节点")
         if (this.opendImg[ind] == false) {
           this.opendImg[ind] = true;
           this.closedImg[ind] = false;

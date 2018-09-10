@@ -484,13 +484,6 @@
         this.$set(this.list, 'applyId', this.tastwaitingPass.ApplyId); //将matchApplyId 赋值给 入参applyId
         this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
         this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
-        // console.log(1, this.QTC.tastwaitingPass)
-        // this.getPageInf(); //获取页面个人信息      
-        // console.log(this.tastwaitingPass.ApplyId)
-        // console.log('tastwaitingPass：', this.tastwaitingPass)
-        // console.log('QTC：', this.QTC)
-        // console.log('pageType：', this.QTC.pageType)
-        // console.log('LocalList：', this.LocalList)
       },
     },
     mounted() {

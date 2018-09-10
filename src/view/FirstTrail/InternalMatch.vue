@@ -167,7 +167,6 @@
         // 进件编号
         this.applySubNo = applicationInformationDetail.applySubNo;
         this.workName = applicationInformationDetail.workName;
-        console.log(applicationInformationDetail.custName)
         this.fixTelcustName = applicationInformationDetail.custName;
         // 测试数据
         this.fetchData('mobile');
@@ -244,7 +243,6 @@
         });
       },
       getTabByFixTel() {
-        console.log(this.fixTelcustName)
         // 获取固定电话类标签
         this.post('internalMatch/getTabByFixTel', {
           applySubNo: this.applySubNo,

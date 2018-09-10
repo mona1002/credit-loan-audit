@@ -31,7 +31,7 @@ let mutations = {
       view.flag ? view.flag : view.flag = state.locFlag;
     }
       if (state.visitedViews.some(v => v.name === view.name)&& view.name==='质检详情'){
-        state.visitedViews.forEach((val,ind,arr)=>{//val为数组中当前的值，index为当前值的下表，arr为原数组
+        state.visitedViews.forEach((val,ind,arr)=>{
           if( state.visitedViews[ind].name==='质检详情'){
             state.visitedViews[ind]=view;
             return
@@ -39,7 +39,6 @@ let mutations = {
       })
       return
     }
-    // console.log('继续往下走')
       if (state.visitedViews.some(v => v.name === view.name)&& view.name!='质检详情') return;
       state.visitedViews.push({
         name: view.name,
@@ -49,8 +48,6 @@ let mutations = {
         matchflag: view.matchflag,
         StatefullPath: view.StatefullPath
       })
-    // 新添加部分，改变flag进行判断
-    // state.locFlag=view.flag;
   },
   DEL_VISITED_VIEWS: (state, view) => {
     for (const [i, v] of state.visitedViews.entries()) {
