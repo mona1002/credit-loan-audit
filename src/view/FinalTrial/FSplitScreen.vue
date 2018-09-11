@@ -32,7 +32,7 @@
             <keep-alive v-if="Routes.closed">
               <AudioVisualLeft v-if=" this.tabContent1==0" msg="FspLone" :list='tastwaitingPass' v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
-            <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
+            <remarkDetail v-if=" this.tabContent1==1" :applyId='tastwaitingPass.applyId' ></remarkDetail>
             <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.applyId'></capplicationInformationDetail>
@@ -44,7 +44,7 @@
             <keep-alive v-if="Routes.closed">
               <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
             </keep-alive>
-            <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
+            <processTrajectory v-if=" this.tabContent1==8" :applyId='tastwaitingPass.applyId'></processTrajectory>
           </div>
         </div>
       </div>
@@ -119,7 +119,7 @@
   import AudioVisual from "../FirstTrail/detailComponent/AudioVisual.vue";
   import AudioVisualLeft from '../FirstTrail/detailComponent/AudioVisualLeft';
   import remark from "../FirstTrail/detailComponent/remark.vue"; //备注信息-右-编辑
-  import cremarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息（左）
+  import remarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息（左）
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息（左+右）
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料（左+右）
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信（左右）
@@ -329,7 +329,7 @@
       cborrowerInformationDetail,
       capplicationInformationDetail,
       remark,
-      cremarkDetail,
+      remarkDetail,
       processTrajectory,
       aAntiApplyInf,
       InternalMatch,

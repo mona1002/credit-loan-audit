@@ -1,6 +1,7 @@
 <template>
   <div class="ApprovalConclusion">
     <!-- 信审审批结论轨迹 -->
+    <!-- 已整合，待删除 -->
    <el-table :data="ConclutionInf" border>
       <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
       </el-table-column>

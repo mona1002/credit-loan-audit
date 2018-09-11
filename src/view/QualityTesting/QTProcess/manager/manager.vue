@@ -245,18 +245,26 @@
           }).then(() => {}).catch(() => {});
           return
         }
-        this.post("/insConclusion/submitList", this.multipleSelectionParams)
-          .then(res => {
-            if (res.statusCode == 200) { //前端不做是否可点击哪个按钮判断，后端做判断，不符合返回msg，前端展示出来即可
-              this.$message({
-                type: "success",
-                message: res.msg
-              })
-              this.inquire(this.params);
-            } else {
-              this.$message.error(res.msg);
-            }
-          });
+        this.$confirm('您确定操作？', '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          cancelButtonText: '取消',
+          showCancelButton: true
+        }).then(() => {
+          this.post("/insConclusion/submitList", this.multipleSelectionParams)
+            .then(res => {
+              if (res.statusCode == 200) { //前端不做是否可点击哪个按钮判断，后端做判断，不符合返回msg，前端展示出来即可
+                this.$message({
+                  type: "success",
+                  message: res.msg
+                })
+                this.tableData = [];
+                this.inquire(this.params);
+              } else {
+                this.$message.error(res.msg);
+              }
+            });
+        }).catch(() => {});
       },
       allotFinished() { //批量完成
         this.saveParams(); // 提取入参 applyId taskId isSecondIns
@@ -269,17 +277,24 @@
           }).then(() => {}).catch(() => {});
           return
         }
-        this.post("/insConclusion/addList", this.multipleSelectionParams).then(res => {
-          if (res.statusCode == 200) {
-            this.$message({
-              type: "success",
-              message: res.msg
-            })
-            this.inquire(this.params);
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
+        this.$confirm('您确定操作？', '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          cancelButtonText: '取消',
+          showCancelButton: true
+        }).then(() => {
+          this.post("/insConclusion/addList", this.multipleSelectionParams).then(res => {
+            if (res.statusCode == 200) {
+              this.$message({
+                type: "success",
+                message: res.msg
+              })
+              this.inquire(this.params);
+            } else {
+              this.$message.error(res.msg);
+            }
+          });
+        }).catch(() => {});
       },
       handleSelectionChange(val) { //列表勾选框
         this.multipleSelection = val;

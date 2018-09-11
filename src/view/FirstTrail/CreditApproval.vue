@@ -580,8 +580,6 @@
         repayWay: '', // 审批  计算审批结论数据  还款方式
         taskName: '', // 角色标志
         social: '', // 社保/公积金  授权标志
-        // bigDataLogVisible: false, //大数据风控弹框
-        // socialLogVisible: false, //社保公积金
         orgId: '', // 用来请求产品  用户id
         huiTuiShow: false,
         juJueShow: false,
@@ -601,7 +599,6 @@
         params: '',
         mainReasonId: '', //主原因id
         subReasonId: '', //子原因id
-
       }
     },
     mounted() {
@@ -1684,7 +1681,6 @@
               this.ploanAmt = '';
               return;
             }
-
             // 大于申请金额
             if (this.ploanAmt2 > Number(this.loanAmt.split('.')[0].replace(',', ''))) {
               this.$message({
@@ -1727,20 +1723,20 @@
           });
         });
       },
-      roSocialSecurity() {
-        if (this.social == "(未授权)") {
-          this.$confirm('客户社保公积金未授权！', '提示', {
-            confirmButtonText: '确定',
-            type: 'warning',
-            cancelButtonText: '取消',
-            showCancelButton: true
-          }).then(() => {}).catch(() => {});
-        } else if (this.social == "(已授权)") {
-          this.$router.push({
-            path: '/SocialSe'
-          });
-        }
-      },
+      // roSocialSecurity() {
+      //   if (this.social == "(未授权)") {
+      //     this.$confirm('客户社保公积金未授权！', '提示', {
+      //       confirmButtonText: '确定',
+      //       type: 'warning',
+      //       cancelButtonText: '取消',
+      //       showCancelButton: true
+      //     }).then(() => {}).catch(() => {});
+      //   } else if (this.social == "(已授权)") {
+      //     this.$router.push({
+      //       path: '/SocialSe'
+      //     });
+      //   }
+      // },
       del(delname) {
         this.$store.dispatch('delVisitedViews', {
           name: delname

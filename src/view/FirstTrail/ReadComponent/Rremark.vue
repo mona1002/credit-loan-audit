@@ -1,4 +1,5 @@
 <template>
+<!-- 已整合，待删除 -->
   <div class="remarkDetial">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">

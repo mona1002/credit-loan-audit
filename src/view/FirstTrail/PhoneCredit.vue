@@ -167,7 +167,6 @@
             <!-- 工作证明人 - 历史 -->
             <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"
               :isFull.sync="isFull"></WorkHis>
-            <!-- 子组件 -->
           </div>
         </el-main>
       </el-container>
@@ -509,14 +508,21 @@
       }
     },
     // props: ['isFull', 'SplitS', 'addBtn'],
-    props:{
-      isFull:{type:Boolean},
-      SplitS:{
-        type:String
+    props: {
+      // applyId: {
+      //   required: true,
+      //   default: '',
+      //   type: String
+      // },
+      isFull: {
+        type: Boolean
       },
-      addBtn:{
-        default:false,
-        type:Boolean,
+      SplitS: {
+        type: String
+      },
+      addBtn: {
+        default: false,
+        type: Boolean,
       }
     },
     mounted() {
@@ -677,7 +683,7 @@
         });
       },
       handleNodeClick(data) {
-       this.formShow= this.addBtn;//初审点击表格变为查询后，点击二级节点切换到编辑页面
+        this.formShow = this.addBtn; //初审点击表格变为查询后，点击二级节点切换到编辑页面
         if (this.isInterFlag == true || this.SplitS != 'right' || this.hisShow) {
           // 点击每条tree数据的事件
           this.treeId = data.id;
@@ -857,8 +863,8 @@
               this.checkJob = '';
               this.checkJobtxt = '';
             }
-          }else{
-            this.listData.recordList=[];
+          } else {
+            this.listData.recordList = [];
             this.$message.error(res.msg)
           }
         })

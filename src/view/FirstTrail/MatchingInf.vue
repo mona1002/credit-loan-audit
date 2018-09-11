@@ -31,7 +31,7 @@
             <keep-alive v-if="Routes.closed">
               <AudioVisualLeft v-if=" this.tabContent1==0" :list='list' msg="MspLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
-            <Rremark v-if=" this.tabContent1==1"></Rremark>
+            <remarkDetail v-if=" this.tabContent1==1" :applyId='tastwaitingPass.matchApplyId'></remarkDetail>
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.matchApplyId'>申请信息</capplicationInformationDetail>
@@ -47,8 +47,8 @@
             <keep-alive v-if="Routes.closed">
               <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
             </keep-alive>
-            <RprocessTrajectory v-if=" this.tabContent1==11">流程轨迹</RprocessTrajectory>
-            <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
+            <processTrajectory v-if=" this.tabContent1==11" :applyId='tastwaitingPass.matchApplyId'>流程轨迹</processTrajectory>
+            <aAprovalConclusion v-if=" this.tabContent1==12" :applyId='tastwaitingPass.matchApplyId'>审批结论轨迹</aAprovalConclusion>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
           <keep-alive v-if="Routes.closed">
             <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.matchApplyId'></AudioVisual>
           </keep-alive>
-          <Rremark v-if=" this.tabContent2==1"></Rremark>
+          <remarkDetail v-if=" this.tabContent2==1" :applyId='tastwaitingPass.matchApplyId'></remarkDetail>
           <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.matchApplyId' roles='MatchingInf'>申请信息</capplicationInformationDetail>
@@ -92,8 +92,8 @@
           <keep-alive v-if="Routes.closed">
             <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
           </keep-alive>
-          <RprocessTrajectory v-if=" this.tabContent2==11">流程轨迹</RprocessTrajectory>
-          <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
+          <processTrajectory v-if=" this.tabContent2==11" :applyId='tastwaitingPass.matchApplyId'>流程轨迹</processTrajectory>
+          <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='tastwaitingPass.matchApplyId'>审批结论轨迹</aAprovalConclusion>
         </div>
       </div>
     </div>
@@ -133,9 +133,9 @@
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RantiFraudInvestigation from "./ReadComponent/RantiFraudInvestigation"; //反欺诈调查
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
-  import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
-  import Rremark from "./ReadComponent/Rremark"; //备注信息
-  import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
+  import aAprovalConclusion from "../AntiFraud/components/aAprovalConclusion.vue"; //信审审批结论轨迹
+  import remarkDetail from "./checkComponent/remarkDetail.vue"; //备注信息
+  import processTrajectory from "./checkComponent/processTrajectory.vue"; //流程轨迹
   import creditInvestigation from "./detailComponent/creditInvestigation.vue"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   import InternalMatch from "./InternalMatch";
@@ -347,13 +347,13 @@
       capplicationInformationDetail,
       RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息
-      RApprovalConclusion, //信审审批结论归结
-      Rremark, // 备注信息
+      aAprovalConclusion, //信审审批结论归结
+      remarkDetail, // 备注信息
       creditInvestigation, //实地征信
       aAntiApplyInf, //反欺诈结论
       InternalMatch,
       RPhoneCredit,
-      RprocessTrajectory,
+      processTrajectory,
       RantiFraudInvestigation, //反欺诈调查
     }
   }

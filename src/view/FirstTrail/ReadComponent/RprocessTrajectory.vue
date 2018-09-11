@@ -1,5 +1,5 @@
 <template>
-  <!-- 流程轨迹 -->
+  <!-- 流程轨迹   已整合，待删除 -->
   <div class="processTrajectory">
     <el-collapse v-model="activeNames">
       <el-collapse-item title="信审流程轨迹" name="1">
