@@ -673,7 +673,11 @@
                     }
                   };
                   //批准期限[月]的列表
-                  this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
+                  // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
+                  this.post('/credit/ploanTermByPro',{
+                    proId:res.data.proId,
+                    applyId:this.applyId
+                  }).then(res => {
                     if (res.statusCode == '200') {
                       this.ploanTerms = res.data;
                       // 审批信息计算入参

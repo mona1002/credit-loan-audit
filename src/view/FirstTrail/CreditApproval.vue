@@ -943,7 +943,11 @@
                         }
                       });
                       //获取批准期限
-                      this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
+                      // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
+                      this.post('/credit/ploanTermByPro', {
+                        proId: res.data.proId,
+                        applyId: this.applyId
+                      }).then(resp => {
                         if (resp.statusCode == '200')
                           this.ploanTerms = resp.data;
                         for (var j = 0; j < this.ploanTerms.length; j++) {
@@ -1543,7 +1547,11 @@
         this.maxAmounnt = val.maxAmounnt;
         // 最小金额
         this.minAmount = val.minAmount;
-        this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+        // this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+        this.post('/credit/ploanTermByPro', {
+          proId: res.data.proId,
+          applyId: this.applyId
+        }).then(res => {
           if (res.statusCode == '200')
             this.ploanTerms = res.data;
         })
