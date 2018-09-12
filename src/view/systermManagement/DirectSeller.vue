@@ -102,7 +102,7 @@
           rows: 10
         },
         totalRecord: 0, //总条数
-        Routes: [],
+        Routes:this.$router.options.routes,
         subOrg: '',
         orgCode: "",
         orgDatasEdit: [],
@@ -224,9 +224,11 @@
         // 基础接口-综合查询
         this.post("/credit/filteredSalePer", pam).then(res => {
           if (res.statusCode == 200) {
-            this.tableData = res.data;
+            this.tableData = res.data.rows;
+            this.totalRecord= res.data.total;
           } else {
             this.tableData = [];
+             this.totalRecord=0;
             this.$message.error(res.msg);
           }
         })
@@ -235,7 +237,7 @@
     created() {
       this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
       this.getinstitution();
-      this.Routes = this.$router.options.routes;
+      // this.Routes = this.$router.options.routes;
     }
   }
 
