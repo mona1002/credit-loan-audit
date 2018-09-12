@@ -1007,7 +1007,7 @@
         submitShow: false, //提交弹框
         loadsitu: false,
         loadSub: false,
-        adbtn: '确认',
+        adbtn: '确定',
         ReconSubmit: '提交',
         currentRow: null,
         addId: '',

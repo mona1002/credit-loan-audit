@@ -744,7 +744,7 @@
         } else if (this.judgeFlag == '02') {
           this.busiState = '11'
         }
-        // 点击 确认 提交 方法              
+        // 点击 确定 提交 方法              
         this.post("/creauditInfo/approveHang ", {
           taskId: this.taskId,
           busiState: this.busiState,
@@ -801,7 +801,7 @@
       //     } else if (this.judgeFlag == '02') {
       //       this.busiState = '11'
       //     }
-      //     //       // 点击 确认 提交 方法
+      //     //       // 点击 确定 提交 方法
       //     this.post("/creauditInfo/approveHang ", {
       //       taskId: this.taskId,
       //       busiState: this.busiState,
@@ -1256,7 +1256,7 @@
         this.isLoading = true;
         this.loadingTitle = '提交中';
         // 判断终审的 opinionFlag 
-        // 点击 确认 提交 方法
+        // 点击 确定 提交 方法
         //获取主原因、子原因id
         for (var i = 0; i < this.mainReasons.length; i++) {
           if (this.mainReasons[i].reasonName == this.mainReason) {

@@ -381,7 +381,7 @@
             <el-form label-width="10px" class="demo-ruleForm">\
             <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
             <el-form-item class="mark-button">\
-                <el-button type="primary" @click="hangOoutBtn()">确认</el-button>\
+                <el-button type="primary" @click="hangOoutBtn()">确定</el-button>\
             </el-form-item>\
             </el-form>\
         </div>\

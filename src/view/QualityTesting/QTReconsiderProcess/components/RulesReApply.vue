@@ -96,7 +96,7 @@
         ManagerBtn: true,
         HintStar: true,
         Confirm: false,
-        adbtn: '确认',
+        adbtn: '确定',
         ReIllustrate: false,
         loadsitu: false,
         tableData: [],

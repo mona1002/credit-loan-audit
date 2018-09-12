@@ -899,7 +899,7 @@
       </el-collapse-item>
     </el-collapse>
     <div class="btn_wrap">
-      <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
+      <el-button type="primary" class="btn" @click="makeSureBtn">确定</el-button>
     </div>
   </div>
 </template>
@@ -908,7 +908,7 @@
     data() {
       return {
         ccccc: null,
-        adbtn: '确认',
+        adbtn: '确定',
         loadsitu: false,
         surbtn: true,
         loadbtn: false,

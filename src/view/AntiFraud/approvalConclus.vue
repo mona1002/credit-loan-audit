@@ -275,7 +275,7 @@
           </div>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="addSure('ruleForm')">确认</el-button>
+          <el-button type="primary" @click="addSure('ruleForm')">确定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -520,7 +520,7 @@
           showCancelButton: true
         }).then(() => {
           this.busiState = '30'
-          // 点击 确认 提交 方法
+          // 点击 确定 提交 方法
           this.post("/creauditInfo/approveHang ", {
             taskId: this.taskId,
             busiState: this.busiState,
@@ -880,7 +880,7 @@
         this.isLoading = true;
         this.loadingTitle = '提交中';
         // 判断终审的 opinionFlag 
-        // 点击 确认 提交 方法
+        // 点击 确定 提交 方法
         this.post("/fraudAuditOpinion/approval", {
           // 挂起 taskId 任务id
           taskId: this.taskId,
@@ -1096,7 +1096,7 @@
         this.ruleFormAdd.caseDescs = '';
         this.$refs[formName] ? this.$refs[formName].resetFields() : '';
       },
-      /*案件编号-新增弹框-确认*/
+      /*案件编号-新增弹框-确定*/
       addSure(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {

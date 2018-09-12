@@ -200,7 +200,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
-        <el-button type="primary" disabled v-show="active==false">确认</el-button>
+        <el-button type="primary" disabled v-show="active==false">确定</el-button>
       </div>
     </el-dialog>
     <!-- 点击 添加出现的弹窗 -->
@@ -239,7 +239,7 @@
           </li>
           <li>
             <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
-            <el-button type="primary" disabled v-show="active==false">确认</el-button>
+            <el-button type="primary" disabled v-show="active==false">确定</el-button>
           </li>
         </ul>
       </div>
@@ -499,7 +499,7 @@
         activeTrees: ["1", "2", "3", "4", "5"],
         addBtnShow: this.addBtn == false ? this.addBtn : true, // 标志 添加电话按钮是否显示
         isLoading: false, // 审批按钮 是否加载状态
-        loadingTitle: '确认', // 默认btn title
+        loadingTitle: '确定', // 默认btn title
         judgeFlag: '',
         landlinePhone: /^(0[0-9]{2}-?)([0-9]{8})$/,
         landlinePhone1: /^(0[0-9]{3}-?)([0-9]{7})$/,
@@ -888,7 +888,7 @@
           // 关闭 弹窗
           this.dialogFormVisible = false;
           this.isLoading = false;
-          this.loadingTitle = '确认';
+          this.loadingTitle = '确定';
           if (res.statusCode == '200') {
             this.$message({
               type: 'success',

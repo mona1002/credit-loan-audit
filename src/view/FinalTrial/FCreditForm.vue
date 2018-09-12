@@ -612,7 +612,7 @@
       </el-collapse-item>
     </el-collapse>
     <div class="btn_wrap" v-if="makeSureBtnShow">
-      <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
+      <el-button type="primary" class="btn" @click="makeSureBtn">确定</el-button>
     </div>
   </div>
 </template>
