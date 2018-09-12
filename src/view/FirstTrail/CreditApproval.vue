@@ -280,7 +280,7 @@
                     <el-input v-model="verIncome " @blur="moneyBlur(verIncome, 'verIncome') "></el-input>
                   </el-form-item>
                   <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
-                    <el-select @change="proSlelecChange " v-model="proName ">
+                    <el-select @change="proSlelecChange " disabled v-model="proName ">
                       <el-option v-for="item in products " :key="item.id " :label="item.proName " :value="item "></el-option>
                     </el-select>
                   </el-form-item>
@@ -325,7 +325,6 @@
                 </div>
               </el-form>
             </div>
-
           </el-collapse-item>
         </el-collapse>
       </el-form>
@@ -361,8 +360,8 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar" v-show="tableData.totalRecord > pageSize">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
-          :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum"
+          :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
         </el-pagination>
       </div>
       <div class="back-form-li" style="text-align:right;padding:10px;">
@@ -371,7 +370,8 @@
     </el-dialog>
     <!-- 流程轨迹弹窗 -->
     <el-dialog title="流程轨迹" :visible.sync="lcgjShow" :modal="false" width="1000px">
-      <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
+      <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading"
+        center>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="taskNameTxt" label="任务节点" width="100">
@@ -839,8 +839,8 @@
         // 清空原因
         this.mainReason = '';
         this.secondaryReason = '';
-        this.isLoading=false;
-          this.loadingTitle = '提交';        
+        this.isLoading = false;
+        this.loadingTitle = '提交';
         // 页面点击按钮出现 的 对应 弹窗
         // 统一处理    回退 02 ,拒绝 01, 放弃  07, 审批 03, 审批结论 spjl, 流程轨迹 lcgj
         switch (flag) {
@@ -1059,7 +1059,6 @@
                     }
                   };
                 };
-
                 //根据产品id获取批准期限
                 this.ploanTerms = res.data.ploanTermByPo;
                 for (var j = 0; j < this.ploanTerms.length; j++) {
