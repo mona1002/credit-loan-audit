@@ -924,26 +924,29 @@
                     this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
                     this.caculData.totalRate = res.data.totalRate; //总负债率;
                     this.appConclusion = res.data.appConclusion; //意见说明;
-                            this.maxAmounnt = this.maxAmounnt;   // 最大
-                            this.minAmount = this.minAmount; // 最小
+                    this.maxAmounnt = this.maxAmounnt; // 最大
+                    this.minAmount = this.minAmount; // 最小
                     //获取批准期限
                     this.ploanTerms = res.data.returnList; //获取批准期限
-                    for ( let item of this.ploanTerms) {
-                      if (item.appDuration == this.ploanTerms) {
-                        ({
-                         loanRateYr: this.loanRateYr,
-                         repayWay: this.repayWay,
-                         synthesisRateM: this.synthesisRateM
-                        } = item);
-                        // ({
-                        //  loanRateYr,
-                        //  repayWay,
-                        //  synthesisRateM   } = item);
+                    if (this.ploanTerm) {//初审第一次未填，在选中下拉值时赋值
+                      for (let item of this.ploanTerms) {
+                        if (item.appDuration == this.ploanTerm) {
+                          ({
+                            loanRateYr: this.loanRateYr,
+                            repayWay: this.repayWay,
+                            synthesisRateM: this.synthesisRateM
+                          } = item);
+                          // ({
+                          //  loanRateYr,
+                          //  repayWay,
+                          //  synthesisRateM   } = item);
+                        }
                       }
                     }
-                    console.log(this.maxAmounnt )
-                    console.log(this.loanRateYr )
-                    console.log(this.proName )
+                    console.log(this.maxAmounnt)
+                    console.log(this.loanRateYr)
+                    console.log(this.proName)
+
                     // if (res.data.proId) {
                     //获取产品列表
                     // this.post('/credit/product').then(ress => {
