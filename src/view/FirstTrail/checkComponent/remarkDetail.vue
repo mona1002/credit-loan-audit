@@ -32,33 +32,23 @@
     data() {
       return {
         activeNames: ['1'],
-        tableData: '',
         datas: [],
-        taskInWaitting: '',
-        judgeFlag: '',
       }
     },
     mounted() {
       this.mountedInf();
     },
+    props: {
+      applyId: {
+        default: '',
+        type: String,
+        required: true
+      }
+    },
     methods: {
       mountedInf() {
-        //一进入页面就发送请求
-        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        if (this.judgeFlag.flag == '01') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-        } else if (this.judgeFlag.flag == '02') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-        } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
-        }
-        this.request(this.taskInWaitting.applyId);
-      },
-      request(param) {
         this.post("/applyRemark/getApplyRemarkList", {
-          'applyId': param
+          applyId: this.applyId
         }).then(res => {
           this.datas = res.data;
         });

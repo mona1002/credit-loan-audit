@@ -167,7 +167,6 @@
         // 进件编号
         this.applySubNo = applicationInformationDetail.applySubNo;
         this.workName = applicationInformationDetail.workName;
-        console.log(applicationInformationDetail.custName)
         this.fixTelcustName = applicationInformationDetail.custName;
         // 测试数据
         this.fetchData('mobile');
@@ -244,7 +243,6 @@
         });
       },
       getTabByFixTel() {
-        console.log(this.fixTelcustName)
         // 获取固定电话类标签
         this.post('internalMatch/getTabByFixTel', {
           applySubNo: this.applySubNo,
@@ -383,7 +381,7 @@
             <el-form label-width="10px" class="demo-ruleForm">\
             <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
             <el-form-item class="mark-button">\
-                <el-button type="primary" @click="hangOoutBtn()">确认</el-button>\
+                <el-button type="primary" @click="hangOoutBtn()">确定</el-button>\
             </el-form-item>\
             </el-form>\
         </div>\

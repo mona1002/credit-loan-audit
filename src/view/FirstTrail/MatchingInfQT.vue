@@ -35,7 +35,7 @@
             <keep-alive v-if="Routes.closed">
               <AudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" :list='list' v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
-            <Rremark v-if=" this.tabContent1==1"></Rremark>
+            <remarkDetail v-if=" this.tabContent1==1" :applyId='tastwaitingPass.ApplyId'></remarkDetail>
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
             <keep-alive v-if="Routes.closed">
               <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.ApplyId'>申请信息</applicationInformationDetail>
@@ -55,7 +55,7 @@
             <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
               <!-- 专员部分 -->
               <QTAprovalConclution v-if=" this.tabContent1==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <RApprovalConclusion v-if=" this.tabContent1==12 ">审批结论轨迹</RApprovalConclusion>
+              <aAprovalConclusion v-if=" this.tabContent1==12 "  :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
               <regularQT v-if=" this.tabContent1==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
               <QTResultCheck v-if=" this.tabContent1==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
             </div>
@@ -67,7 +67,7 @@
             <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
               <!-- 质检部分 -->
               <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
+              <aAprovalConclusion v-if=" this.tabContent1==12"  :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
               <ComplianceProcess v-if=" this.tabContent1==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
               <RulesReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
               <regularQT v-if=" this.tabContent1==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
@@ -101,7 +101,7 @@
           <keep-alive v-if="Routes.closed">
             <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.ApplyId'></AudioVisual>
           </keep-alive>
-          <Rremark v-if=" this.tabContent2==1"></Rremark>
+          <remarkDetail v-if=" this.tabContent2==1" :applyId='tastwaitingPass.ApplyId'></remarkDetail>
           <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
           <keep-alive v-if="Routes.closed">
             <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.ApplyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
@@ -121,7 +121,7 @@
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
             <!-- 专员部分 -->
             <QTAprovalConclution v-if=" this.tabContent2==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <RApprovalConclusion v-if=" this.tabContent2==12 ">审批结论轨迹</RApprovalConclusion>
+            <aAprovalConclusion v-if=" this.tabContent2==12 "  :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
             <regularQT v-if=" this.tabContent2==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
@@ -133,7 +133,7 @@
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
             <!-- 质检部分 -->
             <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
+            <aAprovalConclusion v-if=" this.tabContent2==12"  :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
             <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
             <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
             <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
@@ -177,8 +177,8 @@
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import applicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
-  import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
-  import Rremark from "./ReadComponent/Rremark"; //备注信息
+  import aAprovalConclusion from "../AntiFraud/components/aAprovalConclusion.vue"; //信审审批结论轨迹
+  import remarkDetail from "./checkComponent/remarkDetail.vue"; //备注信息
   import creditInvestigation from "./detailComponent/creditInvestigation.vue"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
@@ -484,13 +484,6 @@
         this.$set(this.list, 'applyId', this.tastwaitingPass.ApplyId); //将matchApplyId 赋值给 入参applyId
         this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
         this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
-        // console.log(1, this.QTC.tastwaitingPass)
-        // this.getPageInf(); //获取页面个人信息      
-        // console.log(this.tastwaitingPass.ApplyId)
-        // console.log('tastwaitingPass：', this.tastwaitingPass)
-        // console.log('QTC：', this.QTC)
-        // console.log('pageType：', this.QTC.pageType)
-        // console.log('LocalList：', this.LocalList)
       },
     },
     mounted() {
@@ -506,8 +499,8 @@
       applicationInformationDetail,
       RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息
-      RApprovalConclusion, //信审审批结论归结
-      Rremark, // 备注信息
+      aAprovalConclusion, //信审审批结论归结
+      remarkDetail, // 备注信息
       creditInvestigation, //实地征信
       aAntiApplyInf, //反欺诈结论
       InternalMatch,

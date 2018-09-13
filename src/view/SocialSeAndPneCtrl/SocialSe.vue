@@ -35,8 +35,6 @@
           this.flagmark();
             this.custname=this.getInf.custName;
         this.custCode=this.getInf.certCode;
-              console.log( this.custname)
-        console.log( this.custCode)
         }
       }
     },
@@ -62,10 +60,6 @@
           .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
           this.getInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
         }
-              console.log(this.getInf)
-     
-        console.log('kkkkkkkkkkkkkk')
-  
       }
     },
     created() {

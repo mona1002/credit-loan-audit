@@ -239,7 +239,7 @@
         Confirm: false,
         add: false,
         Edit: false,
-        adbtn: '确认',
+        adbtn: '确定',
         loadsitu: false,
         createTime: '',
         query: {

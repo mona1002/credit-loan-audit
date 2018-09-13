@@ -16,13 +16,10 @@ import base from './util/base'
 PDFJS.workerSrc = 'vue-pdf-shower/lib/dist/pdf.worker.js'
 PDFJS.cMapUrl = '/static/web/cmaps/'
 PDFJS.cMapPacked = true;
-
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
 Vue.use(http)
 Vue.use(base)
-
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -37,8 +34,6 @@ new Vue({
 // 日期过滤器
 Vue.filter('dateFilter', function (value) {
   if (!value) return ''
-  // console.log(new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0])
-  // return new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{1,2}\-\d{1,2}/)[0]
   return String(new Date(value).getFullYear()) + '-' + String(new Date(value).getMonth() + 1) + '-' + String(new Date(value).getDate());
 
 })
@@ -47,15 +42,6 @@ Vue.filter('formatValue', function (value) {
   if (!value) return ''
   return Number(value) > 0 ? Math.round(Number(value) * 10000) / 100 + '%' : '0.00%';
 })
-// // 金额过滤0返回0
-// Vue.filter('formatMoney', function (value) {
-//   // if (!value) return ''
-//   if (value == 0 || value) {
-//     return value.toLocaleString()
-//   } else {
-//     return ''
-//   }
-// })
 // 金额过滤
 Vue.filter('formatMoney', function (value) {
   if (value == 0) return 0;

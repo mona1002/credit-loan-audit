@@ -32,7 +32,7 @@
           <keep-alive v-if="Routes.closed">
             <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId'></AudioVisual>
           </keep-alive>
-          <cremark v-if=" this.tabContent2==1"></cremark>
+          <remarkDetail v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></remarkDetail>
           <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId' :roles='Flag=="05"?"reconsiderApp_commissioner":"antiFraudApp_manager" '></capplicationInformationDetail>
@@ -55,7 +55,7 @@
 </template>
 <script>
   import AudioVisual from '../FirstTrail/detailComponent/AudioVisual.vue'; //工作台--》 av
-  import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
+  import remarkDetail from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   import AborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
@@ -152,7 +152,7 @@
     },
     components: {
       AudioVisual,
-      cremark,
+      remarkDetail,
       capplicationInformationDetail,
       AborrowerInformationDetail,
       FCreditForm,

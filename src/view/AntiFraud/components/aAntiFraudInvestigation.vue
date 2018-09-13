@@ -153,7 +153,7 @@
       </el-collapse-item>
     </el-collapse>
     <div class="button" v-if="showBtn">
-      <el-button type="primary" @click="bigSure">确认</el-button>
+      <el-button type="primary" @click="bigSure">确定</el-button>
     </div>
     <!-- 弹框 -->
     <el-dialog title='命中规则名称：' :visible.sync="dialogVisible" width="860px">

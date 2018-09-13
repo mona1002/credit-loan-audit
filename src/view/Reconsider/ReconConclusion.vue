@@ -157,7 +157,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" :loading=huituiLoading @click="hsure('FormReturn')"> {{huituiFont}}</el-button>
+          <el-button type="primary" :loading='huituiLoading' @click="hsure('FormReturn')"> {{huituiFont}}</el-button>
         </div>
       </el-dialog>
     </div>
@@ -196,7 +196,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="jdialogVisible = false">取 消</el-button>
-          <el-button type="primary" :loading=jujueLoading @click="jSure('FormReject')"> {{jujueFont}}</el-button>
+          <el-button type="primary" :loading='jujueLoading' @click="jSure('FormReject')"> {{jujueFont}}</el-button>
         </div>
       </el-dialog>
     </div>
@@ -594,6 +594,7 @@
       coverFn(flag) {
         switch (flag) {
           case 'back':
+            this.huituiLoading = false;
             this.huituiFont = '提交';
             this.dialogVisible = true;
             this.get('system/getSystemDate?' + Math.random()).then(res => {
@@ -672,7 +673,11 @@
                     }
                   };
                   //批准期限[月]的列表
-                  this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
+                  // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
+                  this.post('/credit/ploanTermByPro',{
+                    proId:res.data.proId,
+                    applyId:this.applyId
+                  }).then(res => {
                     if (res.statusCode == '200') {
                       this.ploanTerms = res.data;
                       // 审批信息计算入参
@@ -880,6 +885,7 @@
         this.loanRateYr = val.loanRateYr;
         // 还款方式  
         this.repayWay = val.repayWay;
+        this.calculateByAuditInfo();
       },
       // 计算审批结论数据
       calculateByAuditInfo() {
@@ -909,6 +915,8 @@
       },
       //拒绝提交按钮
       jSure(formName) {
+        this.jujueLoading = true;
+        this.jujueFont = '提交中';
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.post("/creauditOpinion/approval", {
@@ -979,6 +987,8 @@
       },
       //回退提交按钮
       hsure(formName) {
+        this.huituiLoading = true;
+        this.huituiFont = '提交中';
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.post("/creauditOpinion/approval", {
@@ -1013,9 +1023,7 @@
                   message: res.msg,
                   type: 'warning'
                 })
-                return;
-              }
-              if (res.statusCode == '200') {
+              } else {
                 // this.taskId = '';
                 this.datas.custName = ''; // 客户名称
                 this.custNo = ''; // 客户code
@@ -1043,7 +1051,6 @@
                 this.del();
               }
             });
-            return
           } else {
             return false;
           }
@@ -1077,7 +1084,6 @@
       },
       //分页
       handleSizeChange(val) {
-        console.log('每页 ${val} 条');
         /*this.queryParam.pageSize = val;
         this.queryParam.pageNum = 1;
         if (this.currentPage !== 1 || this.setPageSize !== 10) {
@@ -1088,7 +1094,6 @@
         };*/
       },
       handleCurrentChange(val) {
-        console.log('当前页: ${val}');
         /*this.queryParam.pageNum = val;
       		  this.request(this.queryParam);*/
       },

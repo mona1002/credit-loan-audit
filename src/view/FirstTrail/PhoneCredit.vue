@@ -116,14 +116,12 @@
                       </el-table-column>
                     </el-table>
                   </div>
-                  <!-- 分页 -->
                   <div class="page_top_bottom_10">
                     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum"
                       :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
                       :total="listData.totalRecord" v-show="listData.totalRecord>0">
                     </el-pagination>
                   </div>
-
                 </div>
               </el-collapse-item>
             </el-collapse>
@@ -169,7 +167,6 @@
             <!-- 工作证明人 - 历史 -->
             <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"
               :isFull.sync="isFull"></WorkHis>
-            <!-- 子组件 -->
           </div>
         </el-main>
       </el-container>
@@ -203,7 +200,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
-        <el-button type="primary" disabled v-show="active==false">确认</el-button>
+        <el-button type="primary" disabled v-show="active==false">确定</el-button>
       </div>
     </el-dialog>
     <!-- 点击 添加出现的弹窗 -->
@@ -242,7 +239,7 @@
           </li>
           <li>
             <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
-            <el-button type="primary" disabled v-show="active==false">确认</el-button>
+            <el-button type="primary" disabled v-show="active==false">确定</el-button>
           </li>
         </ul>
       </div>
@@ -502,7 +499,7 @@
         activeTrees: ["1", "2", "3", "4", "5"],
         addBtnShow: this.addBtn == false ? this.addBtn : true, // 标志 添加电话按钮是否显示
         isLoading: false, // 审批按钮 是否加载状态
-        loadingTitle: '确认', // 默认btn title
+        loadingTitle: '确定', // 默认btn title
         judgeFlag: '',
         landlinePhone: /^(0[0-9]{2}-?)([0-9]{8})$/,
         landlinePhone1: /^(0[0-9]{3}-?)([0-9]{7})$/,
@@ -510,7 +507,24 @@
         mobilePhone: /^1[345789]\d{9}$/,
       }
     },
-    props: ['isFull', 'SplitS', 'addBtn'],
+    // props: ['isFull', 'SplitS', 'addBtn'],
+    props: {
+      // applyId: {
+      //   required: true,
+      //   default: '',
+      //   type: String
+      // },
+      isFull: {
+        type: Boolean
+      },
+      SplitS: {
+        type: String
+      },
+      addBtn: {
+        default: false,
+        type: Boolean,
+      }
+    },
     mounted() {
       this.mountedInf();
     },
@@ -669,6 +683,7 @@
         });
       },
       handleNodeClick(data) {
+        this.formShow = this.addBtn; //初审点击表格变为查询后，点击二级节点切换到编辑页面
         if (this.isInterFlag == true || this.SplitS != 'right' || this.hisShow) {
           // 点击每条tree数据的事件
           this.treeId = data.id;
@@ -848,6 +863,9 @@
               this.checkJob = '';
               this.checkJobtxt = '';
             }
+          } else {
+            this.listData.recordList = [];
+            this.$message.error(res.msg)
           }
         })
       },
@@ -870,7 +888,7 @@
           // 关闭 弹窗
           this.dialogFormVisible = false;
           this.isLoading = false;
-          this.loadingTitle = '确认';
+          this.loadingTitle = '确定';
           if (res.statusCode == '200') {
             this.$message({
               type: 'success',

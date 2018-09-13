@@ -280,7 +280,7 @@
                     <el-input v-model="verIncome " @blur="moneyBlur(verIncome, 'verIncome') "></el-input>
                   </el-form-item>
                   <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
-                    <el-select @change="proSlelecChange " v-model="proName ">
+                    <el-select @change="proSlelecChange " disabled v-model="proName ">
                       <el-option v-for="item in products " :key="item.id " :label="item.proName " :value="item "></el-option>
                     </el-select>
                   </el-form-item>
@@ -325,7 +325,6 @@
                 </div>
               </el-form>
             </div>
-
           </el-collapse-item>
         </el-collapse>
       </el-form>
@@ -361,8 +360,8 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar" v-show="tableData.totalRecord > pageSize">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
-          :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum"
+          :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
         </el-pagination>
       </div>
       <div class="back-form-li" style="text-align:right;padding:10px;">
@@ -371,7 +370,8 @@
     </el-dialog>
     <!-- 流程轨迹弹窗 -->
     <el-dialog title="流程轨迹" :visible.sync="lcgjShow" :modal="false" width="1000px">
-      <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
+      <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading"
+        center>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="taskNameTxt" label="任务节点" width="100">
@@ -580,8 +580,6 @@
         repayWay: '', // 审批  计算审批结论数据  还款方式
         taskName: '', // 角色标志
         social: '', // 社保/公积金  授权标志
-        // bigDataLogVisible: false, //大数据风控弹框
-        // socialLogVisible: false, //社保公积金
         orgId: '', // 用来请求产品  用户id
         huiTuiShow: false,
         juJueShow: false,
@@ -601,7 +599,6 @@
         params: '',
         mainReasonId: '', //主原因id
         subReasonId: '', //子原因id
-
       }
     },
     mounted() {
@@ -747,7 +744,7 @@
         } else if (this.judgeFlag == '02') {
           this.busiState = '11'
         }
-        // 点击 确认 提交 方法              
+        // 点击 确定 提交 方法              
         this.post("/creauditInfo/approveHang ", {
           taskId: this.taskId,
           busiState: this.busiState,
@@ -764,7 +761,6 @@
               this.$router.push('/FtaskInWaitting' + this.routeParams);
               this.del('终审详情');
             }
-
           } else {
             if (res.statusCode == 500) {
               this.hangOut = false;
@@ -804,7 +800,7 @@
       //     } else if (this.judgeFlag == '02') {
       //       this.busiState = '11'
       //     }
-      //     //       // 点击 确认 提交 方法
+      //     //       // 点击 确定 提交 方法
       //     this.post("/creauditInfo/approveHang ", {
       //       taskId: this.taskId,
       //       busiState: this.busiState,
@@ -842,6 +838,8 @@
         // 清空原因
         this.mainReason = '';
         this.secondaryReason = '';
+        this.isLoading = false;
+        this.loadingTitle = '提交';
         // 页面点击按钮出现 的 对应 弹窗
         // 统一处理    回退 02 ,拒绝 01, 放弃  07, 审批 03, 审批结论 spjl, 流程轨迹 lcgj
         switch (flag) {
@@ -944,7 +942,11 @@
                         }
                       });
                       //获取批准期限
-                      this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
+                      // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
+                      this.post('/credit/ploanTermByPro', {
+                        proId: res.data.proId,
+                        applyId: this.applyId
+                      }).then(resp => {
                         if (resp.statusCode == '200')
                           this.ploanTerms = resp.data;
                         for (var j = 0; j < this.ploanTerms.length; j++) {
@@ -1060,7 +1062,6 @@
                     }
                   };
                 };
-
                 //根据产品id获取批准期限
                 this.ploanTerms = res.data.ploanTermByPo;
                 for (var j = 0; j < this.ploanTerms.length; j++) {
@@ -1254,7 +1255,7 @@
         this.isLoading = true;
         this.loadingTitle = '提交中';
         // 判断终审的 opinionFlag 
-        // 点击 确认 提交 方法
+        // 点击 确定 提交 方法
         //获取主原因、子原因id
         for (var i = 0; i < this.mainReasons.length; i++) {
           if (this.mainReasons[i].reasonName == this.mainReason) {
@@ -1545,7 +1546,11 @@
         this.maxAmounnt = val.maxAmounnt;
         // 最小金额
         this.minAmount = val.minAmount;
-        this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+        // this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+        this.post('/credit/ploanTermByPro', {
+          proId: res.data.proId,
+          applyId: this.applyId
+        }).then(res => {
           if (res.statusCode == '200')
             this.ploanTerms = res.data;
         })
@@ -1578,15 +1583,6 @@
           // 审批结论数据
           if (res.statusCode == '200') {
             this.caculData = res.data;
-            // console.log('总负债率：' + (res.data.totalRate * 100), res.data.totalRate * 100)
-            // console.log('内部负债率：' + (res.data.inteDebitrate * 100), res.data.inteDebitrate * 100)
-            // console.log('月还款额:' + res.data.eachTermamt, res.data.eachTermamt)
-            // console.log(this.fbalance2)
-            // console.log('可接受最高每期还款额:' + this.fbalance, this.fbalance)
-            // console.log('产品负债率：' + this.debtRate, this.debtRate)
-            // console.log('流程角色最高审批金额:' + this.maxAuditAmt, this.maxAuditAmt)
-            // console.log('同意:' + this.opinionFlag, this.opinionFlag)
-            // console.log('终审' + this.judgeFlag, this.judgeFlag)
             if (res.data.eachTermamt > this.fbalance) { // fbalance 可接受最高每期还款额
               this.ploanAmt = '' //批准金额
               this.$message.error('月还款额不能大于可接受最高每期还款额，请重新输入！')
@@ -1597,7 +1593,6 @@
               return
             }
             if (this.opinionFlag == '00' && this.judgeFlag == '02') { //选中同意
-              // this.ploanAmtNum = Number(this.ploanAmt.split('.')[0].replace(/,/g, ''));//批准金额 number类型：ploanAmtNum            
               this.ploanAmt.indexOf(',') != -1 ? this.ploanAmtNum = this.ploanAmt.replace(/,/g, '') * 1 : this.ploanAmtNum =
                 this.ploanAmt * 1;
               if (this.ploanAmtNum > this.maxAuditAmt) { //流程角色最高审批金额:maxAuditAmt
@@ -1692,10 +1687,8 @@
               this.ploanAmt = '';
               return;
             }
-
             // 大于申请金额
             if (this.ploanAmt2 > Number(this.loanAmt.split('.')[0].replace(',', ''))) {
-              // this.ploanAmtError = true;
               this.$message({
                 showClose: true,
                 message: '此金额不能大于申请金额,请重新输入!',
@@ -1705,7 +1698,6 @@
               this.ploanAmt2 = '';
               return;
             }
-            // console.log(this.verIncome + "*****" + this.proId + "*****" + this.ploanTerm + "*****" + this.ploanAmt.length);
             if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length >
               0 &&
               this.loanRateYr && this.repayWay && this.synthesisRateM) {
@@ -1737,20 +1729,20 @@
           });
         });
       },
-      roSocialSecurity() {
-        if (this.social == "(未授权)") {
-          this.$confirm('客户社保公积金未授权！', '提示', {
-            confirmButtonText: '确定',
-            type: 'warning',
-            cancelButtonText: '取消',
-            showCancelButton: true
-          }).then(() => {}).catch(() => {});
-        } else if (this.social == "(已授权)") {
-          this.$router.push({
-            path: '/SocialSe'
-          });
-        }
-      },
+      // roSocialSecurity() {
+      //   if (this.social == "(未授权)") {
+      //     this.$confirm('客户社保公积金未授权！', '提示', {
+      //       confirmButtonText: '确定',
+      //       type: 'warning',
+      //       cancelButtonText: '取消',
+      //       showCancelButton: true
+      //     }).then(() => {}).catch(() => {});
+      //   } else if (this.social == "(已授权)") {
+      //     this.$router.push({
+      //       path: '/SocialSe'
+      //     });
+      //   }
+      // },
       del(delname) {
         this.$store.dispatch('delVisitedViews', {
           name: delname

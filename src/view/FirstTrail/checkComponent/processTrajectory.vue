@@ -38,9 +38,16 @@
     data() {
       return {
         activeNames: ['1'],
-        applyId: '',
+        // applyId: '',
         taskDetailList: [],
         judgeFlag: '',
+      }
+    },
+    props: {
+      applyId: {
+        default: '',
+        type: String,
+        required: true
       }
     },
     mounted() {
@@ -48,19 +55,17 @@
     },
     methods: {
       mountedInf() {
-        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        if (this.judgeFlag.flag == '01') {
-          this.applyId = JSON.parse(localStorage.getItem("taskInWaitting")).applyId; // 初审
-        } else if (this.judgeFlag.flag == '02') {
-          this.applyId = JSON.parse(localStorage.getItem("FtaskInWaitting")).applyId //终审
-        } else if (this.judgeFlag.flag == '14') {
-          this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //任务管理-审批任务
-        } else if (this.judgeFlag.flag == '15') {
-          this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //任务管理-质检任务
-        }
-        this.request()
-      },
-      request() {
+        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        // if (this.judgeFlag.flag == '01') {
+        //   this.applyId = JSON.parse(localStorage.getItem("taskInWaitting")).applyId; // 初审
+        // } else if (this.judgeFlag.flag == '02') {
+        //   this.applyId = JSON.parse(localStorage.getItem("FtaskInWaitting")).applyId //终审
+        // } else if (this.judgeFlag.flag == '14') {
+        //   this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //任务管理-审批任务
+        // } else if (this.judgeFlag.flag == '15') {
+        //   this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //任务管理-质检任务
+        // }
+        // this.request()
         this.get("/creauditInfo/getProcessTraceListByApplyId", {
           applyId: this.applyId,
         }).then(res => {

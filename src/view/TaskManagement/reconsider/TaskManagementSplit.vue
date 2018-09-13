@@ -38,7 +38,7 @@
           <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></creditInvestigation>
           </keep-alive>
-          <processTrajectory v-if=" this.tabContent2==3"></processTrajectory>
+          <processTrajectory v-if=" this.tabContent2==3"  :applyId='tastwaitingPass.applyId'></processTrajectory>
         </div>
       </div>
     </div>

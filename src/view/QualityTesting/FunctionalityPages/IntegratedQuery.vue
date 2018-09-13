@@ -34,7 +34,7 @@
           <el-input v-model.trim="params.rlMobile" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input> -->
         </el-col>
         <el-col :span="6" class="search-btn">
-          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn query" type="primary" :loading='loading' @click="Rsearch">查询</el-button>
           <el-button class="btn reset" @click="Rreset">重置</el-button>
         </el-col>
       </el-row>
@@ -102,7 +102,7 @@
           applySubNo: ''
         },
         judge: {
-          flag: '18'//综合查询
+          flag: '18' //综合查询
         },
         userInf: null,
         tableData: [],
@@ -111,6 +111,7 @@
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
         telVal: '$1****',
+        loading: false,
         params: {
           applySubno: '',
           custName: '',
@@ -120,6 +121,13 @@
           // hirecomName: '',
           // rlMobile: ''
         },
+      }
+    },
+    watch: {
+      "$route"(to, from) {
+        if (to.path == '/IntegratedQuery') {
+          this.loading = false;
+        }
       }
     },
     methods: {
@@ -155,6 +163,7 @@
         if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
           '') {
           // ||this.params.workTel != ''||this.params.hirecomName != ''||this.params.rlMobile != ''
+          this.loading = true;
           this.inquire(this.params);
         } else {
           this.$message.error('请输入查询条件')
@@ -169,7 +178,9 @@
               var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
               this.tableData[i].appDate = regs.exec(res.data[i].appDate)[0];
             }
+            this.loading = false;
           } else {
+            this.loading = false;
             this.$message.error(res.msg);
           }
         })

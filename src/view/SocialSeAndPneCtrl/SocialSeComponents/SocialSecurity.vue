@@ -211,36 +211,12 @@
       }
     },
     watch: {
-      // '$route' (to, from) {
-      //   if (to.path == '/SocialSe') {
-      //     // this.custname=Math.random()
-      //   //   console.log("组件方法")
-      //   //   this.getflag();
-      //   // this.getInf()
-      //   //   console.log("组件方法")
-      //   console.log('传入值:'+this.custName)
-
-      //   }},
       '$route' (to, from) {
         if (to.path === '/SocialSe') {
-          // this.custname=Math.random()
           this.getInf()
           this.count=1;
-          console.log('社保详情')
         }
       },
-      // custName: function (newQuestion, oldQuestion) {
-      //   newQuestion !== oldQuestion ? this.getInf() : this.getInf();
-      //   console.log(this.custName)
-      //   console.log('custName')
-      // },
-      // certCode: function (newQuestion, oldQuestion) {
-      //   newQuestion !== oldQuestion ? this.getInf() : this.getInf();
-      //   console.log(this.certCode)
-
-      //   console.log('custName')
-
-      // }
     },
     methods: {
       getflag() {
@@ -252,66 +228,18 @@
         } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
           this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
         }
-        // else if (this.judgeFlag.flag == '04') {
-        //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-        // }
         else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
           this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting"))
         } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
           .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
           this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
         }
-        // this.custName = this.localInf.custName
-        // this.certCode = this.localInf.certCode
       },
       getInf() {
-        console.log('掉方法')
         this.getflag();
-        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        // if (this.judgeFlag.flag == '01') {
-        //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-        // } else if (this.judgeFlag.flag == '02') {
-        //   this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        // } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        //   this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-        // }
-        // // else if (this.judgeFlag.flag == '04') {
-        // //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-        // // }
-        // else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-        //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting"))
-        // } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
-        //   .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
-        //   this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
-        // }
-
-
-        //  else if (this.judgeFlag.flag == '08') {
-        //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
-        // } else if (this.judgeFlag.flag == '09') {
-        //   this.localInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
-        // } else if (this.judgeFlag.flag == '10') {
-        //   this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
-        // } else if (this.judgeFlag.flag == '11') {
-        //   this.localInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
-        // } else if (this.judgeFlag.flag == '13') {
-        //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
-        // }       
-        // this.InputParameter= {};
-        //     this.baseInf =null;
-        //     this.base =null; //基本信息-基本信息
-        //     this.insurances = null; //基本信息-保险费用
-        //     this.insurance_record = null; //基本信息-保险费用记录
-        //     this.medical_insurance_record = null;
-        console.log(',,,,,,,')
-        console.log(this.localInf)
-        console.log(this.localInf.custName)
-        console.log(this.localInf.certCode)
         this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxSecInfo.action", {
           custName: this.localInf.custName,
           certCode: this.localInf.certCode
-          // custName: this.custName,
-          // certCode: this.certCode
           // custName: '乔义星',
           // certCode: '37142519720311977X'
         }).then(res => {
@@ -319,7 +247,6 @@
             var sel=this;
             // 输入参数
             this.InputParameter = res.obj.inParam;
-            console.log('mmmmmmmmmmmmmmmmmmmm')
             // 基本信息 
             if (res.obj.baseInfo != '') {
               sel.baseInf = JSON.parse(res.obj.baseInfo);
@@ -526,25 +453,10 @@
 
     },
     updated() {
-      console.log('ccccc')
-      if(this.count===1){
-
-      }
       this.count++;
-      // this.getInf();
-//   sel.$nextTick(function () {
-//     sel.getInf();
-//     // Code that will run only after the
-//     // entire view has been re-rendered
-//   })
-// },
-    //     activated(){
-    //          console.log('activated')
-    //  sel.getInf();
         },
     mounted() {
       this.getInf();
-      console.log('mounted')
     }
   }
 

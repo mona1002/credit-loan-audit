@@ -1,7 +1,7 @@
+<!-- 直销人员查询 -->
 <template>
   <div class="taskWatting main-div">
     <div @click="dropdownFlag=false" class="wrap">
-      <!-- 直销人员查询 -->
       <div class="taskWinput search-div">
         <el-row class="row row1" type="flex">
           <el-col :span="6" class="search-item" :offset="0">
@@ -17,15 +17,6 @@
             <el-input v-model.trim="params.tel" placeholder="请输入手机号码"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
-            <span class="keywordText">用户状态：</span>
-            <el-select v-model="params.validFlag" placeholder="请选择">
-              <el-option v-for="item in Status" :key='item.value' :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </el-col>
-        </el-row>
-        <el-row class="row row2" type="flex">
-          <el-col :span="6" class="search-item">
             <span class="keywordText">所属机构： </span>
             <div @click.stop="getDropDownSelect" class="dropdown" style="display:inline-block;position:relative;">
               <span class="dropdownInput" v-show="subOrg">{{subOrg}}</span>
@@ -37,6 +28,15 @@
               </div>
               <i id="dropdownInput-arrow" class="el-select__caret el-input__icon el-icon-arrow-down" :class="{reverse:isActive,reverse2:!isActive}"></i>
             </div>
+          </el-col>
+        </el-row>
+        <el-row class="row row2" type="flex">
+          <el-col :span="6" class="search-item">
+            <!-- <span class="keywordText">用户状态：</span>
+            <el-select v-model="params.validFlag" placeholder="请选择">
+              <el-option v-for="item in Status" :key='item.value' :label="item.label" :value="item.value">
+              </el-option>
+            </el-select> -->
           </el-col>
           <el-col :span="6" class="search-item">
           </el-col>
@@ -77,6 +77,12 @@
           <el-table-column prop="validFlagTxt" label="用户状态" width="80">
           </el-table-column>
         </el-table>
+        <div class="page">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]"
+            :current-page.sync="params.page" :page-size="params.rows" layout="total, sizes, prev, pager, next, jumper"
+            :total="this.totalRecord">
+          </el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -92,8 +98,11 @@
           tel: '',
           validFlag: '',
           orgName: '',
+          page: 1,
+          rows: 10
         },
-        Routes: [],
+        totalRecord: 0, //总条数
+        Routes:this.$router.options.routes,
         subOrg: '',
         orgCode: "",
         orgDatasEdit: [],
@@ -184,7 +193,6 @@
           return resolve([])
         }
       },
-
       Rreset() {
         this.params.userName = '';
         this.params.userCode = '';
@@ -192,6 +200,7 @@
         this.params.validFlag = '';
         this.params.orgName = '';
         this.subOrg = '';
+        this.totalRecord = 0;
         this.tableData = []; ////清空已查处列表
       },
       Rsearch() {
@@ -202,13 +211,24 @@
           this.$message.error('请输入查询条件')
         }
       },
+      handleSizeChange(val) { //每页 N 条
+        this.params.rows = val;
+        this.params.page = 1;
+        this.inquire(this.params);
+      },
+      handleCurrentChange(val) { //查看第 N 页
+        this.params.page = val;
+        this.inquire(this.params);
+      },
       inquire(pam) {
         // 基础接口-综合查询
         this.post("/credit/filteredSalePer", pam).then(res => {
           if (res.statusCode == 200) {
-            this.tableData = res.data;
+            this.tableData = res.data.rows;
+            this.totalRecord= res.data.total;
           } else {
             this.tableData = [];
+             this.totalRecord=0;
             this.$message.error(res.msg);
           }
         })
@@ -217,7 +237,7 @@
     created() {
       this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
       this.getinstitution();
-      this.Routes = this.$router.options.routes;
+      // this.Routes = this.$router.options.routes;
     }
   }
 

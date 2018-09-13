@@ -102,7 +102,6 @@
         </div>
       </li>
       <li class="item-column1 item-column3-2">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:0px;top:10px;font-weight:bold;">*</span>
         <div class="left-title"><b class="required_Red"> * </b> 反欺诈决策反馈：</div>
         <div class="textarea-class2">
           <el-input v-model="auditDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
@@ -276,7 +275,7 @@
           </div>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="addSure('ruleForm')">确认</el-button>
+          <el-button type="primary" @click="addSure('ruleForm')">确定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -521,7 +520,7 @@
           showCancelButton: true
         }).then(() => {
           this.busiState = '30'
-          // 点击 确认 提交 方法
+          // 点击 确定 提交 方法
           this.post("/creauditInfo/approveHang ", {
             taskId: this.taskId,
             busiState: this.busiState,
@@ -630,7 +629,6 @@
             return;
           }
         }
-
         // 处理风险项
         if (this.auditResult != '02' || this.auditResult != '01') {
           if (this.riskSection.length > 0) {
@@ -678,74 +676,47 @@
         }
         // 专员的审批 相当于是主管的审批
         if (val == 'submit') {
-          // 原来主管的审批 不变
-          const h = this.$createElement;
-          this.$msgbox({
-            title: '提示',
-            message: h('p', null, [
-              h('span', null, '确定操作? '),
-            ]),
-            showCancelButton: true,
+          this.$confirm('您确定操作？', '提示', {
             confirmButtonText: '确定',
+            type: 'warning',
             cancelButtonText: '取消',
-            beforeClose: (action, instance, done) => {
-              if (action === 'confirm') {
-                instance.confirmButtonLoading = true;
-                instance.confirmButtonText = '执行中...';
-                this.post('/fraudAuditOpinion/opinionInsert', {
-                  applyId: this.applyId, // 申请单id
-                  mainreasonId: this.mainReason, // 欺诈主原因id
-                  subreasonId: this.secondReason, // 欺诈子原因id
-                  mainreaName: this.mainReasonName, // 欺诈主原因名称
-                  subreaName: this.subreaName, // 欺诈子原因名称
-                  riskSection: this.riskSectionArr, // 风险项
-                  auditDesc: this.auditDesc, // 反欺诈决策反馈
-                  auditResult: this.auditResult, // 审核结论
-                  caseDesc: this.caseDesc, // 案件描述
-                  caseNum: this.caseNum, // 案件编号 caseNum
-                  auditType: '01', // 审批类型
-                  taskNodeName: this.taskName, // 任务节点- 取列表taskName
-                  taskId: this.taskId,
-                  processInstanceId: this.processInstanceId, // 流程实例Id
-                  busiState: this.busiState, //  状态
-                  processTemplateId: this.processTemplateId // 流程模版Id
-                }).then(res => {
-                  if (res.statusCode == '200') {
-                    this.resMsg = res.msg;
-                    done();
-                  } else {
-
-                    if (res.statusCode == '500') {
-                      this.$message({
-                        type: 'warning',
-                        message: '网络异常,请重试!'
-                      });
-                      instance.confirmButtonText = '';
-                      instance.confirmButtonLoading = false;
-                    } else {
-
-                      this.$message({
-                        type: 'warning',
-                        message: res.msg
-                      });
-                    }
-                  }
-                  instance.confirmButtonText = '';
-                  instance.confirmButtonLoading = false;
-                })
+            showCancelButton: true
+          }).then(() => {
+            // 原来主管的审批 不变
+            this.post('/fraudAuditOpinion/opinionInsert', {
+              applyId: this.applyId, // 申请单id
+              mainreasonId: this.mainReason, // 欺诈主原因id
+              subreasonId: this.secondReason, // 欺诈子原因id
+              mainreaName: this.mainReasonName, // 欺诈主原因名称
+              subreaName: this.subreaName, // 欺诈子原因名称
+              riskSection: this.riskSectionArr, // 风险项
+              auditDesc: this.auditDesc, // 反欺诈决策反馈
+              auditResult: this.auditResult, // 审核结论
+              caseDesc: this.caseDesc, // 案件描述
+              caseNum: this.caseNum, // 案件编号 caseNum
+              auditType: '01', // 审批类型
+              taskNodeName: this.taskName, // 任务节点- 取列表taskName
+              taskId: this.taskId,
+              processInstanceId: this.processInstanceId, // 流程实例Id
+              busiState: this.busiState, //  状态
+              processTemplateId: this.processTemplateId // 流程模版Id
+            }).then(res => {
+              if (res.statusCode == '200') {
+                this.resMsg = res.msg;
+                this.$message({
+                  type: 'success',
+                  message: '反欺诈审批成功!'
+                });
+                this.$router.push('/AntiFraud34');
               } else {
-                done();
+                this.$message({
+                  type: 'warning',
+                  message: res.msg
+                });
               }
-            }
-          }).then(action => {
-            this.$message({
-              type: 'success',
-              message: '反欺诈审批成功!'
-            });
-            this.$router.push('/AntiFraud34');
-          });
+            })
+          }).catch(() => {});
         } else {
-
           this.$confirm('您确定操作？', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
@@ -782,19 +753,10 @@
                 });
                 this.$router.push('/AntiFraud34');
               } else {
-                if (res.statusCode == '500') {
-                  this.$message({
-                    type: 'warning',
-                    message: '网络异常,请重试!'
-                  });
-                  instance.confirmButtonText = '';
-                  instance.confirmButtonLoading = false;
-                } else {
-                  this.$message({
-                    type: 'warning',
-                    message: res.msg
-                  });
-                }
+                this.$message({
+                  type: 'warning',
+                  message: res.msg
+                });
               }
             })
           }).catch(() => {});
@@ -918,7 +880,7 @@
         this.isLoading = true;
         this.loadingTitle = '提交中';
         // 判断终审的 opinionFlag 
-        // 点击 确认 提交 方法
+        // 点击 确定 提交 方法
         this.post("/fraudAuditOpinion/approval", {
           // 挂起 taskId 任务id
           taskId: this.taskId,
@@ -1134,7 +1096,7 @@
         this.ruleFormAdd.caseDescs = '';
         this.$refs[formName] ? this.$refs[formName].resetFields() : '';
       },
-      /*案件编号-新增弹框-确认*/
+      /*案件编号-新增弹框-确定*/
       addSure(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
