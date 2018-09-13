@@ -924,8 +924,8 @@
                     this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
                     this.caculData.totalRate = res.data.totalRate; //总负债率;
                     this.appConclusion = res.data.appConclusion; //意见说明;
-                    this.maxAmounnt = this.maxAmounnt; // 最大
-                    this.minAmount = this.minAmount; // 最小
+                    this.maxAmounnt = res.data.maxAmounnt; // 最大
+                    this.minAmount = res.data.minAmount; // 最小
                     //获取批准期限
                     this.ploanTerms = res.data.returnList; //获取批准期限
                     if (this.ploanTerm) { //初审第一次未填，在选中下拉值时赋值
@@ -1597,7 +1597,7 @@
       // 批准期限更改
       ploanTermChange: function (val) {
         // 批准期限
-       this.proName= this.ploanTerm = val.appDuration;
+       this.ploanTerm= this.ploanTerm = val.appDuration;
         // 综合费率
         this.synthesisRateM = val.synthesisRateM;
         // 借款利率
