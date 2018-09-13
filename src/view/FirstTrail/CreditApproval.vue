@@ -761,7 +761,6 @@
               this.$router.push('/FtaskInWaitting' + this.routeParams);
               this.del('终审详情');
             }
-
           } else {
             if (res.statusCode == 500) {
               this.hangOut = false;
