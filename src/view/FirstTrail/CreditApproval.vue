@@ -928,7 +928,7 @@
                             this.minAmount = this.minAmount; // 最小
                     //获取批准期限
                     this.ploanTerms = res.data.returnList; //获取批准期限
-                    for (item of this.ploanTerms) {
+                    for ( let item of this.ploanTerms) {
                       if (item.appDuration == this.ploanTerms) {
                         // ({
                         //  loanRateYr: this.loanRateYr,
