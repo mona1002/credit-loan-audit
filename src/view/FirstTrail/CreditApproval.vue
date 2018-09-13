@@ -928,7 +928,7 @@
                     this.minAmount = this.minAmount; // 最小
                     //获取批准期限
                     this.ploanTerms = res.data.returnList; //获取批准期限
-                    if (this.ploanTerm) {//初审第一次未填，在选中下拉值时赋值
+                    if (this.ploanTerm) { //初审第一次未填，在选中下拉值时赋值
                       for (let item of this.ploanTerms) {
                         if (item.appDuration == this.ploanTerm) {
                           ({
@@ -939,8 +939,8 @@
                         }
                       }
                     }
+                    console.log(this.maxAmounnt)
                     console.log(this.loanRateYr)
-
                     // if (res.data.proId) {
                     //获取产品列表
                     // this.post('/credit/product').then(ress => {
@@ -980,6 +980,26 @@
                   } else {
                     return;
                   }
+                } else {
+                  this.verIncome = ''; //月核实收入[元];
+                  this.verIncome2 = '';
+                  this.proId = ''; //批准产品ID;
+                  this.proName = ''; //批准产品;
+                  this.ploanTerm = ''; //批准期限[月];
+                  this.ploanAmt = ''; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
+                  this.caculData.appmult = ''; //审批倍数;
+                  this.caculData.eachTermamt = ''; //月还款额[元];
+                  this.caculData.inteDebitrate = ''; //内部负债率;
+                  this.caculData.creditDebitRate = ''; //总信用负债率;
+                  this.caculData.totalRate = ''; //总负债率;
+                  this.appConclusion = ''; //意见说明;
+                  this.maxAmounn = ''; // 最大
+                  this.minAmount = ''; // 最小
+                  //获取批准期限
+                  this.ploanTerms = []; //获取批准期限
+                  this.loanRateYr = '';
+                  this.repayWay = '';
+                  this.synthesisRateM = '';
                 }
               });
             } else if (this.judgeFlag == '02') {
@@ -1577,14 +1597,15 @@
       // 批准期限更改
       ploanTermChange: function (val) {
         // 批准期限
-        this.ploanTerm = val.appDuration;
+       this.proName= this.ploanTerm = val.appDuration;
         // 综合费率
         this.synthesisRateM = val.synthesisRateM;
         // 借款利率
         this.loanRateYr = val.loanRateYr;
         // 还款方式  
         this.repayWay = val.repayWay;
-              // 计算 审批记录数据
+        
+        // 计算 审批记录数据
         if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
           this.loanRateYr && this.repayWay && this.synthesisRateM) {
           this.calculateByAuditInfo();
