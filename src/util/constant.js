@@ -22,7 +22,7 @@ if (host === productionEnv) {
 } else if (host === developmentEnv) {
   host = developmentEnv;
 } else {
-  host = testEnv;
+  host = releaseEnv;
 }
 
 appConstant.baseUrl_common = "http://" + host + (80 === port ? '' : (':' + port)) + "/riskManagement";

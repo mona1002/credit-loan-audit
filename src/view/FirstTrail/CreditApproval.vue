@@ -904,7 +904,7 @@
                   this.$message.error(res.msg)
                 }
               });
-              this.getProducts();
+              // this.getProducts();
               //带回回退的信息
               this.post('/creauditOpinion/queryCreauditOpinionObj', {
                 applyId: this.applyId
@@ -915,6 +915,7 @@
                     this.verIncome2 = Number(this.verIncome.split('.')[0].replace(/,/g, '')) +
                       Number('0.' + this.verIncome.split('.')[1]);
                     this.proId = res.data.proId; //批准产品ID;
+                    this.proName = res.data.proName; //批准产品;
                     this.ploanTerm = res.data.ploanTerm; //批准期限[月];
                     this.ploanAmt = Number(res.data.ploanAmt).toLocaleString() + '.00'; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
                     this.caculData.appmult = res.data.appmult; //审批倍数;
@@ -923,42 +924,59 @@
                     this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
                     this.caculData.totalRate = res.data.totalRate; //总负债率;
                     this.appConclusion = res.data.appConclusion; //意见说明;
-                    if (res.data.proId) {
-                      //获取产品列表
-                      this.post('/credit/product').then(ress => {
-                        if (ress.statusCode == '200') {
-                          this.products = ress.data;
-                          for (var i = 0; i < this.products.length; i++) {
-                            if (res.data.proId == this.products[i].id) {
-                              this.proName = this.products[i].proName;
-                              // 最大
-                              this.maxAmounnt = this.products[i].maxAmounnt;
-                              // 最小
-                              this.minAmount = this.products[i].minAmount;
-                            }
-                          };
-                        } else {
-                          this.$message.error(res.msg)
-                        }
-                      });
-                      //获取批准期限
-                      // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
-                      this.post('/credit/ploanTermByPro', {
-                        proId: res.data.proId,
-                        applyId: this.applyId
-                      }).then(resp => {
-                        if (resp.statusCode == '200')
-                          this.ploanTerms = resp.data;
-                        for (var j = 0; j < this.ploanTerms.length; j++) {
-                          if (this.ploanTerms[j].appDuration == this.ploanTerm) {
-                            this.loanRateYr = this.ploanTerms[j].loanRateYr
-                            this.repayWay = this.ploanTerms[j].repayWay
-                            this.synthesisRateM = this.ploanTerms[j].synthesisRateM
-                            break;
-                          }
-                        }
-                      });
+                            this.maxAmounnt = this.maxAmounnt;   // 最大
+                            this.minAmount = this.minAmount; // 最小
+                    //获取批准期限
+                    this.ploanTerms = res.data.returnList; //获取批准期限
+                    for (item of this.ploanTerms) {
+                      if (item.appDuration == this.ploanTerms) {
+                        // ({
+                        //  loanRateYr: this.loanRateYr,
+                        //  repayWay: this.repayWay,
+                        //  synthesisRateM: this.synthesisRateM
+                        // } = item);
+                        ({
+                         loanRateYr,
+                         repayWay,
+                         synthesisRateM   } = item);
+                      }
                     }
+                    // if (res.data.proId) {
+                    //获取产品列表
+                    // this.post('/credit/product').then(ress => {
+                    //   if (ress.statusCode == '200') {
+                    //     this.products = ress.data;
+                    //     for (var i = 0; i < this.products.length; i++) {
+                    //       if (res.data.proId == this.products[i].id) {
+                    //         this.proName = this.products[i].proName;
+                    //         // 最大
+                    //         this.maxAmounnt = this.products[i].maxAmounnt;
+                    //         // 最小
+                    //         this.minAmount = this.products[i].minAmount;
+                    //       }
+                    //     };
+                    //   } else {
+                    //     this.$message.error(res.msg)
+                    //   }
+                    // });
+                    //获取批准期限
+                    // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
+                    // this.post('/credit/ploanTermByPro', {
+                    //   proId: res.data.proId,
+                    //   applyId: this.applyId
+                    // }).then(resp => {
+                    //   if (resp.statusCode == '200')
+                    //     this.ploanTerms = resp.data;
+                    //   for (var j = 0; j < this.ploanTerms.length; j++) {
+                    //     if (this.ploanTerms[j].appDuration == this.ploanTerm) {
+                    //       this.loanRateYr = this.ploanTerms[j].loanRateYr
+                    //       this.repayWay = this.ploanTerms[j].repayWay
+                    //       this.synthesisRateM = this.ploanTerms[j].synthesisRateM
+                    //       break;
+                    //     }
+                    //   }
+                    // });
+                    // }
                   } else {
                     return;
                   }
@@ -993,13 +1011,13 @@
         }
       },
       // 进入 初审 审批结论 / 终审 审核结论  先请求产品
-      getProducts() {
-        this.post('/credit/product').then(res => {
-          if (res.statusCode == '200') {
-            this.products = res.data;
-          }
-        })
-      },
+      // getProducts() {
+      //   this.post('/credit/product').then(res => {
+      //     if (res.statusCode == '200') {
+      //       this.products = res.data;
+      //     }
+      //   })
+      // },
       // 根据id 请求信息  终审 - 审批
       queryCreauditOpinionObj() {
         this.post('/creauditOpinion/queryCreauditOpinionObj', {
