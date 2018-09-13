@@ -288,7 +288,7 @@
                 <div class="bfc">
                   <el-form-item class="fl alert_collapse_inputLabel" label="批准期限[月]：" :label-width="formApproLab">
                     <el-select @change="ploanTermChange " v-model="ploanTerm ">
-                      <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item " :key="item ">
+                      <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item.appDuration " :key="item.appDuration ">
                       </el-option>
                     </el-select>
                   </el-form-item>
@@ -930,15 +930,15 @@
                     this.ploanTerms = res.data.returnList; //获取批准期限
                     for ( let item of this.ploanTerms) {
                       if (item.appDuration == this.ploanTerms) {
-                        // ({
-                        //  loanRateYr: this.loanRateYr,
-                        //  repayWay: this.repayWay,
-                        //  synthesisRateM: this.synthesisRateM
-                        // } = item);
                         ({
-                         loanRateYr,
-                         repayWay,
-                         synthesisRateM   } = item);
+                         loanRateYr: this.loanRateYr,
+                         repayWay: this.repayWay,
+                         synthesisRateM: this.synthesisRateM
+                        } = item);
+                        // ({
+                        //  loanRateYr,
+                        //  repayWay,
+                        //  synthesisRateM   } = item);
                       }
                     }
                     console.log(this.maxAmounnt )
