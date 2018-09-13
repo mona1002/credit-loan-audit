@@ -55,7 +55,8 @@
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">理由：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="reason" readonly>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                v-model="reason" readonly>
               </el-input>
             </li>
           </ul>
@@ -87,20 +88,23 @@
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li triplet_textarea_width">
                 <label class="label_width_166">网查：</label>
-                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"  :readonly=' !showBtn' v-model="fraudAuditInfo.netCheck">
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                  :readonly=' !showBtn' v-model="fraudAuditInfo.netCheck">
                 </el-input>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li triplet_textarea_width margin_top_5">
                 <label class="label_width_166">114：</label>
-                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"  :readonly=' !showBtn' v-model="fraudAuditInfo.oof">
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                  :readonly=' !showBtn' v-model="fraudAuditInfo.oof">
                 </el-input>
               </li>
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">其他：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"  :readonly=' !showBtn' v-model="fraudAuditInfo.other">
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                :readonly=' !showBtn' v-model="fraudAuditInfo.other">
               </el-input>
             </li>
           </ul>
@@ -127,17 +131,17 @@
             </el-table-column>
             <el-table-column label="姓名" width="120">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.name" placeholder="请输入姓名" :readonly="scope.row.isInitFlag=='0' || !showBtn"></el-input>
+                <el-input v-model="scope.row.name" placeholder="请输入姓名" :readonly="!showBtn || scope.row.isInitFlag=='0' "></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="phoneNum" label="手机号码" width="180">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)" :readonly="scope.row.isInitFlag=='0'|| !showBtn"></el-input>
+                <el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)" :readonly="!showBtn || scope.row.isInitFlag=='0'"></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="relation" label="关系" width="180">
               <template slot-scope="scope">
-                <el-select v-model="scope.row.relation" placeholder="请选择" :readonly="scope.row.isInitFlag=='0' || !showBtn">
+                <el-select v-model="scope.row.relation" placeholder="请选择" :disabled="!showBtn || scope.row.isInitFlag=='0' ">
                   <el-option v-for="item in relations" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -169,7 +173,8 @@
           </span>
         </div>
         <div>
-          <el-table ref="multipleTable" :data="recordList" style="width: 100%" height="250" border highlight-current-row @selection-change="handleSelectionChange">
+          <el-table ref="multipleTable" :data="recordList" style="width: 100%" height="250" border
+            highlight-current-row @selection-change="handleSelectionChange">
             <el-table-column type="index" :index='1' label="序号" min-width="50">
             </el-table-column>
             <el-table-column type="selection" min-width="50">
@@ -188,8 +193,9 @@
             </el-table-column>
           </el-table>
           <div class="page">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-              :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+              :page-sizes="[10, 20,50]" :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper"
+              :total="totals.totalRecord">
             </el-pagination>
           </div>
         </div>
@@ -354,7 +360,7 @@
         this.post('antiFraud/getAntiFraudSurveyInfo', {
           'appinfoId': val //'1',
         }).then(res => {
-          if (res.statusCode == 200 && 　res.data != null) {
+          if (res.statusCode == 200 && res.data != null) {
             //基本信息
             if (res.data.fraudApplyInfo == null) {
               this.fraudApplyInfo = this.fraudApplyInfo;
@@ -386,7 +392,7 @@
             };
             //电核区
             if (res.data.fraudTelCheckList == null) {
-              this.fraudTelCheckList = this.fraudTelCheckList;
+              this.fraudTelCheckList = [];
             } else {
               this.fraudTelCheckList = res.data.fraudTelCheckList;
               for (var i = 0; i < res.data.fraudTelCheckList.legth; i++) {
@@ -707,14 +713,14 @@
   /* 命中规则 */
 
   .tableDiv {
-    width: calc( 33.3% + 350px);
+    width: calc(33.3% + 350px);
   }
 
   /* 调查记录 */
 
   .record ul li {
     width: 100%;
-    padding-right: calc( 66.6% - 350px);
+    padding-right: calc(66.6% - 350px);
   }
 
   .record ul li label {
@@ -728,7 +734,7 @@
   }
 
   .record ul li div {
-    width: calc( 100% - 150px);
+    width: calc(100% - 150px);
     display: inline-block;
     margin-top: 20px;
   }
@@ -773,7 +779,7 @@
   }
 
   .button button {
-    margin-right: calc( 66.6% - 350px);
+    margin-right: calc(66.6% - 350px);
     float: right;
     margin-top: 20px;
     margin-bottom: 20px;

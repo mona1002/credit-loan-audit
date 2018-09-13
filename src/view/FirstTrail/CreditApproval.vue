@@ -280,7 +280,7 @@
                     <el-input v-model="verIncome " @blur="moneyBlur(verIncome, 'verIncome') "></el-input>
                   </el-form-item>
                   <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
-                    <el-select @change="proSlelecChange " disabled v-model="proName ">
+                    <el-select disabled v-model="proName ">
                       <el-option v-for="item in products " :key="item.id " :label="item.proName " :value="item "></el-option>
                     </el-select>
                   </el-form-item>
@@ -1533,29 +1533,29 @@
         this.getReason('second', this.mainId);
       },
       // 批准产品 更改
-      proSlelecChange: function (val) {
-        this.ploanTerm = '';
-        this.ploanAmt = '';
-        this.debtRate = val.debtRate; //产品负债率
-        // id val.id  产品id
-        this.proId = val.id;
-        // proCode  产品code
-        this.proCode = val.proCode;
-        this.proName = val.proName;
-        // 最大金额
-        this.maxAmounnt = val.maxAmounnt;
-        // 最小金额
-        this.minAmount = val.minAmount;
-        // this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
-        this.post('/credit/ploanTermByPro', {
-          proId: res.data.proId,
-          applyId: this.applyId
-        }).then(res => {
-          if (res.statusCode == '200')
-            this.ploanTerms = res.data;
-        })
+      // proSlelecChange: function (val) {
+      //   this.ploanTerm = '';
+      //   this.ploanAmt = '';
+      //   this.debtRate = val.debtRate; //产品负债率
+      //   // id val.id  产品id
+      //   this.proId = val.id;
+      //   // proCode  产品code
+      //   this.proCode = val.proCode;
+      //   this.proName = val.proName;
+      //   // 最大金额
+      //   this.maxAmounnt = val.maxAmounnt;
+      //   // 最小金额
+      //   this.minAmount = val.minAmount;
+      //   // this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+      //   this.post('/credit/ploanTermByPro', {
+      //     proId: res.data.proId,
+      //     applyId: this.applyId
+      //   }).then(res => {
+      //     if (res.statusCode == '200')
+      //       this.ploanTerms = res.data;
+      //   })
 
-      },
+      // },
       // 批准期限更改
       ploanTermChange: function (val) {
         // 批准期限

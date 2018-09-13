@@ -94,13 +94,13 @@
         </el-table-column>
         <el-table-column prop="appDate" label="申请日期" width="110">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称">
+        <el-table-column prop="custName" label="客户名称" width="100">
         </el-table-column>
         <el-table-column prop="certTypeTxt" label="证件类型" width="80">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码" min-width="160">
+        <el-table-column prop="certCode" label="证件号码" width="160">
         </el-table-column>
-        <el-table-column prop="appOrgName" label="进件机构" width="80">
+        <el-table-column prop="appOrgName" label="进件机构" width="160">
         </el-table-column>
         <el-table-column prop="proName" label="产品名称" width="80">
         </el-table-column>
