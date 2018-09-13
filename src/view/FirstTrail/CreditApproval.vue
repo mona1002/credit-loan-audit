@@ -936,16 +936,10 @@
                             repayWay: this.repayWay,
                             synthesisRateM: this.synthesisRateM
                           } = item);
-                          // ({
-                          //  loanRateYr,
-                          //  repayWay,
-                          //  synthesisRateM   } = item);
                         }
                       }
                     }
-                    console.log(this.maxAmounnt)
                     console.log(this.loanRateYr)
-                    console.log(this.proName)
 
                     // if (res.data.proId) {
                     //获取产品列表
