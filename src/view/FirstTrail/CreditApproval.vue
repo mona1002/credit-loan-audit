@@ -941,6 +941,9 @@
                          synthesisRateM   } = item);
                       }
                     }
+                    cosnole.log(this.maxAmounnt )
+                    cosnole.log(this.loanRateYr )
+                    cosnole.log(this.proName )
                     // if (res.data.proId) {
                     //获取产品列表
                     // this.post('/credit/product').then(ress => {
