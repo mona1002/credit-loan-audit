@@ -1176,20 +1176,20 @@
     },
     watch: {
       //审批 计算 审批倍数 等
-      ploanTerm: function () {
-        // 计算 审批记录数据
-        if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
-          this.repayWay && this.synthesisRateM && this.loanRateYr) {
-          this.calculateByAuditInfo();
-        }
-      },
+      // ploanTerm: function () {
+      //   // 计算 审批记录数据
+      //   if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
+      //     this.repayWay && this.synthesisRateM && this.loanRateYr) {
+      //     this.calculateByAuditInfo();
+      //   }
+      // },
       // 产品 id
-      proId: function () {
-        //月核实收入+产品id+批准期限+批准金额[元]
-        if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 &&
-          this.repayWay && this.synthesisRateM && this.loanRateYr)
-          this.calculateByAuditInfo();
-      },
+      // proId: function () {
+      //   //月核实收入+产品id+批准期限+批准金额[元]
+      //   if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 &&
+      //     this.repayWay && this.synthesisRateM && this.loanRateYr)
+      //     this.calculateByAuditInfo();
+      // },
     }
   }
 
