@@ -1590,6 +1590,11 @@
         this.loanRateYr = val.loanRateYr;
         // 还款方式  
         this.repayWay = val.repayWay;
+              // 计算 审批记录数据
+        if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
+          this.loanRateYr && this.repayWay && this.synthesisRateM) {
+          this.calculateByAuditInfo();
+        }
       },
       // 计算审批结论数据
       calculateByAuditInfo: function () {
@@ -1790,13 +1795,13 @@
         }
       },
       // 批准期限
-      ploanTerm: function () {
-        // 计算 审批记录数据
-        if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
-          this.loanRateYr && this.repayWay && this.synthesisRateM) {
-          this.calculateByAuditInfo();
-        }
-      },
+      // ploanTerm: function () {
+      //   // 计算 审批记录数据
+      //   if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
+      //     this.loanRateYr && this.repayWay && this.synthesisRateM) {
+      //     this.calculateByAuditInfo();
+      //   }
+      // },
       // 产品 id
       proId: function () {
         if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 &&
