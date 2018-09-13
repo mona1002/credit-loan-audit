@@ -288,7 +288,7 @@
                 <div class="bfc">
                   <el-form-item class="fl alert_collapse_inputLabel" label="批准期限[月]：" :label-width="formApproLab">
                     <el-select @change="ploanTermChange " v-model="ploanTerm ">
-                      <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item.appDuration " :key="item.appDuration ">
+                      <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item " :key="item.appDuration ">
                       </el-option>
                     </el-select>
                   </el-form-item>
