@@ -648,88 +648,98 @@
           }
         });
         //请求产品
-        this.post("/credit/product").then(res => {
+        // this.post("/credit/product").then(res => {
+        // if (res.statusCode == 200) {
+        // this.products = res.data;
+        //请求复议专员带过来的审批信息
+        this.post('/creauditOpinion/queryCreauditOpinionObj', {
+          applyId: this.applyId
+        }).then(res => {
           if (res.statusCode == 200) {
-            this.products = res.data;
-            //请求复议专员带过来的审批信息
-            this.post('/creauditOpinion/queryCreauditOpinionObj', {
-              applyId: this.applyId
-            }).then(res => {
-              if (res.statusCode == 200) {
-                //批准期限[月]
-                if (res.data.ploanTerm) {
-                  this.ploanTerm = res.data.ploanTerm;
-                } else {
-                  this.ploanTerm = this.ploanTerm;
-                };
-                // 批准产品
-                if (res.data.proId) {
-                  this.proId = res.data.proId;
-                  for (var i = 0; i < this.products.length; i++) {
-                    if (res.data.proId == this.products[i].id) {
-                      this.proName = this.products[i].proName;
-                      this.maxAmounnt = this.products[i].maxAmounnt;
-                      this.minAmount = this.products[i].minAmount;
-                    }
-                  };
-                  //批准期限[月]的列表
-                  // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
-                  this.post('/credit/ploanTermByPro',{
-                    proId:res.data.proId,
-                    applyId:this.applyId
-                  }).then(res => {
-                    if (res.statusCode == '200') {
-                      this.ploanTerms = res.data;
-                      // 审批信息计算入参
-                      for (let k of this.ploanTerms) {
-                        if (this.ploanTerm == k.appDuration) {
-                          this.synthesisRateM = k.synthesisRateM; // 综合费率
-                          this.loanRateYr = k.loanRateYr; // 借款利率
-                          this.repayWay = k.repayWay; // 还款方式  
-                          break;
-                        }
-                      }
-                    }
-
-                  });
-                } else {
-                  this.proName = this.proName;
-                };
-                // 核实收入
-                if (res.data.verIncome) {
-                  this.verIncome = this.formatNumber(res.data.verIncome, 2, 0);
-                } else {
-                  this.verIncome = this.verIncome;
-                };
-                // 批准金额
-                if (res.data.ploanAmt) {
-                  this.ploanAmt = this.formatNumber(res.data.ploanAmt, 2, 0);
-                } else {
-                  this.ploanAmt = this.ploanAmt;
-                };
-                //审批结论数据
-                //审批倍数
-                if (res.data.appmult) {
-                  this.caculData.appmult = this.formatNumber(res.data.appmult, 2, 0);
-                };
-                //内部负债率
-                if (res.data.inteDebitrate) {
-                  this.caculData.inteDebitrate = (res.data.inteDebitrate * 100).toFixed(2) + "%";
-                };
-                //总负债率
-                if (res.data.totalRate) {
-                  this.caculData.totalRate = (res.data.totalRate * 100).toFixed(2) + "%";
-                };
-                //月还款额
-                if (res.data.eachTermamt) {
-                  this.caculData.eachTermamt = this.formatNumber(res.data.eachTermamt, 2, 0);
-                };
-                //意见说明
-                this.appConclusion = res.data.appConclusion;
+            this.ploanTerm = res.data.ploanTerm; //批准期限[月]
+            this.proName = res.data.proName; //批准产品
+            this.proId = res.data.proId; //批准产品Id
+            this.maxAmounnt = res.data.maxAmounnt;
+            this.minAmount = res.data.minAmount;
+            // 核实收入
+            res.data.verIncome || res.data.verIncome == 0 ? this.verIncome = this.formatNumber(res.data.verIncome,
+              2, 0) : this.verIncozme = res.data.verIncome;
+            // 批准金额
+            res.data.ploanAmt || res.data.ploanAmt == 0 ? this.ploanAmt = this.formatNumber(res.data.ploanAmt, 2, 0) :
+              this.ploanAmt = res.data.ploanAmt;
+            //审批结论数据
+            //审批倍数
+            res.data.appmult || res.data.appmult == 0 ? this.caculData.appmult = this.formatNumber(res.data.appmult,
+              2, 0) : '';
+            //内部负债率
+            res.data.inteDebitrate || res.data.inteDebitrate == 0 ? this.caculData.inteDebitrate = (res.data.inteDebitrate *
+              100).toFixed(2) + "%" : '';
+            //总负债率
+            res.data.totalRate || res.data.totalRate == 0 ? this.caculData.totalRate = (res.data.totalRate * 100).toFixed(
+              2) + "%" : '';
+            //月还款额
+            res.data.eachTermamt || res.data.eachTermamt == 0 ? this.caculData.eachTermamt = this.formatNumber(res.data
+              .eachTermamt, 2, 0) : '';
+            //意见说明
+            this.appConclusion = res.data.appConclusion;
+            this.ploanTerms = res.data.returnList; //批准期限月下拉
+            //  if (this.ploanTerm) { 
+            for (let item of this.ploanTerms) {
+              if (item.appDuration == this.ploanTerm) {
+                ({
+                  loanRateYr: this.loanRateYr,
+                  repayWay: this.repayWay,
+                  synthesisRateM: this.synthesisRateM
+                } = item);
               }
-            })
+            }
+            // }
+            // 批准产品
+            // if (res.data.proId) {
+            //   this.proId = res.data.proId;
+            //   for (var i = 0; i < this.products.length; i++) {
+            //     if (res.data.proId == this.products[i].id) {
+            //       // this.proName = this.products[i].proName;
+            //       // this.maxAmounnt = this.products[i].maxAmounnt;
+            //       // this.minAmount = this.products[i].minAmount;
+            //     }
+            //   };
+            //批准期限[月]的列表
+            // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
+            // this.post('/credit/ploanTermByPro', {
+            //   proId: res.data.proId,
+            //   applyId: this.applyId
+            // }).then(res => {
+            //   if (res.statusCode == '200') {
+            //     this.ploanTerms = res.data;
+            //     // 审批信息计算入参
+            //     for (let k of this.ploanTerms) {
+            //       if (this.ploanTerm == k.appDuration) {
+            //         this.synthesisRateM = k.synthesisRateM; // 综合费率
+            //         this.loanRateYr = k.loanRateYr; // 借款利率
+            //         this.repayWay = k.repayWay; // 还款方式  
+            //         break;
+            //       }
+            //     }
+            //   }
+
+            // });
+          } else {
+            this.ploanTerm = ''; //批准期限[月]
+            this.proName = ''; //批准产品
+            this.proId = ''; //批准产品Id
+            this.maxAmounnt = '';
+            this.minAmount = '';
+            this.loanRateYr = '';
+            this.repayWay = '';
+            this.synthesisRateM = '';
+            this.verIncome = '';
+            this.ploanAmt = '';
+            this.caculData = {};
           };
         });
+        // };
+        // });
       },
       //审批提交按钮
       spsure() {
@@ -1095,7 +1105,7 @@
       },
       handleCurrentChange(val) {
         /*this.queryParam.pageNum = val;
-      		  this.request(this.queryParam);*/
+        		  this.request(this.queryParam);*/
       },
       //反欺诈申请
       AntiFraudApplication() {

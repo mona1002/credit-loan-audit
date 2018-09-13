@@ -917,6 +917,7 @@
                     this.proId = res.data.proId; //批准产品ID;
                     this.proName = res.data.proName; //批准产品;
                     this.ploanTerm = res.data.ploanTerm; //批准期限[月];
+                    this.ploanAmt2 = res.data.ploanAmt;
                     this.ploanAmt = Number(res.data.ploanAmt).toLocaleString() + '.00'; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
                     this.caculData.appmult = res.data.appmult; //审批倍数;
                     this.caculData.eachTermamt = res.data.eachTermamt; //月还款额[元];
@@ -941,6 +942,7 @@
                     }
                     console.log(this.maxAmounnt)
                     console.log(this.loanRateYr)
+                    console.log(this.ploanAmt)
                     // if (res.data.proId) {
                     //获取产品列表
                     // this.post('/credit/product').then(ress => {
@@ -987,6 +989,7 @@
                   this.proName = ''; //批准产品;
                   this.ploanTerm = ''; //批准期限[月];
                   this.ploanAmt = ''; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
+                  this.ploanAmt2 = ''
                   this.caculData.appmult = ''; //审批倍数;
                   this.caculData.eachTermamt = ''; //月还款额[元];
                   this.caculData.inteDebitrate = ''; //内部负债率;
@@ -1596,15 +1599,15 @@
       // },
       // 批准期限更改
       ploanTermChange: function (val) {
+        console.log(val)
         // 批准期限
-       this.ploanTerm= this.ploanTerm = val.appDuration;
+        this.ploanTerm = this.ploanTerm = val.appDuration;
         // 综合费率
         this.synthesisRateM = val.synthesisRateM;
         // 借款利率
         this.loanRateYr = val.loanRateYr;
         // 还款方式  
         this.repayWay = val.repayWay;
-        
         // 计算 审批记录数据
         if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
           this.loanRateYr && this.repayWay && this.synthesisRateM) {
