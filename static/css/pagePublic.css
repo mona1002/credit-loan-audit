@@ -548,7 +548,6 @@ body .el-table_450_scroll .el-table__fixed-right {
   width:50%;
   height: 100%;
   z-index: 22;
-  border:2px solid red;
   background: #ffffff;
 }
 

@@ -27,6 +27,8 @@
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
             </el-table-column>
+               <el-table-column prop="matchApplyStateTxt" label="风控业务状态" width="110">
+            </el-table-column>
             <el-table-column prop="remark" fit="false" class="mark-cell" label="备注" show-overflow-tooltip min-width="100">
             </el-table-column>
           </el-table>
@@ -64,6 +66,8 @@
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
             </el-table-column>
+             <el-table-column prop="matchApplyStateTxt" label="风控业务状态" width="110">
+            </el-table-column>
             <el-table-column prop="remark" min-width="100" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
             </el-table-column>
           </el-table>
@@ -98,6 +102,8 @@
             <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
+            </el-table-column>
+             <el-table-column prop="matchApplyStateTxt" label="风控业务状态" width="110">
             </el-table-column>
             <el-table-column prop="remark" min-width="100" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
             </el-table-column>

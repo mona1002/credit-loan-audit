@@ -22,16 +22,16 @@
       </el-row>
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
-          <!-- <span class="keywordText">单位电话：</span>
-          <el-input v-model.trim="params.workTel" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input> -->
+          <span class="keywordText">单位电话：</span>
+          <el-input v-model.trim="params.workTel" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <!-- <span class="keywordText">单位名称：</span>
-          <el-input v-model.trim="params.hirecomName" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input> -->
+          <span class="keywordText">单位名称：</span>
+          <el-input v-model.trim="params.hirecomName" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <!-- <span class="keywordText">联系人号码：</span>
-          <el-input v-model.trim="params.rlMobile" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input> -->
+          <span class="keywordText">联系人号码：</span>
+          <el-input v-model.trim="params.telNum" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" :loading='loading' @click="Rsearch">查询</el-button>
@@ -70,10 +70,10 @@
             <span>{{ scope.row.mobile |MobileStar }}</span>
           </template>
         </el-table-column>
-        <!-- <el-table-column prop="workName" label="单位名称" align='center' min-width="150">
+        <el-table-column prop="hirecomName" label="单位名称" align='center' min-width="150">
         </el-table-column>
         <el-table-column prop="workTel" label="单位电话" align='center' min-width="150">
-        </el-table-column> -->
+        </el-table-column>
         <el-table-column prop="appDate" label="申请日期" align='center' min-width="150">
         </el-table-column>
         <el-table-column prop="proName" label="产品名称" align='center' min-width="100">
@@ -117,9 +117,9 @@
           custName: '',
           certCode: '',
           mobile: '',
-          // workTel: '',
-          // hirecomName: '',
-          // rlMobile: ''
+          workTel: '',
+          hirecomName: '',
+          telNum: ''
         },
       }
     },
@@ -155,14 +155,13 @@
         this.params.custName = '';
         this.params.certCode = '';
         this.params.mobile = '';
-        //  this.params.workTel= '';
-        //   this.params.hirecomName= '';
-        //   this.params.rlMobile= '';
+         this.params.workTel= '';
+          this.params.hirecomName= '';
+          this.params.telNum= '';
       },
       Rsearch() {
         if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
-          '') {
-          // ||this.params.workTel != ''||this.params.hirecomName != ''||this.params.rlMobile != ''
+          ''||this.params.workTel != ''||this.params.hirecomName != ''||this.params.telNum != '') {
           this.loading = true;
           this.inquire(this.params);
         } else {
