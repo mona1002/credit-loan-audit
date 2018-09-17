@@ -88,20 +88,19 @@
           <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
         </div>
       </div>
-    </div>
-    <!-- 对比弹出层  -->
-    <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
-      <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
-      <div class="AudioVisual_wrap_compare_left ">
+      <!-- 对比弹出层  -->
+      <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
+        <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
+        <!-- <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
         <div class="AlertContent">
           <keep-alive v-if="Routes.closed">
             <AudioVisualLeft :list='tastwaitingPass' msg="spLtwo" :comBtn='false'></AudioVisualLeft>
           </keep-alive>
         </div>
-      </div>
-      <div class="AudioVisual_wrap_compare_right ">
-        <p class="customName">客户名称：
+      </div> -->
+        <!-- <div class="AudioVisual_wrap_compare_right "> -->
+        <p class="customName Left_right_Title">客户名称：
           <el-input v-model="AlertSearch" :disabled="true"></el-input>
           <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
             <i class="el-icon-search" style="fontSize:16px"></i>
@@ -112,6 +111,7 @@
             <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :list='tastwaitingPass' :comBtn='false'></AudioVisualLeft>
           </keep-alive>
         </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>

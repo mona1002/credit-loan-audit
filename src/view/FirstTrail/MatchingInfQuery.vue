@@ -31,7 +31,7 @@
           </p>
           <div class="Left_right_BigImg ">
             <keep-alive v-if="Routes.closed">
-              <AudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" :list='list' v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <AudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" :list='list' v-on:CompareShow="compBtnS" :comBtn='false'></AudioVisualLeft>
             </keep-alive>
             <remarkDetail v-if=" this.tabContent1==1" :applyId='tastwaitingPass.matchApplyId'></remarkDetail>
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
@@ -100,7 +100,7 @@
       </div>
     </div>
     <!-- 对比弹出层 -->
-    <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
+    <!-- <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
       <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
       <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
@@ -123,7 +123,7 @@
           </keep-alive>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>

@@ -96,20 +96,19 @@
           <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='tastwaitingPass.matchApplyId'>审批结论轨迹</aAprovalConclusion>
         </div>
       </div>
-    </div>
-    <!-- 对比弹出层 -->
+          <!-- 对比弹出层 -->
     <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
-      <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
-      <div class="AudioVisual_wrap_compare_left ">
+     <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
+       <!-- <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
         <div class="AlertContent">
           <keep-alive v-if="Routes.closed">
             <AudioVisualLeft :list='list' msg="MspLtwo" :comBtn='false'></AudioVisualLeft>
           </keep-alive>
         </div>
-      </div>
-      <div class="AudioVisual_wrap_compare_right ">
-        <p class="customName">客户名称：
+      </div> -->
+      <!-- <div class="AudioVisual_wrap_compare_right "> -->
+        <p class="customName Left_right_Title">客户名称：
           <el-input v-model="AlertSearch" :disabled="true"></el-input>
           <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
             <i class="el-icon-search" style="fontSize:16px"></i>
@@ -120,7 +119,8 @@
             <AudioVisualLeft :list='list' msg="MspLthree" ref="audioChild" :comBtn='false' v-on:inputInf="inputInner"></AudioVisualLeft>
           </keep-alive>
         </div>
-      </div>
+      <!-- </div> -->
+    </div>
     </div>
   </div>
 </template>

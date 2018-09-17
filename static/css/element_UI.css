@@ -647,10 +647,10 @@
 
 /* 影像列表-左侧列表--内容下边距 */
 
-.AudioVisual .AudioVisual_wrap_compare_right .el-collapse-item__content,
-.AudioVisualLeft .AudioVisual_wrap_compare_right .el-collapse-item__content {
+/* .AudioVisual .AudioVisual_wrap_compare_right .el-collapse-item__content, */
+/* .AudioVisualLeft .AudioVisual_wrap_compare_right .el-collapse-item__content {
   padding-bottom: 0;
-}
+} */
 
 .AudioVisualLeft .posi .el-collapse-item__content,
 .MatchingInf .posi .el-collapse-item__content {
@@ -666,14 +666,14 @@
 
 /* 影像列表- 对比弹出层-select-搜索框-wrap */
 
-.SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,
-.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner,
-.MatchingInf .AudioVisual_wrap_compare_right .el-select>.el-input,
+/* .SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input, */
+/* .SplitScreen .AudioVisual_wrap_compare_right .el-input__inner, */
+/* .MatchingInf .AudioVisual_wrap_compare_right .el-select>.el-input,
 .MatchingInf .AudioVisual_wrap_compare_right .el-input__inner {
   display: inline-block;
   width: 260px;
   height: 35px
-}
+} */
 
 /* 反欺诈-案件编号列表页+反欺诈规则设定 */
 

@@ -135,6 +135,12 @@
                 <span> {{comData.jobref2}}</span>
               </li>
             </div>
+            <div class="clearFix">
+               <li class="text_area_li">
+              <label class="label_width_166">其他说明：</label>
+              <span class="text_area_span text_area_span_minus170 pre_wrap"> {{comData.remark}}</span>
+            </li>
+            </div>
             <li class="text_area_li">
               <label class="label_width_166">调查结果：</label>
               <span class="text_area_span text_area_span_minus170 pre_wrap"> {{comData.conclusion}}</span>
@@ -150,30 +156,30 @@
     data() {
       return {
         activeName: ['1', '2'],
-        imageUrl: ''
+        // imageUrl: ''
       }
     },
     props: ['comData', 'isFull'],
     mounted() {
-      if (this.isFull == true) { // 全屏
-        $(".textarea-class").css("minWidth", "500px");
-        $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
-      } else if (this.isFull == false) { // 分屏
-        $(".textarea-class").css("minWidth", "300px");
-        $(".item-column1 .el-form-item__content").css("width", "300px");
-      }
+      // if (this.isFull == true) { // 全屏
+      //   $(".textarea-class").css("minWidth", "500px");
+      //   $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
+      // } else if (this.isFull == false) { // 分屏
+      //   $(".textarea-class").css("minWidth", "300px");
+      //   $(".item-column1 .el-form-item__content").css("width", "300px");
+      // }
     },
     watch: {
       // 判断全屏 , 更改样式
-      isFull: function (val) {
-        if (val == true) { // 全屏
-          $(".textarea-class").css("minWidth", "500px");
-          $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
-        } else if (val == false) { // 分屏
-          $(".textarea-class").css("minWidth", "300px");
-          $(".item-column1 .el-form-item__content").css("width", "300px");
-        }
-      }
+      // isFull: function (val) {
+      //   // if (val == true) { // 全屏
+      //   //   $(".textarea-class").css("minWidth", "500px");
+      //   //   $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
+      //   // } else if (val == false) { // 分屏
+      //   //   $(".textarea-class").css("minWidth", "300px");
+      //   //   $(".item-column1 .el-form-item__content").css("width", "300px");
+      //   // }
+      // }
     }
   }
 

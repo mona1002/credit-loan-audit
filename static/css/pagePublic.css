@@ -403,23 +403,25 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 .SplitScreen .left,
-.SplitScreen .right,
-.SplitScreen .AudioVisual_wrap_compare_left,
-.SplitScreen .AudioVisual_wrap_compare_right {
-  width: calc(50% - 2px);
+.SplitScreen .right
+/* .SplitScreen .AudioVisual_wrap_compare_left, */
+/* .SplitScreen .AudioVisual_wrap_compare_right  */
+{
+  /* width: calc(50% ); */
+  width:50%;
   height: 100%;
   overflow: auto;
   background: #ffffff;
   border: 1px solid #bfcbd9;
   border-radius: 4px;
-  float: left;
+  float: right;
   position: relative;
 }
 
 /* 对比右侧弹出层2px间距 */
-.SplitScreen .AudioVisual_wrap_compare_right {
-  margin-left: 2px;
-}
+/* .SplitScreen .AudioVisual_wrap_compare_right { */
+  /* margin-left: 2px; */
+/* } */
 
 .SplitScreen .left,
 .SplitScreen .right {
@@ -471,9 +473,10 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 /* 左侧详情 p标签  */
 .SplitScreen .Left_right_Title,
-.SplitScreen .right .Right_tab_title_div,
-.SplitScreen .AudioVisual_wrap_compare_left>p,
-.SplitScreen .AudioVisual_wrap_compare_right>p {
+.SplitScreen .right .Right_tab_title_div
+/* .SplitScreen .AudioVisual_wrap_compare_left>p, */
+/* .SplitScreen .AudioVisual_wrap_compare_right>p  */
+{
   font-size: 16px;
   text-align: center;
   background: rgba(0, 119, 255, 0.75);
@@ -541,11 +544,12 @@ body .el-table_450_scroll .el-table__fixed-right {
 /*  对比弹出层 外包 div 流 */
 .SplitScreen .AudioVisual_wrap_compare {
   position: absolute;
-  top: 80px;
-  width: calc(100% - 18px);
-  height: calc(100% - 123px);
+  right:0;
+  width:50%;
+  height: 100%;
   z-index: 22;
-  min-width: 1348px;
+  border:2px solid red;
+  background: #ffffff;
 }
 
 /* 弹出层 - 两侧组件 content  流 */
@@ -566,6 +570,8 @@ body .el-table_450_scroll .el-table__fixed-right {
 .customName {
   text-align: right !important;
   padding-right: 5px;
+  /* height: 40px; */
+  /* background: rgba(0, 119, 255, 0.75); */
 }
 
 .customName .el-input {

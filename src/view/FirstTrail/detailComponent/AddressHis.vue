@@ -187,6 +187,12 @@
                 <span class="text_area_span text_area_span_minus170 pre_wrap"> {{mobileData.hobbyandBehave}}</span>
               </li>
             </div>
+             <div class="clearFix">
+               <li class="text_area_li">
+              <label class="label_width_166">其他说明：</label>
+              <span class="text_area_span text_area_span_minus170 pre_wrap"> {{mobileData.remark}}</span>
+            </li>
+            </div>
             <li class="text_area_li clearFloat margin_top_5">
               <label class="label_width_166">调查结果：</label>
               <span class="text_area_span text_area_span_minus170 pre_wrap"> {{mobileData.conclusion}}</span>
