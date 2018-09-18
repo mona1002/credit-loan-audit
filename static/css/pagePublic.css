@@ -747,7 +747,10 @@ body .el-table_450_scroll .el-table__fixed-right {
   color: rgba(0, 119, 255, 0.75);
   cursor: pointer;
 }
-
+.blueC>label:hover{
+  color: rgba(0, 119, 255, 0.75);
+   cursor: pointer;
+ }
 /*------------creditform------- 核对现住址-------------------------- */
 /* 
     .CreditForm_check_reside li,

@@ -335,14 +335,15 @@
         </template>
         <div class="CreditForm_WorkInfs ">
           <ul class="CreditForm_WorkInfs_ul_left clearFix">
-            <li style="width:100%">
+            <li style="width:100%" class="position_relative">
               <i class="hint">
-                <b v-show="this.Wordhint.Working.address" class="Working_input"> 输入长度不能超过50</b>
+                <!-- <b v-show="this.Wordhint.Working.address" class="Working_input"> 输入长度不能超过50</b> -->
+                <b v-show="checkData.hirecomName&&checkData.hirecomName.length>=50" class="Working_input"> 输入长度不能超过50</b>
               </i>
               <label class="InternetInf_left_label">工作单位：</label>
-              <input type="text" class="specialInput" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirecomName"
-                @compositionend="wordInput50(checkData.hirecomName,'工作单位')" @keydown="wordInput50(checkData.hirecomName,'工作单位')"
-                @keyup="wordInput50(checkData.hirecomName,'工作单位')">
+              <input type="text" class="specialInput" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirecomName">
+                <!-- @compositionend="wordInput50(checkData.hirecomName,'工作单位')" @keydown="wordInput50(checkData.hirecomName,'工作单位')"
+                @keyup="wordInput50(checkData.hirecomName,'工作单位')" -->
             </li>
             <li style="margin-top:14px;">
               <i class="hint"> </i>
@@ -360,14 +361,16 @@
                 </el-option>
               </el-select>
             </li>
-            <li>
+            <li  class="position_relative">
               <i class="hint">
-                <b v-show="this.Wordhint.Working.level" class="Working_input"> 输入长度不能超过20</b>
+                <!-- <b v-show="this.Wordhint.Working.level" class="Working_input"> 输入长度不能超过20</b> -->
+                <b v-show="checkData.workPost&&checkData.workPost.length>=20" class="Working_input"> 输入长度不能超过20</b>
+                
               </i>
               <label class="InternetInf_left_label "> 职位级别： </label>
-              <el-input type="text" :maxlength="this.shotInputL" placeholder="请输入内容" v-model="checkData.workPost"
-                @compositionend.native="wordInput20(checkData.workPost,'职位级别')" @keydown.native="wordInput20(checkData.workPost,'职位级别')"
-                @keyup.native="wordInput20(checkData.workPost,'职位级别')">
+              <el-input type="text" :maxlength="this.shotInputL" placeholder="请输入内容" v-model="checkData.workPost">
+                <!-- @compositionend.native="wordInput20(checkData.workPost,'职位级别')" @keydown.native="wordInput20(checkData.workPost,'职位级别')"
+                @keyup.native="wordInput20(checkData.workPost,'职位级别')" -->
               </el-input>
             </li>
             <li class="position_relative">
