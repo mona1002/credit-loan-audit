@@ -1,5 +1,5 @@
 <template>
-<!-- 流程轨迹- 质检查查信审流程轨迹 -->
+  <!-- 流程轨迹- 质检查查信审流程轨迹 -->
   <div>
     <el-table :data="tableData" border style="width: 100%" highlight-current-row>
       <el-table-column type="index" label="序号" width="50">
@@ -32,19 +32,18 @@
       }
     },
     props: {
-      pro: {
+      applyId: {
         default: '',
         required: true
       }
     },
     methods: {
       mountedInf() {
-        this.post(baseurlBPM.baseUrl_common2 + '/bpmService/getProcessTraceList', {
-            processInstanceId: this.pro,
-            processStatus: '02' //流程状态 01未完成  02 已完成
+        this.get('/insConclusion/getInsProcessTraceList', {
+            applyId: this.applyId
           })
           .then(res => {
-           res.taskDetailList&&res.taskDetailList.length>0? this.tableData = res.taskDetailList:this.tableData =[];
+            res.taskDetailList && res.taskDetailList.length > 0 ? this.tableData = res.taskDetailList : this.tableData = [];
           })
       }
     },

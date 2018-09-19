@@ -55,21 +55,21 @@
             <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
               <!-- 专员部分 -->
               <QTAprovalConclution v-if=" this.tabContent1==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <aAprovalConclusion v-if=" this.tabContent1==12 "  :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
-               <process v-if=" this.tabContent1==13"  :pro='tastwaitingPass.processInstanceId'>流程轨迹</process>
+              <aAprovalConclusion v-if=" this.tabContent1==12 " :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
+              <process v-if=" this.tabContent1==13" :applyId='tastwaitingPass.ApplyId'>流程轨迹</process>
               <!-- <regularQT v-if=" this.tabContent1==14&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==14&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
             </div>
             <div class='tab2_Content_show' v-if="RoleSHow=='partTwo'">
               <!-- 主管部分 -->
-               <process v-if=" this.tabContent1==11"  :pro='tastwaitingPass.processInstanceId'>流程轨迹</process>
+              <process v-if=" this.tabContent1==11" :applyId='tastwaitingPass.ApplyId'>流程轨迹</process>
               <!-- <regularQT v-if=" this.tabContent1==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
             </div>
             <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
               <!-- 质检部分 -->
               <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <aAprovalConclusion v-if=" this.tabContent1==12"  :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
+              <aAprovalConclusion v-if=" this.tabContent1==12" :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
               <ComplianceProcess v-if=" this.tabContent1==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
               <RulesReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
               <!-- <regularQT v-if=" this.tabContent1==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
@@ -123,21 +123,21 @@
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
             <!-- 专员部分 -->
             <QTAprovalConclution v-if=" this.tabContent2==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <aAprovalConclusion v-if=" this.tabContent2==12 "  :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
-          <process v-if=" this.tabContent2==13"  :pro='tastwaitingPass.processInstanceId'>流程轨迹</process>
+            <aAprovalConclusion v-if=" this.tabContent2==12 " :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
+            <process v-if=" this.tabContent2==13" :applyId='tastwaitingPass.ApplyId'>流程轨迹</process>
             <regularQT v-if=" this.tabContent2==14&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==14&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partTwo'">
             <!-- 主管部分 -->
-                <process v-if=" this.tabContent2==11"  :pro='tastwaitingPass.processInstanceId'>流程轨迹</process>
+            <process v-if=" this.tabContent2==11" :applyId='tastwaitingPass.ApplyId'>流程轨迹</process>
             <regularQT v-if=" this.tabContent2==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
             <!-- 质检部分 -->
             <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <aAprovalConclusion v-if=" this.tabContent2==12"  :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
+            <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
             <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
             <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
             <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>

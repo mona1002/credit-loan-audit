@@ -560,9 +560,9 @@
         },
         // 弹窗显示
         dialogFormVisible: false,
-        verIncomError: false, // 审批 - 月核实收入错误
-        ploanAmtError: false, // 审批 - 批准金额
-        ploanTermError: false, // 批准期限 
+        // verIncomError: false, // 审批 - 月核实收入错误
+        // ploanAmtError: false, // 审批 - 批准金额
+        // ploanTermError: false, // 批准期限 
         ploanTerms: [], // 审批 - 返回的批准期限集合
         ploanTermItem: '', // 审批 - 批准期限item
         synthesisRateM: '', // 审批 - 计算审批结论数据 - 综合费率
@@ -754,36 +754,22 @@
             if (this.judgeFlag == '01') {
               this.$router.push('/taskInWaitting');
               this._del('初审详情');
-            }else if (this.judgeFlag == '02') { // 终审
+            } else if (this.judgeFlag == '02') { // 终审
               this.$router.push('/FtaskInWaitting' + this.routeParams);
               this._del('终审详情');
             }
           } else {
             this.hangOut = false;
-            if (res.statusCode == 500) {
-              // this.hangOut = false;
-              // this.$message({
-              //   type: 'warning',
-              //   message: '网络异常,请重试!'
-              // });
-                this._error('网络异常,请重试!')
-            } else {
-              if (this.judgeFlag == '01') {
-                this.$router.push('/taskInWaitting');
-              }
-              // 终审
-              else if (this.judgeFlag == '02') {
-                this.$router.push('/FtaskInWaitting' + this.routeParams);
-              }
-              // this.hangOut = false;
-              // this.$message({
-              //   type: 'warning',
-              //   message: res.msg
-              // });
-              this._error(res.msg)
-            }
+            this._error('挂起失败！请检查网络后再试！')
           }
         });
+      },
+      // 获取系统时间
+      getSystemDate() {
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
+          // 请求系统时间
+          this.dealroperDate = res.data;
+        })
       },
       coverFn(flag) {
         // 清空原因
@@ -793,161 +779,150 @@
         this.loadingTitle = '提交';
         // 页面点击按钮出现 的 对应 弹窗
         // 统一处理    回退 02 ,拒绝 01, 放弃  07, 审批 03, 审批结论 spjl, 流程轨迹 lcgj
-        switch (flag) {
-          case '02':
-            this.huiTuiShow = true;
-            // 获取系统时间
-            this.get('system/getSystemDate?' + Math.random()).then(res => {
-              // 请求系统时间
-              this.dealroperDate = res.data;
-            })
-            break;
-          case '01':
-            this.juJueShow = true;
-            this.get('system/getSystemDate?' + Math.random()).then(res => {
-              // 请求系统时间
-              this.dealroperDate = res.data;
-            })
-            // 拒绝 03 new
-            this.getReason('main', '03')
-            break;
-          case '07':
-            this.fangQiShow = true;
-            this.get('system/getSystemDate?' + Math.random()).then(res => {
-              // 请求系统时间
-              this.dealroperDate = res.data;
-            })
-            // 放弃 05 new
-            this.getReason('main', '05')
-            break;
-
-            //审批按钮
-          case '03':
-            this.shenPiShow = true;
-            // 申请金额
-            this.loanAmt = this.applicationInformationDetail.loanAmt;
-            // 申请信息-申请产品
-            this.sqproName = this.applicationInformationDetail.proName;
-            // 可接受最高每期还款额
-            this.eachTermAmt = this.applicationInformationDetail.eachTermAmt;
-            // 申请类型/借款类型
-            this.loanType = this.applicationInformationDetail.loanTypeTxt;
-            //初审的时候调用评分接口
-            if (this.judgeFlag == '01') {
-              // 信用评分  核实可接受最高还款额
-              this.post('/credit/quotaScoring', {
-                applyId: this.applyId,
-                proId: this.sproId,
-                appOrgId: this.appOrgId
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  this.quotaData = res.data;
-                  // 单独处理 评分   =>  "评分:51.6"
-                  this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
-                  this.fbalance = res.data.fbalance;
-                  if (res.data.creditScore.split(',')[1]) {
-                    this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(
-                      ',')[1];
-                  } else {
-                    this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
-                  }
-                } else {
-                  this._error(res.msg)
-                }
-              });
-              //带回回退的信息
-              this.post('/creauditOpinion/queryCreauditOpinionObj', {
-                applyId: this.applyId
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  if (res.data) {
-                    // this.verIncome = Number(res.data.verIncome).toLocaleString() + '.00'; //月核实收入[元];
-                    this.verIncome2 = res.data.verIncome;
-                    // this.verIncome2 = Number(this.verIncome.split('.')[0].replace(/,/g, '')) +
-                    //   Number('0.' + this.verIncome.split('.')[1]);
-                    this.proId = res.data.proId; //批准产品ID;
-                    this.proName = res.data.proName; //批准产品;
-                    this.ploanTerm = res.data.ploanTerm; //批准期限[月];
-                    this.ploanAmt2 = res.data.ploanAmt;
-                    res.data.verIncome || res.data.verIncome == 0 ? this.verIncome = this._formatNumber(res.data.verIncome) :
-                      this.verIncome = res.data.verIncome; //月核实收入[元];
-                    res.data.ploanAmt || res.data.ploanAmt == 0 ? this.ploanAmt = this._formatNumber(res.data.ploanAmt) :
-                      this.ploanAmt = res.data.ploanAmt; //批准金额[元];
-                    // this.ploanAmt = Number(res.data.ploanAmt).toLocaleString() + '.00'; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
-                    this.caculData.appmult = res.data.appmult; //审批倍数;
-                    this.caculData.eachTermamt = res.data.eachTermamt; //月还款额[元];
-                    this.caculData.inteDebitrate = res.data.inteDebitrate; //内部负债率;
-                    this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
-                    this.caculData.totalRate = res.data.totalRate; //总负债率;
-                    this.appConclusion = res.data.appConclusion; //意见说明;
-                    this.maxAmounnt = res.data.maxAmounnt; // 最大
-                    this.minAmount = res.data.minAmount; // 最小
-                    //获取批准期限
-                    this.ploanTerms = res.data.returnList; //获取批准期限
-                    if (this.ploanTerm) { //初审第一次未填，在选中下拉值时赋值
-                      for (let item of this.ploanTerms) {
-                        if (item.appDuration == this.ploanTerm) {
-                          ({
-                            loanRateYr: this.loanRateYr,
-                            repayWay: this.repayWay,
-                            synthesisRateM: this.synthesisRateM
-                          } = item);
-                        }
-                      }
+        if (flag)
+          switch (flag) {
+            case '02':
+              this.huiTuiShow = true;
+              this.getSystemDate();
+              break;
+            case '01':
+              this.juJueShow = true;
+              this.getSystemDate();
+              // 拒绝 03 new
+              this.getReason('main', '03')
+              break;
+            case '07':
+              this.fangQiShow = true;
+              this.getSystemDate();
+              // 放弃 05 new
+              this.getReason('main', '05')
+              break;
+              //审批按钮
+            case '03':
+              this.shenPiShow = true;
+              // 申请金额
+              this.loanAmt = this.applicationInformationDetail.loanAmt;
+              // 申请信息-申请产品
+              this.sqproName = this.applicationInformationDetail.proName;
+              // 可接受最高每期还款额
+              this.eachTermAmt = this.applicationInformationDetail.eachTermAmt;
+              // 申请类型/借款类型
+              this.loanType = this.applicationInformationDetail.loanTypeTxt;
+              //初审的时候调用评分接口
+              if (this.judgeFlag == '01') {
+                // 信用评分  核实可接受最高还款额
+                this.post('/credit/quotaScoring', {
+                  applyId: this.applyId,
+                  proId: this.sproId,
+                  appOrgId: this.appOrgId
+                }).then(res => {
+                  if (res.statusCode == '200') {
+                    this.quotaData = res.data;
+                    // 单独处理 评分   =>  "评分:51.6"
+                    this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
+                    this.fbalance = res.data.fbalance;
+                    if (res.data.creditScore.split(',')[1]) {
+                      this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(
+                        ',')[1];
+                    } else {
+                      this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
                     }
                   } else {
-                    return;
+                    this._error(res.msg)
                   }
-                } else {
-                  this.verIncome = ''; //月核实收入[元];
-                  this.verIncome2 = '';
-                  this.proId = ''; //批准产品ID;
-                  this.proName = ''; //批准产品;
-                  this.ploanTerm = ''; //批准期限[月];
-                  this.ploanAmt = ''; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
-                  this.ploanAmt2 = ''
-                  this.caculData.appmult = ''; //审批倍数;
-                  this.caculData.eachTermamt = ''; //月还款额[元];
-                  this.caculData.inteDebitrate = ''; //内部负债率;
-                  this.caculData.creditDebitRate = ''; //总信用负债率;
-                  this.caculData.totalRate = ''; //总负债率;
-                  this.appConclusion = ''; //意见说明;
-                  this.maxAmounn = ''; // 最大
-                  this.minAmount = ''; // 最小
-                  //获取批准期限
-                  this.ploanTerms = []; //获取批准期限
-                  this.loanRateYr = '';
-                  this.repayWay = '';
-                  this.synthesisRateM = '';
-                }
+                });
+                //带回回退的信息
+                this.post('/creauditOpinion/queryCreauditOpinionObj', {
+                  applyId: this.applyId
+                }).then(res => {
+                  if (res.statusCode == '200') {
+                    if (res.data) {
+                      // this.verIncome = Number(res.data.verIncome).toLocaleString() + '.00'; //月核实收入[元];
+                      this.verIncome2 = res.data.verIncome;
+                      // this.verIncome2 = Number(this.verIncome.split('.')[0].replace(/,/g, '')) +
+                      //   Number('0.' + this.verIncome.split('.')[1]);
+                      this.proId = res.data.proId; //批准产品ID;
+                      this.proName = res.data.proName; //批准产品;
+                      this.ploanTerm = res.data.ploanTerm; //批准期限[月];
+                      this.ploanAmt2 = res.data.ploanAmt;
+                      res.data.verIncome || res.data.verIncome == 0 ? this.verIncome = this._formatNumber(res.data.verIncome) :
+                        this.verIncome = res.data.verIncome; //月核实收入[元];
+                      res.data.ploanAmt || res.data.ploanAmt == 0 ? this.ploanAmt = this._formatNumber(res.data.ploanAmt) :
+                        this.ploanAmt = res.data.ploanAmt; //批准金额[元];
+                      // this.ploanAmt = Number(res.data.ploanAmt).toLocaleString() + '.00'; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
+                      this.caculData.appmult = res.data.appmult; //审批倍数;
+                      this.caculData.eachTermamt = res.data.eachTermamt; //月还款额[元];
+                      this.caculData.inteDebitrate = res.data.inteDebitrate; //内部负债率;
+                      this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
+                      this.caculData.totalRate = res.data.totalRate; //总负债率;
+                      this.appConclusion = res.data.appConclusion; //意见说明;
+                      this.maxAmounnt = res.data.maxAmounnt; // 最大
+                      this.minAmount = res.data.minAmount; // 最小
+                      //获取批准期限
+                      this.ploanTerms = res.data.returnList; //获取批准期限
+                      if (this.ploanTerm) { //初审第一次未填，在选中下拉值时赋值
+                        for (let item of this.ploanTerms) {
+                          if (item.appDuration == this.ploanTerm) {
+                            ({
+                              loanRateYr: this.loanRateYr,
+                              repayWay: this.repayWay,
+                              synthesisRateM: this.synthesisRateM
+                            } = item);
+                          }
+                        }
+                      }
+                    } else {
+                      return;
+                    }
+                  } else {
+                    this.verIncome = ''; //月核实收入[元];
+                    this.verIncome2 = '';
+                    this.proId = ''; //批准产品ID;
+                    this.proName = ''; //批准产品;
+                    this.ploanTerm = ''; //批准期限[月];
+                    this.ploanAmt = ''; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
+                    this.ploanAmt2 = ''
+                    this.caculData.appmult = ''; //审批倍数;
+                    this.caculData.eachTermamt = ''; //月还款额[元];
+                    this.caculData.inteDebitrate = ''; //内部负债率;
+                    this.caculData.creditDebitRate = ''; //总信用负债率;
+                    this.caculData.totalRate = ''; //总负债率;
+                    this.appConclusion = ''; //意见说明;
+                    this.maxAmounn = ''; // 最大
+                    this.minAmount = ''; // 最小
+                    //获取批准期限
+                    this.ploanTerms = []; //获取批准期限
+                    this.loanRateYr = '';
+                    this.repayWay = '';
+                    this.synthesisRateM = '';
+                  }
+                });
+              } else if (this.judgeFlag == '02') {
+                this.queryCreauditOpinionObj();
+              }
+              break;
+            case 'fqz':
+              this.$router.push({
+                name: 'AntiApplyEditf'
               });
-            } else if (this.judgeFlag == '02') {
-              this.queryCreauditOpinionObj();
-            }
-            break;
-          case 'fqz':
-            this.$router.push({
-              name: 'AntiApplyEditf'
-            });
-            this.params = {
-              id: this.applyId,
-              flag: 'start',
-              busiState: '30',
-              channel: '00'
-            }
-            localStorage.setItem("AntiApplyParams", JSON.stringify(this.params));
-            break;
-          case 'spjl':
-            this.spjlShow = true;
-            this.getSpjlList();
-            break;
-          case 'lcgj':
-            this.lcgjShow = true;
-            // 任务状态
-            this.lcgjLoading = true;
-            this.getLcgjList();
-            break;
-        }
+              this.params = {
+                id: this.applyId,
+                flag: 'start',
+                busiState: '30',
+                channel: '00'
+              }
+              localStorage.setItem("AntiApplyParams", JSON.stringify(this.params));
+              break;
+            case 'spjl':
+              this.spjlShow = true;
+              this.getSpjlList();
+              break;
+            case 'lcgj':
+              this.lcgjLoading = this.lcgjShow = true;
+              // 任务状态
+              this.getLcgjList();
+              break;
+          }
       },
       // 根据id 请求信息  终审 - 审批
       queryCreauditOpinionObj() {
@@ -1033,190 +1008,189 @@
       submitFn(flag) {
         // 手动赋值  经办人
         this.dealroperCode = this.dealroperCode;
-        switch (flag) {
-          case '01':
-            // 必填校验
-            // 主原因
-            if (!this.mainReason) {
-              // this.$message({
-              //   message: '提示：',
-              //   type: 'warning'
-              // });
-              this._error('请选择主原因!')
-              return;
-            }
-            // 原因说明
-            if (!this.reasonRemark) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // });
-              this._error('请填写原因说明!')
-              return;
-            }
-            this.creauditAppOperate = 'check_Refuse';
-            // 区分初审/终审
-            if (this.judgeFlag == '01') {
-              this.busiState = '02';
-            } else if (this.judgeFlag == '02') {
-              this.busiState = '12'
-            }
-            this.approvalFn();
-            break;
-          case '02':
-            // 进行必填校验
-            // 回退节点
-            if (this.rollbackNodeName.length == 0) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // });
-              this._error('请选择回退节点!')
-              return;
-            }
-            // 主原因
-            if (!this.mainReason) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // });
-              this._error('请选择主原因!')
-              return;
-            }
-            // 原因说明
-            if (!this.reasonRemark) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // });
-              this._error('请填写原因说明!')
-              return;
-            }
-            this.creauditAppOperate = 'check_Back';
-            // 区分初审/终审
-            if (this.judgeFlag == '01') {
-              this.busiState = '00';
-            } else if (this.judgeFlag == '02') {
-              if (this.rollbackNodeName.value == 'creditApp_apply') { //申请登记
-                this.busiState = '00'
-              } else if (this.rollbackNodeName.value == 'creditApp_firstTrial') { //初审审批
-                this.busiState = '10'
-              }
-            }
-            this.approvalFn();
-            break;
-          case '07':
-            // 主原因
-            if (!this.mainReason) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-
-              // });
-              this._error('请选择主原因!')
-              return;
-            }
-            // 原因说明
-            if (!this.reasonRemark) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-
-              // });
-              this._error('请填写原因说明!')
-              return;
-            }
-            this.creauditAppOperate = 'check_Abandon';
-            // 区分初审/终审
-            if (this.judgeFlag == '01') {
-              this.busiState = '03';
-            } else if (this.judgeFlag == '02') {
-              this.busiState = '13'
-            }
-            this.approvalFn();
-            break;
-          case '03':
-            // 校验必填项
-            // 假如没有  核实可接受最高每期还款额 , 提示
-            if (!this.fbalance2) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // });
-              this._error('请完善信审表中可承受的月还款金额！')
-              return;
-            }
-            // 月核实收入
-            if (!this.verIncome) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // });
-              this._error('请填月核实收入!')
-              this.verIncomError = true;
-              return;
-            }
-            // 批准产品 id
-            if (!this.proId) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // });
-              this._error('请选择批准产品!')
-              return;
-            }
-            // 批准期限
-            if (!this.ploanTerm) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // });
-              this._error('请选择批准期限!')
-              this.ploanTermError = true;
-              return;
-            }
-            // 批准金额 ploanAmt
-            if (!this.ploanAmt) {
-              // this.$message({
-              //   message: "提示：",
-              //   type: 'warning'
-              // })
-              this._error('请填写批准金额!')
-              this.ploanAmtError = true;
-              return;
-            }
-            // 批准金额 ploanAmt
-            if (this.ploanAmt) {
-              var regs = /\,/g;
-              var newPloanAmt = this.ploanAmt.replace(regs, '') * 1;
-              if (newPloanAmt > this.maxAuditAmt && this.opinionFlag == '00') {
-                // this.$message({
-                //   message: "提示：大于当前审批人最高审批金额权限，请选择请求更高级审批!",
-                //   type: 'warning'
-                // })
-                this._error('大于当前审批人最高审批金额权限，请选择请求更高级审批!');
-                return;
-              };
-            };
-            // 意见说明 appConclusion
-            if (!this.appConclusion) {
-              // this.$message({
-              //   message: "提示：请填写意见说明!",
-              //   type: 'warning'
-              // })
-              this._error("提示：请填写意见说明!");
-              return;
-            }
-            // 区分初审/终审
-            if (this.judgeFlag == '01') {
-              this.busiState = '04';
-            } else if (this.judgeFlag == '02') {
-              this.busiState = '14'
-            }
-            // 保存审批信息
-            this.saveCreaduit();
-            break;
+        // 回退、拒绝、放弃
+        //必填校验
+        if (flag == '02' && this.rollbackNodeName.length == 0) {
+          this._error('请选择回退节点!')
+          return;
         }
+        if (flag != '03') {
+          if (!this.mainReason) {
+            this._error('请选择主原因!')
+            return;
+          }
+          if (!this.reasonRemark) {
+            this._error('请填写原因说明!')
+            return;
+          }
+          //  区分初审/终审
+          if (this.judgeFlag == '01') {
+            if (flag == '01') this.busiState = '02';
+            if (flag == '02') this.busiState = '00';
+            if (flag == '07') this.busiState = '03';
+          } else if (this.judgeFlag == '02') {
+            if (flag == '01') this.busiState = '12';
+            if (flag == '02') {
+              this.rollbackNodeName.value == 'creditApp_apply' ? this.busiState = '00' : ''; //申请登记
+              this.rollbackNodeName.value == 'creditApp_firstTrial' ? this.busiState = '10' : ''; //初审审批
+            }
+            if (flag == '07') this.busiState = '13';
+          }
+          // 设置入参
+          if (flag == '01') this.creauditAppOperate = 'check_Refuse';
+          if (flag == '02') this.creauditAppOperate = 'check_Back';
+          if (flag == '07') this.creauditAppOperate = 'check_Abandon';
+          this.approvalFn();
+        } else { // 审批 03
+          if (!this.fbalance2) {
+            this._error('请完善信审表中可承受的月还款金额！')
+            return;
+          }
+          if (!this.verIncome) {
+            this._error('请填月核实收入!')
+            return;
+          }
+          if (!this.proId) {
+            this._error('请选择批准产品!')
+            return;
+          }
+          if (!this.ploanTerm) {
+            this._error('请选择批准期限!')
+            return;
+          }
+          if (!this.ploanAmt) {
+            this._error('请填写批准金额!')
+            return;
+          }
+          if (this.ploanAmt) {
+            var newPloanAmt = this.ploanAmt.replace(/\,/g, '') * 1;
+            if (newPloanAmt > this.maxAuditAmt && this.opinionFlag == '00') {
+              this._error('大于当前审批人最高审批金额权限，请选择请求更高级审批!');
+              return;
+            };
+          };
+          if (!this.appConclusion) {
+            this._error("请填写意见说明!");
+            return;
+          }
+          // 区分初审/终审
+          this.judgeFlag == '01' ? this.busiState = '04' : this.busiState = '14';
+          this.saveCreaduit();
+        }
+        // switch (flag) {
+        // case '01':
+        // 必填校验
+        // if (!this.mainReason) {
+        //   this._error('请选择主原因!')
+        //   return;
+        // }
+        // if (!this.reasonRemark) {
+        //   this._error('请填写原因说明!')
+        //   return;
+        // }
+        // this.creauditAppOperate = 'check_Refuse';
+        // 区分初审/终审
+        // if (this.judgeFlag == '01') {
+        //   this.busiState = '02';
+        // } else if (this.judgeFlag == '02') {
+        //   this.busiState = '12'
+        // }
+        // this.approvalFn();
+        // break;
+        // case '02':
+        // 进行必填校验
+        // 回退节点
+        // if (this.rollbackNodeName.length == 0) {
+        //   this._error('请选择回退节点!')
+        //   return;
+        // }
+        // if (!this.mainReason) {
+        //   this._error('请选择主原因!')
+        //   return;
+        // }
+        // if (!this.reasonRemark) {
+        //   this._error('请填写原因说明!')
+        //   return;
+        // }
+        // this.creauditAppOperate = 'check_Back';
+        // 区分初审/终审
+        // if (this.judgeFlag == '01') {
+        //   // this.busiState = '00';
+        // } else if (this.judgeFlag == '02') {
+        //   if (this.rollbackNodeName.value == 'creditApp_apply') { //申请登记
+        //     this.busiState = '00'
+        //   } else if (this.rollbackNodeName.value == 'creditApp_firstTrial') { //初审审批
+        //     this.busiState = '10'
+        //   }
+        // }
+        // this.approvalFn();
+        // break;
+        // case '07':
+        // if (!this.mainReason) {
+        //   this._error('请选择主原因!')
+        //   return;
+        // }
+        // if (!this.reasonRemark) {
+        //   this._error('请填写原因说明!')
+        //   return;
+        // }
+        // this.creauditAppOperate = 'check_Abandon';
+        // 区分初审/终审
+        // if (this.judgeFlag == '01') {
+        //   this.busiState = '03';
+        // } else if (this.judgeFlag == '02') {
+        //   this.busiState = '13'
+        // }
+        // this.approvalFn();
+        // break;
+        // case '03':
+        // 校验必填项
+        // 假如没有  核实可接受最高每期还款额 , 提示
+        // if (!this.fbalance2) {
+        //   this._error('请完善信审表中可承受的月还款金额！')
+        //   return;
+        // }
+        // if (!this.verIncome) {
+        //   this._error('请填月核实收入!')
+        //   this.verIncomError = true;
+        //   return;
+        // }
+        // if (!this.proId) {
+        //   this._error('请选择批准产品!')
+        //   return;
+        // }
+        // if (!this.ploanTerm) {
+        //   this._error('请选择批准期限!')
+        //   this.ploanTermError = true;
+        //   return;
+        // }
+        // if (!this.ploanAmt) {
+        //   this._error('请填写批准金额!')
+        //   this.ploanAmtError = true;
+        //   return;
+        // }
+        // if (this.ploanAmt) {
+        //   var regs = /\,/g;
+        //   var newPloanAmt = this.ploanAmt.replace(regs, '') * 1;
+        //   if (newPloanAmt > this.maxAuditAmt && this.opinionFlag == '00') {
+        //     this._error('大于当前审批人最高审批金额权限，请选择请求更高级审批!');
+        //     return;
+        //   };
+        // };
+        // if (!this.appConclusion) {
+        //   this._error("请填写意见说明!");
+        //   return;
+        // }
+        // // 区分初审/终审
+        // if (this.judgeFlag == '01') {
+        //   this.busiState = '04';
+        // } else if (this.judgeFlag == '02') {
+        //   this.busiState = '14'
+        // }
+        // // 保存审批信息
+        // this.saveCreaduit();
+        // break;
+        // }
       },
       // 回退/拒绝/放弃
       approvalFn() {
@@ -1263,15 +1237,6 @@
         }).then(res => {
           this.fangQiShow = this.juJueShow = this.huiTuiShow = this.isLoading = false;
           this.loadingTitle = '提交';
-          // 返回结果 处理所有的控制显示
-          if (res.statusCode != '200') {
-            // this.$message({
-            //   message: res.msg,
-            //   type: 'warning'
-            // })
-            this._error(res.msg);
-            return;
-          }
           if (res.statusCode == '200') {
             this.mainReason = ''; // 回退主原因
             this.secondaryReason = ''; // 回退子原因
@@ -1279,10 +1244,6 @@
             this.rollbackNodeName = ''; // 回退节点名称
             this.dealroperDate = ''; // 经办时间
             this.creauditAppOperate = ''; // 操作类型
-            // this.$message({
-            //   message: res.msg,
-            //   type: 'success'
-            // })
             this._succe(res.msg)
             if (this.judgeFlag == '01') {
               this.$router.push('/taskInWaitting');
@@ -1294,10 +1255,6 @@
             }
           } else {
             this._error(res.msg);
-            // this.$message({
-            //   message: res.msg ? res.msg : '网络异常,请重试',
-            //   type: 'success'
-            // })
           }
         });
       },
@@ -1359,30 +1316,12 @@
         }).then(res => {
           this.isLoading = false;
           this.loadingTitle = '提交';
-          // 更改显示
           this.shenPiShow = false;
-          // 判断 500
-          // if (res.statusCode == '500') {
-          //   // this.$message({
-          //   //   message: '网络异常,请重试!',
-          //   //   type: 'warning'
-          //   // })
-          //   this._error('网络异常,请重试!');
-          //   return;
-          // }
           if (res.statusCode != '200') {
-            // this.$message({
-            //   message: res.msg,
-            //   type: 'warning'
-            // })
             this._error(res.msg);
             return;
           }
           if (res.statusCode == '200') {
-            // this.$message({
-            //   message: res.msg,
-            //   type: 'success'
-            // })
             this._succe(res.msg);
             this.verIncome = ''; // 核实收入
             this.ploanAmt = ''; // 批准金额
@@ -1465,9 +1404,6 @@
                 this.tableData.recordList[i].eachTermamt = this.tableData.recordList[i].eachTermamt.toLocaleString();
             }
           } else {
-            // if (res.statusCode == '500')
-            //   this.$message('网络异常,请重试!');
-            // else
             this.tableData = [];
             this.$_error(res.msg);
           }
@@ -1501,30 +1437,6 @@
         // 在主原因改变的时候请求子原因
         this.getReason('second', this.mainId);
       },
-      // 批准产品 更改
-      // proSlelecChange: function (val) {
-      //   this.ploanTerm = '';
-      //   this.ploanAmt = '';
-      //   this.debtRate = val.debtRate; //产品负债率
-      //   // id val.id  产品id
-      //   this.proId = val.id;
-      //   // proCode  产品code
-      //   this.proCode = val.proCode;
-      //   this.proName = val.proName;
-      //   // 最大金额
-      //   this.maxAmounnt = val.maxAmounnt;
-      //   // 最小金额
-      //   this.minAmount = val.minAmount;
-      //   // this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
-      //   this.post('/credit/ploanTermByPro', {
-      //     proId: res.data.proId,
-      //     applyId: this.applyId
-      //   }).then(res => {
-      //     if (res.statusCode == '200')
-      //       this.ploanTerms = res.data;
-      //   })
-
-      // },
       // 批准期限更改
       ploanTermChange: function (val) {
         // 批准期限
@@ -1536,10 +1448,7 @@
         // 还款方式  
         this.repayWay = val.repayWay;
         // 计算 审批记录数据
-        // if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
-        //   this.loanRateYr && this.repayWay && this.synthesisRateM) {
         this.calculateByAuditInfo();
-        // }
       },
       // 计算审批结论数据
       calculateByAuditInfo: function () {
@@ -1580,16 +1489,6 @@
       },
       // 月核实收入[元]
       moneyBlur: function (val, flag) {
-        // 无数据
-        // if (!val) {
-        //   if (flag == 'verIncome') {
-        //     this.verIncome = '';
-        //     this.verIncome2 = '';
-        //   } else if (flag == 'ploanAmt') {
-        //     this.ploanAmt = ''
-        //     this.ploanAmt2 = ''
-        //   }
-        // }
         let val2 = 0;
         val.indexOf(',') != -1 ? val = val.replace(/,/g, '') : '';
         if (isNaN(Number(val)) || val <= 0 || val == '') {
@@ -1599,85 +1498,22 @@
           val = this._formatNumber(val);
           val2 = parseFloat(val.replace(/,/g, ''))
         }
-        // 有数据
-        // if (val) {
         if (flag == 'verIncome') {
-          // if (/,/.test(val)) {
-          //   if (/\./.test(val)) { // 有小数
-          //     this.verIncome2 = Number(val.split('.')[0].replace(/,/g, '')) +
-          //       Number('0.' + val.split('.')[1]);
-          //     // 页面值
-          //     this.verIncome = Number(val.split('.')[0].replace(/,/g, '')).toLocaleString() + '.' + val.split(
-          //       '.')[
-          //       1];
-          //   } else {
-          //     this.verIncome2 = Number(val.replace(/,/g, ''));
-          //     this.verIncome = Number(val).toLocaleString() + '.00';
-          //   }
-          // } else {
-          //   this.verIncome2 = Number(val);
-          //   if (/\./.test(val)) { // 有小数
-          //     // 页面值
-          //     this.verIncome = Number(val.split('.')[0]).toLocaleString() + '.' + val.split('.')[1];
-          //   } else {
-          //     // 页面值
-          //     this.verIncome = Number(val).toLocaleString() + '.00';
-          //   }
-          // }
-          // this.verIncome.indexOf(',') != -1 ? this.verIncome = this.verIncome.replace(/,/g, '') : '';
-          // if (isNaN(Number(this.verIncome)) || this.verIncome <= 0 || this.verIncome == '') {
-          //   this.verIncome = '1.00';
-          //   this.verIncome2 = 1;
-          // } else if (this.verIncome > 0) {
-          //   this.verIncome = this._formatNumber(this.verIncome);
-          //   this.verIncome2 = parseFloat(this.verIncome.replace(/,/g, ''))
-          // }
           this.verIncome = val;
           this.verIncome2 = val2;
           this.calculateByAuditInfo();
         } else if (flag == 'ploanAmt') {
-          // this.ploanAmt.indexOf(',') != -1 ? this.ploanAmt = this.ploanAmt.replace(/,/g, '') : '';
-          // if (isNaN(Number(this.ploanAmt)) || this.ploanAmt <= 0 || this.ploanAmt == '') {
-          //   this.ploanAmt = '1.00';
-          //   this.ploanAmt2 = 1;
-          // } else if (this.ploanAmt > 0) {
-          //   this.ploanAmt = this._formatNumber(this.ploanAmt);
-          //   this.ploanAmt2 = parseFloat(this.ploanAmt.replace(/,/g, ''))
-          // }
-          // if (/,/.test(val)) {
-          //   if (/./.test(val)) {
-          //     this.ploanAmt2 = Number(val.split('.')[0].replace(/,/g, '')) +
-          //       Number('0.' + val.split('.')[1]);
-          //     // 页面值
-          //     this.ploanAmt = Number(val.split('.')[0].replace(/,/g, '')).toLocaleString() + '.' + val.split(
-          //       '.')[1];
-          //   } else {
-          //     this.ploanAmt2 = Number(val.replace(/,/g, ''));
-          //     // 页面值
-          //     this.ploanAmt = val.split('.')[0].toLocaleString() + '.00';
-          //   }
-          // } else {
-          //   this.ploanAmt2 = Number(val)
-          //   // 页面值
-          //   if (/\./.test(val)) {
-          //     this.ploanAmt = Number(val.split('.')[0]).toLocaleString() + '.' + val.split('.')[1];
-          //   } else {
-          //     this.ploanAmt = Number(val).toLocaleString() + '.00';
-          //   }
-          // }
-          // 大于最大
+          // 校验
           if (val2 > this.maxAmounnt) {
             this._error('批准金额不能大于产品最高上限' + this.maxAmounnt + '元');
             this.ploanAmt = this.ploanAmt2 = '';
             return;
           }
-          // 小于最小
           if (val2 < this.minAmount) {
             this._error('批准金额不能小于产品最低下限' + this.minAmount + '元')
             this.ploanAmt = this.ploanAmt2 = '';
             return;
           }
-          // 大于申请金额
           if (val2 > Number(this.loanAmt.split('.')[0].replace(',', ''))) {
             this._error('此金额不能大于申请金额,请重新输入!')
             this.ploanAmt = this.ploanAmt2 = '';
@@ -1690,12 +1526,12 @@
           // 显示错误提示
           if (flag == "verIncome") {
             this.verIncome = this.verIncome2 = '';
-            this.verIncomError = true;
+            // this.verIncomError = true;
           } else if (flag == "ploanAmt") {
-            this.ploanAmt = this.ploanAmt2 = this.ploanAmtError = '';
+            this.ploanAmt = this.ploanAmt2 = '';
+            // this.ploanAmtError = 
           }
         }
-        // }
       },
       //大数据风控
       tobigData() {
@@ -1710,57 +1546,7 @@
           });
         });
       },
-      // roSocialSecurity() {
-      //   if (this.social == "(未授权)") {
-      //     this.$confirm('客户社保公积金未授权！', '提示', {
-      //       confirmButtonText: '确定',
-      //       type: 'warning',
-      //       cancelButtonText: '取消',
-      //       showCancelButton: true
-      //     }).then(() => {}).catch(() => {});
-      //   } else if (this.social == "(已授权)") {
-      //     this.$router.push({
-      //       path: '/SocialSe'
-      //     });
-      //   }
-      // },
-      // del(delname) {
-      //   this.$store.dispatch('delVisitedViews', {
-      //     name: delname
-      //   }).then((views) => {
-      //     const latestView = views.slice(-1)[0]
-      //     if (latestView) {
-      //       this.$router.push(latestView.StatefullPath);
-      //     } else {
-      //       this.$router.push('/')
-      //     }
-      //   })
-      // }
     },
-    // 监听器
-    // watch: {
-    // coverShow: function (value) {
-    //   // 当 弹窗消失 ,直接清空所有数据
-    //   if (!value) {
-    //     this.reasonRemark = ''; // 意见描述/原因说明
-    //     this.rollbackNodeName = ''; // 回退节点名称
-    //   }
-    // },
-    // 批准期限
-    // ploanTerm: function () {
-    //   // 计算 审批记录数据
-    //   if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
-    //     this.loanRateYr && this.repayWay && this.synthesisRateM) {
-    //     this.calculateByAuditInfo();
-    //   }
-    // },
-    // 产品 id
-    // proId: function () {
-    //   if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 &&
-    //     this.eachTermamt.length > 0 && this.loanRateYr && this.repayWay && this.synthesisRateM)
-    //     this.calculateByAuditInfo();
-    // },
-    // }
   }
 
 </script>
