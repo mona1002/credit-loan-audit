@@ -172,14 +172,16 @@
         // 基础接口-综合查询
         this.post("applyInfoPool/multipleQuery", pam).then(res => {
           if (res.statusCode == 200) {
+              this.loading = false;
             this.tableData = res.data;
-            for (var i = 0; i < res.data.length; i++) {
-              var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
-              this.tableData[i].appDate = regs.exec(res.data[i].appDate)[0];
-            }
-            this.loading = false;
+            // console.log(exce())
+            // for (var i = 0; i < res.data.length; i++) {
+            //   var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
+            //   this.tableData[i].appDate = regs.exec(res.data[i].appDate)[0];
+            // }
           } else {
             this.loading = false;
+              this.tableData =[];
             this.$message.error(res.msg);
           }
         })

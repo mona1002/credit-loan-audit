@@ -1,6 +1,6 @@
-// 获取b日期前后N天日期。_getDate（3）后3天，_getDate（-3）前三天，不穿b默认查询当天日期。
-// 参数：   b:要查询的日期，a：要查询日期（b）的前/后 a 天
 exports.install = function (Vue, options) {
+  // 获取b日期前后N天日期。_getDate（3）后3天，_getDate（-3）前三天，不穿b默认查询当天日期。
+  // 参数：   b:要查询的日期，a：要查询日期（b）的前/后 a 天
   Vue.prototype._getDate = function (a = 0, b = '') {
     let time = new Date();
     b == '' ? b = time : '';
@@ -10,9 +10,32 @@ exports.install = function (Vue, options) {
       day = (time.getDate() + '').length == 1 ? '0' + time.getDate() : time.getDate();
     return year + '-' + month + '-' + day;
   };
+  // 错误提示语
+  Vue.prototype._error = function (msg = '') {
+    return this.$message.error(msg)
+  };
+  //成功提示语
+  Vue.prototype._succe = function (msg = '') {
+    return this.$message({
+      type: 'success',
+      message: msg
+    })
+  };
+  // 删除页签
+  Vue.prototype._del = function (delname = '') {
+    this.$store.dispatch('delVisitedViews', {
+      name: delname
+    }).then((views) => {
+      const latestView = views.slice(-1)[0]
+      if (latestView) {
+        this.$router.push(latestView.StatefullPath);
+      } else {
+        this.$router.push('/')
+      }
+    })
+  }
   //保留两位小数 整数千分位
   Vue.prototype._formatNumber = function (num, cent = 2, isThousand = 0) {
-    console.log(num)
     num = num.toString().replace(/\$|\,/g, '');
     // 检查传入数值为数值类型
     if (isNaN(num))
@@ -29,14 +52,12 @@ exports.install = function (Vue, options) {
     for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
       num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
     if (cent > 0) {
-    console.log(1,num)
       if (sign == true) {
         return (((sign) ? '' : '-') + num + '.' + cents);
       } else if (sign == false) {
         return '0.00'
       }
     } else {
-    console.log(1,num)
       return (((sign) ? '' : '-') + num);
     }
   };
