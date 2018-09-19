@@ -43,7 +43,12 @@
             applyId: this.applyId
           })
           .then(res => {
-            res.taskDetailList && res.taskDetailList.length > 0 ? this.tableData = res.taskDetailList : this.tableData = [];
+            if(res.statusCode==200){
+               this.tableData = res.data.taskDetailList;
+            }else{
+              this.tableData=[];
+              this._error(res.msg)
+            }
           })
       }
     },
