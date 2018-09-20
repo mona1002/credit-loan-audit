@@ -170,7 +170,7 @@
               {{dealroperCode}}
             </el-form-item>
             <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
-              {{dealroperDate}} {{dealroperDate | dateFilter}}
+              {{dealroperDate | dateFilter}}
             </el-form-item>
           </div>
         </el-form>
