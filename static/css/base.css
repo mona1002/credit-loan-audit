@@ -382,6 +382,9 @@
  .hundred_percent .el-table .el-table__body-wrapper{
   height: auto !important;
 }
+.hundred_percent .el-table {
+  height: auto !important;
+}
  /* 特殊表格宽度 */
 
  /* .Abody .el_table_500 .el-table {

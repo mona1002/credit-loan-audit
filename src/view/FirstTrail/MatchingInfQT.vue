@@ -56,13 +56,13 @@
               <!-- 专员部分 -->
               <QTAprovalConclution v-if=" this.tabContent1==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
               <aAprovalConclusion v-if=" this.tabContent1==12 " :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
-              <process v-if=" this.tabContent1==13" :applyId='tastwaitingPass.ApplyId'>流程轨迹</process>
+              <processTrajectory v-if=" this.tabContent1==13" :applyId='tastwaitingPass.ApplyId'>流程轨迹</processTrajectory>
               <!-- <regularQT v-if=" this.tabContent1==14&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==14&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
             </div>
             <div class='tab2_Content_show' v-if="RoleSHow=='partTwo'">
               <!-- 主管部分 -->
-              <process v-if=" this.tabContent1==11" :applyId='tastwaitingPass.ApplyId'>流程轨迹</process>
+              <processTrajectory v-if=" this.tabContent1==11" :applyId='tastwaitingPass.ApplyId'>流程轨迹</processTrajectory>
               <!-- <regularQT v-if=" this.tabContent1==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
             </div>
@@ -124,13 +124,13 @@
             <!-- 专员部分 -->
             <QTAprovalConclution v-if=" this.tabContent2==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
             <aAprovalConclusion v-if=" this.tabContent2==12 " :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
-            <process v-if=" this.tabContent2==13" :applyId='tastwaitingPass.ApplyId'>流程轨迹</process>
+            <processTrajectory v-if=" this.tabContent2==13" :applyId='tastwaitingPass.ApplyId'>流程轨迹</processTrajectory>
             <regularQT v-if=" this.tabContent2==14&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==14&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partTwo'">
             <!-- 主管部分 -->
-            <process v-if=" this.tabContent2==11" :applyId='tastwaitingPass.ApplyId'>流程轨迹</process>
+            <processTrajectory v-if=" this.tabContent2==11" :applyId='tastwaitingPass.ApplyId'>流程轨迹</processTrajectory>
             <regularQT v-if=" this.tabContent2==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
@@ -177,7 +177,7 @@
   import AudioVisual from "./detailComponent/AudioVisual.vue";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft.vue";
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
-  import process from'../QualityTesting/QTReconsiderProcess/components/process.vue';//流程轨迹
+  import processTrajectory from'./checkComponent/processTrajectory.vue';//流程轨迹
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import applicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
@@ -497,7 +497,7 @@
     components: {
       AudioVisual,
       AudioVisualLeft,
-      process,
+      processTrajectory,
       FCreditForm,
       applicationInformationDetail,
       RborrowerInformationSetail, //借款人资料

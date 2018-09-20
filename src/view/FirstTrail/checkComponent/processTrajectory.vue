@@ -1,6 +1,6 @@
-<!-- 信审流程轨迹   流程轨迹  -->
+<!-- 流程轨迹：   查全部流程轨迹 （弹窗式流程轨迹：查自己的流程轨迹） -->
 <template>
-  <div>
+  <!-- <div> -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -8,7 +8,7 @@
           <span class="collapse_title_text">信审流程轨迹</span>
         </template>
         <div class="hundred_percent">
-          <el-table :data="taskDetailList" style="width: 100%" height="744" highlight-current-row border>
+          <el-table :data="taskDetailList" style="width: 100%" highlight-current-row border>
             <el-table-column type="index" :index="1" label="序号" width="55">
             </el-table-column>
             <el-table-column label="任务节点" prop="taskNodeNameTxt" width="170">
@@ -31,16 +31,14 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-  </div>
+  <!-- </div> -->
 </template>
 <script type="text/javascript">
   export default {
     data() {
       return {
         activeNames: ['1'],
-        // applyId: '',
         taskDetailList: [],
-        judgeFlag: '',
       }
     },
     props: {
@@ -55,17 +53,6 @@
     },
     methods: {
       mountedInf() {
-        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        // if (this.judgeFlag.flag == '01') {
-        //   this.applyId = JSON.parse(localStorage.getItem("taskInWaitting")).applyId; // 初审
-        // } else if (this.judgeFlag.flag == '02') {
-        //   this.applyId = JSON.parse(localStorage.getItem("FtaskInWaitting")).applyId //终审
-        // } else if (this.judgeFlag.flag == '14') {
-        //   this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //任务管理-审批任务
-        // } else if (this.judgeFlag.flag == '15') {
-        //   this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //任务管理-质检任务
-        // }
-        // this.request()
         this.get("/creauditInfo/getProcessTraceListByApplyId", {
           applyId: this.applyId,
         }).then(res => {
@@ -77,8 +64,24 @@
             this.$message.error(res.msg);
           }
         })
+        // this.get('/insConclusion/getInsProcessTraceList', {
+        //     applyId: this.applyId
+        //   })
+        //   .then(res => {
+        //     if (res.statusCode == 200) {
+        //       this.tableData = res.data.taskDetailList;
+        //     } else {
+        //       this.tableData = [];
+        //       this._error(res.msg)
+        //     }
+        //   })
       },
     },
   }
 
 </script>
+<style>
+.ccc{
+
+}
+</style>
