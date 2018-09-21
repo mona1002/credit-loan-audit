@@ -32,7 +32,7 @@
           <keep-alive v-if="Routes.closed">
             <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId'></AudioVisual>
           </keep-alive>
-          <remarkDetail v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></remarkDetail>
+          <remark v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId'
@@ -57,7 +57,7 @@
 </template>
 <script>
   import AudioVisual from '../FirstTrail/detailComponent/AudioVisual.vue'; //工作台
-  import remarkDetail from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
+  import remark from '../FirstTrail/detailComponent/remark.vue' //备注信息
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   import AborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
@@ -146,7 +146,7 @@
       AntiApplyInf, //反欺诈申请信息
       approvalConclus, //审批结论
       aAntiFraudInvestigation, //反欺诈调查
-      remarkDetail, //备注信息
+      remark, //备注信息
       AborrowerInformationDetail, //借款人资料
       capplicationInformationDetail, //申请信息
       InternalMatch,
