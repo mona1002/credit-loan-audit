@@ -33,6 +33,15 @@
   margin-right: 5px;
 }
 
+/* label 宽度 */
+.label_223 {
+  /* display: inline-block; */
+  width: 223px;
+
+  /* font-size: 14px;
+  font-weight: normal; */
+}
+
 /* 气泡 */
 .el-tooltip__popper {
   max-width: 320px;
@@ -404,11 +413,12 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 .SplitScreen .left,
 .SplitScreen .right
+
 /* .SplitScreen .AudioVisual_wrap_compare_left, */
 /* .SplitScreen .AudioVisual_wrap_compare_right  */
-{
+  {
   /* width: calc(50% ); */
-  width:50%;
+  width: 50%;
   height: 100%;
   overflow: auto;
   background: #ffffff;
@@ -420,7 +430,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 /* 对比右侧弹出层2px间距 */
 /* .SplitScreen .AudioVisual_wrap_compare_right { */
-  /* margin-left: 2px; */
+/* margin-left: 2px; */
 /* } */
 
 .SplitScreen .left,
@@ -474,9 +484,10 @@ body .el-table_450_scroll .el-table__fixed-right {
 /* 左侧详情 p标签  */
 .SplitScreen .Left_right_Title,
 .SplitScreen .right .Right_tab_title_div
+
 /* .SplitScreen .AudioVisual_wrap_compare_left>p, */
 /* .SplitScreen .AudioVisual_wrap_compare_right>p  */
-{
+  {
   font-size: 16px;
   text-align: center;
   background: rgba(0, 119, 255, 0.75);
@@ -515,7 +526,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 .SplitScreen .Right_tab_ul_wrap ul li {
   display: inline-block;
-  margin-right: 40px;
+  margin-right: 20px;
   letter-spacing: 0.11px;
   height: 38px;
   line-height: 38px;
@@ -544,8 +555,8 @@ body .el-table_450_scroll .el-table__fixed-right {
 /*  对比弹出层 外包 div 流 */
 .SplitScreen .AudioVisual_wrap_compare {
   position: absolute;
-  right:0;
-  width:50%;
+  right: 0;
+  width: 50%;
   height: 100%;
   z-index: 22;
   background: #ffffff;
@@ -747,10 +758,12 @@ body .el-table_450_scroll .el-table__fixed-right {
   color: rgba(0, 119, 255, 0.75);
   cursor: pointer;
 }
-.blueC>label:hover{
+
+.blueC>label:hover {
   color: rgba(0, 119, 255, 0.75);
-   cursor: pointer;
- }
+  cursor: pointer;
+}
+
 /*------------creditform------- 核对现住址-------------------------- */
 /* 
     .CreditForm_check_reside li,

@@ -1009,6 +1009,7 @@
         loadSub: false,
         adbtn: '确定',
         ReconSubmit: '提交',
+        checkTypeParams: '',
         currentRow: null,
         addId: '',
         ind: 0,
@@ -1371,7 +1372,11 @@
         this.ReconsiderShow = true;
       },
       referPort() { // 质检页面查询接口
-        this.get("/insConclusion/queryInsConclusionObj?applyId=" + this.propQTconclution.applyId + '&' + Math.random())
+        // this.get("/insConclusion/queryInsConclusionObj?applyId=" + this.propQTconclution.applyId + '&' + Math.random())
+        this.get("/insConclusion/queryInsConclusionObj", {
+            applyId: this.propQTconclution.applyId,
+            checkType: this.checkTypeParams, //01专员，02主管
+          })
           .then(res => {
             if (res.statusCode == 200) {
               // 除基本信息以外，专员获取都为空，applyid要一个个赋值进去
@@ -1780,7 +1785,8 @@
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
             this.propQTconclution.pageType == 'checkApp_check_manager' && this.insConclusion[i].checkType == '01' ?
               this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
-            this.propQTconclution.pageType == 'checkApp_check_manager' ? this.insConclusion[i].checkType = '02' : this.insConclusion[i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
+            this.propQTconclution.pageType == 'checkApp_check_manager' ? this.insConclusion[i].checkType = '02' : this.insConclusion[
+              i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
           }
           // insResultTxt  更改微信支付宝显示汉字字段
           for (var k = 0; k < this.AlipayConcat.length; k++) {
@@ -2125,11 +2131,11 @@
       showdiffer() {
         // ----------------------角色------------------------------
         if (this.propQTconclution.pageType == 'checkApp_apply') { //专员-编辑  √
+          this.checkTypeParams = '01' //查询质检页面入参 ：01专员，02主管
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             this.instaskType = '00';
             this.QTConclutionBtn = true;
-          } else
-          if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
+          } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.instaskType = '01';
             this.QTresult = [];
             if (this.propQTconclution.tastwaitingPass.instaskType == '01') { //专项   
@@ -2144,6 +2150,7 @@
             this.regularAndSpecial();
           }
         } else if (this.propQTconclution.pageType == 'checkApp_check_manager') { //主管-编辑 √
+          this.checkTypeParams = '02'; //查询质检页面入参 ：01专员，02主管
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             this.submitBtn = false; //提交
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
@@ -2204,10 +2211,10 @@
     mounted() {
       // console.log('propQTconclution:', this.propQTconclution)
       this.URL = baseurl.imgBaseUrl;
-      this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      this.referPort(); //质检查询页面
+      this.getSystermTime();
       this.showdiffer();
+      this.referPort(); //质检查询页面
     }
   }
 
