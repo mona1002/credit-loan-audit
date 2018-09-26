@@ -1787,6 +1787,7 @@
               this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
             this.propQTconclution.pageType == 'checkApp_check_manager' ? this.insConclusion[i].checkType = '02' : this.insConclusion[
               i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
+              this.insConclusion[i].insDate= this.systermTime;//质检主管，专员，质检结论入参-质检日期重置为系统时间的毫秒数（返参为2019-8-28格式）
           }
           // insResultTxt  更改微信支付宝显示汉字字段
           for (var k = 0; k < this.AlipayConcat.length; k++) {
