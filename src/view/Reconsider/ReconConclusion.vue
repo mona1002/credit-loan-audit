@@ -472,6 +472,7 @@
         appOrgId: '', //进件ID
         //审批
         creditScore: '', // 单独处理的评分
+        loanAmt: null, //审批金额（输入批准金额是校验）
         verIncome: '', // 核实收入
         ploanAmt: '', // 批准金额
         ploanTerm: '', // 批准期限
@@ -558,8 +559,10 @@
         }).then(res => {
           if (res.statusCode == '200') {
             this.datas = res.data;
+            this.loanAmt = res.data.loanAmt;
             this.datas.eachTermAmt = this._formatNumber(this.datas.eachTermAmt);
             this.datas.loanAmt = this._formatNumber(this.datas.loanAmt);
+
           }
         })
       },
@@ -848,37 +851,42 @@
       },
       // 月核实收入[元]
       moneyBlur: function (val, flag) {
+        val || val == 0 ? val = val.toString().replace(/,/, '') : '';
+        // console.log(val)
         switch (flag) {
           case 'verIncome':
-            if (isNaN(Number(this.verIncome)) || this.verIncome <= 0 || this.verIncome == '') {
+            if (isNaN(Number(val)) || val <= 0 || val == '') {
               this.verIncome = '1.00';
-            } else if (this.verIncome > 0) {
+            } else if (val > 0) {
               this.verIncome = this._formatNumber(this.verIncome);
             }
             this.calculateByAuditInfo();
             break;
           case 'ploanAmt':
-            if (this.ploanAmt * 1 > this.maxAmounnt) {
+            if (val * 1 > this.maxAmounnt) {
               this.$message({
                 message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
                 type: 'warning'
               });
               this.ploanAmt = '';
+              return
             };
-            if (this.ploanAmt * 1 < this.minAmount) {
+            if (val * 1 < this.minAmount) {
               this.$message({
                 message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
                 type: 'warning'
               });
               this.ploanAmt = '';
+              return
             };
             // 大于申请金额
-            if (this.ploanAmt * 1 > this.datas.loanAmt) {
+            if (val * 1 > this.loanAmt) {
               this.$message({
                 message: '此金额不能大于申请金额,请重新输入!',
                 type: 'warning'
               });
               this.ploanAmt = '';
+              return
             };
             this.ploanAmt = this._formatNumber(this.ploanAmt);
             this.calculateByAuditInfo();
