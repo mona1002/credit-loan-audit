@@ -1375,7 +1375,7 @@
         // this.get("/insConclusion/queryInsConclusionObj?applyId=" + this.propQTconclution.applyId + '&' + Math.random())
         this.get("/insConclusion/queryInsConclusionObj", {
             applyId: this.propQTconclution.applyId,
-            checkType: this.checkTypeParams, //01专员，02主管
+            // checkType: this.checkTypeParams, //01专员，02主管
           })
           .then(res => {
             if (res.statusCode == 200) {
