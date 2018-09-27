@@ -33,6 +33,9 @@
   margin-right: 5px;
 }
 
+.margin_bottom_10 {
+  margin-bottom: 10px;
+}
 /* label 宽度 */
 .label_223 {
   /* display: inline-block; */
@@ -635,10 +638,26 @@ body .el-table_450_scroll .el-table__fixed-right {
   border: none;
 }
 
+/* 宽度 */
+.Abody .CreditForm .one_row {
+  width: 100%;
+}
+
+.CreditForm .el-form-item {
+  /* border:1px solid red; */
+  float: left;
+  width:50%;
+  height: auto;
+  margin-bottom: 0;
+  margin-top:12px;
+}
+
 .CreditForm .top {
   /* margin-top: 4px; */
 }
-
+.specialInput {
+  width: calc(100% - 230px);
+}
 /* .CreditForm li {
   color: #475669;
   font-size: 14px;

@@ -157,7 +157,11 @@
       // f(6,3) // 1
       //一进入页面就发送请求
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      this.judgeFlag.flag == '01' ? this.remarkType = '03' : this.remarkType = '04'; //初审03，终审04
+    // this.judgeFlag&& this.judgeFlag.flag == '01' ? this.remarkType = '03' : this.remarkType = '04'; //初审03，终审04
+      if(this.judgeFlag ){//初审03，终审04
+        this.judgeFlag.flag == '01' ? this.remarkType = '03' :'';
+        this.judgeFlag.flag == '02' ? this.remarkType = '04' :'';
+      }
       //获取当前登陆人的用户名
       this.remarker = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.request();

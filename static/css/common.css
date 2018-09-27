@@ -250,7 +250,8 @@ table {
 .CreditForm {
   overflow: auto;
   overflow-x: hidden;
-  min-width: 1665px;
+  min-width:930px;
+  /* min-width: 1400px; */
 }
 
 .SP_middle {

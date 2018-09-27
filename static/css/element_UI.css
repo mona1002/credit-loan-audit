@@ -510,7 +510,7 @@
 
 .CreditForm .el-textarea {
   vertical-align: top;
-  width: calc(100% - 295px);
+  /* width: calc(100% - 295px); */
 }
 
 
@@ -535,8 +535,7 @@
 /* 信审表：初审结果评价textarea宽度 */
 
 .CreditForm .CreditForm_result .el-textarea {
-  width: calc( 50% + 200px);
-  width: calc(100% - 260px);
+  width: calc(100% - 230px);
 }
 
 .CreditForm .CreditForm_result .el-textarea__inner {

@@ -80,7 +80,7 @@
           </keep-alive>
           <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
           <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull" :addBtn="true"></PhoneCredit>
-          <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
+          <CreditForm  v-if=" this.tabContent2==6"></CreditForm>
           <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
           </keep-alive>
