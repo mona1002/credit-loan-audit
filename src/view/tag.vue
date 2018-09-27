@@ -388,6 +388,8 @@
           this.nodeName = "借款台账";
         }else if (route.path == '/brrLedgerDetail') { // 定时任务
           this.nodeName = "借款台账-申请信息";
+        } else if (route.path == '/greyLIst') { // 灰名单
+          this.nodeName = "灰名单查询";
         } 
         
         this.RoutePath = route.path;

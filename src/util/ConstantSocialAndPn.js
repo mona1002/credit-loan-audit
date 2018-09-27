@@ -13,7 +13,8 @@ var host = location.hostname,
   postfix = '',
   testU = '';
 if (host === productionEnv) {
-  host = "nyph-credit.nuoyuan.com.cn";
+  host ='120.55.74.99:8282';
+  // host = "nyph-credit.nuoyuan.com.cn";
   postfix = '/ptopCredit/rm';
 } else if (host === releaseEnv) {
   host = "120.26.131.205:8081";

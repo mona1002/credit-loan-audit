@@ -72,6 +72,9 @@ import appLedgerDetail from '../view/systermManagement/LedgerDetail/appLedgerDet
 import borrowLedger from '../view/systermManagement/borrowLedger.vue' //借款台账
 import brrLedgerDetail from '../view/systermManagement/LedgerDetail/brrLedgerDetail.vue' //借款台账-详情
 import telBook from '../view/SocialSeAndPneCtrl/PneCtrl/telBook.vue' //通讯录
+//--------------风险管理--------------
+import greyLIst from '../view/riskManagement.vue/greyLIst.vue' //灰名单
+
 
 Vue.use(Router)
 // 添加路由：添加到最后面，不要改变原路由顺序，会影响其他部分页面
@@ -321,6 +324,16 @@ const routes = [{
     path: "/ACManagerTaskList",
     component: ACManagerTaskList
   },
+  // ---------------------风险管理--------- 
+  {
+    path: '/greyLIst',
+    component: greyLIst,
+    closed: true
+  },
+  // {
+  //   path: '/greyLIst',
+  //   component: greyLIst,
+  // },
   // ---------------------流程监控--------- 
   {
     path: '/processMoniAntiDistributed',

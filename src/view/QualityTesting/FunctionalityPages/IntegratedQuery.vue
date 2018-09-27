@@ -91,8 +91,6 @@
   </div>
 </template>
 <script>
-  import baseU from '../../../util/constant';
-  import baseurl from '../../../util/ConstantSocialAndPn';
   export default {
     data() {
       return {
