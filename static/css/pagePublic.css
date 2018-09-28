@@ -577,6 +577,8 @@ body .el-table_450_scroll .el-table__fixed-right {
   height: 100%;
   z-index: 22;
   background: #ffffff;
+  border: 1px solid #bfcbd9;
+  border-radius: 4px;
 }
 
 /* 弹出层 - 两侧组件 content  流 */

@@ -32,10 +32,32 @@ new Vue({
 })
 // 定义全局 过滤器
 // 日期过滤器
-Vue.filter('dateFilter', function (value) {
-  if (!value) return ''
-  return String(new Date(value).getFullYear()) + '-' + String(new Date(value).getMonth() + 1) + '-' + String(new Date(value).getDate());
+// Vue.filter('dateFilter', function (value) {
+//   if (!value) return ''
+//   return String(new Date(value).getFullYear()) + '-' + String(new Date(value).getMonth() + 1) + '-' + String(new Date(value).getDate());
 
+// })
+// 日期过滤器 value:时间戳，sec：是否显示时分秒，twoDigitM月份不足两位是否补0，twoDigitD：天数是否补0（同上）
+Vue.filter('dateFilter', function (value, sec = false, twoDigitM = false, twoDigitD = false) {
+  if (!value) return ''
+  typeof (value) == Number ? '' : value = value.toString() * 1;
+  let time = new Date(value),
+    year = time.getFullYear(),
+    month = time.getMonth() + 1,
+    day = time.getDate(),
+    seconds = time.toString().split(' ')[4],
+    Time ='';
+  if (twoDigitM) {
+    month < 10 && month > 0 ? month = '0' + month : '';
+  }
+  if (twoDigitD) {
+    day < 10 && day > 0 ? day = '0' + day : '';
+  }
+  Time = year + '-' + month + '-' + day;
+  if (sec) {
+    Time = Time + ' ' + seconds;
+  }
+  return Time;
 })
 // 信审审批 - 审批 计算倍数
 Vue.filter('formatValue', function (value) {
@@ -92,8 +114,8 @@ Vue.filter('YesOrNo', function (value) {
   if (value == false) return '否';
 })
 // *100 之后，变百分号留两位小数
-Vue.filter("percent100",function(value){
-if (value==0) return '0.00%';
-if(!value) return '';
-return (value*100).toFixed(2) + '%';
+Vue.filter("percent100", function (value) {
+  if (value == 0) return '0.00%';
+  if (!value) return '';
+  return (value * 100).toFixed(2) + '%';
 })
