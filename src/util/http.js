@@ -49,7 +49,17 @@ export default {
             })
             .catch((error) => {})
         })
+      },
+      Vue.prototype.Delete = function (url, data = {}) {
+        return new Promise((resolve, reject) => {    
+          axios.delete(url, data)      
+            .then(response => {        
+              resolve(response.data);      
+            }, err => {        
+              reject(err);      
+            })
+            .catch((error) => {})
+        })
       }
-
   }
 }

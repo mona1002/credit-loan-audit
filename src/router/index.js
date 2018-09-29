@@ -74,7 +74,11 @@ import brrLedgerDetail from '../view/systermManagement/LedgerDetail/brrLedgerDet
 import telBook from '../view/SocialSeAndPneCtrl/PneCtrl/telBook.vue' //通讯录
 //--------------风险管理--------------
 import greyLIst from '../view/riskManagement.vue/greyLIst.vue' //灰名单
-
+import blackList from '../view/riskManagement.vue/blackList/blackList.vue' //黑名单
+import blackListOutApply from '../view/riskManagement.vue/blackList/blackListOutApply.vue' //黑名单转出申请
+import blackListOutApr from '../view/riskManagement.vue/blackList/blackListOutApr.vue' //黑名单转出审批
+import blackListToApply from '../view/riskManagement.vue/blackList/blackListToApply.vue' //黑名单转入申请
+import blackListToApr from '../view/riskManagement.vue/blackList/blackListToApr.vue' //黑名单转入审批
 
 Vue.use(Router)
 // 添加路由：添加到最后面，不要改变原路由顺序，会影响其他部分页面
@@ -330,10 +334,31 @@ const routes = [{
     component: greyLIst,
     closed: true
   },
-  // {
-  //   path: '/greyLIst',
-  //   component: greyLIst,
-  // },
+  {
+    path: '/blackList',
+    component: blackList,
+    closed: true
+  },
+  {
+    path: '/blackListOutApply',
+    component: blackListOutApply,
+     closed: true
+  },
+  {
+    path: '/blackListOutApr',
+    component: blackListOutApr,
+     closed: true
+  },
+  {
+    path: '/blackListToApply',
+    component: blackListToApply,
+     closed: true
+  },
+  {
+    path: '/blackListToApr',
+    component: blackListToApr,
+     closed: true
+  },
   // ---------------------流程监控--------- 
   {
     path: '/processMoniAntiDistributed',

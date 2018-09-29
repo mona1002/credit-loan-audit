@@ -46,7 +46,7 @@ Vue.filter('dateFilter', function (value, sec = false, twoDigitM = false, twoDig
     month = time.getMonth() + 1,
     day = time.getDate(),
     seconds = time.toString().split(' ')[4],
-    Time ='';
+    Time = '';
   if (twoDigitM) {
     month < 10 && month > 0 ? month = '0' + month : '';
   }
@@ -54,9 +54,7 @@ Vue.filter('dateFilter', function (value, sec = false, twoDigitM = false, twoDig
     day < 10 && day > 0 ? day = '0' + day : '';
   }
   Time = year + '-' + month + '-' + day;
-  if (sec) {
-    Time = Time + ' ' + seconds;
-  }
+  sec ? Time = Time + ' ' + seconds : '';
   return Time;
 })
 // 信审审批 - 审批 计算倍数
