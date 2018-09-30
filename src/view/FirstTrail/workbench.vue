@@ -5,6 +5,11 @@
       <div class="main_left">
         <h2 style="font-weight:bold;">
           <i class="el-icon-edit"> </i>常用 </h2>
+          <!-- <router-link to='/greyLIst'>gray</router-link>
+          <router-link to='/blackListOutApr'>Out——Apr</router-link>
+          <router-link to='/blackList'>blackList</router-link>
+          <router-link to='/blackListToApr'>to-------apr</router-link>
+          <router-link to='/blackListOutApply'>Out--------Apply</router-link> -->
       </div>
       <div class="main_right">
         <!-- 中间 -->
@@ -19,12 +24,13 @@
                 </span>
               </template>
               <div class="height_auto">
-                <el-table ref="singleTable" :data="tableData" highlight-current-row @row-click="handleCurrentChange" style="width: 100%">
-                  <el-table-column property="processTemplateTxt" label="任务名称" >
+                <el-table ref="singleTable" :data="tableData" highlight-current-row @row-click="handleCurrentChange"
+                  style="width: 100%">
+                  <el-table-column property="processTemplateTxt" label="任务名称">
                   </el-table-column>
-                  <el-table-column property="taskNodeNameTxt" label="节点名称" >
+                  <el-table-column property="taskNodeNameTxt" label="节点名称">
                   </el-table-column>
-                  <el-table-column property="count" label="任务数目" >
+                  <el-table-column property="count" label="任务数目">
                   </el-table-column>
                 </el-table>
               </div>
