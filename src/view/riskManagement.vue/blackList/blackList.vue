@@ -1,52 +1,43 @@
+<!--风险管理 黑名单 -->
 <template>
   <div class="taskWatting main-div">
-    <!--风险管理 灰名单 -->
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
-          <span class="keywordText">进件编号： </span>
-          <el-input v-model.trim="params.param.applySubNo" @keyup.enter.native='Rsearch' placeholder="请输入进件编号"></el-input>
-        </el-col>
-        <el-col :span="6" class="search-item">
-          <span class="keywordText">客户编号：</span>
-          <el-input v-model.trim="params.param.custNo" @keyup.enter.native='Rsearch' placeholder="请输入客户名称"></el-input>
-        </el-col>
-        <el-col :span="6" class="search-item">
-          <span class="keywordText">灰名单类型：</span>
-          <el-select v-model="params.param.listType" placeholder="请选择">
+          <span class="keywordText">黑名单类型： </span>
+          <el-select v-model="params.param.blackListType" placeholder="请选择">
             <el-option v-for="item in listType" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">客户名称：</span>
-          <el-input v-model.trim="params.param.custName" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
+          <el-input v-model.trim="params.param.blackCustName" @keyup.enter.native='Rsearch' placeholder="请输入客户名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">证件号码：</span>
+          <el-input v-model.trim="params.param.blackCertCode" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">单位名称：</span>
+          <el-input v-model.trim="params.param.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
-          <span class="keywordText">证件号码：</span>
-          <el-input v-model.trim="params.param.certCode" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
-        </el-col>
-        <el-col :span="6" class="search-item">
-          <span class="keywordText">单位名称：</span>
-          <el-input v-model.trim="params.param.company" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
-        </el-col>
-        <el-col :span="6" class="search-item">
           <span class="keywordText">电话：</span>
-          <el-input v-model.trim="params.param.mobile" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
+          <el-input v-model.trim="params.param.blackPhone" @keyup.enter.native='Rsearch' placeholder="请输入电话"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">地址： </span>
-          <el-input v-model.trim="params.param.address" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
-        </el-col>
-      </el-row>
-      <el-row class="row row1" type="flex">
-        <el-col :span="6" class="search-item" :offset="0">
+          <!-- <span class="keywordText">进件编号：</span>
+          <el-input v-model.trim="params.param.blackAddress" @keyup.enter.native='Rsearch' placeholder="请输入地址"></el-input> -->
         </el-col>
         <el-col :span="6" class="search-item">
-        </el-col>
-        <el-col :span="6" class="search-item">
+          <!-- <span class="keywordText">加黑类型：</span>
+          <el-select v-model="params.param.blackListType" placeholder="请选择">
+            <el-option v-for="item in blackType" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select> -->
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -57,37 +48,49 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        灰名单客户列表
+        黑名单客户列表
+      </span>
+      <span class="iconContainer">
+        <span class="icon-item" @click='Import'>
+          <i class="el-icon brokenLineIcon"></i>
+          <span class="el-icon-text">批量导入</span>
+        </span>
       </span>
     </div>
     <div class="listContainer">
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
         <el-table-column type="index" label=序号 width="55">
         </el-table-column>
-        <el-table-column prop="applySubno" label="进件编号" width="180">
+        <el-table-column prop="blackListTypeTxt" label="黑名单类型" width="100">
         </el-table-column>
-        <el-table-column prop="custNo" label="客户编号" width="120">
+        <el-table-column prop="blackCustName" label="客户名称" width="100">
         </el-table-column>
-        <el-table-column prop="listTypeTxt" label="灰名单类型" width="150">
+        <el-table-column prop="blackCertTypeTxt" label="证件类型" width="80">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称" width="150">
+        <el-table-column prop="blackCertCode" label="证件号码" width="150">
         </el-table-column>
-        <el-table-column prop="workTel" label="证件类型" width="150">
+        <el-table-column prop="blackCompany" label="单位名称" width="150">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码" width="150">
+        <el-table-column prop="blackAddress" label="地址" width="150">
         </el-table-column>
-        <el-table-column prop="company" label="单位名称" width="150">
+        <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <el-table-column prop="address" label="地址" width="150">
+        <!-- 字段取值待确认 -->
+        <!-- <el-table-column prop="blackPhone" label="加黑类型" width="100">
         </el-table-column>
-        <el-table-column prop="mobile" label="电话" width="100">
+        <el-table-column prop="blackRemark" label="申请说明" width="160">
         </el-table-column>
-        <el-table-column prop="remark" label="原因说明" width="120">
+        <el-table-column prop="disposePerCode" label="申请人" width="100">
         </el-table-column>
-        <el-table-column prop="disposePerCode" label="经办人" width="100">
+        <el-table-column prop="disposePerDate" label="申请时间" min-width="100">
         </el-table-column>
-        <el-table-column prop="disposePerDate" label="经办时间" min-width="100">
+          <el-table-column prop="disposePerCode" label="审批人" width="100">
         </el-table-column>
+        <el-table-column prop="disposePerDate" label="审批时间" min-width="100">
+        </el-table-column>
+          <el-table-column prop="disposePerCode" label="审批说明" width="100">
+        </el-table-column> -->
+
         <!-- <el-table-column label="证件号码" width="180">
           <template slot-scope="scope">
             <span>{{ scope.row.certCode |cerCodeStar }}</span>
@@ -111,14 +114,13 @@
         totalRecord: 0,
         params: {
           param: {
-            applySubNo: '', //	进件编号
-            custNo: '', //	客户编号
-            listType: '', //	灰名单类型
-            custName: '', //	客户名称
-            certCode: '', //	证件号码
-            company: '', //	单位名称
-            mobile: '', //	电话
-            address: '', //	地址
+            blackListType: '', //	黑名单类型
+            blackCustName: '', //	客户名称
+            blackCertCode: '', //	证件号码
+            blackCompany: '', //	单位名称
+            blackPhone: '', //	电话
+            // blackAddress: '', //	进件编号
+            // blackAddress: '', // 加黑类型
           },
           pageParam: {
             pageNum: 1, //	页码
@@ -142,12 +144,29 @@
             label: '单位名称'
           }
         ],
-        Routes: this.$router.options.routes[50],
+        blackType: [{
+            value: '01',
+            label: '客户'
+          },
+          {
+            value: '02',
+            label: '电话'
+          },
+          {
+            value: '03',
+            label: '地址'
+          },
+          {
+            value: '04',
+            label: '单位名称'
+          }
+        ],
+        Routes: this.$router.options.routes[51],
       }
     },
     watch: {
       '$route'(to, from) {
-        if (to.path === '/greyLIst') {
+        if (to.path === '/blackList') {
           if (!this.Routes.closed) {
             this.params.pageParam.pageSize = 10;
             this.Rreset();
@@ -158,14 +177,13 @@
     },
     methods: {
       Rreset() {
-        this.params.param.applySubNo = ''; //	进件编号
-        this.params.param.custNo = ''; //	客户编号
-        this.params.param.listType = ''; //	灰名单类型
-        this.params.param.custName = ''; //	客户名称
-        this.params.param.certCode = ''; //	证件号码
-        this.params.param.company = ''; //	单位名称
-        this.params.param.mobile = ''; //	电话
-        this.params.param.address = ''; //	地址
+        this.params.param.blackListType = ''; //	黑名单类型
+        this.params.param.blackCustName = ''; //	客户名称
+        this.params.param.blackCertCode = ''; //	证件号码
+        this.params.param.blackCompany = ''; //	单位名称
+        this.params.param.blackPhone = ''; //	电话
+        // this.params.param.blackAddress = ''; //	进件编号
+        // this.params.param.blackAddress = ''; //	加黑类型
         this.params.pageParam.pageNum = 1; //	页码
         // this.params.   pageParam.pageSize=''; //	条数
         this.inquire();
@@ -184,9 +202,13 @@
         this.params.pageParam.pageNum = val; //	页码
         this.inquire();
       },
+      // 批量导入
+      Import() {
+
+      },
       inquire() {
         // 基础接口-综合查询
-        this.post("/blackAndGrey/greyListInfos", this.params).then(res => {
+        this.post("/blackAndGrey/blackListInfos", this.params).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data.recordList;
             this.totalRecord = res.data.totalRecord; //totalRecord

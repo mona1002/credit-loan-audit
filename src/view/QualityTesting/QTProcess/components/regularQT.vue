@@ -2154,6 +2154,7 @@
           this.checkTypeParams = '02'; //查询质检页面入参 ：01专员，02主管
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             this.submitBtn = false; //提交
+            //  this.QTConclutionBtn = true;//质检结论添加、删除按钮
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.QTresult = [];
             if (this.propQTconclution.tastwaitingPass.instaskType == '01') { //专项   
@@ -2161,6 +2162,7 @@
             } else if (this.propQTconclution.tastwaitingPass.instaskType == '02') { // 纵向
               this.QTresult = this.QTresultS;
             }
+            //  this.QTConclutionBtn = true;//质检结论添加、删除按钮            
             this.Special();
           } else if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') {
             this.regularAndSpecial();

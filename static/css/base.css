@@ -246,7 +246,7 @@
  .faqi {
    background-image: url('../images/faqi.png')
  }
-
+/* 提交 */
  .tijiao {
    background-image: url('../images/tijiao.png')
  }
@@ -274,19 +274,19 @@
  .checkIcon {
    background-image: url('../images/check2x.png')
  }
-
+/* 挂起 */
  .HangUpIcon {
    background-image: url('../images/guaqi.png')
  }
-
+/* 回退 */
  .backIcon {
    background-image: url('../images/back.png')
  }
-
+/* 拒绝 */
  .rejectIcon {
    background-image: url('../images/jujue.png')
  }
-
+/* 放弃 */
  .giveUpIcon {
    background-image: url('../images/fangqi.png')
  }
@@ -302,7 +302,7 @@
  .brokenLineIcon {
    background-image: url('../images/bigdata.png')
  }
-
+/* 编辑 */
  .editIcon {
    background-image: url('../images/change.png')
  }
@@ -482,7 +482,8 @@
  /*.organManage */
 
  .Abody .el-dialog .el-form-item {
-   margin-bottom: 0px;
+   /* margin-bottom: 0px; */
+   margin-bottom: 3px;
  }
 
  .Abody .el-dialog .el-form-item .dropdown {

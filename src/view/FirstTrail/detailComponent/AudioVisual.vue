@@ -15,34 +15,26 @@
         <span>页数</span>
         <span>上传日期</span>
       </p>
-      <el-collapse>
-        <!-- <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id,ind,item)" accordion> -->
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(ind,item)" >
+      <el-collapse accordion>
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind">
           <template slot="title">
             <p>
               <!-- 一级节点 -->
-              <span style="position:relative;">
-                <b class="NamParentNode"> {{item.arcName}}</b>
-                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:10px"
-                  v-show="opendImg[ind]">
-                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:10px"
-                  v-show="closedImg[ind]">
-              </span>
+              <span>{{item.arcName}} </span>
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
-              <span>{{item.uploadDate}}</span>
+              <span>{{item.uploadDate |dateFilter(true)}}</span>
             </p>
           </template>
           <div class="list_title_div">
-            <!--  二级 内容 节点  ChildList-->
-            <!-- <p v-for="(item,inds) in ListDetails" :key="inds" @click.stop="getImg(inds)"> -->
+            <!--  二级 内容 节点  -->
             <p v-for="(items,inds) in item.child" :key="inds" @click.stop="getImg(inds,items)">
               <el-tooltip class="item" effect="dark" :content="items.arcName" placement="right-end">
                 <span style="width:135px;paddingLeft:20px;">{{items.arcName}}</span>
               </el-tooltip>
               <span>{{items.arcNum}}</span>
               <span>{{items.imageCount}}</span>
-              <span v-bind:title="items.uploadDate">{{items.uploadDate}}</span>
+              <span v-bind:title="items.uploadDate">{{items.uploadDate|dateFilter(true)}}</span>
             </p>
           </div>
         </el-collapse-item>
@@ -82,7 +74,6 @@
           <p v-if="SmallmyPic">{{val.arcSubType}}</p>
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
-          bbbb
           <div class="Small_pic" @dblclick="pdfClose()">
             <p is="pdfDiv" ID='firstTirlSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"
               @dblclick="pdfClose()"></p>
@@ -114,7 +105,6 @@
         SmallPicShow: false,
         CompareAlert: true,
         ListParent: [],
-        ListDetails: [],
         imgPath: [],
         picArrays: [],
         pdfArrys: [],
@@ -132,26 +122,10 @@
       mountedInf() {
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
-        // this.get('/productArchive/productArchives/'+ this.applyId)
-        this.get('/productArchive/notSession-productArchives/' + this.applyId)
+        this.get('/productArchive/productArchives/' + this.applyId)
           .then(res => {
             if (res.statusCode == 200) {
               this.ListParent = res.data;
-
-              if (this.ListParent) {
-                var MDate = null;
-                for (var i = 0; i < this.ListParent.length; i++) {
-                  var MDate = new Date(this.ListParent[i].uploadDate);
-                  this.ListParent[i].uploadDate = this.comput(MDate);
-                  this.ListParent[i].clickType = true;
-                  //  this.opendImg[i] = true;
-                  // this.closedImg[i] = false;
-                }
-                for (var i = 0; i < this.ListParent.length; i++) {
-                  this.opendImg[i] = true;
-                  this.closedImg[i] = false;
-                }
-              }
               this.$parent.$data.loading = false;
             } else {
               this.$parent.$data.loading = false;
@@ -162,29 +136,14 @@
       PerBtn() {
         this.perfBtn = true;
       },
-      getChildrenList(ind, item) {
-        console.log('获取')
-        // 一级节点
-        if (this.opendImg[ind] == false) {
-          this.opendImg[ind] = true;
-          this.closedImg[ind] = false;
-        } else {
-          for (var i = 0; i < this.opendImg.length; i++) {
-            this.opendImg[i] = true;
-            this.closedImg[i] = false;
-          }
-          this.opendImg[ind] = false;
-          this.closedImg[ind] = true;
-        }
-        this.closeImg = ind;
-        this.openImg = ind
-      },
+      // getChildrenList(ind, item) {
+      //   console.log('获取')
+      // },
       pdfClose() {
         this.SmallPicShow = false;
         this.showPage = 1;
       },
       getImg(ind, item) {
-        console.log(item)
         this.picArrays = item.imagePaths;
         this.picType = this.picArrays[0].imagePath.slice(-3);
         if (this.picType == 'pdf') {
@@ -192,6 +151,7 @@
           this.myPdf = true;
           this.myPng = false;
         } else {
+          this.pngAyyrs = this.picArrays;
           this.myPng = true;
           this.myPdf = false;
         }
@@ -226,11 +186,11 @@
           this.pdfArrys = this.picArrays;
           this.SmallmyPdf = true;
           this.SmallmyPic = false;
+          this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
         } else {
           this.pngAyyrs = this.picArrays;
           this.SmallmyPdf = false;
           this.SmallmyPic = true;
-
         }
         this.SmallPicShow = true;
       },
@@ -330,10 +290,6 @@
             }
           }
         })
-      },
-      comput(val) {
-        val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + (val.toString().split(' ')[4]);
-        return val;
       },
       changeSmallPicCss(ind) {
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {

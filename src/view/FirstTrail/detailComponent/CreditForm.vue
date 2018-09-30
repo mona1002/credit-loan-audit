@@ -22,8 +22,7 @@
                 <el-form-item v-show="checkData.wnetPhone==1" label="手机异常信息说明：" :label-width="label_160">
                   <b v-show="checkData.wnetPhonetxt&&  checkData.wnetPhonetxt.length>=500" class="hint internet_textarea ">
                     输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetPhonetxt">
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetPhonetxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -35,11 +34,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetEcutedBrea==1" label="失信记录说明："  :label-width="label_160">
-                    <b v-show="checkData.wnetEcutedBreatxt&&checkData.wnetEcutedBreatxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" resize="none" :rows="2" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetEcutedBreatxt">
+                <el-form-item v-show="checkData.wnetEcutedBrea==1" label="失信记录说明：" :label-width="label_160">
+                  <b v-show="checkData.wnetEcutedBreatxt&&checkData.wnetEcutedBreatxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" resize="none" :rows="2" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -51,11 +49,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetCompany==1" label="工商登记信息说明："  :label-width="label_160">
-                    <b v-show="checkData.wnetCompanytxt&&checkData.wnetCompanytxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetCompanytxt">
+                <el-form-item v-show="checkData.wnetCompany==1" label="工商登记信息说明：" :label-width="label_160">
+                  <b v-show="checkData.wnetCompanytxt&&checkData.wnetCompanytxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetCompanytxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -67,9 +64,9 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wbeexEcuted==1" label="执行信息说明：" prop="wbeexEcutedtxt"  :label-width="label_160">
-                    <b v-show="checkData.wbeexEcutedtxt&&checkData.wbeexEcutedtxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
+                <el-form-item v-show="checkData.wbeexEcuted==1" label="执行信息说明：" prop="wbeexEcutedtxt" :label-width="label_160">
+                  <b v-show="checkData.wbeexEcutedtxt&&checkData.wbeexEcutedtxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
                   <el-input type="textarea" :rows="2" resize="none" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt">
                   </el-input>
                 </el-form-item>
@@ -82,11 +79,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetHirecom==1" label="单位执行信息说明："  :label-width="label_160">
-                    <b v-show="checkData.wnetHirecomtxt&&checkData.wnetHirecomtxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容"
-                    v-model="checkData.wnetHirecomtxt">
+                <el-form-item v-show="checkData.wnetHirecom==1" label="单位执行信息说明：" :label-width="label_160">
+                  <b v-show="checkData.wnetHirecomtxt&&checkData.wnetHirecomtxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" resize="none" :maxlength="this.dd" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -98,11 +94,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetHirecomBrea==1" label="单位失信记录说明："  :label-width="label_160">
-                    <b v-show="checkData.wnetHirecomBreatxt&&checkData.wnetHirecomBreatxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetHirecomBreatxt">
+                <el-form-item v-show="checkData.wnetHirecomBrea==1" label="单位失信记录说明：" :label-width="label_160">
+                  <b v-show="checkData.wnetHirecomBreatxt&&checkData.wnetHirecomBreatxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -114,11 +109,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetAddrstate==1" label="组织机构代码信息说明："  :label-width="label_160">
-                    <b v-show="checkData.wnetAddrstatetxt&&checkData.wnetAddrstatetxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetAddrstatetxt">
+                <el-form-item v-show="checkData.wnetAddrstate==1" label="组织机构代码信息说明：" :label-width="label_160">
+                  <b v-show="checkData.wnetAddrstatetxt&&checkData.wnetAddrstatetxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -130,11 +124,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetAddrandEstate==1" label="地址异常信息说明："  :label-width="label_160">
-                    <b v-show="checkData.wnetAddrandEstatetxt&&checkData.wnetAddrandEstatetxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetAddrandEstatetxt">
+                <el-form-item v-show="checkData.wnetAddrandEstate==1" label="地址异常信息说明：" :label-width="label_160">
+                  <b v-show="checkData.wnetAddrandEstatetxt&&checkData.wnetAddrandEstatetxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -146,11 +139,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetHirecomName==1" label="单位名称异常信息说明："  :label-width="label_160">
-                    <b v-show="checkData.wnetHirecomNametxt&&checkData.wnetHirecomNametxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetHirecomNametxt">
+                <el-form-item v-show="checkData.wnetHirecomName==1" label="单位名称异常信息说明：" :label-width="label_160">
+                  <b v-show="checkData.wnetHirecomNametxt&&checkData.wnetHirecomNametxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -162,27 +154,26 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetHirecomPhone==1" label="单位电话异常信息说明："  :label-width="label_160">
-                    <b v-show="checkData.wnetHirecomPhonetxt&&checkData.wnetHirecomPhonetxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetHirecomPhonetxt">
+                <el-form-item v-show="checkData.wnetHirecomPhone==1" label="单位电话异常信息说明：" :label-width="label_160">
+                  <b v-show="checkData.wnetHirecomPhonetxt&&checkData.wnetHirecomPhonetxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt">
                   </el-input>
                 </el-form-item>
               </li>
               <li class='clearFix margin_bottom_10'>
-                <el-form-item >
+                <el-form-item>
                   <label class="blueC label_223" @click="NewPage(2)">网搜单位地址是否异常：</label>
                   <el-select v-model="checkData.wnetHirecomAddress" @change='checkData.wnetHirecomAddress==0?checkData.wnetHirecomAddresstxt="":""'>
                     <el-option v-for="item in netHirecomAddress" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.wnetHirecomAddress==1" label="单位地址异常信息说明："  :label-width="label_160" class="">
-                    <b v-show="checkData.wnetHirecomAddresstxt&&checkData.wnetHirecomAddresstxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.wnetHirecomAddresstxt">
+                <el-form-item v-show="checkData.wnetHirecomAddress==1" label="单位地址异常信息说明：" :label-width="label_160"
+                  class="">
+                  <b v-show="checkData.wnetHirecomAddresstxt&&checkData.wnetHirecomAddresstxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -205,7 +196,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 执行信息说明：</label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wbeexEcutedtxt">
                   </el-input>
                 </p>
@@ -225,7 +216,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                  <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容"
+                  <el-input type="textarea" resize="none" :maxlength="this.dd" :rows="2" placeholder="请输入内容"
                     v-model="checkData.wnetHirecomtxt">
                   </el-input>
                 </p>
@@ -247,7 +238,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 失信记录说明： </label>
-                  <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容"
+                  <el-input type="textarea" resize="none" :maxlength="this.dd" :rows="2" placeholder="请输入内容"
                     v-model="checkData.wnetEcutedBreatxt">
                   </el-input>
                 </p>
@@ -267,7 +258,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wnetHirecomBreatxt">
                   </el-input>
                 </p>
@@ -290,7 +281,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wnetPhonetxt">
                   </el-input>
                 </p>
@@ -310,7 +301,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wnetHirecomNametxt">
                   </el-input>
                 </p>
@@ -330,7 +321,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wnetHirecomPhonetxt">
                   </el-input>
                 </p>
@@ -350,7 +341,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wnetAddrandEstatetxt">
                   </el-input>
                 </p>
@@ -370,7 +361,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wnetHirecomAddresstxt">
                   </el-input>
                 </p>
@@ -393,7 +384,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wnetCompanytxt">
                   </el-input>
                 </p>
@@ -413,7 +404,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.wnetAddrstatetxt">
                   </el-input>
                 </p>
@@ -436,11 +427,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.iisself==1" label="接听说明："  :label-width="label_160">
-                    <b v-show="checkData.iisselftxt&&checkData.iisselftxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.iisselftxt">
+                <el-form-item v-show="checkData.iisself==1" label="接听说明：" :label-width="label_160">
+                  <b v-show="checkData.iisselftxt&&checkData.iisselftxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.iisselftxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -452,10 +442,9 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item v-show="checkData.iloanBefore==1" label="说明：" :label-width="label_160">
-                    <b v-show="checkData.iloanBeforetxt&&checkData.iloanBeforetxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.iloanBeforetxt">
+                  <b v-show="checkData.iloanBeforetxt&&checkData.iloanBeforetxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.iloanBeforetxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -464,7 +453,7 @@
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanAmt" @blur="checkData.iloanAmt=_formatNumber(checkData.iloanAmt)">
                   </el-input>
                 </el-form-item>
-                <el-form-item v-show="checkData.iloanBefore==1" label="借款期限[月]："  :label-width="label_160">
+                <el-form-item v-show="checkData.iloanBefore==1" label="借款期限[月]：" :label-width="label_160">
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanTerm" @blur="checkData.iloanTerm<=999&&checkData.iloanTerm>=1?checkData.iloanTerm=parseInt(checkData.iloanTerm):checkData.iloanTerm=''">
                   </el-input>
                 </el-form-item>
@@ -476,11 +465,10 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item v-show="checkData.iloanBefore==1" label="借款用途详细说明："  :label-width="label_160">
-                    <b v-show="checkData.iloanPurposetxt&&checkData.iloanPurposetxt.length>=500" class="hint internet_textarea">
-                      输入长度不能超过500</b>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
-                    v-model="checkData.iloanPurposetxt">
+                <el-form-item v-show="checkData.iloanBefore==1" label="借款用途详细说明：" :label-width="label_160">
+                  <b v-show="checkData.iloanPurposetxt&&checkData.iloanPurposetxt.length>=500" class="hint internet_textarea">
+                    输入长度不能超过500</b>
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容" v-model="checkData.iloanPurposetxt">
                   </el-input>
                 </el-form-item>
               </li>
@@ -501,7 +489,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class=" InternetInf_right_label "> 接听说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.iisselftxt">
                   </el-input>
                 </p>
@@ -521,7 +509,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class=" InternetInf_right_label "> 说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.iloanBeforetxt">
                   </el-input>
                 </p>
@@ -555,7 +543,7 @@
                       输入长度不能超过500</b>
                   </i>
                   <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
-                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容"
+                  <el-input type="textarea" :rows="2" resize="none" :maxlength="this.dd" placeholder="请输入内容"
                     v-model="checkData.iloanPurposetxt">
                   </el-input>
                 </p>
@@ -654,12 +642,12 @@
               </li>
               <li class="clearFix">
                 <el-form-item label="前单位名称：" :label-width='label_223'>
-                    <b v-show="checkData.hirelastComname&&checkData.hirelastComname.length>=50" class="hint Working_input">
-                      输入长度不能超过50</b>
+                  <b v-show="checkData.hirelastComname&&checkData.hirelastComname.length>=50" class="hint Working_input">
+                    输入长度不能超过50</b>
                   <input type="text" class="one_row" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirelastComname">
                 </el-form-item>
                 <el-form-item label="所在部门：" :label-width='label_160'>
-                    <b v-show="checkData.hiredepartment&&checkData.hiredepartment.length>=20" class="hint Working_middle Working_right">输入长度不能超过20</b>
+                  <b v-show="checkData.hiredepartment&&checkData.hiredepartment.length>=20" class="hint Working_middle Working_right">输入长度不能超过20</b>
                   <el-input type="text" placeholder="请输入内容" :maxlength="this.shotInputL" v-model="checkData.hiredepartment">
                   </el-input>
                 </el-form-item>
@@ -679,7 +667,7 @@
               </li>
               <li class='clearFix margin_bottom_10'>
                 <el-form-item label="单位地址邮编：" :label-width='label_223'>
-                    <b v-show="this.reg.mpostCode" class="hint Working_middle Working_right">请输入6位邮编</b>
+                  <b v-show="this.reg.mpostCode" class="hint Working_middle Working_right">请输入6位邮编</b>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.workZip" @blur="postCode(checkData.workZip,$event)">
                   </el-input>
                 </el-form-item>
@@ -688,7 +676,6 @@
                     <el-option v-for="item in privateOwnerFlag" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                   </el-select>
-                  {{businessReq}}
                 </el-form-item>
               </li>
             </ul>
@@ -831,7 +818,8 @@
             <i class="collapse_title_icon"></i>
             <span class="collapse_title_text">私营企业信息</span>
           </template>
-          <div v-show="checkData.privateOwnerFlag=='1'">
+          <div v-if="checkData.privateOwnerFlag=='1'">
+            <!-- <div> -->
             <ul>
               <li>
                 <el-form-item label="企业类型：" :label-width='label_223' prop='compType'>
@@ -1077,11 +1065,11 @@
                   <el-select v-model="checkData.spouseSamecity" placeholder="请选择" @change="checkData.spouseSamecity==='0'?checkData.spouseSamecitytxt='':''">
                     <el-option v-for="item in spouseSamecity" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
-                  </el-select>       
+                  </el-select>
                 </el-form-item>
                 <el-form-item v-show="checkData.spouseSamecity==1" label="在同一个城市工作生活信息：" :label-width="label_185">
-                    <b v-show="checkData.spouseSamecitytxt&&checkData.spouseSamecitytxt.length>=200" class="hint internet_textarea">
-                      输入长度不能超过200</b>
+                  <b v-show="checkData.spouseSamecitytxt&&checkData.spouseSamecitytxt.length>=200" class="hint internet_textarea">
+                    输入长度不能超过200</b>
                   <el-input type="textarea" placeholder="请输入内容" :rows="2" resize="none" :maxlength="this.shotTextareaL"
                     v-model="checkData.spouseSamecitytxt">
                   </el-input>
@@ -1098,15 +1086,15 @@
               </li>
               <li v-show='checkData.childFlag=="1"'>
                 <el-form-item>
-                    <b class="hint internet_textarea" v-show="checkData.childCount&&checkData.childCount>=99">请输入0-99之间的数
-                    </b>
+                  <b class="hint internet_textarea" v-show="checkData.childCount&&checkData.childCount>=99">请输入0-99之间的数
+                  </b>
                   <label class="label_223">子女数量：</label>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.childCount" @blur="childNumver(checkData.childCount)">
                   </el-input>
                 </el-form-item>
                 <el-form-item label="子女数量备注：" :label-width="label_185">
-                    <b v-show="checkData.childCounttxt&&checkData.childCounttxt.length>=200" class="hint internet_textarea">
-                      输入长度不能超过200</b>
+                  <b v-show="checkData.childCounttxt&&checkData.childCounttxt.length>=200" class="hint internet_textarea">
+                    输入长度不能超过200</b>
                   <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容"
                     v-model="checkData.childCounttxt">
                   </el-input>
@@ -1121,8 +1109,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="子女现状备注：" :label-width="label_185">
-                    <b v-show="checkData.childStatustxt&&checkData.childStatustxt.length>=200" class="hint internet_textarea">
-                      输入长度不能超过200</b>
+                  <b v-show="checkData.childStatustxt&&checkData.childStatustxt.length>=200" class="hint internet_textarea">
+                    输入长度不能超过200</b>
                   <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容"
                     v-model="checkData.childStatustxt">
                   </el-input>
@@ -1159,8 +1147,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="父母备注：" v-show="checkData.parentIsliving=='1'" :label-width="label_185">
-                    <b v-show="checkData.parentIslivingtxt&&checkData.parentIslivingtxt.length>=200" class="hint internet_textarea">
-                      输入长度不能超过200</b>
+                  <b v-show="checkData.parentIslivingtxt&&checkData.parentIslivingtxt.length>=200" class="hint internet_textarea">
+                    输入长度不能超过200</b>
                   <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容"
                     v-model="checkData.parentIslivingtxt">
                   </el-input>
@@ -1175,8 +1163,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="父母身体状况备注：" :label-width="label_185">
-                    <b v-show="checkData.parentHealthtxt&&checkData.parentHealthtxt.length>=200" class="hint internet_textarea">
-                      输入长度不能超过200</b>
+                  <b v-show="checkData.parentHealthtxt&&checkData.parentHealthtxt.length>=200" class="hint internet_textarea">
+                    输入长度不能超过200</b>
                   <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容"
                     v-model="checkData.parentHealthtxt">
                   </el-input>
@@ -1191,8 +1179,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="父母是否需要赡养备注：" :label-width="label_185">
-                    <b v-show="checkData.parentPayalimonytxt&&checkData.parentPayalimonytxt.length>=200" class="hint internet_textarea">
-                      输入长度不能超过200</b>
+                  <b v-show="checkData.parentPayalimonytxt&&checkData.parentPayalimonytxt.length>=200" class="hint internet_textarea">
+                    输入长度不能超过200</b>
                   <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容"
                     v-model="checkData.parentPayalimonytxt">
                   </el-input>
@@ -1228,9 +1216,9 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="是否有兄弟姐妹备注：" v-show="checkData.brothersIfhas=='1'"  :label-width="label_185">
-                    <b v-show="checkData.brothersIfhastxt&&checkData.brothersIfhastxt.length>=200" class="hint internet_textarea">
-                      输入长度不能超过200</b>
+                <el-form-item label="是否有兄弟姐妹备注：" v-show="checkData.brothersIfhas=='1'" :label-width="label_185">
+                  <b v-show="checkData.brothersIfhastxt&&checkData.brothersIfhastxt.length>=200" class="hint internet_textarea">
+                    输入长度不能超过200</b>
                   <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容"
                     v-model="checkData.brothersIfhastxt">
                   </el-input>
@@ -1532,7 +1520,7 @@
           </template>
           <div class="CreditForm_live">
             <ul>
-              <li  class='clearFix margin_bottom_10'>
+              <li class='clearFix margin_bottom_10'>
                 <el-form-item>
                   <label class="label_223">同住者关系：</label>
                   <el-select v-model="checkData.livingHouseHolds" placeholder="请选择">
@@ -1584,7 +1572,7 @@
                   <span>{{this.checkData.aaddress}}</span>
                 </el-form-item>
               </li>
-              <li  class='clearFix'>
+              <li class='clearFix'>
                 <el-form-item>
                   <label class="label_223">现住地址是否为常住地址：</label>
                   <el-select v-model="checkData.aisresident" placeholder="请选择" @change="checkData.aisresident==0?checkData.aisresidenttxt='':''">
@@ -1593,12 +1581,12 @@
                   </el-select>
                 </el-form-item>
               </li>
-              <li  class='clearFix'>
+              <li class='clearFix'>
                 <el-form-item v-show="checkData.aisresident==0" class="one_row">
                   <label class="label_223">常住地址：</label>
-                    <b v-show="checkData.aisresidenttxt&&checkData.aisresidenttxt.length>=100" class="hint family_textarea">
-                      输入长度不能超过100</b>
-                     <!-- class： specialInput -->
+                  <b v-show="checkData.aisresidenttxt&&checkData.aisresidenttxt.length>=100" class="hint family_textarea">
+                    输入长度不能超过100</b>
+                  <!-- class： specialInput -->
                   <input class='specialInput' type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.aisresidenttxt">
                 </el-form-item>
               </li>
@@ -1655,11 +1643,8 @@
         </el-collapse-item>
       </el-collapse>
     </el-form>
-
     <div class="btn_wrap">
-      <el-button type="primary" class="btn" @click="makeSureBtn">确定</el-button>
-      <el-button type="primary" class="btn" @click="submitForm('ruleForm')">确定</el-button>
-
+      <el-button type="primary" class="btn" @click="makeSureBtn('ruleForm')">确定</el-button>
     </div>
   </div>
 </template>
@@ -1669,9 +1654,7 @@
       return {
         label_223: '223px',
         label_160: '160px',
-       label_185:'185px',
-        businessReq: true,
-        tttt: 0,
+        label_185: '185px',
         rules: {
           wnetEcutedBrea: [{
             required: true,
@@ -1699,87 +1682,30 @@
             trigger: 'blur'
           }],
           compType: [{ //企业类型
-            required: this.businessReq,
-            // required: true,
+            required: true,
             message: '请选择企业类型',
             trigger: 'change'
           }],
           compegDate: [{
             type: 'date',
-            // required: true,
-            required: this.businessReq,
+            required: true,
             message: '请选择公司注册时间',
             trigger: 'change'
           }],
         },
-        adbtn: '确定',
-        loadsitu: false,
-        surbtn: true,
-        loadbtn: false,
         shotInputL: 20,
         longInputL: 50,
         longLongInputL: 100,
         shotTextareaL: 200,
-        textareaL: 500,
+        dd: 500,
         acreage: '',
         Percent: '',
-        // Wordhint: {
-        //   Internet: {
-        //     excude: false,
-        //     comExcude: false,
-        //     looseCreSel: false,
-        //     looseCre: false,
-        //     comLooseCre: false,
-        //     phoneOUtSSel: false,
-        //     phoneOUtS: false,
-        //     comphoneOUtS: false,
-        //     ComName: false,
-        //     address: false,
-        //     comAddress: false,
-        //     loginOrNotSel: false,
-        //     loginOrNot: false,
-        //     institutionCode: false
-        //   },
-        //   checkID: {
-        //     answerDec: false,
-        //     Declear: false,
-        //     loanPurposed: false,
-        //   },
-        //   Working: {
-        //     address: false,
-        //     level: false,
-        //     preComName: false,
-        //     ComAdr: false,
-        //     department: false,
-        //   },
-        //   company: {
-        //     manage: false,
-        //     Supplier: false,
-        //     distributor: false,
-        //   },
-        //   family: {
-        //     SameCity: false,
-        //     ChildCondition: false,
-        //     ChildCt: false,
-        //     ParentRemark: false,
-        //     ParentHealth: false,
-        //     Payalimony: false,
-        //     siblings: false,
-        //     acount: false,
-        //   },
-        //   address: {
-        //     permanentAddress: false,
-        //   },
-        //   result: false,
-        // },
-        getParams: [],
+        d: [],
         pickerOptions1: {
           disabledDate(time) {
             return time.getTime() > Date.now();
           }
         },
-        Confirm: false,
-        AlertS: false,
         reg: {
           payDay: false,
           mMontyP: false,
@@ -1787,52 +1713,13 @@
           mphoneM: false,
           mphoneR: false,
         },
-        // reqd: '',
-        // addressOne: '',
-        // InternetShow: {
-        //   commentS: true,
-        //   commentS1: true,
-        //   commentS2: true,
-        //   commentS3: true,
-        //   commentS4: true,
-        //   commentS5: true,
-        //   commentS6: true,
-        //   commentS7: true,
-        //   commentS8: true,
-        //   commentS9: true,
-        //   commentS10: true,
-        // },
-        // checkId: {
-        //   declearNloaned: false,
-        //   loanNot: false,
-        // },
         workInf: {
-          // private: false,
           empNumber: false,
         },
-        // marriage: {
-        //   couple: true,
-        //   workingCondition: false,
-        //   workingLivingInf: false,
-        // },
-        // Children: {
-        //   ChildrenOrNot: false,
-        //   PayAlimony: false,
-        //   ChildCount: false,
-        // },
-        // parent: {
-        //   livingOrNot: false,
-        // },
-        // siblings: {
-        //   siblingsOrNot: false,
-        // },
-        // address: {
-        //   permanent: false,
-        // },
-        Internet: ["客户执行", "单位执行", "客户失信", "单位失信", "客户手机", "单位名称", "单位电话", "客户住址房产", "单位地址", "企业登记", "单位组织代码",
-          "接听是否本人", "是否申请借款", "是否私营业主", "婚姻状况", "配偶工作情况", "同城工作生活", "是否有子女", "是否支付生活费", "父母是否在世", "是否有兄弟姐妹",
-          "是否为常住地址"
-        ],
+        // Internet: ["客户执行", "单位执行", "客户失信", "单位失信", "客户手机", "单位名称", "单位电话", "客户住址房产", "单位地址", "企业登记", "单位组织代码",
+        //   "接听是否本人", "是否申请借款", "是否私营业主", "婚姻状况", "配偶工作情况", "同城工作生活", "是否有子女", "是否支付生活费", "父母是否在世", "是否有兄弟姐妹",
+        //   "是否为常住地址"
+        // ],
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"],
         checkData: {},
         // -------网上查询信息------------
@@ -2246,7 +2133,7 @@
       }
     },
     methods: {
-      isSelf(val, type) {
+      isSelf(val, type) { //接听者是否是借款人本人 + 是否在我司申请借款
         if (type == '接听' && val == 0) {
           this.checkData.iloanBefore = '';
           this.checkData.iisselftxt = '';
@@ -2259,7 +2146,7 @@
           this.checkData.iloanPurposetxt = '';
         }
       },
-      marrage(val) {
+      marrage(val) { //婚姻状况
         if (val == '01' || val == '04') {
           this.checkData.spouseWork = ''; //配偶工作情况
           this.checkData.spouseWorktype = '';
@@ -2285,7 +2172,7 @@
           this.checkData.childPaycostamt = '';
         }
       },
-      parents(val) { //
+      parents(val) { //父母是否在世
         if (val == '0') {
           this.checkData.parentIslivingtxt = '';
           this.checkData.parentHealth = '';
@@ -2313,382 +2200,23 @@
           this.checkData.selfempCount = "";
           this.checkData.profitamountmamt = "";
           this.checkData.firstDistributor = "";
-          this.businessReq = false;
-        } else {
-          this.businessReq = true;
-        }
+        } else {}
       },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            this.$message.error('有必填项未填！')
-            return false;
-          }
-        });
-      },
+      // submitForm(formName) {
+      //   this.$refs[formName].validate((valid) => {
+      //     if (valid) {
+      //       alert('submit!');
+      //     } else {
+      //       console.log('error submit!!');
+      //       this.$message.error('有必填项未填！')
+      //       return false;
+      //     }
+      //   });
+      // },
       mountedInf() {
-        this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
+        this.d = JSON.parse(localStorage.getItem("taskInWaitting"));
         this.mountC();
       },
-      // wordInput20(val, el) {
-      //   if (val.length >= 20) {
-      //     this.wordInput20SC(val, el);
-      //   } else {
-      //     this.wordInput20SCF(val, el);
-      //   }
-      // },
-      // wordInput20SC(val, el) {
-      //   switch (el) {
-      //     case "职位级别":
-      //       this.Wordhint.Working.level = true;
-      //       break;
-      //     case "部门":
-      //       this.Wordhint.Working.department = true;
-      //       break;
-      //   }
-      // },
-      // wordInput20SCF(val, el) {
-      //   switch (el) {
-      //     case "职位级别":
-      //       this.Wordhint.Working.level = false;
-      //       break;
-      //     case "部门":
-      //       this.Wordhint.Working.department = false;
-      //       break;
-      //   }
-      // },
-      // wordInput50(val, el) {
-      //   if (val.length >= 50) {
-      //     this.wordInput50SC(val, el);
-      //   } else {
-      //     this.wordInput50SCF(val, el);
-      //   }
-      // },
-      // wordInput50SC(val, el) {
-      //   switch (el) {
-      //     case "工作单位":
-      //       this.Wordhint.Working.address = true;
-      //       break;
-      //     case "单位具体地址":
-      //       this.Wordhint.Working.level = true;
-      //       break;
-      //     case "前单位":
-      //       this.Wordhint.Working.preComName = true;
-      //       break;
-      //     case "供销商":
-      //       this.Wordhint.company.Supplier = true;
-      //       break;
-      //     case "分销商":
-      //       this.Wordhint.company.distributor = true;
-      //       break;
-      //   }
-      // },
-      // wordInput50SCF(val, el) {
-      //   switch (el) {
-      //     case "工作单位":
-      //       this.Wordhint.Working.address = false;
-      //       break;
-      //     case "单位具体地址":
-      //       this.Wordhint.Working.level = false;
-      //       break;
-      //     case "前单位":
-      //       this.Wordhint.Working.preComName = false;
-      //       break;
-      //     case "供销商":
-      //       this.Wordhint.company.Supplier = false;
-      //       break;
-      //     case "分销商":
-      //       this.Wordhint.company.distributor = false;
-      //       break;
-      //   }
-      // },
-      // wordInput100(val, el) {
-      //   switch (el) {
-      //     case "单位具体地址":
-      //       val.length >= 100 ? this.Wordhint.Working.ComAdr = true : this.Wordhint.Working.ComAdr = false;
-      //       break;
-      //     case "常住地址":
-      //       val.length >= 100 ? this.Wordhint.address.permanentAddress = true : this.Wordhint.address.permanentAddress =
-      //         false;
-      //       break;
-      //   }
-      // },
-      // wordarea200(val, el) {
-      //   if (val.length >= 200) {
-      //     this.wordarea200SC(val, el);
-      //   } else {
-      //     this.wordarea200SCF(val, el);
-      //   }
-      // },
-      // wordarea200SC(val, el) {
-      //   switch (el) {
-      //     case "经营项目":
-      //       this.Wordhint.company.manage = true;
-      //       break;
-      //     case "同城生活信息":
-      //       this.Wordhint.family.SameCity = true;
-      //       break;
-      //     case "子女备注":
-      //       this.Wordhint.family.ChildCt = true;
-      //       break;
-      //     case "子女现状":
-      //       this.Wordhint.family.ChildCondition = true;
-      //       break;
-      //     case "父母备注":
-      //       this.Wordhint.family.ParentRemark = true;
-      //       break;
-      //     case "父母健康":
-      //       this.Wordhint.family.ParentHealth = true;
-      //       break;
-      //     case "父母赡养":
-      //       this.Wordhint.family.Payalimony = true;
-      //       break;
-      //     case "兄弟姐妹备注":
-      //       this.Wordhint.family.siblings = true;
-      //       break;
-      //   }
-      // },
-      // wordarea200SCF(val, el) {
-      //   switch (el) {
-      //     case "经营项目":
-      //       this.Wordhint.company.manage = false;
-      //     case "同城生活信息":
-      //       this.Wordhint.family.SameCity = false;
-      //       break;
-      //       break;
-      //     case "子女备注":
-      //       this.Wordhint.family.ChildCt = false;
-      //       break;
-      //     case "子女现状":
-      //       this.Wordhint.family.ChildCondition = false;
-      //       break;
-      //     case "父母备注":
-      //       this.Wordhint.family.ParentRemark = false;
-      //       break;
-      //     case "父母健康":
-      //       this.Wordhint.family.ParentHealth = false;
-      //       break;
-      //     case "父母赡养":
-      //       this.Wordhint.family.Payalimony = false;
-      //       break;
-      //     case "兄弟姐妹备注":
-      //       this.Wordhint.family.siblings = false;
-      //       break;
-      //   }
-      // },
-      // commentShow1(name, hidLabel) {
-      //   if (name == "0") {
-      //     switch (hidLabel) {
-      //       case "客户执行":
-      //         this.InternetShow.commentS = false;
-      //         this.checkData.wbeexEcutedtxt = "";
-      //         break;
-      //       case "单位执行":
-      //         this.InternetShow.commentS1 = false;
-      //         this.checkData.wnetHirecomtxt = "";
-      //         break;
-      //       case "客户失信":
-      //         this.InternetShow.commentS2 = false;
-      //         this.checkData.wnetEcutedBreatxt = "";
-      //         break;
-      //       case "单位失信":
-      //         this.InternetShow.commentS3 = false;
-      //         this.checkData.wnetHirecomBreatxt = "";
-      //         break;
-      //       case "客户手机":
-      //         this.InternetShow.commentS4 = false;
-      //         this.checkData.wnetPhonetxt = "";
-      //         break;
-      //       case "单位名称":
-      //         this.InternetShow.commentS5 = false;
-      //         this.checkData.wnetHirecomNametxt = "";
-      //         break;
-      //       case "单位电话":
-      //         this.InternetShow.commentS6 = false;
-      //         this.checkData.wnetHirecomPhonetxt = "";
-      //         break;
-      //       case "客户住址房产":
-      //         this.InternetShow.commentS7 = false;
-      //         this.checkData.wnetAddrandEstatetxt = "";
-      //         break;
-      //       case "单位地址":
-      //         this.InternetShow.commentS8 = false;
-      //         this.checkData.wnetHirecomAddresstxt = "";
-      //         break;
-      //       case "企业登记":
-      //         this.InternetShow.commentS9 = false;
-      //         this.checkData.wnetCompanytxt = "";
-      //         break;
-      //       case "单位组织代码":
-      //         this.InternetShow.commentS10 = false;
-      //         this.checkData.wnetAddrstatetxt = "";
-      //         break;
-      //       case "接听是否本人":
-      //         this.checkId.declearNloaned = false;
-      //         this.checkId.loanNot = false;
-      //         this.checkData.iloanBefore = "";
-      //         this.checkData.iisselftxt = "";
-      //         this.checkData.iloanBeforetxt = "";
-      //         this.checkData.iloanTerm = "";
-      //         this.checkData.iloanPurposetxt = "";
-      //         this.checkData.iloanPurpose = "";
-      //         this.checkData.iloanAmt = "";
-      //         break;
-      //       case "是否申请借款":
-      //         this.checkId.loanNot = false;
-      //         this.checkData.iloanBeforetxt = "";
-      //         this.checkData.iloanTerm = "";
-      //         this.checkData.iloanPurposetxt = "";
-      //         this.checkData.iloanPurpose = "";
-      //         this.checkData.iloanAmt = "";
-      //         break;
-      //       case "是否私营业主":
-      //         this.workInf.private = false;
-      //         this.checkData.compType = "";
-      //         this.checkData.regcapitalamt = "";
-      //         this.checkData.selfhasProportion = "";
-      //         this.checkData.monthrentamt = "";
-      //         this.checkData.selfpremisesArea = "";
-      //         this.checkData.projectManage = "";
-      //         this.checkData.oneYearProfitamt = "";
-      //         this.checkData.firstSuppliers = "";
-      //         this.checkData.compegDate = "";
-      //         this.checkData.selfpremises = "";
-      //         this.checkData.selfempCount = "";
-      //         this.checkData.profitamountmamt = "";
-      //         this.checkData.firstDistributor = "";
-      //         if (name == 0 || name == '') {
-      //           this.reqd = '';
-      //         }
-      //         break;
-      //       case "同城工作生活":
-      //         this.marriage.workingLivingInf = false;
-      //         this.checkData.spouseSamecitytxt = "";
-      //         break;
-      //       case "是否有子女":
-      //         this.Children.ChildrenOrNot = false;
-      //         this.checkData.childCount = "";
-      //         this.checkData.childCounttxt = "";
-      //         this.checkData.childStatus = "";
-      //         this.checkData.childStatustxt = "";
-      //         this.checkData.childIspaycost = "";
-      //         this.checkData.childTogether = "";
-      //         this.checkData.childPaycostamt = "";
-      //         break;
-      //       case "是否支付生活费":
-      //         this.Children.PayAlimony = false;
-      //         this.checkData.childPaycostamt = "";
-      //         break;
-      //       case "父母是否在世":
-      //         this.parent.livingOrNot = false;
-      //         this.checkData.parentHealth = "";
-      //         this.checkData.parentPayalimony = "";
-      //         this.checkData.parentWork = "";
-      //         this.checkData.parentInformed = "";
-      //         this.checkData.parentIslivingtxt = "";
-      //         this.checkData.parentHealthtxt = "";
-      //         this.checkData.parentPayalimonytxt = "";
-      //         this.checkData.parentIncome = "";
-      //         break;
-      //       case "是否有兄弟姐妹":
-      //         this.siblings.siblingsOrNot = false;
-      //         this.checkData.brothersIfhastxt = "";
-      //         break;
-      //       case "是否为常住地址":
-      //         this.address.permanent = true;
-      //         break;
-      //     }
-      //   } else if (name == "1") {
-      //     switch (hidLabel) {
-      //       case "客户执行":
-      //         this.InternetShow.commentS = true;
-      //         break;
-      //       case "单位执行":
-      //         this.InternetShow.commentS1 = true;
-      //         break;
-      //       case "客户失信":
-      //         this.InternetShow.commentS2 = true;
-      //         break;
-      //       case "单位失信":
-      //         this.InternetShow.commentS3 = true;
-      //         break;
-      //       case "客户手机":
-      //         this.InternetShow.commentS4 = true;
-      //         break;
-      //       case "单位名称":
-      //         this.InternetShow.commentS5 = true;
-      //         break;
-      //       case "单位电话":
-      //         this.InternetShow.commentS6 = true;
-      //         break;
-      //       case "客户住址房产":
-      //         this.InternetShow.commentS7 = true;
-      //         break;
-      //       case "单位地址":
-      //         this.InternetShow.commentS8 = true;
-      //         break;
-      //       case "企业登记":
-      //         this.InternetShow.commentS9 = true;
-      //         break;
-      //       case "单位组织代码":
-      //         this.InternetShow.commentS10 = true;
-      //         break;
-      //       case "接听是否本人":
-      //         this.checkId.declearNloaned = true;
-      //         break;
-      //       case "是否申请借款":
-      //         this.checkId.loanNot = true;
-      //         break;
-      //       case "是否私营业主":
-      //         this.workInf.private = true;
-      //         this.reqd = 'required';
-      //         break;
-      //       case "同城工作生活":
-      //         this.marriage.workingLivingInf = true;
-      //         break;
-      //       case "是否有子女":
-      //         this.Children.ChildrenOrNot = true;
-      //         break;
-      //       case "是否支付生活费":
-      //         this.Children.PayAlimony = true;
-      //         break;
-      //       case "父母是否在世":
-      //         this.parent.livingOrNot = true;
-      //         break;
-      //       case "是否有兄弟姐妹":
-      //         this.siblings.siblingsOrNot = true;
-      //         break;
-      //       case "是否为常住地址":
-      //         this.address.permanent = false;
-      //         this.checkData.aisresidenttxt = "";
-      //         break;
-      //     }
-      //   } else if (hidLabel == "婚姻状况") {
-      //     if (name == "02" || name == "03") {
-      //       this.marriage.couple = true;
-      //     } else {
-      //       this.marriage.couple = false;
-      //       this.marriage.workingCondition = false;
-      //       this.marriage.workingLivingInf = false;
-      //       this.checkData.spouseWork = "";
-      //       this.checkData.spouseWorktype = "";
-      //       this.checkData.spouseIncome = "";
-      //       this.checkData.spouseSamecity = "";
-      //       this.checkData.spouseSamecitytxt = "";
-      //     }
-      //   } else if (hidLabel == "配偶工作情况") {
-      //     if (name == "00" || name == "03") {
-      //       this.marriage.workingCondition = true;
-      //     } else {
-      //       this.marriage.workingCondition = false;
-      //       this.checkData.spouseWorktype = "";
-      //       this.checkData.spouseIncome = "";
-      //     }
-      //   }
-      // },
       NewPage(ind) {
         switch (ind) {
           case 0:
@@ -2746,9 +2274,9 @@
       setCountry(item) {
         this.checkData.workCounty = item;
       },
-      makeSureBtn() {
-        this.$validator.validateAll().then((result) => {
-          if (result) {
+      makeSureBtn(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
             this.$confirm('您确定操作？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
@@ -2758,52 +2286,38 @@
               this.CFsave();
             }).catch(() => {});
           } else {
-            this.$message.error('提交失败，有必填项未填写！');
+            this._error('有必填项未填写！');
+            return false;
           }
         });
       },
-      canc() {
-        this.Confirm = false;
-      },
-      closed() {
-        this.Confirm = false;
-      },
       CFsave() {
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            this.checkData.selfpremisesArea = this.acreage;
-            this.checkData.selfhasProportion = this.Percent;
-            this.checkData.workProvinceName = this.$refs.province.selectedLabel;
-            this.checkData.workCityName = this.$refs.city.selectedLabel;
-            this.checkData.workCountyName = this.$refs.country.selectedLabel;
-            this.checkData.hirecomKind = this.$refs.industry.selectedLabel;
-            this.btnnn();
-            this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
-              if (res.statusCode == 200) {
-                this.Confirm = false;
-                this.AreaNPercent();
-                this.$message({
-                  message: '提交成功!',
-                  type: 'success'
-                });
-                this.mountC();
-                // 非必填项提示是语去掉
-                // 单位电话：
-                this.reg.mphoneM = false;
-                this.reg.mphoneR = false;
-                // 每月发薪日：
-                this.reg.mpayDay = false;
-                // 单位地址邮编：
-                this.reg.mpostCode = false;
-              } else {
-                this.Confirm = false;
-                this.$message.error(res.msg);
-                this.mountC();
-              }
+        this.checkData.selfpremisesArea = this.acreage;
+        this.checkData.selfhasProportion = this.Percent;
+        this.checkData.workProvinceName = this.$refs.province.selectedLabel;
+        this.checkData.workCityName = this.$refs.city.selectedLabel;
+        this.checkData.workCountyName = this.$refs.country.selectedLabel;
+        this.checkData.hirecomKind = this.$refs.industry.selectedLabel;
+        this.btnnn();
+        this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
+          if (res.statusCode == 200) {
+            this.AreaNPercent();
+            this.$message({
+              message: '提交成功!',
+              type: 'success'
             });
+            this.mountC();
+            // 非必填项提示是语去掉
+            // 单位电话：
+            this.reg.mphoneM = false;
+            this.reg.mphoneR = false;
+            // 每月发薪日：
+            this.reg.mpayDay = false;
+            // 单位地址邮编：
+            this.reg.mpostCode = false;
           } else {
-            this.Confirm = false;
-            this.$message.error('提交失败，有必填项未填写！');
+            this.$message.error(res.msg);
+            this.mountC();
           }
         });
       },
@@ -2966,10 +2480,8 @@
         val = parseInt(val);
         if (val >= 0 && val <= 99) {
           this.checkData.childCount = val;
-          // this.Children.ChildCount = false;
         } else {
           this.checkData.childCount = " ";
-          // this.Children.ChildCount = true;
         }
       },
       EmpNum(val, e) {
@@ -2982,27 +2494,6 @@
           this.workInf.empNumber = true;
         }
       },
-      // formatNumber(num, cent, isThousand) {
-      //   num = num.toString().replace(/\$|\,/g, '');
-      //   if (isNaN(num)) {
-      //     num = "0";
-      //   }
-      //   let sign = (num == (num = Math.abs(num)));
-      //   num = Math.floor(num * Math.pow(10, cent) + 0.50000000001);
-      //   let cents = num % Math.pow(10, cent);
-      //   num = Math.floor(num / Math.pow(10, cent)).toString();
-      //   cents = cents.toString();
-      //   while (cents.length < cent)
-      //     cents = "0" + cents;
-      //   for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
-      //     num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-      //   }
-      //   if (cent > 0) {
-      //     return (((sign) ? '' : '-') + num + '.' + cents);
-      //   } else {
-      //     return (((sign) ? '' : '-') + num);
-      //   }
-      // },
       // formatSC(el, val) {
       //   switch (el) {
       //     case "月还款":
@@ -3080,33 +2571,37 @@
           .iloanAmt;
         this.checkData.avgsalaryamt ? this.checkData.avgsalaryamt = this._formatNumber(this.checkData.avgsalaryamt) :
           this.checkData.avgsalaryamt;
-        this.checkData.regcapitalamt ? this.checkData.regcapitalamt = this._formatNumber(this.checkData.regcapitalamt) : this.checkData.regcapitalamt;
-        this.checkData.profitamountmamt ? this.checkData.profitamountmamt = this._formatNumber(this.checkData.profitamountmamt) : this.checkData.profitamountmamt;
+        this.checkData.regcapitalamt ? this.checkData.regcapitalamt = this._formatNumber(this.checkData.regcapitalamt) :
+          this.checkData.regcapitalamt;
+        this.checkData.profitamountmamt ? this.checkData.profitamountmamt = this._formatNumber(this.checkData.profitamountmamt) :
+          this.checkData.profitamountmamt;
         this.checkData.monthrentamt ? this.checkData.monthrentamt = this._formatNumber(this.checkData.monthrentamt) :
           this.checkData.monthrentamt;
-        this.checkData.oneYearProfitamt ? this.checkData.oneYearProfitamt = this._formatNumber(this.checkData.oneYearProfitamt) : this.checkData.oneYearProfitamt;
+        this.checkData.oneYearProfitamt ? this.checkData.oneYearProfitamt = this._formatNumber(this.checkData.oneYearProfitamt) :
+          this.checkData.oneYearProfitamt;
         this.checkData.spouseIncome ? this.checkData.spouseIncome = this._formatNumber(this.checkData.spouseIncome) :
           this.checkData.spouseIncome;
-        this.checkData.childPaycostamt ? this.checkData.childPaycostamt = this._formatNumber(this.checkData.childPaycostamt) : this.checkData.childPaycostamt;
+        this.checkData.childPaycostamt ? this.checkData.childPaycostamt = this._formatNumber(this.checkData.childPaycostamt) :
+          this.checkData.childPaycostamt;
         this.checkData.parentIncome ? this.checkData.parentIncome = this._formatNumber(this.checkData.parentIncome) :
           this.checkData.parentIncome;
         this.checkData.fconsumption ? this.checkData.fconsumption = this._formatNumber(this.checkData.fconsumption) :
           this.checkData.fconsumption;
-        this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this._formatNumber(this.checkData.selfpremisesArea,) :
+        this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this._formatNumber(this.checkData.selfpremisesArea, ) :
           this.checkData.selfpremisesArea;
-        this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this._formatNumber(this.checkData.selfhasProportion,) :
+        this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this._formatNumber(this.checkData.selfhasProportion, ) :
           this.checkData.selfhasProportion;
       },
       mountC() {
         // 获取查询列表数据
         this.post("/creauditInfo/queryCreauditInfoObj", {
-          applyId: this.getParams.applyId,
+          applyId: this.d.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
             this.checkData = res.data;
             this.Percent = this.checkData.selfhasProportion
             this.acreage = this.checkData.selfpremisesArea;
-            this.checkData.applyId = this.getParams.applyId;
+            this.checkData.applyId = this.d.applyId;
             this.mountM();
             this.AreaNPercent();
             this.checkData.aaddress ? this.checkData.aaddress = this.checkData.aaddress.replace(/null/g, '') : this
@@ -3150,7 +2645,6 @@
         this.hirecomKind = res.data;
       })
     },
-    // props: ["myWatch"],
   }
 
 </script>
@@ -3211,19 +2705,9 @@
   .hint {
     color: #ff7676;
     font-size: 12px;
-    /* display: inline-block; */
     width: 100%;
-    /* font-style: normal; */
     position: absolute;
     top: -22px;
-    /* height: 14px; */
-  }
-
-  .red {
-    color: #ff7676;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
   }
 
   .btn_wrap {
@@ -3243,7 +2727,6 @@
   }
 
   .internet_textarea {
-    /* padding-left: 235px; */
     padding-left: 8px;
   }
 
@@ -3279,12 +2762,6 @@
   .Working_right {
     padding-left: 150px;
   }
-
-  /* .Working_input,
-  .result_textarea,
-  .family_textarea {
-    padding-left: 235px;
-  } */
 
   .CreditForm_InternetInf li,
   .CreditForm_CheckId li,
