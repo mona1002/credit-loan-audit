@@ -19,7 +19,7 @@
           <el-input v-model.trim="params.param.blackCertCode" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">公司名称：</span>
+          <span class="keywordText">单位名称：</span>
           <el-input v-model.trim="params.param.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
         </el-col>
       </el-row>
@@ -29,10 +29,15 @@
           <el-input v-model.trim="params.param.blackPhone" @keyup.enter.native='Rsearch' placeholder="请输入电话"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">地址：</span>
-          <el-input v-model.trim="params.param.blackAddress" @keyup.enter.native='Rsearch' placeholder="请输入地址"></el-input>
+          <!-- <span class="keywordText">进件编号：</span>
+          <el-input v-model.trim="params.param.blackAddress" @keyup.enter.native='Rsearch' placeholder="请输入地址"></el-input> -->
         </el-col>
         <el-col :span="6" class="search-item">
+          <!-- <span class="keywordText">加黑类型：</span>
+          <el-select v-model="params.param.blackListType" placeholder="请选择">
+            <el-option v-for="item in blackType" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select> -->
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -64,18 +69,28 @@
         </el-table-column>
         <el-table-column prop="blackCertCode" label="证件号码" width="150">
         </el-table-column>
-        <el-table-column prop="blackCompany" label="公司名称" width="150">
+        <el-table-column prop="blackCompany" label="单位名称" width="150">
         </el-table-column>
         <el-table-column prop="blackAddress" label="地址" width="150">
         </el-table-column>
         <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <el-table-column prop="blackRemark" label="原因说明" width="160">
+        <!-- 字段取值待确认 -->
+        <!-- <el-table-column prop="blackPhone" label="加黑类型" width="100">
         </el-table-column>
-        <el-table-column prop="disposePerCode" label="经办人" width="100">
+        <el-table-column prop="blackRemark" label="申请说明" width="160">
         </el-table-column>
-        <el-table-column prop="disposePerDate" label="经办时间" min-width="100">
+        <el-table-column prop="disposePerCode" label="申请人" width="100">
         </el-table-column>
+        <el-table-column prop="disposePerDate" label="申请时间" min-width="100">
+        </el-table-column>
+          <el-table-column prop="disposePerCode" label="审批人" width="100">
+        </el-table-column>
+        <el-table-column prop="disposePerDate" label="审批时间" min-width="100">
+        </el-table-column>
+          <el-table-column prop="disposePerCode" label="审批说明" width="100">
+        </el-table-column> -->
+
         <!-- <el-table-column label="证件号码" width="180">
           <template slot-scope="scope">
             <span>{{ scope.row.certCode |cerCodeStar }}</span>
@@ -104,7 +119,8 @@
             blackCertCode: '', //	证件号码
             blackCompany: '', //	单位名称
             blackPhone: '', //	电话
-            blackAddress: '', //	地址
+            // blackAddress: '', //	进件编号
+            // blackAddress: '', // 加黑类型
           },
           pageParam: {
             pageNum: 1, //	页码
@@ -112,7 +128,24 @@
           }
         },
         listType: [{
-             value: '01',
+            value: '01',
+            label: '客户'
+          },
+          {
+            value: '02',
+            label: '电话'
+          },
+          {
+            value: '03',
+            label: '地址'
+          },
+          {
+            value: '04',
+            label: '单位名称'
+          }
+        ],
+        blackType: [{
+            value: '01',
             label: '客户'
           },
           {
@@ -149,7 +182,8 @@
         this.params.param.blackCertCode = ''; //	证件号码
         this.params.param.blackCompany = ''; //	单位名称
         this.params.param.blackPhone = ''; //	电话
-        this.params.param.blackAddress = ''; //	地址
+        // this.params.param.blackAddress = ''; //	进件编号
+        // this.params.param.blackAddress = ''; //	加黑类型
         this.params.pageParam.pageNum = 1; //	页码
         // this.params.   pageParam.pageSize=''; //	条数
         this.inquire();

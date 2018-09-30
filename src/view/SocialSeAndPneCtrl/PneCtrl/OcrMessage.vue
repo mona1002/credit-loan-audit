@@ -9,7 +9,7 @@
         </template>
         <div class="padding_left_5">
           <!-- 图片标签 -->
-          <img id="image1" alt="人脸图片信息" src="" border="false" style="display:none"/>
+          <img id="image1" alt="人脸图片信息" src="" border="false" style="display:none" />
           <!-- 视频媒体标签 -->
           <video id="video1" alt="人脸视频信息" src="" width="25%" controls preload style="display:none"></video>
         </div>
@@ -100,7 +100,16 @@
         }).then(res => {
           if (!res || !res.appInfo) return;
           var data = $.parseJSON(res.appInfo);
+          if ('PHDX' == this.applySubNo.substr(0, 4) && data) { //旧电销数据
+            $('#image1').show();
+            this.baseinfo = data;
+            if (data['b14']) $('#image2').attr('src', data['b14']);
+            if (data['b15']) $('#image3').attr('src', data['b15']);
+            if (data['k1']) $('#image1').attr('src', data['k1']);
+            return;
+          }
           if (!data || !data.auth) return;
+          //直销、新电销数据
           this.baseinfo = data.auth;
           if (data.auth.id_front_url) $('#image2').attr('src', data.auth.id_front_url);
           if (data.auth.id_back_url) $('#image3').attr('src', data.auth.id_back_url);
