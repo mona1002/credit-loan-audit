@@ -1663,7 +1663,7 @@
         this.checkResultCount08 = 0;
         this.checkResultCount09 = 0;
         this.checkResultCount10 = 0;
-        if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
+        if (type == '提交'||this.propQTconclution.pageType == 'checkApp_check_manager') { //提交 加校验，保存无需校验必填---常规质检,质检主管保存加-（质检结论）校验
           // 保存、提交质检结论都校验
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
@@ -1783,8 +1783,8 @@
           // 循环质检结论list 改变对应的值-不能跟上面的循环校验一起，校验不过不用修改
           for (var i = 0; i < this.insConclusion.length; i++) {
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
-            this.propQTconclution.pageType == 'checkApp_check_manager' && this.insConclusion[i].checkType == '01' ?
-              this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
+            // this.propQTconclution.pageType == 'checkApp_check_manager' && this.insConclusion[i].checkType == '01' ?
+            //   this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
             this.propQTconclution.pageType == 'checkApp_check_manager' ? this.insConclusion[i].checkType = '02' : this.insConclusion[
               i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
               this.insConclusion[i].insDate= this.systermTime;//质检主管，专员，质检结论入参-质检日期重置为系统时间的毫秒数（返参为2019-8-28格式）
@@ -2154,7 +2154,7 @@
           this.checkTypeParams = '02'; //查询质检页面入参 ：01专员，02主管
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             this.submitBtn = false; //提交
-            //  this.QTConclutionBtn = true;//质检结论添加、删除按钮
+             this.QTConclutionBtn = true;//质检结论添加、删除按钮
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.QTresult = [];
             if (this.propQTconclution.tastwaitingPass.instaskType == '01') { //专项   
@@ -2162,7 +2162,7 @@
             } else if (this.propQTconclution.tastwaitingPass.instaskType == '02') { // 纵向
               this.QTresult = this.QTresultS;
             }
-            //  this.QTConclutionBtn = true;//质检结论添加、删除按钮            
+             this.QTConclutionBtn = true;//质检结论添加、删除按钮            
             this.Special();
           } else if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') {
             this.regularAndSpecial();
