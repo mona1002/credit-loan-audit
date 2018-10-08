@@ -581,7 +581,6 @@
             this.activeNames = [];
           }
         }
-
         // 点击的时候清空  
         this.formId = '';
       },
@@ -602,7 +601,7 @@
           this.mobileLoading = false;
           if (res.statusCode == 200) {
             this.listData = res.data.page;
-            if (res.data.message && res.data.page.recordList && res.data.page.recordList.length > 0) {
+            if (res.data.message) {
               if (this.formShow == true) {
                 this.hisShow = false;
               } else {

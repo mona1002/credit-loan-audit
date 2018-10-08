@@ -741,7 +741,7 @@
           //  历史table数据
           if (res.statusCode == 200) {
             this.listData = res.data.page;
-            if (res.data.message && this.listData.recordList && this.listData.recordList.length > 0) {
+            if (res.data.message) {
               if (this.formShow == true) {
                 this.hisShow = false;
               } else {
