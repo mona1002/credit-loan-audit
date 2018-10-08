@@ -246,7 +246,8 @@
  .faqi {
    background-image: url('../images/faqi.png')
  }
-/* 提交 */
+
+ /* 提交 */
  .tijiao {
    background-image: url('../images/tijiao.png')
  }
@@ -274,19 +275,23 @@
  .checkIcon {
    background-image: url('../images/check2x.png')
  }
-/* 挂起 */
+
+ /* 挂起 */
  .HangUpIcon {
    background-image: url('../images/guaqi.png')
  }
-/* 回退 */
+
+ /* 回退 */
  .backIcon {
    background-image: url('../images/back.png')
  }
-/* 拒绝 */
+
+ /* 拒绝 */
  .rejectIcon {
    background-image: url('../images/jujue.png')
  }
-/* 放弃 */
+
+ /* 放弃 */
  .giveUpIcon {
    background-image: url('../images/fangqi.png')
  }
@@ -302,7 +307,8 @@
  .brokenLineIcon {
    background-image: url('../images/bigdata.png')
  }
-/* 编辑 */
+
+ /* 编辑 */
  .editIcon {
    background-image: url('../images/change.png')
  }
@@ -378,21 +384,24 @@
  .Abody .height_auto .el-table {
    height: auto !important;
  }
+
  /* 100% */
- .hundred_percent .el-table .el-table__body-wrapper{
-  height: auto !important;
-}
-.hundred_percent .el-table {
-  height: auto !important;
-}
+ .hundred_percent .el-table .el-table__body-wrapper {
+   height: auto !important;
+ }
+
+ .hundred_percent .el-table {
+   height: auto !important;
+ }
+
  /* 特殊表格宽度 */
 
  /* .Abody .el_table_500 .el-table {
    height: 500px !important;
  } */
  .Abody .el_table_100Percent .el-table {
-  height: 100% !important;
-}
+   height: 100% !important;
+ }
 
  /* 操作按钮 */
 
@@ -932,12 +941,16 @@
    height: 200px;
  }
 
+ .Height_240 .el-dialog .el-dialog__body {
+   height: 240px;
+ }
+
  .Height_300 .el-dialog .el-dialog__body {
    height: 300px;
  }
 
- .Height_240 .el-dialog .el-dialog__body {
-   height: 240px;
+ .Height_600 .el-dialog .el-dialog__body {
+   height: 600px;
  }
 
  .el-collapse-item__wrap {
