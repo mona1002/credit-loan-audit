@@ -636,7 +636,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 /* 查看-信审表-div设置border */
 .border_top {
-  border-top: 1px solid #d8dce5;
+  /* border-top: 1px solid #d8dce5; */
 }
 
 .divWrap_Padding_top_4 {

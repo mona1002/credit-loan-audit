@@ -274,108 +274,7 @@
             trigger: 'blur'
           }],
         },
-        // add: {},
-        addTableData: [{
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, {
-          appDate: ' 2018-03-05 17:23:34',
-          operCode: '017304B004',
-          custName: 'lsjasdlfadf',
-          certCode: '36112319750818888X'
-        }, ],
+        addTableData: [],
         tableData: [{
           "appDate": "2018-09-21",
           "appPerCode": "",
@@ -408,7 +307,6 @@
             blackCertCode: '', //	证件号码
             blackCompany: '', //	单位名称
             blackPhone: '', //	电话
-            // blackAddress: '', //	地址
             blackAppState: '', //	申请状态
             inReasons: '', //加黑类型(原因)
           },
