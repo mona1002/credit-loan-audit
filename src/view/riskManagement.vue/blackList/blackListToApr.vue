@@ -85,11 +85,12 @@
         <el-table-column prop="appPerCode" label="申请人" width="120">
         </el-table-column>
         <el-table-column prop="appDate" label="申请时间" width="120">
-        </el-table-column>     <el-table-column prop="auditPerCode" label="审批人" width="120">
+        </el-table-column>
+        <el-table-column prop="auditPerCode" label="审批人" width="120">
         </el-table-column>
         <el-table-column prop="auditDate" label="审批时间" width="120">
         </el-table-column>
-        <el-table-column prop="auditOpinion" label="审批意见" >
+        <el-table-column prop="auditOpinion" label="审批意见">
         </el-table-column>
         <!-- <el-table-column label="证件号码" width="180">
           <template slot-scope="scope">
@@ -117,16 +118,18 @@
             </el-form-item>
           </div>
           <div class="dialog_textarea">
-            <el-form-item class="mr" label="审批意见：" label-width="85px">
-              <el-input v-model="ruleForm.auditOpinion" type="textarea" resize='none' :rows="2"></el-input>
+            <el-form-item class="mr" label="审批意见：" prop="auditOpinion" label-width="85px">
+              <b class="hint_word Working_input" v-show="ruleForm.auditOpinion&&ruleForm.auditOpinion.length>=300">
+                输入长度不能超过300</b>
+              <el-input v-model="ruleForm.auditOpinion" type="textarea" :maxlength="300" resize='none' :rows="2"></el-input>
             </el-form-item>
           </div>
           <div class="bfc">
             <el-form-item class="fl" label="审批人：" label-width="85px">
-              {{currentRow.auditPerCode}}
+              {{userInf.userCode}}
             </el-form-item>
             <el-form-item class="fr" label="审批时间：" label-width="110px">
-              {{currentRow.auditDate}}
+              {{systermTime|dateFilter }}
             </el-form-item>
           </div>
         </el-form>
@@ -146,16 +149,23 @@
         apprShow: false,
         btnWord: '确定',
         loadSub: false,
+        systermTime: 0,
+        userInf: '',
         ruleForm: {
-          auditConclusion: '',
-          auditOpinion: '',
-          id: ''
+          // auditConclusion: '',
+          // auditOpinion: '',
+          // id: ''
         },
         rules: {
           auditConclusion: [{
             required: true,
             message: '请选择审批结论',
             trigger: 'change'
+          }],
+          auditOpinion: [{
+            required: true,
+            message: '请选择审说明',
+            trigger: 'blur'
           }],
         },
         tableData: [],
@@ -233,11 +243,11 @@
         ],
         apprResult: [{
             value: '01',
-            label: '同意'
+            label: '审批通过'
           },
           {
             value: '02',
-            label: '拒绝'
+            label: '审批拒绝'
           }
         ],
         Routes: this.$router.options.routes[55],
@@ -250,13 +260,21 @@
             this.params.pageParam.pageSize = 10;
             this.Rreset();
             this.Routes.closed = true;
+            this.getSystermTime();
           }
         }
       }
     },
     methods: {
+      getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.systermTime = res.data;
+          }
+        })
+      },
       Rreset() {
-   this.params.param.blackListType = ''; //黑名单类型
+        this.params.param.blackListType = ''; //黑名单类型
         this.params.param.blackCustName = ''; //客户名称
         this.params.param.blackCertCode = ''; //证件号码
         this.params.param.blackCompany = ''; //单位名称
@@ -285,7 +303,6 @@
       },
       // 审核
       appr() {
-        console.log(this.currentRow)
         if (JSON.stringify(this.currentRow) == '{}') {
           this.$confirm('请选择一条记录！', '提示', {
             confirmButtonText: '确定',
@@ -300,8 +317,7 @@
         this.btnWord = '确定';
         this.loadSub = false;
         // 清空弹窗
-        this.ruleForm.auditOpinion = '';
-        this.ruleForm.auditConclusion = '';
+        this.$refs['ruleForm'] ? this.$refs['ruleForm'].resetFields() : '';
         this.ruleForm.id = this.currentRow.id;
       },
       submitForm(formName) {
@@ -309,7 +325,7 @@
           if (valid) {
             this.btnWord = '提交中';
             this.loadSub = true;
-            this.post("/blackAndGrey/auditOutApp", this.ruleForm).then(res => {
+            this.post("/blackAndGrey/auditInApp", this.ruleForm).then(res => {
               if (res.statusCode == 200) {
                 this._succe('提交成功！');
                 this.apprShow = false;
@@ -319,13 +335,9 @@
               }
             });
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
       },
       //   查询列表
       inquire() {
@@ -347,7 +359,9 @@
       },
     },
     mounted() {
+      this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.inquire();
+      this.getSystermTime();
     }
   }
 
