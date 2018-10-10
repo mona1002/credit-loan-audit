@@ -131,40 +131,35 @@
           <div class="form-class" style="width:100%;height:auto;">
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
-            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></AddressForm>
+              :isFull.sync="isFull"></AddressForm> -->
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData"
-              :isFull.sync="isFull"></AddressHis>
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData"></AddressHis>
             <!-- 单位电话 - 表单 -->
-            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></CompanyForm>
+              :isFull.sync="isFull"></CompanyForm> -->
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData"
-              :isFull.sync="isFull"></CompanyHis>
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
-            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></FamilyForm>
+              :isFull.sync="isFull"></FamilyForm> -->
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData"
-              :isFull.sync="isFull"></FamilyHis>
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
-            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></HurryForm>
+              :isFull.sync="isFull"></HurryForm> -->
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData"
-              :isFull.sync="isFull"></HurryHis>
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData"></HurryHis>
             <!-- 工作证明人 - 表单 -->
-            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></WorkForm>
+              :isFull.sync="isFull"></WorkForm> -->
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"
-              :isFull.sync="isFull"></WorkHis>
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"></WorkHis>
           </div>
         </el-main>
       </el-container>
@@ -246,23 +241,23 @@
 </template>
 <script>
   // 电话征信 - 住址电话 表单
-  import AddressForm from '../detailComponent/AddressForm.vue'
+  // import AddressForm from '../detailComponent/AddressForm.vue'
   // 电话征信 - 住址电话 详情
   import AddressHis from '../detailComponent/AddressHis.vue'
   // 电话征信 - 单位电话 表单 CompanyForm
-  import CompanyForm from '../detailComponent/CompanyForm'
+  // import CompanyForm from '../detailComponent/CompanyForm'
   // 电话征信 - 单位电话  详情 CompanyHis
   import CompanyHis from '../detailComponent/CompanyHis'
   // 电话征信 - 家庭联系人 表单
-  import FamilyForm from '../detailComponent/FamilyForm'
+  // import FamilyForm from '../detailComponent/FamilyForm'
   // 电话征信 - 家庭联系人 详情
   import FamilyHis from '../detailComponent/FamilyHis'
   // 电话征信 紧急联系人 表单
-  import HurryForm from '../detailComponent/HurryForm'
+  // import HurryForm from '../detailComponent/HurryForm'
   // 电话征信 紧急联系人 历史
   import HurryHis from '../detailComponent/HurryHis'
   // 电话征信 工作证明人 表单
-  import WorkForm from '../detailComponent/WorkForm'
+  // import WorkForm from '../detailComponent/WorkForm'
   // 电话征信 工作证明人 历史 
   import WorkHis from '../detailComponent/WorkHis'
   export default {
@@ -444,8 +439,8 @@
         default: '',
         type: String
       },
-      isFull: {},
-      SplitS: {}
+      // isFull: {},
+      // SplitS: {}
     },
     mounted() {
       // 组件 创建 估计完成后获取数据
@@ -532,7 +527,6 @@
       formShow: function () {
         if (this.formShow) {
           $('.el-main').css("overflow-y", 'auto');
-
         }
       }
     },
@@ -546,7 +540,7 @@
         });
       },
       handleNodeClick(data) {
-        if (this.isInterFlag == true || this.SplitS != 'right' || this.hisShow) {
+        if (this.isInterFlag == true  || this.hisShow) {//|| this.SplitS != 'right'
           // 点击每条tree数据的事件
           this.treeId = data.id;
           if (data.id.length > 2) {
@@ -562,7 +556,8 @@
             this.phoneNum = data.telNum;
             this.queryTelLogByPage();
           }
-        } else if (this.isInterFlag == false || this.SplitS == 'right') {
+         } 
+        else if (this.isInterFlag == false ) {//|| this.SplitS == 'right'
           // 点击每条tree数据的事件
           this.treeId = data.id;
           if (data.id.length > 2) {
@@ -581,7 +576,6 @@
             this.activeNames = [];
           }
         }
-
         // 点击的时候清空  
         this.formId = '';
       },
@@ -602,7 +596,7 @@
           this.mobileLoading = false;
           if (res.statusCode == 200) {
             this.listData = res.data.page;
-            if (res.data.message && res.data.page.recordList && res.data.page.recordList.length > 0) {
+            if (res.data.message) {
               if (this.formShow == true) {
                 this.hisShow = false;
               } else {
@@ -663,7 +657,7 @@
       },
       rowDbClick(row) {
         // 先让表单消失
-        this.formShow = false;
+        // this.formShow = false;
         this.hisShow = false;
         // 历史列表  点击每一行
         this.id = row.id;
@@ -765,15 +759,15 @@
       // 添加 电话 弹窗, 点击关闭的事件   无效?
     },
     components: {
-      AddressForm,
+      // AddressForm,
       AddressHis,
-      CompanyForm,
+      // CompanyForm,
       CompanyHis,
-      FamilyForm,
+      // FamilyForm,
       FamilyHis,
-      HurryForm,
+      // HurryForm,
       HurryHis,
-      WorkForm,
+      // WorkForm,
       WorkHis
     }
   }
@@ -1032,17 +1026,16 @@
 
   /*  表单样式 */
 
-  .phone-credit .left-title {
+  /* .phone-credit .left-title {
     float: left;
     width: 140px;
     line-height: 30px;
     min-height: 30px;
     padding-right: 5px;
     text-align: right;
-    /* 配合必选 */
     position: relative;
     font-size: 14px;
-  }
+  } */
 
   .phone-credit .form-his {
     font-size: 16px;

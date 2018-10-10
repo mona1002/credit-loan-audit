@@ -8,15 +8,20 @@
 }
 
 /* 内边距 */
-.padding_5{
-  padding:5px;
+.padding_5 {
+  padding: 5px;
 }
+
 .padding_left_5 {
   padding-left: 5px;
 }
 
 .padding_left_235 {
   padding-left: 235px;
+}
+
+.padding_bottom_10 {
+  padding-bottom: 10px;
 }
 
 /* 外边距 */
@@ -28,6 +33,10 @@
   margin-top: 15px;
 }
 
+.margin_top_20 {
+  margin-top: 20px;
+}
+
 .margin_top_100 {
   margin-top: 100px;
 }
@@ -35,30 +44,44 @@
 .margin_right_5 {
   margin-right: 5px;
 }
-.margin_left_5{
+
+.margin_left_5 {
   margin-left: 5px;
 }
-.margin_left_30{
+
+.margin_left_30 {
   margin-left: 30px;
 }
+
 .margin_bottom_10 {
   margin-bottom: 10px;
 }
-/* label 宽度 */
-.label_223 {
-  /* display: inline-block; */
-  width: 223px;
 
-  /* font-size: 14px;
-  font-weight: normal; */
+/* label 宽度 */
+.label_140 {
+  width: 140px;
 }
-.width_33Per{
-  width:33.3%
+
+.label_223 {
+  width: 223px;
 }
-.width_20Per{
-  width:20%
-  
+
+.label_185 {
+  width: 185px;
 }
+
+.width_33Per {
+  width: 33.3%
+}
+
+.width_20Per {
+  width: 20%
+}
+
+.width_50Per {
+  width: 50%
+}
+
 /* 气泡 */
 .el-tooltip__popper {
   max-width: 320px;
@@ -621,7 +644,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 /* 查看-信审表-div设置border */
 .border_top {
-  border-top: 1px solid #d8dce5;
+  /* border-top: 1px solid #d8dce5; */
 }
 
 .divWrap_Padding_top_4 {
@@ -659,21 +682,24 @@ body .el-table_450_scroll .el-table__fixed-right {
   width: 100%;
 }
 
+/* .phone_credit .el-form-item , */
 .CreditForm .el-form-item {
   /* border:1px solid red; */
   float: left;
-  width:50%;
+  width: 50%;
   height: auto;
   margin-bottom: 0;
-  margin-top:12px;
+  margin-top: 12px;
 }
 
 .CreditForm .top {
   /* margin-top: 4px; */
 }
+
 .specialInput {
   width: calc(100% - 230px);
 }
+
 /* .CreditForm li {
   color: #475669;
   font-size: 14px;
@@ -682,21 +708,6 @@ body .el-table_450_scroll .el-table__fixed-right {
   clear: both;
 } */
 /* ------------------------------上网查询 +核实身份--------------------------- */
-.CreditForm_InternetInf p,
-/*  上网查询 */
-.CreditForm_CheckId p,
-/* 核实信息 ul */
-.CreditForm_WorkInfs p,
-/* 工作信息 */
-.CreditForm_CompanyInfs p,
-/* 私营企业 */
-.CreditForm_FamilyInf p,
-/* 家庭信息 */
-.CreditForm_live p {
-  float: left;
-  width: 33.3%;
-  vertical-align: middle;
-}
 
 .CreditForm_check_reside li,
 .CreditForm_check_reside p {
@@ -720,22 +731,6 @@ body .el-table_450_scroll .el-table__fixed-right {
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: middle;
-}
-
-.CreditForm_InternetInf p:nth-of-type(even) span,
-/* 上网查询 */
-.CreditForm_CheckId p:nth-of-type(even) span,
-/* 核实身份-右侧span width */
-.CreditForm_FamilyInf p:nth-of-type(even) span
-
-/* 家庭信息 */
-  {
-  width: calc(100% - 225px);
-  height: 60px;
-  vertical-align: top;
-  overflow: auto;
-  border: 1px solid #d8dce5;
-  border-radius: 4px;
 }
 
 .elips {
@@ -763,22 +758,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* --------------------------工作信息 + 私营企业--------------------- */
-/* 第三列p */
-/* .CheckId_right_label
-
-
-  {
-  width: 140px;
-} */
-/* 家庭信息 */
-/* .CreditForm_InternetInf p:nth-of-type(even),
-.CreditForm_CheckId p:nth-of-type(even),
-.CreditForm_FamilyInf p:nth-of-type(even)
-
-
-  {
-  width: 66.6%;
-} */
 .CreditForm label {
   display: inline-block;
   text-align: right;
@@ -1077,6 +1056,11 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 电话征信公共样式 */
+.phone-credit label {
+  display: inline-block;
+  text-align: right;
+}
+
 .phone-credit .Phone_credit_Form_search_bottom {
   margin-bottom: 8px;
 }

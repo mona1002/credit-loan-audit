@@ -101,11 +101,11 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_height_48 label_width_210 blueC margin_right_5" @click="NewPage(2)">网搜现住址和房产地址是否异常：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(2)">网搜现住址和房产地址是否异常：</label>
                 <span>{{this.FormData.wnetAddrandEstatetext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-if="this.FormData.wnetAddrandEstatetext=='是'">
-                <label class="label_width_210"> 地址异常信息说明： </label>
+                <label class="label_height_48 label_width_210"> 地址异常信息说明： </label>
                 <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetAddrandEstatetxt }} </span>
               </li>
             </div>

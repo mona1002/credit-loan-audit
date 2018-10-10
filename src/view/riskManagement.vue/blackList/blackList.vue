@@ -29,15 +29,15 @@
           <el-input v-model.trim="params.param.blackPhone" @keyup.enter.native='Rsearch' placeholder="请输入电话"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <!-- <span class="keywordText">进件编号：</span>
-          <el-input v-model.trim="params.param.blackAddress" @keyup.enter.native='Rsearch' placeholder="请输入地址"></el-input> -->
+          <span class="keywordText">进件编号：</span>
+          <el-input v-model.trim="params.param.applySubNo" @keyup.enter.native='Rsearch' placeholder="请输入地址"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <!-- <span class="keywordText">加黑类型：</span>
-          <el-select v-model="params.param.blackListType" placeholder="请选择">
-            <el-option v-for="item in blackType" :key="item.value" :label="item.label" :value="item.value">
+          <span class="keywordText">加黑类型：</span>
+          <el-select v-model="params.param.inReasons" placeholder="请选择">
+            <el-option v-for="item in inReasons" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select> -->
+          </el-select>
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -48,7 +48,7 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        黑名单客户列表
+        黑名单查看
       </span>
       <span class="iconContainer">
         <span class="icon-item" @click='Import'>
@@ -63,9 +63,9 @@
         </el-table-column>
         <el-table-column prop="blackListTypeTxt" label="黑名单类型" width="100">
         </el-table-column>
-        <el-table-column prop="blackCustName" label="客户名称" width="100">
+        <el-table-column prop="applySubNo" label="进件编号" width="80">
         </el-table-column>
-        <el-table-column prop="blackCertTypeTxt" label="证件类型" width="80">
+        <el-table-column prop="blackCustName" label="客户名称" width="100">
         </el-table-column>
         <el-table-column prop="blackCertCode" label="证件号码" width="150">
         </el-table-column>
@@ -75,27 +75,20 @@
         </el-table-column>
         <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <!-- 字段取值待确认 -->
-        <!-- <el-table-column prop="blackPhone" label="加黑类型" width="100">
+        <el-table-column prop="inReasonsTxt" label="加黑类型" width="100">
         </el-table-column>
         <el-table-column prop="blackRemark" label="申请说明" width="160">
         </el-table-column>
-        <el-table-column prop="disposePerCode" label="申请人" width="100">
+        <el-table-column prop="appPerCode" label="申请人" width="100">
         </el-table-column>
-        <el-table-column prop="disposePerDate" label="申请时间" min-width="100">
+        <el-table-column prop="blackListInApp.appDate" label="申请时间" width="100">
         </el-table-column>
-          <el-table-column prop="disposePerCode" label="审批人" width="100">
+        <el-table-column prop="blackListInApp.auditPerCode" label="审批人" width="100">
         </el-table-column>
-        <el-table-column prop="disposePerDate" label="审批时间" min-width="100">
+        <el-table-column prop="blackListInApp.auditDate" label="审批时间" width="100">
         </el-table-column>
-          <el-table-column prop="disposePerCode" label="审批说明" width="100">
-        </el-table-column> -->
-
-        <!-- <el-table-column label="证件号码" width="180">
-          <template slot-scope="scope">
-            <span>{{ scope.row.certCode |cerCodeStar }}</span>
-          </template>
-        </el-table-column> -->
+        <el-table-column prop="blackListInApp.auditOpinion" label="审批说明" min-width="160">
+        </el-table-column>
       </el-table>
       <div class="page">
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="params.pageParam.pageNum"
@@ -119,8 +112,8 @@
             blackCertCode: '', //	证件号码
             blackCompany: '', //	单位名称
             blackPhone: '', //	电话
-            // blackAddress: '', //	进件编号
-            // blackAddress: '', // 加黑类型
+            applySubNo: '', //	进件编号
+            inReasons: '', // 加黑类型
           },
           pageParam: {
             pageNum: 1, //	页码
@@ -144,21 +137,25 @@
             label: '单位名称'
           }
         ],
-        blackType: [{
+        inReasons: [{ //加黑类型
             value: '01',
-            label: '客户'
+            label: '代办包装'
           },
           {
             value: '02',
-            label: '电话'
+            label: '组团骗贷'
           },
           {
             value: '03',
-            label: '地址'
+            label: '资料虚假'
           },
           {
             value: '04',
-            label: '单位名称'
+            label: '伪冒申请'
+          },
+          {
+            value: '05',
+            label: '其他欺诈'
           }
         ],
         Routes: this.$router.options.routes[51],
@@ -182,8 +179,8 @@
         this.params.param.blackCertCode = ''; //	证件号码
         this.params.param.blackCompany = ''; //	单位名称
         this.params.param.blackPhone = ''; //	电话
-        // this.params.param.blackAddress = ''; //	进件编号
-        // this.params.param.blackAddress = ''; //	加黑类型
+        this.params.param.applySubNo = ''; //	进件编号
+        this.params.param.inReasons = ''; //	加黑类型
         this.params.pageParam.pageNum = 1; //	页码
         // this.params.   pageParam.pageSize=''; //	条数
         this.inquire();

@@ -1,4 +1,4 @@
-    <!--风险管理 黑名单转入审批 -->
+<!--风险管理 黑名单转入审批 -->
 <template>
   <div class="taskWatting main-div">
     <div class="taskWinput search-div">
@@ -19,7 +19,7 @@
           <el-input v-model.trim="params.param.blackCertCode" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">公司名称：</span>
+          <span class="keywordText">单位名称：</span>
           <el-input v-model.trim="params.param.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
         </el-col>
       </el-row>
@@ -29,13 +29,16 @@
           <el-input v-model.trim="params.param.blackPhone" @keyup.enter.native='Rsearch' placeholder="请输入电话"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">地址：</span>
-          <el-input v-model.trim="params.param.blackAddress" @keyup.enter.native='Rsearch' placeholder="请输入地址"></el-input>
-        </el-col>
-        <el-col :span="6" class="search-item">
           <span class="keywordText">申请状态： </span>
           <el-select v-model="params.param.blackAppState" placeholder="请选择">
             <el-option v-for="item in applyStatus" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">加黑类型：</span>
+          <el-select v-model="params.param.inReasons" placeholder="请选择">
+            <el-option v-for="item in inReasons" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
@@ -65,27 +68,29 @@
         </el-table-column>
         <el-table-column prop="blackCustName" label="客户名称" width="100">
         </el-table-column>
-        <el-table-column prop="blackCertTypeTxt" label="证件类型" width="80">
-        </el-table-column>
         <el-table-column prop="blackCertCode" label="证件号码" width="160">
         </el-table-column>
-        <el-table-column prop="blackCompany" label="公司名称" width="150">
+        <el-table-column prop="blackCompany" label="单位名称" width="150">
         </el-table-column>
         <el-table-column prop="blackAddress" label="地址" width="150">
         </el-table-column>
         <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <el-table-column prop="blackRemark" label="原因说明" width="160">
+        <el-table-column prop="inReasonsTxt" label="加黑类型" width="105">
         </el-table-column>
         <el-table-column prop="blackAppStateTxt" label="申请状态" width="120">
+        </el-table-column>
+        <el-table-column prop="blackRemark " label="申请说明" width="160">
         </el-table-column>
         <el-table-column prop="appPerCode" label="申请人" width="120">
         </el-table-column>
         <el-table-column prop="appDate" label="申请时间" width="120">
         </el-table-column>
-        <el-table-column prop="disposePerCode" label="经办人" width="100">
+        <el-table-column prop="auditPerCode" label="审批人" width="120">
         </el-table-column>
-        <el-table-column prop="disposePerDate" label="经办时间" min-width="100">
+        <el-table-column prop="auditDate" label="审批时间" width="120">
+        </el-table-column>
+        <el-table-column prop="auditOpinion" label="审批意见">
         </el-table-column>
         <!-- <el-table-column label="证件号码" width="180">
           <template slot-scope="scope">
@@ -113,16 +118,18 @@
             </el-form-item>
           </div>
           <div class="dialog_textarea">
-            <el-form-item class="mr" label="审批意见：" label-width="85px" >
-              <el-input v-model="ruleForm.auditOpinion" type="textarea" resize='none' :rows="2"></el-input>
+            <el-form-item class="mr" label="审批意见：" prop="auditOpinion" label-width="85px">
+              <b class="hint_word Working_input" v-show="ruleForm.auditOpinion&&ruleForm.auditOpinion.length>=300">
+                输入长度不能超过300</b>
+              <el-input v-model="ruleForm.auditOpinion" type="textarea" :maxlength="300" resize='none' :rows="2"></el-input>
             </el-form-item>
           </div>
           <div class="bfc">
             <el-form-item class="fl" label="审批人：" label-width="85px">
-              {{currentRow.auditPerCode}}
+              {{userInf.userCode}}
             </el-form-item>
             <el-form-item class="fr" label="审批时间：" label-width="110px">
-              {{currentRow.auditDate}}
+              {{systermTime|dateFilter }}
             </el-form-item>
           </div>
         </el-form>
@@ -142,10 +149,12 @@
         apprShow: false,
         btnWord: '确定',
         loadSub: false,
+        systermTime: 0,
+        userInf: '',
         ruleForm: {
-          auditConclusion: '',
-          auditOpinion: '',
-          id: ''
+          // auditConclusion: '',
+          // auditOpinion: '',
+          // id: ''
         },
         rules: {
           auditConclusion: [{
@@ -153,29 +162,13 @@
             message: '请选择审批结论',
             trigger: 'change'
           }],
+          auditOpinion: [{
+            required: true,
+            message: '请选择审说明',
+            trigger: 'blur'
+          }],
         },
-        tableData: [{
-          "appDate": "2018-09-21",
-          "appPerCode": "",
-          "auditConclusion": "01",
-          "auditDate": "2018-09-21",
-          "auditOpinion": "审批结论---",
-          "auditPerCode": "",
-          "blackAddress": "",
-          "blackAppState": "03",
-          "blackAppStateTxt": "审核同意",
-          "blackCertCode": "98291829736712",
-          "blackCertType": "01",
-          "blackCertTypeTxt": "身份证",
-          "blackCompany": "",
-          "blackCustName": "客户名称改",
-          "blackListType": "01",
-          "blackListTypeTxt": "客户",
-          "blackPhone": "",
-          "blackRemark": "原因说明1",
-          "id": "XpcfOaVaGb9Aep09eWETnhNsbKUMk7FK",
-          "listId": "17686cff-edb1-47e7-9dec-2002163b0bad"
-        }],
+        tableData: [],
         currentRow: {},
         totalRecord: 0,
         params: {
@@ -185,8 +178,8 @@
             blackCertCode: '', //	证件号码
             blackCompany: '', //	单位名称
             blackPhone: '', //	电话
-            blackAddress: '', //	地址
             blackAppState: '', //	申请状态
+            inReasons: '', //加黑类型(原因)
           },
           pageParam: {
             pageNum: 1, //	页码
@@ -227,13 +220,34 @@
             label: '审核拒绝'
           }
         ],
-        apprResult: [{
+        inReasons: [{ //加黑类型
             value: '01',
-            label: '同意'
+            label: '代办包装'
           },
           {
             value: '02',
-            label: '拒绝'
+            label: '组团骗贷'
+          },
+          {
+            value: '03',
+            label: '资料虚假'
+          },
+          {
+            value: '04',
+            label: '伪冒申请'
+          },
+          {
+            value: '05',
+            label: '其他欺诈'
+          }
+        ],
+        apprResult: [{
+            value: '01',
+            label: '审批通过'
+          },
+          {
+            value: '02',
+            label: '审批拒绝'
           }
         ],
         Routes: this.$router.options.routes[55],
@@ -246,19 +260,27 @@
             this.params.pageParam.pageSize = 10;
             this.Rreset();
             this.Routes.closed = true;
+            this.getSystermTime();
           }
         }
       }
     },
     methods: {
+      getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.systermTime = res.data;
+          }
+        })
+      },
       Rreset() {
         this.params.param.blackListType = ''; //黑名单类型
         this.params.param.blackCustName = ''; //客户名称
         this.params.param.blackCertCode = ''; //证件号码
         this.params.param.blackCompany = ''; //单位名称
         this.params.param.blackPhone = ''; //电话
-        this.params.param.blackAddress = ''; //地址
         this.params.param.blackAppState = ''; //申请状态
+        this.currentRow = {};
         this.params.pageParam.pageNum = 1; //	页码
         this.inquire();
       },
@@ -295,8 +317,7 @@
         this.btnWord = '确定';
         this.loadSub = false;
         // 清空弹窗
-        this.ruleForm.auditOpinion = '';
-        this.ruleForm.auditConclusion = '';
+        this.$refs['ruleForm'] ? this.$refs['ruleForm'].resetFields() : '';
         this.ruleForm.id = this.currentRow.id;
       },
       submitForm(formName) {
@@ -304,7 +325,7 @@
           if (valid) {
             this.btnWord = '提交中';
             this.loadSub = true;
-            this.post("/blackAndGrey/auditOutApp", this.ruleForm).then(res => {
+            this.post("/blackAndGrey/auditInApp", this.ruleForm).then(res => {
               if (res.statusCode == 200) {
                 this._succe('提交成功！');
                 this.apprShow = false;
@@ -314,13 +335,9 @@
               }
             });
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
       },
       //   查询列表
       inquire() {
@@ -342,7 +359,9 @@
       },
     },
     mounted() {
+      this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.inquire();
+      this.getSystermTime();
     }
   }
 

@@ -1,7 +1,7 @@
 <!-- 电话征信 -->
 <template>
   <div class="phone-credit Height_200 min_width_1200">
-    <el-container style="height: 100%; border: 1px solid #eee">
+    <el-container style="height: 100%; border: 1px solid #eee" class="phone_credit">
       <!-- 左侧 导航列表 -->
       <el-aside style="width:210px;">
         <!-- 手风琴效果 -->
@@ -741,7 +741,7 @@
           //  历史table数据
           if (res.statusCode == 200) {
             this.listData = res.data.page;
-            if (res.data.message && this.listData.recordList && this.listData.recordList.length > 0) {
+            if (res.data.message) {
               if (this.formShow == true) {
                 this.hisShow = false;
               } else {

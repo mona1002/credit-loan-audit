@@ -851,8 +851,7 @@
       },
       // 月核实收入[元]
       moneyBlur: function (val, flag) {
-        val || val == 0 ? val = val.toString().replace(/,/, '') : '';
-        // console.log(val)
+        val || val == 0 ? val = val.toString().replace(/,/g, '') : '';
         switch (flag) {
           case 'verIncome':
             if (isNaN(Number(val)) || val <= 0 || val == '') {
@@ -880,14 +879,14 @@
               return
             };
             // 大于申请金额
-            if (val * 1 > this.loanAmt) {
-              this.$message({
-                message: '此金额不能大于申请金额,请重新输入!',
-                type: 'warning'
-              });
-              this.ploanAmt = '';
-              return
-            };
+            // if (val * 1 > this.loanAmt) {
+            //   this.$message({
+            //     message: '此金额不能大于申请金额,请重新输入!',
+            //     type: 'warning'
+            //   });
+            //   this.ploanAmt = '';
+            //   return
+            // };
             this.ploanAmt = this._formatNumber(this.ploanAmt);
             this.calculateByAuditInfo();
             break;
@@ -907,7 +906,7 @@
       },
       // 计算审批结论数据
       calculateByAuditInfo() {
-        var reg = /,/;
+        var reg = /,/g;
         this.post('/creauditOpinion/calculateByAuditInfo', {
           applyId: this.applyId, //申请单ID
           proId: this.proId, //产品ID
@@ -1158,16 +1157,16 @@
       },
       //大数据风控
       tobigData() {
-        this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-          applyId: this.applyId
-        }).then(res => {
+        // this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+        //   applyId: this.applyId
+        // }).then(res => {
           this.$router.push({
             name: 'PneCtrl',
             params: {
               newOne: true,
             }
           });
-        });
+        // });
       },
       del() {
         this.$store.dispatch('delVisitedViews', {
@@ -1182,23 +1181,6 @@
         })
       }
     },
-    watch: {
-      //审批 计算 审批倍数 等
-      // ploanTerm: function () {
-      //   // 计算 审批记录数据
-      //   if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
-      //     this.repayWay && this.synthesisRateM && this.loanRateYr) {
-      //     this.calculateByAuditInfo();
-      //   }
-      // },
-      // 产品 id
-      // proId: function () {
-      //   //月核实收入+产品id+批准期限+批准金额[元]
-      //   if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 &&
-      //     this.repayWay && this.synthesisRateM && this.loanRateYr)
-      //     this.calculateByAuditInfo();
-      // },
-    }
   }
 
 </script>
