@@ -852,22 +852,13 @@
       // 月核实收入[元]
       moneyBlur: function (val, flag) {
         val || val == 0 ? val = val.toString().replace(/,/g, '') : '';
-              console.log( 1,  this.verIncome )
-        
-        console.log(val)
         switch (flag) {
           case 'verIncome':
             if (isNaN(Number(val)) || val <= 0 || val == '') {
               this.verIncome = '1.00';
-              console.log( 3,  this.verIncome )
-              
             } else if (val > 0) {
               this.verIncome = this._formatNumber(this.verIncome);
-              console.log( 4,  this.verIncome )
-              
             }
-              console.log(5,   this.verIncome )
-            
             this.calculateByAuditInfo();
             break;
           case 'ploanAmt':
@@ -888,14 +879,14 @@
               return
             };
             // 大于申请金额
-            if (val * 1 > this.loanAmt) {
-              this.$message({
-                message: '此金额不能大于申请金额,请重新输入!',
-                type: 'warning'
-              });
-              this.ploanAmt = '';
-              return
-            };
+            // if (val * 1 > this.loanAmt) {
+            //   this.$message({
+            //     message: '此金额不能大于申请金额,请重新输入!',
+            //     type: 'warning'
+            //   });
+            //   this.ploanAmt = '';
+            //   return
+            // };
             this.ploanAmt = this._formatNumber(this.ploanAmt);
             this.calculateByAuditInfo();
             break;

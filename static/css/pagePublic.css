@@ -57,6 +57,10 @@ padding-bottom: 10px;
 }
 
 /* label 宽度 */
+.label_140 {
+  width: 140px;
+}
+
 .label_223 {
   width: 223px;
 }
@@ -1050,6 +1054,10 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 电话征信公共样式 */
+.phone-credit label{
+  display: inline-block;
+  text-align: right;
+}
 .phone-credit .Phone_credit_Form_search_bottom {
   margin-bottom: 8px;
 }
