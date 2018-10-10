@@ -19,8 +19,9 @@
 .padding_left_235 {
   padding-left: 235px;
 }
-.padding_bottom_10{
-padding-bottom: 10px;
+
+.padding_bottom_10 {
+  padding-bottom: 10px;
 }
 
 /* 外边距 */
@@ -681,6 +682,7 @@ body .el-table_450_scroll .el-table__fixed-right {
   width: 100%;
 }
 
+/* .phone_credit .el-form-item , */
 .CreditForm .el-form-item {
   /* border:1px solid red; */
   float: left;
@@ -1054,10 +1056,11 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 电话征信公共样式 */
-.phone-credit label{
+.phone-credit label {
   display: inline-block;
   text-align: right;
 }
+
 .phone-credit .Phone_credit_Form_search_bottom {
   margin-bottom: 8px;
 }

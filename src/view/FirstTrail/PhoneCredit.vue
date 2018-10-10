@@ -1,7 +1,7 @@
 <!-- 电话征信 -->
 <template>
   <div class="phone-credit Height_200 min_width_1200">
-    <el-container style="height: 100%; border: 1px solid #eee">
+    <el-container style="height: 100%; border: 1px solid #eee" class="phone_credit">
       <!-- 左侧 导航列表 -->
       <el-aside style="width:210px;">
         <!-- 手风琴效果 -->
