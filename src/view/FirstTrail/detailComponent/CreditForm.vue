@@ -1850,7 +1850,7 @@
     height: 60px;
   }
 
-  .btn {
+  .Abody .btn {
     margin: 20px 0 0 250px;
   }
 
@@ -1899,48 +1899,48 @@
     padding-left: 150px;
   }
 
-  .CreditForm_InternetInf li,
-  .CreditForm_CheckId li,
-  .CreditForm_FamilyInf_edit li
+  /* .CreditForm_InternetInf li, */
+  /* .CreditForm_CheckId li, */
+  /* .CreditForm_FamilyInf_edit li */
   /* 家庭信息 */
 
-    {
+    /* {
     clear: both;
     vertical-align: middle;
-  }
+  } */
 
-  .CreditForm_InternetInf li p,
+  /* .CreditForm_InternetInf li p, */
   /*  上网查询 */
 
-  .CreditForm_CheckId p,
+  /* .CreditForm_CheckId p, */
   /* 核实信息 ul */
 
-  .CreditForm_FamilyInf_edit li p,
+  /* .CreditForm_FamilyInf_edit li p, */
   /* 家庭信息 */
 
-  .CreditForm_live_ul_left li
+  /* .CreditForm_live_ul_left li */
   /* 居住情况 */
 
-    {
+    /* {
     float: left;
     width: 33.3%;
     position: relative;
     vertical-align: middle;
     margin-top: 10px;
-  }
+  } */
 
-  .CreditForm_InternetInf li p:nth-of-type(even),
+  /* .CreditForm_InternetInf li p:nth-of-type(even), */
   /*  上网查询 */
 
-  .CreditForm_CheckId li p:nth-of-type(even),
+  /* .CreditForm_CheckId li p:nth-of-type(even), */
   /* 核实信息 ul */
 
-  .CreditForm_FamilyInf_edit li p:nth-of-type(even)
+  /* .CreditForm_FamilyInf_edit li p:nth-of-type(even) */
   /* 家庭信息 */
 
-    {
+    /* {
     width: 66.6%
-  }
+  } */
 
   .CreditForm .CreditForm_FamilyInf_edit li p:nth-of-type(even) span {
     border: none;

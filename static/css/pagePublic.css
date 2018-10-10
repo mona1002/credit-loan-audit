@@ -699,21 +699,21 @@ body .el-table_450_scroll .el-table__fixed-right {
   clear: both;
 } */
 /* ------------------------------上网查询 +核实身份--------------------------- */
-.CreditForm_InternetInf p,
+/* .CreditForm_InternetInf p, */
 /*  上网查询 */
-.CreditForm_CheckId p,
+/* .CreditForm_CheckId p, */
 /* 核实信息 ul */
-.CreditForm_WorkInfs p,
+/* .CreditForm_WorkInfs p, */
 /* 工作信息 */
-.CreditForm_CompanyInfs p,
+/* .CreditForm_CompanyInfs p, */
 /* 私营企业 */
-.CreditForm_FamilyInf p,
+/* .CreditForm_FamilyInf p, */
 /* 家庭信息 */
-.CreditForm_live p {
+/* .CreditForm_live p {
   float: left;
   width: 33.3%;
   vertical-align: middle;
-}
+} */
 
 .CreditForm_check_reside li,
 .CreditForm_check_reside p {
@@ -739,21 +739,21 @@ body .el-table_450_scroll .el-table__fixed-right {
   vertical-align: middle;
 }
 
-.CreditForm_InternetInf p:nth-of-type(even) span,
+/* .CreditForm_InternetInf p:nth-of-type(even) span, */
 /* 上网查询 */
-.CreditForm_CheckId p:nth-of-type(even) span,
+/* .CreditForm_CheckId p:nth-of-type(even) span, */
 /* 核实身份-右侧span width */
-.CreditForm_FamilyInf p:nth-of-type(even) span
+/* .CreditForm_FamilyInf p:nth-of-type(even) span */
 
 /* 家庭信息 */
-  {
+  /* {
   width: calc(100% - 225px);
   height: 60px;
   vertical-align: top;
   overflow: auto;
   border: 1px solid #d8dce5;
   border-radius: 4px;
-}
+} */
 
 .elips {
   width: calc(100% - 225px);

@@ -81,13 +81,13 @@
         </el-table-column>
         <el-table-column prop="appPerCode" label="申请人" width="100">
         </el-table-column>
-        <el-table-column prop="appDate" label="申请时间" width="100">
+        <el-table-column prop="blackListInApp.appDate" label="申请时间" width="100">
         </el-table-column>
-        <el-table-column prop="auditPerCode" label="审批人" width="100">
+        <el-table-column prop="blackListInApp.auditPerCode" label="审批人" width="100">
         </el-table-column>
-        <el-table-column prop="auditDate" label="审批时间" width="100">
+        <el-table-column prop="blackListInApp.auditDate" label="审批时间" width="100">
         </el-table-column>
-        <el-table-column prop="auditOpinion" label="审批说明" min-width="160">
+        <el-table-column prop="blackListInApp.auditOpinion" label="审批说明" min-width="160">
         </el-table-column>
       </el-table>
       <div class="page">

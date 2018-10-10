@@ -469,7 +469,8 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">电话征信</span>
         </template>
-        <div class="CreditForm_CheckId">
+        <!-- <div class="CreditForm_CheckId"> -->
+        <div>
           <ul>
             <li ref="tabOne" class="tab1Default" v-for="(val,index) in tabTitle" :key="index" @click="tabClick($event,index,val)"
               :class="{tabAct:tabIndex==index}">
