@@ -210,27 +210,27 @@
         activeName: ['1', '2']
       }
     },
-    props: ['mobileData', 'isFull'],
+    props: ['mobileData'],//, 'isFull'
     mounted() {
-      if (this.isFull == true) { // 全屏
-        $(".textarea-class").css("minWidth", "500px");
-        $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
-      } else if (this.isFull == false) { // 分屏
-        $(".textarea-class").css("minWidth", "300px");
-        $(".item-column1 .el-form-item__content").css("width", "300px");
-      }
+      // if (this.isFull == true) { // 全屏
+      //   $(".textarea-class").css("minWidth", "500px");
+      //   $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
+      // } else if (this.isFull == false) { // 分屏
+      //   $(".textarea-class").css("minWidth", "300px");
+      //   $(".item-column1 .el-form-item__content").css("width", "300px");
+      // }
     },
     watch: {
       // 判断全屏 , 更改样式
-      isFull: function (val) {
-        if (val == true) { // 全屏
-          $(".textarea-class").css("minWidth", "500px");
-          $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
-        } else if (val == false) { // 分屏
-          $(".textarea-class").css("minWidth", "300px");
-          $(".item-column1 .el-form-item__content").css("width", "300px");
-        }
-      }
+      // isFull: function (val) {
+      //   if (val == true) { // 全屏
+      //     $(".textarea-class").css("minWidth", "500px");
+      //     $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
+      //   } else if (val == false) { // 分屏
+      //     $(".textarea-class").css("minWidth", "300px");
+      //     $(".item-column1 .el-form-item__content").css("width", "300px");
+      //   }
+      // }
     }
   }
 

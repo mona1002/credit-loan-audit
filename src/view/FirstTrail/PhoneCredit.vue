@@ -131,42 +131,37 @@
           <div class="form-class" style="width:100%;height:auto;">
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
+            <!-- :isFull.sync="isFull"  -->
             <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum"
-              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull" :Addlist="newList"></AddressForm>
+              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :Addlist="newList"></AddressForm>
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData"
-              :isFull.sync="isFull"></AddressHis>
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData"></AddressHis>
             <!-- 单位电话 - 表单 -->
             <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull" :danweiList="newList"></CompanyForm>
+              :danweiList="newList"></CompanyForm>
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData"
-              :isFull.sync="isFull"></CompanyHis>
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
             <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull" :familyList="newList"></FamilyForm>
+              :familyList="newList"></FamilyForm>
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData"
-              :isFull.sync="isFull"></FamilyHis>
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
             <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull" :hurryList="newList"></HurryForm>
+              :hurryList="newList"></HurryForm>
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData"
-              :isFull.sync="isFull"></HurryHis>
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData"></HurryHis>
             <!-- 工作证明人 - 表单 -->
             <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"
-              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc"
-              :mobilepayment="mobilepayment" :checkJob="checkJob" :checkJobtxt="checkJobtxt" :mobilepaymenttxt="mobilepaymenttxt"
-              :answerIdentity="answerIdentity" :answertxt="answertxt" :conclusion="conclusion"></WorkForm>
+              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :source='source'
+              :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :mobilepayment="mobilepayment"
+              :checkJob="checkJob" :checkJobtxt="checkJobtxt" :mobilepaymenttxt="mobilepaymenttxt" :answerIdentity="answerIdentity"
+              :answertxt="answertxt" :conclusion="conclusion"></WorkForm>
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"
-              :isFull.sync="isFull"></WorkHis>
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"></WorkHis>
           </div>
         </el-main>
       </el-container>
@@ -514,9 +509,9 @@
       //   default: '',
       //   type: String
       // },
-      isFull: {
-        type: Boolean
-      },
+      // isFull: {
+      //   type: Boolean
+      // },
       SplitS: {
         type: String
       },

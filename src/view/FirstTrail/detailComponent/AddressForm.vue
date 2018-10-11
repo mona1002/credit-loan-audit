@@ -394,27 +394,27 @@
         phoneId: '', // 用来区分是添加 还是 修改 
       }
     },
-    props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', "Addlist"],
+    props: ['custName', 'phoneNum', 'applyId', 'formId',  "Addlist"],//'isFull',
     mounted() {
       this.phoneType = '01'; // 住址电话
-      if (this.isFull == true) { // 全屏
-        $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
-        $('.item-column1 textarea').css("width", "100%")
-        $('.item-column1 textarea').css("width", "100%")
-        // 提交按钮
-        $('.submit-class').css("margin-left", "calc( 66% - 140px)")
-        $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
-        $('.item-column2 textarea').css("width", "100%");
-      } else if (this.isFull == false) { // 分屏
-        // 提交按钮
-        $('.submit-class').css("margin-left", "370px")
-        $('.item-column3').css({
-          "min-height": "0px",
-          "margin-bottom": "10px"
-        })
-        $('.item-column1 textarea').css("width", "300px")
-        $('.item-column2 textarea').css("width", "300px")
-      }
+      // if (this.isFull == true) { // 全屏
+      //   $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+      //   $('.item-column1 textarea').css("width", "100%")
+      //   $('.item-column1 textarea').css("width", "100%")
+      //   // 提交按钮
+      //   $('.submit-class').css("margin-left", "calc( 66% - 140px)")
+      //   $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
+      //   $('.item-column2 textarea').css("width", "100%");
+      // } else if (this.isFull == false) { // 分屏
+      //   // 提交按钮
+      //   $('.submit-class').css("margin-left", "370px")
+      //   $('.item-column3').css({
+      //     "min-height": "0px",
+      //     "margin-bottom": "10px"
+      //   })
+      //   $('.item-column1 textarea').css("width", "300px")
+      //   $('.item-column2 textarea').css("width", "300px")
+      // }
     },
     methods: {
       submitForm() {
@@ -751,26 +751,26 @@
         }
       },
       // 判断全屏 , 更改样式
-      isFull: function (val) {
-        if (val == true) { // 全屏
-          $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
-          $('.item-column1 textarea').css("width", "100%")
-          // 提交按钮
-          $('.submit-class').css("margin-left", "calc( 66% - 140px)")
-          // 显示 column2
-          $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
-          $('.item-column2 textarea').css("width", "100%");
-        } else if (val == false) { // 分屏
-          // 提交按钮
-          $('.submit-class').css("margin-left", "370px")
-          $('.item-column3').css({
-            "min-height": "0px",
-            "margin-bottom": "10px"
-          })
-          $('.item-column1 textarea').css("width", "300px")
-          $('.item-column2 textarea').css("width", "300px")
-        }
-      }
+      // isFull: function (val) {
+      //   if (val == true) { // 全屏
+      //     $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+      //     $('.item-column1 textarea').css("width", "100%")
+      //     // 提交按钮
+      //     $('.submit-class').css("margin-left", "calc( 66% - 140px)")
+      //     // 显示 column2
+      //     $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
+      //     $('.item-column2 textarea').css("width", "100%");
+      //   } else if (val == false) { // 分屏
+      //     // 提交按钮
+      //     $('.submit-class').css("margin-left", "370px")
+      //     $('.item-column3').css({
+      //       "min-height": "0px",
+      //       "margin-bottom": "10px"
+      //     })
+      //     $('.item-column1 textarea').css("width", "300px")
+      //     $('.item-column2 textarea').css("width", "300px")
+      //   }
+      // }
     }
   }
 

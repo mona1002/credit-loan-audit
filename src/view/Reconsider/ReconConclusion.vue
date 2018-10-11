@@ -790,7 +790,7 @@
         //按钮加“加载中”
         this.shenpiLoading = true;
         this.shenpiFont = '提交中';
-        var reg = /,/;
+        var reg = /,/g;
         this.post('/creauditOpinion/add', {
           applyId: this.applyId,
           auditType: '02',

@@ -290,7 +290,7 @@
         phoneId: '',
       }
     },
-    props: ['custName', 'phoneNum', 'applyId', 'formId', 'danweiList'],//, 'isFull'
+    props: ['custName', 'phoneNum', 'applyId', 'formId', 'danweiList'], //, 'isFull'
     mounted() {
       this.phoneType = '02'; // 单位电话
       // if (this.isFull == true) { // 全屏

@@ -164,7 +164,7 @@
         activeName: ['1', '2']
       }
     },
-    props: ['familyData', 'isFull'],
+    props: ['familyData'],//, 'isFull'
     mounted() {
       // if (this.isFull == true) { // 全屏
       //   $(".textarea-class").css("minWidth", "500px");
