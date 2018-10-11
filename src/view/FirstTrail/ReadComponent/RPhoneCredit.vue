@@ -79,7 +79,7 @@
         </el-collapse>
         <!-- 更改电话树 end -->
         <!-- 备选  折叠面板- 手风琴效果 -->
-        <el-button type="primary" @click.native="dialogFormVisible=true" v-show="addBtnShow">添加</el-button>
+        <!-- <el-button type="primary" @click.native="dialogFormVisible=true" v-show="addBtnShow">添加</el-button> -->
       </el-aside>
       <!-- 右侧 表单内容 -->
       <el-container>
@@ -165,7 +165,7 @@
       </el-container>
     </el-container>
     <!-- 更改的 添加电话选项 -->
-    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal="false" width="330px">
+    <!-- <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal="false" width="330px">
       <el-form>
         <span class="require-icon" style="left:20px;line-height:38px;">*</span>
         <el-form-item label="电话类型：" :label-width="addTellFormLabelWidth" prop="addTelType">
@@ -195,9 +195,9 @@
         <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
         <el-button type="primary" disabled v-show="active==false">确定</el-button>
       </div>
-    </el-dialog>
+    </el-dialog> -->
     <!-- 点击 添加出现的弹窗 -->
-    <div class="cover-view" v-show="false">
+    <!-- <div class="cover-view" v-show="false">
       <div class="cover-content">
         <el-tag closable @close="coverShow=false"></el-tag>
         <div class="add-title">
@@ -236,7 +236,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -398,7 +398,7 @@
         hisId: '',
         hisPhoneType: '',
         // 改造 , 通过 电话类型 , formShwo/hisShow 来控制所有的 表单/历史显示
-        formShow: false,
+        // formShow: false,
         hisShow: false,
         activeNames: ["1"], // 折叠默认展开的选项
         treeFlag: '', // 用来标志  电话树是否需要更新
@@ -413,7 +413,7 @@
         workData: [],
         active: false, // 添加电话 提示语
         addTelRex: false, // 添加电话 校验
-        formId: '', // 传给表单的  id
+        // formId: '', // 传给表单的  id
         dialogFormVisible: false, // 电话征信 点击添加
         addTellForm: {
           applyId: '',
@@ -449,87 +449,87 @@
       // 电话树数据
       this.fetchData();
     },
-    watch: {
-      // 监听 添加电话 页面是否显示
-      dialogFormVisible: function () {
-        if (!this.coverShow) {
-          this.addTelType = '';
-          this.addTelName = '';
-          this.addRelationShip = '';
-          this.addTelNum = '';
-        }
-      },
-      // 添加电话  电话类型
-      addTelType: function (value) {
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
-        ) {
-          this.active = true;
-        } else {
-          this.active = false;
-        }
-      },
-      // 电话名称
-      addTelName: function (value) {
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
-        ) {
-          this.active = true;
-        } else {
-          this.active = false;
-        }
-      },
-      //  有无关系 判断 
-      addRelationShip: function (value) {
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
-        ) {
-          this.active = true;
-        } else {
-          this.active = false;
-        }
+    // watch: {
+    //   // 监听 添加电话 页面是否显示
+    //   // dialogFormVisible: function () {
+    //   //   if (!this.coverShow) {
+    //   //     this.addTelType = '';
+    //   //     this.addTelName = '';
+    //   //     this.addRelationShip = '';
+    //   //     this.addTelNum = '';
+    //   //   }
+    //   // },
+    //   // 添加电话  电话类型
+    //   // addTelType: function (value) {
+    //   //   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
+    //   //       0 && this.addTelRex) ||
+    //   //     ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
+    //   //       0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
+    //   //   ) {
+    //   //     this.active = true;
+    //   //   } else {
+    //   //     this.active = false;
+    //   //   }
+    //   // },
+    //   // 电话名称
+    //   // addTelName: function (value) {
+    //   //   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
+    //   //       0 && this.addTelRex) ||
+    //   //     ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
+    //   //       0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
+    //   //   ) {
+    //   //     this.active = true;
+    //   //   } else {
+    //   //     this.active = false;
+    //   //   }
+    //   // },
+    //   //  有无关系 判断 
+    //   // addRelationShip: function (value) {
+    //   //   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
+    //   //       0 && this.addTelRex) ||
+    //   //     ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
+    //   //       0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
+    //   //   ) {
+    //   //     this.active = true;
+    //   //   } else {
+    //   //     this.active = false;
+    //   //   }
 
-      },
-      // 添加电话  电话校验
-      addTelNum: function (value) {
-        this.addTelRex = /^(1)\d{10}$/i.test(value) ||
-          /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
-        // 判断 显示 电话格式
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !
-            this.addTelRex)
-        ) {
-          this.active = false;
-          this.$message({
-            message: '格式不正确,请使用下面的格式:区号-电话号码或者11位手机号',
-            type: 'warning'
-          });
-          return;
-        }
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
-        ) {
-          this.active = true;
-        } else {
-          this.active = false;
-        }
-      },
-      formShow: function () {
-        if (this.formShow) {
-          $('.el-main').css("overflow-y", 'auto');
-        }
-      }
-    },
+    //   // },
+    //   // 添加电话  电话校验
+    //   // addTelNum: function (value) {
+    //   //   this.addTelRex = /^(1)\d{10}$/i.test(value) ||
+    //   //     /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
+    //   //   // 判断 显示 电话格式
+    //   //   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
+    //   //       0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
+    //   //     ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
+    //   //       0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !
+    //   //       this.addTelRex)
+    //   //   ) {
+    //   //     this.active = false;
+    //   //     this.$message({
+    //   //       message: '格式不正确,请使用下面的格式:区号-电话号码或者11位手机号',
+    //   //       type: 'warning'
+    //   //     });
+    //   //     return;
+    //   //   }
+    //   //   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
+    //   //       0 && this.addTelRex) ||
+    //   //     ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
+    //   //       0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
+    //   //   ) {
+    //   //     this.active = true;
+    //   //   } else {
+    //   //     this.active = false;
+    //   //   }
+    //   // },
+    //   // formShow: function () {
+    //   //   if (this.formShow) {
+    //   //     $('.el-main').css("overflow-y", 'auto');
+    //   //   }
+    //   // }
+    // },
     methods: {
       fetchData() {
         this.post("/creTelInfo/queryTels", {
@@ -540,44 +540,64 @@
         });
       },
       handleNodeClick(data) {
-        if (this.isInterFlag == true  || this.hisShow) {//|| this.SplitS != 'right'
-          // 点击每条tree数据的事件
-          this.treeId = data.id;
-          if (data.id.length > 2) {
-            // 点击数据展示历史记录  列表
-            this.hisListShow = true;
-            // 历史数据不显示
-            this.hisShow = false;
-            // 请求历史调查日志
-            this.phoneType = data.telType;
-            // 客户姓名
-            this.custName = data.telName;
-            // 电话号码
-            this.phoneNum = data.telNum;
-            this.queryTelLogByPage();
-          }
-         } 
-        else if (this.isInterFlag == false ) {//|| this.SplitS == 'right'
-          // 点击每条tree数据的事件
-          this.treeId = data.id;
-          if (data.id.length > 2) {
-            // 点击数据展示历史记录  列表
-            this.hisListShow = true;
-            // 请求历史调查日志
-            this.phoneType = data.telType;
-            // 客户姓名
-            this.custName = data.telName;
-            // 电话号码
-            this.phoneNum = data.telNum;
-            this.queryTelLogByPage();
-            this.formShow = true;
-            this.hisShow = false;
-            // 编辑的时候 历史调查日志不展开
-            this.activeNames = [];
-          }
+        console.log(data)
+        console.log(this.isInterFlag == true)
+        console.log(this.hisShow)
+        // 点击每条tree数据的事件
+        this.treeId = data.id;
+        if (data.id.length > 2) {
+          // 点击数据展示历史记录  列表
+          this.hisListShow = true;
+          // 请求历史调查日志
+          this.phoneType = data.telType;
+          // 客户姓名
+          this.custName = data.telName;
+          // 电话号码
+          this.phoneNum = data.telNum;
+          this.queryTelLogByPage();
+          // this.formShow = true;
+          this.hisShow = true;
+          // 编辑的时候 历史调查日志不展开
+          // this.activeNames = [];
         }
+        // if (this.isInterFlag == true  || this.hisShow) {//|| this.SplitS != 'right'
+        //   // 点击每条tree数据的事件
+        //   this.treeId = data.id;
+        //   if (data.id.length > 2) {
+        //     // 点击数据展示历史记录  列表
+        //     this.hisListShow = true;
+        //     // 历史数据不显示
+        //     this.hisShow = false;
+        //     // 请求历史调查日志
+        //     this.phoneType = data.telType;
+        //     // 客户姓名
+        //     this.custName = data.telName;
+        //     // 电话号码
+        //     this.phoneNum = data.telNum;
+        //     this.queryTelLogByPage();
+        //   }
+        //  } 
+        // else if (this.isInterFlag == false ) {//|| this.SplitS == 'right'
+        //   // 点击每条tree数据的事件
+        //   this.treeId = data.id;
+        //   if (data.id.length > 2) {
+        //     // 点击数据展示历史记录  列表
+        //     this.hisListShow = true;
+        //     // 请求历史调查日志
+        //     this.phoneType = data.telType;
+        //     // 客户姓名
+        //     this.custName = data.telName;
+        //     // 电话号码
+        //     this.phoneNum = data.telNum;
+        //     this.queryTelLogByPage();
+        //     // this.formShow = true;
+        //     this.hisShow = true;
+        //     // 编辑的时候 历史调查日志不展开
+        //     this.activeNames = [];
+        //   }
+        // }
         // 点击的时候清空  
-        this.formId = '';
+        // this.formId = '';
       },
       queryTelLogByPage() {
         // 获取 历史调查日志 
@@ -597,54 +617,58 @@
           if (res.statusCode == 200) {
             this.listData = res.data.page;
             if (res.data.message) {
-              if (this.formShow == true) {
-                this.hisShow = false;
-              } else {
-                this.hisShow = true;
-              };
+              this.hisShow = true;
+              // if (this.formShow == true) {
+              //   this.hisShow = false;
+              // } else {
+              //   this.hisShow = true;
+              // };
               this.newList = res.data.message;
+            } else {
+              this.hisShow = false;
             }
-          }else{
-            this.listData.recordList=[];
+          } else {
+            this.hisShow = false;
+            this.listData.recordList = [];
             this.$message.error(res.msg)
           }
         })
       },
-      append(data) {
-        this.isLoading = true;
-        this.loadingTitle = '提交中';
-        // 判断必填
-        this.post('/creTelInfo/addTel', {
-          "creTelInfo": {
-            "applyId": this.applyId,
-            "telNum": this.addTelNum,
-            "telName": this.addTelName,
-            "telType": this.addTelType,
-            // 登录人编号
-            "creatorCode": this.userCode,
-            "relationShip": this.addRelationShip // 关系
-          },
-          "applySubNo": this.applySubNo
-        }).then(res => {
-          // 关闭 弹窗
-          this.dialogFormVisible = false;
-          this.isLoading = false;
-          this.loadingTitle = '确定';
-          if (res.statusCode == '200') {
-            this.$message({
-              type: 'success',
-              message: res.msg
-            });
-            // 点击提交之后 重新请求 电话树
-            this.fetchData();
-          } else
-            this.$message({
-              type: 'warning',
-              message: res.msg
-            });
-        })
+      // append(data) {
+      //   this.isLoading = true;
+      //   this.loadingTitle = '提交中';
+      //   // 判断必填
+      //   this.post('/creTelInfo/addTel', {
+      //     "creTelInfo": {
+      //       "applyId": this.applyId,
+      //       "telNum": this.addTelNum,
+      //       "telName": this.addTelName,
+      //       "telType": this.addTelType,
+      //       // 登录人编号
+      //       "creatorCode": this.userCode,
+      //       "relationShip": this.addRelationShip // 关系
+      //     },
+      //     "applySubNo": this.applySubNo
+      //   }).then(res => {
+      //     // 关闭 弹窗
+      //     this.dialogFormVisible = false;
+      //     this.isLoading = false;
+      //     this.loadingTitle = '确定';
+      //     if (res.statusCode == '200') {
+      //       this.$message({
+      //         type: 'success',
+      //         message: res.msg
+      //       });
+      //       // 点击提交之后 重新请求 电话树
+      //       this.fetchData();
+      //     } else
+      //       this.$message({
+      //         type: 'warning',
+      //         message: res.msg
+      //       });
+      //   })
 
-      },
+      // },
       handleSizeChange(val) {
         this.pageSize = val;
         this.pageNum = 1;
