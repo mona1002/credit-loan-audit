@@ -159,7 +159,7 @@
         // imageUrl: ''
       }
     },
-    props: ['comData', 'isFull'],
+    props: ['comData'],//, 'isFull'
     mounted() {
       // if (this.isFull == true) { // 全屏
       //   $(".textarea-class").css("minWidth", "500px");

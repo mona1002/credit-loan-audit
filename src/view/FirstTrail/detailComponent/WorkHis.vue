@@ -98,7 +98,7 @@
         activeName: ['1', '2'],
       }
     },
-    props: ['workData', 'isFull'],
+    props: ['workData'],//, 'isFull'
     mounted() {
       // if (this.isFull == true) { // 全屏
       //   $(".item-column1 .el-form-item__content").css("minWidth", "500px")

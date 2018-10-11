@@ -612,7 +612,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 .AlertContent .AudioVisual_List .list_title {
   background: #ebeef5;
-  /* font-weight: 800; */
   color: #3b3b3b;
   height: 35px;
   line-height: 35px;
@@ -622,8 +621,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 .customName {
   text-align: right !important;
   padding-right: 5px;
-  /* height: 40px; */
-  /* background: rgba(0, 119, 255, 0.75); */
 }
 
 .customName .el-input {
