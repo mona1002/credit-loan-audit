@@ -696,6 +696,9 @@ body .el-table_450_scroll .el-table__fixed-right {
 .specialInput {
   width: calc(100% - 230px);
 }
+.btn_wrap {
+  height: 60px;
+}
 
 /* .CreditForm li {
   color: #475669;
