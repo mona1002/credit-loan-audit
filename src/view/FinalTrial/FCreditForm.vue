@@ -882,10 +882,6 @@
     left: 205px;
   }
 
-  .btn_wrap {
-    height: 60px;
-  }
-
   .btn {
     margin-left: 235px;
   }

@@ -1635,7 +1635,8 @@
 
 </script>
 
-<style>
+<style scoped>
+
   .CreditForm input {
     border: 1px solid rgb(229, 229, 229);
     border-radius: 4px;
@@ -1674,11 +1675,8 @@
     top: -22px;
   }
 
-  .btn_wrap {
-    height: 60px;
-  }
 
-  .Abody .btn {
+ .btn {
     margin: 20px 0 0 250px;
   }
 
