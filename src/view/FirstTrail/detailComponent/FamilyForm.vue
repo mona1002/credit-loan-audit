@@ -73,116 +73,82 @@
       <i class="collapse_title_icon"></i>
       <span class="collapse_title_text">录入家庭联系人电话调查信息</span>
     </div>
-    <ul style="margin-left:15px;">
-      <div class="content-ul">
-        <li class="item-column1">
-          <div class="left-title">第三方查询信息：</div>
-          <div class="textarea-class">
+    <el-form>
+      <ul class="margin_left_15 margin_right_5">
+        <li class="clearFix">
+          <el-form-item class="height_80 width_66Per margin_top_5" label='第三方查询信息：' :label-width="label_160">
             <el-input type="textarea" v-model="FthirdResult" :rows="3" resize=none :maxlength="500"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">
-            <span class="require-icon" style="left:0px;">* </span>三方查询是否异常：</div>
-          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="FthreeQueries" @change="changes('FthreeQueries')">
-              <el-option label="否" value="0"></el-option>
-              <el-option label="是" value="1"></el-option>
-            </el-select>
-          </el-tooltip>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="FthreeQueries=='1'">
-            <span class="require-icon" style="left:80px;">* </span>说明：</div>
-          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="FthreeQueries=='1'">
+        <li class="clearFix">
+          <el-form-item class="width_40Per require_red" label='三方查询是否异常：' :label-width="label_160">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="FthreeQueries" @change="changes('FthreeQueries')">
+                <el-option label="否" value="0"></el-option>
+                <el-option label="是" value="1"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <el-form-item v-if="FthreeQueries=='1'" class="width_60Per height_60 require_red " label="说明：" :label-width="label_145">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-input v-model="FthreeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-            </div>
-          </el-tooltip>
+            </el-tooltip>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title left-title2">
-            <span class="require-icon" style="left:0px; top:-8px;">* </span>微信/支付宝是否异常：</div>
-          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="Fmobilepayment" @change="changes('Fmobilepayment')">
-              <el-option label="否" value="0"></el-option>
-              <el-option label="是" value="1"></el-option>
-            </el-select>
-          </el-tooltip>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="Fmobilepayment=='1'">
-            <span class="require-icon" style="left:80px;">* </span>说明：</div>
-          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="Fmobilepayment=='1'">
+        <li class="clearFix">
+          <el-form-item class="width_40Per require_red" label='微信/支付宝是否异常：' :label-width="label_160">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="Fmobilepayment" @change="changes('Fmobilepayment')">
+                <el-option label="否" value="0"></el-option>
+                <el-option label="是" value="1"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <el-form-item v-if="Fmobilepayment=='1'" class="width_60Per height_60 require_red" label="说明：" :label-width="label_145">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-input v-model="Fmobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-            </div>
-          </el-tooltip>
+            </el-tooltip>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title left-title2">是否与家庭联系人为同一接听人：</div>
-          <div class="textarea-class2">
-            <el-select v-model="FissameFam" @change="changes(FissameFam)">
+        <li class="clearFix">
+          <el-form-item class="width_40Per line_H_16_label" label='是否与家庭联系人为同一接听人：' :label-width="label_160">
+            <el-select v-model="FissameFam" @change="changes('FissameFam')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="FissameFam=='0'">说明：</div>
-          <div class="textarea-class2" v-show="FissameFam=='0'">
+          </el-form-item>
+          <el-form-item v-if="FissameFam==0" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input v-model="FissameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">与借款人关系：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='与借款人关系：' :label-width="label_160">
             <el-select v-model="FrelBorrower" @change="changes('FrelBorrower')">
               <el-option label="父母" value="00"></el-option>
               <el-option label="爱人" value="01"></el-option>
               <el-option label="子女" value="02"></el-option>
               <el-option label="其他" value="03"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="FrelBorrower=='03'">说明：</div>
-          <div class="textarea-class2" v-show="FrelBorrower=='03'">
+          </el-form-item>
+          <el-form-item v-if="FrelBorrower=='03'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input v-model="FrelBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">核对工作情况：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='核对工作情况：' :label-width="label_160">
             <el-select v-model="FcheckWork" @change="changes('FcheckWork')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
               <el-option label="被调查人不清楚" value="03"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="FcheckWork=='01'">说明：</div>
-          <div class="textarea-class2" v-show="FcheckWork=='01'">
+          </el-form-item>
+          <el-form-item v-if="FcheckWork=='01'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input v-model="FcheckWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">核对婚姻情况：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='核对婚姻情况：' :label-width="label_160">
             <el-select v-model="FmaritalStatus">
               <el-option label="未婚" value="00"></el-option>
               <el-option label="已婚" value="01"></el-option>
@@ -191,38 +157,215 @@
               <el-option label="准备结婚" value="04"></el-option>
               <el-option label="被调查人不清楚" value="05"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column3">
-          <div class="left-title">核对子女情况：</div>
-          <div>
+          </el-form-item>
+          <el-form-item class="width_60Per" label="核对子女情况：" :label-width="label_145">
             <el-select v-model="FmaritalStatustxt">
               <el-option label="有子女" value="00"></el-option>
               <el-option label="无子女" value="01"></el-option>
             </el-select>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">核实居住地址：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='核实居住地址：' :label-width="label_160">
             <el-select v-model="FcheckAddr" @change="changes('FcheckAddr')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
               <el-option label="被调查人不清楚" value="03"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="FcheckAddr=='01'">说明：</div>
-          <div class="textarea-class2" v-show="FcheckAddr=='01'">
+          </el-form-item>
+          <el-form-item v-if="FcheckAddr=='01'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input v-model="FcheckAddrtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='核对房产：' :label-width="label_160">
+            <el-select v-model="FcheckEstate" @change="changes('FcheckEstate')">
+              <el-option label="有" value="00"></el-option>
+              <el-option label="无" value="01"></el-option>
+              <el-option label="租房" value="02"></el-option>
+              <el-option label="与父母同住" value="03"></el-option>
+              <el-option label="被调查人不清楚" value="04"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-if="FcheckEstate=='00'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
+            <el-input v-model="FcheckEstatetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='其他收入：' :label-width="label_160">
+            <el-select v-model="FotherIncome" @change="changes('FotherIncome')">
+              <el-option label="有" value="00"></el-option>
+              <el-option label="无" value="01"></el-option>
+              <el-option label="被调查人不清楚" value="02"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-if="FotherIncome=='00'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
+             <el-input v-model="FotherIncometxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+         <li class="clearFix">
+          <el-form-item label="调查结果：" class="height_120 require_red width_66Per" :label-width="label_160">
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-input type="textarea" v-model="Fconclusion" :rows="5" resize=none :maxlength="500"></el-input>
+          </el-tooltip>
+          </el-form-item>
+        </li>
+          <li class="clearFix">
+          <el-button type="primary margin_left_600" @click="submitForm('form')">确定</el-button>
+        </li>
+      </ul>
+    </el-form>
+    <!-- <ul style="margin-left:15px;"> -->
+      <!-- <div class="content-ul">
+              <li class="item-column1">
+                <div class="left-title">第三方查询信息：</div>
+                <div class="textarea-class">
+                  <el-input type="textarea" v-model="FthirdResult" :rows="3" resize=none :maxlength="500"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">
+                  <span class="require-icon" style="left:0px;">* </span>三方查询是否异常：</div>
+                <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+                  <el-select v-model="FthreeQueries" @change="changes('FthreeQueries')">
+                    <el-option label="否" value="0"></el-option>
+                    <el-option label="是" value="1"></el-option>
+                  </el-select>
+                </el-tooltip>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="FthreeQueries=='1'">
+                  <span class="require-icon" style="left:80px;">* </span>说明：</div>
+                <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+                  <div class="textarea-class2" v-show="FthreeQueries=='1'">
+                    <el-input v-model="FthreeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+                  </div>
+                </el-tooltip>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title left-title2">
+                  <span class="require-icon" style="left:0px; top:-8px;">* </span>微信/支付宝是否异常：</div>
+                <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+                  <el-select v-model="Fmobilepayment" @change="changes('Fmobilepayment')">
+                    <el-option label="否" value="0"></el-option>
+                    <el-option label="是" value="1"></el-option>
+                  </el-select>
+                </el-tooltip>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="Fmobilepayment=='1'">
+                  <span class="require-icon" style="left:80px;">* </span>说明：</div>
+                <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+                  <div class="textarea-class2" v-show="Fmobilepayment=='1'">
+                    <el-input v-model="Fmobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+                  </div>
+                </el-tooltip>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title left-title2">是否与家庭联系人为同一接听人：</div>
+                <div class="textarea-class2">
+                  <el-select v-model="FissameFam" @change="changes(FissameFam)">
+                    <el-option label="否" value="0"></el-option>
+                    <el-option label="是" value="1"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="FissameFam=='0'">说明：</div>
+                <div class="textarea-class2" v-show="FissameFam=='0'">
+                  <el-input v-model="FissameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">与借款人关系：</div>
+                <div>
+                  <el-select v-model="FrelBorrower" @change="changes('FrelBorrower')">
+                    <el-option label="父母" value="00"></el-option>
+                    <el-option label="爱人" value="01"></el-option>
+                    <el-option label="子女" value="02"></el-option>
+                    <el-option label="其他" value="03"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="FrelBorrower=='03'">说明：</div>
+                <div class="textarea-class2" v-show="FrelBorrower=='03'">
+                  <el-input v-model="FrelBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">核对工作情况：</div>
+                <div>
+                  <el-select v-model="FcheckWork" @change="changes('FcheckWork')">
+                    <el-option label="一致" value="00"></el-option>
+                    <el-option label="基本一致" value="01"></el-option>
+                    <el-option label="不一致" value="02"></el-option>
+                    <el-option label="被调查人不清楚" value="03"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="FcheckWork=='01'">说明：</div>
+                <div class="textarea-class2" v-show="FcheckWork=='01'">
+                  <el-input v-model="FcheckWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">核对婚姻情况：</div>
+                <div>
+                  <el-select v-model="FmaritalStatus">
+                    <el-option label="未婚" value="00"></el-option>
+                    <el-option label="已婚" value="01"></el-option>
+                    <el-option label="离异" value="02"></el-option>
+                    <el-option label="丧偶" value="03"></el-option>
+                    <el-option label="准备结婚" value="04"></el-option>
+                    <el-option label="被调查人不清楚" value="05"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column3">
+                <div class="left-title">核对子女情况：</div>
+                <div>
+                  <el-select v-model="FmaritalStatustxt">
+                    <el-option label="有子女" value="00"></el-option>
+                    <el-option label="无子女" value="01"></el-option>
+                  </el-select>
+                </div>
+              </li>
+            </div> -->
+      <!-- <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">核实居住地址：</div>
+                <div>
+                  <el-select v-model="FcheckAddr" @change="changes('FcheckAddr')">
+                    <el-option label="一致" value="00"></el-option>
+                    <el-option label="基本一致" value="01"></el-option>
+                    <el-option label="不一致" value="02"></el-option>
+                    <el-option label="被调查人不清楚" value="03"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="FcheckAddr=='01'">说明：</div>
+                <div class="textarea-class2" v-show="FcheckAddr=='01'">
+                  <el-input v-model="FcheckAddrtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li>
+            </div> -->
+      <!-- <div class="content-ul">
         <li class="item-column3">
           <div class="left-title">核对房产：</div>
           <div>
@@ -276,7 +419,7 @@
           <el-button type="primary" @click="submitForm('form')">确定</el-button>
         </li>
       </div>
-    </ul>
+    </ul> -->
   </div>
 </template>
 <script>
@@ -284,6 +427,8 @@
     data() {
       return {
         phoneType: '03',
+        label_145: '145px',
+         label_160: '160px',
         Fsource: this.familyList.source,
         Fanswer: this.familyList.answer,
         FsourceDesc: this.familyList.sourceDesc,
@@ -315,29 +460,9 @@
         newLists: '',
       }
     },
-    props: ['custName', 'phoneNum', 'applyId', 'formId', 'familyList'],// 'isFull',
+    props: ['custName', 'phoneNum', 'applyId', 'formId', 'familyList'], // 'isFull',
     mounted() {
       this.phoneType = '03'; // 住址电话
-      // if (this.isFull == true) { // 全屏
-      //   $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
-      //   $('.item-column1 textarea').css("width", "100%")
-      //   $('.item-column1 textarea').css("width", "100%")
-      //   // 提交按钮
-      //   $('.submit-class').css("margin-left", "calc( 66% - 140px)")
-      //   // 显示 column2
-      //   $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
-      //   $('.item-column2 textarea').css("width", "100%");
-      // } else if (this.isFull == false) { // 分屏
-      //   // 提交按钮
-      //   $('.submit-class').css("margin-left", "370px")
-
-      //   $('.item-column3').css({
-      //     "min-height": "0px",
-      //     "margin-bottom": "10px"
-      //   })
-      //   $('.item-column1 textarea').css("width", "300px")
-      //   $('.item-column2 textarea').css("width", "300px")
-      // };
     },
     methods: {
       submitForm() {
@@ -444,6 +569,11 @@
           case 'FcheckAddr':
             if (this.FcheckAddr != '01') {
               this.FcheckAddrtxt = '';
+            }
+            break;
+              case 'FcheckEstate':
+            if (this.FcheckEstate != '00') {
+              this.FcheckEstatetxt = '';
             }
             break;
           case 'FotherIncome':

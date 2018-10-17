@@ -76,15 +76,12 @@
     </div>
     <!-- <el-form :model="ruleForm" :rules="rules" ref="ruleForm"> -->
     <el-form>
-      <ul style="margin-left:15px;">
-        <div class="content-ul">
-          <li class="item-column1">
-            <div class="left-title">第三方查询结果：</div>
-            <div class="textarea-class">
-              <el-input v-model="AddthirdResult" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
-            </div>
-          </li>
-        </div>
+      <ul class="margin_left_15 margin_right_5">
+        <li class="clearFix">
+          <el-form-item label="第三方查询结果：" class="height_80 width_66Per margin_top_5" label-width="140px">
+            <el-input v-model="AddthirdResult" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
+          </el-form-item>
+        </li>
         <li class="clearFix">
           <!-- <el-form-item label="三方查询是否异常：" class="width_40Per" prop="AddthreeQueries"> -->
           <el-form-item class="width_40Per">
@@ -105,8 +102,8 @@
           </el-form-item>
         </li>
         <li class="clearFix ">
-          <el-form-item class="width_40Per height_60 ">
-            <label class=" label_140 vertical_top">是否与家庭联系人为同一人接听：</label>
+          <el-form-item class="width_40Per line_H_16_label">
+            <label class=" label_140 vertical_top ">是否与家庭联系人为同一人接听：</label>
             <el-select v-model="AddissameFam" @change="changes('AddissameFam')">
               <el-option label="是" value="1"></el-option>
               <el-option label="否" value="0"></el-option>
@@ -159,7 +156,7 @@
               <el-option label="被调查人不清楚" value="05"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="width_60Per height_60" label="核对子女情况：" :label-width="label_100">
+          <el-form-item class="width_60Per" label="核对子女情况：" :label-width="label_100">
             <el-select v-model="AddmaritalStatustxt">
               <el-option label="有子女" value="00"></el-option>
               <el-option label="无子女" value="01"></el-option>
@@ -276,21 +273,21 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item  label="借款人爱好和品行："  class="height_80 width_66Per" label-width="140px">
+          <el-form-item label="借款人爱好和品行：" class="height_80 width_66Per" label-width="140px">
             <!-- <label class=" label_140">借款人爱好和品行：</label> -->
             <el-input v-model="AddhobbyandBehave" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item label="调查结果：" class="height_120 require_red width_66Per"   label-width="140px">
+          <el-form-item label="调查结果：" class="height_120 require_red width_66Per" label-width="140px">
             <!-- <label class=" label_140"><span class="required_Red"> * </span>调查结果：</label> -->
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-input v-model="Addconclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
             </el-tooltip>
           </el-form-item>
         </li>
-        <li class="item-column1 submit-class">
-          <el-button type="primary" @click="submitForm('form')">确定</el-button>
+        <li class="clearFix">
+          <el-button type="primary margin_left_600" @click="submitForm('form')">确定</el-button>
           <!-- <el-button type="primary" @click="submitForm('ruleForm')">确定2</el-button> -->
         </li>
       </ul>
@@ -619,24 +616,6 @@
     props: ['custName', 'phoneNum', 'applyId', 'formId', "Addlist"], //'isFull',
     mounted() {
       this.phoneType = '01'; // 住址电话
-      // if (this.isFull == true) { // 全屏
-      //   $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
-      //   $('.item-column1 textarea').css("width", "100%")
-      //   $('.item-column1 textarea').css("width", "100%")
-      //   // 提交按钮
-      //   $('.submit-class').css("margin-left", "calc( 66% - 140px)")
-      //   $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
-      //   $('.item-column2 textarea').css("width", "100%");
-      // } else if (this.isFull == false) { // 分屏
-      //   // 提交按钮
-      //   $('.submit-class').css("margin-left", "370px")
-      //   $('.item-column3').css({
-      //     "min-height": "0px",
-      //     "margin-bottom": "10px"
-      //   })
-      //   $('.item-column1 textarea').css("width", "300px")
-      //   $('.item-column2 textarea').css("width", "300px")
-      // }
     },
     methods: {
       submitForm() {
@@ -972,27 +951,6 @@
           return;
         }
       },
-      // 判断全屏 , 更改样式
-      // isFull: function (val) {
-      //   if (val == true) { // 全屏
-      //     $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
-      //     $('.item-column1 textarea').css("width", "100%")
-      //     // 提交按钮
-      //     $('.submit-class').css("margin-left", "calc( 66% - 140px)")
-      //     // 显示 column2
-      //     $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
-      //     $('.item-column2 textarea').css("width", "100%");
-      //   } else if (val == false) { // 分屏
-      //     // 提交按钮
-      //     $('.submit-class').css("margin-left", "370px")
-      //     $('.item-column3').css({
-      //       "min-height": "0px",
-      //       "margin-bottom": "10px"
-      //     })
-      //     $('.item-column1 textarea').css("width", "300px")
-      //     $('.item-column2 textarea').css("width", "300px")
-      //   }
-      // }
     }
   }
 

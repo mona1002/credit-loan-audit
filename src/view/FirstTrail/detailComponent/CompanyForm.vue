@@ -73,140 +73,261 @@
       <i class="collapse_title_icon"></i>
       <span class="collapse_title_text">录入单位电话调查信息</span>
     </div>
-    <ul style="margin-left:15px;">
-      <div class="content-ul">
-        <li class="item-column1">
-          <div class="left-title">第三方查询信息：</div>
-          <div class="textarea-class">
+    <el-form>
+      <ul class="margin_left_15 margin_right_5">
+        <li class="clearFix">
+          <el-form-item label="第三方查询信息：" class="height_80 width_66Per margin_top_5" label-width="140px">
             <el-input type="textarea" v-model="DanWthirdResult" :rows="3" resize=none :maxlength="500"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">拨打电话：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='拨打电话：' label-width="140px">
             <el-select v-model="DanWphone" @change="changes('DanWphone')">
               <el-option label="借款人提供" value="00"></el-option>
               <el-option label="拨打以下号码" value="01"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="DanWphone=='01'">
-            <span class="require-icon" style="left:80px;">* </span>说明：</div>
-          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="DanWphone=='01'">
+          </el-form-item>
+          <el-form-item v-if="DanWphone=='01'" class="width_60Per height_60 require_red" label="说明：" :label-width="label_145">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-input v-model="DanWphonetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-            </div>
-          </el-tooltip>
+            </el-tooltip>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">接电话人身份：</div>
-          <div>
-            <el-select v-model="DanWanswerIdentity" @change="changes('answerIdentity')">
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='接电话人身份：' label-width="140px">
+            <el-select v-model="DanWanswerIdentity" @change="changes('DanWanswerIdentity')">
               <el-option label="同事" value="00"></el-option>
               <el-option label="本人" value="01"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="DanWanswerIdentity == '00'">说明：</div>
-          <div class="textarea-class2" v-show="DanWanswerIdentity == '00'">
+          </el-form-item>
+          <el-form-item v-if="DanWanswerIdentity=='00'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input type="textarea" v-model="DanWanswertxt" :row="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title left-title2">核对单位及工作信息：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='核对单位及工作信息：' label-width="140px">
             <el-select v-model="DanWcompany" @change="changes('DanWcompany')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
               <el-option label="被调查人不清楚" value="03"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="DanWcompany=='01'">说明：</div>
-          <div class="textarea-class2" v-show="DanWcompany=='01'">
+          </el-form-item>
+          <el-form-item v-if="DanWcompany=='01'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input type="textarea" v-model="DanWcompanytxt" :row="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">核对工作时间：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='核对工作时间：' label-width="140px">
             <el-select v-model="DanWcheckTime" @change="changes('DanWcheckTime')">
               <el-option label="知晓" value="00"></el-option>
               <el-option label="被调查人不清楚" value="01"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="DanWcheckTime=='00'">说明：</div>
-          <div class="textarea-class2" v-show="DanWcheckTime=='00'">
+          </el-form-item>
+          <el-form-item v-if="DanWcheckTime=='00'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input type="textarea" v-model="DanWcheckTimetxt" :row="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">核对收入：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='核对收入：' label-width="140px">
             <el-select v-model="DanWcheckIncome" @change="changes('DanWcheckIncome')">
               <el-option label="知晓" value="00"></el-option>
               <el-option label="被调查人不清楚" value="01"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="DanWcheckIncome=='00'">说明：</div>
-          <div class="textarea-class2" v-show="DanWcheckIncome=='00'">
+          </el-form-item>
+          <el-form-item v-if="DanWcheckIncome=='00'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input type="textarea" v-model="DanWcheckIncometxt" :row="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">用工方式：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='用工方式：' label-width="140px">
             <el-select v-model="DanWemploymentmode">
               <el-option label="正式" value="00"></el-option>
               <el-option label="外派" value="01"></el-option>
               <el-option label="兼职" value="03"></el-option>
             </el-select>
-          </div>
+          </el-form-item>
         </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="false">说明：</div>
-          <div class="textarea-class2" v-show="false">
-            <el-input type="textarea" v-model="DanWcheckIncometxt" :row="2" resize=none :maxlength="100"></el-input>
-          </div>
-        </li>
-      </div>
-      <div class="content-ul">
-        <li class="item-column3">
-          <div class="left-title">工资发放情况：</div>
-          <div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='工资发放情况：' label-width="140px">
             <el-select v-model="DanWpayrollSituation" @change="changes('DanWpayrollSituation')">
               <el-option label="打卡" value="00"></el-option>
               <el-option label="不打卡" value="01"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="DanWpayrollSituation=='00'">说明：</div>
-          <div class="textarea-class2" v-show="DanWpayrollSituation=='00'">
+          </el-form-item>
+          <el-form-item v-if="DanWpayrollSituation=='00'" class="width_60Per height_60 " label="说明：" :label-width="label_145">
             <el-input type="textarea" v-model="DanWpayrollSituationtxt" :row="2" resize=none :maxlength="100"></el-input>
-          </div>
+          </el-form-item>
         </li>
-      </div>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='是否缴纳养老保险：' label-width="140px">
+            <el-select v-model="DanWpensionInsurance">
+              <el-option label="否" value="0"></el-option>
+              <el-option label="是" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item class="width_60Per  " label="是否缴纳住房公积金：" :label-width="label_145">
+            <el-select v-model="DanWhousingFund">
+              <el-option label="否" value="0"></el-option>
+              <el-option label="是" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per" label='核对工作证明人1：' label-width="140px">
+            <el-input v-model="DanWjobref1" :maxlength="20"></el-input>
+          </el-form-item>
+          <el-form-item class="width_60Per  " label="核对工作证明人2：" :label-width="label_145">
+            <el-input v-model="DanWjobref2" :maxlength="20"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="height_120 require_red width_66Per" label='调查结果：' label-width="140px">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-input type="textarea" v-model="DanWconclusion" :rows="5" resize=none :maxlength="500"></el-input>
+            </el-tooltip>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-button type="primary margin_left_600" @click="submitForm('form')">确定</el-button>
+        </li>
+      </ul>
+    </el-form>
+
+    <!-- <ul style="margin-left:15px;"> -->
+    <!-- <div class="content-ul">
+              <li class="item-column1">
+                <div class="left-title">第三方查询信息：</div>
+                <div class="textarea-class">
+                  <el-input type="textarea" v-model="DanWthirdResult" :rows="3" resize=none :maxlength="500"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">拨打电话：</div>
+                <div>
+                  <el-select v-model="DanWphone" @change="changes('DanWphone')">
+                    <el-option label="借款人提供" value="00"></el-option>
+                    <el-option label="拨打以下号码" value="01"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="DanWphone=='01'">
+                  <span class="require-icon" style="left:80px;">* </span>说明：</div>
+                <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+                  <div class="textarea-class2" v-show="DanWphone=='01'">
+                    <el-input v-model="DanWphonetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+                  </div>
+                </el-tooltip>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">接电话人身份：</div>
+                <div>
+                  <el-select v-model="DanWanswerIdentity" @change="changes('answerIdentity')">
+                    <el-option label="同事" value="00"></el-option>
+                    <el-option label="本人" value="01"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="DanWanswerIdentity == '00'">说明：</div>
+                <div class="textarea-class2" v-show="DanWanswerIdentity == '00'">
+                  <el-input type="textarea" v-model="DanWanswertxt" :row="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title left-title2">核对单位及工作信息：</div>
+                <div>
+                  <el-select v-model="DanWcompany" @change="changes('DanWcompany')">
+                    <el-option label="一致" value="00"></el-option>
+                    <el-option label="基本一致" value="01"></el-option>
+                    <el-option label="不一致" value="02"></el-option>
+                    <el-option label="被调查人不清楚" value="03"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="DanWcompany=='01'">说明：</div>
+                <div class="textarea-class2" v-show="DanWcompany=='01'">
+                  <el-input type="textarea" v-model="DanWcompanytxt" :row="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">核对工作时间：</div>
+                <div>
+                  <el-select v-model="DanWcheckTime" @change="changes('DanWcheckTime')">
+                    <el-option label="知晓" value="00"></el-option>
+                    <el-option label="被调查人不清楚" value="01"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="DanWcheckTime=='00'">说明：</div>
+                <div class="textarea-class2" v-show="DanWcheckTime=='00'">
+                  <el-input type="textarea" v-model="DanWcheckTimetxt" :row="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">核对收入：</div>
+                <div>
+                  <el-select v-model="DanWcheckIncome" @change="changes('DanWcheckIncome')">
+                    <el-option label="知晓" value="00"></el-option>
+                    <el-option label="被调查人不清楚" value="01"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="DanWcheckIncome=='00'">说明：</div>
+                <div class="textarea-class2" v-show="DanWcheckIncome=='00'">
+                  <el-input type="textarea" v-model="DanWcheckIncometxt" :row="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li>
+            </div>
+            <div class="content-ul">
+              <li class="item-column3">
+                <div class="left-title">用工方式：</div>
+                <div>
+                  <el-select v-model="DanWemploymentmode">
+                    <el-option label="正式" value="00"></el-option>
+                    <el-option label="外派" value="01"></el-option>
+                    <el-option label="兼职" value="03"></el-option>
+                  </el-select>
+                </div>
+              </li>
+              <li class="item-column2 item-column3-2">
+                <div class="left-title" v-show="false">说明：</div>
+                <div class="textarea-class2" v-show="false">
+                  <el-input type="textarea" v-model="DanWcheckIncometxt" :row="2" resize=none :maxlength="100"></el-input>
+                </div>
+              </li> -->
+    <!-- </div> -->
+    <!-- <div class="content-ul">
+          <li class="item-column3">
+            <div class="left-title">工资发放情况：</div>
+            <div>
+              <el-select v-model="DanWpayrollSituation" @change="changes('DanWpayrollSituation')">
+                <el-option label="打卡" value="00"></el-option>
+                <el-option label="不打卡" value="01"></el-option>
+              </el-select>
+            </div>
+          </li>
+          <li class="item-column2 item-column3-2">
+            <div class="left-title" v-show="DanWpayrollSituation=='00'">说明：</div>
+            <div class="textarea-class2" v-show="DanWpayrollSituation=='00'">
+              <el-input type="textarea" v-model="DanWpayrollSituationtxt" :row="2" resize=none :maxlength="100"></el-input>
+            </div>
+          </li>
+        </div>
       <div class="content-ul">
         <li class="item-column3">
           <div class="left-title">是否缴纳养老保险：</div>
@@ -216,8 +337,8 @@
               <el-option label="是" value="1"></el-option>
             </el-select>
           </div>
-        </li>
-        <li class="item-column3">
+        </li> -->
+    <!-- <li class="item-column3">
           <div class="left-title left-title2">是否缴纳住房公积金：</div>
           <div>
             <el-select v-model="DanWhousingFund">
@@ -226,8 +347,8 @@
             </el-select>
           </div>
         </li>
-      </div>
-      <div class="content-ul">
+      </div> -->
+    <!-- <div class="content-ul">
         <li class="item-column3">
           <div class="left-title">核对工作证明人1：</div>
           <div>
@@ -251,11 +372,11 @@
             </div>
           </el-tooltip>
         </li>
-      </div>
-      <li class="item-column1 submit-class">
+      </div> -->
+    <!-- <li class="item-column1 submit-class">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
-      </li>
-    </ul>
+      </li> -->
+    <!-- </ul> -->
   </div>
 </template>
 <script>
@@ -263,6 +384,7 @@
     data() {
       return {
         phoneType: '02',
+        label_145: '145px',
         DanWsource: this.danweiList.source,
         DanWanswer: this.danweiList.answer,
         DanWcheckStage: this.danweiList.checkStage,
@@ -379,7 +501,7 @@
             this.$emit('updateTree');
             this.$message({
               type: 'success',
-              message:'提交成功'
+              message: '提交成功'
             });
           } else {
             this.$message.error(res.msg)
@@ -387,7 +509,7 @@
         });
       },
       changes(flage) {
-        switch (flage) {
+        switch (flage) { //DanWanswerIdentity
           case 'DanWsource':
             if (this.DanWsource != '02') {
               this.DanWsourceDesc = '';
@@ -405,6 +527,7 @@
             break;
           case 'DanWanswerIdentity':
             if (this.DanWanswerIdentity == '01') {
+              console.log('qing')
               this.DanWanswertxt = '';
             }
             break;
