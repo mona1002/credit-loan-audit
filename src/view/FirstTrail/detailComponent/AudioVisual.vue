@@ -136,9 +136,6 @@
       PerBtn() {
         this.perfBtn = true;
       },
-      // getChildrenList(ind, item) {
-      //   console.log('获取')
-      // },
       pdfClose() {
         this.SmallPicShow = false;
         this.showPage = 1;

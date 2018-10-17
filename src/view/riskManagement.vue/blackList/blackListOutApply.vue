@@ -419,7 +419,6 @@ this.addInfShow=true;
       },
       // 操作-删除
       del(row) {
-        console.log(row);
         let title = '';
         row.blackAppStateTxt == '申请中' ? title = '您要删除当前项目？' : title = '只能删除状态为申请中的记录！';
         this.$confirm(title, '提示', {
@@ -443,7 +442,6 @@ this.addInfShow=true;
       },
       // 操作-查看
       handleClick(row) {
-        console.log(row);
         this.checkShow = true;
       },
       //   查询列表

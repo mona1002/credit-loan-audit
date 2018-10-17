@@ -74,7 +74,228 @@
       <i class="collapse_title_icon"></i>
       <span class="collapse_title_text">录入住址电话调查信息</span>
     </div>
-    <ul style="margin-left:15px;">
+    <!-- <el-form :model="ruleForm" :rules="rules" ref="ruleForm"> -->
+    <el-form>
+      <ul style="margin-left:15px;">
+        <div class="content-ul">
+          <li class="item-column1">
+            <div class="left-title">第三方查询结果：</div>
+            <div class="textarea-class">
+              <el-input v-model="AddthirdResult" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
+            </div>
+          </li>
+        </div>
+        <li class="clearFix">
+          <!-- <el-form-item label="三方查询是否异常：" class="width_40Per" prop="AddthreeQueries"> -->
+          <el-form-item class="width_40Per">
+            <label class=" label_140"><span class="required_Red"> * </span>三方查询是否异常：</label>
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="AddthreeQueries" @change="changes('AddthreeQueries')">
+                <el-option label="是" value="1"></el-option>
+                <el-option label="否" value="0"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <!-- <el-form-item v-if="AddthreeQueries=='1'" class="width_60Per height_60" label="说明：" prop="AddexceptionState" :label-width="label_100"> -->
+          <el-form-item v-if="AddthreeQueries=='1'" class="width_60Per height_60 require_red" label="说明：" :label-width="label_100">
+            <!-- <label class=" label_140">说明：</label> -->
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-input v-model="AddexceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+            </el-tooltip>
+          </el-form-item>
+        </li>
+        <li class="clearFix ">
+          <el-form-item class="width_40Per height_60 ">
+            <label class=" label_140 vertical_top">是否与家庭联系人为同一人接听：</label>
+            <el-select v-model="AddissameFam" @change="changes('AddissameFam')">
+              <el-option label="是" value="1"></el-option>
+              <el-option label="否" value="0"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="AddissameFam=='0'" class="width_60Per" label="说明：" :label-width="label_100">
+            <!-- <label class=" label_140">说明：</label> -->
+            <el-input v-model="AddissameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">与借款人关系：</label>
+            <el-select v-model="AddrelBorrower" @change="changes('AddrelBorrower')">
+              <el-option label="父母" value="00"></el-option>
+              <el-option label="爱人" value="01"></el-option>
+              <el-option label="子女" value="02"></el-option>
+              <el-option label="其他" value="03"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="AddrelBorrower=='03'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <!-- <label class=" label_140">说明：</label> -->
+            <el-input v-model="AddrelBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">核对工作情况：</label>
+            <el-select v-model="AddcheckWork" @change="changes('AddcheckWork')">
+              <el-option label="一致" value="00"></el-option>
+              <el-option label="基本一致" value="01"></el-option>
+              <el-option label="不一致" value="02"></el-option>
+              <el-option label="被调查人不清楚" value="03"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="AddcheckWork=='01'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <!-- <label class=" label_140">说明：</label> -->
+            <el-input v-model="AddcheckWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">核对婚姻情况：</label>
+            <el-select v-model="AddmaritalStatus">
+              <el-option label="未婚" value="00"></el-option>
+              <el-option label="已婚" value="01"></el-option>
+              <el-option label="离异" value="02"></el-option>
+              <el-option label="丧偶" value="03"></el-option>
+              <el-option label="准备结婚" value="04"></el-option>
+              <el-option label="被调查人不清楚" value="05"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item class="width_60Per height_60" label="核对子女情况：" :label-width="label_100">
+            <el-select v-model="AddmaritalStatustxt">
+              <el-option label="有子女" value="00"></el-option>
+              <el-option label="无子女" value="01"></el-option>
+            </el-select>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">核对地址：</label>
+            <el-select v-model="AddcheckAddr" @change="changes('AddcheckAddr')">
+              <el-option label="一致" value="00"></el-option>
+              <el-option label="基本一致" value="01"></el-option>
+              <el-option label="不一致" value="02"></el-option>
+              <el-option label="被调查人不清楚" value="03"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="AddcheckAddr=='01'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <el-input v-model="AddcheckAddrtxt" type="textarea" resize=none :rows="2" :maxlength="500"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">核对房产：</label>
+            <el-select v-model="AddcheckEstate" @change="changes('AddcheckEstate')">
+              <el-option label="有" value="00"></el-option>
+              <el-option label="无" value="01"></el-option>
+              <el-option label="租房" value="02"></el-option>
+              <el-option label="与父母同住" value="03"></el-option>
+              <el-option label="被调查人不清楚" value="04"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="AddcheckEstate=='00'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <el-input v-model="AddcheckEstatetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">其他收入：</label>
+            <el-select v-model="AddotherIncome" @change="changes('AddotherIncome')">
+              <el-option label="有" value="00"></el-option>
+              <el-option label="无" value="01"></el-option>
+              <el-option label="被调查人不清楚" value="02"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="AddotherIncome=='00'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <el-input v-model="AddotherIncometxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">近期大项开销：</label>
+            <el-select v-model="AddrecentLargespend">
+              <el-option label="有" value="00"></el-option>
+              <el-option label="无" value="01"></el-option>
+              <el-option label="被调查人不清楚" value="02"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="AddrecentLargespend=='00'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <el-input v-model="AddrecentlArgespendInfo" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">父母：</label>
+            <el-select v-model="Addparents" @change="changes('Addparents')">
+              <el-option label="退休" value="00"></el-option>
+              <el-option label="在职" value="01"></el-option>
+              <el-option label="务农" value="02"></el-option>
+              <el-option label="被调查人不清楚" value="03"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="Addparents=='01'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <el-input v-model="AddparentsInfo" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">是否有兄弟姐妹：</label>
+            <el-select v-model="Addbrother" @change="changes('Addbrother')">
+              <el-option label="有" value="00"></el-option>
+              <el-option label="无" value="01"></el-option>
+              <el-option label="被调查人不清楚" value="02"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="Addbrother=='00'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <el-input v-model="Addbrothertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">支付家庭生活费用：</label>
+            <el-select v-model="Addexpenses" @change="changes('Addexpenses')">
+              <el-option label="需要" value="00"></el-option>
+              <el-option label="不需要" value="01"></el-option>
+              <el-option label="被调查人不清楚" value="02"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="Addexpenses=='00'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <el-input v-model="Addexpensestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_40Per">
+            <label class=" label_140">核对家庭固话：</label>
+            <el-select v-model="AddcheckHometel" @change="changes('AddcheckHometel')">
+              <el-option label="一致" value="00"></el-option>
+              <el-option label="基本一致" value="01"></el-option>
+              <el-option label="不一致" value="02"></el-option>
+              <el-option label="被调查人不清楚" value="03"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item v-show="AddcheckHometel=='01'" class="width_60Per height_60" label="说明：" :label-width="label_100">
+            <el-input v-model="AddcheckHometeltxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item  label="借款人爱好和品行："  class="height_80 width_66Per" label-width="140px">
+            <!-- <label class=" label_140">借款人爱好和品行：</label> -->
+            <el-input v-model="AddhobbyandBehave" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item label="调查结果：" class="height_120 require_red width_66Per"   label-width="140px">
+            <!-- <label class=" label_140"><span class="required_Red"> * </span>调查结果：</label> -->
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-input v-model="Addconclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
+            </el-tooltip>
+          </el-form-item>
+        </li>
+        <li class="item-column1 submit-class">
+          <el-button type="primary" @click="submitForm('form')">确定</el-button>
+          <!-- <el-button type="primary" @click="submitForm('ruleForm')">确定2</el-button> -->
+        </li>
+      </ul>
+    </el-form>
+    <!-- <ul style="margin-left:15px;">
       <div class="content-ul">
         <li class="item-column1">
           <div class="left-title">第三方查询结果：</div>
@@ -350,7 +571,7 @@
       <li class="item-column1 submit-class">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 <script>
@@ -358,6 +579,7 @@
     data() {
       return {
         phoneType: '01',
+        label_100: '100px',
         Addsource: this.Addlist.source,
         Addanswer: this.Addlist.answer,
         AddcheckStage: this.Addlist.checkStage,
@@ -394,7 +616,7 @@
         phoneId: '', // 用来区分是添加 还是 修改 
       }
     },
-    props: ['custName', 'phoneNum', 'applyId', 'formId',  "Addlist"],//'isFull',
+    props: ['custName', 'phoneNum', 'applyId', 'formId', "Addlist"], //'isFull',
     mounted() {
       this.phoneType = '01'; // 住址电话
       // if (this.isFull == true) { // 全屏

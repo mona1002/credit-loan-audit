@@ -1057,15 +1057,11 @@
       },
       //大数据风控
       tobigData() {
-        this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-          applyId: this.applyId
-        }).then(res => {
           this.$router.push({
             name: 'PneCtrl',
             params: {
               newOne: true,
             }
-          });
         });
       },
       // 修改 按钮
