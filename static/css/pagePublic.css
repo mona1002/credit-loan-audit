@@ -75,6 +75,9 @@
   line-height: 17px;
 }
 /* label 宽度 */
+.label_85 {
+  width: 85px;
+}
 .label_140 {
   width: 140px;
 }
@@ -109,6 +112,7 @@
 .width_50Per {
   width: 50%
 }
+/* 高度 */
 body .Abody .height_60{
   height: 60px;
 }
@@ -117,6 +121,10 @@ body .Abody .height_80{
 }
 body .Abody .height_120{
   height: 120px;
+}
+/* display  */
+.dis_inBlock{
+display: inline-block
 }
 /* 垂直对齐 */
 .vertical_top {

@@ -384,6 +384,9 @@
  .Abody .height_auto .el-table {
    height: auto !important;
  }
+ .Abody .height_300 .el-table {
+  height: 300px !important;
+}
 
  /* 100% */
  .hundred_percent .el-table .el-table__body-wrapper {

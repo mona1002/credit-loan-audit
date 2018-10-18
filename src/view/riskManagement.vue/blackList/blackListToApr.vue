@@ -129,7 +129,7 @@
               {{userInf.userCode}}
             </el-form-item>
             <el-form-item class="fr" label="审批时间：" label-width="110px">
-              {{systermTime|dateFilter }}
+              {{systermTime | dateFilter }}
             </el-form-item>
           </div>
         </el-form>
@@ -151,11 +151,7 @@
         loadSub: false,
         systermTime: 0,
         userInf: '',
-        ruleForm: {
-          // auditConclusion: '',
-          // auditOpinion: '',
-          // id: ''
-        },
+        ruleForm: {},
         rules: {
           auditConclusion: [{
             required: true,
@@ -172,6 +168,7 @@
         currentRow: {},
         totalRecord: 0,
         params: {
+          isAudit: "y",
           param: {
             blackListType: '', //	黑名单类型
             blackCustName: '', //	客户名称
@@ -180,6 +177,7 @@
             blackPhone: '', //	电话
             blackAppState: '', //	申请状态
             inReasons: '', //加黑类型(原因)
+            appPerCode: ''
           },
           pageParam: {
             pageNum: 1, //	页码
@@ -204,10 +202,6 @@
           }
         ],
         applyStatus: [{
-            value: '01',
-            label: '申请中'
-          },
-          {
             value: '02',
             label: '待审核'
           },
@@ -312,6 +306,10 @@
           }).then(() => {}).catch(() => {});
           return
         }
+        if (this.currentRow.blackAppStateTxt != '待审核') {
+          this._error('只能处理待审核的任务！');
+          return
+        }
         this.apprShow = true;
         // 重置按钮
         this.btnWord = '确定';
@@ -319,6 +317,7 @@
         // 清空弹窗
         this.$refs['ruleForm'] ? this.$refs['ruleForm'].resetFields() : '';
         this.ruleForm.id = this.currentRow.id;
+        this.ruleForm.auditPerCode = this.userInf.userCode;
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -328,11 +327,12 @@
             this.post("/blackAndGrey/auditInApp", this.ruleForm).then(res => {
               if (res.statusCode == 200) {
                 this._succe('提交成功！');
-                this.apprShow = false;
                 this.currentRow = {};
               } else {
                 this._error(res.msg);
               }
+              this.apprShow = false;
+              this.inquire();
             });
           } else {
             return false;
@@ -360,6 +360,7 @@
     },
     mounted() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      this.params.param.appPerCode = this.userInf.userCode
       this.inquire();
       this.getSystermTime();
     }
