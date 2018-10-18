@@ -1,87 +1,137 @@
 <!-- 电话征信 - 单位电话 -->
 <template>
-  <div class="company-form">
-    <div class="address-title">
-      <i class="collapse_title_icon"></i>
-      <span class="collapse_title_text">新增调查日志</span>
-    </div>
-    <ul class="content-ul" style="margin-left:15px;">
-      <li class="item-column3">
-        <div class="left-title">电话名称：</div>
-        <div class="dis-input">
-          <el-input v-model="custName" :disabled="true"></el-input>
-        </div>
-      </li>
-      <li class="item-column3">
-        <div class="left-title">电话类型：</div>
-        <div>
-          <el-select v-model="phoneType" :disabled="true">
-            <el-option label="单位电话" value="02"></el-option>
-          </el-select>
-        </div>
-      </li>
-      <li class="item-column3">
-        <div class="left-title">电话号码：</div>
-        <div>
-          <el-input v-model="phoneNum" :disabled="true"></el-input>
-        </div>
-      </li>
-      <li class="item-column3">
-        <div class="left-title">
-          <span class="require-icon" style="left:80px;">* </span>来源：</div>
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="DanWsource" @change="changes('DanWsource')">
-            <el-option label="申请表" value="00"></el-option>
-            <el-option label="第三方查询" value="01"></el-option>
-            <el-option label="其他" value="02"></el-option>
-          </el-select>
-        </el-tooltip>
-      </li>
-      <li class="item-column3">
-        <div class="left-title">
-          <span class="require-icon" style="left:50px;">* </span>接听情况：</div>
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="DanWanswer">
-            <el-option label="无人接" value="00"></el-option>
-            <el-option label="拒接" value="01"></el-option>
-            <el-option label="停机" value="02"></el-option>
-            <el-option label="空号" value="03"></el-option>
-            <el-option label="接通" value="04"></el-option>
-          </el-select>
-        </el-tooltip>
-      </li>
-      <li class="item-column3 Phone_credit_Form_search_bottom">
-        <div class="left-title">
-          <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="DanWcheckStage">
-            <el-option label="正在调查" value="00"></el-option>
-            <el-option label="完成调查" value="01"></el-option>
-            <el-option label="调查失败" value="02"></el-option>
-            <el-option label="未调查" value="03"></el-option>
-          </el-select>
-        </el-tooltip>
-      </li>
-      <li class="item-column1" v-show="DanWsource=='02'">
-        <div class="left-title">其他来源说明：</div>
-        <div class="textarea-class">
-          <el-input v-model="DanWsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
-        </div>
-      </li>
-    </ul>
-    <div class="address-title">
-      <i class="collapse_title_icon"></i>
-      <span class="collapse_title_text">录入单位电话调查信息</span>
-    </div>
+  <div>
     <el-form>
-      <ul class="margin_left_15 margin_right_5">
+      <div class="address-title">
+        <i class="collapse_title_icon"></i>
+        <span class="collapse_title_text">新增调查日志</span>
+      </div>
+      <ul class=" margin_10_5_0_5 el_form_item_height_35">
         <li class="clearFix">
-          <el-form-item label="第三方查询信息：" class="height_80 width_66Per margin_top_5" label-width="140px">
+          <el-form-item class="width_33Per" label='电话名称：' :label-width="label_140">
+            <el-input v-model="custName" :disabled="true"></el-input>
+          </el-form-item>
+          <el-form-item class="width_33Per" label='电话类型：' :label-width="label_140">
+            <el-select v-model="phoneType" :disabled="true">
+              <el-option label="单位电话" value="02"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item class="width_33Per" label='电话号码：' :label-width="label_140">
+            <el-input v-model="phoneNum" :disabled="true"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_33Per require_red" label='来源：' :label-width="label_140">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="DanWsource" @change="changes('DanWsource')">
+                <el-option label="申请表" value="00"></el-option>
+                <el-option label="第三方查询" value="01"></el-option>
+                <el-option label="其他" value="02"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <el-form-item class="width_33Per require_red" label='接听情况：' :label-width="label_140">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="DanWanswer">
+                <el-option label="无人接" value="00"></el-option>
+                <el-option label="拒接" value="01"></el-option>
+                <el-option label="停机" value="02"></el-option>
+                <el-option label="空号" value="03"></el-option>
+                <el-option label="接通" value="04"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <el-form-item class="width_33Per require_red" label='调查阶段：' :label-width="label_140">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="DanWcheckStage">
+                <el-option label="正在调查" value="00"></el-option>
+                <el-option label="完成调查" value="01"></el-option>
+                <el-option label="调查失败" value="02"></el-option>
+                <el-option label="未调查" value="03"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item v-if="DanWsource=='02'" class="width_40Per height_80 " label="其他来源说明：" :label-width="label_140">
+            <el-input v-model="DanWsourceDesc" type="textarea" :rows="3" resize='none' :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <!-- <li class="item-column3">
+          <div class="left-title">电话名称：</div>
+          <div class="dis-input">
+            <el-input v-model="custName" :disabled="true"></el-input>
+          </div>
+        </li>
+        <li class="item-column3">
+          <div class="left-title">电话类型：</div>
+          <div>
+            <el-select v-model="phoneType" :disabled="true">
+              <el-option label="单位电话" value="02"></el-option>
+            </el-select>
+          </div>
+        </li>
+        <li class="item-column3">
+          <div class="left-title">电话号码：</div>
+          <div>
+            <el-input v-model="phoneNum" :disabled="true"></el-input>
+          </div>
+        </li>
+        <li class="item-column3">
+          <div class="left-title">
+            <span class="require-icon" style="left:80px;">* </span>来源：</div>
+          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+            <el-select v-model="DanWsource" @change="changes('DanWsource')">
+              <el-option label="申请表" value="00"></el-option>
+              <el-option label="第三方查询" value="01"></el-option>
+              <el-option label="其他" value="02"></el-option>
+            </el-select>
+          </el-tooltip>
+        </li>
+        <li class="item-column3">
+          <div class="left-title">
+            <span class="require-icon" style="left:50px;">* </span>接听情况：</div>
+          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+            <el-select v-model="DanWanswer">
+              <el-option label="无人接" value="00"></el-option>
+              <el-option label="拒接" value="01"></el-option>
+              <el-option label="停机" value="02"></el-option>
+              <el-option label="空号" value="03"></el-option>
+              <el-option label="接通" value="04"></el-option>
+            </el-select>
+          </el-tooltip>
+        </li>
+        <li class="item-column3 Phone_credit_Form_search_bottom">
+          <div class="left-title">
+            <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
+          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+            <el-select v-model="DanWcheckStage">
+              <el-option label="正在调查" value="00"></el-option>
+              <el-option label="完成调查" value="01"></el-option>
+              <el-option label="调查失败" value="02"></el-option>
+              <el-option label="未调查" value="03"></el-option>
+            </el-select>
+          </el-tooltip>
+        </li>
+        <li class="item-column1" v-show="DanWsource=='02'">
+          <div class="left-title">其他来源说明：</div>
+          <div class="textarea-class">
+            <el-input v-model="DanWsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+          </div>
+        </li> -->
+      </ul>
+      <div class="address-title">
+        <i class="collapse_title_icon"></i>
+        <span class="collapse_title_text">录入单位电话调查信息</span>
+      </div>
+      <ul class="margin_left_5 margin_right_5">
+        <li class="clearFix">
+          <el-form-item label="第三方查询信息：" class="height_80 width_66Per margin_top_5" :label-width="label_140">
             <el-input type="textarea" v-model="DanWthirdResult" :rows="3" resize=none :maxlength="500"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='拨打电话：' label-width="140px">
+          <el-form-item class="width_40Per" label='拨打电话：' :label-width="label_140">
             <el-select v-model="DanWphone" @change="changes('DanWphone')">
               <el-option label="借款人提供" value="00"></el-option>
               <el-option label="拨打以下号码" value="01"></el-option>
@@ -94,7 +144,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='接电话人身份：' label-width="140px">
+          <el-form-item class="width_40Per" label='接电话人身份：' :label-width="label_140">
             <el-select v-model="DanWanswerIdentity" @change="changes('DanWanswerIdentity')">
               <el-option label="同事" value="00"></el-option>
               <el-option label="本人" value="01"></el-option>
@@ -105,7 +155,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='核对单位及工作信息：' label-width="140px">
+          <el-form-item class="width_40Per" label='核对单位及工作信息：' :label-width="label_140">
             <el-select v-model="DanWcompany" @change="changes('DanWcompany')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
@@ -118,7 +168,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='核对工作时间：' label-width="140px">
+          <el-form-item class="width_40Per" label='核对工作时间：' :label-width="label_140">
             <el-select v-model="DanWcheckTime" @change="changes('DanWcheckTime')">
               <el-option label="知晓" value="00"></el-option>
               <el-option label="被调查人不清楚" value="01"></el-option>
@@ -129,7 +179,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='核对收入：' label-width="140px">
+          <el-form-item class="width_40Per" label='核对收入：' :label-width="label_140">
             <el-select v-model="DanWcheckIncome" @change="changes('DanWcheckIncome')">
               <el-option label="知晓" value="00"></el-option>
               <el-option label="被调查人不清楚" value="01"></el-option>
@@ -140,7 +190,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='用工方式：' label-width="140px">
+          <el-form-item class="width_40Per" label='用工方式：' :label-width="label_140">
             <el-select v-model="DanWemploymentmode">
               <el-option label="正式" value="00"></el-option>
               <el-option label="外派" value="01"></el-option>
@@ -149,7 +199,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='工资发放情况：' label-width="140px">
+          <el-form-item class="width_40Per" label='工资发放情况：' :label-width="label_140">
             <el-select v-model="DanWpayrollSituation" @change="changes('DanWpayrollSituation')">
               <el-option label="打卡" value="00"></el-option>
               <el-option label="不打卡" value="01"></el-option>
@@ -160,7 +210,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='是否缴纳养老保险：' label-width="140px">
+          <el-form-item class="width_40Per" label='是否缴纳养老保险：' :label-width="label_140">
             <el-select v-model="DanWpensionInsurance">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
@@ -174,7 +224,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per" label='核对工作证明人1：' label-width="140px">
+          <el-form-item class="width_40Per" label='核对工作证明人1：' :label-width="label_140">
             <el-input v-model="DanWjobref1" :maxlength="20"></el-input>
           </el-form-item>
           <el-form-item class="width_60Per  " label="核对工作证明人2：" :label-width="label_145">
@@ -182,7 +232,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="height_120 require_red width_66Per" label='调查结果：' label-width="140px">
+          <el-form-item class="height_120 require_red width_66Per" label='调查结果：' :label-width="label_140">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-input type="textarea" v-model="DanWconclusion" :rows="5" resize=none :maxlength="500"></el-input>
             </el-tooltip>
@@ -385,6 +435,7 @@
       return {
         phoneType: '02',
         label_145: '145px',
+        label_140: '140px',
         DanWsource: this.danweiList.source,
         DanWanswer: this.danweiList.answer,
         DanWcheckStage: this.danweiList.checkStage,

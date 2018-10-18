@@ -1,12 +1,63 @@
 <!-- 电话征信 - 紧急联系人 -->
 <template>
   <div>
-    <div class="address-title">
-      <i class="collapse_title_icon"></i>
-      <span class="collapse_title_text">新增调查日志</span>
-    </div>
-    <ul class="content-ul" style="margin-left:15px;">
-      <li class="item-column3">
+    <el-form>
+      <div class="address-title">
+        <i class="collapse_title_icon"></i>
+        <span class="collapse_title_text">新增调查日志</span>
+      </div>
+      <ul class="margin_10_5_0_5 el_form_item_height_35">
+        <li class="clearFix">
+          <el-form-item class="width_33Per" label='电话名称：' :label-width="label_160">
+            <el-input v-model="custName" :disabled="true"></el-input>
+          </el-form-item>
+          <el-form-item class="width_33Per" label='电话类型：' :label-width="label_160">
+            <el-select v-model="phoneType" disabled>
+              <el-option label="其他联系人" value="04"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item class="width_33Per" label='电话号码：' :label-width="label_160">
+            <el-input v-model="phoneNum" :disabled="true"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_33Per require_red" label='来源：' :label-width="label_160">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="Hsource" placeholder="请选择来源" @change="changes('Hsource')">
+                <el-option label="申请表" value="00"></el-option>
+                <el-option label="第三方查询" value="01"></el-option>
+                <el-option label="其他" value="02"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <el-form-item class="width_33Per require_red" label='接听情况：' :label-width="label_160">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="Hanswer" placeholder="请选择接听情况">
+                <el-option label="无人接" value="00"></el-option>
+                <el-option label="拒接" value="01"></el-option>
+                <el-option label="停机" value="02"></el-option>
+                <el-option label="空号" value="03"></el-option>
+                <el-option label="接通" value="04"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <el-form-item class="width_33Per require_red" label='调查阶段：' :label-width="label_160">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="HcheckStage" placeholder="请选择调查阶段">
+                <el-option label="正在调查" value="00"></el-option>
+                <el-option label="完成调查" value="01"></el-option>
+                <el-option label="调查失败" value="02"></el-option>
+                <el-option label="未调查" value="03"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item v-if="Hsource=='02'" class="width_40Per height_80 " label="其他来源说明：" :label-width="label_160">
+            <el-input v-model="HsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <!-- <li class="item-column3">
         <div class="left-title">电话名称：</div>
         <div>
           <el-input v-model="custName" :disabled="true"></el-input>
@@ -67,14 +118,13 @@
         <div class="textarea-class">
           <el-input v-model="HsourceDesc" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
-      </li>
-    </ul>
-    <div class="address-title">
-      <i class="collapse_title_icon"></i>
-      <span class="collapse_title_text">录入其他联系人调查信息</span>
-    </div>
-    <el-form>
-      <ul class="margin_left_15 margin_right_5">
+      </li> -->
+      </ul>
+      <div class="address-title">
+        <i class="collapse_title_icon"></i>
+        <span class="collapse_title_text">录入其他联系人调查信息</span>
+      </div>
+      <ul class="margin_left_5 margin_right_5">
         <li class="clearFix">
           <el-form-item class="height_80 width_66Per margin_top_5" label='第三方查询信息：' :label-width="label_160">
             <el-input type="textarea" v-model="HthirdResult" :row="2" resize=none></el-input>

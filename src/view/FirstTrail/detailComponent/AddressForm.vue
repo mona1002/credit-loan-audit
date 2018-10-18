@@ -1,89 +1,140 @@
 <!-- 电话征信 - 住址电话 -->
 <template>
   <div>
-    <div class="address-title">
-      <i class="collapse_title_icon"></i>
-      <span class="collapse_title_text">新增调查日志</span>
-    </div>
-    <ul class="content-ul" style="margin-left:15px;">
-      <li class="item-column3">
-        <div class="left-title">电话名称：</div>
-        <div class="dis-input">
-          <el-input v-model="custName" :disabled="true"></el-input>
-        </div>
-      </li>
-      <li class="item-column3">
-        <div class="left-title">电话类型：</div>
-        <div>
-          <el-select v-model="phoneType" :disabled="true">
-            <el-option label="住址电话" value="01"></el-option>
-          </el-select>
-        </div>
-      </li>
-      <li class="item-column3">
-        <div class="left-title">电话号码：</div>
-        <div>
-          <el-input v-model="phoneNum" :disabled="true"></el-input>
-        </div>
-      </li>
-      <li class="item-column3">
-        <div class="left-title">
-          <span class="require-icon" style="left:80px;">* </span> 来源：</div>
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="Addsource" @change="changes('Addsource')">
-            <el-option label="申请表" value="00"></el-option>
-            <el-option label="第三方查询" value="01"></el-option>
-            <el-option label="其他" value="02"></el-option>
-          </el-select>
-        </el-tooltip>
-      </li>
-      <li class="item-column3">
-        <div class="left-title">
-          <span class="require-icon" style="left:50px;">* </span> 接听情况：
-        </div>
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="Addanswer">
-            <el-option label="无人接" value="00"></el-option>
-            <el-option label="拒接" value="01"></el-option>
-            <el-option label="停机" value="02"></el-option>
-            <el-option label="空号" value="03"></el-option>
-            <el-option label="接通" value="04"></el-option>
-          </el-select>
-        </el-tooltip>
-      </li>
-      <li class="item-column3 Phone_credit_Form_search_bottom">
-        <div class="left-title">
-          <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="AddcheckStage">
-            <el-option label="正在调查" value="00"></el-option>
-            <el-option label="完成调查" value="01"></el-option>
-            <el-option label="调查失败" value="02"></el-option>
-            <el-option label="未调查" value="03"></el-option>
-          </el-select>
-        </el-tooltip>
-      </li>
-      <li class="item-column1" v-show="Addsource=='02'">
-        <div class="left-title">其他来源说明：</div>
-        <div class="textarea-class">
-          <el-input v-model="AddsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
-        </div>
-      </li>
-    </ul>
-    <div class="address-title">
-      <i class="collapse_title_icon"></i>
-      <span class="collapse_title_text">录入住址电话调查信息</span>
-    </div>
-    <!-- <el-form :model="ruleForm" :rules="rules" ref="ruleForm"> -->
+    <!-- <el-form-item label="三方查询是否异常：" class="width_40Per" prop="AddthreeQueries"> -->
     <el-form>
-      <ul class="margin_left_15 margin_right_5">
+      <div class="address-title">
+        <i class="collapse_title_icon"></i>
+        <span class="collapse_title_text">新增调查日志</span>
+      </div>
+      <!-- content-ul   -->
+      <ul class="margin_10_5_0_5 el_form_item_height_35">
         <li class="clearFix">
-          <el-form-item label="第三方查询结果：" class="height_80 width_66Per margin_top_5" label-width="140px">
+          <el-form-item class="width_33Per" label='电话名称：' :label-width="label_140">
+            <el-input v-model="custName" :disabled="true"></el-input>
+          </el-form-item>
+          <el-form-item class="width_33Per" label='电话类型：' :label-width="label_140">
+            <el-select v-model="phoneType" :disabled="true">
+              <el-option label="住址电话" value="01"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item class="width_33Per" label='电话号码：' :label-width="label_140">
+            <el-input v-model="phoneNum" :disabled="true"></el-input>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item class="width_33Per require_red" label='来源：' :label-width="label_140">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="Addsource" @change="changes('Addsource')">
+                <el-option label="申请表" value="00"></el-option>
+                <el-option label="第三方查询" value="01"></el-option>
+                <el-option label="其他" value="02"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <el-form-item class="width_33Per require_red" label='接听情况：' :label-width="label_140">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="Addanswer">
+                <el-option label="无人接" value="00"></el-option>
+                <el-option label="拒接" value="01"></el-option>
+                <el-option label="停机" value="02"></el-option>
+                <el-option label="空号" value="03"></el-option>
+                <el-option label="接通" value="04"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+          <el-form-item class="width_33Per require_red" label='调查阶段：' :label-width="label_140">
+            <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+              <el-select v-model="AddcheckStage">
+                <el-option label="正在调查" value="00"></el-option>
+                <el-option label="完成调查" value="01"></el-option>
+                <el-option label="调查失败" value="02"></el-option>
+                <el-option label="未调查" value="03"></el-option>
+              </el-select>
+            </el-tooltip>
+          </el-form-item>
+        </li>
+        <li class="clearFix">
+          <el-form-item v-if="Addsource=='02'" class="width_40Per height_80 " label="其他来源说明：" :label-width="label_140">
+            <el-input v-model="AddsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+          </el-form-item>
+        </li>
+        <!-- <li class="item-column3">
+              <div class="left-title">电话名称：</div>
+              <div class="dis-input">
+                <el-input v-model="custName" :disabled="true"></el-input>
+              </div>
+            </li>
+            <li class="item-column3">
+              <div class="left-title">电话类型：</div>
+              <div>
+                <el-select v-model="phoneType" :disabled="true">
+                  <el-option label="住址电话" value="01"></el-option>
+                </el-select>
+              </div>
+            </li>
+            <li class="item-column3">
+              <div class="left-title">电话号码：</div>
+              <div>
+                <el-input v-model="phoneNum" :disabled="true"></el-input>
+              </div>
+            </li>
+            <li class="item-column3">
+              <div class="left-title">
+                <span class="require-icon" style="left:80px;">* </span> 来源：</div>
+              <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+                <el-select v-model="Addsource" @change="changes('Addsource')">
+                  <el-option label="申请表" value="00"></el-option>
+                  <el-option label="第三方查询" value="01"></el-option>
+                  <el-option label="其他" value="02"></el-option>
+                </el-select>
+              </el-tooltip>
+            </li>
+            <li class="item-column3">
+              <div class="left-title">
+                <span class="require-icon" style="left:50px;">* </span> 接听情况：
+              </div>
+              <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+                <el-select v-model="Addanswer">
+                  <el-option label="无人接" value="00"></el-option>
+                  <el-option label="拒接" value="01"></el-option>
+                  <el-option label="停机" value="02"></el-option>
+                  <el-option label="空号" value="03"></el-option>
+                  <el-option label="接通" value="04"></el-option>
+                </el-select>
+              </el-tooltip>
+            </li>
+            <li class="item-column3 Phone_credit_Form_search_bottom">
+              <div class="left-title">
+                <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
+              <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+                <el-select v-model="AddcheckStage">
+                  <el-option label="正在调查" value="00"></el-option>
+                  <el-option label="完成调查" value="01"></el-option>
+                  <el-option label="调查失败" value="02"></el-option>
+                  <el-option label="未调查" value="03"></el-option>
+                </el-select>
+              </el-tooltip>
+            </li>
+            <li class="item-column1" v-show="Addsource=='02'">
+              <div class="left-title">其他来源说明：</div>
+              <div class="textarea-class">
+                <el-input v-model="AddsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+              </div>
+            </li> -->
+      </ul>
+      <div class="address-title">
+        <i class="collapse_title_icon"></i>
+        <span class="collapse_title_text">录入住址电话调查信息</span>
+      </div>
+      <!-- <el-form :model="ruleForm" :rules="rules" ref="ruleForm"> -->
+      <ul class="margin_left_5 margin_right_5">
+        <li class="clearFix">
+          <el-form-item label="第三方查询结果：" class="height_80 width_66Per margin_top_5" :label-width="label_140">
             <el-input v-model="AddthirdResult" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
-          <!-- <el-form-item label="三方查询是否异常：" class="width_40Per" prop="AddthreeQueries"> -->
           <el-form-item class="width_40Per">
             <label class=" label_140"><span class="required_Red"> * </span>三方查询是否异常：</label>
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
@@ -273,13 +324,13 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item label="借款人爱好和品行：" class="height_80 width_66Per" label-width="140px">
+          <el-form-item label="借款人爱好和品行：" class="height_80 width_66Per" :label-width="label_140">
             <!-- <label class=" label_140">借款人爱好和品行：</label> -->
             <el-input v-model="AddhobbyandBehave" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item label="调查结果：" class="height_120 require_red width_66Per" label-width="140px">
+          <el-form-item label="调查结果：" class="height_120 require_red width_66Per" :label-width="label_140">
             <!-- <label class=" label_140"><span class="required_Red"> * </span>调查结果：</label> -->
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-input v-model="Addconclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
@@ -577,6 +628,7 @@
       return {
         phoneType: '01',
         label_100: '100px',
+        label_140: '140px',
         Addsource: this.Addlist.source,
         Addanswer: this.Addlist.answer,
         AddcheckStage: this.Addlist.checkStage,

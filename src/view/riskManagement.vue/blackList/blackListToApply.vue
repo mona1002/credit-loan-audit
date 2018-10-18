@@ -510,7 +510,8 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.addObj.inReasons = this.addObj.inReasons.join(',') //转换入参格式
-            this.post('http://10.1.26.141:8080/riskManagement/blackAndGrey/blackListInApp', this.addObj).then(res => {
+            // this.post('http://10.1.26.141:8080/riskManagement/blackAndGrey/blackListInApp', this.addObj).then(res => {
+            this.post('/blackAndGrey/blackListInApp', this.addObj).then(res => {
               if (res.statusCode == 200) {
                 this._succe(res.msg);
                 this.addShow = false;

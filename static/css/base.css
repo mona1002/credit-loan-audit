@@ -958,6 +958,11 @@
    width: 100%;
  }
 
+ /*  */
+ body .el_form_item_height_35 .el-form-item{
+/* margin-bottom: 0 !important; */
+height: 35px;
+ }
  /* 弹窗里部分input必填项，部分展示项 */
 
  .alert_collapse_inputLabel label::before {
@@ -971,7 +976,9 @@
   color: #ff7676;
   font-weight: 700;
   font-size: 16px;
-  margin-right: 4px;
+  left: -4px;
+  top: 3px;
+  position: relative;
 }
  /* 弹窗全部为必填项 */
 

@@ -29,6 +29,12 @@
 }
 
 /* 外边距 */
+/* .margin_5{
+  margin: 5px;
+} */
+.margin_10_5_0_5{
+  margin: 10px 5px 0  5px;
+}
 .margin_top_5 {
   margin-top: 5px;
 }
