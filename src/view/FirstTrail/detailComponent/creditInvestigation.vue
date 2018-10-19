@@ -19,14 +19,14 @@
             </li>
             <li>
               <label class="label_width_200">是否核对借款人有效证件：</label>
-              <span>{{datas.isCheckDocTxt}} </span>
+              <span>{{datas.checkDocFlag}} </span>
             </li>
             <li>
-              <p v-show="datas.isCheckDocTxt=='否'">
+              <p v-show="datas.checkDocFlag=='否'">
                 <label class="label_width_200">不核对借款人有效证件原因：</label>
-                <el-tooltip class="item" effect="dark" :content="datas.isCheckDocRemark" :disabled="datas.isCheckDocRemark==null"
+                <el-tooltip class="item" effect="dark" :content="datas.notCheckBorrowerDocReason" :disabled="datas.notCheckBorrowerDocReason==null"
                   placement="top">
-                  <span>{{datas.isCheckDocRemark}}</span>
+                  <span>{{datas.notCheckBorrowerDocReason}}</span>
                 </el-tooltip>
               </p>
             </li>
@@ -54,7 +54,7 @@
             </li>
             <li>
               <label class="label_width_200">标志性建筑：</label>
-              <span>{{datas.homeLandMark}}</span>
+              <span>{{datas.homeLandmark}}</span>
             </li>
             <li>
               <label class="label_width_200">路线：</label>
@@ -62,10 +62,10 @@
             </li>
             <li>
               <label class="label_width_200">是否核对借款人房产证件：</label>
-              <span>{{datas.homeNoverReasonTxt}}</span>
+              <span>{{datas.checkEstateLicenseReason}}</span>
             </li>
             <li>
-              <p v-show="datas.homeNoverReasonTxt == '否'">
+              <p v-show="datas.checkEstateLicenseReason == '否'">
                 <label class="label_width_200">不核对借款人房产证件原因：</label>
                 <el-tooltip class="item" effect="dark" :content="datas.homeHouseInfo" :disabled="datas.homeHouseInfo==null"
                   placement="top">
@@ -75,11 +75,11 @@
             </li>
             <li>
               <label class="label_width_200">在场人员：</label>
-              <span>{{datas.homePresenter}}</span>
+              <span>{{datas.homePresence}}</span>
             </li>
             <li>
               <label class="label_width_200">与借款人关系：</label>
-              <span>{{datas.homeRelBorrower}}</span>
+              <span>{{datas.homeBorrowerReleation}}</span>
             </li>
             <li>
               <label class="label_width_200">社区周边环境：</label>
@@ -147,11 +147,11 @@
             </li>
             <li>
               <label class="label_width_200">异常说明：</label>
-              <span>{{datas.homeOtherExpRemark}}</span>
+              <span>{{datas.homeExceptionRemark}}</span>
             </li>
             <li>
               <label class="label_width_200">其他生活情况：</label>
-              <span>{{datas.homeOtherRemark}}</span>
+              <span>{{datas.homeOtherLiving}}</span>
             </li>
           </ul>
         </div>
@@ -165,11 +165,11 @@
           <ul>
             <li style="width:100%;">
               <label class="label_width_200">企业征信地址：</label>
-              <span>{{datas.comAddr}}</span>
+              <span>{{datas.compAddr}}</span>
             </li>
             <li>
               <label class="label_width_200">是否查验企业有效证件：</label>
-              <span>{{datas.comisEffDocTxt}}</span>
+              <span>{{datas.compCheckDocFlag}}</span>
             </li>
             <li>
               <label class="label_width_200">各项材料原件是否收齐比对：</label>
@@ -191,15 +191,15 @@
           <ul>
             <li>
               <label class="label_width_200">企业水牌位置及新旧程度：</label>
-              <span>{{datas.comSignPlace}}</span>
+              <span>{{datas.compSignPlace}}</span>
             </li>
             <li>
               <label class="label_width_200">办公场所装修情况：</label>
-              <span>{{datas.comOffDecora}}</span>
+              <span>{{datas.compOfficeDecora}}</span>
             </li>
             <li>
               <label class="label_width_200">办公场所面积：</label>
-              <span>{{datas.comOffArea}}</span>
+              <span>{{datas.compSignPlace}}</span>
             </li>
           </ul>
         </div>
@@ -213,15 +213,15 @@
           <ul>
             <li>
               <label class="label_width_200">机器设备：</label>
-              <span>{{datas.comEquipment}}</span>
+              <span>{{datas.compEquipment}}</span>
             </li>
             <li>
               <label class="label_width_200">厂房面积：</label>
-              <span>{{datas.comArea}}</span>
+              <span>{{datas.compArea}}</span>
             </li>
             <li>
               <label class="label_width_200">现代化程度：</label>
-              <span>{{datas.comModenLevel}}</span>
+              <span>{{datas.compModenLevel}}</span>
             </li>
             <li>
               <label class="label_width_200">办公区工位数情况：</label>
@@ -229,7 +229,7 @@
             </li>
             <li>
               <label class="label_width_200">库存：</label>
-              <span>{{datas.comStock}}</span>
+              <span>{{datas.compStock}}</span>
             </li>
             <li>
               <label class="label_width_200">工位上是否有电话：</label>
@@ -247,15 +247,15 @@
           <ul>
             <li>
               <label class="label_width_200">是否开工中：</label>
-              <span>{{datas.comIsStartTxt}}</span>
+              <span>{{datas.compIsStart}}</span>
             </li>
             <li>
               <label class="label_width_200">见到办公人数：</label>
-              <span>{{datas.comWorkerNum}}</span>
+              <span>{{datas.compWorkerStationNum}}</span>
             </li>
             <li>
               <label class="label_width_200">是否统一着装：</label>
-              <span>{{datas.comIsDressUniTxt}}</span>
+              <span>{{datas.compUniformFlag}}</span>
             </li>
             <li>
               <label class="label_width_200">工位上是否有电话：</label>
@@ -277,60 +277,60 @@
           <ul>
             <li style="width:100%;">
               <label class="label_width_200">规模：</label>
-              <span>{{datas.comScale}}</span>
+              <span>{{datas.compScale}}</span>
             </li>
             <li>
               <label class="label_width_200">经营年限：</label>
-              <span>{{datas.comOperaYears}}</span>
+              <span>{{datas.compOperaYears}}</span>
             </li>
             <li>
               <label class="label_width_200">年收支[万元]：</label>
-              <span>{{datas.comPay}}</span>
+              <span>{{datas.compPay}}</span>
             </li>
             <li>
               <label class="label_width_200">毛利[万元]：</label>
-              <span>{{datas.comOperaYears}}</span>
+              <span>{{datas.compGroosmargin}}</span>
             </li>
             <li>
               <label class="label_width_200">纯利[万元]：</label>
-              <span>{{datas.comNetProfit}}</span>
+              <span>{{datas.compNetProfit}}</span>
             </li>
             <li>
               <label class="label_width_200">上下游供货方式：</label>
-              <span>{{datas.comSupplyMode}}</span>
+              <span>{{datas.compSupplyMode}}</span>
             </li>
             <li>
               <label class="label_width_200">上下游结算方式：</label>
-              <span>{{datas.comCaculation}}</span>
+              <span>{{datas.compCaculation}}</span>
             </li>
             <li style="width:100%;">
               <label class="label_width_200">上下游结算周期：</label>
-              <span>{{datas.comBillCycle}}</span>
+              <span>{{datas.compBillcycle}}</span>
             </li>
             <li>
               <label class="label_width_200">应收账款[万元]：</label>
-              <span>{{datas.comCollection}}</span>
+              <span>{{datas.compCollection}}</span>
             </li>
             <li>
               <label class="label_width_200">应付账款[万元]：</label>
-              <span>{{datas.comPayables}}</span>
+              <span>{{datas.compPayables}}</span>
             </li>
             <li style="width:100%;">
               <label class="label_width_200">贷款及抵押情况：</label>
-              <span>{{datas.comLoan}}</span>
+              <span>{{datas.compLoan}}</span>
             </li>
             <li class="text_area_li">
               <label class="label_width_200">其他说明：</label>
-              <el-tooltip class="item" effect="dark" :content="datas.comOtherInfo" :disabled="datas.comOtherInfo==null"
+              <el-tooltip class="item" effect="dark" :content="datas.compOtherRemark" :disabled="datas.compOtherRemark==null"
                 placement="top">
-                <span class="text_area_span text_area_span_minus220">{{datas.comOtherInfo}}</span>
+                <span class="text_area_span text_area_span_minus220">{{datas.compOtherRemark}}</span>
               </el-tooltip>
             </li>
             <li class="text_area_li">
               <label class="label_width_200">异常说明：</label>
-              <el-tooltip class="item" effect="dark" :content="datas.comExceptionInfo" :disabled="datas.comExceptionInfo==null"
+              <el-tooltip class="item" effect="dark" :content="datas.compExceptionRemark" :disabled="datas.compExceptionRemark==null"
                 placement="top">
-                <span class="text_area_span text_area_span_minus220">{{datas.comExceptionInfo}}</span>
+                <span class="text_area_span text_area_span_minus220">{{datas.compExceptionRemark}}</span>
               </el-tooltip>
             </li>
           </ul>
@@ -378,32 +378,32 @@
           if (res.statusCode == 200) {
             this.datas = res.data;
             //(企业)收支[万元]
-            if (this.datas.comPay != null) {
-              this.datas.comPay = this.formatNumber(this.datas.comPay, 2, 0);
+            if (this.datas.compPay != null) {
+              this.datas.compPay = this.formatNumber(this.datas.compPay, 2, 0);
             };
             //(企业)毛利[万元]
-            if (this.datas.comGroosMargin != null) {
-              this.datas.comGroosMargin = this.formatNumber(this.datas.comGroosMargin, 2, 0);
+            if (this.datas.compGroosmargin != null) {
+              this.datas.compGroosmargin = this.formatNumber(this.datas.compGroosmargin, 2, 0);
             };
             //(企业)纯利[万元]
-            if (this.datas.comNetProfit != null) {
-              this.datas.comNetProfit = this.formatNumber(this.datas.comNetProfit, 2, 0);
+            if (this.datas.compNetProfit != null) {
+              this.datas.compNetProfit = this.formatNumber(this.datas.compNetProfit, 2, 0);
             };
             //(企业)应收账款[万元]
-            if (this.datas.comCollection != null) {
-              this.datas.comCollection = this.formatNumber(this.datas.comCollection, 2, 0);
+            if (this.datas.compCollection != null) {
+              this.datas.compCollection = this.formatNumber(this.datas.compCollection, 2, 0);
             };
             //(企业)应付账款
-            if (this.datas.comPayables != null) {
-              this.datas.comPayables = this.formatNumber(this.datas.comPayables, 2, 0);
+            if (this.datas.compPayables != null) {
+              this.datas.compPayables = this.formatNumber(this.datas.compPayables, 2, 0);
             };
             //办公环境 办公场所面积
-            if (this.datas.comOffArea != null) {
-              this.datas.comOffArea = this.formatNumber(this.datas.comOffArea, 2, 0).replace(/,/g, '') + '㎡';
+            if (this.datas.compOfficeArea != null) {
+              this.datas.compOfficeArea = this.formatNumber(this.datas.compOfficeArea, 2, 0).replace(/,/g, '') + '㎡';
             };
             //库房/车间 厂房面积
-            if (this.datas.comArea != null) {
-              this.datas.comArea = this.formatNumber(this.datas.comArea, 2, 0).replace(/,/g, '') + '㎡';
+            if (this.datas.compArea != null) {
+              this.datas.compArea = this.formatNumber(this.datas.compArea, 2, 0).replace(/,/g, '') + '㎡';
             };
 
           };
