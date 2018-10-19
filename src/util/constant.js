@@ -22,9 +22,9 @@ if (host === productionEnv) {
 } else if (host === press) {
   host = press;
 } else if (host === developmentEnv) {
-  // host=developmentEnv;
-  host = '10.1.26.203';
-  port= 20716;
+  host=developmentEnv;
+  // host = '10.1.26.203';
+  // port= 20716;
 } else {
   host = testEnv;
   // host = '10.1.26.203';
