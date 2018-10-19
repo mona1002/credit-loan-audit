@@ -15,11 +15,11 @@
             </el-table-column>
             <el-table-column prop="custName" label="客户姓名" min-width="100">
             </el-table-column>
-            <el-table-column prop="proName" label="产品名称" min-width="100">
+            <el-table-column prop="productName" label="产品名称" min-width="100">
             </el-table-column>
             <el-table-column prop="loanDate" label="放款日期" min-width="140">
             </el-table-column>
-            <el-table-column prop="loanReceiptPayAmt" label="放款金额[元]" min-width="120">
+            <el-table-column prop="payAmt" label="放款金额[元]" min-width="120">
             </el-table-column>
             <el-table-column prop="loanTerm" label="借款期限[月]" min-width="120">
             </el-table-column>
@@ -31,7 +31,7 @@
             </el-table-column>
             <el-table-column prop="overDueDayNum" label="当前逾期天数" min-width="120">
             </el-table-column>
-            <el-table-column prop="currArrTerm" label="当前拖欠期数" min-width="120">
+            <el-table-column prop="arrSumTerm" label="当前拖欠期数" min-width="120">
             </el-table-column>
             <el-table-column prop="arrTermSum" label="累计拖欠期数" min-width="120">
             </el-table-column>
