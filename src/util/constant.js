@@ -17,17 +17,18 @@ if (host === productionEnv) {
   host = releaseEnv;
 } else if (host === testEnv) {
   host = testEnv;
-  host = '10.1.26.203';
-  port= 20716;
+  // host = '10.1.26.203';
+  // port= 20716;
 } else if (host === press) {
   host = press;
 } else if (host === developmentEnv) {
+  // host=developmentEnv;
   host = '10.1.26.203';
   port= 20716;
 } else {
   host = testEnv;
-  host = '10.1.26.203';
-  port= 20716;
+  // host = '10.1.26.203';
+  // port= 20716;
 }
 
 appConstant.baseUrl_common = "http://" + host + (80 === port ? '' : (':' + port)) + "/riskManagement";
