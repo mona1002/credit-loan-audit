@@ -19,6 +19,7 @@ axios.defaults.withCredentials = true;
 axios.interceptors.response.use(  response => {    
   if (response.data && response.data.statusCode == 900) {
     // window.location.href = platforUrl + "#/";  
+    alert(900)
   };    
   return response;  
 },   error => {
