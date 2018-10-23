@@ -5,11 +5,12 @@
       <div class="main_left">
         <h2 style="font-weight:bold;">
           <i class="el-icon-edit"> </i>常用 </h2>
-          <!-- <router-link to='/greyLIst'>gray</router-link>
-          <router-link to='/blackListOutApr'>Out——Apr</router-link>
-          <router-link to='/blackList'>blackList</router-link>
-          <router-link to='/blackListToApr'>to-------apr</router-link>
-          <router-link to='/blackListOutApply'>Out--------Apply</router-link> -->
+        <router-link to='/greyLIst'>gray</router-link><br>
+        <router-link to='/blackListOutApr'>Out——Apr</router-link><br>
+        <router-link to='/blackListOutApply'>Out--------Apply</router-link><br>
+        <router-link to='/blackList'>blackList</router-link><br>
+        <router-link to='/blackListToApr'>to-------apr</router-link><br>
+        <router-link to='/blackListToApply'>to-------Apply</router-link><br>
       </div>
       <div class="main_right">
         <!-- 中间 -->
@@ -109,7 +110,7 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/') {
           this.mountedInf();
         }
@@ -236,6 +237,27 @@
       }
     },
     mounted() {
+//       var x = 1;
+// function foo(x, y = function() { x = 2; }) {
+//   var x = 3;
+//   y();
+//   console.log(x);
+// }
+
+// foo() // 3
+// console.log(x )
+// x // 1
+// var x = 1;
+// function foo(x, y = function() { x = 2; }) {
+//   x = 3;
+//   y();
+//   console.log(x);
+// }
+// console.log(x)
+// foo() // 2
+// x // 1
+// const bar = function baz() {};
+// console.log(bar.name)
       // 统一登录平台  
       this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         this.userInf = {
@@ -252,7 +274,7 @@
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
-          
+
           if (res.statusCode == 200) {
             this.tableData = res.data;
           } else {
@@ -281,7 +303,7 @@
   .workbench {
     background: #ededed;
     width: 100%;
-    height: calc( 100% -90px);
+    height: calc(100% -90px);
   }
 
   .workbench .top {
@@ -317,7 +339,7 @@
   /* 右边-折叠面板 */
 
   .main .main_right {
-    width: calc( 100% - 148px);
+    width: calc(100% - 148px);
     background: white;
     height: 100%;
   }

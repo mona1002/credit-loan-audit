@@ -199,10 +199,6 @@
         this.params.pageParam.pageNum = val; //	页码
         this.inquire();
       },
-      // 批量导入
-      Import() {
-
-      },
       inquire() {
         // 基础接口-综合查询
         this.post("/blackAndGrey/blackListInfos", this.params).then(res => {

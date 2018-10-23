@@ -1366,7 +1366,7 @@
           parentCode: this.checkData.workProvince,
         }).then(res => {
           if (res.statusCode == 200) {
-            this.hireProvincd = res.data;
+            this.hireProvincd = res.data.ereaInfos;
             this.checkData.workCounty = "";
             this.checkData.workCountyName = "";
             this.hireTown = "";
@@ -1624,7 +1624,7 @@
       this.mountedInf();
       // 省    
       this.post("/credit/queryProvince").then(res => {
-        this.hirecomAddress = res.data;
+        this.hirecomAddress = res.data.ereaInfos;
       });
       // 所属行业 
       this.post("/credit/industry").then(res => {
