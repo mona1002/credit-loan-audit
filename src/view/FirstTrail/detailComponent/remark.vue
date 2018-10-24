@@ -6,7 +6,7 @@
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">备注信息</span>
-          <div class="title_icon">
+          <div class="title_icon" v-if='btnShow'>
             <span @click.stop="add">
               <i class="title_icon_img addIcon"></i>
               <span class="title_icon_span">添加</span>
@@ -114,10 +114,7 @@
         changeRemarks: '',
         deletLayer: false,
         taskInWaitting: '',
-        applyId: '',
         userInf: '',
-        remarker: '',
-        remarkType: '',
         //添加的弹层
         dialogVisible: false,
         //是否有数据的弹层
@@ -135,29 +132,39 @@
         title: '',
       }
     },
+    props: {
+      applyId: {
+        default: '',
+        type: String,
+        required: true
+      },
+      btnShow: {
+        default: false,
+        type: Boolean
+      }
+    },
     mounted() {
       //一进入页面就发送请求
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting')); // 初审
-        this.applyId = this.taskInWaitting.applyId;
-        this.remarkType = '03';
-      } else if (this.judgeFlag.flag == '02') {
-        this.taskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting')); // 终审
-        this.applyId = this.taskInWaitting.applyId;
-        this.remarkType = '04';
+      if(this.judgeFlag ){//初审03，终审04
+        this.judgeFlag.flag == '01' ? this.remarkType = '03' :'';
+        this.judgeFlag.flag == '02' ? this.remarkType = '04' :'';
       }
       //获取当前登陆人的用户名
-      this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      this.remarker = this.userInf.userCode;
-      this.request(this.taskInWaitting.applyId);
+      this.remarker = JSON.parse(localStorage.getItem('userInf')).userCode;
+      this.request();
     },
     methods: {
-      request(param) {
+      request() {
         this.post("/applyRemark/getApplyRemarkList", {
-          'applyId': param
+          'applyId': this.applyId
         }).then(res => {
-          this.tableData = res.data;
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+          } else {
+            this.tableData = [];
+            this._error(res.msg)
+          }
         });
       },
       add() {
@@ -183,11 +190,7 @@
         }
       },
       delet() {
-        if (this.isChecked == '') {
-          this.title = '请选择一条记录！';
-        } else {
-          this.title = '您要删除该备注吗？';
-        }
+        this.isChecked == ''?  this.title = '请选择一条记录！': this.title = '您要删除该备注吗？';
         this.promptSure();
       },
       deletCancle() {
@@ -208,16 +211,10 @@
               .then(res => {
                 this.addSure = "确定";
                 if (res.statusCode == 200) {
-                  this.request(this.applyId);
-                  this.$message({
-                    message: "保存成功！",
-                    type: 'success'
-                  })
+                  this.request();
+                  this._succe('保存成功！')
                 } else {
-                  this.$message({
-                    message: "保存失败！",
-                    type: 'error'
-                  })
+                  this._error('保存失败！')
                 }
               });
           } else {
@@ -235,16 +232,10 @@
           })
           .then(res => {
             if (res.statusCode == 200) {
-              this.request(this.applyId);
-              this.$message({
-                message: "修改成功！",
-                type: 'success'
-              })
+              this._succe('修改成功！')
+              this.request();
             } else {
-              this.$message({
-                message: "修改失败！",
-                type: 'error'
-              })
+              this._error('修改失败！')
             }
           });
       },
@@ -263,25 +254,15 @@
           id: this.isChecked
         }).then(res => {
           if (res.statusCode == 200) {
-            this.request(this.applyId);
-            this.$message({
-              message: "删除成功",
-              type: 'success'
-            })
+            this.request();
+            this._succe('删除成功！')
           } else {
-            this.$message({
-              message: "删除失败",
-              type: 'error'
-            })
+            this._error('删除失败！')
           }
         });
       },
       handleCurrentChange(val) {
-        if (val == null) {
-          this.isChecked = '';
-        } else {
-          this.isChecked = val.id;
-        }
+        val == null? this.isChecked = '': this.isChecked = val.id;
       },
     },
   }

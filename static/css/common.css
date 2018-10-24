@@ -250,7 +250,8 @@ table {
 .CreditForm {
   overflow: auto;
   overflow-x: hidden;
-  min-width: 1665px;
+  min-width: 930px;
+  /* min-width: 1400px; */
 }
 
 .SP_middle {
@@ -402,4 +403,19 @@ table {
 
 .clearFloat {
   clear: both;
+}
+
+.AudioVisual_List .el-collapse-item__header {
+  position: relative;
+}
+
+  .AudioVisual_List .el-collapse-item__header .el-collapse-item__arrow {
+  position: absolute;
+  left: 10px;
+  top: 3px;
+  /* z-index: 1; */
+}
+
+.AudioVisual_List .el-icon-arrow-right:before{
+  content: url('../images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png');
 }

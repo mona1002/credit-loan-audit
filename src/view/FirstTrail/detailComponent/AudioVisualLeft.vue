@@ -13,28 +13,22 @@
         </span>
         <span>页数</span>
       </p>
-      <el-collapse accordion v-model="activeName">
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id,ind,item)">
+      <el-collapse accordion>
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind">
           <template slot="title">
             <p>
               <!-- 一级节点 -->
-              <span style="position:relative;">
-                <b class="NamParentNode"> {{item.arcName}}</b>
-                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:10px"
-                  v-show="opendImg[ind]">
-                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:10px"
-                  v-show="closedImg[ind]">
-              </span>
+              <span>{{item.arcName}} </span>
               <span>{{item.imageCount}}</span>
             </p>
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
-            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind,$event)">
-              <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
-                <span style="width:105px;marginLeft:20px;">{{item.arcName}}</span>
+            <p v-for="(items,inds) in  item.child" :key="inds" @click.stop="getImg(inds,items)">
+              <el-tooltip class="item" effect="dark" :content="items.arcName" placement="right-end">
+                <span style="width:105px;marginLeft:20px;">{{items.arcName}}</span>
               </el-tooltip>
-              <span>{{item.imageCount}}</span>
+              <span>{{items.imageCount}}</span>
             </p>
           </div>
         </el-collapse-item>
@@ -90,36 +84,30 @@
       <div class="posi_content">
         <el-collapse v-model="activeNames">
           <el-collapse-item title="本人进件列表" name="1">
-            <div>
-              <el-table :data="personal" border @dblclick.native="getParentList(currentRow.matchApplyId)"
-                @current-change="handleCurrentChange" style="width: 100%">
-                <el-table-column property="matchApplyCustName" label="客户名称">
-                </el-table-column>
-                <el-table-column property="matchApplySubNo" label="进件编号">
-                </el-table-column>
-                <el-table-column property="matchApplyDate" label="申请时间">
-                </el-table-column>
-                <el-table-column prop="matchApplyStateTxt" label="业务状态">
-                </el-table-column>
-              </el-table>
-            </div>
+            <el-table :data="personal" border height="350" @dblclick.native="getParentList(currentRow.matchApplyId)"
+              @current-change="handleCurrentChange">
+              <el-table-column property="matchApplyCustName" label="客户名称">
+              </el-table-column>
+              <el-table-column property="matchApplySubNo" label="进件编号">
+              </el-table-column>
+              <el-table-column property="matchApplyDate" label="申请时间">
+              </el-table-column>
+              <el-table-column prop="matchApplyStateTxt" label="业务状态">
+              </el-table-column>
+            </el-table>
           </el-collapse-item>
           <el-collapse-item title="内匹客户进件" name="2">
-            <div class="height_auto">
-              <el-table :data="others" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
-                style="width: 100%">
-                <el-table-column property="matchApplyCustName" label="客户名称">
-                </el-table-column>
-                <el-table-column property="matchApplySubNo" label="进件编号">
-                </el-table-column>
-                <el-table-column property="matchApplyDate" label="申请时间">
-                </el-table-column>
-                <el-table-column prop="matchApplyStateTxt" label="业务状态">
-                </el-table-column>
-              </el-table>
-            </div>
-            <div style="margin-top: 20px">
-            </div>
+            <el-table :data="others" border height="350" @dblclick.native="getParentList(currentRow.matchApplyId)"
+              @current-change="handleCurrentChange">
+              <el-table-column property="matchApplyCustName" label="客户名称">
+              </el-table-column>
+              <el-table-column property="matchApplySubNo" label="进件编号">
+              </el-table-column>
+              <el-table-column property="matchApplyDate" label="申请时间">
+              </el-table-column>
+              <el-table-column prop="matchApplyStateTxt" label="业务状态">
+              </el-table-column>
+            </el-table>
           </el-collapse-item>
         </el-collapse>
       </div>
@@ -136,6 +124,7 @@
         judgeFlag: '',
         opendImg: [],
         closedImg: [],
+        picType: '',
         imgBaseUrl: '',
         // localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
@@ -145,12 +134,11 @@
         SmallPicShow: false,
         CompareAlert: true,
         ListParent: [],
-        ListDetails: [],
+        // ListDetails: [],
         imgPath: [],
         imgPathDetail: [],
         // ----------------------------------
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
-        activeName: [],
         dataa: false,
         personal: [], // 匹配查询-个人
         others: [], // 匹配查询-他人
@@ -195,17 +183,8 @@
 
     methods: {
       mountedInf() {
-        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        // if (this.judgeFlag.flag == '01') {
-        //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-        // } else if (this.judgeFlag.flag == '02') {
-        //   this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        // } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        //   this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
-        // }
         // 恢复到初始状态
-        this.ListDetails = [];
-        this.activeName = [];
+        // this.ListDetails = [];
         this.pngAyyrs = [];
         this.pdfArrys = [];
         this.SmallmyPic = false;
@@ -214,18 +193,9 @@
         this.SmallPicShow = false; //缩略图
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
-        this.post("/productArchive/getProductArchiveParentList", {
-          // applyId: this.localInf.applyId
-          applyId: this.applyId,
-        }).then(res => {
+        this.get('/productArchive/productArchives/' + this.applyId).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
-            if (this.ListParent) {
-              for (var i = 0; i < this.ListParent.length; i++) {
-                this.opendImg[i] = true;
-                this.closedImg[i] = false;
-              }
-            }
             this.$parent.$data.loading = false;
           } else {
             this.$message.error(res.msg);
@@ -273,15 +243,15 @@
         });
       },
       getParentList(id) {
-        this.post("/productArchive/getProductArchiveParentList", {
-          applyId: id, //上面删除后 此处打开
-        }).then(res => {
+        // this.post("/productArchive/getProductArchiveParentList", {
+        //   applyId: id, //上面删除后 此处打开
+        // }).then(res => {
+        this.get('/productArchive/productArchives/' + id).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
             this.applyId = id;
             this.myPng = this.dataa = false;
-            this.activeName = [];
-            this.opendImg = [];//-----------------------------待更新
+            this.opendImg = []; //-----------------------------待更新
             this.custName = this.currentRow.matchApplyCustName;
             this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
             this.$emit('inputInf', this.custName, this.custmatchApplySubNo)
@@ -290,33 +260,9 @@
           }
         });
       },
-      getChildrenList(id, ind, item) {
-        if (this.opendImg[ind] == false) {
-          this.opendImg[ind] = true;
-          this.closedImg[ind] = false;
-        } else {
-          for (var i = 0; i < this.opendImg.length; i++) {
-            this.opendImg[i] = true;
-            this.closedImg[i] = false;
-          }
-          this.opendImg[ind] = false;
-          this.closedImg[ind] = true;
-        }
-        this.closeImg = ind;
-        this.openImg = ind
-        // 二级（子）节点
-        this.post("/productArchive/getProductArchiveChildList", {
-          // applyId: this.localInf.applyId
-          applyId: this.applyId,
-          pid: id
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.ListDetails = res.data;
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-      },
+      // getChildrenList(id, ind, item) {
+
+      // },
       smallPic(ev, ind) {
         this.smallPicInd = ind;
         this.showPage = ind + 1;
@@ -327,21 +273,24 @@
         this.SmallPicShow = false;
         this.showPage = 1;
       },
-      getImg(ind) {
-        this.pdfArrys = [];
-        this.pngAyyrs = [];
-        this.smallPicInd = 0;
-        this.showPage = 1;
-        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        if (this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length - 3) == 'pdf') {
-          this.pdfArrys = this.imgPath;
+      getImg(ind, item) {
+
+        this.picArrays = item.imagePaths;
+        this.picType = this.picArrays[0].imagePath.slice(-3);
+        if (this.picType == 'pdf') {
+          this.pdfArrys = this.picArrays;
           this.myPdf = true;
           this.myPng = false;
         } else {
+          this.pngAyyrs = this.picArrays;
           this.myPng = true;
           this.myPdf = false;
-          this.pngAyyrs = this.imgPath;
-        };
+        }
+        // this.pdfArrys = [];
+        // this.pngAyyrs = [];
+        this.smallPicInd = 0;
+        this.showPage = 1;
+        this.imgPath = this.picArrays[0].imagePath;
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -366,15 +315,26 @@
         this.SmallmyPic = false;
       },
       SmallpicAlert() {
-        this.SmallPicShow = true;
-        if (this.myPdf) { //显示pdf
+        // this.SmallPicShow = true;
+        // if (this.myPdf) { //显示pdf
+        //   this.SmallmyPdf = true;
+        //   this.SmallmyPic = false;
+        //   this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
+        // } else { //显示图片
+        //   this.SmallmyPic = true;
+        //   this.SmallmyPdf = false;
+        // }
+        if (this.picType == 'pdf') {
+          this.pdfArrys = this.picArrays;
           this.SmallmyPdf = true;
           this.SmallmyPic = false;
           this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
-        } else { //显示图片
-          this.SmallmyPic = true;
+        } else {
+          this.pngAyyrs = this.picArrays;
           this.SmallmyPdf = false;
+          this.SmallmyPic = true;
         }
+        this.SmallPicShow = true;
       },
       pre() {
         if (this.pngAyyrs.length != 0) {
@@ -612,6 +572,8 @@
   .posi_content {
     height: calc(100% - 40px);
     overflow: auto;
+    /* overflow-x: hidden; */
+    /* overflow: hidden; */
   }
 
 </style>

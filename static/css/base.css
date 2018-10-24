@@ -247,6 +247,7 @@
    background-image: url('../images/faqi.png')
  }
 
+ /* 提交 */
  .tijiao {
    background-image: url('../images/tijiao.png')
  }
@@ -275,18 +276,22 @@
    background-image: url('../images/check2x.png')
  }
 
+ /* 挂起 */
  .HangUpIcon {
    background-image: url('../images/guaqi.png')
  }
 
+ /* 回退 */
  .backIcon {
    background-image: url('../images/back.png')
  }
 
+ /* 拒绝 */
  .rejectIcon {
    background-image: url('../images/jujue.png')
  }
 
+ /* 放弃 */
  .giveUpIcon {
    background-image: url('../images/fangqi.png')
  }
@@ -303,6 +308,7 @@
    background-image: url('../images/bigdata.png')
  }
 
+ /* 编辑 */
  .editIcon {
    background-image: url('../images/change.png')
  }
@@ -378,21 +384,27 @@
  .Abody .height_auto .el-table {
    height: auto !important;
  }
+ .Abody .height_300 .el-table {
+  height: 300px !important;
+}
+
  /* 100% */
- .hundred_percent .el-table .el-table__body-wrapper{
-  height: auto !important;
-}
-.hundred_percent .el-table {
-  height: auto !important;
-}
+ .hundred_percent .el-table .el-table__body-wrapper {
+   height: auto !important;
+ }
+
+ .hundred_percent .el-table {
+   height: auto !important;
+ }
+
  /* 特殊表格宽度 */
 
  /* .Abody .el_table_500 .el-table {
    height: 500px !important;
  } */
  .Abody .el_table_100Percent .el-table {
-  height: 100% !important;
-}
+   height: 100% !important;
+ }
 
  /* 操作按钮 */
 
@@ -482,7 +494,8 @@
  /*.organManage */
 
  .Abody .el-dialog .el-form-item {
-   margin-bottom: 0px;
+   /* margin-bottom: 0px; */
+   margin-bottom: 3px;
  }
 
  .Abody .el-dialog .el-form-item .dropdown {
@@ -931,12 +944,16 @@
    height: 200px;
  }
 
+ .Height_240 .el-dialog .el-dialog__body {
+   height: 240px;
+ }
+
  .Height_300 .el-dialog .el-dialog__body {
    height: 300px;
  }
 
- .Height_240 .el-dialog .el-dialog__body {
-   height: 240px;
+ .Height_600 .el-dialog .el-dialog__body {
+   height: 600px;
  }
 
  .el-collapse-item__wrap {
@@ -944,6 +961,11 @@
    width: 100%;
  }
 
+ /*  */
+ body .el_form_item_height_35 .el-form-item{
+/* margin-bottom: 0 !important; */
+height: 35px;
+ }
  /* 弹窗里部分input必填项，部分展示项 */
 
  .alert_collapse_inputLabel label::before {
@@ -952,6 +974,15 @@
    margin-right: 4px;
  }
 
+ .require_red label::before {
+  content: "*";
+  color: #ff7676;
+  font-weight: 700;
+  font-size: 16px;
+  left: -4px;
+  top: 3px;
+  position: relative;
+}
  /* 弹窗全部为必填项 */
 
  .return_back .el-dialog .el-dialog__body label::before {

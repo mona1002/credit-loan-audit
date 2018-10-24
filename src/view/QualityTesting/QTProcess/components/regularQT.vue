@@ -298,7 +298,7 @@
           <table border="1" cellpadding='2' width='100%'>
             <tr>
               <th width='40px'> 序号</th>
-              <th width='290px'>核实类型 </th>
+              <th width='300px'>核实类型 </th>
               <th width='150px'>
                 <b class="required_Red"> * </b>核实结论</th>
               <th>备注</th>
@@ -469,7 +469,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">电话征信</span>
         </template>
-        <div class="CreditForm_CheckId">
+        <div>
           <ul>
             <li ref="tabOne" class="tab1Default" v-for="(val,index) in tabTitle" :key="index" @click="tabClick($event,index,val)"
               :class="{tabAct:tabIndex==index}">
@@ -771,7 +771,8 @@
             </el-table-column>
             <el-table-column label="质检日期" align="center" width="180">
               <template slot-scope='scope'>
-                <span>{{scope.row.insDate | dateFilter}}</span>
+                <!-- <span>{{scope.row.insDate}}</span> -->
+                <span>{{scope.row.insDateStr | dateFilter}}</span>
               </template>
             </el-table-column>
           </el-table>
@@ -1003,12 +1004,13 @@
         userInf: '',
         SaveInfParams: '',
         URL: '', //音频路径
-        systermTime: Number,
+        systermTime: Number, //系统时间
         submitShow: false, //提交弹框
         loadsitu: false,
         loadSub: false,
         adbtn: '确定',
         ReconSubmit: '提交',
+        checkTypeParams: '',
         currentRow: null,
         addId: '',
         ind: 0,
@@ -1371,7 +1373,11 @@
         this.ReconsiderShow = true;
       },
       referPort() { // 质检页面查询接口
-        this.get("/insConclusion/queryInsConclusionObj?applyId=" + this.propQTconclution.applyId + '&' + Math.random())
+        // this.get("/insConclusion/queryInsConclusionObj?applyId=" + this.propQTconclution.applyId + '&' + Math.random())
+        this.get("/insConclusion/queryInsConclusionObj", {
+            applyId: this.propQTconclution.applyId,
+            // checkType: this.checkTypeParams, //01专员，02主管
+          })
           .then(res => {
             if (res.statusCode == 200) {
               // 除基本信息以外，专员获取都为空，applyid要一个个赋值进去
@@ -1474,7 +1480,7 @@
               }
               this.WechatData(0); //客户本人 微信支付宝赋值为客户本人AlipayCus
               // this.addQTResult(); //进页面默认添加一条
-              this.Social(); //社保公积金接口
+              // this.Social(); //社保公积金接口
             } else {
               this.$message.error(res.msg);
             }
@@ -1535,6 +1541,7 @@
             insMemberCode: this.userInf.userCode, // 操作人员-质检code            
             insMemberName: this.userInf.userName, // 操作人员-质检员name
             insDate: this.systermTime, // 质检日期
+            insDateStr: this.systermTime, // 质检日期-用于解决提交时转换时出现的闪现时间戳问题
             checkType: '01', // 初终检标志01:初检，02：终检 ，终审点击保存的时候全部改为02（包括插过来的初审数据的CheckType）
             instaskType: this.instaskType, //任务类型（00:常规质检，01:专项质检）
             // id: this.addId, // 专员或主管首次保存或提交不传-checktype=01专员：新添加的都  CheckType=01主管：保存提交的时候id值不清空（不能新添加）
@@ -1556,6 +1563,7 @@
               insMemberCode: this.userInf.userCode, // 操作人员-质检code            
               insMemberName: this.userInf.userName, // 操作人员-质检员name
               insDate: this.systermTime, // 质检日期
+              insDateStr: this.systermTime, // 质检日期-用于解决提交时转换时出现的闪现时间戳问题
               // checkType: this.propQTconclution.pageType == 'checkApp_apply' ? '01' : '02', // 初终检标志01:初检，02：终检
               checkType: '01', //  初终检标志01:初检，02：终检 ，终审点击保存的时候全部改为02（包括插过来的初审数据的CheckType）
               instaskType: this.instaskType, //任务类型（00:常规质检，01:专项质检）
@@ -1658,7 +1666,7 @@
         this.checkResultCount08 = 0;
         this.checkResultCount09 = 0;
         this.checkResultCount10 = 0;
-        if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
+        if (type == '提交' || this.propQTconclution.pageType == 'checkApp_check_manager') { //提交 加校验，保存无需校验必填---常规质检,质检主管保存加-（质检结论）校验
           // 保存、提交质检结论都校验
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
@@ -1778,9 +1786,11 @@
           // 循环质检结论list 改变对应的值-不能跟上面的循环校验一起，校验不过不用修改
           for (var i = 0; i < this.insConclusion.length; i++) {
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
-            this.propQTconclution.pageType == 'checkApp_check_manager' && this.insConclusion[i].checkType == '01' ?
-              this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
-            this.propQTconclution.pageType == 'checkApp_check_manager' ? this.insConclusion[i].checkType = '02' : this.insConclusion[i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
+            // this.propQTconclution.pageType == 'checkApp_check_manager' && this.insConclusion[i].checkType == '01' ?
+            //   this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
+            this.propQTconclution.pageType == 'checkApp_check_manager' ? this.insConclusion[i].checkType = '02' : this.insConclusion[
+              i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
+            this.insConclusion[i].insDate = this.systermTime; //质检主管，专员，质检结论入参-质检日期重置为系统时间的毫秒数（返参为2019-8-28格式）
           }
           // insResultTxt  更改微信支付宝显示汉字字段
           for (var k = 0; k < this.AlipayConcat.length; k++) {
@@ -2057,44 +2067,40 @@
       },
       //大数据风控
       RiskControl() {
-        this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-          applyId: this.propQTconclution.applyId
-        }).then(res => {
-          this.$router.push({
-            name: 'PneCtrl',
-            params: {
-              newOne: true,
-            }
-          });
-        });
-      },
-      //社保/公积金
-      Social() {
-        this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
-          certCode: this.baseInfo.certCode,
-          custName: this.baseInfo.custName
-        }).then(res => {
-          if (res.obj == null || res.obj == '') {
-            this.social = "(未授权)";
-          } else if (res.obj) {
-            this.social = "(已授权)";
+        this.$router.push({
+          name: 'PneCtrl',
+          params: {
+            newOne: true,
           }
         });
       },
-      roSocialSecurity() { //社保/公积金-授权显示
-        if (this.social == "(未授权)") {
-          this.$confirm('客户社保公积金未授权！', '提示', {
-            confirmButtonText: '确定',
-            type: 'warning',
-            cancelButtonText: '取消',
-            showCancelButton: true
-          }).then(() => {}).catch(() => {});
-        } else if (this.social == "(已授权)") {
-          this.$router.push({
-            path: '/SocialSe'
-          });
-        }
-      },
+      //社保/公积金
+      // Social() {
+      //   this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
+      //     certCode: this.baseInfo.certCode,
+      //     custName: this.baseInfo.custName
+      //   }).then(res => {
+      //     if (res.obj == null || res.obj == '') {
+      //       this.social = "(未授权)";
+      //     } else if (res.obj) {
+      //       this.social = "(已授权)";
+      //     }
+      //   });
+      // },
+      // roSocialSecurity() { //社保/公积金-授权显示
+      //   if (this.social == "(未授权)") {
+      //     this.$confirm('客户社保公积金未授权！', '提示', {
+      //       confirmButtonText: '确定',
+      //       type: 'warning',
+      //       cancelButtonText: '取消',
+      //       showCancelButton: true
+      //     }).then(() => {}).catch(() => {});
+      //   } else if (this.social == "(已授权)") {
+      //     this.$router.push({
+      //       path: '/SocialSe'
+      //     });
+      //   }
+      // },
       areaAndComplianceBtn() {
         this.onlyCheck();
         this.ReApply = true; //初终审复议申请信息
@@ -2125,11 +2131,11 @@
       showdiffer() {
         // ----------------------角色------------------------------
         if (this.propQTconclution.pageType == 'checkApp_apply') { //专员-编辑  √
+          this.checkTypeParams = '01' //查询质检页面入参 ：01专员，02主管
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             this.instaskType = '00';
             this.QTConclutionBtn = true;
-          } else
-          if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
+          } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.instaskType = '01';
             this.QTresult = [];
             if (this.propQTconclution.tastwaitingPass.instaskType == '01') { //专项   
@@ -2144,8 +2150,10 @@
             this.regularAndSpecial();
           }
         } else if (this.propQTconclution.pageType == 'checkApp_check_manager') { //主管-编辑 √
+          this.checkTypeParams = '02'; //查询质检页面入参 ：01专员，02主管
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             this.submitBtn = false; //提交
+            this.QTConclutionBtn = true; //质检结论添加、删除按钮
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.QTresult = [];
             if (this.propQTconclution.tastwaitingPass.instaskType == '01') { //专项   
@@ -2153,6 +2161,7 @@
             } else if (this.propQTconclution.tastwaitingPass.instaskType == '02') { // 纵向
               this.QTresult = this.QTresultS;
             }
+            this.QTConclutionBtn = true; //质检结论添加、删除按钮            
             this.Special();
           } else if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') {
             this.regularAndSpecial();
@@ -2204,10 +2213,10 @@
     mounted() {
       // console.log('propQTconclution:', this.propQTconclution)
       this.URL = baseurl.imgBaseUrl;
-      this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      this.referPort(); //质检查询页面
+      this.getSystermTime();
       this.showdiffer();
+      this.referPort(); //质检查询页面
     }
   }
 

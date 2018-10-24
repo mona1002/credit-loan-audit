@@ -388,8 +388,19 @@
           this.nodeName = "借款台账";
         }else if (route.path == '/brrLedgerDetail') { // 定时任务
           this.nodeName = "借款台账-申请信息";
+        } else if (route.path == '/greyLIst') { // 灰名单
+          this.nodeName = "灰名单查询";
+        }  else if (route.path == '/blackList') { // 黑名单库
+          this.nodeName = "黑名单库";
+        }  else if (route.path == '/blackListOutApply') { // 黑名单转出申请
+          this.nodeName = "黑名单转出申请";
+        }  else if (route.path == '/blackListOutApr') { // 黑名单转出审批
+          this.nodeName = "黑名单转出审批";
+        }  else if (route.path == '/blackListToApply') { // 黑名单转入申请
+          this.nodeName = "黑名单转入申请";
+        }  else if (route.path == '/blackListToApr') { // 黑名单转入审批
+          this.nodeName = "黑名单转入审批";
         } 
-        
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
           name: this.nodeName,
@@ -432,6 +443,12 @@
         view.name == '直销人员查询' ? this.Routes[2].closed = false : '';
         view.name == '申请台账' ? this.Routes[3].closed = false : '';
         view.name == '借款台账' ? this.Routes[4].closed = false : '';
+        view.name == '灰名单查询' ? this.Routes[50].closed = false : '';
+        view.name == '黑名单库' ? this.Routes[51].closed = false : '';
+        view.name == '黑名单转出申请' ? this.Routes[52].closed = false : '';
+        view.name == '黑名单转出审批' ? this.Routes[53].closed = false : '';
+        view.name == '黑名单转入申请' ? this.Routes[54].closed = false : '';
+        view.name == '黑名单转入审批' ? this.Routes[55].closed = false : '';
         this.$store.dispatch('delVisitedViews', view).then((views) => {
           if (this.isActive(view)) {
             const latestView = views.slice(-1)[0]

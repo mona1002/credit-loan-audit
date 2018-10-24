@@ -32,7 +32,7 @@
             <keep-alive v-if="Routes.closed">
               <AudioVisualLeft v-if=" this.tabContent1==0" msg="FspLone" :list='tastwaitingPass' v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
-            <remarkDetail v-if=" this.tabContent1==1" :applyId='tastwaitingPass.applyId' ></remarkDetail>
+            <remark v-if=" this.tabContent1==1" :applyId='tastwaitingPass.applyId' ></remark>
             <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.applyId'></capplicationInformationDetail>
@@ -72,7 +72,7 @@
           <keep-alive v-if="Routes.closed">
             <AudioVisual v-if=" this.tabContent2==0"  :applyId='tastwaitingPass.applyId'></AudioVisual>
           </keep-alive>
-          <remark v-if=" this.tabContent2==1"></remark>
+          <remark v-if=" this.tabContent2==1"  :btnShow='true' :applyId='tastwaitingPass.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
           <!-- ref="applicationInf" -->
           <keep-alive v-if="Routes.closed">
@@ -119,7 +119,6 @@
   import AudioVisual from "../FirstTrail/detailComponent/AudioVisual.vue";
   import AudioVisualLeft from '../FirstTrail/detailComponent/AudioVisualLeft';
   import remark from "../FirstTrail/detailComponent/remark.vue"; //备注信息-右-编辑
-  import remarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息（左）
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息（左+右）
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料（左+右）
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信（左右）
@@ -329,7 +328,6 @@
       cborrowerInformationDetail,
       capplicationInformationDetail,
       remark,
-      remarkDetail,
       processTrajectory,
       aAntiApplyInf,
       InternalMatch,

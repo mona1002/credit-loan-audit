@@ -16,31 +16,25 @@
         <span>上传日期</span>
       </p>
       <el-collapse accordion>
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id,ind,item)">
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind">
           <template slot="title">
             <p>
               <!-- 一级节点 -->
-              <span style="position:relative;">
-                <b class="NamParentNode"> {{item.arcName}}</b>
-                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:10px"
-                  v-show="opendImg[ind]">
-                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:10px"
-                  v-show="closedImg[ind]">
-              </span>
+              <span>{{item.arcName}} </span>
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
-              <span>{{item.uploadDate}}</span>
+              <span>{{item.uploadDate |dateFilter(true)}}</span>
             </p>
           </template>
           <div class="list_title_div">
-            <!--  二级 内容 节点 -->
-            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
-              <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
-                <span style="width:135px;paddingLeft:20px;">{{item.arcName}}</span>
+            <!--  二级 内容 节点  -->
+            <p v-for="(items,inds) in item.child" :key="inds" @click.stop="getImg(inds,items)">
+              <el-tooltip class="item" effect="dark" :content="items.arcName" placement="right-end">
+                <span style="width:135px;paddingLeft:20px;">{{items.arcName}}</span>
               </el-tooltip>
-              <span>{{item.arcNum}}</span>
-              <span>{{item.imageCount}}</span>
-              <span v-bind:title="item.uploadDate">{{item.uploadDate}}</span>
+              <span>{{items.arcNum}}</span>
+              <span>{{items.imageCount}}</span>
+              <span v-bind:title="items.uploadDate">{{items.uploadDate|dateFilter(true)}}</span>
             </p>
           </div>
         </el-collapse-item>
@@ -73,7 +67,7 @@
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
       <div class="small_pic_content">
-        <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
+        <figure v-for="(val,index) in pngAyyrs" :key="index" v-show="SmallmyPic" class="small_pic_figure">
           <div class="Small_pic">
             <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
           </div>
@@ -101,7 +95,7 @@
         litimgIndex: -1,
         litimgInd: -1,
         perfBtn: false, //功能按钮
-        // judgeFlag: {},
+        picType: '',
         opendImg: [],
         closedImg: [],
         showListDiv: true,
@@ -111,8 +105,8 @@
         SmallPicShow: false,
         CompareAlert: true,
         ListParent: [],
-        ListDetails: [],
         imgPath: [],
+        picArrays: [],
         pdfArrys: [],
         pngAyyrs: [],
         myPng: false,
@@ -126,99 +120,41 @@
     },
     methods: {
       mountedInf() {
-        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        // if (this.judgeFlag.flag == '01') {
-        //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-        // } else if (this.judgeFlag.flag == '02') {
-        //   this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        // } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        //   this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈
-        // } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-        //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
-        // } else if (this.judgeFlag.flag == '14' || this.judgeFlag.flag == '15') {
-        //   this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) // 任务管理
-        // }
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
-        this.post("/productArchive/getProductArchiveParentList", {
-          applyId: this.applyId
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.ListParent = res.data;
-            if (this.ListParent) {
-              var MDate = null;
-              for (var i = 0; i < this.ListParent.length; i++) {
-                var MDate = new Date(this.ListParent[i].uploadDate);
-                this.ListParent[i].uploadDate = this.comput(MDate)
-              }
-              for (var i = 0; i < this.ListParent.length; i++) {
-                this.opendImg[i] = true;
-                this.closedImg[i] = false;
-              }
+        this.get('/productArchive/productArchives/' + this.applyId)
+          .then(res => {
+            if (res.statusCode == 200) {
+              this.ListParent = res.data;
+              this.$parent.$data.loading = false;
+            } else {
+              this.$parent.$data.loading = false;
+              this.$message.error(res.msg);
             }
-            this.$parent.$data.loading = false;
-          } else {
-            this.$parent.$data.loading = false;
-            this.$message.error(res.msg);
-          }
-        });
+          });
       },
       PerBtn() {
         this.perfBtn = true;
-      },
-      getChildrenList(id, ind, item) {
-        // 一级节点
-        if (this.opendImg[ind] == false) {
-          this.opendImg[ind] = true;
-          this.closedImg[ind] = false;
-        } else {
-          for (var i = 0; i < this.opendImg.length; i++) {
-            this.opendImg[i] = true;
-            this.closedImg[i] = false;
-          }
-          this.opendImg[ind] = false;
-          this.closedImg[ind] = true;
-        }
-        this.closeImg = ind;
-        this.openImg = ind
-        // 二级（子）节点
-        this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.applyId,
-          pid: id
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.ListDetails = res.data;
-            if (this.ListDetails) {
-              var MChiDate = null;
-              for (var i = 0; i < this.ListDetails.length; i++) {
-                var MChiDate = new Date(this.ListDetails[i].uploadDate);
-                this.ListDetails[i].uploadDate = this.comput(MChiDate)
-              }
-            }
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
       },
       pdfClose() {
         this.SmallPicShow = false;
         this.showPage = 1;
       },
-      getImg(ind) {
-        this.pdfArrys = [];
-        this.pngAyyrs = [];
-        this.smallPicInd = 0;
-        this.showPage = 1;
-        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        if (this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length - 3) == 'pdf') {
-          this.pdfArrys = this.imgPath;
+      getImg(ind, item) {
+        this.picArrays = item.imagePaths;
+        this.picType = this.picArrays[0].imagePath.slice(-3);
+        if (this.picType == 'pdf') {
+          this.pdfArrys = this.picArrays;
           this.myPdf = true;
           this.myPng = false;
         } else {
+          this.pngAyyrs = this.picArrays;
           this.myPng = true;
           this.myPdf = false;
-          this.pngAyyrs = this.imgPath;
-        };
+        }
+        this.smallPicInd = 0;
+        this.showPage = 1;
+        this.imgPath = this.picArrays[0].imagePath;
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -243,15 +179,17 @@
         this.SmallmyPic = false;
       },
       SmallpicAlert() {
-        this.SmallPicShow = true;
-        if (this.myPdf) { //显示pdf
+        if (this.picType == 'pdf') {
+          this.pdfArrys = this.picArrays;
           this.SmallmyPdf = true;
           this.SmallmyPic = false;
-          this.pdfTitle = this.pdfArrys[0].arcSubType;
-        } else { //显示图片
-          this.SmallmyPic = true;
+          this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
+        } else {
+          this.pngAyyrs = this.picArrays;
           this.SmallmyPdf = false;
+          this.SmallmyPic = true;
         }
+        this.SmallPicShow = true;
       },
       pre() {
         if (this.pngAyyrs.length != 0) {
@@ -350,10 +288,6 @@
           }
         })
       },
-      comput(val) {
-        val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + (val.toString().split(' ')[4]);
-        return val;
-      },
       changeSmallPicCss(ind) {
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
           this.$refs.small_pic_ref[i].style.opacity = 1;
@@ -422,10 +356,10 @@
       },
     },
     props: {
-      applyId:{
-        default:'',
-        required:true,
-        type:String
+      applyId: {
+        default: '',
+        required: true,
+        type: String
       }
     },
     mounted() {

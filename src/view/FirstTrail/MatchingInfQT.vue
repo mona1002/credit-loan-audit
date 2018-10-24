@@ -35,7 +35,7 @@
             <keep-alive v-if="Routes.closed">
               <AudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" :list='list' v-on:CompareShow="compBtnS" :comBtn='false'></AudioVisualLeft>
             </keep-alive>
-            <remarkDetail v-if=" this.tabContent1==1" :applyId='tastwaitingPass.ApplyId'></remarkDetail>
+            <remark v-if=" this.tabContent1==1" :applyId='tastwaitingPass.ApplyId'></remark>
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
             <keep-alive v-if="Routes.closed">
               <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.ApplyId'>申请信息</applicationInformationDetail>
@@ -103,7 +103,7 @@
           <keep-alive v-if="Routes.closed">
             <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.ApplyId'></AudioVisual>
           </keep-alive>
-          <remarkDetail v-if=" this.tabContent2==1" :applyId='tastwaitingPass.ApplyId'></remarkDetail>
+          <remark v-if=" this.tabContent2==1" :applyId='tastwaitingPass.ApplyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
           <keep-alive v-if="Routes.closed">
             <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.ApplyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
@@ -182,7 +182,7 @@
   import applicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import aAprovalConclusion from "../AntiFraud/components/aAprovalConclusion.vue"; //信审审批结论轨迹
-  import remarkDetail from "./checkComponent/remarkDetail.vue"; //备注信息
+  import remark from "./detailComponent/remark.vue"; //备注信息
   import creditInvestigation from "./detailComponent/creditInvestigation.vue"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
@@ -485,7 +485,6 @@
         this.$set(this.list, 'applyId', this.tastwaitingPass.ApplyId); //将matchApplyId 赋值给 入参applyId
         this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
         this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
-        // console.log(this.tastwaitingPass)
       },
     },
     mounted() {
@@ -503,7 +502,7 @@
       RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息
       aAprovalConclusion, //信审审批结论归结
-      remarkDetail, // 备注信息
+      remark, // 备注信息
       creditInvestigation, //实地征信
       aAntiApplyInf, //反欺诈结论
       InternalMatch,

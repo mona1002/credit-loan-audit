@@ -472,6 +472,7 @@
         appOrgId: '', //进件ID
         //审批
         creditScore: '', // 单独处理的评分
+        loanAmt: null, //审批金额（输入批准金额是校验）
         verIncome: '', // 核实收入
         ploanAmt: '', // 批准金额
         ploanTerm: '', // 批准期限
@@ -509,6 +510,7 @@
         shenpiLoading: false,
         shenpiFont: '提交',
         RtaskInWaitting: '',
+        debtRate: Number, //产品负债率
       }
     },
     props: {
@@ -558,38 +560,40 @@
         }).then(res => {
           if (res.statusCode == '200') {
             this.datas = res.data;
-            this.datas.eachTermAmt = this.formatNumber(this.datas.eachTermAmt, 2, 0);
-            this.datas.loanAmt = this.formatNumber(this.datas.loanAmt, 2, 0);
+            this.loanAmt = res.data.loanAmt;
+            this.datas.eachTermAmt = this._formatNumber(this.datas.eachTermAmt);
+            this.datas.loanAmt = this._formatNumber(this.datas.loanAmt);
+
           }
         })
       },
       //保留两位小数 整数千分位
-      formatNumber(num, cent, isThousand) {
-        num = num.toString().replace(/\$|\,/g, '');
-        // 检查传入数值为数值类型
-        if (isNaN(num))
-          num = "0";
-        // 获取符号(正/负数)
-        let sign = (num == (num = Math.abs(num)));
-        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
-        let cents = num % Math.pow(10, cent); // 求出小数位数值
-        num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
-        cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-        // 补足小数位到指定的位数
-        while (cents.length < cent)
-          cents = "0" + cents;
-        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
-          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-        if (cent > 0) {
-          if (sign == true) {
-            return (((sign) ? '' : '-') + num + '.' + cents);
-          } else if (sign == false) {
-            return '0.00'
-          }
-        } else {
-          return (((sign) ? '' : '-') + num);
-        }
-      },
+      // formatNumber(num, cent, isThousand) {
+      //   num = num.toString().replace(/\$|\,/g, '');
+      //   // 检查传入数值为数值类型
+      //   if (isNaN(num))
+      //     num = "0";
+      //   // 获取符号(正/负数)
+      //   let sign = (num == (num = Math.abs(num)));
+      //   num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
+      //   let cents = num % Math.pow(10, cent); // 求出小数位数值
+      //   num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
+      //   cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
+      //   // 补足小数位到指定的位数
+      //   while (cents.length < cent)
+      //     cents = "0" + cents;
+      //   for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+      //     num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+      //   if (cent > 0) {
+      //     if (sign == true) {
+      //       return (((sign) ? '' : '-') + num + '.' + cents);
+      //     } else if (sign == false) {
+      //       return '0.00'
+      //     }
+      //   } else {
+      //     return (((sign) ? '' : '-') + num);
+      //   }
+      // },
       //回退:back、拒绝:refuse
       coverFn(flag) {
         switch (flag) {
@@ -661,16 +665,17 @@
             this.proId = res.data.proId; //批准产品Id
             this.maxAmounnt = res.data.maxAmounnt;
             this.minAmount = res.data.minAmount;
+            this.debtRate = res.data.debtRate; //产品负债率
             // 核实收入
-            res.data.verIncome || res.data.verIncome == 0 ? this.verIncome = this.formatNumber(res.data.verIncome,
-              2, 0) : this.verIncozme = res.data.verIncome;
+            res.data.verIncome || res.data.verIncome == 0 ? this.verIncome = this._formatNumber(res.data.verIncome) :
+              this.verIncozme = res.data.verIncome;
             // 批准金额
-            res.data.ploanAmt || res.data.ploanAmt == 0 ? this.ploanAmt = this.formatNumber(res.data.ploanAmt, 2, 0) :
+            res.data.ploanAmt || res.data.ploanAmt == 0 ? this.ploanAmt = this._formatNumber(res.data.ploanAmt) :
               this.ploanAmt = res.data.ploanAmt;
             //审批结论数据
             //审批倍数
-            res.data.appmult || res.data.appmult == 0 ? this.caculData.appmult = this.formatNumber(res.data.appmult,
-              2, 0) : '';
+            res.data.appmult || res.data.appmult == 0 ? this.caculData.appmult = this._formatNumber(res.data.appmult) :
+              '';
             //内部负债率
             res.data.inteDebitrate || res.data.inteDebitrate == 0 ? this.caculData.inteDebitrate = (res.data.inteDebitrate *
               100).toFixed(2) + "%" : '';
@@ -678,8 +683,9 @@
             res.data.totalRate || res.data.totalRate == 0 ? this.caculData.totalRate = (res.data.totalRate * 100).toFixed(
               2) + "%" : '';
             //月还款额
-            res.data.eachTermamt || res.data.eachTermamt == 0 ? this.caculData.eachTermamt = this.formatNumber(res.data
-              .eachTermamt, 2, 0) : '';
+            res.data.eachTermamt || res.data.eachTermamt == 0 ? this.caculData.eachTermamt = this._formatNumber(res
+              .data
+              .eachTermamt) : '';
             //意见说明
             this.appConclusion = res.data.appConclusion;
             this.ploanTerms = res.data.returnList; //批准期限月下拉
@@ -693,41 +699,11 @@
                 } = item);
               }
             }
-            // }
-            // 批准产品
-            // if (res.data.proId) {
-            //   this.proId = res.data.proId;
-            //   for (var i = 0; i < this.products.length; i++) {
-            //     if (res.data.proId == this.products[i].id) {
-            //       // this.proName = this.products[i].proName;
-            //       // this.maxAmounnt = this.products[i].maxAmounnt;
-            //       // this.minAmount = this.products[i].minAmount;
-            //     }
-            //   };
-            //批准期限[月]的列表
-            // this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
-            // this.post('/credit/ploanTermByPro', {
-            //   proId: res.data.proId,
-            //   applyId: this.applyId
-            // }).then(res => {
-            //   if (res.statusCode == '200') {
-            //     this.ploanTerms = res.data;
-            //     // 审批信息计算入参
-            //     for (let k of this.ploanTerms) {
-            //       if (this.ploanTerm == k.appDuration) {
-            //         this.synthesisRateM = k.synthesisRateM; // 综合费率
-            //         this.loanRateYr = k.loanRateYr; // 借款利率
-            //         this.repayWay = k.repayWay; // 还款方式  
-            //         break;
-            //       }
-            //     }
-            //   }
-
-            // });
           } else {
             this.ploanTerm = ''; //批准期限[月]
             this.proName = ''; //批准产品
             this.proId = ''; //批准产品Id
+            this.debtRate = ''; //产品负债率
             this.maxAmounnt = '';
             this.minAmount = '';
             this.loanRateYr = '';
@@ -786,7 +762,7 @@
         //按钮加“加载中”
         this.shenpiLoading = true;
         this.shenpiFont = '提交中';
-        var reg = /,/;
+        var reg = /,/g;
         this.post('/creauditOpinion/add', {
           applyId: this.applyId,
           auditType: '02',
@@ -812,8 +788,7 @@
           applyCustId: this.applyCustId, //申请客户ID（申请登记-个人信息）
           applyConclusion: this.applyConclusion, //申请结论（00-通过）
           ploanOperId: '', // 批准人员
-          creditDebitRate: (this.caculData.creditDebitRate == 0 || this.caculData.creditDebitRate == '' || !this.caculData
-            .creditDebitRate) ? 0 : this.caculData.creditDebitRate.replace("%", "") / 100, // 信用负债率
+          creditDebitRate: this.caculData.creditDebitRate, // 信用负债率
           approvalFlag: '0', // 终审通过标志  0 未
           ploanDate: '', // 批准日期
           auditDate: '', // 批准时间
@@ -848,39 +823,43 @@
       },
       // 月核实收入[元]
       moneyBlur: function (val, flag) {
+        val || val == 0 ? val = val.toString().replace(/,/g, '') : '';
         switch (flag) {
           case 'verIncome':
-            if (isNaN(Number(this.verIncome)) || this.verIncome <= 0 || this.verIncome == '') {
+            if (isNaN(Number(val)) || val <= 0 || val == '') {
               this.verIncome = '1.00';
-            } else if (this.verIncome > 0) {
-              this.verIncome = this.formatNumber(this.verIncome, 2, 0);
+            } else if (val > 0) {
+              this.verIncome = this._formatNumber(this.verIncome);
             }
             this.calculateByAuditInfo();
             break;
           case 'ploanAmt':
-            if (this.ploanAmt * 1 > this.maxAmounnt) {
+            if (val * 1 > this.maxAmounnt) {
               this.$message({
                 message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
                 type: 'warning'
               });
               this.ploanAmt = '';
+              return
             };
-            if (this.ploanAmt * 1 < this.minAmount) {
+            if (val * 1 < this.minAmount) {
               this.$message({
                 message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
                 type: 'warning'
               });
               this.ploanAmt = '';
+              return
             };
             // 大于申请金额
-            if (this.ploanAmt * 1 > this.datas.loanAmt) {
-              this.$message({
-                message: '此金额不能大于申请金额,请重新输入!',
-                type: 'warning'
-              });
-              this.ploanAmt = '';
-            };
-            this.ploanAmt = this.formatNumber(this.ploanAmt, 2, 0);
+            // if (val * 1 > this.loanAmt) {
+            //   this.$message({
+            //     message: '此金额不能大于申请金额,请重新输入!',
+            //     type: 'warning'
+            //   });
+            //   this.ploanAmt = '';
+            //   return
+            // };
+            this.ploanAmt = this._formatNumber(this.ploanAmt);
             this.calculateByAuditInfo();
             break;
         }
@@ -899,13 +878,13 @@
       },
       // 计算审批结论数据
       calculateByAuditInfo() {
-        var reg = /,/;
+        var reg = /,/g;
         this.post('/creauditOpinion/calculateByAuditInfo', {
           applyId: this.applyId, //申请单ID
           proId: this.proId, //产品ID
           ploanTerm: this.ploanTerm, //批准期限
-          ploanAmt: this.ploanAmt.replace(reg, '') * 1, //批准金额[元]
-          verIncome: this.verIncome.replace(reg, '') * 1, //核实收入[元]
+          ploanAmt: this.ploanAmt || this.ploanAmt == 0 ? this.ploanAmt.replace(reg, '') * 1 : '', //批准金额[元]
+          verIncome: this.verIncome || this.verIncome == 0 ? this.verIncome.replace(reg, '') * 1 : '', //核实收入[元]
           eachTermamt: this.datas.eachTermAmt.replace(reg, '') * 1, //每期还款额[元]
           repayWay: this.repayWay, // 还款方式
           synthesisRateM: this.synthesisRateM, // 综合费率 
@@ -914,8 +893,13 @@
           // 审批结论数据
           if (res.statusCode == '200') {
             this.caculData = res.data;
-            this.caculData.appmult = this.formatNumber(this.caculData.appmult, 2, 0); //审批倍数
-            this.caculData.eachTermamt = this.formatNumber(this.caculData.eachTermamt, 2, 0); //月还款额
+             if (res.data.totalRate * 100 > this.debtRate || res.data.inteDebitrate * 100 > this.debtRate) { //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
+              this.ploanAmt = '' //批准金额
+              this._error('内部负债率/总负债率超过该产品对应的最大负债率！')
+              return
+            }
+            this.caculData.appmult = this._formatNumber(this.caculData.appmult); //审批倍数
+            this.caculData.eachTermamt = this._formatNumber(this.caculData.eachTermamt); //月还款额
             this.caculData.inteDebitrate = (this.caculData.inteDebitrate * 100).toFixed(2) + "%"; //内部负债率
             this.caculData.totalRate = (this.caculData.totalRate * 100).toFixed(2) + "%"; //总负债率
           } else {
@@ -1150,16 +1134,16 @@
       },
       //大数据风控
       tobigData() {
-        this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-          applyId: this.applyId
-        }).then(res => {
-          this.$router.push({
-            name: 'PneCtrl',
-            params: {
-              newOne: true,
-            }
-          });
+        // this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+        //   applyId: this.applyId
+        // }).then(res => {
+        this.$router.push({
+          name: 'PneCtrl',
+          params: {
+            newOne: true,
+          }
         });
+        // });
       },
       del() {
         this.$store.dispatch('delVisitedViews', {
@@ -1174,23 +1158,6 @@
         })
       }
     },
-    watch: {
-      //审批 计算 审批倍数 等
-      // ploanTerm: function () {
-      //   // 计算 审批记录数据
-      //   if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
-      //     this.repayWay && this.synthesisRateM && this.loanRateYr) {
-      //     this.calculateByAuditInfo();
-      //   }
-      // },
-      // 产品 id
-      // proId: function () {
-      //   //月核实收入+产品id+批准期限+批准金额[元]
-      //   if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 &&
-      //     this.repayWay && this.synthesisRateM && this.loanRateYr)
-      //     this.calculateByAuditInfo();
-      // },
-    }
   }
 
 </script>

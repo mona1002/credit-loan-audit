@@ -32,7 +32,7 @@
             <keep-alive v-if="Routes.closed">
               <AudioVisualLeft v-if=" this.tabContent1==0" :list='tastwaitingPass' msg="spLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
-            <remarkDetail v-if=" this.tabContent1==1" :applyId='tastwaitingPass.applyId'></remarkDetail>
+            <remark v-if=" this.tabContent1==1" :applyId='tastwaitingPass.applyId'></remark>
             <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.applyId'></capplicationInformationDetail>
@@ -71,7 +71,7 @@
           <keep-alive v-if="Routes.closed">
             <AudioVisual :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0"> </AudioVisual>
           </keep-alive>
-          <remark v-if=" this.tabContent2==1"></remark>
+          <remark v-if=" this.tabContent2==1" :btnShow='true' :applyId='tastwaitingPass.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
           <keep-alive v-if="Routes.closed">
             <!--  ref="applicationInf" -->
@@ -80,7 +80,7 @@
           </keep-alive>
           <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
           <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull" :addBtn="true"></PhoneCredit>
-          <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
+          <CreditForm  v-if=" this.tabContent2==6"></CreditForm>
           <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
           </keep-alive>
@@ -129,7 +129,6 @@
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   import CreditApproval from "./CreditApproval";
-  import remarkDetail from "./checkComponent/remarkDetail"; //备注信息
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
@@ -346,7 +345,6 @@
       FCreditForm,
       creditInvestigation,
       CreditApproval,
-      remarkDetail,
       cborrowerInformationDetail,
       capplicationInformationDetail,
       processTrajectory,

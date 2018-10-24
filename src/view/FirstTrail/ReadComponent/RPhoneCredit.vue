@@ -79,7 +79,6 @@
         </el-collapse>
         <!-- 更改电话树 end -->
         <!-- 备选  折叠面板- 手风琴效果 -->
-        <el-button type="primary" @click.native="dialogFormVisible=true" v-show="addBtnShow">添加</el-button>
       </el-aside>
       <!-- 右侧 表单内容 -->
       <el-container>
@@ -131,138 +130,60 @@
           <div class="form-class" style="width:100%;height:auto;">
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
-            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></AddressForm>
+              :isFull.sync="isFull"></AddressForm> -->
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData"
-              :isFull.sync="isFull"></AddressHis>
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData"></AddressHis>
             <!-- 单位电话 - 表单 -->
-            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></CompanyForm>
+              :isFull.sync="isFull"></CompanyForm> -->
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData"
-              :isFull.sync="isFull"></CompanyHis>
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
-            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></FamilyForm>
+              :isFull.sync="isFull"></FamilyForm> -->
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData"
-              :isFull.sync="isFull"></FamilyHis>
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
-            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></HurryForm>
+              :isFull.sync="isFull"></HurryForm> -->
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData"
-              :isFull.sync="isFull"></HurryHis>
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData"></HurryHis>
             <!-- 工作证明人 - 表单 -->
-            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"
+            <!-- <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
-              :isFull.sync="isFull"></WorkForm>
+              :isFull.sync="isFull"></WorkForm> -->
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"
-              :isFull.sync="isFull"></WorkHis>
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"></WorkHis>
           </div>
         </el-main>
       </el-container>
     </el-container>
-    <!-- 更改的 添加电话选项 -->
-    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal="false" width="330px">
-      <el-form>
-        <span class="require-icon" style="left:20px;line-height:38px;">*</span>
-        <el-form-item label="电话类型：" :label-width="addTellFormLabelWidth" prop="addTelType">
-          <el-select v-model="addTelType" placeholder="请选择">
-            <el-option v-for="item in telTypes" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <span class="require-icon" style="left:20px;line-height:38px;">*</span>
-        <el-form-item label="电话名称：" :label-width="addTellFormLabelWidth" prop="addTelName">
-          <el-input v-model="addTelName" auto-complete="off"></el-input>
-        </el-form-item>
-        <span class="require-icon" style="left:50px;line-height:38px;" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')">*</span>
-        <el-form-item label="关系：" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')"
-          :label-width="addTellFormLabelWidth">
-          <el-select v-model="addRelationShip" placeholder="请选择">
-            <el-option v-for="item in relationShips" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <span class="require-icon" style="left:20px;line-height:38px;">*</span>
-        <el-form-item label="电话号码：" :label-width="addTellFormLabelWidth" prop="addTelNum">
-          <el-input auto-complete="off" v-model="addTelNum"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
-        <el-button type="primary" disabled v-show="active==false">确定</el-button>
-      </div>
-    </el-dialog>
-    <!-- 点击 添加出现的弹窗 -->
-    <div class="cover-view" v-show="false">
-      <div class="cover-content">
-        <el-tag closable @close="coverShow=false"></el-tag>
-        <div class="add-title">
-          <span>添加申请单电话信息</span>
-        </div>
-        <ul class="add-content">
-          <li>
-            <span class="add-label">
-              <span class="require-icon">*</span>电话类型：</span>
-            <el-select v-model="addTelType" placeholder="请选择">
-              <el-option v-for="item in telTypes" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </li>
-          <li>
-            <span class="add-label">
-              <span class="require-icon">*</span>电话名称：</span>
-            <el-input type="text" name="" v-model="addTelName" value="" placeholder=""></el-input>
-          </li>
-          <li v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')">
-            <span class="add-label">
-              <span class="require-icon">*</span>关系：</span>
-            <el-select v-model="addRelationShip" placeholder="请选择">
-              <el-option v-for="item in relationShips" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </li>
-          <li>
-            <span class="add-label">
-              <span class="require-icon">*</span>电话号码：</span>
-            <el-input type="text" name="" v-model="addTelNum" value=""></el-input>
-          </li>
-          <li>
-            <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
-            <el-button type="primary" disabled v-show="active==false">确定</el-button>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </template>
 <script>
   // 电话征信 - 住址电话 表单
-  import AddressForm from '../detailComponent/AddressForm.vue'
+  // import AddressForm from '../detailComponent/AddressForm.vue'
   // 电话征信 - 住址电话 详情
   import AddressHis from '../detailComponent/AddressHis.vue'
   // 电话征信 - 单位电话 表单 CompanyForm
-  import CompanyForm from '../detailComponent/CompanyForm'
+  // import CompanyForm from '../detailComponent/CompanyForm'
   // 电话征信 - 单位电话  详情 CompanyHis
   import CompanyHis from '../detailComponent/CompanyHis'
   // 电话征信 - 家庭联系人 表单
-  import FamilyForm from '../detailComponent/FamilyForm'
+  // import FamilyForm from '../detailComponent/FamilyForm'
   // 电话征信 - 家庭联系人 详情
   import FamilyHis from '../detailComponent/FamilyHis'
   // 电话征信 紧急联系人 表单
-  import HurryForm from '../detailComponent/HurryForm'
+  // import HurryForm from '../detailComponent/HurryForm'
   // 电话征信 紧急联系人 历史
   import HurryHis from '../detailComponent/HurryHis'
   // 电话征信 工作证明人 表单
-  import WorkForm from '../detailComponent/WorkForm'
+  // import WorkForm from '../detailComponent/WorkForm'
   // 电话征信 工作证明人 历史 
   import WorkHis from '../detailComponent/WorkHis'
   export default {
@@ -306,78 +227,6 @@
         coverShow: false,
         // 头部列表
         hisListShow: false,
-        // 添加的电话类型
-        telTypes: [{
-            value: '01',
-            label: '住址电话'
-          },
-          {
-            value: '02',
-            label: '单位电话'
-          },
-          {
-            value: '03',
-            label: '家庭联系人电话'
-          },
-          {
-            value: '04',
-            label: '其他联系人电话'
-          },
-          {
-            value: '05',
-            label: '工作证明人电话'
-          }
-        ],
-        // 添加的电话类型
-        relationShips: [{
-            value: '01',
-            label: '夫妻'
-          },
-          {
-            value: '02',
-            label: '父母'
-          },
-          {
-            value: '03',
-            label: '子女'
-          },
-          {
-            value: '04',
-            label: '兄弟'
-          },
-          {
-            value: '05',
-            label: '姐妹'
-          },
-          {
-            value: '06',
-            label: '兄妹'
-          },
-          {
-            value: '07',
-            label: '姐弟'
-          },
-          {
-            value: '08',
-            label: '朋友'
-          },
-          {
-            value: '09',
-            label: '同事'
-          },
-          {
-            value: '10',
-            label: '房东'
-          },
-          {
-            value: '11',
-            label: '亲属'
-          },
-          {
-            value: '12',
-            label: '其他'
-          }
-        ],
         // 添加申请单 电话类型 
         addTelType: '',
         // 电话名称
@@ -403,7 +252,7 @@
         hisId: '',
         hisPhoneType: '',
         // 改造 , 通过 电话类型 , formShwo/hisShow 来控制所有的 表单/历史显示
-        formShow: false,
+        // formShow: false,
         hisShow: false,
         activeNames: ["1"], // 折叠默认展开的选项
         treeFlag: '', // 用来标志  电话树是否需要更新
@@ -418,7 +267,6 @@
         workData: [],
         active: false, // 添加电话 提示语
         addTelRex: false, // 添加电话 校验
-        formId: '', // 传给表单的  id
         dialogFormVisible: false, // 电话征信 点击添加
         addTellForm: {
           applyId: '',
@@ -444,8 +292,6 @@
         default: '',
         type: String
       },
-      isFull: {},
-      SplitS: {}
     },
     mounted() {
       // 组件 创建 估计完成后获取数据
@@ -453,88 +299,6 @@
       this.applySubNo = this.taskInWaitting.applySubNo;
       // 电话树数据
       this.fetchData();
-    },
-    watch: {
-      // 监听 添加电话 页面是否显示
-      dialogFormVisible: function () {
-        if (!this.coverShow) {
-          this.addTelType = '';
-          this.addTelName = '';
-          this.addRelationShip = '';
-          this.addTelNum = '';
-        }
-      },
-      // 添加电话  电话类型
-      addTelType: function (value) {
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
-        ) {
-          this.active = true;
-        } else {
-          this.active = false;
-        }
-      },
-      // 电话名称
-      addTelName: function (value) {
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
-        ) {
-          this.active = true;
-        } else {
-          this.active = false;
-        }
-      },
-      //  有无关系 判断 
-      addRelationShip: function (value) {
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
-        ) {
-          this.active = true;
-        } else {
-          this.active = false;
-        }
-
-      },
-      // 添加电话  电话校验
-      addTelNum: function (value) {
-        this.addTelRex = /^(1)\d{10}$/i.test(value) ||
-          /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
-        // 判断 显示 电话格式
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !
-            this.addTelRex)
-        ) {
-          this.active = false;
-          this.$message({
-            message: '格式不正确,请使用下面的格式:区号-电话号码或者11位手机号',
-            type: 'warning'
-          });
-          return;
-        }
-        if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length >
-            0 && this.addTelRex) ||
-          ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length >
-            0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
-        ) {
-          this.active = true;
-        } else {
-          this.active = false;
-        }
-      },
-      formShow: function () {
-        if (this.formShow) {
-          $('.el-main').css("overflow-y", 'auto');
-
-        }
-      }
     },
     methods: {
       fetchData() {
@@ -546,44 +310,22 @@
         });
       },
       handleNodeClick(data) {
-        if (this.isInterFlag == true || this.SplitS != 'right' || this.hisShow) {
-          // 点击每条tree数据的事件
-          this.treeId = data.id;
-          if (data.id.length > 2) {
-            // 点击数据展示历史记录  列表
-            this.hisListShow = true;
-            // 历史数据不显示
-            this.hisShow = false;
-            // 请求历史调查日志
-            this.phoneType = data.telType;
-            // 客户姓名
-            this.custName = data.telName;
-            // 电话号码
-            this.phoneNum = data.telNum;
-            this.queryTelLogByPage();
-          }
-        } else if (this.isInterFlag == false || this.SplitS == 'right') {
-          // 点击每条tree数据的事件
-          this.treeId = data.id;
-          if (data.id.length > 2) {
-            // 点击数据展示历史记录  列表
-            this.hisListShow = true;
-            // 请求历史调查日志
-            this.phoneType = data.telType;
-            // 客户姓名
-            this.custName = data.telName;
-            // 电话号码
-            this.phoneNum = data.telNum;
-            this.queryTelLogByPage();
-            this.formShow = true;
-            this.hisShow = false;
-            // 编辑的时候 历史调查日志不展开
-            this.activeNames = [];
-          }
+        // 点击每条tree数据的事件
+        this.treeId = data.id;
+        if (data.id.length > 2) {
+          // 点击数据展示历史记录  列表
+          this.hisListShow = true;
+          // 请求历史调查日志
+          this.phoneType = data.telType;
+          // 客户姓名
+          this.custName = data.telName;
+          // 电话号码
+          this.phoneNum = data.telNum;
+          this.queryTelLogByPage();
+          this.hisShow = true;
+          // 编辑的时候 历史调查日志不展开
+          // this.activeNames = [];
         }
-
-        // 点击的时候清空  
-        this.formId = '';
       },
       queryTelLogByPage() {
         // 获取 历史调查日志 
@@ -602,55 +344,18 @@
           this.mobileLoading = false;
           if (res.statusCode == 200) {
             this.listData = res.data.page;
-            if (res.data.message && res.data.page.recordList && res.data.page.recordList.length > 0) {
-              if (this.formShow == true) {
-                this.hisShow = false;
-              } else {
-                this.hisShow = true;
-              };
+            if (res.data.message) {
+              this.hisShow = true;
               this.newList = res.data.message;
+            } else {
+              this.hisShow = false;
             }
-          }else{
-            this.listData.recordList=[];
+          } else {
+            this.hisShow = false;
+            this.listData.recordList = [];
             this.$message.error(res.msg)
           }
         })
-      },
-      append(data) {
-        this.isLoading = true;
-        this.loadingTitle = '提交中';
-        // 判断必填
-        this.post('/creTelInfo/addTel', {
-          "creTelInfo": {
-
-            "applyId": this.applyId,
-            "telNum": this.addTelNum,
-            "telName": this.addTelName,
-            "telType": this.addTelType,
-            // 登录人编号
-            "creatorCode": this.userCode,
-            "relationShip": this.addRelationShip // 关系
-          },
-          "applySubNo": this.applySubNo
-        }).then(res => {
-          // 关闭 弹窗
-          this.dialogFormVisible = false;
-          this.isLoading = false;
-          this.loadingTitle = '确定';
-          if (res.statusCode == '200') {
-            this.$message({
-              type: 'success',
-              message: res.msg
-            });
-            // 点击提交之后 重新请求 电话树
-            this.fetchData();
-          } else
-            this.$message({
-              type: 'warning',
-              message: res.msg
-            });
-        })
-
       },
       handleSizeChange(val) {
         this.pageSize = val;
@@ -663,7 +368,6 @@
       },
       rowDbClick(row) {
         // 先让表单消失
-        this.formShow = false;
         this.hisShow = false;
         // 历史列表  点击每一行
         this.id = row.id;
@@ -765,15 +469,15 @@
       // 添加 电话 弹窗, 点击关闭的事件   无效?
     },
     components: {
-      AddressForm,
+      // AddressForm,
       AddressHis,
-      CompanyForm,
+      // CompanyForm,
       CompanyHis,
-      FamilyForm,
+      // FamilyForm,
       FamilyHis,
-      HurryForm,
+      // HurryForm,
       HurryHis,
-      WorkForm,
+      // WorkForm,
       WorkHis
     }
   }
@@ -1030,20 +734,6 @@
     padding: 0;
   }
 
-  /*  表单样式 */
-
-  .phone-credit .left-title {
-    float: left;
-    width: 140px;
-    line-height: 30px;
-    min-height: 30px;
-    padding-right: 5px;
-    text-align: right;
-    /* 配合必选 */
-    position: relative;
-    font-size: 14px;
-  }
-
   .phone-credit .form-his {
     font-size: 16px;
   }
@@ -1087,7 +777,6 @@
     border: 1px solid #475669;
     border-radius: 4px;
   }
-
 
   /* 更改电话征信 弹窗*/
 
