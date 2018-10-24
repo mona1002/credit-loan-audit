@@ -1,5 +1,5 @@
 <template>
-  <!-- 聚立信 -->
+  <!-- 聚信立 -->
   <div class="SocialSecurity carrierReport">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">

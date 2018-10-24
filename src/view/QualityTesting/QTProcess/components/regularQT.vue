@@ -2067,16 +2067,12 @@
       },
       //大数据风控
       RiskControl() {
-        // this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-        //   applyId: this.propQTconclution.applyId
-        // }).then(res => {
         this.$router.push({
           name: 'PneCtrl',
           params: {
             newOne: true,
           }
         });
-        // });
       },
       //社保/公积金
       // Social() {

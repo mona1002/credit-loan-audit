@@ -126,16 +126,12 @@
       },
       //大数据风控
       RiskControl() {
-        this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-          applyId: this.taskwaitting.ApplyId
-        }).then(res => {
           this.$router.push({
             name: 'PneCtrl',
             params: {
               newOne: true,
             }
           });
-        });
       },
     },
     mounted() {

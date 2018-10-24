@@ -1,4 +1,8 @@
 /*最小宽度 */
+.min_width_1100 {
+  min-width: 1100px;
+}
+
 .min_width_1200 {
   min-width: 1200px;
 }
@@ -25,6 +29,12 @@
 }
 
 /* 外边距 */
+/* .margin_5{
+  margin: 5px;
+} */
+.margin_10_5_0_5{
+  margin: 10px 5px 0  5px;
+}
 .margin_top_5 {
   margin-top: 5px;
 }
@@ -48,16 +58,26 @@
 .margin_left_5 {
   margin-left: 5px;
 }
+.margin_left_15 {
+  margin-left: 15px;
+}
 
 .margin_left_30 {
   margin-left: 30px;
 }
-
+.margin_left_600 {
+  margin-left: 600px;
+}
 .margin_bottom_10 {
   margin-bottom: 10px;
 }
-
+.Abody .line_H_16_label label{
+  line-height: 17px;
+}
 /* label 宽度 */
+.label_85 {
+  width: 85px;
+}
 .label_140 {
   width: 140px;
 }
@@ -74,12 +94,41 @@
   width: 33.3%
 }
 
+.width_66Per {
+  width: 66.6%
+}
+
+.width_40Per {
+  width: 40%
+}
+
+.width_60Per {
+  width: 60%
+}
 .width_20Per {
   width: 20%
 }
 
 .width_50Per {
   width: 50%
+}
+/* 高度 */
+body .Abody .height_60{
+  height: 60px;
+}
+body .Abody .height_80{
+  height: 80px;
+}
+body .Abody .height_120{
+  height: 120px;
+}
+/* display  */
+.dis_inBlock{
+display: inline-block
+}
+/* 垂直对齐 */
+.vertical_top {
+  vertical-align: top;
 }
 
 /* 气泡 */
@@ -696,6 +745,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 .specialInput {
   width: calc(100% - 230px);
 }
+
 .btn_wrap {
   height: 60px;
 }

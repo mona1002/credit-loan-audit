@@ -19,7 +19,7 @@
           <el-input v-model.trim="params.param.blackCertCode" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">公司名称：</span>
+          <span class="keywordText">单位名称：</span>
           <el-input v-model.trim="params.param.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
         </el-col>
       </el-row>
@@ -29,13 +29,16 @@
           <el-input v-model.trim="params.param.blackPhone" @keyup.enter.native='Rsearch' placeholder="请输入电话"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">地址：</span>
-          <el-input v-model.trim="params.param.blackAddress" @keyup.enter.native='Rsearch' placeholder="请输入地址"></el-input>
-        </el-col>
-        <el-col :span="6" class="search-item">
           <span class="keywordText">申请状态： </span>
           <el-select v-model="params.param.blackAppState" placeholder="请选择">
             <el-option v-for="item in applyStatus" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">加黑类型：</span>
+          <el-select v-model="params.param.inReasons" placeholder="请选择">
+            <el-option v-for="item in inReasons" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
@@ -48,14 +51,18 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        黑名单客户列表
+        黑名单列表
       </span>
       <span class="iconContainer">
         <span class="icon-item" @click='add'>
           <i class="el-icon addIcon"></i>
           <span class="el-icon-text">添加</span>
         </span>
-        <span class="icon-item" @click='appr'>
+        <span class="icon-item" @click='delAndSubmit("del")'>
+          <i class="el-icon deleteIcon"></i>
+          <span class="el-icon-text">删除</span>
+        </span>
+        <span class="icon-item" @click='delAndSubmit("sub")'>
           <i class="el-icon tijiao"></i>
           <span class="el-icon-text">提交</span>
         </span>
@@ -69,30 +76,25 @@
         </el-table-column>
         <el-table-column prop="blackCustName" label="客户名称" width="100">
         </el-table-column>
-        <el-table-column prop="blackCertTypeTxt" label="证件类型" width="80">
-        </el-table-column>
         <el-table-column prop="blackCertCode" label="证件号码" width="160">
         </el-table-column>
-        <el-table-column prop="blackCompany" label="公司名称" width="150">
+        <el-table-column prop="blackCompany" label="单位名称" width="150">
         </el-table-column>
         <el-table-column prop="blackAddress" label="地址" width="150">
         </el-table-column>
         <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <el-table-column prop="blackRemark" label="原因说明" width="160">
+        <el-table-column prop="inReasonsTxt" label="加黑类型" width="105">
         </el-table-column>
         <el-table-column prop="blackAppStateTxt" label="申请状态" width="120">
+        </el-table-column>
+        <el-table-column prop="blackRemark " label="申请说明" width="160">
         </el-table-column>
         <el-table-column prop="appPerCode" label="申请人" width="120">
         </el-table-column>
         <el-table-column prop="appDate" label="申请时间" width="120">
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="100">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-            <!-- <el-button type="text" size="small">编辑</el-button> -->
-            <el-button type="text" size="small" @click='del(scope.row)'>删除</el-button>
-          </template>
+        <el-table-column prop="auditConclusionTxt" label="审批结论" min-width="120">
         </el-table-column>
         <!-- <el-table-column label="证件号码" width="180">
           <template slot-scope="scope">
@@ -107,94 +109,142 @@
         </el-pagination>
       </div>
     </div>
-    <!-- 添加 -->
-    <div class="Height_240">
+    <!-- 添加 Height_240-->
+    <div class="el_form_item_height_35">
       <el-dialog title="添加黑名单转出申请" :visible.sync="addShow" :modal="false ">
-        <el-form>
-          <el-form-item label="黑名单类型：" :label-width='label_115'>
-            {{ addObj.ttttttttttttttttttttttt}}
-            <i class="el-icon-search addIcon_search" @click="getAddInf"></i>
-          </el-form-item>
-          <el-form-item label="黑名单转入说明：" :label-width='label_115'>
-            {{ addObj.ttttttttttttttttttttttt}}
-          </el-form-item>
-          <el-form-item label="黑名单转出说明：	" :label-width='label_115'>
-            {{addObj.ttttttttttttttttttttttt}}
-          </el-form-item>
-          <!--取哪里的值？？？？？？？？ -->
+        <el-form :model="addObj" :rules="addRules" ref="addObj">
           <div class="bfc">
-            <el-form-item class="fl" label="申请人：" :label-width='label_115'>
-              {{addObj.ttttttttttttttttttttttt}}
+            <el-form-item label="黑名单类型：" class="fl width_50Per" :label-width='label_115'>
+              {{addObj.blackListTypeTxt}}
+              <i class="el-icon-search addIcon_search" @click="getAddInf"></i>
             </el-form-item>
-            <el-form-item class="fr" label="申请时间：" label-width="110px">
-              {{addObj.ttttttttttttttttttttttt}}
+            <el-form-item label="加黑类型：" v-if="addObj.blackListType" class="fl width_50Per" :label-width='label_115'>
+              {{addObj.inReasonsTxt}}
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item label="客户名称：" class="fl width_50Per" :label-width='label_115' v-if="addObj.blackListType">
+              {{addObj.blackCustName}}
+            </el-form-item>
+            <el-form-item label="证件号码：" class="fl width_50Per" v-if="addObj.blackListType" :label-width='label_115'>
+              {{addObj.blackCertCode}}
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item label="电话：" class="fl width_50Per" v-if="addObj.blackListType" :label-width='label_115'>
+              {{addObj.blackPhone}}
+            </el-form-item>
+            <el-form-item label="地址：" class="fl width_50Per" v-if='addObj.blackListType' :label-width='label_115'>
+              {{addObj.blackAddress }}
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item label="单位名称：" class="fl width_50Per" :label-width='label_115' v-if="addObj.blackListType">
+              {{addObj.blackCompany }}
+            </el-form-item>
+            <el-form-item label="申请人：" class="fl width_50Per" :label-width='label_115' v-if="addObj.blackListType">
+              {{addObj.appPerCode}}
+            </el-form-item>
+          </div>
+          <el-form-item class="mr height_60" label="转入申请说明：" v-if='addObj.blackListType' :label-width="label_115">
+            <el-input v-model="addObj.blackRemark" type="textarea" resize='none' :rows="2" disabled></el-input>
+          </el-form-item>
+          <el-form-item class="mr height_60" label="转出申请说明：" v-if='addObj.blackListType' :label-width="label_115" prop="outBlackRemark">
+            <b class="hint_word Working_input" v-show="addObj.outBlackRemark&&addObj.outBlackRemark.length>=300">
+              输入长度不能超过300</b>
+            <el-input v-model="addObj.outBlackRemark" :maxlength='300' type="textarea" resize='none' :rows="2"></el-input>
+          </el-form-item>
+          <div class="bfc margin_top_20" v-if='addObj.blackListType'>
+            <el-form-item class="fl width_50Per" label="申请人：" :label-width='label_115'>
+              {{userInf.userCode}}
+            </el-form-item>
+            <el-form-item class="fl" label="申请时间：" label-width="110px">
+              {{systermTime | dateFilter}}
             </el-form-item>
           </div>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="addShow=false">取 消</el-button>
-          <el-button type="primary" :loading="addBlackLoad" @click="addBlackList">
+          <el-button type="primary" :loading="addBlackLoad" @click="addBlackList('addObj')">
             {{blackbtnWord}}</el-button>
         </div>
       </el-dialog>
     </div>
-    <!-- 添加选择 -->
-    <div class="Height_240">
-      <el-dialog title="查看黑名单申请" :visible.sync="addInfShow" :modal="false ">
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
-          <div class="bfc">
-            <el-form-item label="黑名单类型：	" label-width="85px" prop="auditConclusion" class="fl ">
-              <el-select v-model="ruleForm.auditConclusion" placeholder="请选择">
-                <el-option v-for="item in apprResult" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </div>
-          <div class="dialog_textarea ">
-            <el-form-item class="mr" label="审批意见：" label-width="85px">
-              <el-input v-model="ruleForm.auditOpinion" type="textarea" resize='none' :rows="2"></el-input>
-            </el-form-item>
-          </div>
-          <div class="bfc">
-            <el-form-item class="fl" label="审批人：" label-width="85px">
-              {{currentRow.auditPerCode}}
-            </el-form-item>
-            <el-form-item class="fr" label="审批时间：" label-width="110px">
-              {{currentRow.auditDate}}
-            </el-form-item>
-          </div>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="addInfShow=false">取 消</el-button>
-          <el-button type="primary" :loading="addInfLoad" @click="submitForm('ruleForm')">
-            {{btnWord}}</el-button>
-        </div>
-      </el-dialog>
-    </div>
-    <!-- 查看黑名单申请====待确认  调接口口还是取本条信息内数据 -->
-    <div class="Height_240">
-      <el-dialog title="查看黑名单申请" :visible.sync="checkShow" :modal="false ">
-        <el-form>
-          <el-form-item label="黑名单类型：" label-width="85px">
-
-          </el-form-item>
-          <el-form-item class="mr" label="原因说明：" label-width="85px">
-
-          </el-form-item>
-          <div class="bfc">
-            <el-form-item class="fl" label="申请人：" label-width="85px">
-              {{currentRow.auditPerCode}}
-            </el-form-item>
-            <el-form-item class="fr" label="申请时间：" label-width="110px">
-              {{currentRow.auditDate}}
-            </el-form-item>
-          </div>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="checkShow=false">确定</el-button>
-        </div>
-      </el-dialog>
-    </div>
+    <!-- 添加弹窗-搜索按钮 Height_600-->
+    <!-- <div class=""> -->
+    <el-dialog title="请选择一条信息" :visible.sync="addInfShow" width='1000px' height='900' :modal="false ">
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" >
+          <span class="dis_inBlock label_85 text_align_right">黑名单类型：</span>
+          <el-select v-model="addSearchForm.blackListType" placeholder="请选择">
+            <el-option v-for="item in listType" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span>客户名称：</span>
+          <el-input v-model.trim="addSearchForm.blackCustName" @keyup.enter.native='Rsearch' placeholder="请输入客户名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span>证件号码：</span>
+          <el-input v-model.trim="addSearchForm.blackCertCode" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
+        </el-col>
+      </el-row>
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item">
+          <span class="dis_inBlock label_85 text_align_right">电话：</span>
+          <el-input v-model.trim="addSearchForm.blackPhone" @keyup.enter.native='Rsearch' placeholder="请输入电话"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span>单位名称：</span>
+          <el-input v-model.trim="addSearchForm.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入单位名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <el-button class="btn query" type="primary" @click="addRsearch">查询</el-button>
+          <el-button class="btn reset" @click="addRreset">重置</el-button>
+        </el-col>
+      </el-row>
+      <div class="height_300">
+        <el-table :data="addTableData" style="width: 100%" height="300" highlight-current-row border @row-click='getAddCurrentRow'>
+          <el-table-column type="index" label=序号 width="55">
+          </el-table-column>
+          <el-table-column prop="blackListTypeTxt" label="黑名单类型" width="100">
+          </el-table-column>
+          <el-table-column prop="blackCustName" label="客户名称" width="100">
+          </el-table-column>
+          <el-table-column prop="blackCertCode" label="证件号码" width="160">
+          </el-table-column>
+          <el-table-column prop="blackCompany" label="单位名称" width="150">
+          </el-table-column>
+          <el-table-column prop="blackAddress" label="地址" width="150">
+          </el-table-column>
+          <el-table-column prop="blackPhone" label="电话" width="105">
+          </el-table-column>
+          <el-table-column prop="inReasonsTxt" label="加黑类型" width="105">
+          </el-table-column>
+          <el-table-column prop="blackRemark" label="申请说明" width="160">
+          </el-table-column>
+          <el-table-column prop="appPerCode" label="申请人" width="120">
+          </el-table-column>
+          <el-table-column prop="appDate" label="申请时间" width="120">
+          </el-table-column>
+          <el-table-column prop="auditConclusionTxt" label="审批结论" min-width="120">
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="page">
+        <el-pagination @size-change="addSearchSizeChange" @current-change="addSearchCurrentChange" :current-page="addSearchPage.pageNum"
+          :page-sizes="[10, 20,50]" :page-size="addSearchPage.pageSize" layout="total, sizes, prev, pager, next, jumper"
+          :total="addSearchTotalRecord">
+        </el-pagination>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addInfShow=false">取 消</el-button>
+        <el-button type="primary" :loading="addInfLoad" @click="addSearchAdd">
+          {{btnWord}}</el-button>
+      </div>
+    </el-dialog>
+    <!-- </div> -->
   </div>
 </template>
 <script>
@@ -206,12 +256,17 @@
         addShow: false,
         addInfShow: false,
         addBlackLoad: false,
-        addInfLoad:false,
+        addInfLoad: false,
         checkShow: false,
         btnWord: '确定',
         blackbtnWord: "确定",
         loadSub: false,
         addObj: {},
+        addSearchForm: {},
+        addSearchPage: {
+          pageNum: 1,
+          pageSize: 10
+        },
         ruleForm: {
           auditConclusion: '',
           auditOpinion: '',
@@ -224,31 +279,25 @@
             trigger: 'change'
           }],
         },
-        // add: {},
-        tableData: [{
-          "appDate": "2018-09-21",
-          "appPerCode": "",
-          "auditConclusion": "01",
-          "auditDate": "2018-09-21",
-          "auditOpinion": "审批结论---",
-          "auditPerCode": "",
-          "blackAddress": "",
-          "blackAppState": "03",
-          "blackAppStateTxt": "审核同意",
-          "blackCertCode": "98291829736712",
-          "blackCertType": "01",
-          "blackCertTypeTxt": "身份证",
-          "blackCompany": "",
-          "blackCustName": "客户名称改",
-          "blackListType": "01",
-          "blackListTypeTxt": "客户",
-          "blackPhone": "",
-          "blackRemark": "原因说明1",
-          "id": "XpcfOaVaGb9Aep09eWETnhNsbKUMk7FK",
-          "listId": "17686cff-edb1-47e7-9dec-2002163b0bad"
-        }],
+        addRules: {
+          // blackListType: [{
+          //   required: true,
+          //   message: '请选择黑名单类型',
+          //   trigger: 'change'
+          // }],
+          outBlackRemark: [{
+            required: true,
+            message: '请填写转出申请说明',
+            trigger: 'blur'
+          }],
+        },
+        addTableData: [],
+        tableData: [],
         currentRow: {},
+        AddCurrentRow: {},
         totalRecord: 0,
+        addSearchTotalRecord: 0,
+        userInf: '',
         params: {
           param: {
             blackListType: '', //	黑名单类型
@@ -256,8 +305,12 @@
             blackCertCode: '', //	证件号码
             blackCompany: '', //	单位名称
             blackPhone: '', //	电话
-            blackAddress: '', //	地址
             blackAppState: '', //	申请状态
+            inReasons: '', //加黑类型(原因)
+            // appPerCode:this.userInf.userCode//申请人
+            // appPerCode:this.userInf//申请人
+            // appPerCode:this.userInf.userCode//申请人
+            appPerCode: '' //申请人
           },
           pageParam: {
             pageNum: 1, //	页码
@@ -281,6 +334,19 @@
             label: '单位名称'
           }
         ],
+        addListType: [{
+            value: '01',
+            label: '客户'
+          },
+          {
+            value: '02',
+            label: '电话'
+          },
+          {
+            value: '04',
+            label: '单位名称'
+          }
+        ],
         applyStatus: [{
             value: '01',
             label: '申请中'
@@ -298,6 +364,27 @@
             label: '审核拒绝'
           }
         ],
+        inReasons: [{ //加黑类型
+            value: '01',
+            label: '代办包装'
+          },
+          {
+            value: '02',
+            label: '组团骗贷'
+          },
+          {
+            value: '03',
+            label: '资料虚假'
+          },
+          {
+            value: '04',
+            label: '伪冒申请'
+          },
+          {
+            value: '05',
+            label: '其他欺诈'
+          }
+        ],
         apprResult: [{
             value: '01',
             label: '同意'
@@ -308,6 +395,8 @@
           }
         ],
         Routes: this.$router.options.routes[52],
+        systermTime: 0,
+        landLinePhoneLength: /^[0-9\-]{0,20}$/,
       }
     },
     watch: {
@@ -316,26 +405,76 @@
           if (!this.Routes.closed) {
             this.params.pageParam.pageSize = 10;
             this.Rreset();
+            this.getSystermTime();
             this.Routes.closed = true;
           }
         }
       }
     },
     methods: {
+      confirm() {
+        this.$confirm('请选择一条记录！', '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          cancelButtonText: '取消',
+          showCancelButton: true
+        }).catch(() => {});
+      },
+      getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.systermTime = res.data;
+          }
+        })
+      },
       Rreset() {
         this.params.param.blackListType = ''; //黑名单类型
         this.params.param.blackCustName = ''; //客户名称
         this.params.param.blackCertCode = ''; //证件号码
         this.params.param.blackCompany = ''; //单位名称
         this.params.param.blackPhone = ''; //电话
-        this.params.param.blackAddress = ''; //地址
+        // this.params.param.blackAddress = ''; //地址
         this.params.param.blackAppState = ''; //申请状态
         this.currentRow = {};
         this.params.pageParam.pageNum = 1; //	页码
         this.inquire();
       },
+      addRreset() {
+        this.addTableData = [];
+        this.addSearchForm = {};
+         this.AddCurrentRow={};
+      },
       Rsearch() {
         this.inquire();
+      },
+      addRsearch() {
+        if (JSON.stringify(this.addSearchForm) == '{}') {
+          this._error('请输入查询条件！')
+          return
+        }
+          this.AddCurrentRow={};
+        // 查黑名单库
+        this.post('/blackAndGrey/blackListInfos', {
+          param: this.addSearchForm,
+          pageParam: this.addSearchPage
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.addTableData = res.data.recordList;
+            this.addSearchTotalRecord = res.data.totalRecord;
+          } else {
+            this.addTableData = [];
+          }
+        })
+      },
+      addSearchAdd() {
+        if (JSON.stringify(this.AddCurrentRow) == '{}') {
+          this.confirm();
+          return
+        }
+        // this.addObj.blackCustName = this.AddCurrentRow.custName;
+        // this.addObj.blackCertCode = this.AddCurrentRow.certCode;
+        this.addObj = this.AddCurrentRow;
+        this.addInfShow = false;
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -343,97 +482,108 @@
         this.params.pageParam.pageSize = val; //	条数
         this.inquire();
       },
+      addSearchSizeChange(val) {
+        this.addSearchPage.pageNum = 1; //	页码
+        this.addSearchPage.pageSize = val; //	条数
+        this.addRsearch();
+      },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
         this.params.pageParam.pageNum = val; //	页码
         this.inquire();
       },
+      addSearchCurrentChange(val) {
+        this.addSearchPage.pageNum = val; //	条数
+        this.addRsearch();
+      },
       getCurrentRow(val) {
         this.currentRow = val;
+      },
+      getAddCurrentRow(val) {
+        this.AddCurrentRow = val;
       },
       // 添加
       add() {
         this.addShow = true;
         this.addObj = {};
-      },
-      getAddInf() {
-this.addInfShow=true;
-      },
-      // 添加 - 信息
-      addBlackList() {
+        this.addObj.appPerCode = this.userInf.userCode;
         this.addBlackLoad = false;
         this.blackbtnWord = '确定';
-        let listId='';//确认从哪取值之后删掉
+      },
+      getAddInf() {
+        this.addInfShow = true;
+        this.addSearchForm = {};
+        this.addTableData = [];
+      },
+      addReset(formName) {
+        let blackListType = this.addObj.blackListType;
+        this.$refs[formName].resetFields();
+        this.addObj.blackListType = blackListType;
+      },
+      // 添加 - 信息
+      addBlackList(formName) {
+        // let listId = ''; //确认从哪取值之后删掉
         // listId 待确认从哪取值
-        this.get('/blackAndGrey/blackListOutApp/' + listId).then(res => {
-          if (res.data.statusCode == 200) {
-            this._succe(res.msg);
-            this.addShow = false;
-          } else {
-            this._error(res.msg)
-          }
-        })
-      },
-      // 审核
-      appr() {
-        if (JSON.stringify(this.currentRow) == '{}') {
-          this.$confirm('请选择一条记录！', '提示', {
-            confirmButtonText: '确定',
-            type: 'warning',
-            cancelButtonText: '取消',
-            showCancelButton: true
-          }).then(() => {}).catch(() => {});
-          return
-        }
-        this.apprShow = true;
-        // 重置按钮
-        this.btnWord = '确定';
-        this.loadSub = false;
-        // 清空弹窗
-        this.ruleForm.auditOpinion = '';
-        this.ruleForm.auditConclusion = '';
-        this.ruleForm.id = this.currentRow.id;
-      },
-      submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.btnWord = '提交中';
-            this.loadSub = true;
-            this.post("/blackAndGrey/auditOutApp", this.ruleForm).then(res => {
+             this.addBlackLoad = true;
+        this.blackbtnWord = '添加中';
+            // this.addObj.inReasons = this.addObj.inReasons.join(',') //转换入参格式
+            // this.post('http://10.1.26.141:8080/riskManagement/blackAndGrey/blackListInApp', this.addObj).then(res => {
+            this.post('/blackAndGrey/blackListOutApp', {
+             listId: this.addObj.id,
+              blackRemark: this.addObj.outBlackRemark, //申请说明
+              appPerCode: this.userInf.userCode //	申请人
+            }).then(res => {
               if (res.statusCode == 200) {
-                this._succe('提交成功！');
-                this.apprShow = false;
-                this.currentRow = {};
+                this._succe(res.msg);
               } else {
-                this._error(res.msg);
+                this._error(res.msg)
               }
-            });
+              this.addShow = false;
+              this.inquire();
+            })
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      // 操作-删除
-      del(row) {
-        console.log(row);
+      // 删除 + 提交
+      delAndSubmit(proType) {
+        if (JSON.stringify(this.currentRow) == '{}') {
+          this.confirm();
+          return
+        }
+        if (this.currentRow.blackAppStateTxt != '申请中') {
+          this._error('只能处理申请中的任务！')
+          return
+        }
         let title = '';
-        row.blackAppStateTxt == '申请中' ? title = '您要删除当前项目？' : title = '只能删除状态为申请中的记录！';
+        if (proType == 'del') {
+          this.currentRow.blackAppStateTxt == '申请中' ? title = '确定要删除当前项目？' : title = '只能删除状态为申请中的记录！';
+        } else if (proType == 'sub') {
+          this.currentRow.blackAppStateTxt == '申请中' ? title = '确定要提交当前项目？' : title = '只能提交状态为申请中的记录！';
+        }
         this.$confirm(title, '提示', {
           confirmButtonText: '确定',
           type: 'warning',
           cancelButtonText: '取消',
           showCancelButton: true
         }).then(() => {
-          if (row.blackAppStateTxt != '申请中') {
-            return
-          } else {
-            this.Delete('/blackAndGrey/blackListOutApp/' + row.id).then(res => {
+          if (proType == 'del') { //删除
+            this.Delete('/blackAndGrey/blackListOutApp/' + this.currentRow.id).then(res => {
               if (res.statusCode == 200) {
                 this._succe(res.msg)
+                this.inquire();
+              } else {
+                this._error(res.msg);
+              }
+            })
+          } else if (proType == 'sub') { //提交
+            this.get('/blackAndGrey/submitOutApp/' + this.currentRow.id).then(res => {
+              if (res.statusCode == 200) {
+                this._succe(res.msg)
+                this.inquire();
               } else {
                 this._error(res.msg);
               }
@@ -441,17 +591,12 @@ this.addInfShow=true;
           }
         }).catch(() => {});
       },
-      // 操作-查看
-      handleClick(row) {
-        console.log(row);
-        this.checkShow = true;
-      },
-      //   查询列表
+      // 查询列表
       inquire() {
         this.currentRow = {};
-        this.post("/blackAndGrey/blackListInApps", this.params).then(res => {
+        this.post("/blackAndGrey/blackListOutApps", this.params).then(res => {
           if (res.statusCode == 200) {
-            // this.tableData = res.data.recordList;
+            this.tableData = res.data.recordList;
             this.totalRecord = res.data.totalRecord; //totalRecord
             this.params.pageParam.pageNum = res.data.pageNum; //	页码
             this.params.pageParam.pageSize = res.data.pageSize; //	条数
@@ -465,8 +610,14 @@ this.addInfShow=true;
         })
       },
     },
+    beforeCreate() {
+
+    },
     mounted() {
+      this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      this.params.param.appPerCode = this.userInf.userCode;
       this.inquire();
+      this.getSystermTime();
     }
   }
 
@@ -478,7 +629,7 @@ this.addInfShow=true;
     border-radius: 6px;
     padding: 2px;
     position: absolute;
-    left: 120px;
+    left: 100px;
     top: 4px;
     cursor: pointer;
   }

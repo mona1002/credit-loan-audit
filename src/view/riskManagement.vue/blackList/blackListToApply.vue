@@ -94,7 +94,7 @@
         </el-table-column>
         <el-table-column prop="appDate" label="申请时间" width="120">
         </el-table-column>
-        <el-table-column prop="auditConclusionTxt" label="审批结论" width="120">
+        <el-table-column prop="auditConclusionTxt" label="审批结论" min-width="120">
         </el-table-column>
         <!-- <el-table-column label="证件号码" width="180">
           <template slot-scope="scope">
@@ -169,7 +169,7 @@
       <el-dialog title="请选择一条信息" :visible.sync="addInfShow" width='900px' height='900' :modal="false ">
         <el-row class="row row1" type="flex">
           <el-col :span="6" class="search-item">
-            <span>证件号码：</span>
+            <span>客户名称：</span>
             <el-input v-model.trim="addSearchForm.custName" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
@@ -275,31 +275,11 @@
           }],
         },
         addTableData: [],
-        tableData: [{
-          "appDate": "2018-09-21",
-          "appPerCode": "",
-          "auditConclusion": "01",
-          "auditDate": "2018-09-21",
-          "auditOpinion": "审批结论---",
-          "auditPerCode": "",
-          "blackAddress": "",
-          "blackAppState": "03",
-          "blackAppStateTxt": "审核同意",
-          "blackCertCode": "98291829736712",
-          "blackCertType": "01",
-          "blackCertTypeTxt": "身份证",
-          "blackCompany": "",
-          "blackCustName": "客户名称改",
-          "blackListType": "01",
-          "blackListTypeTxt": "客户",
-          "blackPhone": "",
-          "blackRemark": "原因说明1",
-          "id": "XpcfOaVaGb9Aep09eWETnhNsbKUMk7FK",
-          "listId": "17686cff-edb1-47e7-9dec-2002163b0bad"
-        }],
+        tableData: [],
         currentRow: {},
         AddCurrentRow: {},
         totalRecord: 0,
+        userInf: '',
         params: {
           param: {
             blackListType: '', //	黑名单类型
@@ -309,6 +289,10 @@
             blackPhone: '', //	电话
             blackAppState: '', //	申请状态
             inReasons: '', //加黑类型(原因)
+            // appPerCode:this.userInf.userCode//申请人
+            // appPerCode:this.userInf//申请人
+            // appPerCode:this.userInf.userCode//申请人
+            appPerCode: '' //申请人
           },
           pageParam: {
             pageNum: 1, //	页码
@@ -394,7 +378,6 @@
         ],
         Routes: this.$router.options.routes[52],
         systermTime: 0,
-        userInf: '',
         landLinePhoneLength: /^[0-9\-]{0,20}$/,
       }
     },
@@ -488,6 +471,7 @@
       add() {
         this.addShow = true;
         this.addObj = {};
+        this.addObj.appPerCode = this.userInf.userCode;
         this.addBlackLoad = false;
         this.blackbtnWord = '确定';
       },
@@ -510,14 +494,15 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.addObj.inReasons = this.addObj.inReasons.join(',') //转换入参格式
-            this.post('http://10.1.26.141:8080/riskManagement/blackAndGrey/blackListInApp', this.addObj).then(res => {
+            // this.post('http://10.1.26.141:8080/riskManagement/blackAndGrey/blackListInApp', this.addObj).then(res => {
+            this.post('/blackAndGrey/blackListInApp', this.addObj).then(res => {
               if (res.statusCode == 200) {
                 this._succe(res.msg);
-                this.addShow = false;
-                this.inquire();
               } else {
                 this._error(res.msg)
               }
+              this.addShow = false;
+              this.inquire();
             })
           } else {
             return false;
@@ -528,6 +513,10 @@
       delAndSubmit(proType) {
         if (JSON.stringify(this.currentRow) == '{}') {
           this.confirm();
+          return
+        }
+        if (this.currentRow.blackAppStateTxt != '申请中') {
+          this._error('只能处理申请中的任务！')
           return
         }
         let title = '';
@@ -542,28 +531,24 @@
           cancelButtonText: '取消',
           showCancelButton: true
         }).then(() => {
-          if (this.currentRow.blackAppStateTxt != '申请中') {
-            return
-          } else {
-            if (proType == 'del') { //删除
-              this.Delete('/blackAndGrey/blackListInApp/' + this.currentRow.id).then(res => {
-                if (res.statusCode == 200) {
-                  this._succe(res.msg)
-                  this.inquire();
-                } else {
-                  this._error(res.msg);
-                }
-              })
-            } else if (proType == 'sub') { //提交
-              this.get('/blackAndGrey/submitInApp/' + this.currentRow.id).then(res => {
-                if (res.statusCode == 200) {
-                  this._succe(res.msg)
-                  this.inquire();
-                } else {
-                  this._error(res.msg);
-                }
-              })
-            }
+          if (proType == 'del') { //删除
+            this.Delete('/blackAndGrey/blackListInApp/' + this.currentRow.id).then(res => {
+              if (res.statusCode == 200) {
+                this._succe(res.msg)
+                this.inquire();
+              } else {
+                this._error(res.msg);
+              }
+            })
+          } else if (proType == 'sub') { //提交
+            this.get('/blackAndGrey/submitInApp/' + this.currentRow.id).then(res => {
+              if (res.statusCode == 200) {
+                this._succe(res.msg)
+                this.inquire();
+              } else {
+                this._error(res.msg);
+              }
+            })
           }
         }).catch(() => {});
       },
@@ -586,8 +571,12 @@
         })
       },
     },
+    beforeCreate() {
+
+    },
     mounted() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      this.params.param.appPerCode = this.userInf.userCode;
       this.inquire();
       this.getSystermTime();
     }

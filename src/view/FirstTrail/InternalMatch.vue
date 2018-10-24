@@ -1,6 +1,46 @@
 <template>
   <div class="internalMatch-class">
     <el-collapse v-model="activeNames">
+      <!-- 客户历史贷款信息 -->
+      <!-- <el-collapse-item name="0">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">客户历史贷款信息</span>
+        </template>
+        <div class="height_auto">
+          <el-table :data="mobileData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickMobiel"
+            highlight-current-row v-loading="mobileLoading">
+            <el-table-column prop="matchApplySubNo" label="进件编号" width="160">
+            </el-table-column>
+            <el-table-column prop="matchApplyCustName" label="客户名称" width="80">
+            </el-table-column>
+            <el-table-column prop="certCode" label="身份证号" width="160">
+            </el-table-column>
+            <el-table-column prop="dddddddddd" label="申请日期" width="105">
+            </el-table-column>
+            <el-table-column prop="dddddddddd" label="借款金额" width="90">
+            </el-table-column>
+            <el-table-column prop="dddddddddd" label="产品名称" width="100">
+            </el-table-column>
+            <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
+            </el-table-column>
+            <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
+            </el-table-column>
+            <el-table-column prop="dddddddddd" label="命中规则" width="180">
+            </el-table-column>
+            <el-table-column prop="dddddddddd" label="账户状态" width="80">
+            </el-table-column>
+            <el-table-column prop="remark" fit="false" class="mark-cell" label="备注" show-overflow-tooltip min-width="100">
+            </el-table-column>
+          </el-table>
+        </div>
+        <div class="block tool-bar" v-show="CustomData.totalRecord>0">
+          <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile"
+            :current-page="CudstomPageNum" :page-sizes="[10, 20,50]" :page-size="CudstomPageSize" layout="total, sizes, prev, pager, next, jumper"
+            :total="CustomData.totalRecord">
+          </el-pagination>
+        </div>
+      </el-collapse-item> -->
       <!-- 移动电话 -->
       <el-collapse-item name="1">
         <template slot="title">
@@ -132,10 +172,11 @@
   export default {
     data() {
       return {
-        activeNames: ['1', '2', '3', '4'],
+        activeNames: ['0', '1', '2', '3', '4'],
         title1: "移动号码类(手机号和联系人)",
         title2: "固定电话类(家电、单电)",
         title3: "单位名称",
+        CustomData: [], //客户数据
         mobileData: [], // 移动电话数据
         fixTelData: [], // 固话数据
         workData: [], // 单位数据
@@ -143,6 +184,9 @@
         workName: '', // 公司名称
         MobilePageSize: 10, // 移动 每页条数
         MobilePageNum: 1, // 移动 当前页
+        CudstomPageNum: 1, // 客户 当前页
+        CudstomPageSize: 10, // 移动 每页条数
+
         FixTelPageSize: 5, // 固定电话 每页条数
         FixTelPageNum: 1, // 固定电话 当前页
         CompanyPageSize: 5, // 公司电话 每页条数

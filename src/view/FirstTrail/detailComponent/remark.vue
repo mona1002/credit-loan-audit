@@ -114,10 +114,7 @@
         changeRemarks: '',
         deletLayer: false,
         taskInWaitting: '',
-        // applyId: '',
         userInf: '',
-        // remarker: '',
-        // remarkType: '',
         //添加的弹层
         dialogVisible: false,
         //是否有数据的弹层
@@ -147,17 +144,8 @@
       }
     },
     mounted() {
-      //  console.log( (function(q,b=3,c){}).length)
-      // let x = 1;
-
-      // function f(z,x,y = x) {
-      // var x = 8
-      //   console.log(z,y,x);
-      // }
-      // f(6,3) // 1
       //一进入页面就发送请求
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-    // this.judgeFlag&& this.judgeFlag.flag == '01' ? this.remarkType = '03' : this.remarkType = '04'; //初审03，终审04
       if(this.judgeFlag ){//初审03，终审04
         this.judgeFlag.flag == '01' ? this.remarkType = '03' :'';
         this.judgeFlag.flag == '02' ? this.remarkType = '04' :'';
