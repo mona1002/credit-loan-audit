@@ -42,6 +42,7 @@
                 <label class="label_width_166">邮箱：</label>
                 <span>{{basicInfo.email}}</span>
               </li>
+<<<<<<< HEAD
               <li>
                 <label class="label_width_166">地址：</label>
                 <span>{{basicInfo.address}}</span>
@@ -50,6 +51,12 @@
                 <label class="label_width_166">入网时间：</label>
                 <span>{{basicInfo.registerDate}}</span>
               </li>
+=======
+              <li class="li_half_two_rows">
+                <label class="label_width_166">地址：</label>
+                <span>{{basicInfo.address}}</span>
+              </li>
+>>>>>>> 6ed4fc645af9d6b4149596e37a5195b76cbac6c3
             </div>
           </ul>
         </div>
