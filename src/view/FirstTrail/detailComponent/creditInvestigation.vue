@@ -19,10 +19,10 @@
             </li>
             <li>
               <label class="label_width_200">是否核对借款人有效证件：</label>
-              <span>{{datas.checkDocFlag}} </span>
+              <span>{{datas.IsCheckDocTxt}} </span>
             </li>
             <li>
-              <p v-show="datas.checkDocFlag=='否'">
+              <p v-show="datas.IsCheckDocTxt=='否'">
                 <label class="label_width_200">不核对借款人有效证件原因：</label>
                 <el-tooltip class="item" effect="dark" :content="datas.notCheckBorrowerDocReason" :disabled="datas.notCheckBorrowerDocReason==null"
                   placement="top">
