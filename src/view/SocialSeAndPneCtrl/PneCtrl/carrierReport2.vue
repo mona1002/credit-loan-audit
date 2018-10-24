@@ -42,9 +42,13 @@
                 <label class="label_width_166">邮箱：</label>
                 <span>{{basicInfo.email}}</span>
               </li>
-              <li class="li_half_two_rows">
+              <li>
                 <label class="label_width_166">地址：</label>
                 <span>{{basicInfo.address}}</span>
+              </li>
+               <li>
+                <label class="label_width_166">入网时间：</label>
+                <span>{{basicInfo.registerDate}}</span>
               </li>
             </div>
           </ul>
