@@ -237,27 +237,6 @@
       }
     },
     mounted() {
-//       var x = 1;
-// function foo(x, y = function() { x = 2; }) {
-//   var x = 3;
-//   y();
-//   console.log(x);
-// }
-
-// foo() // 3
-// console.log(x )
-// x // 1
-// var x = 1;
-// function foo(x, y = function() { x = 2; }) {
-//   x = 3;
-//   y();
-//   console.log(x);
-// }
-// console.log(x)
-// foo() // 2
-// x // 1
-// const bar = function baz() {};
-// console.log(bar.name)
       // 统一登录平台  
       this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         this.userInf = {

@@ -12,11 +12,11 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">申请类型：</label>
-                <span>{{datas.appTypeTxt}}</span>
+                <span>{{datas.applyTypeTxt}}</span>
               </li>
               <li>
                 <label class="label_width_166">借款人类型：</label>
-                <span>{{datas.borrTypeTxt}}</span>
+                <span>{{datas.borrowTypeTxt}}</span>
               </li>
               <li>
                 <label class="label_width_166">有无授权机构：</label>
@@ -26,12 +26,12 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">获客渠道：</label>
-                <span>{{datas.sourcesChanTxt}}</span>
+                <span>{{datas.customerSourcesTxt}}</span>
               </li>
               <li style="width:66.6%">
                 <p v-if="datas.sourcesChanTxt == '其他'">
                   <label class="label_width_166">获客渠道说明：</label>
-                  <span>{{datas.sourcesChanRemark}}</span>
+                  <span>{{datas.customerSourcesRemark}}</span>
                 </p>
               </li>
             </div>
@@ -42,43 +42,43 @@
               </li>
               <li>
                 <label class="label_width_166">直销人员：</label>
-                <span>{{datas.salPerName}}</span>
+                <span>{{datas.directSalesName}}</span>
               </li>
               <li>
                 <label class="label_width_166">直销人员联系方式：</label>
-                <span>{{datas.salPerTel}}</span>
+                <span>{{datas.directSalesTel}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">家人是否知晓本借款：</label>
-                <span>{{datas.famKnowFlagTxt}}</span>
+                <span>{{datas.familyKnowFlagTxt}}</span>
               </li>
               <li>
-                <p v-if="datas.famKnowFlag=='1'">
+                <p v-if="datas.familyKnowFlag=='1'">
                   <label class="label_width_166">知晓人姓名：</label>
-                  <span>{{datas.knowerName}}</span>
+                  <span>{{datas.knowName}}</span>
                 </p>
               </li>
               <li>
-                <p v-if="datas.famKnowFlag=='1'">
+                <p v-if="datas.familyKnowFlag=='1'">
                   <label class="label_width_166">与本人关系：</label>
-                  <span>{{datas.knowerRelationTxt}}</span>
+                  <span>{{datas.knowReleationTxt}}</span>
                 </p>
               </li>
             </div>
             <li>
               <label class="label_width_166">客户符合何种产品：</label>
-              <span>{{datas.proName}}</span>
+              <span>{{datas.productName}}</span>
             </li>
             <li>
               <label class="label_width_166">紧急程度：</label>
-              <span>{{datas.emerTypeTxt}}</span>
+              <span>{{datas.emergencyTypeTxt}}</span>
             </li>
             <li>
-              <p v-if="datas.emerType=='02'">
+              <p v-if="datas.emergencyType=='02'">
                 <label class="label_width_166">加急费用[元]：</label>
-                <span>{{datas.emerAmt}}</span>
+                <span>{{datas.emergencyAmt}}</span>
               </p>
             </li>
           </ul>

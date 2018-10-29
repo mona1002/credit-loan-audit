@@ -6,7 +6,8 @@
           <div class="pai" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
             <router-link :to='tag.StatefullPath' ref="tag_self">
               <p class="button_bottom" :class="[isActive(tag)?'active':'']">
-                <span v-show="tag.name!='工作台'" @click.stop.prevent="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}
+                <span v-show="tag.name!='工作台'" @click.stop.prevent="handleClose(tag,$event)" class="el-icon-close close_tag">
+                </span> {{tag.name}}
               </p>
             </router-link>
           </div>
@@ -328,8 +329,6 @@
           this.nodeName = "质检未分配流程";
         } else if (route.path == '/PneCtrl') {
           this.nodeName = "大数据风控详情页";
-        } else if (route.path == '/SocialSe') {
-          this.nodeName = "社保公积金";
         } else if (route.path == '/IntegratedQuery') {
           this.nodeName = "综合查询";
         } else if (route.path == '/MatchingInfQuery') {
@@ -380,27 +379,27 @@
           this.nodeName = "自动通知查询";
         } else if (route.path == '/DirectSeller') { // 定时任务
           this.nodeName = "直销人员查询";
-        }else if (route.path == '/applyLedger') { // 定时任务
+        } else if (route.path == '/applyLedger') { // 定时任务
           this.nodeName = "申请台账";
         } else if (route.path == '/appLedgerDetail') { // 定时任务
           this.nodeName = "申请台账-详情";
         } else if (route.path == '/borrowLedger') { // 定时任务
           this.nodeName = "借款台账";
-        }else if (route.path == '/brrLedgerDetail') { // 定时任务
+        } else if (route.path == '/brrLedgerDetail') { // 定时任务
           this.nodeName = "借款台账-申请信息";
         } else if (route.path == '/greyLIst') { // 灰名单
           this.nodeName = "灰名单查询";
-        }  else if (route.path == '/blackList') { // 黑名单库
+        } else if (route.path == '/blackList') { // 黑名单库
           this.nodeName = "黑名单库";
-        }  else if (route.path == '/blackListOutApply') { // 黑名单转出申请
+        } else if (route.path == '/blackListOutApply') { // 黑名单转出申请
           this.nodeName = "黑名单转出申请";
-        }  else if (route.path == '/blackListOutApr') { // 黑名单转出审批
+        } else if (route.path == '/blackListOutApr') { // 黑名单转出审批
           this.nodeName = "黑名单转出审批";
-        }  else if (route.path == '/blackListToApply') { // 黑名单转入申请
+        } else if (route.path == '/blackListToApply') { // 黑名单转入申请
           this.nodeName = "黑名单转入申请";
-        }  else if (route.path == '/blackListToApr') { // 黑名单转入审批
+        } else if (route.path == '/blackListToApr') { // 黑名单转入审批
           this.nodeName = "黑名单转入审批";
-        } 
+        }
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
           name: this.nodeName,
