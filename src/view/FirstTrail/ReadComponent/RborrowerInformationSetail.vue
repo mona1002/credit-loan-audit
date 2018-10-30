@@ -490,6 +490,8 @@
                 this.borestateList[i].estateType = '亲属住房'
               } else if (this.borestateList[i].estateType == '07') {
                 this.borestateList[i].estateType = '单位宿舍'
+              }else if (this.borestateList[i].estateType == '08') {
+                this.borestateList[i].estateType = '混合型按揭购房'
               };
               if (this.borestateList[i].propertyType == '01') {
                 this.borestateList[i].propertyType = '宅基地'
