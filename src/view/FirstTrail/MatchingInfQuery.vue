@@ -38,7 +38,7 @@
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.matchApplyId'>申请信息</capplicationInformationDetail>
             </keep-alive>
-            <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
+            <borrowerInformationDetail v-if=" this.tabContent1==4"  :applyId='tastwaitingPass.matchApplyId'>借款人资料</borrowerInformationDetail>
             <RPhoneCredit v-if=" this.tabContent1==5" :applyId='tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
             <keep-alive v-if="Routes.closed">
@@ -83,7 +83,7 @@
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.matchApplyId' roles='MatchingInfQuery'>申请信息</capplicationInformationDetail>
           </keep-alive>
-          <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
+          <borrowerInformationDetail v-if=" this.tabContent2==4" :applyId='tastwaitingPass.matchApplyId'>借款人资料</borrowerInformationDetail>
           <RPhoneCredit v-if=" this.tabContent2==5" :applyId='tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <keep-alive v-if="Routes.closed">
@@ -130,7 +130,7 @@
   import AudioVisual from "./detailComponent/AudioVisual.vue";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft.vue";
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
-  import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
+  import borrowerInformationDetail from "./checkComponent/borrowerInformationDetail.vue"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation.vue"; //账务信息
   import aAprovalConclusion from "../AntiFraud/components/aAprovalConclusion.vue"; //信审审批结论轨迹
@@ -349,7 +349,7 @@
       AudioVisualLeft,
       FCreditForm,
       capplicationInformationDetail,
-      RborrowerInformationSetail, //借款人资料
+      borrowerInformationDetail, //借款人资料
       RFinanceInformation, //账务信息
       aAprovalConclusion, //信审审批结论归结
       remark, // 备注信息

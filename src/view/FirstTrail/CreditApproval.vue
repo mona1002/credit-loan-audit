@@ -246,10 +246,10 @@
                   </el-form-item>
                 </div>
                 <div class="bfc">
-                  <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft" prop="holiday">
+                  <!-- <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft" prop="holiday">
                     {{creditScore}}
-                  </el-form-item>
-                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth" prop="holiday">
+                  </el-form-item> -->
+                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabLeft" prop="holiday">
                     {{loanType}}
                   </el-form-item>
                 </div>

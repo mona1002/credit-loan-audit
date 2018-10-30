@@ -1,4 +1,4 @@
-<!-- 内匹 借款人资料详情 -->
+<!-- 内匹 借款人资料详情=已整合 待删除 -->
 <template>
   <div class="borrowerInformationSetail">
     <el-collapse v-model="activeNames">
@@ -280,21 +280,21 @@
             <li>
               <label class="label_width_166">车贷每月还款额[元]：</label>
               <span>{{borDebt.carLoanAmt}}</span>
-              <li>
-                <label class="label_width_166">其他贷款每月还款额[元]：</label>
-                <span>{{borDebt.otherLoanAmt}}</span>
-                <li>
-                  <label class="label_width_166">负债合计[元]：</label>
-                  <span>{{borDebt.totalLoan}}</span>
-                </li>
-                <li>
-                  <label class="label_width_166">最近三个月信用卡/贷款申请次数：</label>
-                  <span>{{borDebt.loanNumber}}</span>
-                </li>
-                <li class="text_area_li triplet_textarea_width">
-                  <label class="label_width_166">文字说明：</label>
-                  <span class="text_area_span text_area_span_minus220">{{borDebt.remark}}</span>
-                </li>
+            <li>
+              <label class="label_width_166">其他贷款每月还款额[元]：</label>
+              <span>{{borDebt.otherLoanAmt}}</span>
+            <li>
+              <label class="label_width_166">负债合计[元]：</label>
+              <span>{{borDebt.totalLoan}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">最近三个月信用卡/贷款申请次数：</label>
+              <span>{{borDebt.loanNumber}}</span>
+            </li>
+            <li class="text_area_li triplet_textarea_width">
+              <label class="label_width_166">文字说明：</label>
+              <span class="text_area_span text_area_span_minus220">{{borDebt.remark}}</span>
+            </li>
           </ul>
         </div>
       </el-collapse-item>
@@ -419,53 +419,6 @@
         this.taskInWaitting = JSON.parse(localStorage.getItem("QT")) //综合查询
       }
       this.request(this.taskInWaitting.matchApplyId);
-      if (this.isFull == false) { // 分屏
-        //信用卡使用总况
-        $(".xinyongka").width('930px');
-        $(".xinyongka ul li span").width('150px');
-        //负债信息
-        $(".fuzhaixinxi").width('930px');
-        $(".fuzhaixinxi ol li span").width('150px');
-        $(".fuzhaixinxi ol.num li:nth-of-type(2)").css({
-          "padding-left": 'calc( 16.6% - 150px )',
-          "padding-right": 'calc( 16.6% - 150px )'
-        });
-        //征询报告
-        $(".zhengxunbaogao ol:nth-of-type(2) li").css({
-          "padding-left": 'calc( 16.6% - 150px )',
-          "padding-right": 'calc( 49.9% - 150px )'
-        });
-        $(".zhengxunbaogao ol li .tipDiv").width('150px');
-        //其他信息
-        $(".qita").width('930px');
-        $(".qita ol li").css({
-          'padding-right': 'calc( 49.9% - 155px )',
-          'padding-left': 'calc( 16.6% - 155px )'
-        });
-
-      } else if (this.isFull == true) { // 全屏
-        $(".xinyongka").width('100%');
-        $(".xinyongka ul li span").width('200px');
-        //负债信息
-        $(".fuzhaixinxi").width('100%');
-        $(".fuzhaixinxi ol li span").width('200px');
-        $(".fuzhaixinxi ol.num li:nth-of-type(2)").css({
-          "padding-left": 'calc( 16.6% - 180px )',
-          "padding-right": 'calc( 16.6% - 180px )'
-        });
-        //征询报告
-        $(".zhengxunbaogao ol:nth-of-type(2) li").css({
-          "padding-left": 'calc( 16.6% - 174px )',
-          "padding-right": 'calc( 49.9% - 174px )'
-        });
-        $(".zhengxunbaogao ol li .tipDiv").width('200px');
-        //其他信息
-        $(".qita").width('100%');
-        $(".qita ol li").css({
-          "padding-left": 'calc( 16.6% - 174px )',
-          "padding-right": 'calc( 49.9% - 174px )'
-        });
-      }
     },
     methods: {
       request(param) {
@@ -490,7 +443,7 @@
                 this.borestateList[i].estateType = '亲属住房'
               } else if (this.borestateList[i].estateType == '07') {
                 this.borestateList[i].estateType = '单位宿舍'
-              }else if (this.borestateList[i].estateType == '08') {
+              } else if (this.borestateList[i].estateType == '08') {
                 this.borestateList[i].estateType = '混合型按揭购房'
               };
               if (this.borestateList[i].propertyType == '01') {
@@ -824,49 +777,49 @@
       isFull: function (val) {
         if (this.isFull == false) { // 分屏
           //信用卡使用总况
-          $(".xinyongka").width('930px');
-          $(".xinyongka ul li span").width('150px');
+          // $(".xinyongka").width('930px');
+          // $(".xinyongka ul li span").width('150px');
           //负债信息
-          $(".fuzhaixinxi").width('930px');
-          $(".fuzhaixinxi ol li span").width('150px');
-          $(".fuzhaixinxi ol.num li:nth-of-type(2)").css({
-            "padding-left": 'calc( 16.6% - 150px )',
-            "padding-right": 'calc( 16.6% - 150px )'
-          });
-          //征询报告
-          $(".zhengxunbaogao ol:nth-of-type(2) li").css({
-            "padding-left": 'calc( 16.6% - 150px )',
-            "padding-right": 'calc( 49.9% - 150px )'
-          });
-          $(".zhengxunbaogao ol li .tipDiv").width('150px');
-          //其他信息
-          $(".qita").width('930px');
-          $(".qita ol li").css({
-            'padding-right': 'calc( 49.9% - 155px )',
-            'padding-left': 'calc( 16.6% - 155px )'
-          });
+          // $(".fuzhaixinxi").width('930px');
+          // $(".fuzhaixinxi ol li span").width('150px');
+          // $(".fuzhaixinxi ol.num li:nth-of-type(2)").css({
+          //   "padding-left": 'calc( 16.6% - 150px )',
+          //   "padding-right": 'calc( 16.6% - 150px )'
+          // });
+          // //征询报告
+          // $(".zhengxunbaogao ol:nth-of-type(2) li").css({
+          //   "padding-left": 'calc( 16.6% - 150px )',
+          //   "padding-right": 'calc( 49.9% - 150px )'
+          // });
+          // $(".zhengxunbaogao ol li .tipDiv").width('150px');
+          // //其他信息
+          // $(".qita").width('930px');
+          // $(".qita ol li").css({
+          //   'padding-right': 'calc( 49.9% - 155px )',
+          //   'padding-left': 'calc( 16.6% - 155px )'
+          // });
         } else if (this.isFull == true) { // 全屏
-          $(".xinyongka").width('100%');
-          $(".xinyongka ul li span").width('200px');
+          // $(".xinyongka").width('100%');
+          // $(".xinyongka ul li span").width('200px');
           //负债信息
-          $(".fuzhaixinxi").width('100%');
-          $(".fuzhaixinxi ol li span").width('200px');
-          $(".fuzhaixinxi ol.num li:nth-of-type(2)").css({
-            "padding-left": 'calc( 16.6% - 180px )',
-            "padding-right": 'calc( 16.6% - 180px )'
-          });
+          // $(".fuzhaixinxi").width('100%');
+          // $(".fuzhaixinxi ol li span").width('200px');
+          // $(".fuzhaixinxi ol.num li:nth-of-type(2)").css({
+          //   "padding-left": 'calc( 16.6% - 180px )',
+          //   "padding-right": 'calc( 16.6% - 180px )'
+          // });
           //征询报告
-          $(".zhengxunbaogao ol:nth-of-type(2) li").css({
-            "padding-left": 'calc( 16.6% - 174px )',
-            "padding-right": 'calc( 49.9% - 174px )'
-          });
-          $(".zhengxunbaogao ol li .tipDiv").width('200px');
+          // $(".zhengxunbaogao ol:nth-of-type(2) li").css({
+          //   "padding-left": 'calc( 16.6% - 174px )',
+          //   "padding-right": 'calc( 49.9% - 174px )'
+          // });
+          // $(".zhengxunbaogao ol li .tipDiv").width('200px');
           //其他信息
-          $(".qita").width('100%');
-          $(".qita ol li").css({
-            "padding-left": 'calc( 16.6% - 174px )',
-            "padding-right": 'calc( 49.9% - 174px )'
-          });
+          // $(".qita").width('100%');
+          // $(".qita ol li").css({
+          //   "padding-left": 'calc( 16.6% - 174px )',
+          //   "padding-right": 'calc( 49.9% - 174px )'
+          // });
         }
       }
 

@@ -37,7 +37,7 @@
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId' :roles='Flag=="05"?"reconsiderApp_commissioner":"antiFraudApp_manager" '></capplicationInformationDetail>
           </keep-alive>
-          <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
+          <AborrowerInformationDetail v-if=" this.tabContent2==4" :applyId='tastwaitingPass.applyId'></AborrowerInformationDetail>
           <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
           <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='tastwaitingPass.applyId'
             :FinalConCheckShow='true'></FCreditForm>
