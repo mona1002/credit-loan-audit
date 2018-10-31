@@ -40,7 +40,7 @@
             <keep-alive v-if="Routes.closed">
               <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.ApplyId'>申请信息</applicationInformationDetail>
             </keep-alive>
-            <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
+            <borrowerInformationDetail v-if=" this.tabContent1==4" :applyId='tastwaitingPass.ApplyId'>借款人资料</borrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
             <keep-alive v-if="Routes.closed">
@@ -104,15 +104,15 @@
             <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.ApplyId'></AudioVisual>
           </keep-alive>
           <remark v-if=" this.tabContent2==1" :applyId='tastwaitingPass.ApplyId'></remark>
-          <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
+          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
           <keep-alive v-if="Routes.closed">
             <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.ApplyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
           </keep-alive>
-          <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
-          <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
-          <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
+          <borrowerInformationDetail v-if=" this.tabContent2==4" :applyId='tastwaitingPass.ApplyId'></borrowerInformationDetail>
+          <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> </PhoneCredit>
+          <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'></FCreditForm>
           <keep-alive v-if="Routes.closed">
-            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.ApplyId'></creditInvestigation>
           </keep-alive>
           <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'>
@@ -178,7 +178,7 @@
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft.vue";
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
   import processTrajectory from'./checkComponent/processTrajectory.vue';//流程轨迹
-  import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
+  import borrowerInformationDetail from "./checkComponent/borrowerInformationDetail.vue"; //借款人资料 
   import applicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import aAprovalConclusion from "../AntiFraud/components/aAprovalConclusion.vue"; //信审审批结论轨迹
@@ -499,7 +499,7 @@
       processTrajectory,
       FCreditForm,
       applicationInformationDetail,
-      RborrowerInformationSetail, //借款人资料
+      borrowerInformationDetail, //借款人资料
       RFinanceInformation, //账务信息
       aAprovalConclusion, //信审审批结论归结
       remark, // 备注信息

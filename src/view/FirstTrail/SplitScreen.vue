@@ -37,7 +37,7 @@
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.applyId'></capplicationInformationDetail>
             </keep-alive>
-            <cborrowerInformationDetail v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
+            <cborrowerInformationDetail v-if=" this.tabContent1==4"  :applyId='tastwaitingPass.applyId'></cborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.applyId' :PhoneAndInterShow="false"></FCreditForm>
             <keep-alive v-if="Routes.closed">

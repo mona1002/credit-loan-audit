@@ -37,7 +37,7 @@
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.applyId'></capplicationInformationDetail>
             </keep-alive>
-            <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
+            <cborrowerInformationDetail v-if=" this.tabContent1==4" :applyId='tastwaitingPass.applyId'></cborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId=' this.tastwaitingPass.applyId' :TrilPersonShow='true'
               :FinalConCheckShow='true'></FCreditForm>
@@ -79,7 +79,7 @@
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId' roles='creditApp_finalTrial'
               :btn="true"></capplicationInformationDetail>
           </keep-alive>
-          <cborrowerInformationDetail v-if=" this.tabContent2==4" :isFull.sync="isFull"></cborrowerInformationDetail>
+          <cborrowerInformationDetail v-if=" this.tabContent2==4"  :applyId='tastwaitingPass.applyId'></cborrowerInformationDetail>
           <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId=' tastwaitingPass.applyId' :TrilPersonShow='true'
             :FinalConEditShow='true' :makeSureBtnShow="true"></FCreditForm>

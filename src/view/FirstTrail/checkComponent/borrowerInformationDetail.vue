@@ -404,7 +404,13 @@
         taskInWaitting: '',
       };
     },
-    props: ['isFull'],
+    props: {
+      applyId: {
+        default: '',
+        required: true,
+        type: String
+      }
+    },
     judgeFlag: '',
     mounted() {
       this.mountedInf();
@@ -415,14 +421,8 @@
         this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
         if (this.judgeFlag.flag == '01') {
           this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-        } else if (this.judgeFlag.flag == '02') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈
-        } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
         }
-        this.request(this.taskInWaitting.applyId);
+        this.request(this.applyId);
       },
       request(param) {
         this.post("/borrower/getBorrowerInfo", {
@@ -446,6 +446,8 @@
                 this.borestateList[i].estateType = '亲属住房'
               } else if (this.borestateList[i].estateType == '07') {
                 this.borestateList[i].estateType = '单位宿舍'
+              }else if (this.borestateList[i].estateType == '08') {
+                this.borestateList[i].estateType = '混合型按揭购房'
               };
               if (this.borestateList[i].propertyType == '01') {
                 this.borestateList[i].propertyType = '宅基地'

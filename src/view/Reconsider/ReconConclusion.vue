@@ -225,10 +225,10 @@
                   </el-form-item>
                 </div>
                 <div class="bfc">
-                  <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft">
+                  <!-- <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft">
                     {{creditScore}}
-                  </el-form-item>
-                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth">
+                  </el-form-item> -->
+                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabLeft">
                     {{datas.appTypeTxt}}
                   </el-form-item>
                 </div>
