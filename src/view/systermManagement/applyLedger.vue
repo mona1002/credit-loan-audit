@@ -723,8 +723,6 @@
         this.post('/credit/getSmOrgByLevelCate', {
           orgLevel: '06',
           orgCate: '01',
-          sort: 'orgCode',
-          order: 'asc'
         }).then(res => {
           if (res.statusCode == 200) {
             this.agency = res.data;

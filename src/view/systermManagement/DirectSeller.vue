@@ -221,7 +221,6 @@
         this.inquire(this.params);
       },
       inquire(pam) {
-        // 基础接口-综合查询
         this.post("/credit/filteredSalePer", pam).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data.rows;
