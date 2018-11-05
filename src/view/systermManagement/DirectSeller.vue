@@ -32,11 +32,6 @@
         </el-row>
         <el-row class="row row2" type="flex">
           <el-col :span="6" class="search-item">
-            <!-- <span class="keywordText">用户状态：</span>
-            <el-select v-model="params.validFlag" placeholder="请选择">
-              <el-option v-for="item in Status" :key='item.value' :label="item.label" :value="item.value">
-              </el-option>
-            </el-select> -->
           </el-col>
           <el-col :span="6" class="search-item">
           </el-col>
@@ -98,8 +93,8 @@
           tel: '',
           validFlag: '',
           orgName: '',
-          page: 1,
-          rows: 10
+          pageNum: 1,
+          pageSize: 10
         },
         totalRecord: 0, //总条数
         Routes:this.$router.options.routes,
@@ -223,8 +218,8 @@
       inquire(pam) {
         this.post("/credit/filteredSalePer", pam).then(res => {
           if (res.statusCode == 200) {
-            this.tableData = res.data.rows;
-            this.totalRecord= res.data.total;
+            this.tableData = res.data.recordList;
+            this.totalRecord= res.data.totalRecord;
           } else {
             this.tableData = [];
              this.totalRecord=0;
@@ -236,7 +231,6 @@
     created() {
       this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
       this.getinstitution();
-      // this.Routes = this.$router.options.routes;
     }
   }
 

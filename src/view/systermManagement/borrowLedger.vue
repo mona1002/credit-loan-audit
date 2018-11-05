@@ -1,5 +1,5 @@
 <template>
-  <!--接口款台账 -->
+  <!--借款台账 -->
   <div class="taskWatting main-div el-table_400_scroll">
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
@@ -1603,7 +1603,6 @@
               this.getData = {};
             }
           } else {
-
             this.$message.error(res.msg);
           }
         });

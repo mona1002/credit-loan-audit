@@ -275,6 +275,27 @@
                   </el-form-item>
                 </div>
                 <div class="bfc">
+                  <el-form-item class="fr alert_collapse_inputLabel" label="授信金额[元]：" :label-width="formApproLab">
+                    <el-input v-model="aaaaa" @blur="moneyBlur(aaaaa, 'aaaaa') "></el-input>
+                  </el-form-item>
+                  <el-form-item class="fl alert_collapse_inputLabel" label="授信期限[月]：" :label-width="formApproLab">
+                    <el-select v-model="bbbbb ">
+                      <el-option v-for="item in bbbbbTerms " :label="item.appDuration " :value="item " :key="item.appDuration ">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="授信开始日期：" :label-width="formApproLab">
+                    {{caculData.appmult}}
+                    <!-- creditExtensionBeginDate -->
+                  </el-form-item>
+                  <el-form-item class="presentation" label="授信截止日期：" :label-width="formApproLab">
+                    {{caculData.eachTermamt }}
+                    <!-- {{creditExtensionEndDate}} -->
+                  </el-form-item>
+                </div>
+                <div class="bfc">
                   <el-form-item class="presentation" label="审批倍数：" :label-width="formApproLab">
                     {{caculData.appmult}}
                   </el-form-item>
@@ -303,7 +324,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="sdialogVisible=false">取 消</el-button>
-        <el-button type="primary" :loading=shenpiLoading @click="spsure"> {{shenpiFont}}</el-button>
+        <el-button type="primary" :loading='shenpiLoading' @click="spsure"> {{shenpiFont}}</el-button>
       </div>
     </el-dialog>
     <!-- 审批流程轨迹 -->
@@ -369,7 +390,6 @@
   </div>
 </template>
 <script type="text/javascript">
-  import baseurl from '../../util/ConstantSocialAndPn';
   export default {
     data() {
       return {
@@ -379,6 +399,9 @@
         formApproLabelWidth: "200px",
         fbalance: '',
         fbalance2: '',
+        aaaaa: '',
+        bbbbb: '',
+        bbbbbTerms: [],
         FormReturn: {
           rollbackNodeName: '',
           mainReasonName: '',
@@ -721,42 +744,30 @@
       spsure() {
         // 月核实收入
         if (!this.verIncome) {
-          this.$message({
-            message: "提示：请填写月核实收入!",
-            type: 'warning'
-          });
-          return;
-        }
-        // 批准产品 id
-        if (!this.proId) {
-          this.$message({
-            message: "提示：请选择批准产品!",
-            type: 'warning'
-          });
+          this._error('请填写月核实收入!')
           return;
         }
         // 批准期限
         if (!this.ploanTerm) {
-          this.$message({
-            message: "提示：请选择批准期限!",
-            type: 'warning'
-          });
+          this._error('请选择批准期限!')
           return;
         }
         // 批准金额 ploanAmt
         if (!this.ploanAmt) {
-          this.$message({
-            message: "提示：请填写批准金额!",
-            type: 'warning'
-          })
+          this._error('请填写批准金额!')
+          return;
+        }
+        if (!this.aaaaa) {
+          this._error('请填写授信金额!')
+          return;
+        }
+        if (!this.bbbbb) {
+          this._error('请填写授信期限!')
           return;
         }
         // 意见说明 appConclusion
         if (!this.appConclusion) {
-          this.$message({
-            message: "提示：请填写意见说明!",
-            type: 'warning'
-          })
+          this._error("请填写意见说明")
           return;
         };
         //按钮加“加载中”
@@ -764,6 +775,8 @@
         this.shenpiFont = '提交中';
         var reg = /,/g;
         this.post('/creauditOpinion/add', {
+          bbbbb: this.bbbbb.replace(reg, '') * 1, //授信期限
+          aaaaa: this.aaaaa.replace(reg, '') * 1, //授信金额
           applyId: this.applyId,
           auditType: '02',
           proCode: this.proCode, //产品编号
@@ -833,13 +846,16 @@
             }
             this.calculateByAuditInfo();
             break;
+          case 'aaaaa':
+            this.aaaaa = this._formatNumber(this.aaaaa);
+            break;
           case 'ploanAmt':
             if (val * 1 > this.maxAmounnt) {
               this.$message({
                 message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
                 type: 'warning'
               });
-              this.ploanAmt = '';
+              this.aaaaa = this.ploanAmt = '';
               return
             };
             if (val * 1 < this.minAmount) {
@@ -847,19 +863,10 @@
                 message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
                 type: 'warning'
               });
-              this.ploanAmt = '';
+              this.aaaaa = this.ploanAmt = '';
               return
             };
-            // 大于申请金额
-            // if (val * 1 > this.loanAmt) {
-            //   this.$message({
-            //     message: '此金额不能大于申请金额,请重新输入!',
-            //     type: 'warning'
-            //   });
-            //   this.ploanAmt = '';
-            //   return
-            // };
-            this.ploanAmt = this._formatNumber(this.ploanAmt);
+            this.aaaaa = this.ploanAmt = this._formatNumber(this.ploanAmt);
             this.calculateByAuditInfo();
             break;
         }
@@ -893,7 +900,7 @@
           // 审批结论数据
           if (res.statusCode == '200') {
             this.caculData = res.data;
-             if (res.data.totalRate * 100 > this.debtRate || res.data.inteDebitrate * 100 > this.debtRate) { //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
+            if (res.data.totalRate * 100 > this.debtRate || res.data.inteDebitrate * 100 > this.debtRate) { //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
               this.ploanAmt = '' //批准金额
               this._error('内部负债率/总负债率超过该产品对应的最大负债率！')
               return
@@ -1134,16 +1141,12 @@
       },
       //大数据风控
       tobigData() {
-        // this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-        //   applyId: this.applyId
-        // }).then(res => {
         this.$router.push({
           name: 'PneCtrl',
           params: {
             newOne: true,
           }
         });
-        // });
       },
       del() {
         this.$store.dispatch('delVisitedViews', {
