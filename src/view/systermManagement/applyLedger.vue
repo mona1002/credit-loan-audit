@@ -159,7 +159,7 @@
         </el-table-column>
         <el-table-column prop="creditTime" label="授信日期" fixed width="100">
         </el-table-column>
-        <el-table-column prop="appDate" label="申请日期" fixed sortable width="100">
+        <el-table-column prop="applyDate" label="申请日期" fixed sortable width="100">
         </el-table-column>
         <el-table-column prop="custName" label="客户名称" fixed width="80">
         </el-table-column>
@@ -177,15 +177,15 @@
             {{ scope.row.mobile | MobileStar }}
           </template>
         </el-table-column>
-        <el-table-column prop="appTypeTxt" label="申请类型" width="80">
+        <el-table-column prop="applyTypeTxt" label="申请类型" width="80">
         </el-table-column>
-        <el-table-column prop="borrTypeTxt" label="借款人类型" width="90">
+        <el-table-column prop="borrowTypeTxt" label="借款人类型" width="90">
         </el-table-column>
-        <el-table-column prop="emerTypeTxt" label="紧急程度" align='center' width="80">
+        <el-table-column prop="emergencyTypeTxt" label="紧急程度" align='center' width="80">
         </el-table-column>
-        <el-table-column prop="proTypeTxt" label="产品类型" width="80">
+        <el-table-column prop="productTypeTxt" label="产品类型" width="80">
         </el-table-column>
-        <el-table-column prop="proName" label="产品名称" width="105">
+        <el-table-column prop="productName" label="产品名称" width="105">
         </el-table-column>
         <el-table-column prop="loanAmt" label="借款金额[元]" width="110">
         </el-table-column>
@@ -195,13 +195,13 @@
         </el-table-column>
         <el-table-column prop="guarnTypeTxt" label="担保方式" width="80">
         </el-table-column>
-        <el-table-column prop="comBorrFlagTxt" label="是否共同借款" width="100">
+        <el-table-column prop="commonBorrowFlagTxt" label="是否共同借款" width="100">
         </el-table-column>
-        <el-table-column prop="sourcesChanTxt" label="来源渠道" width="80">
+        <el-table-column prop="channelTxt" label="来源渠道" width="80">
         </el-table-column>
-        <el-table-column prop="salPerCode" label="直销人员" width="100">
+        <el-table-column prop="directSalesCode" label="直销人员" width="100">
         </el-table-column>
-        <el-table-column prop="salPerName" label="直销人员名称" width="100">
+        <el-table-column prop="directSalesName" label="直销人员名称" width="100">
         </el-table-column>
         <el-table-column prop="teamLeaderCode" label="团队经理" width="100">
         </el-table-column>
@@ -211,13 +211,13 @@
         </el-table-column>
         <el-table-column prop="subOrgName" label="进件团队名称" width="100">
         </el-table-column>
-        <el-table-column prop="appSerPerCode" label="进件客服" width="100">
+        <el-table-column prop="applyCustServCode" label="进件客服" width="100">
         </el-table-column>
-        <el-table-column prop="appSerPerName" label="进件客服名称" width="100">
+        <el-table-column prop="applyCustServName" label="进件客服名称" width="100">
         </el-table-column>
-        <el-table-column prop="appOrgCode" label="进件机构" width="100">
+        <el-table-column prop="applyOrgCode" label="进件机构" width="100">
         </el-table-column>
-        <el-table-column prop="appOrgName" label="进件机构名称" width="130">
+        <el-table-column prop="applyOrgName" label="进件机构名称" width="130">
         </el-table-column>
         <el-table-column prop="busiStateTxt" label="业务状态" min-width="110">
         </el-table-column>
