@@ -64,17 +64,6 @@
             this.$message.error(res.msg);
           }
         })
-        // this.get('/insConclusion/getInsProcessTraceList', {
-        //     applyId: this.applyId
-        //   })
-        //   .then(res => {
-        //     if (res.statusCode == 200) {
-        //       this.tableData = res.data.taskDetailList;
-        //     } else {
-        //       this.tableData = [];
-        //       this._error(res.msg)
-        //     }
-        //   })
       },
     },
   }

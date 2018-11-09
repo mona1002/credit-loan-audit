@@ -377,11 +377,13 @@
       getProcessTraceList(id) {
         processMoniSer
           .getProcessTraceList({
-            processInstanceId: id,
-            processStatus: "01"
+            params: {
+              processInstanceId: id,
+                processStatus: "01"
+            }
           })
           .then(res => {
-            this.traceList = res.data.taskDetailList;
+            this.traceList = res.data.data;
           })
       },
       // 转分派流程轨迹

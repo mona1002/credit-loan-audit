@@ -373,11 +373,12 @@
           .getProcessTraceList({
             params: {
               processInstanceId: id,
+                processStatus: "01"
             }
-            // processStatus: "01"
           })
           .then(res => {
-            this.traceList = res.data.taskDetailList;
+            console.log(res)
+            this.traceList = res.data.data;
           })
       },
       // 转分派流程轨迹

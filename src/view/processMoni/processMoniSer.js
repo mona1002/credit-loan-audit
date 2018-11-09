@@ -16,7 +16,7 @@ var URL = {
   // 查询审批流程轨迹
   getProcessTraceList: "get::/creauditInfo/getProcessTraceList",
   // 查询质检流程轨迹
-  getQTProcessTraceList:'/insConclusion/getInsProcessTraceList',
+  // getQTProcessTraceList:'/insConclusion/getInsProcessTraceList',
   // 转办任务
   transmitTask: "/creauditInfo/transmitTask",
  

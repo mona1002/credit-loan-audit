@@ -2057,9 +2057,13 @@
       // 流程轨迹-工作流接口-查询流程轨迹
       getLcgjList() {
         this.lcdialogVisible = true;
-        this.post(baseurlBPM.baseUrl_common2 + '/bpmService/getProcessTraceList', {
-            processInstanceId: this.processInstanceIdParams,
-            processStatus: '01'
+        this.get('/creauditInfo/getProcessTraceList', {
+            // processInstanceId: this.processInstanceIdParams,
+            // processStatus: '01'
+            params: {
+              processInstanceId: this.processInstanceIdParams,
+              processStatus: "02"
+            }
           })
           .then(res => {
             this.lcgjData = res.taskDetailList;
