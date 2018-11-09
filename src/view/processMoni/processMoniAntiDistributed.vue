@@ -372,7 +372,7 @@
         processMoniSer
           .getProcessTraceList({
             processInstanceId: id,
-            processStatus: "01"
+            // processStatus: "01"
           })
           .then(res => {
             this.traceList = res.data.taskDetailList;
@@ -492,7 +492,7 @@
             return
           }
         }
-
+console.log(this.multipleSelection[0])
         if (flag === 'trace') {
           this.dialogTraceVisible = true;
           this.getProcessTraceList(this.multipleSelection[0].processInstanceId);
