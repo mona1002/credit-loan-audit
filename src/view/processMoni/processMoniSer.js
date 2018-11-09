@@ -8,13 +8,13 @@ var URL = {
 
 
 
-  
+
   // 转分派任务轨迹
   // getTransmitHistoryList: "bpmService/getTransmitHistoryList",
-  getTransmitHistoryList: "/creauditInfo/getTransmitHistoryList",
+  getTransmitHistoryList: "get::/creauditInfo/getTransmitHistoryList",
 
   // 查询审批流程轨迹
-  getProcessTraceList: "/creauditInfo/getProcessTraceList",
+  getProcessTraceList: "get::/creauditInfo/getProcessTraceList",
   // 查询质检流程轨迹
   getQTProcessTraceList:'/insConclusion/getInsProcessTraceList',
   // 转办任务

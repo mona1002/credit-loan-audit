@@ -364,7 +364,7 @@
       getCurrentUserFlowRole() {
         this.post(constant.baseUrl_user + "remote/user/getBpmUser", {
           data: {
-            flowRoleCode: this.multipleSelection[0].flowRoleCode,
+            flowRoleCode: this.multipleSelection[0].groupId,
             orgCode: this.multipleSelection[0].orgCode,
             validFlag: "0"
           }
@@ -534,7 +534,7 @@
           this.getProcessTraceList(this.multipleSelection[0].processInstanceId);
         } else if (flag === "assign") {
           this.dialogAssignVisible = true;
-          this.getFlowRoleName(this.multipleSelection[0].flowRoleCode);
+          this.getFlowRoleName(this.multipleSelection[0].groupId);
           this.getCurrentUserFlowRole();
         } else if (flag === "trans") {
           this.dialogTransVisible = true;
