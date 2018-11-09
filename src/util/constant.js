@@ -20,6 +20,7 @@ if (host === productionEnv) {
   // port= 20716;
 } else {
   host = testEnv;
+  host=developmentEnv;
   // host = '10.1.26.203';
   // port= 20716;
 }
