@@ -17,7 +17,7 @@
             <el-input v-model.trim="params.tel" placeholder="请输入手机号码"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
-            <span class="keywordText">所属机构： </span>
+            <!-- <span class="keywordText">所属机构： </span>
             <div @click.stop="getDropDownSelect" class="dropdown" style="display:inline-block;position:relative;">
               <span class="dropdownInput" v-show="subOrg">{{subOrg}}</span>
               <span class="dropdownInput" v-show="!subOrg" style="color:#B5BCCD;">请选择所属机构</span>
@@ -25,6 +25,15 @@
                 <el-tree :data="orgDatasEdit" node-key="id" :load="loadNode" lazy :props="defaultProps"
                   :expand-on-click-node='false' @node-click="getItemSelect">
                 </el-tree>
+              </div>
+              <i id="dropdownInput-arrow" class="el-select__caret el-input__icon el-icon-arrow-down" :class="{reverse:isActive,reverse2:!isActive}"></i>
+            </div> -->
+            <span class="keywordText">所属机构： </span>
+            <div @click.stop="getDropDownSelect" class="dropdown" style="display:inline-block;position:relative;">
+              <span class="dropdownInput" v-show="subOrg">{{subOrg}}</span>
+              <span class="dropdownInput" v-show="!subOrg" style="color:#B5BCCD;">请选择所属机构</span>
+              <div class="dropList" v-show="dropdownFlag">
+                <el-tree :data="orgDatasEdit" :props="defaultProps" :expand-on-click-node='false' @node-click="getItemSelect"></el-tree>
               </div>
               <i id="dropdownInput-arrow" class="el-select__caret el-input__icon el-icon-arrow-down" :class="{reverse:isActive,reverse2:!isActive}"></i>
             </div>
@@ -97,14 +106,14 @@
           pageSize: 10
         },
         totalRecord: 0, //总条数
-        Routes:this.$router.options.routes,
+        Routes: this.$router.options.routes,
         subOrg: '',
         orgCode: "",
         orgDatasEdit: [],
         defaultProps: {
           children: "children",
-          label: "text",
-          isLeaf: 'leaf',
+          label: "orgName",
+          // isLeaf: 'leaf',
         },
         dropdownFlag: false,
         isActive: false,
@@ -160,34 +169,34 @@
       // 查询的树形结构选取某一级数据，所属机构
       getItemSelect(row, node, arr) {
         this.dropdownFlag = false;
-        this.subOrg = row.text;
+        this.subOrg = row.orgName;
         if (this.subOrg) {
           this.isActive = false;
         };
-        this.params.orgName = row.text;
+        this.params.orgName = row.orgName;
       },
       // 点击展开时加载
-      loadNode(node, resolve) {
-        var data;
-        if (node.data.state == "closed") {
-          this.post('/credit/getSmOrg', {
-            id: node.data.id,
-            isCurrentOrgCode: '0',
-          }).then((res) => {
-            if (res.statusCode == 200) {
-              data = res.data;
-              for (var i = 0, len = data.length; i < len; i++) {
-                if (data[i].state === 'open') {
-                  data[i].leaf = true;
-                }
-              }
-              return resolve(data);
-            }
-          })
-        } else {
-          return resolve([])
-        }
-      },
+      // loadNode(node, resolve) {
+      //   var data;
+      //   if (node.data.state == "closed") {
+      //     this.post('/credit/getSmOrg', {
+      //       id: node.data.id,
+      //       isCurrentOrgCode: '0',
+      //     }).then((res) => {
+      //       if (res.statusCode == 200) {
+      //         data = res.data;
+      //         for (var i = 0, len = data.length; i < len; i++) {
+      //           if (data[i].state === 'open') {
+      //             data[i].leaf = true;
+      //           }
+      //         }
+      //         return resolve(data);
+      //       }
+      //     })
+      //   } else {
+      //     return resolve([])
+      //   }
+      // },
       Rreset() {
         this.params.userName = '';
         this.params.userCode = '';
@@ -219,10 +228,10 @@
         this.post("/credit/filteredSalePer", pam).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data.recordList;
-            this.totalRecord= res.data.totalRecord;
+            this.totalRecord = res.data.totalRecord;
           } else {
             this.tableData = [];
-             this.totalRecord=0;
+            this.totalRecord = 0;
             this.$message.error(res.msg);
           }
         })
