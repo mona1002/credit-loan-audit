@@ -28,8 +28,8 @@
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.proName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+              <span style="float: left; width:66px">{{ item.productName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.productCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
@@ -319,16 +319,15 @@
       createFilter(queryString) {
         return restaurant => {
           return (
-            restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) !=
+            restaurant.productName.toLowerCase().indexOf(queryString.toLowerCase()) !=
             -1
           );
         };
       },
       handleSelect(item) {
-        this.product = item.proName;
-        // this.proId = item.id;
+        this.product = item.productName;
         this.queryParam.proId = item.id;
-        this.selectedProName = item.proName;
+        this.selectedProName = item.productName;
       },
       getUserInf() {
         this.queryParam.processTemplateId = "creditApp";
@@ -407,10 +406,13 @@
       getTransmitHistoryList(id) {
         processMoniSer
           .getTransmitHistoryList({
-            processInstanceId: id
+            params: {
+              processInstanceId: id,
+            }
           })
           .then(res => {
-            this.transList = res.data.assignTaskLogList;
+            console.log(res.data)
+            this.transList = res.data.data.recordList;
           });
       },
 

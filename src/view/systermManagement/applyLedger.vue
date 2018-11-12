@@ -23,33 +23,33 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品类型： </span>
-          <el-select v-model="params.proType" placeholder="请选择">
-            <el-option v-for="item in proType" :key="item.value" :label="item.label" :value="item.value">
+          <el-select v-model="params.productType" placeholder="请选择">
+            <el-option v-for="item in productType" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="ProQuerySearch"
+          <el-autocomplete popper-class="my-autocomplete" v-model="productCode" :debounce='0' :fetch-suggestions="ProQuerySearch"
             placeholder="请输入内容" @select="ProhandleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.proName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+              <span style="float: left; width:66px">{{ item.productName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.productCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">申请类型： </span>
-          <el-select v-model="params.appType" placeholder="请选择">
+          <el-select v-model="params.applyType" placeholder="请选择">
             <el-option v-for="item in applyType" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">借款人类型： </span>
-          <el-select v-model="params.borrType" placeholder="请选择">
+          <el-select v-model="params.borrowType" placeholder="请选择">
             <el-option v-for="item in applierType" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -58,7 +58,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">直销人员： </span>
-          <el-input v-model.trim="params.salPerCode" placeholder="请输入直销人员"></el-input>
+          <el-input v-model.trim="params.directSalesCode" placeholder="请输入直销人员"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">借款用途： </span>
@@ -83,7 +83,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">紧急程度： </span>
-          <el-select v-model="params.emerType" placeholder="请选择">
+          <el-select v-model="params.emergencyType" placeholder="请选择">
             <el-option v-for="item in emergency" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -102,7 +102,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">来源渠道： </span>
-          <el-select v-model="params.sourcesChan" placeholder="请选择">
+          <el-select v-model="params.channel" placeholder="请选择">
             <el-option v-for="item in source" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -118,7 +118,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">进件客服： </span>
-          <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件客服"></el-input>
+          <el-input v-model.trim="params.applyCustServCode" placeholder="请输入进件客服"></el-input>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">授信日期： </span>
@@ -153,9 +153,9 @@
       <el-table :data="tableData" style="width: 100%" height="410" highlight-current-row border @row-click='selectRow'>
         <el-table-column type="index" label=序号 fixed width="50">
         </el-table-column>
-        <el-table-column prop="applyMainNo" label="主进件编号" fixed width="185">
+        <el-table-column prop="applySubNo" label="主进件编号" fixed width="185">
         </el-table-column>
-        <el-table-column prop="applyMainNo" label="进件编号" fixed width="185">
+        <el-table-column prop="applySubNo" label="进件编号" fixed width="185">
         </el-table-column>
         <el-table-column prop="creditTime" label="授信日期" fixed width="100">
         </el-table-column>
@@ -245,33 +245,33 @@
         params: {
           userCode: '', //	用户编号
           applySubNo: '', //	进件编号
-          proType: '', //	产品类型
-          salPerCode: '', //	直销人员
-          emerType: '', //	紧急程度
-          appSerPerCode: '', //	进件客服
+          productType: '', //	产品类型
+          directSalesCode: '', //	直销人员
+          emergencyType: '', //	紧急程度
+          applyCustServCode: '', //	进件客服
           custName_la: '', //	客户名称（输入客户编号）
-          proCode: '', //	产品名称（输入产品编号）
+          productCode: '', //	产品名称（输入产品编号）
           loanPurpose: '', //	借款用途
-          appOrgCode: '', //	进件机构
-          appOrgName: '', //	进件机构名称
+          applyOrgCode: '', //	进件机构
+          applyOrgName: '', //	进件机构名称
           certCode: '', //	证件号码
-          appType: '', //	申请类型
-          sourcesChan: '', //	来源渠道
-          // appDate_ge: this._getDate(-6), //	,高级查询 起始时间
-          // appDate_le: this._getDate(), //	高级查询 终止时间
-          appDate_ge: '', //	,高级查询 起始时间
-          appDate_le: '', //	高级查询 终止时间
+          applyType: '', //	申请类型
+          channel: '', //	来源渠道
+          // applyDateGe: this._getDate(-6), //	,高级查询 起始时间
+          // applyDateLe: this._getDate(), //	高级查询 终止时间
+          applyDateGe: '', //	,高级查询 起始时间
+          applyDateLe: '', //	高级查询 终止时间
           mobile: '', //	手机号码
-          borrType: '', //	借款人类型
+          borrowType: '', //	借款人类型
           loanTerm: '', //	借款期限
           busiState: '', //	业务状态
-          page: 1, //	页码
-          rows: 10, //	每页条数
+          pageNum: 1, //	页码
+          pageSize: 10, //	每页条数
         },
         judge: {
           flag: '16'
         },
-        proCode: "",
+        productCode: "",
         selectedProName: "",
         agencyCode: '',
         selectedAgenName: "",
@@ -282,7 +282,7 @@
         totalRecord: 0, //总条数
         tableData: [],
         production: [], //产品名称
-        proType: [ //产品类型
+        productType: [ //产品类型
           {
             value: '00',
             label: '信用'
@@ -515,13 +515,13 @@
         if (to.path == '/applyLedger') {
           if (!this.Routes[3].closed) {
             this.currentRow = {};
-            this.params.page = this.currentPage = 1;
-            this.params.rows = this.pageCount = 10;
+            this.params.pageNum = this.currentPage = 1;
+            this.params.pageSize = this.pageCount = 10;
             this.Rreset();
             this.applyData = [this._getDate(-6), this._getDate()];
             this.creditTime = '';
-            this.params.appDate_ge = this._getDate(-6);
-            this.params.appDate_le = this._getDate();
+            this.params.applyDateGe = this._getDate(-6);
+            this.params.applyDateLe = this._getDate();
             this.Routes[3].closed = true;
           }
         }
@@ -541,8 +541,8 @@
         }
         // 日期入参
         if (this.applyData.length > 0) {
-          this.params.appDate_ge = this.applyData[0];
-          this.params.appDate_le = this.applyData[1];
+          this.params.applyDateGe = this.applyData[0];
+          this.params.applyDateLe = this.applyData[1];
         }
         // 授信日期
         if (this.creditTime.length > 0) {
@@ -551,8 +551,8 @@
         }
         // 删除多余入参
         let obj = Object.assign({}, this.params);
-        delete obj.page;
-        delete obj.rows;
+        delete obj.pageNum;
+        delete obj.pageSize;
         axios({
           method: 'post',
           url: '/export/applyLedgers',
@@ -613,82 +613,82 @@
       },
       ProcreateFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+          return (restaurant.productName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
         };
       },
       handleSelect(item) { //进件机构下拉查询选中项
-        this.params.appOrgName = this.agencyCode = this.selectedAgenName = item.orgName;
-        this.params.appOrgCode = item.orgCode;
+        this.params.applyOrgName = this.agencyCode = this.selectedAgenName = item.orgName;
+        this.params.applyOrgCode = item.orgCode;
       },
       ProhandleSelect(item) { //产品下拉选中项
-        this.proCode = this.selectedProName = item.proName;
-        this.params.proCode = item.proCode;
+        this.productCode = this.selectedProName = item.productName;
+        this.params.productCode = item.productCode;
       },
       handleSizeChange(val) { //每页 N 条
-        this.params.rows = val;
-        this.params.page = this.currentPage = 1;
+        this.params.pageSize = val;
+        this.params.pageNum = this.currentPage = 1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) { //查看第 N 页
-        this.params.page = val;
+        this.params.pageNum = val;
         this.getInf(this.params);
       },
       Rreset() {
         this.params.applySubNo = ''; //	进件编号
-        this.params.proType = ''; //	产品类型
-        this.params.salPerCode = ''; //	直销人员
-        this.params.emerType = ''; //	紧急程度
-        this.params.appSerPerCode = ''; //	进件客服
+        this.params.productType = ''; //	产品类型
+        this.params.directSalesCode = ''; //	直销人员
+        this.params.emergencyType = ''; //	紧急程度
+        this.params.applyCustServCode = ''; //	进件客服
         this.params.custName_la = ''; //	客户名称
-        this.params.proCode = ''; //	产品名称（输入产品编号）
+        this.params.productCode = ''; //	产品名称（输入产品编号）
         this.params.loanPurpose = ''; //	借款用途
-        this.params.appOrgCode = ''; //	进件机构
-        this.params.appOrgName = ''; //	进件机构名称
+        this.params.applyOrgCode = ''; //	进件机构
+        this.params.applyOrgName = ''; //	进件机构名称
         this.params.certCode = ''; //	证件号码
-        this.params.appType = ''; //	申请类型
-        this.params.sourcesChan = ''; //	来源渠道
-        this.params.appDate_ge = ''; //	高级查询 起始时间
-        this.params.appDate_le = ''; //	高级查询 终止时间
+        this.params.applyType = ''; //	申请类型
+        this.params.channel = ''; //	来源渠道
+        this.params.applyDateGe = ''; //	高级查询 起始时间
+        this.params.applyDateLe = ''; //	高级查询 终止时间
         this.params.creditTime_ge = ''; //	授信日期 起始时间
         this.params.creditTime_le = ''; //	授信日期 终止时间
         this.params.mobile = ''; //	手机号码
-        this.params.borrType = ''; //	借款人类型
+        this.params.borrowType = ''; //	借款人类型
         this.params.loanTerm = ''; //	借款期限
         this.params.busiState = ''; //	业务状态
-        this.params.page = this.currentPage = 1; //	页码-页码重置
+        this.params.pageNum = this.currentPage = 1; //	页码-页码重置
         this.totalRecord = 0;
         this.applyData = ''; //申请日期
         this.creditTime = ''; //授信日期
         this.agencyCode = ''; //进件机构
         this.selectedAgenName = '';
-        this.proCode = ''; //产品名称
+        this.productCode = ''; //产品名称
         this.selectedProName = '';
         this.tableData = []; ////清空已查处列表
         this.currentRow = {}; //清空选中行 
       },
       Rsearch() {
         if (this.applyData.length > 0) {
-          this.params.appDate_ge = this.applyData[0];
-          this.params.appDate_le = this.applyData[1];
+          this.params.applyDateGe = this.applyData[0];
+          this.params.applyDateLe = this.applyData[1];
         }
         if (this.creditTime.length > 0) {
           this.params.creditTime_ge = this.creditTime[0];
           this.params.creditTime_le = this.creditTime[1];
         }
-        this.params.page = this.currentPage = 1;
+        this.params.pageNum = this.currentPage = 1;
         this.getInf(this.params);
       },
       getInf(pam) {
         this.currentRow = {}; //清空选中行        
-        this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.params.proCode = "") :
+        this.productCode != this.selectedProName ? (this.productCode = this.selectedProName = this.params.productCode = "") :
           "";
         this.agencyCode != this.selectedAgenName ? (this.agencyCode = this.selectedAgenName = this.params.agencyCode =
           "") : "";
         this.post("/credit/getApplyLedger", pam).then(res => {
           if (res.statusCode == 200) {
             if (res.data) {
-              this.tableData = res.data.rows;
-              this.totalRecord = res.data.total; // 总数
+              this.tableData = res.data.recordList;
+              this.totalRecord = res.data.totalRecord; // 总数
             } else {
               this.tableData = [];
               this.totalRecord = 0;

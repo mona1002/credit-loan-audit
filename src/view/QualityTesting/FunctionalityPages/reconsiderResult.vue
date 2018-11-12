@@ -14,7 +14,7 @@
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
           <el-select v-model="params.dataParam.proCode" placeholder="请选择">
-            <el-option v-for="item in ProductName" :key="item.proCode" :label="item.proName" :value="item.proCode">
+            <el-option v-for="item in ProductName" :key="item.productCode" :label="item.productName" :value="item.productCode">
             </el-option>
           </el-select>
         </el-col>

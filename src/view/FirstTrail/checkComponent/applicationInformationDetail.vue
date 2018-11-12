@@ -827,6 +827,7 @@
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         taskNodeName: '',
+        datas:{},
         appOrgCountydatas: '',
         /*房产信息*/
         applyCustEstateDTOs: [],
@@ -1010,12 +1011,12 @@
             //   this.datas.emergencyAmt = this.formatNumber(this.datas.emergencyAmt, 2, 0);
             // };
             /*您的借款需求*/
-            if (res.data.accepApplyLoan == null) {
+            if (res.data.applyBasicInfoDTO == null) {
               this.accepApplyLoan = this.accepApplyLoan
             } else {
-              this.accepApplyLoan = res.data.accepApplyLoan;
+              this.accepApplyLoan = res.data.applyBasicInfoDTO;
               this.accepApplyLoan.loanAmt = this.formatNumber(this.accepApplyLoan.loanAmt, 2, 0);
-              this.accepApplyLoan.eachTermAmt = this.formatNumber(this.accepApplyLoan.eachTermAmt, 2, 0);
+              this.accepApplyLoan.maxEachTermAmt = this.formatNumber(this.accepApplyLoan.maxEachTermAmt, 2, 0);
             }
             /*您的个人信息*/
             if (res.data.applyCustBasicInfoDTO == null) {
@@ -1026,11 +1027,13 @@
               //投保地点
               if (this.applyCustBasicInfoDTO.insurProvinceName == null && this.applyCustBasicInfoDTO.insurCityName == null &&
                 this.applyCustBasicInfoDTO.insurCountyName == null && this.applyCustBasicInfoDTO.insurAddress == null) {
-                this.insurAddr = '';
+              //  insurAddr：替换为 insurAddress
+               this.insurAddr = '';
               } else {
                 this.insurAddr = this.applyCustBasicInfoDTO.insurProvinceName + this.applyCustBasicInfoDTO.insurCityName +
                   this.applyCustBasicInfoDTO.insurCountyName + this.applyCustBasicInfoDTO.insurAddress;
-                this.insurAddr = this.insurAddr.replace(reg, '');
+                  // ------------------------------------------------------------------
+               this.insurAddr? this.insurAddr = this.insurAddr.replace(reg, ''):'';
               }
               //每月家庭支出
               if (this.applyCustBasicInfoDTO.monthPayAmt != null) {
@@ -1165,9 +1168,8 @@
               };
               //单位地址
               var reg = /null/g;
-              this.applyCustWorkDTO.companyAddr = this.applyCustWorkDTO.companyAddr.replace(reg, '');
+             this.applyCustWorkDTO.companyAddr? this.applyCustWorkDTO.companyAddr = this.applyCustWorkDTO.companyAddr.replace(reg, ''):'';
             }
-
             /*联系人信息*/
             if (res.data.applyCustLinkmanDTOs) {
               this.applyCustLinkmanDTOs = res.data.applyCustLinkmanDTOs;
@@ -1206,12 +1208,12 @@
               workName: this.datas.applyCustWorkDTO.workName,
               proId: this.datas.productId,
               proCode: this.datas.productCode,
-              loanAmt: this.datas.accepApplyLoan.loanAmt,
-              eachTermAmt: this.datas.accepApplyLoan.eachTermAmt,
+              loanAmt: this.accepApplyLoan.loanAmt,
+              eachTermAmt: this.accepApplyLoan.eachTermAmt,
               mainCustName: this.datas.mainCustName,
               appOrgName: this.datas.applyOrgName,
-              loanType: this.datas.accepApplyLoan.loanType,
-              loanTypeTxt: this.datas.accepApplyLoan.loanTypeTxt,
+              loanType: this.accepApplyLoan.loanType,
+              loanTypeTxt: this.accepApplyLoan.loanTypeTxt,
               appOrgId: this.datas.appOrgId,
               appOrgCode: this.datas.appOrgCode,
               applyCustId: this.datas.applyCustBasicInfoDTO.id,

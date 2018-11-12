@@ -37,13 +37,13 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="ProQuerySearch"
+          <el-autocomplete popper-class="my-autocomplete" v-model="productCode" :debounce='0' :fetch-suggestions="ProQuerySearch"
             placeholder="请输入内容" @select="ProhandleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.proName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+              <span style="float: left; width:66px">{{ item.productName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.productCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
@@ -850,7 +850,7 @@
         judge: {
           flag: '17'
         },
-        proCode: "",
+        productCode: "",
         selectedProName: "",
         agencyCode: '',
         selectedAgenName: "",
@@ -1478,7 +1478,7 @@
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+          return (restaurant.productName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
         };
       },
       handleSelect(item) { //进件机构下拉查询选中项
@@ -1486,8 +1486,8 @@
         this.agencyCode = this.selectedAgenName = item.orgName;
       },
       ProhandleSelect(item) { //产品下拉选中项
-        this.proCode = this.selectedProName = item.proName;
-        this.params.proCode = item.proCode;
+        this.productCode = this.selectedProName = item.productName;
+        this.params.proCode = item.productCode;
       },
       handleSizeChange(val) { //每页 N 条
         this.params.rows = val;
@@ -1555,7 +1555,7 @@
         this.params.controlerName = ''; //  管户客服名称
         this.agencyCode = '';
         this.selectedAgenName = '';
-        this.proCode = '';
+        this.productCode = '';
         this.selectedProName = '';
         this.loanDate = ''; // 放款日期
         this.PaybackDate = ''; // 应还款日期
@@ -1586,7 +1586,7 @@
       },
       getInf(pam) {
         this.currentRow = {}; //清空选中行        
-        this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.params.proCode = "") :
+        this.productCode != this.selectedProName ? (this.productCode = this.selectedProName = this.params.proCode = "") :
           "";
         this.agencyCode != this.selectedAgenName ? (this.agencyCode = this.selectedAgenName = this.params.agencyCode =
           "") : "";

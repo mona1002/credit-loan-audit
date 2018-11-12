@@ -673,10 +673,6 @@
             });
           }
         });
-        //请求产品
-        // this.post("/credit/product").then(res => {
-        // if (res.statusCode == 200) {
-        // this.products = res.data;
         //请求复议专员带过来的审批信息
         this.post('/creauditOpinion/queryCreauditOpinionObj', {
           applyId: this.applyId
@@ -738,8 +734,6 @@
             this.caculData = {};
           };
         });
-        // };
-        // });
       },
       //审批提交按钮
       spsure() {

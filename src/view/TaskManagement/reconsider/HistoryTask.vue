@@ -17,13 +17,13 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="querySearch"
+          <el-autocomplete popper-class="my-autocomplete" v-model="productCode" :debounce='0' :fetch-suggestions="querySearch"
             placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.proName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+              <span style="float: left; width:66px">{{ item.productName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.productCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
@@ -125,7 +125,7 @@
           completeTime_ge: '',
           completeTime_le: '',
         },
-        proCode: "",
+        productCode: "",
         selectedProName: "",
         applyData: '',
         dealDate: '',
@@ -160,11 +160,11 @@
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+          return (restaurant.productName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
         };
       },
       handleSelect(item) {
-        this.proCode = this.selectedProName = item.proName;
+        this.productCode = this.selectedProName = item.productName;
         this.params.proCode = item.id;
       },
       DateF(val) {
@@ -191,7 +191,7 @@
         this.params.completeTime_ge = '';
         this.params.completeTime_le = '';
         this.selectedProName = '';
-        this.proCode = '';
+        this.productCode = '';
         this.applyData = '';
         this.dealDate = '';
         this.getInf(this.params);
@@ -205,7 +205,7 @@
         this.getInf(this.params);
       },
       getInf(pam) {
-        this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.params.proCode = "") : "";
+        this.productCode != this.selectedProName ? (this.productCode = this.selectedProName = this.params.proCode = "") : "";
         this.post("/workFlowTaskQuery/getTaskHistoryList", pam).then(res => {
           if (res.statusCode == 200 && res.data.taskDetailList != null) {
             this.tableData = res.data.taskDetailList;

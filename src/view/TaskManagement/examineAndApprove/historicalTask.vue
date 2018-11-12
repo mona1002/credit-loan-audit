@@ -17,13 +17,13 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="querySearch"
+          <el-autocomplete popper-class="my-autocomplete" v-model="productCode" :debounce='0' :fetch-suggestions="querySearch"
             placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.proName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+              <span style="float: left; width:66px">{{ item.productName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.productCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
@@ -122,7 +122,7 @@
         applySubNo: '', //进件编号-查询
         custName_la: '', //客户名称模糊-查询
         certCode: '', ////证件号码-查询
-        proCode: '', //产品code-查询
+        productCode: '', //产品code-查询
         emerType: '', //紧急程度-查询
         selectedProName: "",
         queryParam: {
@@ -188,11 +188,11 @@
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+          return (restaurant.productName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
         };
       },
       handleSelect(item) {
-        this.proCode = this.selectedProName = item.proName;
+        this.productCode = this.selectedProName = item.productName;
         this.queryParam.proCode = item.id;
       },
       product() {
@@ -205,7 +205,7 @@
         });
       },
       request(param) {
-        this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.queryParam.proCode = "") :
+        this.productCode != this.selectedProName ? (this.productCode = this.selectedProName = this.queryParam.proCode = "") :
           "";
         this.post('/workFlowTaskQuery/getTaskHistoryList',
           param
@@ -239,7 +239,7 @@
         this.custName_la = '';
         this.certCode = '';
         this.selectedProName = '';
-        this.proCode = ''; //产品code-查询
+        this.productCode = ''; //产品code-查询
         this.emerType = ''; //紧急程度-查询
         this.applicationDate = '', //申请信息 时间 数组
           this.processingTime = '', //本环节处理时间 时间 数组

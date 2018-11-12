@@ -21,19 +21,6 @@
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">
-        <!-- <el-col :span="6" class="search-item">
-          <span class="keywordText">产品名称：</span>
-          <el-select v-model="proId" placeholder="请选择产品名称">
-            <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
-              <span style="width:66px;display:inline-block;">产品代码</span>
-              <span style="margin-left: 20px">产品名称</span>
-            </p>
-            <el-option v-for="item in proNames" :key="item.id" :label="item.proName" :value="item.id">
-              <span style="float: left;width:66px">{{ item.proCode }}</span>
-              <span style="float: left; color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proName }}</span>
-            </el-option>
-          </el-select>
-        </el-col> -->
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
           <el-autocomplete popper-class="my-autocomplete" v-model="product" :debounce='0' :fetch-suggestions="querySearch"
@@ -41,8 +28,8 @@
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.proName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+              <span style="float: left; width:66px">{{ item.productName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.productCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
@@ -317,13 +304,13 @@
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+          return (restaurant.productName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
         };
       },
       handleSelect(item) {
-        this.product = item.proName;
+        this.product = item.productName;
         this.queryParam.proId = item.id;
-        this.selectedProName = item.proName;
+        this.selectedProName = item.productName;
       },
       // -----------------------
       getUserInf() {
@@ -405,10 +392,12 @@
       getTransmitHistoryList(id) {
         processMoniSer
           .getTransmitHistoryList({
-            processInstanceId: id,
+              params: {
+              processInstanceId: id,
+            }
           })
           .then(res => {
-            this.transList = res.data.assignTaskLogList;
+            this.transList = res.data.data.recordList;
           })
       },
 
