@@ -50,12 +50,12 @@
         <i class="el-icon title-icon"></i>
         黑名单查看
       </span>
-      <span class="iconContainer">
+      <!-- <span class="iconContainer">
         <span class="icon-item" @click='Import'>
           <i class="el-icon brokenLineIcon"></i>
           <span class="el-icon-text">批量导入</span>
         </span>
-      </span>
+      </span> -->
     </div>
     <div class="listContainer">
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
