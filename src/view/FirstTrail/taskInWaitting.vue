@@ -58,7 +58,7 @@
         </el-table>
         <div class="page">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-            :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
+            :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.total">
           </el-pagination>
         </div>
       </div>
@@ -118,9 +118,9 @@
         this.post('/workFlowTaskQuery/getTaskToDoList',
           param
         ).then(res => {
-          if (res.statusCode == 200 && 　res.data.taskDetailList != null) {
+          if (res.statusCode == 200 && 　res.data.recordList != null) {
             this.totals = res.data;
-            this.datas = res.data.taskDetailList;
+            this.datas = res.data.recordList;
             for (var i = 0; i < this.datas.length; i++) {
               if (this.datas[i].taskType == '00') { //00
                 this.datas[i].taskType = "新任务";

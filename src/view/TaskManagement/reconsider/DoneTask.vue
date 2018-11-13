@@ -205,9 +205,9 @@
       getInf(pam) {
         this.productCode != this.selectedProName ? (this.productCode = this.selectedProName = this.params.proCode = "") : "";
         this.post("/workFlowTaskQuery/getTaskToDoList", pam).then(res => {
-          if (res.statusCode == 200 && res.data.taskDetailList != null) {
-            this.tableData = res.data.taskDetailList;
-            this.totalRecord = res.data.totalNum; // 总数
+          if (res.statusCode == 200 && res.data.recordList != null) {
+            this.tableData = res.data.recordList;
+            this.totalRecord = res.data.total; // 总数
             this.changeColor();
           } else {
             this.$message.error(res.msg);

@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="listContainer">
-      <el-table :data="antiTableData.taskDetailList" border fit height="510" highlight-current-row class="anti-table"
+      <el-table :data="antiTableData.recordList" border fit height="510" highlight-current-row class="anti-table"
         v-show="antiFlag!='03'&& antiFlag!='04'">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
@@ -84,7 +84,7 @@
         </el-table-column>
       </el-table>
       <!-- 专员 -->
-      <el-table :data="directorTableData.taskDetailList" border fit height="510" highlight-current-row @row-dblclick="rowDbClick"
+      <el-table :data="directorTableData.recordList" border fit height="510" highlight-current-row @row-dblclick="rowDbClick"
         v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
         <el-table-column type="index" :index="1" label="序号" width='50'>
         </el-table-column>
@@ -110,7 +110,7 @@
     </div>
     <div class="page">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum"
-        :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum">
+        :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.total">
       </el-pagination>
     </div>
   </div>

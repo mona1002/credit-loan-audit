@@ -253,7 +253,6 @@
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
-
           if (res.statusCode == 200) {
             this.tableData = res.data;
           } else {
