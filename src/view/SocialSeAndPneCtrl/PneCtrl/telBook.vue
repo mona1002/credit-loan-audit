@@ -30,18 +30,25 @@
     },
     methods: {
       getInf() {
-        this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!notSession_getTelBook.action', {
-          applySubNo: this.applySubNo
-          //  applySubNo : '201506260111012193'
-        }).then(res => {
-          if (res && res.success == true && res.obj) {
-            this.tableData = res.obj.contracts;
-            this.type = '';
-            if (res.obj.td_clientType) {
-              if (res.obj.td_clientType == '3') this.type = 'IOS';
-              else if (res.obj.td_clientType == '2') this.type = 'Android';
-              else this.type = 'Web';
+        this.get('/tripartiteData/' + this.applySubNo + '/getContactsInfo').then(res => {
+        // this.get('/tripartiteData/201801080512013502/getContactsInfo?' + Math.random()).then(res => {
+          if (res.statusCode==200) {
+            console.log()
+            let resp=JSON.parse(res.data);
+            this.tableData = resp.contactsInfo;
+            if(resp.clientType){
+              resp.clientType==1? this.type ='H5':'';
+              resp.clientType==2? this.type ='Android':'';
+              resp.clientType==3? this.type ='IOS':'';
             }
+            // 下面的无返回值
+            // if (res.obj.td_clientType) {
+              // if (res.obj.td_clientType == '3') this.type = 'IOS';
+              // else if (res.obj.td_clientType == '2') this.type = 'Android';
+              // else this.type = 'Web';
+            // }
+          }else{
+            this._error(res.msg)
           }
         });
       },
