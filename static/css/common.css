@@ -283,7 +283,7 @@ table {
   vertical-align: middle;
   font-style: normal;
 }
-
+/* 提示语 */
 .hint_word {
   color: #ff7676;
   font-size: 12px;

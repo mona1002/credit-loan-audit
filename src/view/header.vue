@@ -5,7 +5,7 @@
       风控管理系统
     </div>
     <!-- 左按钮 -->
-    <div class="icon" style="left:199px;background:#2ea8e0;display:none;" @click="le" id="iconl">
+    <div class="icon" style="left:187px;background:#2ea8e0;display:none;" @click="le" id="iconl">
       <img src="/static/images/leftjt.png">
     </div>
     <!-- 导航内容 -->

@@ -32,9 +32,10 @@
 /* .margin_5{
   margin: 5px;
 } */
-.margin_10_5_0_5{
-  margin: 10px 5px 0  5px;
+.margin_10_5_0_5 {
+  margin: 10px 5px 0 5px;
 }
+
 .margin_top_5 {
   margin-top: 5px;
 }
@@ -58,6 +59,7 @@
 .margin_left_5 {
   margin-left: 5px;
 }
+
 .margin_left_15 {
   margin-left: 15px;
 }
@@ -65,19 +67,26 @@
 .margin_left_30 {
   margin-left: 30px;
 }
+
 .margin_left_600 {
   margin-left: 600px;
+}
+.margin_left_735 {
+  margin-left: 735px;
 }
 .margin_bottom_10 {
   margin-bottom: 10px;
 }
-.Abody .line_H_16_label label{
+
+.Abody .line_H_16_label label {
   line-height: 17px;
 }
+
 /* label 宽度 */
 .label_85 {
   width: 85px;
 }
+
 .label_140 {
   width: 140px;
 }
@@ -94,6 +103,10 @@
   width: 33.3%
 }
 
+/* .width_800 {
+  width: 800px;
+} */
+
 .width_66Per {
   width: 66.6%
 }
@@ -105,6 +118,7 @@
 .width_60Per {
   width: 60%
 }
+
 .width_20Per {
   width: 20%
 }
@@ -112,23 +126,50 @@
 .width_50Per {
   width: 50%
 }
+
 /* 高度 */
-body .Abody .height_60{
+body .Abody .height_60 {
   height: 60px;
 }
-body .Abody .height_80{
+
+body .Abody .height_80 {
   height: 80px;
 }
-body .Abody .height_120{
+
+body .Abody .height_120 {
   height: 120px;
 }
+
 /* display  */
-.dis_inBlock{
-display: inline-block
+.dis_inBlock {
+  display: inline-block
 }
+
 /* 垂直对齐 */
 .vertical_top {
   vertical-align: top;
+}
+
+/* 定位 */
+.position_relative {
+  position: relative;
+}
+
+/* 文本对齐方式 */
+.text_align_right {
+  text-align: right;
+}
+
+.text_align_center {
+  text-align: center;
+}
+
+.float_left {
+  float: left;
+}
+
+body .pre_wrap {
+  white-space: pre-wrap;
 }
 
 /* 气泡 */
@@ -282,28 +323,6 @@ display: inline-block
   padding-left: 10px;
   border: 1px solid #d8dce5;
   border-radius: 4px;
-}
-
-/* 定位 */
-.position_relative {
-  position: relative;
-}
-
-/* 文本对齐方式 */
-.text_align_right {
-  text-align: right;
-}
-
-.text_align_center {
-  text-align: center;
-}
-
-.float_left {
-  float: left;
-}
-
-body .pre_wrap {
-  white-space: pre-wrap;
 }
 
 /* 列表 */
