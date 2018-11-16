@@ -88,7 +88,7 @@
         </el-table-column>
         <el-table-column prop="blackAppStateTxt" label="申请状态" width="120">
         </el-table-column>
-        <el-table-column prop="blackRemark " label="申请说明" width="160">
+        <el-table-column prop="blackRemark" label="申请说明" width="160">
         </el-table-column>
         <el-table-column prop="appPerCode" label="申请人" width="120">
         </el-table-column>
@@ -145,7 +145,7 @@
           </el-form-item>
           <el-form-item class="mr" label="申请说明：" v-if='addObj.blackListType' :label-width="label_115" prop="blackRemark">
             <b class="hint_word Working_input" v-show="addObj.blackRemark&&addObj.blackRemark.length>=300">
-              输入长度不能超过20</b>
+              输入长度不能超过300</b>
             <el-input v-model="addObj.blackRemark" :maxlength='300' type="textarea" resize='none' :rows="2"></el-input>
           </el-form-item>
           <div class="bfc margin_top_20" v-if="addObj.blackListType">
@@ -170,7 +170,7 @@
         <el-row class="row row1" type="flex">
           <el-col :span="6" class="search-item">
             <span>客户名称：</span>
-            <el-input v-model.trim="addSearchForm.custName" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
+            <el-input v-model.trim="addSearchForm.custName" @keyup.enter.native='Rsearch' placeholder="请输入客户名称"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
             <span>证件号码：</span>
@@ -586,14 +586,7 @@
 </script>
 <style scoped>
   .addIcon_search {
-    border: 1px solid;
-    font-size: 18px;
-    border-radius: 6px;
-    padding: 2px;
-    position: absolute;
     left: 190px;
-    top: 4px;
-    cursor: pointer;
   }
 
 </style>

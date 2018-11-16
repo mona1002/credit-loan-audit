@@ -370,6 +370,15 @@ body .pre_wrap {
 .overFlow_x {
   overflow-x: hidden;
 }
+.addIcon_search {
+  border: 1px solid #dcdfe6;
+  font-size: 18px;
+  border-radius: 6px;
+  padding: 2px;
+  position: absolute;
+  top: 4px;
+  cursor: pointer;
+}
 
 /* el-table特殊高度  +  带fixed属性 出滚动条时 fixed部分高度 */
 body .el-table_450_scroll .el-table {

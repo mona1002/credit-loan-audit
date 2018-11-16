@@ -111,7 +111,7 @@
     </div>
     <!-- 添加 Height_240-->
     <div class="el_form_item_height_35">
-      <el-dialog title="添加黑名单转出申请ddddd" :visible.sync="addShow" :modal="false ">
+      <el-dialog title="添加黑名单转出申请" :visible.sync="addShow" :modal="false ">
         <el-form :model="addObj" :rules="addRules" ref="addObj">
           <div class="bfc">
             <el-form-item label="黑名单类型：" class="fl width_50Per" :label-width='label_115'>
@@ -624,14 +624,7 @@
 </script>
 <style scoped>
   .addIcon_search {
-    border: 1px solid;
-    font-size: 18px;
-    border-radius: 6px;
-    padding: 2px;
-    position: absolute;
     left: 100px;
-    top: 4px;
-    cursor: pointer;
   }
 
 </style>
