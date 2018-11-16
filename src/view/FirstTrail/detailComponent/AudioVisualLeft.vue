@@ -198,7 +198,7 @@
             this.ListParent = res.data;
             this.$parent.$data.loading = false;
           } else {
-            this.$message.error(res.msg);
+            // this.$message.error(res.msg);
             this.$parent.$data.loading = false;
           }
 

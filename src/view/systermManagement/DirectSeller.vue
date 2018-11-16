@@ -83,7 +83,7 @@
         </el-table>
         <div class="page">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]"
-            :current-page.sync="params.page" :page-size="params.rows" layout="total, sizes, prev, pager, next, jumper"
+            :current-page.sync="params.pageNum" :page-size="params.pageSize" layout="total, sizes, prev, pager, next, jumper"
             :total="this.totalRecord">
           </el-pagination>
         </div>
@@ -216,12 +216,12 @@
         }
       },
       handleSizeChange(val) { //每页 N 条
-        this.params.rows = val;
-        this.params.page = 1;
+        this.params.pageSize = val;
+        this.params.pageNum = 1;
         this.inquire(this.params);
       },
       handleCurrentChange(val) { //查看第 N 页
-        this.params.page = val;
+        this.params.pageNum = val;
         this.inquire(this.params);
       },
       inquire(pam) {

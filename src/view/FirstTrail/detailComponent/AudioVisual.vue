@@ -129,7 +129,7 @@
               this.$parent.$data.loading = false;
             } else {
               this.$parent.$data.loading = false;
-              this.$message.error(res.msg);
+              // this.$message.error(res.msg);
             }
           });
       },

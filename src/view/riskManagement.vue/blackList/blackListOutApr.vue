@@ -51,7 +51,7 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        黑名单客户列表
+        黑名单列表
       </span>
       <span class="iconContainer">
         <span class="icon-item" @click='appr'>
@@ -76,7 +76,7 @@
         </el-table-column>
         <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <el-table-column prop="inReasonsTxt" label="加黑类型" width="105">
+        <el-table-column prop="inReasonsTxt" label="加黑类型" width="130">
         </el-table-column>
         <el-table-column prop="blackAppStateTxt" label="申请状态" width="120">
         </el-table-column>
@@ -129,7 +129,7 @@
               {{userInf.userCode}}
             </el-form-item>
             <el-form-item class="fr" label="审批时间：" label-width="110px">
-              {{systermTime | dateFilter }}
+              {{systermTime | dateFilter(true) }}
             </el-form-item>
           </div>
         </el-form>

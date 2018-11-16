@@ -20,7 +20,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">单位名称：</span>
-          <el-input v-model.trim="params.param.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
+          <el-input v-model.trim="params.param.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入单位名称"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">
@@ -84,7 +84,7 @@
         </el-table-column>
         <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <el-table-column prop="inReasonsTxt" label="加黑类型" width="105">
+        <el-table-column prop="inReasonsTxt" label="加黑类型" width="130">
         </el-table-column>
         <el-table-column prop="blackAppStateTxt" label="申请状态" width="120">
         </el-table-column>
@@ -111,7 +111,7 @@
     </div>
     <!-- 添加 -->
     <div class="Height_240">
-      <el-dialog title="添加黑名单转出申请" :visible.sync="addShow" :modal="false ">
+      <el-dialog title="添加黑名单转入申请" :visible.sync="addShow" :modal="false ">
         <el-form :model="addObj" :rules="addRules" ref="addObj">
           <el-form-item label="黑名单类型：" :label-width='label_115' prop="blackListType">
             <el-select v-model="addObj.blackListType" placeholder="请选择" @change="addReset('addObj')">
@@ -120,17 +120,17 @@
             </el-select>
           </el-form-item>
           <el-form-item label="客户名称：" :label-width='label_115' v-if="addObj.blackListType=='01'" prop="blackCustName">
-            <el-input v-model.trim="addObj.blackCustName" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
+            <el-input v-model.trim="addObj.blackCustName" @keyup.enter.native='Rsearch' placeholder="请输入客户名称"></el-input>
           </el-form-item>
           <div class="bfc">
             <el-form-item label="证件号码：" class="fl width_50Per" v-if="addObj.blackListType=='01'" :label-width='label_115'
               prop="blackCertCode">
-              <el-input v-model.trim="addObj.blackCertCode" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
+              <el-input v-model.trim="addObj.blackCertCode" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
               <i class="el-icon-search addIcon_search" @click="getAddInf"></i>
             </el-form-item>
             <el-form-item label="电话：" class="fl width_50Per" v-if="addObj.blackListType=='02'" :label-width='label_115'
               prop="blackPhone">
-              <el-input v-model.trim="addObj.blackPhone" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
+              <el-input v-model.trim="addObj.blackPhone" @keyup.enter.native='Rsearch' placeholder="请输入电话号码"></el-input>
             </el-form-item>
             <el-form-item label="加黑类型：" class="fl width_50Per" v-if='addObj.blackListType' :label-width='label_115'
               prop="inReasons">
@@ -141,7 +141,7 @@
             </el-form-item>
           </div>
           <el-form-item label="单位名称：" :label-width='label_115' v-if="addObj.blackListType=='03'" prop="blackCompany">
-            <el-input v-model.trim="addObj.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入公司名称"></el-input>
+            <el-input v-model.trim="addObj.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入单位名称"></el-input>
           </el-form-item>
           <el-form-item class="mr" label="申请说明：" v-if='addObj.blackListType' :label-width="label_115" prop="blackRemark">
             <b class="hint_word Working_input" v-show="addObj.blackRemark&&addObj.blackRemark.length>=300">
@@ -153,7 +153,7 @@
               {{userInf.userCode}}
             </el-form-item>
             <el-form-item class="fl" label="申请时间：" label-width="110px">
-              {{systermTime | dateFilter}}
+              {{systermTime | dateFilter(true)}}
             </el-form-item>
           </div>
         </el-form>

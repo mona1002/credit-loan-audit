@@ -30,7 +30,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">进件编号：</span>
-          <el-input v-model.trim="params.param.applySubNo" @keyup.enter.native='Rsearch' placeholder="请输入地址"></el-input>
+          <el-input v-model.trim="params.param.applySubNo" @keyup.enter.native='Rsearch' placeholder="请输入进件编号"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">加黑类型：</span>
@@ -75,7 +75,7 @@
         </el-table-column>
         <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <el-table-column prop="inReasonsTxt" label="加黑类型" width="100">
+        <el-table-column prop="inReasonsTxt" label="加黑类型" width="130">
         </el-table-column>
         <el-table-column prop="blackRemark" label="申请说明" width="160">
         </el-table-column>

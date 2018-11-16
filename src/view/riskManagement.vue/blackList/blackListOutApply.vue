@@ -84,7 +84,7 @@
         </el-table-column>
         <el-table-column prop="blackPhone" label="电话" width="105">
         </el-table-column>
-        <el-table-column prop="inReasonsTxt" label="加黑类型" width="105">
+        <el-table-column prop="inReasonsTxt" label="加黑类型" width="130">
         </el-table-column>
         <el-table-column prop="blackAppStateTxt" label="申请状态" width="120">
         </el-table-column>
@@ -111,7 +111,7 @@
     </div>
     <!-- 添加 Height_240-->
     <div class="el_form_item_height_35">
-      <el-dialog title="添加黑名单转出申请" :visible.sync="addShow" :modal="false ">
+      <el-dialog title="添加黑名单转出申请ddddd" :visible.sync="addShow" :modal="false ">
         <el-form :model="addObj" :rules="addRules" ref="addObj">
           <div class="bfc">
             <el-form-item label="黑名单类型：" class="fl width_50Per" :label-width='label_115'>
@@ -159,7 +159,7 @@
               {{userInf.userCode}}
             </el-form-item>
             <el-form-item class="fl" label="申请时间：" label-width="110px">
-              {{systermTime | dateFilter}}
+              {{systermTime | dateFilter(true)}}
             </el-form-item>
           </div>
         </el-form>
@@ -220,7 +220,7 @@
           </el-table-column>
           <el-table-column prop="blackPhone" label="电话" width="105">
           </el-table-column>
-          <el-table-column prop="inReasonsTxt" label="加黑类型" width="105">
+          <el-table-column prop="inReasonsTxt" label="加黑类型" width="130">
           </el-table-column>
           <el-table-column prop="blackRemark" label="申请说明" width="160">
           </el-table-column>

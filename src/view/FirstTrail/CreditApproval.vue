@@ -610,7 +610,7 @@
         loadingTitle: '提交', // 默认btn title
         shenPiBtnShow: false, // 初审 审批按钮  BX21
         debtRate: Number, //产品负债率
-        flowRoleCode: '', //	流程角色code
+        groupId: '', //	流程角色code
         maxAuditAmt: Number, //流程角色-最高审批金额
         ploanAmtNum: Number, //批准金额number类型
         params: '',
@@ -660,7 +660,7 @@
 
         } else if (this.judgeFlag == '02') { // 终审取终审  taskId
           this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-          this.flowRoleCode = this.FtaskInWaitting.flowRoleCode; //	流程角色code
+          this.groupId = this.FtaskInWaitting.groupId; //	流程角色code
           // 挂起 任务id
           this.taskId = this.FtaskInWaitting.taskId;
           // 流程 实例id
@@ -725,7 +725,7 @@
       },
       findSmFlowRole() { //信审审批-8.获取流程角色信息
         this.get("/smFlowRoleAction/findSmFlowRole", {
-          flowRoleCode: this.flowRoleCode,
+          flowRoleCode: this.groupId,
         }).then(res => {
           if (res.statusCode == 200) {
             this.maxAuditAmt = res.data.maxAuditAmt;
