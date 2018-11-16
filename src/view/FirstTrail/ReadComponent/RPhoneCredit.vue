@@ -277,7 +277,6 @@
           creatorCode: ''
         },
         addTellFormLabelWidth: '80px', // 添加电话 表单 label-width
-        isInterFlag: false, // 是否是内匹跳转的查看详情
         activeTrees: ["1", "2", "3", "4", "5"],
         addBtnShow: false, // 标志 添加电话按钮是否显示
         isLoading: false, // 审批按钮 是否加载状态

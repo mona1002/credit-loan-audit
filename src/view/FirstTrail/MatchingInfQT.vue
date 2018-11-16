@@ -41,7 +41,7 @@
               <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.ApplyId'>申请信息</applicationInformationDetail>
             </keep-alive>
             <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
-            <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent1==5"  :applyId='tastwaitingPass.ApplyId'  :SubNo='tastwaitingPass.applySubNo' :addBtn="false"> 电话征信</PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
             <keep-alive v-if="Routes.closed">
               <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>
@@ -109,7 +109,7 @@
             <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.ApplyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
           </keep-alive>
           <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
-          <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
+          <PhoneCredit v-if=" this.tabContent2==5"  :applyId='tastwaitingPass.ApplyId'  :SubNo='tastwaitingPass.applySubNo' :addBtn="false"> 电话征信</PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>

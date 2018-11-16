@@ -94,11 +94,10 @@
   export default {
     data() {
       return {
-        query: {
-          id: '',
-          matchApplyId: "",
-          applySubNo: ''
-        },
+        // query: {
+        //   id: '',
+        //   applySubNo: ''
+        // },
         judge: {
           flag: '18' //综合查询
         },
@@ -133,11 +132,10 @@
         this.currentRow = val;
       },
       handleCurrentChange(val) {
-        this.query.id = val.id;
-        this.query.matchApplyId = val.applyId;
-        this.query.applySubNo = val.applySubno;
-        this.query = Object.assign({}, this.query, val)
-        localStorage.setItem("Query", JSON.stringify(this.query));
+        let query={};
+        query.applySubNo = val.applySubno;
+        query = Object.assign({}, query, val)
+        localStorage.setItem("Query", JSON.stringify(query));
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'Query'
         }));

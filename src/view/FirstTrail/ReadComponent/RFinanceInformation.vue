@@ -50,7 +50,7 @@
     data() {
       return {
         FinanceInf: [],
-        MatchInf: '',
+        list: {},
         judgeFlag: '',
         activeNames: ['1'],
         loanReceiptPayAmt: '',
@@ -59,14 +59,14 @@
     mounted() {
       this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag"))
       if (this.MatchFlag.MatchFlag == 'internal') {
-        this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
+        this.list = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
       } else if (this.MatchFlag.MatchFlag == 'Query') {
-        this.MatchInf = JSON.parse(localStorage.getItem("Query")) //综合查询
+        this.list = JSON.parse(localStorage.getItem("Query")) //综合查询
       } else if (this.MatchFlag.MatchFlag == 'QT') {
-        this.MatchInf = JSON.parse(localStorage.getItem("QT")) //质检
+        this.list = JSON.parse(localStorage.getItem("QT")) //质检
       }
       this.post("/creAccountInfo/getAccountByApplyId", {
-        applyId: this.MatchInf.matchApplyId,
+        applyId: this.list.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
           this.FinanceInf = res.data;

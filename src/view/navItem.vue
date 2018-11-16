@@ -38,11 +38,6 @@
             };
             localStorage.setItem("workbenchPass", JSON.stringify(row));
             localStorage.setItem("judge", JSON.stringify(judge));
-            // 导航进入的 标志 , 优先级最高
-            var navJudge = {
-              "flag": "nav_first"
-            }
-            localStorage.setItem("navJude", JSON.stringify(navJudge))
           };
           //终审一级
           if (strs[0].split('=')[1] == "creditApp_finalTrial_one" && strs[1].split('=')[1] == "02") {

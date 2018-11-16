@@ -30,25 +30,25 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId'></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='list.applyId'></AudioVisual>
           </keep-alive>
-          <remark v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></remark>
-          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
+          <remark v-if=" this.tabContent2==1" :applyId='list.applyId'></remark>
+          <InternalMatch v-if=" this.tabContent2==2"  :listInf='list'></InternalMatch>
           <keep-alive v-if="Routes.closed">
-            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId'
+            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3" :applyId='list.applyId'
               :roles='Flag=="03"?"antiFraudApp_commissioner":"antiFraudApp_manager" '></capplicationInformationDetail>
           </keep-alive>
           <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
-          <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
-          <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='tastwaitingPass.applyId'
+          <PhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+          <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='list.applyId'
             :FinalConCheckShow='true'></FCreditForm>
           <keep-alive v-if="Routes.closed">
-            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'></creditInvestigation>
           </keep-alive>
-          <aAprovalConclusion v-if=" this.tabContent2==8" :applyId='tastwaitingPass.applyId'></aAprovalConclusion>
+          <aAprovalConclusion v-if=" this.tabContent2==8" :applyId='list.applyId'></aAprovalConclusion>
           <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
           <AntiApplyInf v-if=" this.tabContent2==10">反欺诈申请信息</AntiApplyInf>
-          <aAntiFraudInvestigation v-if=" this.tabContent2==11" :applyId='tastwaitingPass.applyId' :PropshowBtn='Flag=="03"?true:false'>反欺诈调查</aAntiFraudInvestigation>
+          <aAntiFraudInvestigation v-if=" this.tabContent2==11" :applyId='list.applyId' :PropshowBtn='Flag=="03"?true:false'>反欺诈调查</aAntiFraudInvestigation>
           <approvalConclus v-if=" this.tabContent2==12">审批结论</approvalConclus>
         </div>
       </div>
@@ -80,7 +80,7 @@
         accepCusBasicInfo: '',
         // 进件人信息
         customInf: {}, //申请信息页local字段
-        tastwaitingPass: {}, //详情列表页信息--(含)取applyId
+        list: {}, //详情列表页信息--(含)取applyId
         accepCusBasicInfo: {},
         title: "",
         isShow: false,
@@ -112,7 +112,7 @@
     methods: {
       mountedInf() {
         this.loading = true;
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈
+        this.list = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈
         this.Flag = JSON.parse(localStorage.getItem("judge")).flag;
       },
       leftMovingBtn() {

@@ -169,12 +169,10 @@
     data() {
       return {
         tableData: [],
-        query: {
-          id: '',
-          matchApplyId: '',
-          applySubNo: '',
-          isInterFlag: false
-        },
+        // query: {
+        //   id: '',
+        //   applySubNo: '',
+        // },
         aa: '命中规则名称：',
         activeNames: ['1', '2', '3', '4', '5'],
         fraudApplyInfo: '',
@@ -322,18 +320,16 @@
         this.dialogVisible = false;
       },
       handlDetail(index, row) {
-        this.query.id = row.id;
-        this.query.matchApplyId = row.applyId;
-        this.query.applySubNo = row.applySubNo;
-        this.query.isInterFlag = false;
-        this.query = Object.assign({}, this.query, row)
+        // let query={};
+      //  query.applyId = row.applyId;
+      //  query = Object.assign(query, row)
         this.$router.push({
           name: 'MatchingInfQuery',
           params: {
             newOne: true,
           }
         });
-        localStorage.setItem("Query", JSON.stringify(this.query));
+        localStorage.setItem("Query", JSON.stringify(row));
       },
       /*命中客户数 查询*/
       inquiry(row) {

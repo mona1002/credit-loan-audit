@@ -98,19 +98,19 @@
                   <div class="height_auto">
                     <el-table :data="listData.recordList" border @row-dblclick="rowDbClick" v-loading="mobileLoading"
                       highlight-current-row>
-                      <el-table-column type="index" label="序号" min-width="60">
+                      <el-table-column type="index" label="序号" width="55">
                       </el-table-column>
                       <el-table-column prop="phoneTypeDes" label="电话类型" width="100">
                       </el-table-column>
                       <el-table-column prop="checkTime" label="调查时间" width="160">
                       </el-table-column>
-                      <el-table-column prop="sourceDes" label="来源" min-width="150">
+                      <el-table-column prop="sourceDes" label="来源" width="150">
                       </el-table-column>
-                      <el-table-column prop="phoneNum" label="电话号码" width="105">
+                      <el-table-column prop="phoneNum" label="电话号码" width="120">
                       </el-table-column>
-                      <el-table-column prop="answerDes" label="接听情况" min-width="100">
+                      <el-table-column prop="answerDes" label="接听情况" width="100">
                       </el-table-column>
-                      <el-table-column prop="checkStageDes" label="调查阶段" min-width="80">
+                      <el-table-column prop="checkStageDes" label="调查阶段" width="80">
                       </el-table-column>
                       <el-table-column prop="conclusion" label="调查结果" min-width="100" show-overflow-tooltip>
                       </el-table-column>
@@ -135,25 +135,25 @@
             <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :Addlist="newList"></AddressForm>
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData"></AddressHis>
+            <AddressHis class="form-his" v-if="!formShow && phoneType == '01'" :mobileData="newList?newList:mobileData"></AddressHis>
             <!-- 单位电话 - 表单 -->
             <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
               :danweiList="newList"></CompanyForm>
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData"></CompanyHis>
+            <CompanyHis class="form-his" v-if="!formShow && phoneType=='02'" :comData="newList?newList:comData"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
             <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
               :familyList="newList"></FamilyForm>
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData"></FamilyHis>
+            <FamilyHis class="form-his" v-if="!formShow && phoneType=='03'" :familyData="newList?newList:familyData"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
             <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
               :hurryList="newList"></HurryForm>
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData"></HurryHis>
+            <HurryHis class="form-his" v-if="!formShow && phoneType=='04'" :hurryData="newList?newList:hurryData"></HurryHis>
             <!-- 工作证明人 - 表单 -->
             <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"
               :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :source='source'
@@ -161,7 +161,7 @@
               :checkJob="checkJob" :checkJobtxt="checkJobtxt" :mobilepaymenttxt="mobilepaymenttxt" :answerIdentity="answerIdentity"
               :answertxt="answertxt" :conclusion="conclusion"></WorkForm>
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"></WorkHis>
+            <WorkHis class="form-his" v-if="!formShow && phoneType=='05'" :workData="newList?newList:workData"></WorkHis>
           </div>
         </el-main>
       </el-container>
@@ -447,7 +447,7 @@
         // 电话号码
         addTelNum: '',
         //  历史列表相关
-        applyId: '', // 申请单id
+        // applyId: '', // 申请单id
         phoneNum: '', // 电话号码
         phoneType: '', // 电话类型
         id: '', // 历史入参 
@@ -455,7 +455,6 @@
         pageSize: 10, // 每页条数
         // 加载
         mobileLoading: true,
-        // 传给表单的 数据
         // 客户姓名
         custName: '',
         // 电话号码
@@ -463,14 +462,12 @@
         // 请求历史日志
         hisId: '',
         hisPhoneType: '',
-        // 改造 , 通过 电话类型 , formShwo/hisShow 来控制所有的 表单/历史显示
-        formShow: false,
-        hisShow: false,
+        formShow: '',
         activeNames: ["1"], // 折叠默认展开的选项
         treeFlag: '', // 用来标志  电话树是否需要更新
         listFlag: '', // 用来标志  历史调查日志, 
         //是否需要更新  在子组件操作的时候, $emit 
-        applySubNo: '', // 进件编号
+        // applySubNo: '', // 进件编号
         // 历史数据
         mobileData: [],
         comData: [],
@@ -490,29 +487,25 @@
           creatorCode: ''
         }, // 添加电话征信 表单数据
         addTellFormLabelWidth: '80px', // 添加电话 表单 label-width
-        isInterFlag: false, // 是否是内匹跳转的查看详情
         activeTrees: ["1", "2", "3", "4", "5"],
-        addBtnShow: this.addBtn == false ? this.addBtn : true, // 标志 添加电话按钮是否显示
+        addBtnShow: this.addBtn == false ? false : true, // 标志 添加电话按钮是否显示
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '确定', // 默认btn title
-        judgeFlag: '',
         landlinePhone: /^(0[0-9]{2}-?)([0-9]{8})$/,
         landlinePhone1: /^(0[0-9]{3}-?)([0-9]{7})$/,
         landLinePhoneLength: /^[0-9\-]{0,20}$/,
         mobilePhone: /^1[345789]\d{9}$/,
       }
     },
-    // props: ['isFull', 'SplitS', 'addBtn'],
     props: {
-      // applyId: {
-      //   required: true,
-      //   default: '',
-      //   type: String
-      // },
-      // isFull: {
-      //   type: Boolean
-      // },
-      SplitS: {
+      applyId: {
+        required: true,
+        default: '',
+        type: String
+      },
+     SubNo: {
+        required: true,
+        default: '',
         type: String
       },
       addBtn: {
@@ -569,7 +562,6 @@
         } else {
           this.active = false;
         }
-
       },
 
       // 添加电话  电话校验
@@ -611,63 +603,16 @@
         // 此时 data 已经被 observed 了
         // 测试数据
         // 调用历史数据
-        this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
-        if (this.judgeFlag == '01') {
-          var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-          this.applyId = taskInWaitting.applyId;
-          // 进件编号
-          this.applySubNo = taskInWaitting.applySubNo;
-        }
-        if (this.judgeFlag == '02') {
-          var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-          this.applyId = FtaskInWaitting.applyId;
-          // 进件编号
-          this.applySubNo = FtaskInWaitting.applySubNo;
-        }
-        //反欺诈专员
-        if (this.judgeFlag == '03') {
-          var AntitaskInWaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
-          this.applyId = AntitaskInWaitting.applyId;
-          // 进件编号
-          this.applySubNo = AntitaskInWaitting.applySubNo;
-        }
-        //反欺诈主管
-        if (this.judgeFlag == '04') {
-          var AntiManagertaskInWaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
-          this.applyId = AntiManagertaskInWaitting.applyId;
-          // 进件编号
-          this.applySubNo = AntiManagertaskInWaitting.applySubNo;
-        }
-        //复议专员
-        if (this.judgeFlag == '05' || this.judgeFlag == '06') {
-          var RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
-          this.applyId = RtaskInWaitting.applyId;
-          // 进件编号
-          this.applySubNo = RtaskInWaitting.applySubNo;
-        }
-        //质检详情-部分
-        if (this.judgeFlag == '07' || this.judgeFlag == '08' || this.judgeFlag == '09' || this.judgeFlag == '10' ||
-          this.judgeFlag == '11' || this.judgeFlag == '12' || this.judgeFlag == '13') {
-          var RtaskInWaitting = JSON.parse(localStorage.getItem('QT'));
-          this.applyId = RtaskInWaitting.matchApplyId;
-          // 进件编号
-          this.applySubNo = RtaskInWaitting.applySubNo;
-        }
-        // 电话树数据
-        this.fetchData();
-        // 取内匹存储的标志
-        var internalObj = JSON.parse(localStorage.getItem('internalObj'))
-        // 从导航进入时的 标志
-        // 导航假如是初审进入 那就是编辑状态 important
-        var navJudge = JSON.parse(localStorage.getItem('navJudge'));
-        // 假如 内匹标志和  导航进入标志都存在 , 导航标志优先
-        if (internalObj && navJudge) {
-          if (navJudge.flag == 'nav_first') {
-            this.isInterFlag = false;
-          } else {
-            this.isInterFlag = internalObj.isInterFlag;
-          }
-        }
+        // let taskInWaitting={};
+        // let judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
+        // if (judgeFlag == '01')  taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+        // if (judgeFlag == '02')  taskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+        // if (judgeFlag == '03'||judgeFlag == '04') taskInWaitting =JSON.parse(localStorage.getItem('AntitaskInWaitting')); //反欺诈专员\主管
+        // if (this.judgeFlag == '05' || this.judgeFlag == '06') taskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));  //复议专、主管
+        // if (judgeFlag == '07' || judgeFlag == '08' || judgeFlag == '09' || judgeFlag == '10' ||  judgeFlag == '11' || judgeFlag == '12' || judgeFlag == '13')  taskInWaitting = JSON.parse(localStorage.getItem('QT')); //质检详情-部分
+        // this.applyId = taskInWaitting.applyId;
+        // this.applySubNo = taskInWaitting.applySubNo; // 进件编号
+        this.fetchData(); // 电话树数据
       },
       fetchData() {
         this.post("/creTelInfo/queryTels", {
@@ -679,41 +624,18 @@
       },
       handleNodeClick(data) {
         this.formShow = this.addBtn; //初审点击表格变为查询后，点击二级节点切换到编辑页面
-        if (this.isInterFlag == true || this.SplitS != 'right' || this.hisShow) {
-          // 点击每条tree数据的事件
-          this.treeId = data.id;
-          if (data.id.length > 2) {
-            // 点击数据展示历史记录  列表
-            this.hisListShow = true;
-            // 历史数据不显示
-            this.hisShow = false;
-            // 请求历史调查日志
-            this.phoneType = data.telType;
-            // 客户姓名
-            this.custName = data.telName;
-            // 电话号码
-            this.phoneNum = data.telNum;
-            this.queryTelLogByPage();
-          }
-        } else if (this.isInterFlag == false || this.SplitS == 'right') {
-          // 点击每条tree数据的事件
-          this.treeId = data.id;
-          if (data.id.length > 2) {
-            // 点击数据展示历史记录  列表
-            this.hisListShow = true;
-            // 请求历史调查日志
-            this.phoneType = data.telType;
-            // 客户姓名
-            this.custName = data.telName;
-            // 电话号码
-            this.phoneNum = data.telNum;
-            // this.phoneNum = '010-001';
-            this.queryTelLogByPage();
-            this.formShow = true;
-            this.hisShow = false;
-            // 编辑的时候 历史调查日志不展开
-            this.activeNames = [];
-          }
+        // 点击每条tree数据的事件
+        this.treeId = data.id;
+        if (data.id.length > 2) {
+          // 点击数据展示历史记录  列表
+          this.hisListShow = true;
+          // 请求历史调查日志
+          this.phoneType = data.telType;
+          // 客户姓名
+          this.custName = data.telName;
+          // 电话号码
+          this.phoneNum = data.telNum;
+          this.queryTelLogByPage();
         }
         // 点击的时候清空  
         this.formId = '';
@@ -737,11 +659,6 @@
           if (res.statusCode == 200) {
             this.listData = res.data.page;
             if (res.data.message) {
-              if (this.formShow == true) {
-                this.hisShow = false;
-              } else {
-                this.hisShow = true;
-              };
               this.newList = res.data.message;
               this.source = this.newList.source;
               this.answer = this.newList.answer;
@@ -878,7 +795,7 @@
             "creatorCode": this.userCode,
             "relationShip": this.addRelationShip // 关系
           },
-          "applySubNo": this.applySubNo
+          "applySubNo": this.SubNo
         }).then(res => {
           // 关闭 弹窗
           this.dialogFormVisible = false;
@@ -909,10 +826,7 @@
         this.queryTelLogByPage();
       },
       rowDbClick(row) {
-        // 先让表单消失
         this.formShow = false;
-        this.hisShow = false;
-        // 历史列表  点击每一行
         this.id = row.id;
         // 通过 电话类型来判断 显示哪个表单
         switch (this.phoneType) {
@@ -947,9 +861,7 @@
         }).then(res => {
           this.newList = '';
           this.mobileData = res.data;
-          if (res.statusCode == '200')
-            // 直接处理 显示  历史
-            this.hisShow = true;
+          if (res.statusCode != '200') this._error(res.msg)
 
         })
       },
@@ -962,9 +874,7 @@
         }).then(res => {
           this.newList = '';
           this.comData = res.data;
-          if (res.statusCode == '200')
-            // 直接处理 显示  历史
-            this.hisShow = true;
+          if (res.statusCode != '200') this._error(res.msg)
         })
       },
       queryTelfContract() {
@@ -976,9 +886,7 @@
         }).then(res => {
           this.newList = '';
           this.familyData = res.data;
-          if (res.statusCode == '200')
-            // 直接处理 显示  历史
-            this.hisShow = true;
+          if (res.statusCode != '200') this._error(res.msg)
         })
       },
       queryTeleContract() {
@@ -990,9 +898,7 @@
         }).then(res => {
           this.newList = '';
           this.hurryData = res.data;
-          if (res.statusCode == '200')
-            // 直接处理 显示  历史
-            this.hisShow = true;
+          if (res.statusCode != '200') this._error(res.msg)
         })
       },
       queryTelJobRef() {
@@ -1004,9 +910,7 @@
         }).then(res => {
           this.newList = '';
           this.workData = res.data;
-          if (res.statusCode == '200')
-            // 直接处理 显示  历史
-            this.hisShow = true;
+          if (res.statusCode != '200') this._error(res.msg)
         })
       },
     },

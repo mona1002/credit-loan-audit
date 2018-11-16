@@ -31,24 +31,24 @@
             <keep-alive v-if="Routes.closed">
               <AudioVisualLeft v-if=" this.tabContent1==0" :list='list' msg="MspLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
-            <remark v-if=" this.tabContent1==1" :applyId='tastwaitingPass.matchApplyId'></remark>
-            <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
+            <remark v-if=" this.tabContent1==1" :applyId='list.applyId'></remark>
+            <InternalMatch v-if=" this.tabContent1==2" :listInf='list'>内部匹配</InternalMatch>
             <keep-alive v-if="Routes.closed">
-              <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.matchApplyId'>申请信息</capplicationInformationDetail>
+              <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'>申请信息</capplicationInformationDetail>
             </keep-alive>
             <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
-            <RPhoneCredit v-if=" this.tabContent1==5" :applyId='tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
-            <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
+            <RPhoneCredit v-if=" this.tabContent1==5" :applyId='list.applyId'> 电话征信</RPhoneCredit>
+            <FCreditForm v-if=" this.tabContent1==6" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
             <keep-alive v-if="Routes.closed">
-              <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
+              <creditInvestigation v-if=" this.tabContent1==7" :applyId='list.applyId'>实地征信</creditInvestigation>
             </keep-alive>
-            <aAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aAntiApplyInf>
-            <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
+            <aAntiApplyInf v-if=" this.tabContent1==8" :applyId='list.applyId'>反欺诈结论</aAntiApplyInf>
+            <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='list.applyId'>反欺诈调查</RantiFraudInvestigation>
             <keep-alive v-if="Routes.closed">
               <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
             </keep-alive>
-            <processTrajectory v-if=" this.tabContent1==11" :applyId='tastwaitingPass.matchApplyId'>流程轨迹</processTrajectory>
-            <aAprovalConclusion v-if=" this.tabContent1==12" :applyId='tastwaitingPass.matchApplyId'>审批结论轨迹</aAprovalConclusion>
+            <processTrajectory v-if=" this.tabContent1==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
+            <aAprovalConclusion v-if=" this.tabContent1==12" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
           </div>
         </div>
       </div>
@@ -74,32 +74,32 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.matchApplyId'></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='list.applyId'></AudioVisual>
           </keep-alive>
-          <remark v-if=" this.tabContent2==1" :applyId='tastwaitingPass.matchApplyId'></remark>
-          <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
+          <remark v-if=" this.tabContent2==1" :applyId='list.applyId'></remark>
+          <InternalMatch v-if=" this.tabContent2==2" :listInf='list'>内部匹配</InternalMatch>
           <keep-alive v-if="Routes.closed">
-            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.matchApplyId' roles='MatchingInf'>申请信息</capplicationInformationDetail>
+            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='MatchingInf'>申请信息</capplicationInformationDetail>
           </keep-alive>
           <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
-          <RPhoneCredit v-if=" this.tabContent2==5" :applyId='tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
-          <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
+          <RPhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId'> 电话征信</RPhoneCredit>
+          <FCreditForm v-if=" this.tabContent2==6" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
           <keep-alive v-if="Routes.closed">
-            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'>实地征信</creditInvestigation>
           </keep-alive>
-          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aAntiApplyInf>
-          <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
+          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='list.applyId'>反欺诈结论</aAntiApplyInf>
+          <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='list.applyId'>反欺诈调查</RantiFraudInvestigation>
           <keep-alive v-if="Routes.closed">
             <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
           </keep-alive>
-          <processTrajectory v-if=" this.tabContent2==11" :applyId='tastwaitingPass.matchApplyId'>流程轨迹</processTrajectory>
-          <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='tastwaitingPass.matchApplyId'>审批结论轨迹</aAprovalConclusion>
+          <processTrajectory v-if=" this.tabContent2==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
+          <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
         </div>
       </div>
-          <!-- 对比弹出层 -->
-    <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
-     <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
-       <!-- <div class="AudioVisual_wrap_compare_left ">
+      <!-- 对比弹出层 -->
+      <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
+        <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
+        <!-- <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
         <div class="AlertContent">
           <keep-alive v-if="Routes.closed">
@@ -107,7 +107,7 @@
           </keep-alive>
         </div>
       </div> -->
-      <!-- <div class="AudioVisual_wrap_compare_right "> -->
+        <!-- <div class="AudioVisual_wrap_compare_right "> -->
         <p class="customName Left_right_Title">客户名称：
           <el-input v-model="AlertSearch" :disabled="true"></el-input>
           <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
@@ -119,8 +119,8 @@
             <AudioVisualLeft :list='list' msg="MspLthree" ref="audioChild" :comBtn='false' v-on:inputInf="inputInner"></AudioVisualLeft>
           </keep-alive>
         </div>
-      <!-- </div> -->
-    </div>
+        <!-- </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -144,12 +144,16 @@
     data() {
       return {
         accepCusBasicInfo: {},
-        list: {}, //左侧影像资料入参值
+        list: {},
+        // list: {//左侧影像资料入参值
+        //   applyId: this.list.applyId,
+        //   applySubNo: this.list.applySubNo,
+        //   certCode: this.list.certCode
+        // }, 
         certCode: '',
         watchData: '',
         loading: false,
         customInf: {},
-        tastwaitingPass: {},
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -191,7 +195,7 @@
           this.Routes.closed = false;
           this.customInf = {};
           this.accepCusBasicInfo = {};
-          this.list = {};
+          // this.list = {};
           this.mountedInf();
           this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
@@ -328,10 +332,10 @@
       mountedInf() {
         this.title = "影像资料";
         this.loading = true;
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
-        this.$set(this.list, 'applyId', this.tastwaitingPass.matchApplyId); //将matchApplyId 赋值给 入参applyId
-        this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
-        this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
+        this.list = JSON.parse(localStorage.getItem("internalObj"));
+        // this.$set(this.list, 'applyId', this.list.applyId); //将matchApplyId 赋值给 入参applyId
+        // this.$set(this.list, 'applySubNo', this.list.applySubNo);
+        // this.$set(this.list, 'certCode', this.list.certCode);
       },
     },
     mounted() {

@@ -30,20 +30,20 @@
           </p>
           <div class="Left_right_BigImg">
             <keep-alive v-if="Routes.closed">
-              <AudioVisualLeft v-if=" this.tabContent1==0" :list='tastwaitingPass' msg="spLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <AudioVisualLeft v-if=" this.tabContent1==0" :list='list' msg="spLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
-            <remark v-if=" this.tabContent1==1" :applyId='tastwaitingPass.applyId'></remark>
-            <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
+            <remark v-if=" this.tabContent1==1" :applyId='list.applyId'></remark>
+            <InternalMatch v-if=" this.tabContent1==2" :listInf='list'></InternalMatch>
             <keep-alive v-if="Routes.closed">
-              <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.applyId'></capplicationInformationDetail>
+              <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'></capplicationInformationDetail>
             </keep-alive>
             <cborrowerInformationDetail v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
-            <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
-            <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.applyId' :PhoneAndInterShow="false"></FCreditForm>
+            <PhoneCredit v-if=" this.tabContent1==5"  :applyId='list.applyId'   :SubNo='list.applySubNo'  :addBtn="false"></PhoneCredit>
+            <FCreditForm v-if=" this.tabContent1==6" :applyId='list.applyId' :PhoneAndInterShow="false"></FCreditForm>
             <keep-alive v-if="Routes.closed">
-              <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+              <creditInvestigation v-if=" this.tabContent1==7" :applyId='list.applyId'></creditInvestigation>
             </keep-alive>
-            <processTrajectory v-if=" this.tabContent1==8" :applyId='tastwaitingPass.applyId'></processTrajectory>
+            <processTrajectory v-if=" this.tabContent1==8" :applyId='list.applyId'></processTrajectory>
           </div>
         </div>
       </div>
@@ -69,22 +69,22 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0"> </AudioVisual>
+            <AudioVisual :applyId='list.applyId' v-if=" this.tabContent2==0"> </AudioVisual>
           </keep-alive>
-          <remark v-if=" this.tabContent2==1" :btnShow='true' :applyId='tastwaitingPass.applyId'></remark>
-          <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
+          <remark v-if=" this.tabContent2==1" :btnShow='true' :applyId='list.applyId'></remark>
+          <InternalMatch v-if=" this.tabContent2==2" :listInf='list' :read='false'></InternalMatch>
           <keep-alive v-if="Routes.closed">
             <!--  ref="applicationInf" -->
-            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId' roles='creditApp_firstTrial'
+            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='creditApp_firstTrial'
               :btn="true"></capplicationInformationDetail>
           </keep-alive>
           <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
-          <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull" :addBtn="true"></PhoneCredit>
+          <PhoneCredit v-if=" this.tabContent2==5"  :applyId='list.applyId'  :SubNo='list.applySubNo' :addBtn="true"></PhoneCredit>
           <CreditForm  v-if=" this.tabContent2==6"></CreditForm>
           <keep-alive v-if="Routes.closed">
-            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'></creditInvestigation>
           </keep-alive>
-          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
+          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='list.applyId'></aAntiApplyInf>
           <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
         </div>
       </div>
@@ -95,7 +95,7 @@
         <p>影像资料</p>
         <div class="AlertContent">
           <keep-alive v-if="Routes.closed">
-            <AudioVisualLeft :list='tastwaitingPass' msg="spLtwo" :comBtn='false'></AudioVisualLeft>
+            <AudioVisualLeft :list='list' msg="spLtwo" :comBtn='false'></AudioVisualLeft>
           </keep-alive>
         </div>
       </div> -->
@@ -108,7 +108,7 @@
         </p>
         <div class="AlertContent">
           <keep-alive v-if="Routes.closed">
-            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :list='tastwaitingPass' :comBtn='false'></AudioVisualLeft>
+            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :list='list' :comBtn='false'></AudioVisualLeft>
           </keep-alive>
         </div>
         <!-- </div> -->
@@ -141,7 +141,7 @@
         watchData: '',
         loading: false,
         customInf: {}, //申请信息页local字段
-        tastwaitingPass: {}, //详情列表页信息--(含)取applyId
+        list: {}, //详情列表页信息--(含)取applyId
         accepCusBasicInfo: {},
         showHalfBtn: false,
         CompareAlert: false,
@@ -325,7 +325,7 @@
       mountedInf() {
         this.title = "影像资料";
         this.loading = true;
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+        this.list = JSON.parse(localStorage.getItem("taskInWaitting"));
       }
     },
     mounted() {

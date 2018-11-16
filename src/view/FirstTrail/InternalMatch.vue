@@ -1,52 +1,50 @@
 <template>
   <div class="internalMatch-class">
     <el-collapse v-model="activeNames">
-      <!-- 客户历史贷款信息 -->
-      <!-- <el-collapse-item name="0">
+      <el-collapse-item name="0">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">客户历史贷款信息</span>
         </template>
         <div class="height_auto">
-          <el-table :data="mobileData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickMobiel"
-            highlight-current-row v-loading="mobileLoading">
-            <el-table-column prop="matchApplySubNo" label="进件编号" width="160">
+          <!--  v-loading="mobileLoading" -->
+          <el-table :data="applyInfoHistory" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickMobiel"
+            highlight-current-row>
+            <el-table-column prop="applySubno" label="进件编号" width="160">
             </el-table-column>
-            <el-table-column prop="matchApplyCustName" label="客户名称" width="80">
+            <el-table-column prop="custName" label="客户名称" width="80">
             </el-table-column>
             <el-table-column prop="certCode" label="身份证号" width="160">
             </el-table-column>
-            <el-table-column prop="dddddddddd" label="申请日期" width="105">
+            <el-table-column prop="appDate" label="申请日期" width="105">
             </el-table-column>
-            <el-table-column prop="dddddddddd" label="借款金额" width="90">
+            <el-table-column prop="iloanAmt" label="借款金额" width="90">
             </el-table-column>
-            <el-table-column prop="dddddddddd" label="产品名称" width="100">
+            <el-table-column prop="proName" label="产品名称" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
+            <el-table-column prop="operOrgName" label="进件机构" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
+            <el-table-column prop="busiStateTxt" label="业务状态" width="110">
             </el-table-column>
-            <el-table-column prop="dddddddddd" label="命中规则" width="180">
+            <el-table-column prop="hitRulesTxt" label="命中规则" width="180">
             </el-table-column>
-            <el-table-column prop="dddddddddd" label="账户状态" width="80">
-            </el-table-column>
-            <el-table-column prop="remark" fit="false" class="mark-cell" label="备注" show-overflow-tooltip min-width="100">
+            <el-table-column prop="remark" label="备注" show-overflow-tooltip min-width="100">
             </el-table-column>
           </el-table>
         </div>
-        <div class="block tool-bar" v-show="CustomData.totalRecord>0">
+        <!-- <div class="block tool-bar" v-show="CustomData.totalRecord>0">
           <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile"
             :current-page="CudstomPageNum" :page-sizes="[10, 20,50]" :page-size="CudstomPageSize" layout="total, sizes, prev, pager, next, jumper"
             :total="CustomData.totalRecord">
           </el-pagination>
-        </div>
-      </el-collapse-item> -->
+        </div> -->
+      </el-collapse-item>
       <!-- 移动电话 -->
       <el-collapse-item name="1">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">移动号码类(手机号和联系人)</span>
-          <span class="collapse_title_text internalMatch_head_tab">{{mobileTab}}</span>
+          <span class="collapse_title_text internalMatch_head_tab">{{init.mobileInternalMatchTab}}</span>
         </template>
         <div class="height_auto">
           <el-table :data="mobileData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickMobiel"
@@ -66,6 +64,8 @@
             <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
+            </el-table-column>
+            <el-table-column prop="hitRulesTxt" label="命中规则" width="110">
             </el-table-column>
             <el-table-column prop="remark" fit="false" class="mark-cell" label="备注" show-overflow-tooltip min-width="100">
             </el-table-column>
@@ -83,10 +83,10 @@
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">固定电话类(家电、单电)</span>
-          <span class="collapse_title_text internalMatch_head_tab">{{fixTelTab}}</span>
+          <span class="collapse_title_text internalMatch_head_tab">{{init.fixTelInternalMatchTab}}</span>
         </template>
         <div class="height_auto">
-          <el-table :data="fixTelData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickFixTel"
+          <el-table :data="fixTelData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickMobiel"
             highlight-current-row v-loading="fixTelLoading">
             <el-table-column prop="targetCustName" label="命中号码姓名" width="105">
             </el-table-column>
@@ -103,6 +103,8 @@
             <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
+            </el-table-column>
+            <el-table-column prop="hitRulesTxt" label="命中规则" width="110">
             </el-table-column>
             <el-table-column prop="remark" min-width="100" fit="false" class="mark-cell" label="备注"
               show-overflow-tooltip>
@@ -124,7 +126,7 @@
           <span class="collapse_title_text internalMatch_head_tab">{{workName}}</span>
         </template>
         <div class="height_auto">
-          <el-table :data="workData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickCompany"
+          <el-table :data="workData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickMobiel"
             highlight-current-row v-loading="companyLoading">
             <el-table-column prop="targetCustName" label="命中号码姓名" width="105">
             </el-table-column>
@@ -139,6 +141,8 @@
             <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
+            </el-table-column>
+            <el-table-column prop="hitRulesTxt" label="命中规则" width="110">
             </el-table-column>
             <el-table-column prop="remark" min-width="100" fit="false" class="mark-cell" label="备注"
               show-overflow-tooltip>
@@ -158,12 +162,17 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">匹配结论</span>
         </template>
-        <div class="height_auto">
-          <!-- 匹配结论编辑 -->
-          <internal-match-textarea v-show="SplitS=='right'"></internal-match-textarea>
-          <!-- 匹配结论查看 -->
-          <internal-match-read v-show="SplitS!='right'"></internal-match-read>
-        </div>
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="30px" class="">
+          <el-form-item prop="audit_desc" class="height_120 margin_top_15 margin_right_5">
+            <b v-show="ruleForm.audit_desc&&ruleForm.audit_desc.length>=500" class="hint_word loca">
+              输入长度不能超过500</b>
+            <el-input type="textarea" class="txt_width" v-model="ruleForm.audit_desc" :readonly="read" resize="none"
+              :rows="5" :maxlength="500"></el-input>
+          </el-form-item>
+          <el-form-item v-if="!read">
+            <el-button type="primary" class="margin_left_735" @click="submitForm('ruleForm')">确定</el-button>
+          </el-form-item>
+        </el-form>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -176,189 +185,141 @@
         title1: "移动号码类(手机号和联系人)",
         title2: "固定电话类(家电、单电)",
         title3: "单位名称",
+        init: {},
+        ruleForm: {
+          applyId: this.listInf.applyId, // 申请单id
+          creator_code: this.creator_code, // 操作人用户编码  userCode
+          audit_desc: '', // 匹配结论
+          id: ''
+        },
+        rules: { //结论为必填项时打开
+          //   audit_desc: [{
+          //     required: true,
+          //     message: '请填写活动形式',
+          //     trigger: 'blur'
+          //   }]
+        },
+        applyInfoHistory: [], //客户历史贷款信息
         CustomData: [], //客户数据
         mobileData: [], // 移动电话数据
         fixTelData: [], // 固话数据
         workData: [], // 单位数据
-        applySubNo: '', // 进件编号
         workName: '', // 公司名称
         MobilePageSize: 10, // 移动 每页条数
         MobilePageNum: 1, // 移动 当前页
         CudstomPageNum: 1, // 客户 当前页
         CudstomPageSize: 10, // 移动 每页条数
-
-        FixTelPageSize: 5, // 固定电话 每页条数
+        FixTelPageSize: 10, // 固定电话 每页条数
         FixTelPageNum: 1, // 固定电话 当前页
-        CompanyPageSize: 5, // 公司电话 每页条数
+        CompanyPageSize: 10, // 公司电话 每页条数
         CompanyPageNum: 1, // 公司电话 当前页
-        mobileLoading: true,
-        fixTelLoading: true,
-        companyLoading: true,
+        mobileLoading: false,
+        fixTelLoading: false,
+        companyLoading: false,
         auditId: '', // 匹配结论id
-        isInterFlag: false,
-        fixTelTab: '', // 固定电话标签
-        mobileTab: '', // 移动电话标签
-        fixTelcustName: ''
       };
     },
-    props: ['isFull', 'SplitS'],
+    props: {
+      listInf: {
+        default: function () {
+          return {}
+        },
+        type: Object,
+        required: true
+      },
+      read: {
+        default: true,
+        type: Boolean,
+      }
+    },
     mounted() {
+      // 获取入参
+      var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+      var userInfo = JSON.parse(localStorage.getItem('userInf'));
+      this.workName = applicationInformationDetail.workName;
+      this.creator_code = userInfo.userCode;
       this.mountedInf();
     },
     methods: {
       mountedInf() {
-        //   // 组件歘估计完成后获取数据
-        //   // 此时 data 已经被 observed 了
-        var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-        // 进件编号
-        this.applySubNo = applicationInformationDetail.applySubNo;
-        this.workName = applicationInformationDetail.workName;
-        this.fixTelcustName = applicationInformationDetail.custName;
-        // 测试数据
-        this.fetchData('mobile');
-        this.fetchData('fixed');
-        this.fetchData('company');
-        // 样式处理
-        if (this.isFull == true) { // 全屏
-          $(".internalMatch-class .mark-textarea").css("width", "800px")
-          $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
-          // 按钮
-          $(".internalMatch-class .mark-button").css("margin-left", "775px")
-        } else if (this.isFull == false) { // 分屏
-          $(".internalMatch-class .mark-textarea").css("width", "600px")
-          $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
-          // 按钮
-          $(".internalMatch-class .mark-button").css("margin-left", "580px")
-        }
+        console.log(this.listInf);
+        // 初始化接口
+        this.post('/internalMatch/getInternalMatchInfo', {
+          pageParam: {
+            pageNum: 1, //		页码
+            pageSize: 10 //每页条数
+          },
+          applyId: this.listInf.applyId, //	申请单id
+          applySubNo: this.listInf.applySubNo, //	进件编号
+          name: this.listInf.custName, //	借款人名字
+          workName: this.workName //	单位名称
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.init = res.data;
+            this.applyInfoHistory = this.init.applyInfoHistory; //客户历史贷款信息  - 无分页
+            this.mobileData = this.init.mobileInternalMatch; //移动号码类  
+            this.fixTelData = this.init.fixTelInternalMatch; //固定电话类  
+            this.workData = this.init.workInternalMatch; //单位名称  
+            if (this.init && this.init.matchOption) {
+              this.ruleForm.audit_desc = this.init.matchOption.auditDesc; //内匹结论
+              this.ruleForm.id = this.init.matchOption.id //内匹结论id
+            }
+          } else {
+            this._error(res.msg)
+          }
+        })
       },
-      /*
-        mobile: 移动电话
-        fixed:  固定电话
-        company:  公司电话
-        option: 匹配结论
-       */
-      fetchData(type) {
-        // 只做判断分流
-        switch (type) {
-          case 'mobile':
-            this.getListByMobile();
-            this.getTabByMobile();
-            break;
-          case 'fixed':
-            this.getListByFixTel();
-            this.getTabByFixTel();
-            break;
-          case 'company':
-            this.getListByWorkName();
-            break;
-
-        }
-      },
+      // 移动号码类
       getListByMobile() {
-        // 移动号码类
+        this.mobileLoading = true;
         this.post('internalMatch/getInternalMatchListByMobile', {
           pageParam: {
             pageNum: this.MobilePageNum,
             pageSize: this.MobilePageSize
           },
-          applySubNo: this.applySubNo
+          applySubNo: this.listInf.applySubNo //this.applySubNo
         }).then(res => {
           this.mobileData = res.data;
           this.mobileLoading = false;
         });
       },
-      getTabByMobile() {
-        // 获取移动电话类标签
-        this.post('internalMatch/getTabByMobile', {
-          applySubNo: this.applySubNo
-        }).then(res => {
-          this.mobileTab = res.data;
-        })
-      },
+      // 固定电话类
       getListByFixTel() {
-        // 固定电话类
+        this.fixTelLoading = true;
         this.post('internalMatch/getInternalMatchListByFixTel', {
           pageParam: {
             pageNum: this.FixTelPageNum,
             pageSize: this.FixTelPageSize
           },
-          applySubNo: this.applySubNo
+          applySubNo: this.listInf.applySubNo, ///this.applySubNo
         }).then(res => {
           this.fixTelData = res.data;
           this.fixTelLoading = false;
         });
       },
-      getTabByFixTel() {
-        // 获取固定电话类标签
-        this.post('internalMatch/getTabByFixTel', {
-          applySubNo: this.applySubNo,
-          name: this.fixTelcustName,
-        }).then(res => {
-          this.fixTelTab = res.data;
-        })
-      },
+      // 单位名称类
       getListByWorkName() {
-        // 单位名称类
+        this.companyLoading = true;
         this.post('internalMatch/getInternalMatchListByWorkName', {
           pageParam: {
             pageNum: this.CompanyPageNum,
             pageSize: this.CompanyPageSize
           },
-          applySubNo: this.applySubNo,
+          applySubNo: this.listInf.applySubNo, //this.applySubNo,
           workName: this.workName
         }).then(res => {
           this.workData = res.data;
           this.companyLoading = false;
         })
       },
+      // 表格双击跳转
       itemDbclickMobiel(row, event) {
         let query = {};
-        query.id = row.id;
-        query.matchApplyId = row.matchApplyId;
-        // 行被双击 事件  移动电话
-        this.isInterFlag = query.isInterFlag = true;
+        // query.id = row.id;
+        query.applyId = row.matchApplyId;
         query.applySubNo = row.matchApplySubNo;
         query = Object.assign({}, row, query)
         // id: 客户id     orgCate
-        // isInterFlag  标志是否是  内部匹配跳转的  查看
-        localStorage.setItem("internalObj", JSON.stringify(query));
-        localStorage.setItem("MatchFlag", JSON.stringify({
-          MatchFlag: 'internal'
-        }));
-        this.$router.push({
-          name: 'MatchingInf',
-          params: {
-            newOne: true,
-          }
-        });
-      },
-      itemDbclickFixTel(row, event) {
-        let query = {};
-        query.id = row.id;
-        query.matchApplyId = row.matchApplyId;
-        // 行被双击 事件  固定电话
-        this.isInterFlag = query.isInterFlag = true;
-        query.applySubNo = row.matchApplySubNo;
-        query = Object.assign({}, row, query)
-        localStorage.setItem("internalObj", JSON.stringify(query));
-        localStorage.setItem("MatchFlag", JSON.stringify({
-          MatchFlag: 'internal'
-        }));
-        this.$router.push({
-          name: 'MatchingInf',
-          params: {
-            newOne: true,
-          }
-        });
-      },
-      itemDbclickCompany(row, event) {
-        let query = {};
-        query.id = row.id;
-        query.matchApplyId = row.matchApplyId;
-        // 行被双击 事件  单位名称
-        this.isInterFlag = query.isInterFlag = true;
-        query.applySubNo = row.matchApplySubNo;
-        query = Object.assign({}, row, query)
         localStorage.setItem("internalObj", JSON.stringify(query));
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'internal'
@@ -372,276 +333,71 @@
       },
       // 移动电话
       handleSizeChangeMobile(val) {
-        // 每页 10条
         this.MobilePageSize = val;
-        this.fetchData('mobile');
+        this.getListByMobile();
       },
       handleCurrentChangeMobile(val) {
-        // 第几页
         this.MobilePageNum = val;
-        this.fetchData('mobile');
+        this.getListByMobile();
       },
       // 固定电话
       handleSizeChangeFixTel(val) {
-        // 每页 10条
         this.FixTelPageSize = val;
-        this.fetchData('fixed');
+        this.getListByFixTel();
       },
       handleCurrentChangeFixTel(val) {
-        // 第几页
         this.FixTelPageNum = val;
-        this.fetchData('fixed');
+        this.getListByFixTel();
       },
       // 单位电话
       handleSizeChangeCompany(val) {
-        // 每页 10条
         this.CompanyPageSize = val;
-        this.fetchData('company');
+        this.getListByWorkName();
       },
       handleCurrentChangeCompany(val) {
-        // 第几页
         this.CompanyPageNum = val;
-        this.fetchData('company');
+        this.getListByWorkName();
       },
-    },
-    watch: {
-      isFull() {
-        // 样式处理
-        if (this.isFull == true) { // 全屏
-          $(".internalMatch-class .mark-textarea").css("width", "800px")
-          $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
-          // 按钮
-          $(".internalMatch-class .mark-button").css("margin-left", "775px")
-        } else if (this.isFull == false) { // 分屏
-          $(".internalMatch-class .mark-textarea").css("width", "600px")
-          $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
-          // 按钮
-          $(".internalMatch-class .mark-button").css("margin-left", "580px")
-        }
-      }
-    },
-    components: {
-      "internal-match-textarea": {
-        template: '\
-        <div>\
-            <el-form label-width="10px" class="demo-ruleForm">\
-            <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
-            <el-form-item class="mark-button">\
-                <el-button type="primary" @click="hangOoutBtn()">确定</el-button>\
-            </el-form-item>\
-            </el-form>\
-        </div>\
-            ',
-        data() {
-          return {
-            mark: "",
-            ruleForm: {
-              type: []
-            },
-            applyId: '', // 申请单id
-            audit_desc: '', //匹配结论
-            creator_code: '', // 用户操作人编码 userCode
-            resMsg: '',
-            hangOut: false,
-            loadsitu: false,
-            adbtn: '确定',
-          };
-        },
-        mounted() {
-          this.mountedf();
-        },
-        methods: {
-          mountedf() {
-            var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-            this.applyId = applicationInformationDetail.applyId;
-            var userInfo = JSON.parse(localStorage.getItem('userInf'));
-            this.creator_code = userInfo.userCode;
-            this.getOption();
-          },
-          getOption() {
-            // 获取匹配结论
-            this.post('internalMatch/getInternalMatchOption', {
-              applyId: this.applyId
-            }).then(res => {
-              res.data != null ? this.audit_desc = res.data.auditDesc : '';
-              res.data != null ? this.auditId = res.data.id : '';
-            })
-          },
-          hangOoutBtn() {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
             this.$confirm('确定操作？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
               cancelButtonText: '取消',
               showCancelButton: true
             }).then(() => {
-              this.Csave();
-            }).catch(() => {});
-          },
-          canc() {
-            this.hangOut = false;
-          },
-          Csave() {
-            this.post('internalMatch/addInternalMatchOption', {
-              // 申请单id
-              applyId: this.applyId,
-              // 操作人用户编码  userCode
-              creator_code: this.creator_code,
-              // 匹配结论
-              audit_desc: this.audit_desc,
-              id: this.auditId
-            }).then(res => {
-              if (res.statusCode == '200') {
-                this.resMsg = '保存成功！';
-                this.$message({
-                  type: 'success',
-                  message: this.resMsg
-                });
-              } else {
-                this.resMsg = '提交失败,请重试！';
-              }
-            });
-          },
-          submitForm: function () {
-            this.open();
-          },
-          // open 打开 是否确认提交弹窗
-          open() {
-            const h = this.$createElement;
-            this.$msgbox({
-              title: '提示',
-              message: h('p', null, [
-                h('span', null, '确定操作? '),
-              ]),
-              showCancelButton: true,
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              beforeClose: (action, instance, done) => {
-                if (action === 'confirm') {
-                  instance.confirmButtonLoading = true;
-                  instance.confirmButtonText = '执行中...';
-                  // 提交 匹配结论
-                  this.post('internalMatch/addInternalMatchOption', {
-                    // 申请单id
-                    applyId: this.applyId,
-                    // 操作人用户编码  userCode
-                    creator_code: this.creator_code,
-                    // 匹配结论
-                    audit_desc: this.audit_desc,
-                    id: this.auditId
-                  }).then(res => {
-                    if (res.statusCode == '200') {
-
-                      this.resMsg = '保存成功！';
-                      done();
-                    } else {
-                      this.resMsg = '提交失败,请重试！';
-                      instance.confirmButtonText = '';
-                    }
-                    instance.confirmButtonLoading = false;
-                  });
+              this.post('internalMatch/addInternalMatchOption', this.ruleForm).then(res => {
+                if (res.statusCode == '200') {
+                  this._succe('保存成功！')
+                  this.mountedInf();
                 } else {
-                  done();
+                  this._error('提交失败,请重试！');
                 }
-              }
-            }).then(action => {
-              this.$message({
-                type: 'success',
-                message: this.resMsg
               });
-            });
+            }).catch(() => {});
+          } else {
+            return false;
           }
-        },
-        watch: {
-          // 匹配结论输入
-          audit_desc: function (val) {
-            if (val.length >= 500) {
-              this.$message({
-                type: 'warning',
-                message: '请输入500字以内的结论！'
-              });
-            }
-          }
-        }
+        });
       },
-      // 匹配结论查看
-      "internal-match-read": {
-        template: '\
-            <el-form label-width="10px" class="demo-ruleForm">\
-            <el-input disabled type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
-            </el-form>\
-            ',
-        data() {
-          return {
-            mark: "",
-            ruleForm: {
-              type: []
-            },
-            applyId: '', // 申请单id
-            audit_desc: '', //匹配结论
-            creator_code: '' // 用户操作人编码 userCode
-          };
-        },
-        mounted() {
-          this.mountedC();
-        },
-        methods: {
-          mountedC() {
-            var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-            this.applyId = applicationInformationDetail.applyId;
-            var userInfo = JSON.parse(localStorage.getItem('userInf'));
-            this.creator_code = userInfo.userCode;
-            // 获取匹配信息
-            this.getOption();
-          },
-          getOption() {
-            // 获取匹配结论
-            this.post('internalMatch/getInternalMatchOption', {
-              applyId: this.applyId
-            }).then(res => {
-              res.data != null ? this.audit_desc = res.data.auditDesc : '';
-              res.data != null ? this.auditId = res.data.id : '';
-            })
-
-          },
-        }
-      }
-    }
+    },
   };
 
 </script>
-<style lang="css">
-  /* 分页 */
+<style scoped>
+  .loca {
+    left: 10px;
+  }
 
-  .internalMatch-class .tool-bar {
+  .tool-bar {
     width: 100%;
     text-align: center;
     padding: 10px 0 0 10px;
     margin-bottom: 10px;
   }
 
-  .internalMatch-class .mark-textarea {
-    margin: 10px;
-    width: 98.5%;
-  }
-
-  .internalMatch-class .mark-textarea textarea {
-    min-height: 100px;
-    width: 800px;
-    margin-left: 50px;
-  }
-
-  /* 确认按钮 */
-
-  .internalMatch-class .mark-button {
-    text-align: left;
-    margin-right: 0px;
-    margin-top: 20px;
-    margin-left: 775px;
-  }
-
-  /* 备注 width*/
-
-  .internalMatch-class .mark-cell {
+  .mark-cell {
     overflow: hidden;
     overflow-wrap: break-word;
   }
@@ -649,6 +405,11 @@
   .internalMatch_head_tab {
     color: #2DA8E1;
     font-weight: normal;
+  }
+
+  .txt_width {
+    min-width: 400px;
+    max-width: 800px;
   }
 
 </style>

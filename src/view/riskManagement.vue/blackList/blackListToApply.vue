@@ -438,6 +438,7 @@
             this.addTableData = res.data;
           } else {
             this.addTableData = [];
+            this._error(res.mag);
           }
         })
       },

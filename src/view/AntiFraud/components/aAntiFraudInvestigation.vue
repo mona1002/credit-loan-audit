@@ -213,11 +213,10 @@
         tableData: [],
         showBtn: this.PropshowBtn,
         ind: '',
-        query: {
-          id: '',
-          matchApplyId: '',
-          isInterFlag: false
-        },
+        // query: {
+        //   // id: '',
+        //   // applyId: '',
+        // },
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         fraudApplyInfo: '',
         hitRuleList: [],
@@ -478,17 +477,17 @@
         this.dialogVisible = false;
       },
       handlDetail(index, row) {
-        this.query.id = row.id;
-        this.query.matchApplyId = row.applyId;
-        this.query.isInterFlag = false;
-        this.query = Object.assign({}, this.query, row)
+        let query={};
+        // this.query.id = row.id;
+        // this.query.applyId = row.applyId;
+        query = Object.assign({}, query, row)
         this.$router.push({
           name: 'MatchingInf',
           params: {
             newOne: true,
           }
         });
-        localStorage.setItem("internalObj", JSON.stringify(this.query));
+        localStorage.setItem("internalObj", JSON.stringify(query));
       },
       /*命中客户数 查询*/
       inquiry(row) {

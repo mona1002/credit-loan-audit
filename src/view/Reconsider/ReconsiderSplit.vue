@@ -4,7 +4,7 @@
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
-      <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+      <span> 证件号码：{{list.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
       <span> 进件机构：{{customInf.appOrgName}}</span>
       <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
@@ -30,23 +30,23 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId'></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='list.applyId'></AudioVisual>
           </keep-alive>
-          <remark v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></remark>
+          <remark v-if=" this.tabContent2==1" :applyId='list.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
           <keep-alive v-if="Routes.closed">
-            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId' :roles='Flag=="05"?"reconsiderApp_commissioner":"antiFraudApp_manager" '></capplicationInformationDetail>
+            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' :roles='Flag=="05"?"reconsiderApp_commissioner":"antiFraudApp_manager" '></capplicationInformationDetail>
           </keep-alive>
           <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
-          <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
-          <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='tastwaitingPass.applyId'
+          <PhoneCredit v-if=" this.tabContent2==5"  :applyId='list.applyId'  :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+          <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='list.applyId'
             :FinalConCheckShow='true'></FCreditForm>
           <keep-alive v-if="Routes.closed">
-            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'></creditInvestigation>
           </keep-alive>
           <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply>
-          <aAntiApplyInf v-if=" this.tabContent2==9" :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
-          <RantiFraudInvestigation v-if=" this.tabContent2==10" :isShow='false' :applyId='tastwaitingPass.applyId'></RantiFraudInvestigation>
+          <aAntiApplyInf v-if=" this.tabContent2==9" :applyId='list.applyId'></aAntiApplyInf>
+          <RantiFraudInvestigation v-if=" this.tabContent2==10" :isShow='false' :applyId='list.applyId'></RantiFraudInvestigation>
           <ReconConclusion v-if=" this.tabContent2==11" :type='type'></ReconConclusion>
         </div>
       </div>
@@ -79,7 +79,7 @@
         loading: false,
         // 进件人信息
         customInf: {}, //申请信息页local字段
-        tastwaitingPass: {}, //详情列表页信息--(含)取applyId
+        list: {}, //详情列表页信息--(含)取applyId
         CompareAlert: false,
         title: "",
         isShow: false,
@@ -110,17 +110,17 @@
         // 复议不用flag判断，列表页专员、主管存的同一个字段
         // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
         // if (this.judgeFlag.flag == '05') {
-        //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
+        //   this.list = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
         //      this.Rcon = 1;
         // } else if (this.judgeFlag.flag == '06') {
-        //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
+        //   this.list = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
         //   this.Rcon = 2;
         // }
         this.type = '';
         this.loading = true;
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
+        this.list = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
         this.Flag = JSON.parse(localStorage.getItem("judge")).flag;
-        this.taskName = this.tastwaitingPass.taskName;
+        this.taskName = this.list.taskName;
         if (this.taskName == 'reconsiderApp_commissioner') { //复议专员结论
           this.type = 'commissioner';
         } else if (this.taskName == 'reconsiderApp_manager') { //复议经理结论
