@@ -9,33 +9,31 @@
         </template>
         <div class="height_auto">
           <el-table :data="borestateList" style="width: 100%" class="house" border>
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="55">
             </el-table-column>
-            <el-table-column prop="estateType" label="房产类型" min-width="120">
+            <el-table-column prop="estateType" label="房产类型" width="120">
             </el-table-column>
-            <el-table-column prop="propertyType" label="产权性质" min-width="100">
+            <el-table-column prop="propertyType" label="产权性质" width="100">
             </el-table-column>
-            <el-table-column prop="coveredArea" label="建筑面积[m²]" min-width="120">
+            <el-table-column prop="coveredArea" label="建筑面积[m²]" width="110">
             </el-table-column>
-            <el-table-column prop="unitPrice" label="建筑单价[元]" min-width="110">
+            <el-table-column prop="unitPrice" label="建筑单价[元]" width="110">
             </el-table-column>
-            <el-table-column prop="estateAddress" label="房产地址" show-overflow-tooltip min-width="200">
+            <el-table-column prop="estateAddress" label="房产地址" show-overflow-tooltip min-width="160">
             </el-table-column>
-            <el-table-column prop="estateZip" label="邮政编码" min-width="100">
+            <el-table-column prop="equityRatio" label="产权比例[%]" width="100">
             </el-table-column>
-            <el-table-column prop="equityRatio" label="产权比例[%]" min-width="100">
+            <el-table-column prop="loanPeriod" label="贷款期限[月]" width="100">
             </el-table-column>
-            <el-table-column prop="loanPeriod" label="贷款期限[月]" min-width="110">
+            <el-table-column prop="mortgageStatus" label="抵押状况" width="100">
             </el-table-column>
-            <el-table-column prop="mortgageStatus" label="抵押状况" min-width="100">
+            <el-table-column prop="monthlyPay" label="月供[元]" width="80">
             </el-table-column>
-            <el-table-column prop="monthlyPay" label="月供[元]" min-width="100">
+            <el-table-column prop="restLoans" label="贷款余额[元]" width="110">
             </el-table-column>
-            <el-table-column prop="restLoans" label="贷款余额[元]" min-width="110">
+            <el-table-column prop="estateShare" label="是否共有" width="70">
             </el-table-column>
-            <el-table-column prop="estateShare" label="房产是否共有" min-width="110">
-            </el-table-column>
-            <el-table-column prop="buyDate" label="购买时间" min-width="110">
+            <el-table-column prop="buyDate" label="购买时间" width="110">
             </el-table-column>
           </el-table>
         </div>
@@ -47,33 +45,33 @@
         </template>
         <div class="height_auto">
           <el-table :data="carInfoList" style="width: 100%" class="car" border>
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="55">
             </el-table-column>
-            <el-table-column prop="carPrice" label="车辆购置价[元]" min-width="120">
+            <el-table-column prop="carPrice" label="车辆购置价[元]" width="120">
             </el-table-column>
-            <el-table-column prop="isYearCheck" label="是否年检" min-width="100">
+            <el-table-column prop="isYearCheck" label="是否年检" width="80">
             </el-table-column>
-            <el-table-column prop="isOperate" label="是否非运营" min-width="100">
+            <el-table-column prop="isOperate" label="是否非运营" width="90">
             </el-table-column>
-            <el-table-column prop="carModel" label="车辆型号" min-width="100">
+            <el-table-column prop="carModel" label="车辆型号" width="100">
             </el-table-column>
-            <el-table-column prop="carType" label="车辆类型" min-width="100">
+            <el-table-column prop="carType" label="车辆类型" width="100">
             </el-table-column>
-            <el-table-column prop="loanPeriod" label="贷款期限[月]" min-width="110">
+            <el-table-column prop="loanPeriod" label="贷款期限[月]" width="100">
             </el-table-column>
-            <el-table-column prop="monthlyPay" label="月供[元]" min-width="100">
+            <el-table-column prop="monthlyPay" label="月供[元]" width="100">
             </el-table-column>
-            <el-table-column prop="restLoans" label="贷款余额[月]" min-width="110">
+            <el-table-column prop="restLoans" label="贷款余额[月]" width="100">
             </el-table-column>
-            <el-table-column prop="carNo" label="车牌号码" min-width="100">
+            <el-table-column prop="carNo" label="车牌号码" width="100">
             </el-table-column>
-            <el-table-column prop="buyInsur" label="车辆已购保险" min-width="110">
+            <el-table-column prop="buyInsur" label="已购保险" width="110">
             </el-table-column>
-            <el-table-column prop="buyDate" label="购买时间" min-width="120">
+            <el-table-column prop="buyDate" label="购买时间" min-width="110">
             </el-table-column>
-            <el-table-column prop="carShare" label="车产是否共有" min-width="110">
+            <el-table-column prop="carShare" label="是否共有" width="80">
             </el-table-column>
-            <el-table-column prop="carMortgage" label="车产是否抵押" min-width="110">
+            <el-table-column prop="carMortgage" label="是否抵押" width="80">
             </el-table-column>
           </el-table>
         </div>

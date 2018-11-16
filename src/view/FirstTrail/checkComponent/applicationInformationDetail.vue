@@ -546,22 +546,20 @@
         </template>
         <div class="height_auto">
           <el-table :data="applyCustEstateDTOs" style="width: 100%" border class="house">
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="55">
             </el-table-column>
-            <el-table-column prop="estateTypeTxt" label="房产类型" min-width="100">
+            <el-table-column prop="estateTypeTxt" label="房产类型" width="100">
             </el-table-column>
-            <el-table-column prop="propertyTypeTxt" label="产权性质" min-width="80">
+            <el-table-column prop="propertyTypeTxt" label="产权性质" width="80">
             </el-table-column>
-            <el-table-column prop="coveredArea" label="建筑面积[m²]" min-width="110">
+            <el-table-column prop="coveredArea" label="建筑面积[m²]" width="110">
             </el-table-column>
-            <el-table-column prop="" label="建筑单价[元]" min-width="110">
+            <el-table-column prop="" label="建筑单价[元]" width="110">
               <template slot-scope="scope">
                 {{scope.row.unitPrice |formatMoney(true)}}
               </template>
             </el-table-column>
             <el-table-column prop="estateAddress" label="房产地址" show-overflow-tooltip min-width="200">
-            </el-table-column>
-            <el-table-column prop="estateZip" label="邮政编码" min-width="70">
             </el-table-column>
             <el-table-column prop="equityRatio" label="产权比例[%]" min-width="100">
             </el-table-column>
@@ -579,7 +577,7 @@
                 {{scope.row.restLoans |formatMoney(true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="estateShareTxt" label="房产是否共有" min-width="120">
+            <el-table-column prop="estateShareTxt" label="是否共有" width="80">
             </el-table-column>
           </el-table>
         </div>
@@ -591,42 +589,42 @@
         </template>
         <div class="height_auto">
           <el-table :data="applyCustCarDTOs" style="width: 100%" border class="car">
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="55">
             </el-table-column>
-            <el-table-column prop="" label="车辆购置价[元]" min-width="110">
+            <el-table-column prop="" label="车辆购置价[元]" width="110">
               <template slot-scope="scope">
                 {{scope.row.carPrice |formatMoney(true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="yearCheckFlagTxt" label="是否年检" min-width="100">
+            <el-table-column prop="yearCheckFlagTxt" label="是否年检" width="80">
             </el-table-column>
-            <el-table-column prop="operateFlagTxt" label="是否非运营" min-width="100">
+            <el-table-column prop="operateFlagTxt" label="是否非运营" width="90">
             </el-table-column>
-            <el-table-column prop="carModel" label="车辆型号" min-width="100">
+            <el-table-column prop="carModel" label="车辆型号" width="100">
             </el-table-column>
-            <el-table-column prop="carTypeTxt" label="车辆类型" min-width="100">
+            <el-table-column prop="carTypeTxt" label="车辆类型" width="100">
             </el-table-column>
-            <el-table-column prop="loanPeriod" label="贷款期限[月]" min-width="100">
+            <el-table-column prop="loanPeriod" label="贷款期限[月]" width="100">
             </el-table-column>
-            <el-table-column prop="" label="月供[元]" min-width="100">
+            <el-table-column prop="" label="月供[元]" width="100">
               <template slot-scope="scope">
                 {{scope.row.monthlyPayment |formatMoney(true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="" label="贷款余额[月]" min-width="100">
+            <el-table-column prop="" label="贷款余额[月]" width="100">
               <template slot-scope="scope">
                 {{scope.row.restLoans |formatMoney(true)}}
               </template>
             </el-table-column>
-            <el-table-column prop="carNo" label="车牌号码" min-width="100">
+            <el-table-column prop="carNo" label="车牌号码" width="100">
             </el-table-column>
-            <el-table-column prop="buyInsuranceTxt" label="车辆已购保险" min-width="100">
+            <el-table-column prop="buyInsuranceTxt" label="已购保险" width="100">
             </el-table-column>
             <el-table-column prop="buyDate" label="购买时间" min-width="120">
             </el-table-column>
-            <el-table-column prop="carShareFlagTxt" label="车产是否共有" min-width="100">
+            <el-table-column prop="carShareFlagTxt" label="是否共有" width="80">
             </el-table-column>
-            <el-table-column prop="carMortgageFlagTxt" label="车产是否抵押" min-width="100">
+            <el-table-column prop="carMortgageFlagTxt" label="是否抵押" width="80">
             </el-table-column>
           </el-table>
         </div>
