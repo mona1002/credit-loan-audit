@@ -488,7 +488,6 @@
         titleNames: ['1'],
         applyConclusion: '00',
         caculData: {}, // 审批结论数据
-        applicationInformationDetail: '', // 申请详情传过来的数据
         applyId: '',
         sproId: '', // 审批 proId
         appOrgId: '', //进件ID
@@ -543,9 +542,10 @@
       }
     },
     mounted() {
-      this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'))
+      this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
+      this.userInf=JSON.parse(localStorage.getItem('userInf'));
       //申请单ID
-      this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
+      this.id = this.RtaskInWaitting.applyId;
       this.request();
       this.applyId = this.RtaskInWaitting.applyId;
       this.appOrgId = this.RtaskInWaitting.appOrgId;
@@ -558,10 +558,9 @@
       this.applyCustId = this.RtaskInWaitting.applyCustId;
       this.certType = this.RtaskInWaitting.certType;
       //经办人
-      this.dealroperCode = JSON.parse(localStorage.getItem('userInf')).userCode;
-      this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+      this.dealroperCode = this.userInf.userCode;
       //登陆人id
-      this.orgId = JSON.parse(localStorage.getItem('userInf')).orgId;
+      this.orgId = this.userInf.orgId;
       //流程模版ID
       if (this.type == 'commissioner') { //复议专员
         this.options = this.options1;
@@ -940,6 +939,7 @@
               busiState: '22', //复议审批中（回退）
               dealroperCode: this.dealroperCode, //经办人
               applySubNo: this.datas.applySubNo, //复议申请单ID
+              userInf:{},
             }).then(res => {
               this.jdialogVisible = false;
               if (res.statusCode != '200') {

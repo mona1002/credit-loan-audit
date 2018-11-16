@@ -12,73 +12,73 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">申请类型：</label>
-                <span>{{datas.applyTypeTxt}}</span>
+                <span>{{accepApplyLoan.applyTypeTxt}}</span>
               </li>
               <li>
                 <label class="label_width_166">借款人类型：</label>
-                <span>{{datas.borrowTypeTxt}}</span>
+                <span>{{accepApplyLoan.borrowTypeTxt}}</span>
               </li>
               <li>
                 <label class="label_width_166">有无授权机构：</label>
-                <span>{{datas.authOrgFlagTxt}}</span>
+                <span>{{accepApplyLoan.authOrgFlagTxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">获客渠道：</label>
-                <span>{{datas.customerSourcesTxt}}</span>
+                <span>{{accepApplyLoan.customerSourcesTxt}}</span>
               </li>
               <li style="width:66.6%">
-                <p v-if="datas.customerSourcesTxt == '其他'">
+                <p v-if="accepApplyLoan.customerSourcesTxt == '其他'">
                   <label class="label_width_166">获客渠道说明：</label>
-                  <span>{{datas.customerSourcesRemark}}</span>
+                  <span>{{accepApplyLoan.customerSourcesRemark}}</span>
                 </p>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">团队经理：</label>
-                <span>{{datas.teamLeaderName}}</span>
+                <span>{{accepApplyLoan.teamLeaderName}}</span>
               </li>
               <li>
                 <label class="label_width_166">直销人员：</label>
-                <span>{{datas.directSalesName}}</span>
+                <span>{{accepApplyLoan.directSalesName}}</span>
               </li>
               <li>
                 <label class="label_width_166">直销人员联系方式：</label>
-                <span>{{datas.directSalesTel}}</span>
+                <span>{{accepApplyLoan.directSalesTel}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">家人是否知晓本借款：</label>
-                <span>{{datas.familyKnowFlagTxt}}</span>
+                <span>{{accepApplyLoan.familyKnowFlagTxt}}</span>
               </li>
               <li>
-                <p v-if="datas.familyKnowFlag=='1'">
+                <p v-if="accepApplyLoan.familyKnowFlag=='1'">
                   <label class="label_width_166">知晓人姓名：</label>
-                  <span>{{datas.knowName}}</span>
+                  <span>{{accepApplyLoan.knowName}}</span>
                 </p>
               </li>
               <li>
-                <p v-if="datas.familyKnowFlag=='1'">
+                <p v-if="accepApplyLoan.familyKnowFlag=='1'">
                   <label class="label_width_166">与本人关系：</label>
-                  <span>{{datas.knowReleationTxt}}</span>
+                  <span>{{accepApplyLoan.knowReleationTxt}}</span>
                 </p>
               </li>
             </div>
             <li>
               <label class="label_width_166">客户符合何种产品：</label>
-              <span>{{datas.productName}}</span>
+              <span>{{accepApplyLoan.productName}}</span>
             </li>
             <li>
               <label class="label_width_166">紧急程度：</label>
-              <span>{{datas.emergencyTypeTxt}}</span>
+              <span>{{accepApplyLoan.emergencyTypeTxt}}</span>
             </li>
             <li>
-              <p v-if="datas.emergencyType=='02'">
+              <p v-if="accepApplyLoan.emergencyType=='02'">
                 <label class="label_width_166">加急费用[元]：</label>
-                <span>{{datas.emergencyAmt}}</span>
+                <span>{{accepApplyLoan.emergencyAmt |formatMoney(true)}}</span>
               </p>
             </li>
           </ul>
@@ -115,7 +115,7 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">申请借款额度[元]：</label>
-                <span>{{accepApplyLoan.loanAmt}}</span>
+                <span>{{accepApplyLoan.loanAmt |formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">借款期限[月]：</label>
@@ -123,7 +123,7 @@
               </li>
               <li>
                 <label class="label_width_166">可接受最高月还款额[元]：</label>
-                <span>{{accepApplyLoan.maxEachTermAmt}}</span>
+                <span>{{accepApplyLoan.maxEachTermAmt|formatMoney(true)}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -217,7 +217,7 @@
               <li>
                 <p v-if="applyCustBasicInfoDTO.residentialType=='01' || applyCustBasicInfoDTO.residentialType=='02' || applyCustBasicInfoDTO.residentialType=='03'">
                   <label class="label_width_166">每月租金/还款额[元]：</label>
-                  <span>{{applyCustBasicInfoDTO.monthRentAmt}}</span>
+                  <span>{{applyCustBasicInfoDTO.monthRentAmt|formatMoney(true)}}</span>
                 </p>
               </li>
             </div>
@@ -275,11 +275,11 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">每月家庭支出[元]：</label>
-                <span>{{applyCustBasicInfoDTO.monthPayAmt}}</span>
+                <span>{{applyCustBasicInfoDTO.monthPayAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">单张信用卡最高额度[元]：</label>
-                <span>{{applyCustBasicInfoDTO.cardMaxAmt}}</span>
+                <span>{{applyCustBasicInfoDTO.cardMaxAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">您来本市年份：</label>
@@ -343,7 +343,7 @@
               </li>
               <li>
                 <label class="label_width_166">注册资金[万元]：</label>
-                <span>{{applyPrivateOwnersDT.regCapitalAmt}}</span>
+                <span>{{applyPrivateOwnersDT.regCapitalAmt |formatMoney(true)}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -353,7 +353,7 @@
               </li>
               <li>
                 <label class="label_width_166">每月净利润额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.profitMonthAmt}}</span>
+                <span>{{applyPrivateOwnersDT.profitMonthAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">营业执照编号：</label>
@@ -367,7 +367,7 @@
               </li>
               <li>
                 <label class="label_width_166">月还款额/月租金[万元]：</label>
-                <span>{{applyPrivateOwnersDT.monthRentAmt}}</span>
+                <span>{{applyPrivateOwnersDT.monthRentAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">营业面积：</label>
@@ -397,43 +397,43 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">淡季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.slowMonthSaleAmt}}</span>
+                <span>{{applyPrivateOwnersDT.slowMonthSaleAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">旺季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.peakMonthSaleAmt}}</span>
+                <span>{{applyPrivateOwnersDT.peakMonthSaleAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">平季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.avgMonthSaleAmt}}</span>
+                <span>{{applyPrivateOwnersDT.avgMonthSaleAmt|formatMoney(true)}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_166">企业近利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.oneyearProfitAmt}}</span>
+                <label class="label_width_166">企业近一年利润[万元]：</label>
+                <span>{{applyPrivateOwnersDT.oneyearProfitAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近两年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.twoYearProfitAmt}}</span>
+                <span>{{applyPrivateOwnersDT.twoYearProfitAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近三年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.threeYearProfitAmt}}</span>
+                <span>{{applyPrivateOwnersDT.threeYearProfitAmt|formatMoney(true)}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">企业近一年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.oneYearTaxAmt}}</span>
+                <span>{{applyPrivateOwnersDT.oneYearTaxAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近两年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.twoYearTaxAmt}}</span>
+                <span>{{applyPrivateOwnersDT.twoYearTaxAmt|formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近三年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.threeYearTaxAmt}}</span>
+                <span>{{applyPrivateOwnersDT.threeYearTaxAmt|formatMoney(true)}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -473,39 +473,34 @@
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <div class=" CreditForm_div_border clearFix">
-                <!-- aaa -->
               <li>
                 <label class="label_width_166">同业机构名称：</label>
                 <span>{{accepCusInterBankLoan.interBankTxt}}</span>
               </li>
-                <!-- aaa -->
               <li>
                 <label class="label_width_166">贷款产品：</label>
                 <span>{{accepCusInterBankLoan.loanPro}}</span>
               </li>
               <li>
-                <!-- aaa -->
                 <label class="label_width_166">贷款额度[元]：</label>
                 <span>{{accepCusInterBankLoan.loanTotalAmt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
-                <!-- aaa -->
               <li>
                 <label class="label_width_166">贷款生效日期：</label>
                 <span>{{accepCusInterBankLoan.loanEffectDate}}</span>
               </li>
-                <!-- aaa -->
               <li>
                 <label class="label_width_166">贷款总期限[月]：</label>
                 <span>{{accepCusInterBankLoan.loanPeriod}}</span>
               </li>
-              <li>     <!-- aaa -->
+              <li>
                 <label class="label_width_166">每月还款日：</label>
                 <span>{{accepCusInterBankLoan.eachPayDay}}</span>
               </li>
             </div>
-            <li>     <!-- aaa -->
+            <li>
               <label class="label_width_166">还款额度[元]：</label>
               <span>{{accepCusInterBankLoan.repayAmt}}</span>
             </li>
@@ -527,9 +522,15 @@
             </el-table-column>
             <el-table-column prop="insurPayWayTxt" label="缴费方式" min-width="100">
             </el-table-column>
-            <el-table-column prop="eachPayAmt" label="期缴保费金额[元]" min-width="120">
+            <el-table-column prop="" label="期缴保费金额[元]" min-width="120">
+              <template slot-scope="scope">
+                {{scope.row.eachPayAmt |formatMoney(true)}}
+              </template>
             </el-table-column>
-            <el-table-column prop="totalPayAmt" label="保单总额[元]" min-width="120">
+            <el-table-column prop="" label="保单总额[元]" min-width="120">
+              <template slot-scope="scope">
+                {{scope.row.totalPayAmt |formatMoney(true)}}
+              </template>
             </el-table-column>
             <el-table-column prop="payPeriod" label="缴纳年限[月]" min-width="120">
             </el-table-column>
@@ -547,13 +548,16 @@
           <el-table :data="applyCustEstateDTOs" style="width: 100%" border class="house">
             <el-table-column type="index" :index='1' label="序号" min-width="50">
             </el-table-column>
-            <el-table-column prop="estateType" label="房产类型" min-width="100">
+            <el-table-column prop="estateTypeTxt" label="房产类型" min-width="100">
             </el-table-column>
-            <el-table-column prop="estateProperty" label="产权性质" min-width="80">
+            <el-table-column prop="propertyTypeTxt" label="产权性质" min-width="80">
             </el-table-column>
             <el-table-column prop="coveredArea" label="建筑面积[m²]" min-width="110">
             </el-table-column>
-            <el-table-column prop="unitPrice" label="建筑单价[元]" min-width="110">
+            <el-table-column prop="" label="建筑单价[元]" min-width="110">
+              <template slot-scope="scope">
+                {{scope.row.unitPrice |formatMoney(true)}}
+              </template>
             </el-table-column>
             <el-table-column prop="estateAddress" label="房产地址" show-overflow-tooltip min-width="200">
             </el-table-column>
@@ -563,11 +567,17 @@
             </el-table-column>
             <el-table-column prop="loanPeriod" label="贷款期限[月]" min-width="120">
             </el-table-column>
-            <el-table-column prop="mortgageStatus" label="抵押状况" min-width="80">
+            <el-table-column prop="mortgageStatusTxt" label="抵押状况" min-width="80">
             </el-table-column>
-            <el-table-column prop="monthlyPayment" label="月供[元]" min-width="80">
+            <el-table-column prop="" label="月供[元]" min-width="80">
+              <template slot-scope="scope">
+                {{scope.row.monthlyPayment |formatMoney(true)}}
+              </template>
             </el-table-column>
-            <el-table-column prop="restLoans" label="贷款余额[元]" min-width="120">
+            <el-table-column prop="" label="贷款余额[元]" min-width="120">
+              <template slot-scope="scope">
+                {{scope.row.restLoans |formatMoney(true)}}
+              </template>
             </el-table-column>
             <el-table-column prop="estateShareTxt" label="房产是否共有" min-width="120">
             </el-table-column>
@@ -583,7 +593,10 @@
           <el-table :data="applyCustCarDTOs" style="width: 100%" border class="car">
             <el-table-column type="index" :index='1' label="序号" min-width="50">
             </el-table-column>
-            <el-table-column prop="carPrice" label="车辆购置价[元]" min-width="110">
+            <el-table-column prop="" label="车辆购置价[元]" min-width="110">
+              <template slot-scope="scope">
+                {{scope.row.carPrice |formatMoney(true)}}
+              </template>
             </el-table-column>
             <el-table-column prop="yearCheckFlagTxt" label="是否年检" min-width="100">
             </el-table-column>
@@ -595,9 +608,15 @@
             </el-table-column>
             <el-table-column prop="loanPeriod" label="贷款期限[月]" min-width="100">
             </el-table-column>
-            <el-table-column prop="monthlyPayment" label="月供[元]" min-width="100">
+            <el-table-column prop="" label="月供[元]" min-width="100">
+              <template slot-scope="scope">
+                {{scope.row.monthlyPayment |formatMoney(true)}}
+              </template>
             </el-table-column>
-            <el-table-column prop="restLoans" label="贷款余额[月]" min-width="100">
+            <el-table-column prop="" label="贷款余额[月]" min-width="100">
+              <template slot-scope="scope">
+                {{scope.row.restLoans |formatMoney(true)}}
+              </template>
             </el-table-column>
             <el-table-column prop="carNo" label="车牌号码" min-width="100">
             </el-table-column>
@@ -660,7 +679,7 @@
               </li>
               <li>
                 <label class="label_width_166">社保缴纳基数[元]：</label>
-                <span>{{applyCustWorkDTO.insureBase}}</span>
+                <span>{{applyCustWorkDTO.insureBase |formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">单位电话：</label>
@@ -674,7 +693,7 @@
               </li>
               <li>
                 <label class="label_width_166">公积金缴纳基数[元]：</label>
-                <span>{{applyCustWorkDTO.fundBase}}</span>
+                <span>{{applyCustWorkDTO.fundBase |formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">入职时间：</label>
@@ -684,11 +703,11 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">月均工资[元]：</label>
-                <span>{{applyCustWorkDTO.wageAvg}}</span>
+                <span>{{applyCustWorkDTO.wageAvg |formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">其他收入[元]：</label>
-                <span>{{applyCustWorkDTO.otherIncome}}</span>
+                <span>{{applyCustWorkDTO.otherIncome |formatMoney(true)}}</span>
               </li>
               <li>
                 <label class="label_width_166">每月发薪日：</label>
@@ -827,14 +846,13 @@
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         taskNodeName: '',
-        datas:{},
         appOrgCountydatas: '',
         /*房产信息*/
         applyCustEstateDTOs: [],
         /*车辆信息*/
         applyCustCarDTOs: [],
         /*您的借款需求*/
-        accepApplyLoan: '',
+        accepApplyLoan: {},
         /*您的个人信息*/
         applyCustBasicInfoDTO: '',
         /*私人业主信息*/
@@ -902,326 +920,88 @@
           'id': this.applyId
         }).then(res => {
           if (res.statusCode == 200) {
+            let reg = /null/g;
             this.$parent.$data.customInf = res.data;
-            res.data.applyCustBasicInfoDTO ? this.$parent.$data.accepCusBasicInfo = res.data.applyCustBasicInfoDTO : '';
-            this.datas = res.data;
+            res.data.applyCustBasicInfoDTO ? this.$parent.$data.accepCusBasicInfo = res.data.applyCustBasicInfoDTO :
+              '';
             /*房产信息*/
             this.applyCustEstateDTOs = res.data.applyCustEstateDTOs;
             for (var i = 0; i < this.applyCustEstateDTOs.length; i++) {
-              if (this.applyCustEstateDTOs[i].mortgageStatus == '0') {
-                this.applyCustEstateDTOs[i].mortgageStatus = '已抵押'
-              } else if (this.applyCustEstateDTOs[i].mortgageStatus == '1') {
-                this.applyCustEstateDTOs[i].mortgageStatus = '未抵押'
-              };
-              if (this.applyCustEstateDTOs[i].estateType == '01') {
-                this.applyCustEstateDTOs[i].estateType = '租用'
-              } else if (this.applyCustEstateDTOs[i].estateType == '02') {
-                this.applyCustEstateDTOs[i].estateType = '商业按揭购房'
-              } else if (this.applyCustEstateDTOs[i].estateType == '03') {
-                this.applyCustEstateDTOs[i].estateType = '公积金按揭购房'
-              } else if (this.applyCustEstateDTOs[i].estateType == '04') {
-                this.applyCustEstateDTOs[i].estateType = '无按揭购房'
-              } else if (this.applyCustEstateDTOs[i].estateType == '05') {
-                this.applyCustEstateDTOs[i].estateType = '自建房'
-              } else if (this.applyCustEstateDTOs[i].estateType == '06') {
-                this.applyCustEstateDTOs[i].estateType = '亲属住房'
-              } else if (this.applyCustEstateDTOs[i].estateType == '07') {
-                this.applyCustEstateDTOs[i].estateType = '单位宿舍'
-              };
-              if (this.applyCustEstateDTOs[i].estateProperty == '01') {
-                this.applyCustEstateDTOs[i].estateProperty = '宅基地'
-              } else if (this.applyCustEstateDTOs[i].estateProperty == '02') {
-                this.applyCustEstateDTOs[i].estateProperty = '自建房'
-              } else if (this.applyCustEstateDTOs[i].estateProperty == '03') {
-                this.applyCustEstateDTOs[i].estateProperty = '小产权'
-              } else if (this.applyCustEstateDTOs[i].estateProperty == '04') {
-                this.applyCustEstateDTOs[i].estateProperty = '期房'
-              } else if (this.applyCustEstateDTOs[i].estateProperty == '05') {
-                this.applyCustEstateDTOs[i].estateProperty = '公租房'
-              } else if (this.applyCustEstateDTOs[i].estateProperty == '06') {
-                this.applyCustEstateDTOs[i].estateProperty = '经济适用房'
-              } else if (this.applyCustEstateDTOs[i].estateProperty == '07') {
-                this.applyCustEstateDTOs[i].estateProperty = '土地证'
-              } else if (this.applyCustEstateDTOs[i].estateProperty == '08') {
-                this.applyCustEstateDTOs[i].estateProperty = '大产权'
-              };
-              //建筑单价 保留两位小数点
-              if (this.applyCustEstateDTOs[i].unitPrice != null) {
-                this.applyCustEstateDTOs[i].unitPrice = this.formatNumber(this.applyCustEstateDTOs[i].unitPrice, 2, 0);
-              };
-
-              //贷款余额 保留两位小数点
-              if (this.applyCustEstateDTOs[i].restLoans != null) {
-                this.applyCustEstateDTOs[i].restLoans = this.formatNumber(this.applyCustEstateDTOs[i].restLoans, 2, 0);
-              };
-              //月供 保留两位小数点
-              if (this.applyCustEstateDTOs[i].monthlyPayment != null) {
-                this.applyCustEstateDTOs[i].monthlyPayment = this.formatNumber(this.applyCustEstateDTOs[i].monthlyPayment, 2, 0);
-              };
               //产权比例 保留两位小数点+%
               if (this.applyCustEstateDTOs[i].equityRatio != null) {
-                this.applyCustEstateDTOs[i].equityRatio = this.formatNumber(this.applyCustEstateDTOs[i].equityRatio, 2, 0).replace(
-                  /,/g, '');
+                this.applyCustEstateDTOs[i].equityRatio = this._formatNumber(this.applyCustEstateDTOs[i].equityRatio).replace(/,/g, '');
               };
               //建筑面积
               if (this.applyCustEstateDTOs[i].coveredArea != null) {
-                this.applyCustEstateDTOs[i].coveredArea = this.formatNumber(this.applyCustEstateDTOs[i].coveredArea, 2, 0).replace(
-                  /,/g, '');
-              };
-              if (this.applyCustEstateDTOs[i].estateShare != null) {
-                if (this.applyCustEstateDTOs[i].estateShare == '0') {
-                  this.applyCustEstateDTOs[i].estateShare = '否'
-                } else if (this.applyCustEstateDTOs[i].estateShare == '1') {
-                  this.applyCustEstateDTOs[i].estateShare = '是'
-                }
+                this.applyCustEstateDTOs[i].coveredArea = this._formatNumber(this.applyCustEstateDTOs[i].coveredArea).replace(/,/g, '');
               };
             };
             /*车辆信息*/
             this.applyCustCarDTOs = res.data.applyCustCarDTOs;
-            for (var i = 0; i < this.applyCustCarDTOs.length; i++) {
-              //车辆购置价 保留两位小数点
-              if (this.applyCustCarDTOs[i].carPrice != null) {
-                this.applyCustCarDTOs[i].carPrice = this.formatNumber(this.applyCustCarDTOs[i].carPrice, 2, 0);
-              };
-              //月供 保留两位小数点
-              if (this.applyCustCarDTOs[i].monthlyPayment != null) {
-                this.applyCustCarDTOs[i].monthlyPayment = this.formatNumber(this.applyCustCarDTOs[i].monthlyPayment, 2, 0);
-              };
-              //贷款余额 保留两位小数点
-              if (this.applyCustCarDTOs[i].restLoans != null) {
-                this.applyCustCarDTOs[i].restLoans = this.formatNumber(this.applyCustCarDTOs[i].restLoans, 2, 0);
-              };
-              if (this.applyCustCarDTOs[i].carShareFlag != null) {
-                if (this.applyCustCarDTOs[i].carShareFlag == '0') {
-                  this.applyCustCarDTOs[i].carShareFlag = '否'
-                } else if (this.applyCustCarDTOs[i].carShareFlag == '1') {
-                  this.applyCustCarDTOs[i].carShareFlag = '是'
-                }
-              };
-              if (this.applyCustCarDTOs[i].carShareFlag != null) {
-                if (this.applyCustCarDTOs[i].carShareFlag == '0') {
-                  this.applyCustCarDTOs[i].carShareFlag = '否'
-                } else if (this.applyCustCarDTOs[i].carShareFlag == '1') {
-                  this.applyCustCarDTOs[i].carShareFlag = '是'
-                }
-              };
-            }
-            /*工作人员填写  加急费用*/ //合并前R的多余部分
-            // if (res.data != null) {
-            //   this.datas.emergencyAmt = this.formatNumber(this.datas.emergencyAmt, 2, 0);
-            // };
             /*您的借款需求*/
-            if (res.data.applyBasicInfoDTO == null) {
-              this.accepApplyLoan = this.accepApplyLoan
-            } else {
-              this.accepApplyLoan = res.data.applyBasicInfoDTO;
-              this.accepApplyLoan.loanAmt = this.formatNumber(this.accepApplyLoan.loanAmt, 2, 0);
-              this.accepApplyLoan.maxEachTermAmt = this.formatNumber(this.accepApplyLoan.maxEachTermAmt, 2, 0);
-            }
+            res.data.applyBasicInfoDTO == null ? '' : this.accepApplyLoan = res.data.applyBasicInfoDTO;
             /*您的个人信息*/
-            if (res.data.applyCustBasicInfoDTO == null) {
-              this.applyCustBasicInfoDTO = this.applyCustBasicInfoDTO
-            } else {
+            if (res.data.applyCustBasicInfoDTO != null) {
               this.applyCustBasicInfoDTO = res.data.applyCustBasicInfoDTO;
-              var reg = /null/g;
               //投保地点
-              if (this.applyCustBasicInfoDTO.insurProvinceName == null && this.applyCustBasicInfoDTO.insurCityName == null &&
-                this.applyCustBasicInfoDTO.insurCountyName == null && this.applyCustBasicInfoDTO.insurAddress == null) {
-              //  insurAddr：替换为 insurAddress
-               this.insurAddr = '';
+              if (this.applyCustBasicInfoDTO.insurProvinceName == null && this.applyCustBasicInfoDTO.insurCityName ==
+                null &&
+                this.applyCustBasicInfoDTO.insurCountyName == null && this.applyCustBasicInfoDTO.insurAddress ==
+                null) {
+                //  insurAddr：替换为 insurAddress
+                this.insurAddr = '';
               } else {
                 this.insurAddr = this.applyCustBasicInfoDTO.insurProvinceName + this.applyCustBasicInfoDTO.insurCityName +
                   this.applyCustBasicInfoDTO.insurCountyName + this.applyCustBasicInfoDTO.insurAddress;
-                  // ------------------------------------------------------------------
-               this.insurAddr? this.insurAddr = this.insurAddr.replace(reg, ''):'';
+                // ------------------------------------------------------------------
+                this.insurAddr ? this.insurAddr = this.insurAddr.replace(reg, '') : '';
               }
-              //每月家庭支出
-              if (this.applyCustBasicInfoDTO.monthPayAmt != null) {
-                this.applyCustBasicInfoDTO.monthPayAmt = this.formatNumber(this.applyCustBasicInfoDTO.monthPayAmt, 2, 0);
-              };
-              //单张信用卡最高额度
-              if (this.applyCustBasicInfoDTO.cardMaxAmt != null) {
-                this.applyCustBasicInfoDTO.cardMaxAmt = this.formatNumber(this.applyCustBasicInfoDTO.cardMaxAmt, 2, 0);
-              };
               //户口所在地
               this.applyCustBasicInfoDTO.homeDetailAddr = this.applyCustBasicInfoDTO.homeDetailAddr.replace(reg, '');
               //现住宅地址
               this.applyCustBasicInfoDTO.liveAddress = this.applyCustBasicInfoDTO.liveAddress.replace(reg, '');
             }
             /*私人业主信息*/
-            if (res.data.applyPrivateOwnersDT == null) {
-              this.applyPrivateOwnersDT = this.applyPrivateOwnersDT;
-            } else {
+            if (res.data.applyPrivateOwnersDT != null) {
               this.applyPrivateOwnersDT = res.data.applyPrivateOwnersDT;
-              //注册资金
-              if (this.applyPrivateOwnersDT.regCapitalAmt != null) {
-                this.applyPrivateOwnersDT.regCapitalAmt = this.formatNumber(this.applyPrivateOwnersDT.regCapitalAmt, 2, 0);
-              };
-              //每月净利润额
-              if (this.applyPrivateOwnersDT.profitMonthAmt != null) {
-                this.applyPrivateOwnersDT.profitMonthAmt = this.formatNumber(this.applyPrivateOwnersDT.profitMonthAmt, 2,
-                  0);
-              };
-              //月还款额/月租金
-              if (this.applyPrivateOwnersDT.monthRentAmt != null) {
-                this.applyPrivateOwnersDT.monthRentAmt = this.formatNumber(this.applyPrivateOwnersDT.monthRentAmt, 2, 0);
-              };
-              //淡季销售额
-              if (this.applyPrivateOwnersDT.slowMonthSaleAmt != null) {
-                this.applyPrivateOwnersDT.slowMonthSaleAmt = this.formatNumber(this.applyPrivateOwnersDT.slowMonthSaleAmt, 2,
-                  0);
-              };
-              //旺季销售额
-              if (this.applyPrivateOwnersDT.peakMonthSaleAmt != null) {
-                this.applyPrivateOwnersDT.peakMonthSaleAmt = this.formatNumber(this.applyPrivateOwnersDT.peakMonthSaleAmt, 2,
-                  0);
-              };
-              //平季销售额
-              if (this.applyPrivateOwnersDT.avgMonthSaleAmt != null) {
-                this.applyPrivateOwnersDT.avgMonthSaleAmt = this.formatNumber(this.applyPrivateOwnersDT.avgMonthSaleAmt, 2, 0);
-              };
-              //企业近一年利润
-              if (this.applyPrivateOwnersDT.oneYearProfitAmt != null) {
-                this.applyPrivateOwnersDT.oneYearProfitAmt = this.formatNumber(this.applyPrivateOwnersDT.oneYearProfitAmt, 2,
-                  0);
-              };
-              //企业近两年利润
-              if (this.applyPrivateOwnersDT.twoYearProfitAmt != null) {
-                this.applyPrivateOwnersDT.twoYearProfitAmt = this.formatNumber(this.applyPrivateOwnersDT.twoYearProfitAmt, 2,
-                  0);
-              };
-              //企业近三年利润
-              if (this.applyPrivateOwnersDT.threeYearProfitAmt != null) {
-                this.applyPrivateOwnersDT.threeYearProfitAmt = this.formatNumber(this.applyPrivateOwnersDT.threeYearProfitAmt,
-                  2, 0);
-              };
-              //企业近一年纳税额
-              if (this.applyPrivateOwnersDT.oneYearTaxAmt != null) {
-                this.applyPrivateOwnersDT.oneYearTaxAmt = this.formatNumber(this.applyPrivateOwnersDT.oneYearTaxAmt, 2, 0);
-              };
-              //企业近两年纳税额
-              if (this.applyPrivateOwnersDT.twoYearTaxAmt != null) {
-                this.applyPrivateOwnersDT.twoYearTaxAmt = this.formatNumber(this.applyPrivateOwnersDT.twoYearTaxAmt, 2, 0);
-              };
-              //企业近三年纳税额
-              if (this.applyPrivateOwnersDT.threeYearTaxAmt != null) {
-                this.applyPrivateOwnersDT.threeYearTaxAmt = this.formatNumber(this.applyPrivateOwnersDT.threeYearTaxAmt, 2, 0);
-              };
               //占股比例
               if (this.applyPrivateOwnersDT.shareProportion != null) {
-                this.applyPrivateOwnersDT.shareProportion = this.formatNumber(this.applyPrivateOwnersDT.shareProportion, 2, 0) + "%";
+                this.applyPrivateOwnersDT.shareProportion = this._formatNumber(this.applyPrivateOwnersDT.shareProportion) +
+                  "%";
               };
               //企业净利润率
               if (this.applyPrivateOwnersDT.profitMargin != null) {
-                this.applyPrivateOwnersDTapplyPrivateOwnersDT.profitMargin = this.formatNumber(this.applyPrivateOwnersDT.profitMargin, 2, 0) +
+                this.applyPrivateOwnersDT.profitMargin = this._formatNumber(this.applyPrivateOwnersDT.profitMargin) +
                   "%";
               };
               //营业面积
               if (this.applyPrivateOwnersDT.businessArea != null) {
-                this.applyPrivateOwnersDT.businessArea = this.formatNumber(this.applyPrivateOwnersDT.businessArea, 2, 0) + "㎡";
+                this.applyPrivateOwnersDT.businessArea = this._formatNumber(this.applyPrivateOwnersDT.businessArea) +
+                  "㎡";
               };
-
-
             };
             //同业贷情况
-            if (res.data.accepCusInterBankLoan) {
-              this.accepCusInterBankLoan = res.data.accepCusInterBankLoan;
-            };
+            res.data.accepCusInterBankLoan ? this.accepCusInterBankLoan = res.data.accepCusInterBankLoan : '';
             //保险信息
-            if (res.data.accepCusInsurances) {
-              this.accepCusInsurances = res.data.accepCusInsurances;
-              for (var i = 0; i < this.accepCusInsurances.length; i++) {
-                //期缴保费
-                if (this.accepCusInsurances[i].eachPayAmt != null) {
-                  this.accepCusInsurances[i].eachPayAmt = this.formatNumber(this.accepCusInsurances[i].eachPayAmt,
-                    2, 0);
-                };
-                //总保额
-                if (this.accepCusInsurances[i].totalPayAmt != null) {
-                  this.accepCusInsurances[i].totalPayAmt = this.formatNumber(this.accepCusInsurances[i].totalPayAmt,
-                    2, 0);
-                };
-              }
-            } else {
-              this.accepCusInsurances = this.accepCusInsurances;
-            };
+            res.data.accepCusInsurances ? this.accepCusInsurances = res.data.accepCusInsurances : '';
             /*您的工作信息*/
-            if (res.data.applyCustWorkDTO == null) {
-              this.applyCustWorkDTO = this.applyCustWorkDTO
-            } else {
+            if (res.data.applyCustWorkDTO != null) {
               this.applyCustWorkDTO = res.data.applyCustWorkDTO;
-              //社保缴纳基数
-              if (this.applyCustWorkDTO.insureBase != null) {
-                this.applyCustWorkDTO.insureBase = this.formatNumber(this.applyCustWorkDTO.insureBase, 2, 0);
-              };
-              //公积金缴纳基数
-              if (this.applyCustWorkDTO.fundBase != null) {
-                this.applyCustWorkDTO.fundBase = this.formatNumber(this.applyCustWorkDTO.fundBase, 2, 0);
-              };
-              //月均工资
-              if (this.applyCustWorkDTO.wageAvg != null) {
-                this.applyCustWorkDTO.wageAvg = this.formatNumber(this.applyCustWorkDTO.wageAvg, 2, 0);
-              };
-              //其他收入
-              if (this.applyCustWorkDTO.otherIncome != null) {
-                this.applyCustWorkDTO.otherIncome = this.formatNumber(this.applyCustWorkDTO.otherIncome, 2, 0);
-              };
-              //单位地址
-              var reg = /null/g;
-             this.applyCustWorkDTO.companyAddr? this.applyCustWorkDTO.companyAddr = this.applyCustWorkDTO.companyAddr.replace(reg, ''):'';
+              this.applyCustWorkDTO.companyAddr ? this.applyCustWorkDTO.companyAddr = this.applyCustWorkDTO.companyAddr
+                .replace(reg, '') : ''; //单位地址
             }
             /*联系人信息*/
-            if (res.data.applyCustLinkmanDTOs) {
-              this.applyCustLinkmanDTOs = res.data.applyCustLinkmanDTOs;
-            } else {
-              this.applyCustLinkmanDTOs = this.applyCustLinkmanDTOs;
-            };
-            if (this.datas.customerSources == '00') { //00
-              this.datas.customerSources = "电销";
-            } else if (this.datas.customerSources == '01') {
-              this.datas.customerSources = "报纸";
-            } else if (this.datas.customerSources == '02') {
-              this.datas.customerSources = "网络";
-            } else if (this.datas.customerSources == '03') {
-              this.datas.customerSources = "促销活动";
-            } else if (this.datas.customerSources == '04') {
-              this.datas.customerSources = "朋友介绍";
-            } else if (this.datas.customerSources == '05') {
-              this.datas.customerSources = "销售开发";
-            } else if (this.datas.customerSources == '06') {
-              this.datas.customerSources = "其他";
-            };
+            res.data.applyCustLinkmanDTOs ? this.applyCustLinkmanDTOs = res.data.applyCustLinkmanDTOs : '';
             query = {
-              appType: this.datas.appType,
-              appTypeTxt: this.datas.appTypeTxt,
-              certType: this.applyCustBasicInfoDTO.certType,
-              certTypeTxt: this.applyCustBasicInfoDTO.certTypeTxt,
-              certCode: this.applyCustBasicInfoDTO.certCode,
-              proName: this.datas.productName,
-              loanTerm: this.accepApplyLoan.loanTerm,
-              applyMainNo: this.datas.applyMainNo,
-              applySubNo: this.datas.applySubNo,
-              salPerEmployDate: this.datas.directSalesEmployDate,
-              appOrgRegisterDate: this.datas.applyOrgRegisterDate,
-              adminIntroduce: this.datas.adminIntroduce,
-              applyId: this.datas.id,
-              workName: this.datas.applyCustWorkDTO.workName,
-              proId: this.datas.productId,
-              proCode: this.datas.productCode,
-              loanAmt: this.accepApplyLoan.loanAmt,
-              eachTermAmt: this.accepApplyLoan.eachTermAmt,
-              mainCustName: this.datas.mainCustName,
-              appOrgName: this.datas.applyOrgName,
-              loanType: this.accepApplyLoan.loanType,
-              loanTypeTxt: this.accepApplyLoan.loanTypeTxt,
-              appOrgId: this.datas.appOrgId,
-              appOrgCode: this.datas.appOrgCode,
-              applyCustId: this.datas.applyCustBasicInfoDTO.id,
-              custNo: this.datas.applyCustBasicInfoDTO.custNo,
-              //客户名称
-              custName: this.datas.applyCustBasicInfoDTO.custName
-
+              applyTypeTxt: this.accepApplyLoan.applyTypeTxt, //
+              loanTerm: this.accepApplyLoan.loanTerm, // 
+              workName: this.applyCustWorkDTO.workName, //
+              productCode: this.accepApplyLoan.productCode, //
+              loanAmt: this.accepApplyLoan.loanAmt, //
+              maxEachTermAmt: this.accepApplyLoan.maxEachTermAmt, //
+              loanTypeTxt: this.accepApplyLoan.loanTypeTxt, //
             };
+            console.log(query)
             localStorage.setItem("applicationInformationDetail", JSON.stringify(query));
             /*将房产信息保存到本地*/
             if (res.data.applyCustEstateDTOs != '') {
@@ -1293,37 +1073,6 @@
             this.$parent.$data.loading = false;
           }
         });
-
-      },
-      //保留两位小数 整数千分位
-      formatNumber(num, cent, isThousand) {
-        if (!num) {
-          return ''
-        }
-        num = num.toString().replace(/\$|\,/g, '');
-        // 检查传入数值为数值类型
-        if (isNaN(num))
-          num = "0";
-        // 获取符号(正/负数)
-        let sign = (num == (num = Math.abs(num)));
-        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
-        let cents = num % Math.pow(10, cent); // 求出小数位数值
-        num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
-        cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-        // 补足小数位到指定的位数
-        while (cents.length < cent)
-          cents = "0" + cents;
-        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
-          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-        if (cent > 0) {
-          if (sign == true) {
-            return (((sign) ? '' : '-') + num + '.' + cents);
-          } else if (sign == false) {
-            return '0.00'
-          }
-        } else {
-          return (((sign) ? '' : '-') + num);
-        }
       },
       /*维护日志*/
       comrequest(param) {
@@ -1332,19 +1081,15 @@
             if (res.data) {
               this.logDatas = res.data;
             }
-            this.$message({
-              message: "查询成功！",
-              type: 'success'
-            })
+            this._succe("查询成功！")
           } else {
-            this.$message.error(res.msg)
+            this._error(res.msg);
           }
         })
       },
       maintenanceLog() {
         this.sldialogVisible = true;
         this.comrequest(this.queryParam);
-
       },
       /*维护日志 刷新按钮*/
       renovate() {
@@ -1378,15 +1123,9 @@
             } else {
               this.detailLogDatas = '';
             };
-            this.$message({
-              message: "查询成功！",
-              type: 'success'
-            })
+           this._succe("查询成功！");
           } else {
-            this.$message({
-              message: "查询失败！",
-              type: 'error'
-            })
+             this._error("查询失败！");
           }
         })
       },

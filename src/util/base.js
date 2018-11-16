@@ -36,7 +36,8 @@ exports.install = function (Vue, options) {
   }
   //保留两位小数 整数千分位
   Vue.prototype._formatNumber = function (num, cent = 2, isThousand = 0) {
-    num||num==0?  num = num.toString().replace(/\$|\,/g, ''):'';    
+    num || num == 0 ? num = num.toString().replace(/\$|\,/g, '') : '';
+    if (!num && num != 0) return '';//无值返回空
     // 检查传入数值为数值类型
     if (isNaN(num))
       num = "0";

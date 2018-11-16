@@ -231,7 +231,7 @@
               <el-form>
                 <div class="bfc">
                   <el-form-item class="presentation" label="申请金额[元]：" :label-width="formApproLabLeft">
-                    {{loanAmt}}
+                    {{loanAmt |formatMoney(true)}}
                   </el-form-item>
                   <el-form-item class="presentation" label="申请期限[月]：" :label-width="formApproLabelWidth">
                     {{loanTerm}}
@@ -242,7 +242,7 @@
                     {{sqproName}}
                   </el-form-item>
                   <el-form-item class="presentation" label="可接受最高每期还款额[元]：" :label-width="formApproLabelWidth">
-                    {{eachTermAmt}}
+                    {{maxEachTermAmt |formatMoney(true)}}
                   </el-form-item>
                 </div>
                 <div class="bfc">
@@ -500,7 +500,7 @@
         loanAmt: '', // 申请金额
         loanTerm: '', // 申请期限
         sqproName: '', // 申请信息-申请产品
-        eachTermAmt: '', // 可接受最高每期还款额
+        maxEachTermAmt: '', // 可接受最高每期还款额
         loanType: '', // 申请类型
         // 审批同意
         applyConclusion: '00', // 审批同意
@@ -818,7 +818,7 @@
               // 申请信息-申请产品
               this.sqproName = this.applicationInformationDetail.productCode;
               // 可接受最高每期还款额
-              this.eachTermAmt = this.applicationInformationDetail.maxEachTermAmt;
+              this.maxEachTermAmt = this.applicationInformationDetail.maxEachTermAmt;
               // 申请类型/借款类型
               this.loanType = this.applicationInformationDetail.loanTypeTxt;
               //初审的时候调用评分接口
@@ -1465,8 +1465,9 @@
             this._error('批准金额不能小于产品最低下限' + this.minAmount + '元')
             this.creditExtensionLoanAmt = this.ploanAmt = this.ploanAmt2 = '';
             return;
-          }
-          if (val2 > Number(this.loanAmt.split('.')[0].replace(',', ''))) {
+          } 
+          // if (val2 > Number(this.loanAmt.split('.')[0].replace(',', ''))) {
+          if (val2 >this.loanAmt ) {
             this._error('此金额不能大于申请金额,请重新输入!')
             this.creditExtensionLoanAmt = this.ploanAmt = this.ploanAmt2 = '';
             return;
