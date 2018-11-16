@@ -1,33 +1,39 @@
 <!-- 信审 - 审批 -->
 <template>
-  <div class="common_component_width creditApproval-class">
+  <!-- common_component_width -->
+  <div class=" creditApproval-class">
     <el-collapse v-model="activeName">
       <el-collapse-item name="1">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">概要信息</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+        <!-- checkedInf_li_width_triplet -->
+        <div class="checkedInf wid_670 checkedInf_li_width_half clearFix" style="margin:0 auto">
           <ul>
             <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_130">客户名称：</label>
-                <span>{{custName}}</span>
-              </li>
-              <li>
-                <label class="label_width_130">申请类型：</label>
-                <span>{{applyTypeTxt}}</span>
-              </li>
+              <div>
+                <li>
+                  <label class="label_width_130">客户名称：</label>
+                  <span>{{custName}}</span>
+                </li>
+                <li>
+                  <label class="label_width_130">申请类型：</label>
+                  <span>{{applyTypeTxt}}</span>
+                </li>
+              </div>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_130">进件编号：</label>
                 <span>{{applySubNo}}</span>
               </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_130">证件类型：</label>
                 <span>{{certTypeTxt}}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_130">证件号码：</label>
                 <span>{{certCode}}</span>
@@ -43,47 +49,52 @@
             </li>
           </ul>
         </div>
-        <div class="approve_btn_area approve_btn_area_width_1050" style="margin-top:100px;">
-          <span class="approve_item" @click="hangOoutBtn">
-            <i class="approve_icon HangUpIcon"></i>
-            <span class="approve_text">挂起</span>
-          </span>
-          <span class="approve_item" @click="coverFn('02')">
-            <i class="approve_icon backIcon"></i>
-            <span class="approve_text">回退</span>
-          </span>
-          <span class="approve_item" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">
-            <i class="approve_icon rejectIcon"></i>
-            <span class="approve_text">拒绝</span>
-          </span>
-          <span class="approve_item" v-show="judgeFlag!='01'" @click="coverFn('01')">
-            <i class="approve_icon rejectIcon"></i>
-            <span class="approve_text">拒绝</span>
-          </span>
-          <span class="approve_item" @click="coverFn('07')">
-            <i class="approve_icon giveUpIcon"></i>
-            <span class="approve_text">放弃</span>
-          </span>
-          <span class="approve_item" @click="coverFn('03')">
-            <i class="approve_icon appro"></i>
-            <span class="approve_text">审批</span>
-          </span>
-          <span class="approve_item" @click="coverFn('fqz')">
-            <i class="approve_icon faqi"></i>
-            <span class="approve_text">发起反欺诈</span>
-          </span>
-          <span class="approve_item" @click="coverFn('spjl')">
-            <i class="approve_icon lineChartIcon"></i>
-            <span class="approve_text">审批结论轨迹</span>
-          </span>
-          <span class="approve_item" @click="coverFn('lcgj')">
-            <i class="approve_icon liuchengIcon"></i>
-            <span class="approve_text">流程轨迹</span>
-          </span>
-          <span class="approve_item" @click="tobigData">
-            <i class="approve_icon brokenLineIcon"></i>
-            <span class="approve_text">大数据风控</span>
-          </span>
+        <!-- approve_btn_area_width_1050 -->
+        <div class="approve_btn_area " style="margin-top:100px; width:477px">
+          <div class="width_400 margin_left_50 clearFix">
+            <span class="approve_item" @click="hangOoutBtn">
+              <i class="approve_icon HangUpIcon"></i>
+              <span class="approve_text">挂起</span>
+            </span>
+            <span class="approve_item" @click="coverFn('02')">
+              <i class="approve_icon backIcon"></i>
+              <span class="approve_text">回退</span>
+            </span>
+            <span class="approve_item" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">
+              <i class="approve_icon rejectIcon"></i>
+              <span class="approve_text">拒绝</span>
+            </span>
+            <span class="approve_item" v-show="judgeFlag!='01'" @click="coverFn('01')">
+              <i class="approve_icon rejectIcon"></i>
+              <span class="approve_text">拒绝</span>
+            </span>
+            <span class="approve_item" @click="coverFn('07')">
+              <i class="approve_icon giveUpIcon"></i>
+              <span class="approve_text">放弃</span>
+            </span>
+            <span class="approve_item" @click="coverFn('03')">
+              <i class="approve_icon appro"></i>
+              <span class="approve_text">审批</span>
+            </span>
+          </div>
+          <div class="width_480 margin_top_20">
+            <span class="approve_item" @click="coverFn('fqz')">
+              <i class="approve_icon faqi"></i>
+              <span class="approve_text">发起反欺诈</span>
+            </span>
+            <span class="approve_item" @click="coverFn('spjl')">
+              <i class="approve_icon lineChartIcon"></i>
+              <span class="approve_text">审批结论轨迹</span>
+            </span>
+            <span class="approve_item" @click="coverFn('lcgj')">
+              <i class="approve_icon liuchengIcon"></i>
+              <span class="approve_text">流程轨迹</span>
+            </span>
+            <span class="approve_item" @click="tobigData">
+              <i class="approve_icon brokenLineIcon"></i>
+              <span class="approve_text">大数据风控</span>
+            </span>
+          </div>
           <!-- <span class="approve_item" @click="roSocialSecurity">
             <i class="approve_icon dataMaptIcon"></i>
             <span class="approve_text">社保公积金{{social}}</span>
@@ -1465,9 +1476,9 @@
             this._error('批准金额不能小于产品最低下限' + this.minAmount + '元')
             this.creditExtensionLoanAmt = this.ploanAmt = this.ploanAmt2 = '';
             return;
-          } 
+          }
           // if (val2 > Number(this.loanAmt.split('.')[0].replace(',', ''))) {
-          if (val2 >this.loanAmt ) {
+          if (val2 > this.loanAmt) {
             this._error('此金额不能大于申请金额,请重新输入!')
             this.creditExtensionLoanAmt = this.ploanAmt = this.ploanAmt2 = '';
             return;
@@ -1507,5 +1518,9 @@
     overflow: hidden;
     font-size: 16px;
   }
+
+  /* .wid_670{
+  width:670px;
+} */
 
 </style>
