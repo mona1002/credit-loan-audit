@@ -126,73 +126,73 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">账户ID：</label>
-                <span>{{fundRawReport.id}}</span>
+                <span>{{accounts.id}}</span>
               </li>
               <li>
                 <label class="label_width_195">客户号：</label>
-                <span>{{fundRawReport.customer}}</span>
+                <span>{{accounts.customer}}</span>
               </li>
               <li>
                 <label class="label_width_195">姓名：</label>
-                <span>{{fundRawReport.name}}</span>
+                <span>{{accounts.name}}</span>
               </li>
               <li>
                 <label class="label_width_195">身份证号：</label>
-                <span>{{fundRawReport.idcard}}</span>
+                <span>{{accounts.idcard}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">当前账户状态：</label>
-                <span>{{fundRawReport.status}}</span>
+                <span>{{accounts.status}}</span>
               </li>
               <li>
                 <label class="label_width_195">当前账户余额[元]：</label>
-                <span>{{parseInt(fundRawReport.balance)/ 100 | formatMoney }}</span>
+                <span>{{parseInt(accounts.balance)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">最近一次缴存日期：</label>
-                <span>{{fundRawReport.last_record_date}}</span>
+                <span>{{accounts.last_record_date}}</span>
               </li>
               <li>
                 <label class="label_width_195">当前缴存公司名称：</label>
-                <span>{{fundRawReport.company}}</span>
+                <span>{{accounts.company}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">月缴存金额[元]：</label>
-                <span>{{parseInt(fundRawReport.deposit_amount)/ 100 | formatMoney }}</span>
+                <span>{{parseInt(accounts.deposit_amount)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">月缴存基数[元]：</label>
-                <span>{{parseInt(fundRawReport.deposit_base)/ 100 | formatMoney }}</span>
+                <span>{{parseInt(accounts.deposit_base)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">公司缴存比例(%)：</label>
-                <span>{{fundRawReport.company_rate}}</span>
+                <span>{{accounts.company_rate}}</span>
               </li>
               <li>
                 <label class="label_width_195">个人缴存比例(%)：</label>
-                <span>{{fundRawReport.person_rate}}</span>
+                <span>{{accounts.person_rate}}</span>
               </li>
             </div>
             <div>
               <li>
                 <label class="label_width_195">房补缴存金额[元]：</label>
-                <span>{{parseInt(fundRawReport.housing_supplement_base)/ 100 | formatMoney }}</span>
+                <span>{{parseInt(accounts.housing_supplement_base)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">房补余额[元]：</label>
-                <span>{{parseInt(fundRawReport.housing_supplement_balance)/ 100 | formatMoney }}</span>
+                <span>{{parseInt(accounts.housing_supplement_balance)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">开户日期：</label>
-                <span>{{fundRawReport.init_date}}</span>
+                <span>{{accounts.init_date}}</span>
               </li>
               <li>
                 <label class="label_width_195">一次性补贴余额[元]：</label>
-                <span>{{parseInt(fundRawReport.once_balance)/ 100 | formatMoney }}</span>
+                <span>{{parseInt(accounts.once_balance)/ 100 | formatMoney }}</span>
               </li>
             </div>
           </ul>
@@ -204,7 +204,7 @@
           <span class="collapse_title_text">工作信息</span>
         </template>
         <div class="height_auto">
-          <el-table :data="companys" style="width:100%;" highlight-current-row border>
+          <el-table :data="fundReport.companys" style="width:100%;" highlight-current-row border>
             <el-table-column prop="name" label="单位名称" width="160">
             </el-table-column>
             <el-table-column prop="type" label="单位性质" width="100">
@@ -222,14 +222,14 @@
           <span class="collapse_title_text">账户流水</span>
         </template>
         <div class="height_auto">
-          <el-table :data="flows" style="width:100%;" highlight-current-row border>
+          <el-table :data="fundReport.flows" style="width:100%;" highlight-current-row border>
             <el-table-column prop="company" label="公司名称" width="120">
             </el-table-column>
-            <el-table-column prop="operation_date" label="操作日期" width="180">
+            <el-table-column prop="operation_date" label="操作日期" width="100">
             </el-table-column>
-            <el-table-column prop="operation_type" label="操作类型" width="100">
+            <el-table-column prop="operation_type" label="操作类型" width="240">
             </el-table-column>
-            <el-table-column prop="record_month" label="缴纳月份" width="130">
+            <el-table-column prop="record_month" label="缴纳月份" width="80">
             </el-table-column>
             <el-table-column label="金额[元]" width="190">
               <template slot-scope="scope">
@@ -250,7 +250,7 @@
           <span class="collapse_title_text">贷款明细</span>
         </template>
         <div class="height_auto">
-          <el-table :data="loans" style="width:100%;" highlight-current-row border>
+          <el-table :data="fundReport.loans" style="width:100%;" highlight-current-row border>
             <el-table-column prop="contract_no" label="合同号" width="120">
             </el-table-column>
             <el-table-column prop="name" label="姓名" width="80">
@@ -290,7 +290,7 @@
           <span class="collapse_title_text">贷款还款流水</span>
         </template>
         <div class="height_auto">
-          <el-table :data="loanFlows" style="width:100%;" highlight-current-row border>
+          <el-table :data="loan_flows" style="width:100%;" highlight-current-row border>
             <el-table-column prop="account_id" label="账户ID" width="180">
             </el-table-column>
             <el-table-column prop="contract_no" label="合同号" width="180">
@@ -330,26 +330,13 @@
   </div>
 </template>
 <script>
-  import baseurl from '../../../util/ConstantSocialAndPn';
-  import utils from '../../../util/utils';
   export default {
     data() {
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        fundReport: {
-        },
-        fundRawReport: {},
-        insurances: [], 
-        medicareFlow: [],
-        pensionFlow: [],
-        unemploymentFlow: [],
-        injuryFlow: [],
-        maternityFlow: [],
-        consumption: [],
-        companys: [],
-        flows: [],
-        loans: [],
-        loanFlows: []
+        fundReport: {},
+        accounts: {},
+        loan_flows: [],
       }
     },
     props: {
@@ -361,35 +348,26 @@
     },
     methods: {
       getInf() {
-        this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getFundReport.action', {
-          applySubNo: this.applySubNo
+        this.get('/tripartiteData/queryReport', {
+        // this.get('http://10.1.26.130:20716/riskManagement/tripartiteData/queryReport', {
+          applySubNo: this.applySubNo,
+          // applySubNo: '201801080512013502',
+          category: '00'
         }).then(res => {
-          if (res.obj.rpt) {
-            var result = $.parseJSON(res.obj.rpt);
-            if (result && result.result && result.result['10059'] && result.result['10059'].bizInfo && result.result[
-                '10059'].bizInfo.data &&
-              result.result['10059'].bizInfo.data.report && result.result['10059'].bizInfo.data.report[0] &&
-              result.result['10059'].bizInfo.data.report[0].data) {
-              this.fundReport = result.result['10059'].bizInfo.data.report[0].data[0];
+          if (res.statusCode == 200) {
+            let resp = res.data;
+            let report = JSON.parse(resp.reportData); //报告数据
+            let rawreport = JSON.parse(resp.rawData); //原始数据
+            if (report && report.data && report.data.report && report.data.report.length > 0) {
+              let repData = report.data.report[0].data;
+              repData && repData.length > 0 ? this.fundReport = repData[0] : '';
             }
-          }
-          if (res.obj.rawRpt) {
-            var rawResult = $.parseJSON(res.obj.rawRpt);
-            var Accounts;
-            if (rawResult && rawResult.result && rawResult.result['10060'] && rawResult.result['10060'].bizInfo) {
-              Accounts = rawResult.result['10060'].bizInfo.data;
-              Accounts && Accounts.accounts && Accounts.accounts.length > 0 ? this.fundRawReport = Accounts.accounts[0] : {};
+            if (rawreport && rawreport.data) {
+              let raw = rawreport.data;
+              this.accounts
+              raw.accounts && raw.accounts.length > 0 ? this.accounts = raw.accounts[0] : '';
+              this.loan_flows = raw.loan_flows;
             }
-          }
-          if (this.fundReport) {
-            this.fundReport.companys && this.fundReport.companys.length > 0 ? this.companys = this.fundReport.companys :
-              '';
-            this.fundReport.flows && this.fundReport.flows.length > 0 ? this.flows = this.fundReport.flows : '';
-            this.fundReport.loans && this.fundReport.loans.length > 0 ? this.loans = this.fundReport.loans : '';
-          }
-          if (this.fundRawReport) {
-            this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0 ? this.loanFlows = this.fundRawReport
-              .loan_flows : '';
           }
         });
       },
