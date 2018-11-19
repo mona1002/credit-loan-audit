@@ -107,7 +107,7 @@
         </el-table-column>
         <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
         </el-table-column>
-        <el-table-column prop="operatorCode" label="当前处理人员" min-width="40">
+        <el-table-column prop="operatorCode" label="当前处理人员" min-width="105">
         </el-table-column>
       </el-table>
       <!-- 页码 -->

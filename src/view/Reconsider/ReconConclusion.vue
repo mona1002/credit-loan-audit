@@ -240,7 +240,7 @@
             <div class="dialog_form_auto">
               <el-form>
                 <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
-                  {{fbalance2}}
+                  {{fbalance |formatMoney(true)}}
                 </el-form-item>
               </el-form>
             </div>
@@ -279,7 +279,7 @@
                     <el-input v-model="creditExtensionLoanAmt" @blur="moneyBlur(creditExtensionLoanAmt, 'creditExtensionLoanAmt') "></el-input>
                   </el-form-item>
                   <el-form-item class="fl alert_collapse_inputLabel" label="授信期限[月]：" :label-width="formApproLab">
-                    <el-select v-model="creditExtensionLoanTerm ">
+                    <el-select v-model="creditExtensionLoanTerm">
                       <el-option v-for="item in creditExtensionLoanTermTerms " :label="item.code " :value="item.code"
                         :key="item.code ">
                       </el-option>
@@ -397,7 +397,6 @@
         formApproLab: "122px",
         formApproLabelWidth: "200px",
         fbalance: '',
-        fbalance2: '',
         creditExtensionLoanAmt: '',
         creditExtensionLoanTerm: '',
         creditExtensionLoanTermTerms: [],
@@ -632,12 +631,6 @@
             // 单独处理 评分   =>  "评分:51.6"
             this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
             this.fbalance = res.data.fbalance;
-            if (res.data.creditScore.split(',')[1]) {
-              this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(
-                ',')[1];
-            } else {
-              this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
-            }
           } else if (res.statusCode == '700') {
             this._error(res.msg);
           }
@@ -657,10 +650,12 @@
             // 核实收入
             res.data.verIncome || res.data.verIncome == 0 ? this.verIncome = this._formatNumber(res.data.verIncome) :
               this.verIncozme = res.data.verIncome;
-            // 批准金额
-            res.data.ploanAmt || res.data.ploanAmt == 0 ? his.creditExtensionLoanAmt = this.ploanAmt = this._formatNumber(
+            // 批准金额、授信金额
+            res.data.ploanAmt || res.data.ploanAmt == 0 ? this.creditExtensionLoanAmt = this.ploanAmt = this._formatNumber(
                 res.data.ploanAmt) :
-              his.creditExtensionLoanAmt = this.ploanAmt = res.data.ploanAmt;
+              this.creditExtensionLoanAmt = this.ploanAmt = res.data.ploanAmt;
+              // 授信期限
+              this.creditExtensionLoanTerm=res.data.creditExtensionLoanTerm;
             //审批结论数据
             //审批倍数
             res.data.appmult || res.data.appmult == 0 ? this.caculData.appmult = this._formatNumber(res.data.appmult) :
