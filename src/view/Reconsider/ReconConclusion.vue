@@ -400,6 +400,8 @@
         creditExtensionLoanAmt: '',
         creditExtensionLoanTerm: '',
         creditExtensionLoanTermTerms: [],
+        creditExtensionBeginDate:'',
+        creditExtensionEndDate:'',
         FormReturn: {
           rollbackNodeName: '',
           mainReasonName: '',
@@ -671,9 +673,10 @@
               .data
               .eachTermamt) : '';
             //意见说明
+            console.log( res.data.creditExtensionEndDate)
             this.appConclusion = res.data.appConclusion;
             this.ploanTerms = res.data.returnList; //批准期限月下拉
-            this.creditExtensionBeginDate = res.data.creditExtensionBeginDate. //授信开始日期
+            this.creditExtensionBeginDate = res.data.creditExtensionBeginDate; //授信开始日期
             this.creditExtensionEndDate = res.data.creditExtensionEndDate; //授信截止日期
             //  if (this.ploanTerm) { 
             for (let item of this.ploanTerms) {
