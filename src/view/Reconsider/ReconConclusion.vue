@@ -226,7 +226,7 @@
                 </div>
                 <div class="bfc">
                   <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft">
-                    {{creditScore}}
+                    <!-- {{creditScore}} -->
                   </el-form-item>
                   <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth">
                     {{datas.appTypeTxt}}
@@ -491,7 +491,7 @@
         sproId: '', // 审批 proId
         appOrgId: '', //进件ID
         //审批
-        creditScore: '', // 单独处理的评分
+        // creditScore: '', // 单独处理的评分
         loanAmt: null, //审批金额（输入批准金额是校验）
         verIncome: '', // 核实收入
         ploanAmt: '', // 批准金额
@@ -629,7 +629,7 @@
           if (res.statusCode == '200') {
             this.quotaData = res.data;
             // 单独处理 评分   =>  "评分:51.6"
-            this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
+            // this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
             this.fbalance = res.data.fbalance;
           } else if (res.statusCode == '700') {
             this._error(res.msg);
