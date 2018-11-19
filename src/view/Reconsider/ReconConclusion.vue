@@ -736,12 +736,16 @@
         this.shenpiFont = '提交中';
         var reg = /,/g;
         this.post('/creauditOpinion/add', {
-          creditExtensionLoanTerm: this.creditExtensionLoanTerm.replace(reg, '') * 1, //授信期限
-          creditExtensionLoanAmt: this.creditExtensionLoanAmt.replace(reg, '') * 1, //授信金额
+          creditExtensionLoanTerm: this.creditExtensionLoanTerm, //授信期限
+          // creditExtensionLoanAmt: this.creditExtensionLoanAmt.indexOf(',')!=-1?this.creditExtensionLoanAmt.replace(reg, '') * 1:this.creditExtensionLoanAmt*1, //授信金额
+          creditExtensionLoanAmt: this.creditExtensionLoanAmt.indexOf(',')!=-1?this.creditExtensionLoanAmt.replace(reg, '') * 1:this.creditExtensionLoanAmt*1, //授信金额
           applyId: this.applyId,
           auditType: '02',
           proCode: this.proCode, //产品编号
           verIncome: this.verIncome.replace(reg, '') * 1, //核实收入[元]
+          // verIncome: this.verIncome.indexOf(',')!=-1?this.verIncome.replace(reg, '') * 1:this.verIncome*1, //核实收入[元]
+          // ploanAmt: this.ploanAmt.indexOf(',')!=-1?this.ploanAmt.replace(reg, '') * 1:this.ploanAmt*1, //批准金额[元]
+          // eachTermamt: this.eachTermamt.indexOf(',')!=-1?this.eachTermamt.replace(reg, '') * 1:this.eachTermamt*1, //每期还款额[元]
           ploanAmt: this.ploanAmt.replace(reg, '') * 1, //批准金额[元]
           ploanTerm: this.ploanTerm, //批准期限
           appmult: this.caculData.appmult * 1, // 审批倍数
@@ -772,14 +776,6 @@
           opinionFlag: '00', // 任务类型  初审 00 
           busiState: '21' //复议审批
         }).then(res => {
-          this.sdialogVisible = false;
-          if (res.statusCode != '200') {
-            this.$message({
-              message: res.msg,
-              type: 'warning'
-            })
-            return;
-          };
           if (res.statusCode == '200') {
             this.$message({
               message: res.msg,
@@ -791,7 +787,9 @@
               this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
             }
             this.del();
-          };
+          }else{
+            this._error(res.msg)
+          }this.sdialogVisible = false;
         })
 
       },
