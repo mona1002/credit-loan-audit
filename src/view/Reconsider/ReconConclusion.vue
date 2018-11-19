@@ -543,7 +543,7 @@
     },
     mounted() {
       this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
-      this.userInf=JSON.parse(localStorage.getItem('userInf'));
+      this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //申请单ID
       this.id = this.RtaskInWaitting.applyId;
       this.request();
@@ -672,6 +672,7 @@
             });
           }
         });
+        this.creditPeriod(); //授信期限
         //请求复议专员带过来的审批信息
         this.post('/creauditOpinion/queryCreauditOpinionObj', {
           applyId: this.applyId
@@ -687,8 +688,9 @@
             res.data.verIncome || res.data.verIncome == 0 ? this.verIncome = this._formatNumber(res.data.verIncome) :
               this.verIncozme = res.data.verIncome;
             // 批准金额
-            res.data.ploanAmt || res.data.ploanAmt == 0 ? his.creditExtensionLoanAmt=this.ploanAmt = this._formatNumber(res.data.ploanAmt) :
-            his.creditExtensionLoanAmt=  this.ploanAmt = res.data.ploanAmt;
+            res.data.ploanAmt || res.data.ploanAmt == 0 ? his.creditExtensionLoanAmt = this.ploanAmt = this._formatNumber(
+                res.data.ploanAmt) :
+              his.creditExtensionLoanAmt = this.ploanAmt = res.data.ploanAmt;
             //审批结论数据
             //审批倍数
             res.data.appmult || res.data.appmult == 0 ? this.caculData.appmult = this._formatNumber(res.data.appmult) :
@@ -939,7 +941,7 @@
               busiState: '22', //复议审批中（回退）
               dealroperCode: this.dealroperCode, //经办人
               applySubNo: this.datas.applySubNo, //复议申请单ID
-              userInf:{},
+              userInf: {},
             }).then(res => {
               this.jdialogVisible = false;
               if (res.statusCode != '200') {
@@ -1059,6 +1061,17 @@
             this.mainResions = res.data;
           }
         })
+      },
+      // 获取授信期限
+      creditPeriod() {
+        this.get('/credit/creditPeriod').then(res => {
+          console.log(res)
+          if (res.statusCode == 200) {
+            this.creditExtensionLoanTermTerms = res.data;
+          } else {
+            this._error(res.msg)
+          }
+        });
       },
       //主原因
       mainReason($event, flag) {
