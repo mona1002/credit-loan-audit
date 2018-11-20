@@ -3,13 +3,13 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
-      <span> 进件编号：{{customInf.applyMainNo}}</span>
+      <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
       <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
-      <span> 进件机构：{{customInf.appOrgName}}</span>
-      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
-      <span>{{customInf.adminIntroduce}}</span>
+      <span> 进件机构：{{accepCusBasicInfo.applyOrgName}}</span>
+      <span> 门店成立时间：{{accepCusBasicInfo.applyOrgRegisterDate}}</span>
+      <span> 业务员入职时间：{{accepCusBasicInfo.directSalesEmpDate}}</span>
+      <span>{{accepCusBasicInfo.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap content_not_split">
       <div class="right" ref="rRight">
@@ -40,7 +40,7 @@
           </keep-alive>
           <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
           <PhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
-          <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='list.applyId'
+          <FCreditForm v-if=" this.tabContent2==6" :applyId='list.applyId'
             :FinalConCheckShow='true'></FCreditForm>
           <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'></creditInvestigation>
@@ -72,14 +72,8 @@
   export default {
     data() {
       return {
-        SplitLeft: "left",
-        SplitRight: "right",
-        watchData: '',
         loading: false,
         Flag: '',
-        accepCusBasicInfo: '',
-        // 进件人信息
-        customInf: {}, //申请信息页local字段
         list: {}, //详情列表页信息--(含)取applyId
         accepCusBasicInfo: {},
         title: "",
@@ -90,7 +84,6 @@
           "反欺诈调查", "审批结论"
         ],
         tab2Index: 3,
-        AlertSearch: "",
         Routes: this.$router.options.routes[10],
       }
     },
@@ -98,7 +91,6 @@
       '$route'(to, from) {
         if (to.path === '/AntiAudit' && this.$route.params.newOne) {
           this.Routes.closed = false;
-          this.customInf = {};
           this.accepCusBasicInfo = {};
            this.$refs.right_tab_ul.style.left = "0";
           this.mountedInf();

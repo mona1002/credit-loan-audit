@@ -4,13 +4,13 @@
     <!--反欺诈审批结论轨迹，质检部分调另一个新鞋的接口库== 反欺诈-8.反欺诈查询所有审批轨迹 -->
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
-      <span> 进件编号：{{customInf.applyMainNo}}</span>
+      <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
       <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
-      <span> 进件机构：{{customInf.appOrgName}}</span>
-      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
-      <span>{{customInf.adminIntroduce}}</span>
+      <span> 进件机构：{{accepCusBasicInfo.applyOrgName}}</span>
+      <span> 门店成立时间：{{accepCusBasicInfo.applyOrgRegisterDate}}</span>
+      <span> 业务员入职时间：{{accepCusBasicInfo.directSalesEmpDate}}</span>
+      <span>{{accepCusBasicInfo.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
       <!-- 左侧分屏部分 -->
@@ -108,7 +108,7 @@
           <keep-alive v-if="Routes.closed">
             <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.ApplyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
           </keep-alive>
-          <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
+          <RborrowerInformationSetail v-if=" this.tabContent2==4" >借款人资料</RborrowerInformationSetail>
           <PhoneCredit v-if=" this.tabContent2==5"  :applyId='tastwaitingPass.ApplyId'  :SubNo='tastwaitingPass.applySubNo' :addBtn="false"> 电话征信</PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <keep-alive v-if="Routes.closed">
@@ -197,7 +197,6 @@
     data() {
       return {
         accepCusBasicInfo: {},
-        customInf: {},
         tastwaitingPass: {},
         list: {},
         QTConclutionMark: "",
@@ -247,7 +246,6 @@
         flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true,true],
         flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true], //16
         AlertSearch: "",
-        isFull: false,
         midShow: true,
         QTC: {
           applyId: '',
@@ -268,7 +266,6 @@
         }
         if (to.path === '/MatchingInfQT' && this.$route.meta.newOne) {
           this.Routes.closed = false;
-          this.customInf = {};
           this.accepCusBasicInfo = {};
           this.list = {};
           this.mountedInf();
@@ -332,7 +329,6 @@
         this.$refs.rLeft.style.display = "none";
         this.watchData = this.$refs.rRight.style.width = "100%";
         this.$refs.rRight.style.left = '0';
-        this.isFull = true;
         this.midShow = false;
         this.leftBtnMark = true;
         this.$refs.leftBtn.style.left = '45px';
@@ -343,7 +339,6 @@
         this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left = this.watchData =
           "calc(50% - 2px)";
         this.$refs.rRight.style.left = '50%';
-        this.isFull = false;
         this.midShow = true;
         this.leftBtnMark = false;
         this.$refs.leftBtn.style.left = '10px';
@@ -413,23 +408,6 @@
           e.cancelBubble = true;
         });
       },
-      // getPageInf() { //获取个人信息
-      //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-      //     id: this.tastwaitingPass.ApplyId,
-      //   }).then(res => {
-      //     if (res.statusCode == 200) {
-      //       this.customInf = res.data;
-      //       if (res.data.accepCusBasicInfo) {
-      //         this.loading = false;
-      //         this.custName = res.data.accepCusBasicInfo.custName;
-      //         this.certCode = res.data.accepCusBasicInfo.certCode;
-      //         this.mobile = res.data.accepCusBasicInfo.mobile;
-      //       }
-      //     } else {
-      //       this.$message.error(res.msg);
-      //     }
-      //   });
-      // },
       initialInfo() {
         var Nodename = this.$route.fullPath.split('?')[1];
         if (Nodename === 'checkApp_apply') {

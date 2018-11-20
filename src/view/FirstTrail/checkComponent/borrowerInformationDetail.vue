@@ -402,7 +402,6 @@
         taskInWaitting: '',
       };
     },
-    props: ['isFull'],
     judgeFlag: '',
     mounted() {
       this.mountedInf();

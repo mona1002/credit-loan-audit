@@ -2,13 +2,13 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
-      <span> 进件编号：{{customInf.applyMainNo}}</span>
+      <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
       <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
-      <span> 进件机构：{{customInf.appOrgName}}</span>
-      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
-      <span>{{customInf.adminIntroduce}}</span>
+      <span> 进件机构：{{accepCusBasicInfo.applyOrgName}}</span>
+      <span> 门店成立时间：{{accepCusBasicInfo.applyOrgRegisterDate}}</span>
+      <span> 业务员入职时间：{{accepCusBasicInfo.directSalesEmpDate}}</span>
+      <span>{{accepCusBasicInfo.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
       <!-- 左侧分屏部分 -->
@@ -79,7 +79,7 @@
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='creditApp_finalTrial'
               :btn="true"></capplicationInformationDetail>
           </keep-alive>
-          <cborrowerInformationDetail v-if=" this.tabContent2==4" :isFull.sync="isFull"></cborrowerInformationDetail>
+          <cborrowerInformationDetail v-if=" this.tabContent2==4" ></cborrowerInformationDetail>
           <PhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId'  :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId=' list.applyId' :TrilPersonShow='true'
             :FinalConEditShow='true' :makeSureBtnShow="true"></FCreditForm>
@@ -134,9 +134,7 @@
         SplitRight: "right",
         watchData: '',
         loading: false,
-        // 进件人信息
         accepCusBasicInfo: {},
-        customInf: {}, //申请信息页local字段
         list: {}, //详情列表页信息--(含)取applyId
         showHalfBtn: false,
         CompareAlert: false,
@@ -165,7 +163,6 @@
           label: '内匹客户姓名'
         }],
         Routes: this.$router.options.routes[8],
-        isFull: false,
         midShow: true,
       }
     },
@@ -173,7 +170,6 @@
       '$route'(to, from) {
         if (to.path === '/FSplitScreen' && this.$route.params.newOne) {
           this.Routes.closed = false;
-          this.customInf = {};
           this.accepCusBasicInfo = {};
           this.mountedInf();
           this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
@@ -231,7 +227,6 @@
         this.$refs.rLeft.style.display = "none";
         this.watchData = this.$refs.rRight.style.width = "100%";
         this.$refs.rRight.style.left = '0';
-        this.isFull = true;
         this.midShow = false;
       },
       DblScreen() {
@@ -240,7 +235,6 @@
         this.watchData = this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left =
           "calc(50% - 2px)";
         this.$refs.rRight.style.left = '50%';
-        this.isFull = false;
         this.midShow = true;
       },
       tab1(ev, ind, val) {

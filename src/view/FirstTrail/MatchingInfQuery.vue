@@ -3,13 +3,13 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
-      <span> 进件编号：{{customInf.applyMainNo}}</span>
+      <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
       <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
-      <span> 进件机构：{{customInf.appOrgName}}</span>
-      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
-      <span>{{customInf.adminIntroduce}}</span>
+      <span> 进件机构：{{accepCusBasicInfo.applyOrgName}}</span>
+      <span> 门店成立时间：{{accepCusBasicInfo.applyOrgRegisterDate}}</span>
+      <span> 业务员入职时间：{{accepCusBasicInfo.directSalesEmpDate}}</span>
+      <span>{{accepCusBasicInfo.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap" id="rWrapQ" ref="rWrapQ">
       <!-- 左侧分屏部分 -->
@@ -84,7 +84,7 @@
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.applyId' roles='MatchingInfQuery'>申请信息</capplicationInformationDetail>
           </keep-alive>
-          <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
+          <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail>
           <RPhoneCredit v-if=" this.tabContent2==5" :applyId='tastwaitingPass.applyId'> 电话征信</RPhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.applyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <keep-alive v-if="Routes.closed">
@@ -100,31 +100,6 @@
         </div>
       </div>
     </div>
-    <!-- 对比弹出层 -->
-    <!-- <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
-      <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
-      <div class="AudioVisual_wrap_compare_left ">
-        <p>影像资料</p>
-        <div class="AlertContent">
-          <keep-alive v-if="Routes.closed">
-            <AudioVisualLeft :list='list' msg="MspLtwo" :comBtn='false'></AudioVisualLeft>
-          </keep-alive>
-        </div>
-      </div>
-      <div class="AudioVisual_wrap_compare_right ">
-        <p class="customName">客户名称：
-          <el-input v-model="AlertSearch" :disabled="true"></el-input>
-          <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
-            <i class="el-icon-search" style="fontSize:16px"></i>
-          </el-button>
-        </p>
-        <div class="AlertContent">
-          <keep-alive v-if="Routes.closed">
-            <AudioVisualLeft :list='list' msg="MspLthree" ref="audioChild" :comBtn='false' v-on:inputInf="inputInner"></AudioVisualLeft>
-          </keep-alive>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 <script>
@@ -145,9 +120,7 @@
   export default {
     data() {
       return {
-        watchData: '',
         loading: false,
-        customInf: {},
         list: {
           applyId: this.tastwaitingPass.applyId, //将matchApplyId 赋值给 入参applyId
           applySubNo: this.tastwaitingPass.applySubNo,
@@ -159,7 +132,6 @@
         CompareAlert: false,
         title: "",
         isShow: false,
-        flexible: true,
         tabContent1: 0,
         tabContent2: 3,
         tabActiveInd1: 0,
@@ -174,20 +146,7 @@
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true],
         flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true],
-        AlertSearch: "",
-        AlertSearchCondition: [{
-          value: '选项1',
-          label: '最近时间原则排列'
-        }, {
-          value: '选项2',
-          label: '内匹客户姓名+本人进件'
-        }, {
-          value: '选项3',
-          label: '内匹客户姓名'
-        }],
-        isFull: false,
         midShow: true,
-        custName: '',
         Routes: this.$router.options.routes[36],
       }
     },
@@ -195,7 +154,6 @@
       '$route'(to, from) {
         if (to.path === '/MatchingInfQuery' && this.$route.params.newOne) {
           this.Routes.closed = false;
-          this.customInf = {};
           this.accepCusBasicInfo = {};
           // this.list = {};
           this.mountedInf();
@@ -207,7 +165,6 @@
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
           this.CompareAlert = false; //关闭弹出层
-          this.AlertSearch = ''; //弹出层客户名称
         }
       }
     },
@@ -219,7 +176,6 @@
         this.$refs.audioChild.personalNunPerson()
       },
       inputInner(a, b) {
-        this.AlertSearch = a + " " + b;
       },
       compBtnS() {
         this.CompareAlert = true;
@@ -243,28 +199,24 @@
       },
       showList() {
         this.$refs.Left_title.style.left = "9px";
-        this.flexible = false;
       },
       hid() {
         this.$refs.Left_title.style.left = "-200px";
-        this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-        this.watchData = this.$refs.rRight.style.width = "100%";
+        this.$refs.rRight.style.width = "100%";
         this.$refs.rRight.style.left = '0';
-        this.isFull = true;
         this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
         this.$refs.rLeft.style.display = "block";
-        this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RMQ.style.left = this.watchData =
+        this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RMQ.style.left =
           "calc(50% - 2px)";
         this.$refs.rRight.style.left = '50%';
-        this.isFull = false;
         this.midShow = true;
       },
       tab1(ev, ind, val) {

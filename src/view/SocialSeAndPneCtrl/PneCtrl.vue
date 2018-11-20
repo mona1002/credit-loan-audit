@@ -85,7 +85,7 @@
         if (to.path === '/PneCtrl' && this.$route.params.newOne) {
           this.Routes.closed = false;
           this.customInf = {};
-          this.accepCusBasicInfo = {};
+          // this.accepCusBasicInfo = {};
           this.mountedInf();
           this.ind = 0;
         }

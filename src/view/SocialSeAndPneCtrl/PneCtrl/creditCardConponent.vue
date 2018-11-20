@@ -12,76 +12,75 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">姓名：</label>
-                <span>{{reportInf.name}}</span>
+                <span>{{totalVal.name}}</span>
               </li>
               <li>
                 <label class="label_width_166">用户填写姓名：</label>
-                <span>{{reportInf.user_name}}</span>
+                <span>{{totalVal.user_name}}</span>
               </li>
               <li>
                 <label class="label_width_166">用户填写身份证：</label>
-                <span>{{reportInf.user_idcard}}</span>
+                <span>{{totalVal.user_idcard}}</span>
               </li>
               <li>
                 <label class="label_width_166">用户填写手机号：</label>
-                <span>{{reportInf.user_phone}}</span>
+                <span>{{totalVal.user_phone}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
-
               <li>
                 <label class="label_width_166">姓名是否一致：</label>
-                <span>{{reportInf.name_match}}</span>
+                <span>{{totalVal.name_match}}</span>
               </li>
               <li>
                 <label class="label_width_166">身份证是否一致：</label>
-                <span>{{reportInf.idcard_match}}</span>
+                <span>{{totalVal.idcard_match}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">账户ID：</label>
+                <span>{{totalVal.account_id}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">卡号：</label>
+                <span>{{totalVal.card}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_166">账户ID：</label>
-                <span>{{reportInf.account_id}}</span>
-              </li>
-              <li>
-                <label class="label_width_166">卡号：</label>
-                <span>{{reportInf.card}}</span>
-              </li>
-              <li>
                 <label class="label_width_166">银行名称：</label>
-                <span>{{reportInf.bank}}</span>
+                <span>{{totalVal.bank}}</span>
               </li>
               <li>
                 <label class="label_width_166">消费额度[元]：</label>
-                <span> {{parseInt(reportInf.consume_limit)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(totalVal.consume_limit)/ 100 | formatMoney }}</span>
+              </li>
+              <li>
+                <label class="label_width_166">可用消费额度[元]：</label>
+                <span> {{parseInt(totalVal.usable_consume_limit)/ 100 | formatMoney }}</span>
+              </li>
+              <li>
+                <label class="label_width_166">外币消费总笔数(6期)：</label>
+                <span>{{totalVal.foreign_consume_count}}</span>
               </li>
             </div>
             <div class="CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_166">可用消费额度[元]：</label>
-                <span> {{parseInt(reportInf.usable_consume_limit)/ 100 | formatMoney }}</span>
-              </li>
-              <li>
-                <label class="label_width_166">外币消费总笔数(6期)：</label>
-                <span>{{reportInf.foreign_consume_count}}</span>
-              </li>
-              <li>
                 <label class="label_width_166">逾期期数(6期)：</label>
-                <span>{{reportInf.overdue_count}}</span>
+                <span>{{totalVal.overdue_count}}</span>
               </li>
               <li>
                 <label class="label_width_166">逾期金额总和[元](6期)：</label>
-                <span> {{parseInt(reportInf.overdue_amount)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(totalVal.overdue_amount)/ 100 | formatMoney }}</span>
               </li>
-            </div>
-            <div class=" clearFix">
               <li>
                 <label class="label_width_166">最大连续逾期期数(12期)：</label>
-                <span> {{parseInt(reportInf.max_series_overdue_count)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(totalVal.max_series_overdue_count)/ 100 | formatMoney }}</span>
               </li>
+            </div>
+            <div class="clearFix">
               <li class="li_four_3rows">
                 <label class="label_width_166">逾期状态列表(12期)：</label>
-                <span>{{reportInf.overdue_status|overduemMulti}}</span>
+                <span>{{totalVal.overdue_status|overduemMulti}}</span>
               </li>
             </div>
           </ul>
@@ -97,79 +96,79 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">账户ID：</label>
-                <span>{{accountInf.id}}</span>
+                <span>{{rawData.id}}</span>
               </li>
               <li>
                 <label class="label_width_166">账户类型：</label>
-                <span>{{accountInf.type}}</span>
+                <span>{{rawData.type}}</span>
               </li>
               <li>
                 <label class="label_width_166">卡号：</label>
-                <span>{{accountInf.card}}</span>
+                <span>{{rawData.card}}</span>
               </li>
               <li>
                 <label class="label_width_166">主副卡标志：</label>
-                <span>{{accountInf.main_vice_flag}}</span>
+                <span>{{rawData.main_vice_flag}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">银行名称：</label>
-                <span>{{accountInf.bank}}</span>
+                <span>{{rawData.bank}}</span>
               </li>
               <li>
                 <label class="label_width_166">持卡人姓名：</label>
-                <span>{{accountInf.holder}}</span>
+                <span>{{rawData.holder}}</span>
               </li>
               <li>
                 <label class="label_width_166">证件号码：</label>
-                <span>{{accountInf.idcard}}</span>
+                <span>{{rawData.idcard}}</span>
               </li>
               <li>
                 <label class="label_width_166">状态：</label>
-                <span>{{accountInf.status}}</span>
+                <span>{{rawData.status}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">开卡时间：</label>
-                <span>{{accountInf.open_date}}</span>
+                <span>{{rawData.open_date}}</span>
               </li>
               <li>
                 <label class="label_width_166">卡产品名称：</label>
-                <span>{{accountInf.card_name}}</span>
+                <span>{{rawData.card_name}}</span>
               </li>
               <li>
                 <label class="label_width_166">积分：</label>
-                <span> {{accountInf.points }}</span>
+                <span> {{rawData.points }}</span>
               </li>
               <li>
                 <label class="label_width_166">当前余额[元]：</label>
-                <span> {{parseInt(accountInf.balance)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(rawData.balance)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">账单日：</label>
-                <span>{{accountInf.bill_day}}</span>
+                <span>{{rawData.bill_day}}</span>
               </li>
               <li>
                 <label class="label_width_166">还款日：</label>
-                <span>{{accountInf.repay_day}}</span>
+                <span>{{rawData.repay_day}}</span>
               </li>
               <li>
                 <label class="label_width_166">当前剩余欠款[元]：</label>
-                <span> {{parseInt(accountInf.current_arrears)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(rawData.current_arrears)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_166">本期已还[元]：</label>
-                <span> {{parseInt(accountInf.current_payed_amount)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(rawData.current_payed_amount)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class="  clearFix">
               <li>
                 <label class="label_width_166">未出账单已入账金额[元]：</label>
-                <span> {{parseInt(accountInf.current_credited_amount)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(rawData.current_credited_amount)/ 100 | formatMoney }}</span>
               </li>
             </div>
           </ul>
@@ -178,51 +177,10 @@
       <el-collapse-item name="3">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">信用卡额度</span>
-        </template>
-        <div class="height_auto">
-          <el-table :data="totalVal.data.month_summaries" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="month" label="账户ID" width="100">
-            </el-table-column>
-            <el-table-column prop="outflow_count" label="币种" width="160">
-            </el-table-column>
-            <el-table-column label="消费额度[元]" width="160">
-              <template slot-scope="scope">
-                {{parseInt(scope.row.outflow_sum_amount)/ 100 | formatMoney }}
-              </template>
-            </el-table-column>
-            <el-table-column label="可用消费额度[元]" width="160">
-              <template slot-scope="scope">
-                {{parseInt(scope.row.outflow_max_amount)/ 100 | formatMoney }}
-              </template>
-            </el-table-column>
-            <el-table-column prop="inflow_count" label="取现额度[元]" width="140">
-            </el-table-column>
-            <el-table-column label="流入总金额[元]" width="160">
-              <template slot-scope="scope">
-                {{parseInt(scope.row.inflow_sum_amount)/ 100 | formatMoney }}
-              </template>
-            </el-table-column>
-            <el-table-column label="可用取现额度[元]" min-width="160">
-              <template slot-scope="scope">
-                {{parseInt(scope.row.inflow_max_amount)/ 100 | formatMoney }}
-              </template>
-            </el-table-column>
-            <el-table-column label="预借现金额度[元]" min-width="160">
-              <template slot-scope="scope">
-                {{parseInt(scope.row.inflow_max_amount)/ 100 | formatMoney }}
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-collapse-item>
-      <el-collapse-item name="4">
-        <template slot="title">
-          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">账单</span>
         </template>
         <div class="height_auto">
-          <el-table :data="totalVal.data.bills" style="width:100%;" highlight-current-row border>
+          <el-table :data="totalVal.bills" style="width:100%;" highlight-current-row border>
             <el-table-column prop="bill_date" label="账单日期">
             </el-table-column>
             <el-table-column label="账单金额[元]">
@@ -244,13 +202,13 @@
           </el-table>
         </div>
       </el-collapse-item>
-      <el-collapse-item name="5">
+      <el-collapse-item name="4">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">流水详情</span>
         </template>
         <div class="height_auto">
-          <el-table :data="totalVal.flows" style="width:100%;" highlight-current-row border>
+          <el-table :data="rawData.flows" style="width:100%;" highlight-current-row border>
             <el-table-column prop="account_id" label="账户ID" width='120'>
             </el-table-column>
             <el-table-column prop="settle_time" label="交易时间" width='100'>
@@ -299,9 +257,7 @@
   export default {
     data() {
       return {
-        activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '2'],
-        accountInf: this.totalVal.accounts,
-        reportInf: this.totalVal.data
+        activeNames: ['1', '2', '3', '4'],
       }
     },
     props: {
@@ -311,10 +267,11 @@
         },
         type: Object
       },
-      month_summaries: {
+        rawData: {
         default: function () {
-          return [];
+          return {};
         },
+        type: Object
       },
     },
   }

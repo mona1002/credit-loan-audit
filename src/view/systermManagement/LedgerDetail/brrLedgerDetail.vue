@@ -2,14 +2,14 @@
   <!-- 借款台账详情 -->
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
-      <span> 借款人：{{accepCusBasicInfo.custName}}</span>
-      <span> 进件编号：{{customInf.applyMainNo}}</span>
-      <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+           <span> 借款人：{{accepCusBasicInfo.custName}}</span>
+      <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
+      <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
-      <span> 进件机构：{{customInf.appOrgName}}</span>
-      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
-      <span>{{customInf.adminIntroduce}}</span>
+      <span> 进件机构：{{accepCusBasicInfo.applyOrgName}}</span>
+      <span> 门店成立时间：{{accepCusBasicInfo.applyOrgRegisterDate}}</span>
+      <span> 业务员入职时间：{{accepCusBasicInfo.directSalesEmpDate}}</span>
+      <span>{{accepCusBasicInfo.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap content_not_split">
       <div class="right" ref="rRight">
@@ -53,8 +53,6 @@
       return {
         loading: false,
         accepCusBasicInfo: {},
-        // 进件人信息
-        customInf: {}, //申请信息页local字段
         tastwaitingPass: {}, //详情列表页信息--(含)取applyId
         tabContent2: 0,
         tabActiveInd2: 0,
@@ -67,7 +65,6 @@
       '$route'(to, from) {
         if (to.path === '/brrLedgerDetail' && this.$route.params.newOne) {
           this.Routes.closed = false;
-          this.customInf = {};
           this.accepCusBasicInfo = {};
           this.mountedInf();
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 0;

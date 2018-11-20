@@ -919,19 +919,23 @@
         }).then(res => {
           if (res.statusCode == 200) {
             let reg = /null/g;
-            this.$parent.$data.customInf = res.data;
-            res.data.applyCustBasicInfoDTO ? this.$parent.$data.accepCusBasicInfo = res.data.applyCustBasicInfoDTO :
+            // this.$parent.$data.customInf = res.data;
+            res.data.applyBasicInfoDTO ? this.$parent.$data.accepCusBasicInfo = res.data.applyBasicInfoDTO :
               '';
+            this.$parent.$data.accepCusBasicInfo.mobile = res.data.applyCustBasicInfoDTO.mobile;
+            this.$parent.$data.accepCusBasicInfo.adminIntroduce = res.data.adminIntroduce;
             /*房产信息*/
             this.applyCustEstateDTOs = res.data.applyCustEstateDTOs;
             for (var i = 0; i < this.applyCustEstateDTOs.length; i++) {
               //产权比例 保留两位小数点+%
               if (this.applyCustEstateDTOs[i].equityRatio != null) {
-                this.applyCustEstateDTOs[i].equityRatio = this._formatNumber(this.applyCustEstateDTOs[i].equityRatio).replace(/,/g, '');
+                this.applyCustEstateDTOs[i].equityRatio = this._formatNumber(this.applyCustEstateDTOs[i].equityRatio)
+                  .replace(/,/g, '');
               };
               //建筑面积
               if (this.applyCustEstateDTOs[i].coveredArea != null) {
-                this.applyCustEstateDTOs[i].coveredArea = this._formatNumber(this.applyCustEstateDTOs[i].coveredArea).replace(/,/g, '');
+                this.applyCustEstateDTOs[i].coveredArea = this._formatNumber(this.applyCustEstateDTOs[i].coveredArea)
+                  .replace(/,/g, '');
               };
             };
             /*车辆信息*/
@@ -1121,9 +1125,9 @@
             } else {
               this.detailLogDatas = '';
             };
-           this._succe("查询成功！");
+            this._succe("查询成功！");
           } else {
-             this._error("查询失败！");
+            this._error("查询失败！");
           }
         })
       },

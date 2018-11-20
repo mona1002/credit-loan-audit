@@ -2,13 +2,13 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
-      <span> 进件编号：{{customInf.applyMainNo}}</span>
+      <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
       <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
-      <span> 进件机构：{{customInf.appOrgName}}</span>
-      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
-      <span>{{customInf.adminIntroduce}}</span>
+      <span> 进件机构：{{accepCusBasicInfo.applyOrgName}}</span>
+      <span> 门店成立时间：{{accepCusBasicInfo.applyOrgRegisterDate}}</span>
+      <span> 业务员入职时间：{{accepCusBasicInfo.directSalesEmpDate}}</span>
+      <span>{{accepCusBasicInfo.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
       <!-- 左侧分屏部分 -->
@@ -81,7 +81,7 @@
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='MatchingInf'>申请信息</capplicationInformationDetail>
           </keep-alive>
-          <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
+          <RborrowerInformationSetail v-if=" this.tabContent2==4" >借款人资料</RborrowerInformationSetail>
           <RPhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId'> 电话征信</RPhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
           <keep-alive v-if="Routes.closed">
@@ -150,15 +150,11 @@
         //   applySubNo: this.list.applySubNo,
         //   certCode: this.list.certCode
         // }, 
-        certCode: '',
-        watchData: '',
         loading: false,
-        customInf: {},
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
         isShow: false,
-        flexible: true,
         tabContent1: 0,
         tabContent2: 3,
         tabActiveInd1: 0,
@@ -184,7 +180,6 @@
           value: '选项3',
           label: '内匹客户姓名'
         }],
-        isFull: false,
         midShow: true,
         Routes: this.$router.options.routes[7],
       }
@@ -193,9 +188,7 @@
       '$route'(to, from) {
         if (to.path === '/MatchingInf' && this.$route.params.newOne) {
           this.Routes.closed = false;
-          this.customInf = {};
           this.accepCusBasicInfo = {};
-          // this.list = {};
           this.mountedInf();
           this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
@@ -240,28 +233,24 @@
       },
       showList() {
         this.$refs.Left_title.style.left = "9px";
-        this.flexible = false;
       },
       hid() {
         this.$refs.Left_title.style.left = "-200px";
-        this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-        this.watchData = this.$refs.rRight.style.width = "100%";
+      this.$refs.rRight.style.width = "100%";
         this.$refs.rRight.style.left = '0';
-        this.isFull = true;
         this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
         this.$refs.rLeft.style.display = "block";
-        this.watchData = this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left =
+      this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left =
           "calc(50% - 2px)";
         this.$refs.rRight.style.left = '50%';
-        this.isFull = false;
         this.midShow = true;
       },
       tab1(ev, ind, val) {

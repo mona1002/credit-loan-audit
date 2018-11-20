@@ -3,13 +3,13 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
-      <span> 进件编号：{{customInf.applyMainNo}}</span>
-      <span> 证件号码：{{list.certCode}}</span>
+      <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
+      <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
-      <span> 进件机构：{{customInf.appOrgName}}</span>
-      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
-      <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
-      <span>{{customInf.adminIntroduce}}</span>
+      <span> 进件机构：{{accepCusBasicInfo.applyOrgName}}</span>
+      <span> 门店成立时间：{{accepCusBasicInfo.applyOrgRegisterDate}}</span>
+      <span> 业务员入职时间：{{accepCusBasicInfo.directSalesEmpDate}}</span>
+      <span>{{accepCusBasicInfo.adminIntroduce}}</span>
     </p>
     <div class="SplitScreen_wrap content_not_split">
       <div class="right" ref="rRight">
@@ -39,7 +39,7 @@
           </keep-alive>
           <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
           <PhoneCredit v-if=" this.tabContent2==5"  :applyId='list.applyId'  :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
-          <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='list.applyId'
+          <FCreditForm v-if=" this.tabContent2==6" :applyId='list.applyId'
             :FinalConCheckShow='true'></FCreditForm>
           <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'></creditInvestigation>
@@ -71,23 +71,15 @@
       return {
         taskName: '',
         accepCusBasicInfo: {},
-        SplitLeft: "left",
-        SplitRight: "right",
-        watchData: '',
         Flag: '',
         type: '',
         loading: false,
-        // 进件人信息
-        customInf: {}, //申请信息页local字段
         list: {}, //详情列表页信息--(含)取applyId
-        CompareAlert: false,
-        title: "",
         isShow: false,
         tabContent2: 3,
         tabActiveInd2: 3,
         items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "复议申请", "反欺诈结论", "反欺诈调查", "复议结论"],
         tab2Index: 3,
-        AlertSearch: "",
         Routes: this.$router.options.routes[22],
       }
     },
@@ -95,7 +87,6 @@
       '$route'(to, from) {
         if (to.path === '/ReconsiderSplit' && this.$route.params.newOne) {
           this.Routes.closed = false;
-          this.customInf = {};
           this.accepCusBasicInfo = {};
           this.mountedInf();
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
@@ -108,14 +99,6 @@
     methods: {
       mountedInf() {
         // 复议不用flag判断，列表页专员、主管存的同一个字段
-        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        // if (this.judgeFlag.flag == '05') {
-        //   this.list = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
-        //      this.Rcon = 1;
-        // } else if (this.judgeFlag.flag == '06') {
-        //   this.list = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
-        //   this.Rcon = 2;
-        // }
         this.type = '';
         this.loading = true;
         this.list = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
