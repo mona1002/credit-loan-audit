@@ -60,6 +60,10 @@
   margin-left: 5px;
 }
 
+.margin_left_0 {
+  margin-left: 0px;
+}
+
 .margin_left_15 {
   margin-left: 15px;
 }
@@ -67,15 +71,19 @@
 .margin_left_30 {
   margin-left: 30px;
 }
-.margin_left_50 {
-  margin-left: 50px;
+
+.margin_left_75 {
+  margin-left: 75px;
 }
+
 .margin_left_600 {
   margin-left: 600px;
 }
+
 .margin_left_735 {
   margin-left: 735px;
 }
+
 .margin_bottom_10 {
   margin-bottom: 10px;
 }
@@ -92,6 +100,7 @@
 .label_140 {
   width: 140px;
 }
+
 .label_150 {
   width: 150px;
 }
@@ -129,11 +138,13 @@
 }
 
 .width_400 {
-  width:400px;
+  width: 400px;
 }
+
 .width_480 {
-  width:480px;
+  width: 480px;
 }
+
 /* 高度 */
 body .Abody .height_60 {
   height: 60px;
@@ -228,6 +239,11 @@ body .pre_wrap {
 
 .label_width_110 {
   width: 110px;
+}
+
+/* el-item 前的红色*  去掉 */
+.clear_hint label::before {
+  content: '' !important;
 }
 
 /* 查看-label高度 */
@@ -374,6 +390,7 @@ body .pre_wrap {
 .overFlow_x {
   overflow-x: hidden;
 }
+
 .addIcon_search {
   border: 1px solid #dcdfe6;
   font-size: 18px;

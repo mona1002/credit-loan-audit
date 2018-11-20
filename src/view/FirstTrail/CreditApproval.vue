@@ -129,10 +129,8 @@
             </el-form-item>
           </div>
           <div class="bfc" v-if="checkBox&&judgeFlag == '01'">
-            <!-- <div class="bfc"> -->
-            <!-- {{checkedCities}} -->
             <el-form-item class="fl" label="补充授权项：">
-              <el-checkbox-group v-model="checkedCities" class="creditApr_backoff">
+              <el-checkbox-group v-model="checkedCities" class="creditApr_backoff clear_hint">
                 <el-checkbox v-for="val in lists" :label="val.value" :key="val.value">{{val.label}}</el-checkbox>
               </el-checkbox-group>
             </el-form-item>
@@ -143,12 +141,11 @@
             </el-form-item>
           </div>
           <div class="bfc">
-            <el-form-item class="fl" label="经办人：">
+            <el-form-item class="fl clear_hint" label="经办人：">
               <!-- 取登录用户 -->
               {{dealroperCode}}
             </el-form-item>
-            <el-form-item class="fr" label="经办时间：">
-              <!-- {{2017-12-1}} -->
+            <el-form-item class="fr clear_hint" label="经办时间：">
               {{dealroperDate | dateFilter}}
             </el-form-item>
           </div>
@@ -1563,8 +1560,8 @@
     margin-left: 8px;
   }
 
-  .creditApproval-class .creditApr_backoff label::before {
+  /* .creditApproval-class .creditApr_backoff label::before {
     content: '' !important;
-  }
+  } */
 
 </style>

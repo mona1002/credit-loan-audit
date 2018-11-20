@@ -384,9 +384,10 @@
  .Abody .height_auto .el-table {
    height: auto !important;
  }
+
  .Abody .height_300 .el-table {
-  height: 300px !important;
-}
+   height: 300px !important;
+ }
 
  /* 100% */
  .hundred_percent .el-table .el-table__body-wrapper {
@@ -962,10 +963,11 @@
  }
 
  /*  */
- body .el_form_item_height_35 .el-form-item{
-/* margin-bottom: 0 !important; */
-height: 35px;
+ body .el_form_item_height_35 .el-form-item {
+   /* margin-bottom: 0 !important; */
+   height: 35px;
  }
+
  /* 弹窗里部分input必填项，部分展示项 */
 
  .alert_collapse_inputLabel label::before {
@@ -975,14 +977,15 @@ height: 35px;
  }
 
  .require_red label::before {
-  content: "*";
-  color: #ff7676;
-  font-weight: 700;
-  font-size: 16px;
-  left: -4px;
-  top: 3px;
-  position: relative;
-}
+   content: "*";
+   color: #ff7676;
+   font-weight: 700;
+   font-size: 16px;
+   left: -4px;
+   top: 3px;
+   position: relative;
+ }
+
  /* 弹窗全部为必填项 */
 
  .return_back .el-dialog .el-dialog__body label::before {
