@@ -349,15 +349,15 @@
     methods: {
       getInf() {
         this.get('/tripartiteData/queryReport', {
-        // this.get('http://10.1.26.130:20716/riskManagement/tripartiteData/queryReport', {
+          // this.get('http://10.1.26.130:20716/riskManagement/tripartiteData/queryReport', {
           applySubNo: this.applySubNo,
           // applySubNo: '201801080512013502',
           category: '00'
         }).then(res => {
           if (res.statusCode == 200) {
             let resp = res.data;
-            let report = JSON.parse(resp.reportData); //报告数据
-            let rawreport = JSON.parse(resp.rawData); //原始数据
+            let report = res.data.reportData ? JSON.parse(resp.reportData) : {}; //报告数据
+            let rawreport = res.data.rawData ? JSON.parse(resp.rawData) : {}; //原始数据
             if (report && report.data && report.data.report && report.data.report.length > 0) {
               let repData = report.data.report[0].data;
               repData && repData.length > 0 ? this.fundReport = repData[0] : '';

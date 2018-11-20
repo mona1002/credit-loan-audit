@@ -42,17 +42,16 @@
     methods: {
       getInf() {
         //   applySubNo: this.applySubNo
-        // this.get(
-        // 'http://10.1.26.130:20716/riskManagement/tripartiteData/queryReport?applySubNo=201801080512013502&category=03'
-        this.get('http://10.1.26.130:20716/riskManagement/tripartiteData/queryReport', {
-          // applySubNo: this.applyS/ubNo,
+        // this.get('http://10.1.26.130:20716/riskManagement/tripartiteData/queryReport', {
+        this.get('/tripartiteData/queryReport', {
+          applySubNo: this.applySubNo,
           category: '03',
-          applySubNo: '201801080512013502'
+          // applySubNo: '201801080512013502'
         }).then(res => {
           if (res.statusCode == 200) {
             let resp = res.data;
-            let report = JSON.parse(resp.reportData); //报告数据
-            let rawreport = JSON.parse(resp.rawData); //原始数据
+            let report = res.data.reportData ? JSON.parse(resp.reportData) : {}; //报告数据
+            let rawreport = res.data.rawData ? JSON.parse(resp.rawData) : {}; //原始数据
             if (report && report.data && report.data.report && report.data.report.length > 0) {
               let repData = report.data.report;
               if (repData[0].type == '储蓄卡') {
@@ -81,16 +80,8 @@
         });
       },
     },
-    mounted() {
-      console.log(111)
-    },
-    beforeCreate() {
-      console.log(888);
-
-    },
     created() {
       this.getInf();
-      console.log(999);
     }
   }
 

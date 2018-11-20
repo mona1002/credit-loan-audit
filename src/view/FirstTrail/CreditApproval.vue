@@ -51,7 +51,7 @@
         </div>
         <!-- approve_btn_area_width_1050 -->
         <div class="approve_btn_area " style="margin-top:100px; width:477px">
-          <div class="width_400 margin_left_50 clearFix">
+          <div class="width_400 margin_left_75 clearFix">
             <span class="approve_item" @click="hangOoutBtn">
               <i class="approve_icon HangUpIcon"></i>
               <span class="approve_text">挂起</span>
@@ -104,9 +104,9 @@
     </el-collapse>
     <!-- 回退弹窗 -->
     <div class="Height_240 return_back">
-      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false " width='600px'>
-        <el-form>
-          <el-form-item label="回退节点：" :label-width="formLabelWidth">
+      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false " width='620px'>
+        <el-form :label-width="LabelWidth">
+          <el-form-item label="回退节点：">
             <el-select @change="backSelectChange" v-model="rollbackNodeName">
               <el-option v-for="item in options" :label="item.label" :key='item.value' :value="item">
               </el-option>
@@ -115,30 +115,39 @@
           <div class="bfc">
             <!-- 回退主原因输入 02 -->
             <!-- 拒绝主原因选择 01 -->
-            <el-form-item class="fl" label="主原因：" :label-width="formLabelWidth">
+            <el-form-item class="fl" label="主原因：">
               <el-select @change="selectChange" v-model="mainReason">
                 <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="fr" label="子原因：" :label-width="formLabelWidth">
-              <el-select v-model="secondaryReason">
+            <el-form-item class="fr" label="子原因：">
+              <el-select v-model="secondaryReason" @change='getCheckBox'>
                 <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
                 </el-option>
               </el-select>
             </el-form-item>
           </div>
-          <div class="dialog_textarea">
-            <el-form-item class="mr" label="原因说明：" :label-width="formLabelWidth">
+          <div class="bfc" v-if="checkBox&&judgeFlag == '01'">
+            <!-- <div class="bfc"> -->
+            <!-- {{checkedCities}} -->
+            <el-form-item class="fl" label="补充授权项：">
+              <el-checkbox-group v-model="checkedCities" class="creditApr_backoff">
+                <el-checkbox v-for="val in lists" :label="val.value" :key="val.value">{{val.label}}</el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+          </div>
+          <div class="dialog_textarea bfc">
+            <el-form-item class="mr" label="原因说明：">
               <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
             </el-form-item>
           </div>
           <div class="bfc">
-            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth">
+            <el-form-item class="fl" label="经办人：">
               <!-- 取登录用户 -->
               {{dealroperCode}}
             </el-form-item>
-            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
+            <el-form-item class="fr" label="经办时间：">
               <!-- {{2017-12-1}} -->
               {{dealroperDate | dateFilter}}
             </el-form-item>
@@ -435,6 +444,7 @@
         creditExtensionLoanTerm: '',
         activeName: ['1'],
         formLabelWidth: '85px',
+        LabelWidth: '95px',
         formApproLabLeft: "100px",
         formApproLab: "123px",
         formApproLabelWidth: "200px",
@@ -466,6 +476,31 @@
           appConclusion: 'appConclusion',
           auditDate: 'auditDate'
         }],
+        checkList: '',
+        lists: [{
+          label: '公积金',
+          value: '00'
+        }, {
+          label: '社保',
+          value: '01'
+        }, {
+          label: '运营商',
+          value: '02'
+        }, {
+          label: '网银',
+          value: '03'
+        }, {
+          label: '简版征信',
+          value: '04'
+        }, {
+          label: '设备画像',
+          value: '05'
+        }],
+        //  checkAll: false,
+        checkedCities: [],
+        checkBox: false,
+        // cities: cityOptions,
+        // isIndeterminate: true,
         currentPage: 0,
         creditExtensionLoanTermTerms: [],
         mainReasons: [], // 主原因
@@ -505,7 +540,6 @@
         mainId: '', // 主原因 id
         mainReasonTitle: '', // 主原因 title
         applicationInformationDetail: '', // 申请详情传过来的数据
-        taskInWaitting: '', // 
         userInfo: '', // 登录信息
         // 审批
         loanAmt: '', // 申请金额
@@ -634,33 +668,19 @@
     },
     methods: {
       mountedInf() {
-        // 取出标志taskNodeName
         // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
+        let taskInWaitting = {};
         this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
-        if (this.judgeFlag == '01') { // 初审 任务 id  taskId
-          this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-          this.taskId = this.taskInWaitting.taskId;
-          this.processInstanceId = this.taskInWaitting.processInstanceId;
-          this.applyId = this.taskInWaitting.applyId;
-          this.appOrgId = this.taskInWaitting.appOrgId;
-          this.appOrgCode = this.taskInWaitting.appOrgCode;
-          this.custNo = this.taskInWaitting.custNo; // 客户编号
-          this.custName = this.taskInWaitting.custName;
-          this.applySubNo = this.taskInWaitting.applySubNo; // 进件编号
-          this.certTypeTxt = this.taskInWaitting.certTypeTxt; // 证件类型
-          this.certCode = this.taskInWaitting.certCode; // 证件号码
-          // 申请期限 
-          this.sproId = this.taskInWaitting.proId;
-          // 申请信息 带过来的 产品名称
-          this.baseProName = this.taskInWaitting.proName;
-          this.certCode = this.taskInWaitting.certCode;
+        this.userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+        if (this.judgeFlag == '01') {
+          taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
           this.options = [{
             "label": "申请登记",
             "value": "creditApp_apply",
             "type": "01"
           }]
-          // 任务状态
-          this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+          this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus; // 任务状态
           // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
           if (this.userInfo.roleCodesList) {
             for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
@@ -668,41 +688,16 @@
                 if (this.judgeFlag == '01')
                   this.shenPiBtnShow = true;
           }
-
-        } else if (this.judgeFlag == '02') { // 终审取终审  taskId
-          this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-          this.groupId = this.FtaskInWaitting.groupId; //	流程角色code
-          // 挂起 任务id
-          this.taskId = this.FtaskInWaitting.taskId;
-          // 流程 实例id
-          this.processInstanceId = this.FtaskInWaitting.processInstanceId;
-          this.applyId = this.FtaskInWaitting.applyId;
-          this.appOrgId = this.FtaskInWaitting.appOrgId;
-          this.appOrgCode = this.FtaskInWaitting.appOrgCode;
-          // 客户编号
-          this.custNo = this.FtaskInWaitting.custNo;
-          // 显示
-          this.custName = this.FtaskInWaitting.custName;
-          // 申请类型
-          // 进件编号
-          this.applySubNo = this.FtaskInWaitting.applySubNo;
-          // 证件类型
-          this.certTypeTxt = this.FtaskInWaitting.certTypeTxt;
-          // 证件号码
-          this.certCode = this.FtaskInWaitting.certCode;
-          // 申请期限 
-          this.sproId = this.FtaskInWaitting.proId;
-          // 申请信息 带过来的 产品名称
-          this.baseProName = this.FtaskInWaitting.proName;
-          this.certCode = this.FtaskInWaitting.certCode;
+        } else if (this.judgeFlag == '02') {
+          taskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+          this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus; // 任务状态
+          this.taskName = taskInWaitting.taskName;
+          this.groupId = taskInWaitting.groupId; //	流程角色code
           this.options = [{
             "label": "初审审批",
             "value": "creditApp_firstTrial",
             "type": "02"
-          }]
-          // 任务状态
-          this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
-          this.taskName = this.FtaskInWaitting.taskName;
+          }];
           this.findSmFlowRole();
           // 拒绝按钮根据 角色判断 BX20
           if (this.userInfo.roleCodesList) {
@@ -712,27 +707,38 @@
                   this.jujueBtnShow = true;
           }
         }
+        //  获取列表页信息
+        ({
+          taskId: this.taskId,
+          processInstanceId: this.processInstanceId,
+          applyId: this.applyId,
+          appOrgId: this.appOrgId,
+          appOrgCode: this.appOrgCode,
+          custNo: this.custNo, // 客户编号
+          custName: this.custName,
+          applySubNo: this.applySubNo, // 进件编号
+          certTypeTxt: this.certTypeTxt, // 证件类型
+          certCode: this.certCode, // 证件号码
+          sproId: this.proId,
+          baseProName: this.proName,
+          certCode: this.certCode
+        } = taskInWaitting);
         // 回退 拒绝  审批
         // 经办人 登录用户名
-        this.userInfo = JSON.parse(localStorage.getItem('userInf'));
         this.dealroperCode = this.userInfo.userCode;
         // 用户id
         this.orgId = this.userInfo.orgId;
-        this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
         console.log(this.applicationInformationDetail)
-        JSON.stringify(this.applicationInformationDetail) === '{}' ? this._error('客户信息获取失败！请保存已填写内容，从任务列表重新进入！') :
-          '';
-        // 申请类型
-        this.applyTypeTxt = this.applicationInformationDetail.applyTypeTxt; //...
-        // 申请期限 
-        this.loanTerm = this.applicationInformationDetail.loanTerm; //...
-        if (this.judgeFlag == '04') { // 主管
-          this.options = [{
-            "label": "反欺诈专员审批",
-            "value": "antiFraudApp_commissioner",
-            "type": ''
-          }]
-        }
+        JSON.stringify(this.applicationInformationDetail) === '{}' ? this._error('客户信息获取失败！请保存已填写内容，从任务列表重新进入！') : '';
+        this.applyTypeTxt = this.applicationInformationDetail.applyTypeTxt; // 申请类型
+        this.loanTerm = this.applicationInformationDetail.loanTerm; // 申请期限 
+        // if (this.judgeFlag == '04') { // 主管
+        //   this.options = [{
+        //     "label": "反欺诈专员审批",
+        //     "value": "antiFraudApp_commissioner",
+        //     "type": ''
+        //   }]
+        // }
       },
       findSmFlowRole() { //信审审批-8.获取流程角色信息
         this.get("/smFlowRoleAction/findSmFlowRole", {
@@ -798,8 +804,9 @@
       coverFn(flag) {
         // 清空原因
         this.mainReason = '';
-        this.secondaryReason = '';
+        this.secondaryReason = ''; //清空子原因
         this.isLoading = false;
+        this.checkBox = false; //隐藏复选框
         this.loadingTitle = '提交';
         // 页面点击按钮出现 的 对应 弹窗
         // 统一处理    回退 02 ,拒绝 01, 放弃  07, 审批 03, 审批结论 spjl, 流程轨迹 lcgj
@@ -807,7 +814,10 @@
           switch (flag) {
             case '02':
               this.huiTuiShow = true;
+              this.checkedCities = []; //清空复选框
+              this.secondaryReason = ''; //清空子原因
               this.getSystemDate();
+              this.getReason('main', '01')
               break;
             case '01':
               this.juJueShow = true;
@@ -945,9 +955,15 @@
         this.dealroperCode = this.dealroperCode;
         // 回退、拒绝、放弃
         //必填校验
-        if (flag == '02' && this.rollbackNodeName.length == 0) {
-          this._error('请选择回退节点!')
-          return;
+        if (flag == '02') {
+          if (this.rollbackNodeName.length == 0) {
+            this._error('请选择回退节点!')
+            return;
+          }
+          if (this.checkBox && this.checkedCities.length == 0) {
+            this._error('请勾选补充授权项！!')
+            return;
+          }
         }
         if (flag != '03') {
           if (!this.mainReason) {
@@ -1152,8 +1168,11 @@
             this.subReasonId = this.secondeReasons[i].id;
           }
         };
+        console.log(this.checkedCities);
+        // return
         this.post("/creauditInfo/approval", {
           // 挂起 taskId 任务id
+          authCredits: this.checkedCities.join(','),
           taskId: this.taskId,
           custName: this.custName, // 客户名称
           custNo: this.custNo, // 客户code
@@ -1295,6 +1314,7 @@
           this.get('/credit/firstNodeReason?reasonType=' + type + '&' + Math.random()).then(res => {
             if (res.statusCode == '200') {
               this.mainReasons = res.data;
+              console.log(this.mainReasons);
             } else {
               this.mainReasons = [];
             }
@@ -1304,6 +1324,7 @@
           this.get('/credit/findNodeFirstChildren?id=' + this.mainId + '&' + Math.random()).then(res => {
             if (res.statusCode == '200') {
               this.secondeReasons = res.data;
+              console.log(this.secondeReasons);
             } else {
               this.secondeReasons = [];
             }
@@ -1397,6 +1418,16 @@
         this.mainId = val.id; // 主原因的 id
         // 在主原因改变的时候请求子原因
         this.getReason('second', this.mainId);
+      },
+      getCheckBox(value) {
+        //主原因：大数据爬取信息，子原因:授权项缺失/空白 时显示复选框
+        this.checkedCities = [];
+        for (let key of this.secondeReasons) {
+          if (key.reasonName == value) {
+            key.reasonCode == 'r01150702' ? this.checkBox = true : this.checkBox = false;
+            break;
+          }
+        }
       },
       // 批准期限更改
       ploanTermChange: function (val) {
@@ -1495,6 +1526,15 @@
           }
         }
       },
+      //   handleCheckAllChange(val) {
+      //   this.checkedCities = val ? cityOptions : [];
+      //   // this.isIndeterminate = false;
+      // },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.lists.length;
+        // this.isIndeterminate = checkedCount > 0 && checkedCount < this.lists.length;
+      },
       //大数据风控
       tobigData() {
         this.$router.push({
@@ -1519,8 +1559,12 @@
     font-size: 16px;
   }
 
-  /* .wid_670{
-  width:670px;
-} */
+  .creditApproval-class .creditApr_backoff label {
+    margin-left: 8px;
+  }
+
+  .creditApproval-class .creditApr_backoff label::before {
+    content: '' !important;
+  }
 
 </style>
