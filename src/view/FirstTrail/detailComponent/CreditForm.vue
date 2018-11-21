@@ -11,7 +11,7 @@
           <div>
             <ul>
               <li class='clearFix'>
-                <el-form-item prop="wnetPhone">
+                <el-form-item prop="wnetPhone" class="el_hint_word">
                   <label class="blueC label_223" @click="NewPage(2)"><span class="required_Red"> * </span>网搜本人手机是否异常：</label>
                   <el-select v-model="checkData.wnetPhone" @change='checkData.wnetPhone==0?checkData.wnetPhonetxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
@@ -26,7 +26,7 @@
                 </el-form-item>
               </li>
               <li class='clearFix'>
-                <el-form-item prop="wnetEcutedBrea">
+                <el-form-item prop="wnetEcutedBrea" class="el_hint_word">
                   <label class="blueC label_223" @click="NewPage(1)"><span class="required_Red"> * </span>客户在失信网是否有失信记录：</label>
                   <el-select v-model="checkData.wnetEcutedBrea" @change='checkData.wnetEcutedBrea==0?checkData.wnetEcutedBreatxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
@@ -41,7 +41,7 @@
                 </el-form-item>
               </li>
               <li class='clearFix'>
-                <el-form-item prop="wnetCompany">
+                <el-form-item prop="wnetCompany" class="el_hint_word">
                   <label class="blueC label_223" @click="NewPage(3)"><span class="required_Red"> * </span>工商企业基本信息是否登记：</label>
                   <el-select v-model="checkData.wnetCompany" @change='checkData.wnetCompany==0?checkData.wnetCompanytxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
@@ -56,8 +56,8 @@
                 </el-form-item>
               </li>
               <li class='clearFix'>
-                <el-form-item>
-                  <label class="blueC label_223" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
+                <el-form-item prop="wbeexEcuted" class="el_hint_word">
+                  <label class="blueC label_223" @click="NewPage(0)"><span class="required_Red"> * </span>客户在法网是否有被执行信息：</label>
                   <el-select v-model="checkData.wbeexEcuted" @change='checkData.wbeexEcuted==0?checkData.wbeexEcutedtxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
@@ -475,7 +475,7 @@
           <div>
             <ul>
               <li class="clearFix">
-                <el-form-item prop="fbalance">
+                <el-form-item prop="fbalance" class="el_hint_word">
                   <label class="label_223"><span class="required_Red"> * </span> 可以承受的月还款[元]：</label>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="checkData.fbalance?checkData.fbalance=_formatNumber(checkData.fbalance):''">
                   </el-input>
@@ -755,7 +755,7 @@
             <span class="collapse_title_text">审批结论</span>
           </template>
           <div class="CreditForm_result">
-            <el-form-item prop='oother' class="one_row">
+            <el-form-item prop='oother' class="one_row el_hint_word">
               <i class="hint" style="top:27px;">
                 <b v-show="checkData.oother && checkData.oother.length>=1000" class="result_textarea"> 输入长度不能超过1000</b>
               </i>
@@ -792,7 +792,12 @@
           }],
           wnetCompany: [{
             required: true,
-            message: '请选择当地工商网查询企业基本信息中是否有登记',
+            message: '请选择工商企业基本信息是否登记',
+            trigger: 'change'
+          }],
+          wbeexEcuted: [{
+            required: true,
+            message: '请选择客户在法网是否有被执行信息',
             trigger: 'change'
           }],
           fbalance: [{
@@ -1329,7 +1334,7 @@
           this.checkData.selfempCount = "";
           this.checkData.profitamountmamt = "";
           this.checkData.firstDistributor = "";
-        } 
+        }
       },
       mountedInf() {
         this.d = JSON.parse(localStorage.getItem("taskInWaitting"));
@@ -1636,7 +1641,6 @@
 </script>
 
 <style scoped>
-
   .CreditForm input {
     border: 1px solid rgb(229, 229, 229);
     border-radius: 4px;
@@ -1676,13 +1680,9 @@
   }
 
 
- .btn {
+  .btn {
     margin: 20px 0 0 250px;
   }
-
-  /* .specialInput {
-    width: calc(100% - 230px);
-  } */
 
   .internet_textarea {
     padding-left: 8px;
@@ -1694,6 +1694,10 @@
 
   .Working_right {
     padding-left: 150px;
+  }
+
+  .CreditForm_result {
+    height: 150px;
   }
 
 </style>
