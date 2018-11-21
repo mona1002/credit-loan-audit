@@ -142,6 +142,7 @@
     font-size: 30px;
     color: white;
     position: relative;
+    z-index: 9999;
   }
 
   .mheader .logoDiv {
