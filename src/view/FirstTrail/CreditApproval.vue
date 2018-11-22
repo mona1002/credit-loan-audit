@@ -513,7 +513,7 @@
         emerType: '',
         appOrgCode: '',
         proName: '',
-        proCode: '', // 批准产品 产品编号
+        // proCode: '', // 批准产品 产品编号
         proId: '', // 产品id
         // "00"-"人工通过","01"-"人工拒绝","02"-"人工回退","03"-"高级审批","04"-"决策通过","05"-"决策拒绝","06"-"人工审批","07"-"客户放弃"),"08"-"系统通过","09"-"系统拒绝","10"-"人工撤销"
         opinionFlag: '00', // 任务标志类型  默认00 , 点击了 更高 审批改  03
@@ -862,6 +862,7 @@
               }).then(res => {
                 if (res.statusCode == '200') {
                   if (res.data) {
+                    this.proCode=res.data.proCode;
                     this.verIncome2 = res.data.verIncome; //月核实收入[元];
                     this.proId = res.data.proId; //批准产品ID;
                     this.proName = res.data.proName; //批准产品;

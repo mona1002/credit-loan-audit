@@ -54,37 +54,37 @@
     <div class="listContainer">
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @current-change="selectRow"
         @row-dblclick="handleCurrentChange" border>
-        <el-table-column type="index" align='center' label=序号 width="55">
+        <el-table-column type="index" label=序号 width="55">
         </el-table-column>
-        <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
+        <el-table-column prop="applySubno" label="进件编号" width="165">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
+        <el-table-column prop="custName" label="客户名称" width="100">
         </el-table-column>
-        <el-table-column label="证件号码" align='center' min-width="180">
+        <el-table-column label="证件号码" width="160">
           <template slot-scope="scope">
             <span>{{ scope.row.certCode |cerCodeStar }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="手机号码" align='center' min-width="140">
+        <el-table-column label="手机号码" width="120">
           <template slot-scope="scope">
             <span>{{ scope.row.mobile |MobileStar }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="hirecomName" label="单位名称" align='center' min-width="150">
+        <el-table-column prop="hirecomName" label="单位名称" width="150">
         </el-table-column>
-        <el-table-column prop="workTel" label="单位电话" align='center' min-width="150">
+        <el-table-column prop="workTel" label="单位电话" width="120">
         </el-table-column>
-        <el-table-column prop="appDate" label="申请日期" align='center' min-width="150">
+        <el-table-column prop="appDate" label="申请日期" width="160">
         </el-table-column>
-        <el-table-column prop="proName" label="产品名称" align='center' min-width="100">
+        <el-table-column prop="proName" label="产品名称" width="100">
         </el-table-column>
-        <el-table-column prop="operOrgName" label="进件机构" align='center' min-width="120">
+        <el-table-column prop="operOrgName" label="进件机构" width="120">
         </el-table-column>
-        <el-table-column prop="busiStateTxt" label="审批状态" align='center' min-width="100">
+        <el-table-column prop="busiStateTxt" label="审批状态" width="100">
         </el-table-column>
-        <el-table-column prop="reconStateTxt" label="复议状态" align='center' min-width="100">
+        <el-table-column prop="reconStateTxt" label="复议状态" width="100">
         </el-table-column>
-        <el-table-column prop="fraudStateTxt" label="反欺诈状态" align='center' min-width="100">
+        <el-table-column prop="fraudStateTxt" label="反欺诈状态" min-width="100">
         </el-table-column>
       </el-table>
     </div>
