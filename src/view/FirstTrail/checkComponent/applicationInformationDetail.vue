@@ -995,13 +995,14 @@
             /*联系人信息*/
             res.data.applyCustLinkmanDTOs ? this.applyCustLinkmanDTOs = res.data.applyCustLinkmanDTOs : '';
             query = {
-              applyTypeTxt: this.accepApplyLoan.applyTypeTxt, //
-              loanTerm: this.accepApplyLoan.loanTerm, // 
-              workName: this.applyCustWorkDTO.workName, //
-              productCode: this.accepApplyLoan.productCode, //
-              loanAmt: this.accepApplyLoan.loanAmt, //
-              maxEachTermAmt: this.accepApplyLoan.maxEachTermAmt, //
-              loanTypeTxt: this.accepApplyLoan.loanTypeTxt, //
+              applyTypeTxt: this.accepApplyLoan.applyTypeTxt,
+              loanTerm: this.accepApplyLoan.loanTerm,
+              workName: this.applyCustWorkDTO.workName,
+              productCode: this.accepApplyLoan.productCode,
+              loanAmt: this.accepApplyLoan.loanAmt,
+              maxEachTermAmt: this.accepApplyLoan.maxEachTermAmt,
+              loanTypeTxt: this.accepApplyLoan.loanTypeTxt,
+              productName: this.accepApplyLoan.productName
             };
             console.log(query)
             localStorage.setItem("applicationInformationDetail", JSON.stringify(query));

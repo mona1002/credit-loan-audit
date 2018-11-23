@@ -256,7 +256,7 @@
                 </div>
                 <div class="bfc">
                   <el-form-item class="presentation" label="申请产品：" :label-width="formApproLabLeft">
-                    {{sqproName}}
+                    {{productName}}
                   </el-form-item>
                   <el-form-item class="presentation" label="可接受最高每期还款额[元]：" :label-width="formApproLabelWidth">
                     {{maxEachTermAmt |formatMoney(true)}}
@@ -315,7 +315,7 @@
                     <el-input v-model="creditExtensionLoanAmt" @blur="moneyBlur(creditExtensionLoanAmt, 'creditExtensionLoanAmt') "></el-input>
                   </el-form-item>
                   <el-form-item class="fl alert_collapse_inputLabel" label="授信期限[月]：" :label-width="formApproLab">
-                    <el-select v-model="creditExtensionLoanTerm ">
+                    <el-select v-model="creditExtensionLoanTerm " @change='day'>
                       <el-option v-for="item in creditExtensionLoanTermTerms " :label="item.code " :value="item.code "
                         :key="item.code ">
                       </el-option>
@@ -541,7 +541,7 @@
         // 审批
         loanAmt: '', // 申请金额
         loanTerm: '', // 申请期限
-        sqproName: '', // 申请信息-申请产品
+        productName: '', // 申请信息-申请产品
         maxEachTermAmt: '', // 可接受最高每期还款额
         loanType: '', // 申请类型
         // 审批同意
@@ -558,7 +558,7 @@
         totalRate: '', // 总负债率
         reasonRemark: '',
         caculData: {}, // 审批结论数据
-        creditExtensionBeginDate: '', // 授权开始
+        creditExtensionBeginDate: this._getDate(), // 授权开始
         creditExtensionEndDate: '', // 授权结束
         appConclusion: '', // 审批结论内容
         lcgjLoading: '', // 流程轨迹
@@ -568,7 +568,7 @@
         applyTypeTxt: '', // 申请类型
         certTypeTxt: '', // 证件类型
         sproId: '', // 审批 proId
-        quotaData: '', // 评分 月还款额
+        // quotaData: '', // 评分 月还款额
         fbalance: '', // 核实每月可接受最高还款额
         fbalance2Num: Number,
         hangOut: false,
@@ -662,8 +662,13 @@
     },
     mounted() {
       this.mountedInf();
+      this.creditPeriod();
     },
     methods: {
+      day() {
+        this.creditExtensionEndDate = this._getDate(this.creditExtensionLoanTerm, 0, true,
+          true, this.creditExtensionBeginDate)
+      },
       mountedInf() {
         // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
         let taskInWaitting = {};
@@ -717,7 +722,7 @@
           certTypeTxt: this.certTypeTxt, // 证件类型
           certCode: this.certCode, // 证件号码
           sproId: this.proId,
-          baseProName: this.proName,
+          proName: this.baseProName,
           certCode: this.certCode
         } = taskInWaitting);
         // 回退 拒绝  审批
@@ -725,7 +730,6 @@
         this.dealroperCode = this.userInfo.userCode;
         // 用户id
         this.orgId = this.userInfo.orgId;
-        console.log(this.applicationInformationDetail)
         JSON.stringify(this.applicationInformationDetail) === '{}' ? this._error('客户信息获取失败！请保存已填写内容，从任务列表重新进入！') : '';
         this.applyTypeTxt = this.applicationInformationDetail.applyTypeTxt; // 申请类型
         this.loanTerm = this.applicationInformationDetail.loanTerm; // 申请期限 
@@ -834,7 +838,7 @@
               // 申请金额
               this.loanAmt = this.applicationInformationDetail.loanAmt;
               // 申请信息-申请产品
-              this.sqproName = this.applicationInformationDetail.productCode;
+              this.productName = this.applicationInformationDetail.productName;
               // 可接受最高每期还款额
               this.maxEachTermAmt = this.applicationInformationDetail.maxEachTermAmt;
               // 申请类型/借款类型
@@ -848,21 +852,21 @@
                 appOrgId: this.appOrgId
               }).then(res => {
                 if (res.statusCode == '200') {
-                  this.quotaData = res.data;
+                  // this.quotaData = res.data;
                   // 单独处理 评分   =>  "评分:51.6"
                   this.fbalance = res.data.fbalance;
                 } else {
                   this._error(res.msg)
                 }
               });
-              this.creditPeriod();
+              // this.creditPeriod();
               //带回的信息
               this.post('/creauditOpinion/queryCreauditOpinionObj', {
                 applyId: this.applyId
               }).then(res => {
                 if (res.statusCode == '200') {
                   if (res.data) {
-                    this.proCode=res.data.proCode;
+                    this.proCode = res.data.proCode;
                     this.verIncome2 = res.data.verIncome; //月核实收入[元];
                     this.proId = res.data.proId; //批准产品ID;
                     this.proName = res.data.proName; //批准产品;
@@ -870,9 +874,9 @@
                     this.ploanAmt2 = res.data.ploanAmt;
                     res.data.verIncome || res.data.verIncome == 0 ? this.verIncome = this._formatNumber(res.data.verIncome) :
                       this.verIncome = res.data.verIncome; //月核实收入[元];
-                    res.data.ploanAmt || res.data.ploanAmt == 0 ? this.creditExtensionLoanAmt = this.ploanAmt =
-                      this._formatNumber(res.data.ploanAmt) :
-                      this.creditExtensionLoanAmt = this.ploanAmt = res.data.ploanAmt; //批准金额[元];
+                    this.ploanAmt = res.data.ploanAmt || res.data.ploanAmt == 0 ? this._formatNumber(res.data.ploanAmt) :
+                      '';
+                    this.creditExtensionLoanAmt = this._formatNumber(res.data.creditExtensionLoanAmt); //批准金额[元];
                     this.caculData.appmult = res.data.appmult; //审批倍数;
                     this.caculData.eachTermamt = res.data.eachTermamt; //月还款额[元];
                     this.caculData.inteDebitrate = res.data.inteDebitrate; //内部负债率;
@@ -882,9 +886,10 @@
                     this.maxAmounnt = res.data.maxAmounnt; // 最大
                     this.minAmount = res.data.minAmount; // 最小
                     this.debtRate = res.data.debtRate; //产品负债率
+                    this.creditExtensionLoanTerm = res.data.creditExtensionLoanTerm //授信期限[月]
                     //获取批准期限
                     this.ploanTerms = res.data.returnList; //获取批准期限
-                    this.creditExtensionBeginDate = res.data.creditExtensionBeginDate; //授信开始日期
+                    if (this.judgeFlag == '02') this.creditExtensionBeginDate = res.data.creditExtensionBeginDate; //授信开始日期-初审返回值为空，不需赋值，设定默认是为当天。终审获取初审时间
                     this.creditExtensionEndDate = res.data.creditExtensionEndDate; //授信截止日期
                     if (this.ploanTerm) { //初审第一次未填，在选中下拉值时赋值
                       for (let item of this.ploanTerms) {
@@ -968,6 +973,7 @@
             this._error('请选择主原因!')
             return;
           }
+          // 添加
           if (!this.reasonRemark) {
             this._error('请填写原因说明!')
             return;
@@ -1166,7 +1172,6 @@
             this.subReasonId = this.secondeReasons[i].id;
           }
         };
-        console.log(this.checkedCities);
         // return
         this.post("/creauditInfo/approval", {
           // 挂起 taskId 任务id
@@ -1312,7 +1317,6 @@
           this.get('/credit/firstNodeReason?reasonType=' + type + '&' + Math.random()).then(res => {
             if (res.statusCode == '200') {
               this.mainReasons = res.data;
-              console.log(this.mainReasons);
             } else {
               this.mainReasons = [];
             }
@@ -1322,7 +1326,6 @@
           this.get('/credit/findNodeFirstChildren?id=' + this.mainId + '&' + Math.random()).then(res => {
             if (res.statusCode == '200') {
               this.secondeReasons = res.data;
-              console.log(this.secondeReasons);
             } else {
               this.secondeReasons = [];
             }
@@ -1332,7 +1335,6 @@
       // 获取授信期限
       creditPeriod() {
         this.get('/credit/creditPeriod').then(res => {
-          console.log(res)
           if (res.statusCode == 200) {
             this.creditExtensionLoanTermTerms = res.data;
           } else {

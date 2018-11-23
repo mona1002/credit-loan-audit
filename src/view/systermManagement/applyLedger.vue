@@ -275,7 +275,7 @@
         selectedProName: "",
         agencyCode: '',
         selectedAgenName: "",
-        applyData: [this._getDate(-6), this._getDate()],
+        applyData: [this._getDate(0,-6), this._getDate()],
         creditTime: '', //授信日期
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
@@ -518,9 +518,9 @@
             this.params.pageNum = this.currentPage = 1;
             this.params.pageSize = this.pageCount = 10;
             this.Rreset();
-            this.applyData = [this._getDate(-6), this._getDate()];
+            this.applyData = [this._getDate(0,-6), this._getDate()];
             this.creditTime = '';
-            this.params.applyDateGe = this._getDate(-6);
+            this.params.applyDateGe = this._getDate(0,-6);
             this.params.applyDateLe = this._getDate();
             this.Routes[3].closed = true;
           }
