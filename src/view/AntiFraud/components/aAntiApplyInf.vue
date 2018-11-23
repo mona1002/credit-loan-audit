@@ -7,30 +7,39 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">基本信息</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+        <div class="checkedInf checkedInf_li_width_half clearFix">
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_166">进件编号：</label>
-                <span>{{applyInfoPool.applySubno}}</span>
+                <div>
+                  <label class="label_width_95">进件编号：</label>
+                  <span>{{applyInfoPool.applySubno}}</span></div>
               </li>
               <li>
-                <label class="label_width_166">客户名称：</label>
-                <span>{{applyInfoPool.custName}}</span>
-              </li>
-              <li>
-                <label class="label_width_166">证件类型：</label>
-                <span>{{applyInfoPool.certTypeTxt}}</span>
+                <div>
+                  <label class="label_width_95">客户名称：</label>
+                  <span>{{applyInfoPool.custName}}</span> </div>
               </li>
             </div>
-            <li>
-              <label class="label_width_166">证件号码：</label>
-              <span>{{applyInfoPool.certCode}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">移动电话：</label>
-              <span>{{applyInfoPool.mobile}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <div>
+                  <label class="label_width_95">证件类型：</label>
+                  <span>{{applyInfoPool.certTypeTxt}}</span> </div>
+              </li>
+              <li>
+                <div>
+                  <label class="label_width_95">证件号码：</label>
+                  <span>{{applyInfoPool.certCode}}</span> </div>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <div>
+                  <label class="label_width_95">移动电话：</label>
+                  <span>{{applyInfoPool.mobile}}</span> </div>
+              </li>
+            </div>
           </ul>
         </div>
       </el-collapse-item>
@@ -39,7 +48,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">反欺诈申请信息</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+        <div class="checkedInf checkedInf_li_width_half clearFix">
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
@@ -58,16 +67,16 @@
               </li>
             </div>
             <li class="clearFloat">
-              <label class="label_width_166">反欺诈申请人：</label>
-              <span>{{fraudApplyInfo.applyPersonName}}</span>
+              <div> <label class="label_width_166">反欺诈申请人：</label>
+                <span>{{fraudApplyInfo.applyPersonName}}</span></div>
             </li>
             <li>
-              <label class="label_width_166">反欺诈申请日期：</label>
-              <span>{{fraudApplyInfo.appDate}}</span>
+              <div> <label class="label_width_166">反欺诈申请日期：</label>
+                <span>{{fraudApplyInfo.appDate}}</span></div>
             </li>
             <li>
-              <label class="label_width_166">反欺诈申请机构：</label>
-              <span>{{fraudApplyInfo.appOrgName}}</span>
+              <div> <label class="label_width_166">反欺诈申请机构：</label>
+                <span>{{fraudApplyInfo.appOrgName}}</span></div>
             </li>
           </ul>
         </div>
@@ -131,9 +140,3 @@
   }
 
 </script>
-<style scoped>
-  .aAntiApplyInf {
-    min-width: 950px;
-  }
-
-</style>

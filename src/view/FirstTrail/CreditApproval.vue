@@ -12,41 +12,55 @@
         <div class="checkedInf wid_670 checkedInf_li_width_half clearFix" style="margin:0 auto">
           <ul>
             <div class=" CreditForm_div_border clearFix">
-              <div>
                 <li>
-                  <label class="label_width_130">客户名称：</label>
-                  <span>{{custName}}</span>
+                  <div>
+                    <label class="label_width_95">客户名称：</label>
+                    <span>{{custName}}</span>
+                  </div>
                 </li>
                 <li>
-                  <label class="label_width_130">申请类型：</label>
-                  <span>{{applyTypeTxt}}</span>
+                  <div>
+                    <label class="label_width_95">申请类型：</label>
+                    <span>{{applyTypeTxt}}</span>
+                  </div>
                 </li>
-              </div>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_130">进件编号：</label>
-                <span>{{applySubNo}}</span>
+                <div>
+                  <label class="label_width_95">进件编号：</label>
+                  <span>{{applySubNo}}</span>
+                </div>
               </li>
               <li>
-                <label class="label_width_130">证件类型：</label>
-                <span>{{certTypeTxt}}</span>
+                <div>
+                  <label class="label_width_95">证件类型：</label>
+                  <span>{{certTypeTxt}}</span>
+                </div>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_130">证件号码：</label>
-                <span>{{certCode}}</span>
+                <div>
+                  <label class="label_width_95">证件号码：</label>
+                  <span>{{certCode}}</span>
+                </div>
               </li>
               <li>
-                <label class="label_width_130">产品名称：</label>
-                <span>{{baseProName}}</span>
+                <div>
+                  <label class="label_width_95">产品名称：</label>
+                  <span>{{baseProName}}</span>
+                </div>
               </li>
             </div>
-            <li>
-              <label class="label_width_130">申请期限[月]：</label>
-              <span>{{loanTerm}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <div>
+                  <label class="label_width_95">申请期限[月]：</label>
+                  <span>{{loanTerm}}</span>
+                </div>
+              </li>
+            </div>
           </ul>
         </div>
         <!-- approve_btn_area_width_1050 -->
@@ -1562,6 +1576,8 @@
   .creditApproval-class .creditApr_backoff label {
     margin-left: 8px;
   }
+
+
 
   /* .creditApproval-class .creditApr_backoff label::before {
     content: '' !important;

@@ -240,7 +240,9 @@ body .pre_wrap {
 .label_width_110 {
   width: 110px;
 }
-
+.label_width_95 {
+  width: 95px;
+}
 /* el-item 前的红色*  去掉 */
 .clear_hint label::before {
   content: '' !important;
@@ -1240,4 +1242,11 @@ border:3px solid red;
 .sort {
   font-weight: 800;
   margin: 5px 10px;
+}
+.creditApproval-class .CreditForm_div_border li div ,
+  .aAntiApplyInf .CreditForm_div_border li div {
+  width: 260px;
+  margin-left: auto;
+  margin-right: auto;
+  /* border:1px solid red */
 }
