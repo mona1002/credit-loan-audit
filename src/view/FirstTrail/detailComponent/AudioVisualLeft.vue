@@ -41,7 +41,7 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative;" :id='msg'>
-        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="val.imagePath"
           v-if="key==smallPicInd" v-show="myPng" @dblclick='next' />
         <p v-show="myPdf" is="pdfDivLeft" ID='firstTirlLeft' v-bind:title="pdfArrys"></p>
       </div>
@@ -64,7 +64,7 @@
       <div class="small_pic_content">
         <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
           <div class="Small_pic">
-            <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
+            <img :src="val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
           </div>
           <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
         </figure>
@@ -115,7 +115,6 @@
   </div>
 </template>
 <script>
-  import imgUrl from '../../../util/ConstantSocialAndPn'
   import pdfDivLeft from '../../pdf'
   export default {
     data() {
@@ -125,8 +124,6 @@
         opendImg: [],
         closedImg: [],
         picType: '',
-        imgBaseUrl: '',
-        // localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
         showPage: 0,
@@ -134,7 +131,6 @@
         SmallPicShow: false,
         CompareAlert: true,
         ListParent: [],
-        // ListDetails: [],
         imgPath: [],
         imgPathDetail: [],
         // ----------------------------------
@@ -184,14 +180,12 @@
     methods: {
       mountedInf() {
         // 恢复到初始状态
-        // this.ListDetails = [];
         this.pngAyyrs = [];
         this.pdfArrys = [];
         this.SmallmyPic = false;
         this.SmallmyPdf = false;
         this.myPdf = false;
         this.SmallPicShow = false; //缩略图
-        this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.get('/productArchive/productArchives/' + this.applyId).then(res => {
           if (res.statusCode == 200) {

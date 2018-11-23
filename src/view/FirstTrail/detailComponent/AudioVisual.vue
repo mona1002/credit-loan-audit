@@ -46,7 +46,7 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" :key="key" :src="val.imagePath" v-if="key==smallPicInd"
           v-show="myPng" @dblclick='next' />
         <p v-show="myPdf" is="pdfDiv" ID='firstTirl' v-bind:title="pdfArrys"></p>
       </div>
@@ -69,7 +69,7 @@
       <div class="small_pic_content">
         <figure v-for="(val,index) in pngAyyrs" :key="index" v-show="SmallmyPic" class="small_pic_figure">
           <div class="Small_pic">
-            <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
+            <img :src="val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
           </div>
           <p v-if="SmallmyPic">{{val.arcSubType}}</p>
         </figure>
@@ -85,12 +85,10 @@
   </div>
 </template>
 <script>
-  import imgUrl from '../../../util/ConstantSocialAndPn'
   import pdfDiv from '../../pdf'
   export default {
     data() {
       return {
-        imgBaseUrl: '',
         litimg: [],
         litimgIndex: -1,
         litimgInd: -1,
@@ -120,7 +118,6 @@
     },
     methods: {
       mountedInf() {
-        this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.get('/productArchive/productArchives/' + this.applyId)
           .then(res => {

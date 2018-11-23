@@ -1,13 +1,12 @@
 <template>
   <div>
-    <pdf-shower class="rightCav" v-for="item in newArry" :key='Math.random()' :pdfurl="imgBaseUrl+item.imagePath"
+    <pdf-shower class="rightCav" v-for="item in newArry" :key='Math.random()' :pdfurl="item.imagePath"
       :scale="scale" :canvasId='id' :canvasWidth='pdfWidth' :canvasHeight='pdfHeight' :SmallClass="SmallClass" @onErr="onErr">
     </pdf-shower>
   </div>
 </template>
 <script>
   import PdfShower from 'vue-pdf-shower';
-  import pdfUrl from '../util/ConstantSocialAndPn';
   export default {
     name: 'pdfshower',
     components: {
@@ -18,7 +17,6 @@
         pdfurls2: '',
         // 缩放 默认为1
         scale: 1.2,
-        imgBaseUrl: pdfUrl.imgBaseUrl,
         newArry: [],
         id: this.ID,
         pdfWidth: this.cvsWidth ? this.cvsWidth : '',
