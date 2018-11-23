@@ -23,7 +23,7 @@
               <span>{{item.arcName}} </span>
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
-              <span>{{item.uploadDate |dateFilter(true)}}</span>
+              <span>{{item.uploadDate }}</span>
             </p>
           </template>
           <div class="list_title_div">
@@ -34,7 +34,7 @@
               </el-tooltip>
               <span>{{items.arcNum}}</span>
               <span>{{items.imageCount}}</span>
-              <span v-bind:title="items.uploadDate">{{items.uploadDate|dateFilter(true)}}</span>
+              <span v-bind:title="items.uploadDate">{{items.uploadDate}}</span>
             </p>
           </div>
         </el-collapse-item>

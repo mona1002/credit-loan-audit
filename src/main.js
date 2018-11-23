@@ -63,10 +63,10 @@ Vue.filter('formatValue', function (value) {
   return Number(value) > 0 ? Math.round(Number(value) * 10000) / 100 + '%' : '0.00%';
 })
 // 金额过滤
-Vue.filter('formatMoney', function (value, point = false) {
+Vue.filter('formatMoney', function (value, point = true) {
   if (value == 0) return 0;
   if (!value) return '';
-  if (point == true) {
+  if (point) {
     if (value.toString().indexOf('.') == -1) return value.toLocaleString() + '.00';
   }
   return value.toLocaleString();

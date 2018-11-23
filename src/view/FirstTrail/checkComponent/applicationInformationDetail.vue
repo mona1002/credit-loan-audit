@@ -78,7 +78,7 @@
             <li>
               <p v-if="accepApplyLoan.emergencyType=='02'">
                 <label class="label_width_166">加急费用[元]：</label>
-                <span>{{accepApplyLoan.emergencyAmt |formatMoney(true)}}</span>
+                <span>{{accepApplyLoan.emergencyAmt |formatMoney}}</span>
               </p>
             </li>
           </ul>
@@ -115,7 +115,7 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">申请借款额度[元]：</label>
-                <span>{{accepApplyLoan.loanAmt |formatMoney(true)}}</span>
+                <span>{{accepApplyLoan.loanAmt |formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">借款期限[月]：</label>
@@ -123,7 +123,7 @@
               </li>
               <li>
                 <label class="label_width_166">可接受最高月还款额[元]：</label>
-                <span>{{accepApplyLoan.maxEachTermAmt|formatMoney(true)}}</span>
+                <span>{{accepApplyLoan.maxEachTermAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -217,7 +217,7 @@
               <li>
                 <p v-if="applyCustBasicInfoDTO.residentialType=='01' || applyCustBasicInfoDTO.residentialType=='02' || applyCustBasicInfoDTO.residentialType=='03'">
                   <label class="label_width_166">每月租金/还款额[元]：</label>
-                  <span>{{applyCustBasicInfoDTO.monthRentAmt|formatMoney(true)}}</span>
+                  <span>{{applyCustBasicInfoDTO.monthRentAmt|formatMoney}}</span>
                 </p>
               </li>
             </div>
@@ -275,11 +275,11 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">每月家庭支出[元]：</label>
-                <span>{{applyCustBasicInfoDTO.monthPayAmt|formatMoney(true)}}</span>
+                <span>{{applyCustBasicInfoDTO.monthPayAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">单张信用卡最高额度[元]：</label>
-                <span>{{applyCustBasicInfoDTO.cardMaxAmt|formatMoney(true)}}</span>
+                <span>{{applyCustBasicInfoDTO.cardMaxAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">您来本市年份：</label>
@@ -343,7 +343,7 @@
               </li>
               <li>
                 <label class="label_width_166">注册资金[万元]：</label>
-                <span>{{applyPrivateOwnersDT.regCapitalAmt |formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.regCapitalAmt |formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -353,7 +353,7 @@
               </li>
               <li>
                 <label class="label_width_166">每月净利润额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.profitMonthAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.profitMonthAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">营业执照编号：</label>
@@ -367,7 +367,7 @@
               </li>
               <li>
                 <label class="label_width_166">月还款额/月租金[万元]：</label>
-                <span>{{applyPrivateOwnersDT.monthRentAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.monthRentAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">营业面积：</label>
@@ -397,43 +397,43 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">淡季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.slowMonthSaleAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.slowMonthSaleAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">旺季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.peakMonthSaleAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.peakMonthSaleAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">平季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.avgMonthSaleAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.avgMonthSaleAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">企业近一年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.oneyearProfitAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.oneyearProfitAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近两年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.twoYearProfitAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.twoYearProfitAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近三年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.threeYearProfitAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.threeYearProfitAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">企业近一年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.oneYearTaxAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.oneYearTaxAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近两年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.twoYearTaxAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.twoYearTaxAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近三年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.threeYearTaxAmt|formatMoney(true)}}</span>
+                <span>{{applyPrivateOwnersDT.threeYearTaxAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -524,12 +524,12 @@
             </el-table-column>
             <el-table-column prop="" label="期缴保费金额[元]" min-width="120">
               <template slot-scope="scope">
-                {{scope.row.eachPayAmt |formatMoney(true)}}
+                {{scope.row.eachPayAmt |formatMoney}}
               </template>
             </el-table-column>
             <el-table-column prop="" label="保单总额[元]" min-width="120">
               <template slot-scope="scope">
-                {{scope.row.totalPayAmt |formatMoney(true)}}
+                {{scope.row.totalPayAmt |formatMoney}}
               </template>
             </el-table-column>
             <el-table-column prop="payPeriod" label="缴纳年限[月]" min-width="120">
@@ -556,7 +556,7 @@
             </el-table-column>
             <el-table-column prop="" label="建筑单价[元]" width="110">
               <template slot-scope="scope">
-                {{scope.row.unitPrice |formatMoney(true)}}
+                {{scope.row.unitPrice |formatMoney}}
               </template>
             </el-table-column>
             <el-table-column prop="estateAddress" label="房产地址" show-overflow-tooltip min-width="200">
@@ -569,12 +569,12 @@
             </el-table-column>
             <el-table-column prop="" label="月供[元]" min-width="80">
               <template slot-scope="scope">
-                {{scope.row.monthlyPayment |formatMoney(true)}}
+                {{scope.row.monthlyPayment |formatMoney}}
               </template>
             </el-table-column>
             <el-table-column prop="" label="贷款余额[元]" min-width="120">
               <template slot-scope="scope">
-                {{scope.row.restLoans |formatMoney(true)}}
+                {{scope.row.restLoans |formatMoney}}
               </template>
             </el-table-column>
             <el-table-column prop="estateShareTxt" label="是否共有" width="80">
@@ -593,7 +593,7 @@
             </el-table-column>
             <el-table-column prop="" label="车辆购置价[元]" width="110">
               <template slot-scope="scope">
-                {{scope.row.carPrice |formatMoney(true)}}
+                {{scope.row.carPrice |formatMoney}}
               </template>
             </el-table-column>
             <el-table-column prop="yearCheckFlagTxt" label="是否年检" width="80">
@@ -608,12 +608,12 @@
             </el-table-column>
             <el-table-column prop="" label="月供[元]" width="100">
               <template slot-scope="scope">
-                {{scope.row.monthlyPayment |formatMoney(true)}}
+                {{scope.row.monthlyPayment |formatMoney}}
               </template>
             </el-table-column>
             <el-table-column prop="" label="贷款余额[月]" width="100">
               <template slot-scope="scope">
-                {{scope.row.restLoans |formatMoney(true)}}
+                {{scope.row.restLoans |formatMoney}}
               </template>
             </el-table-column>
             <el-table-column prop="carNo" label="车牌号码" width="100">
@@ -677,7 +677,7 @@
               </li>
               <li>
                 <label class="label_width_166">社保缴纳基数[元]：</label>
-                <span>{{applyCustWorkDTO.insureBase |formatMoney(true)}}</span>
+                <span>{{applyCustWorkDTO.insureBase |formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">单位电话：</label>
@@ -691,7 +691,7 @@
               </li>
               <li>
                 <label class="label_width_166">公积金缴纳基数[元]：</label>
-                <span>{{applyCustWorkDTO.fundBase |formatMoney(true)}}</span>
+                <span>{{applyCustWorkDTO.fundBase |formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">入职时间：</label>
@@ -701,11 +701,11 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">月均工资[元]：</label>
-                <span>{{applyCustWorkDTO.wageAvg |formatMoney(true)}}</span>
+                <span>{{applyCustWorkDTO.wageAvg |formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">其他收入[元]：</label>
-                <span>{{applyCustWorkDTO.otherIncome |formatMoney(true)}}</span>
+                <span>{{applyCustWorkDTO.otherIncome |formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">每月发薪日：</label>
@@ -748,7 +748,7 @@
             </el-table-column>
             <el-table-column prop="linkName" label="姓名" width="80">
             </el-table-column>
-            <el-table-column prop="contactTypeTxt" label="类型" width="90">
+            <el-table-column prop="linkTypeTxt" label="类型" width="100">
             </el-table-column>
             <el-table-column prop="relationshipTxt" label="关系" width="50">
             </el-table-column>

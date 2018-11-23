@@ -248,7 +248,7 @@
               <el-form>
                 <div class="bfc">
                   <el-form-item class="presentation" label="申请金额[元]：" :label-width="formApproLabLeft">
-                    {{loanAmt |formatMoney(true)}}
+                    {{loanAmt |formatMoney}}
                   </el-form-item>
                   <el-form-item class="presentation" label="申请期限[月]：" :label-width="formApproLabelWidth">
                     {{loanTerm}}
@@ -259,7 +259,7 @@
                     {{productName}}
                   </el-form-item>
                   <el-form-item class="presentation" label="可接受最高每期还款额[元]：" :label-width="formApproLabelWidth">
-                    {{maxEachTermAmt |formatMoney(true)}}
+                    {{maxEachTermAmt |formatMoney}}
                   </el-form-item>
                 </div>
                 <div class="bfc">
@@ -275,7 +275,7 @@
             <div class="dialog_form_auto">
               <el-form>
                 <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
-                  {{fbalance |formatMoney(true)}}
+                  {{fbalance |formatMoney}}
                 </el-form-item>
               </el-form>
             </div>
@@ -315,7 +315,7 @@
                     <el-input v-model="creditExtensionLoanAmt" @blur="moneyBlur(creditExtensionLoanAmt, 'creditExtensionLoanAmt') "></el-input>
                   </el-form-item>
                   <el-form-item class="fl alert_collapse_inputLabel" label="授信期限[月]：" :label-width="formApproLab">
-                    <el-select v-model="creditExtensionLoanTerm " @change='day'>
+                    <el-select v-model="creditExtensionLoanTerm " @change='changeDate'>
                       <el-option v-for="item in creditExtensionLoanTermTerms " :label="item.code " :value="item.code "
                         :key="item.code ">
                       </el-option>
@@ -665,7 +665,7 @@
       this.creditPeriod();
     },
     methods: {
-      day() {
+      changeDate() {
         this.creditExtensionEndDate = this._getDate(this.creditExtensionLoanTerm, 0, true,
           true, this.creditExtensionBeginDate)
       },

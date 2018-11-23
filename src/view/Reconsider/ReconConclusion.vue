@@ -225,10 +225,10 @@
                   </el-form-item>
                 </div>
                 <div class="bfc">
-                  <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft">
-                    <!-- {{creditScore}} -->
-                  </el-form-item>
-                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth">
+                  <!-- <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft"> -->
+                  <!-- {{creditScore}} -->
+                  <!-- </el-form-item> -->
+                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabLeft">
                     {{datas.appTypeTxt}}
                   </el-form-item>
                 </div>
@@ -240,7 +240,7 @@
             <div class="dialog_form_auto">
               <el-form>
                 <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
-                  {{fbalance |formatMoney(true)}}
+                  {{fbalance |formatMoney}}
                 </el-form-item>
               </el-form>
             </div>
@@ -279,7 +279,7 @@
                     <el-input v-model="creditExtensionLoanAmt" @blur="moneyBlur(creditExtensionLoanAmt, 'creditExtensionLoanAmt') "></el-input>
                   </el-form-item>
                   <el-form-item class="fl alert_collapse_inputLabel" label="授信期限[月]：" :label-width="formApproLab">
-                    <el-select v-model="creditExtensionLoanTerm">
+                    <el-select v-model="creditExtensionLoanTerm" @change='changeDate'>
                       <el-option v-for="item in creditExtensionLoanTermTerms " :label="item.code " :value="item.code"
                         :key="item.code ">
                       </el-option>
@@ -400,8 +400,8 @@
         creditExtensionLoanAmt: '',
         creditExtensionLoanTerm: '',
         creditExtensionLoanTermTerms: [],
-        creditExtensionBeginDate:'',
-        creditExtensionEndDate:'',
+        creditExtensionBeginDate: '',
+        creditExtensionEndDate: '',
         FormReturn: {
           rollbackNodeName: '',
           mainReasonName: '',
@@ -574,8 +574,13 @@
       this.processInstanceId = JSON.parse(localStorage.getItem('RtaskInWaitting')).processInstanceId;
       //任务id
       this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
+      this.creditPeriod(); //授信期限下拉-审批按钮弹窗
     },
     methods: {
+      changeDate() {
+        this.creditExtensionEndDate = this._getDate(this.creditExtensionLoanTerm, 0, true,
+          true, this.creditExtensionBeginDate)
+      },
       request() {
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailMsg", {
           'id': this.id
@@ -637,7 +642,7 @@
             this._error(res.msg);
           }
         });
-        this.creditPeriod(); //授信期限
+        // this.creditPeriod(); //授信期限
         //请求复议专员带过来的审批信息
         this.post('/creauditOpinion/queryCreauditOpinionObj', {
           applyId: this.applyId
@@ -656,8 +661,8 @@
             res.data.ploanAmt || res.data.ploanAmt == 0 ? this.creditExtensionLoanAmt = this.ploanAmt = this._formatNumber(
                 res.data.ploanAmt) :
               this.creditExtensionLoanAmt = this.ploanAmt = res.data.ploanAmt;
-              // 授信期限
-              this.creditExtensionLoanTerm=res.data.creditExtensionLoanTerm;
+            // 授信期限
+            this.creditExtensionLoanTerm = res.data.creditExtensionLoanTerm;
             //审批结论数据
             //审批倍数
             res.data.appmult || res.data.appmult == 0 ? this.caculData.appmult = this._formatNumber(res.data.appmult) :
@@ -673,7 +678,7 @@
               .data
               .eachTermamt) : '';
             //意见说明
-            console.log( res.data.creditExtensionEndDate)
+            console.log(res.data.creditExtensionEndDate)
             this.appConclusion = res.data.appConclusion;
             this.ploanTerms = res.data.returnList; //批准期限月下拉
             this.creditExtensionBeginDate = res.data.creditExtensionBeginDate; //授信开始日期
@@ -741,7 +746,8 @@
         this.post('/creauditOpinion/add', {
           creditExtensionLoanTerm: this.creditExtensionLoanTerm, //授信期限
           // creditExtensionLoanAmt: this.creditExtensionLoanAmt.indexOf(',')!=-1?this.creditExtensionLoanAmt.replace(reg, '') * 1:this.creditExtensionLoanAmt*1, //授信金额
-          creditExtensionLoanAmt: this.creditExtensionLoanAmt.indexOf(',')!=-1?this.creditExtensionLoanAmt.replace(reg, '') * 1:this.creditExtensionLoanAmt*1, //授信金额
+          creditExtensionLoanAmt: this.creditExtensionLoanAmt.indexOf(',') != -1 ? this.creditExtensionLoanAmt.replace(
+            reg, '') * 1 : this.creditExtensionLoanAmt * 1, //授信金额
           applyId: this.applyId,
           auditType: '02',
           proCode: this.proCode, //产品编号
@@ -790,9 +796,10 @@
               this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
             }
             this.del();
-          }else{
+          } else {
             this._error(res.msg)
-          }this.sdialogVisible = false;
+          }
+          this.sdialogVisible = false;
         })
 
       },

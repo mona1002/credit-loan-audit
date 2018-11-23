@@ -120,7 +120,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="客户名称：" :label-width='label_115' v-if="addObj.blackListType=='01'" prop="blackCustName">
-            <el-input v-model.trim="addObj.blackCustName" @keyup.enter.native='Rsearch' placeholder="请输入客户名称"></el-input>
+            <el-input v-model.trim="addObj.blackCustName" @keyup.enter.native='Rsearch'  placeholder="请输入客户名称"></el-input>
           </el-form-item>
           <div class="bfc">
             <el-form-item label="证件号码：" class="fl width_50Per" v-if="addObj.blackListType=='01'" :label-width='label_115'
@@ -140,7 +140,7 @@
               </el-select>
             </el-form-item>
           </div>
-          <el-form-item label="单位名称：" :label-width='label_115' v-if="addObj.blackListType=='03'" prop="blackCompany">
+          <el-form-item label="单位名称：" :label-width='label_115' v-if="addObj.blackListType=='04'" prop="blackCompany">
             <el-input v-model.trim="addObj.blackCompany" @keyup.enter.native='Rsearch' placeholder="请输入单位名称"></el-input>
           </el-form-item>
           <el-form-item class="mr" label="申请说明：" v-if='addObj.blackListType' :label-width="label_115" prop="blackRemark">
@@ -248,7 +248,7 @@
           blackCustName: [{
             required: true,
             message: '请输入客户名称',
-            trigger: 'blur'
+            trigger: 'change'
           }],
           blackCertCode: [{
             required: true,
@@ -479,7 +479,8 @@
       getAddInf() {
         this.addInfShow = true;
         this.addSearchForm = {};
-        this.addTableData = [];
+        this.AddCurrentRow={};
+        this.addTableData=[];//清空弹窗表格信息
       },
       addReset(formName) {
         let blackListType = this.addObj.blackListType;
