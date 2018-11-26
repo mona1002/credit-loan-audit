@@ -605,6 +605,8 @@
             //运营商数据分析——联系人通话详情
             this.caReport.contact_list && this.caReport.contact_list.length > 0 ? this.contactList = this.caReport.contact_list :
               '';
+              console.log(1,this.caReport);
+              console.log(2,this.caReport.main_service);
             //运营商数据分析——常用服务
             if (this.caReport.main_service && this.caReport.main_service.length > 0) {
               var fieldsArr = ['company_type', 'company_name', 'total_service_cnt'];
