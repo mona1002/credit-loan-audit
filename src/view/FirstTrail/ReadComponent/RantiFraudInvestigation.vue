@@ -1,4 +1,4 @@
-<!-- 反欺诈调查-(内匹、质检、复议详情用)-(调查记录只能查看,无添加删除按钮) -->
+<!-- 反欺诈调查-(内匹、质检、复议详情用)-(调查记录只能查看,无添加删除按钮)  -->
 <template>
   <div class="aAntiFraudInvestigation RaAntiFraudInvestigation AlertDialogBox">
     <el-collapse v-model="activeNames">

@@ -1,4 +1,4 @@
-<!-- 借款人资料 -->
+<!-- 借款人资料  -->
 <template>
   <div class="borrowerInformation">
     <el-collapse v-model="activeNames">

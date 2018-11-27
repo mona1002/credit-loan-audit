@@ -1,4 +1,4 @@
-<!-- 复议结论 -->
+<!-- 复议结论  -->
 <template>
   <div class="ReconsiderationConclusion">
     <el-collapse v-model="titleNames">
