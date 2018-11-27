@@ -321,146 +321,146 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">企业类型：</label>
-                <span>{{applyPrivateOwnersDT.companyTypeTxt}}</span>
+                <span>{{applyPrivateOwnersDTO.companyTypeTxt}}</span>
               </li>
               <li>
                 <label class="label_width_166">员工人数：</label>
-                <span>{{applyPrivateOwnersDT.employeeNumber}}</span>
+                <span>{{applyPrivateOwnersDTO.employeeNumber}}</span>
               </li>
               <li>
                 <label class="label_width_166">公司注册时间：</label>
-                <span>{{applyPrivateOwnersDT.companyRegDate}}</span>
+                <span>{{applyPrivateOwnersDTO.companyRegDate}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">占股比例：</label>
-                <span>{{applyPrivateOwnersDT.shareProportion}}</span>
+                <span>{{applyPrivateOwnersDTO.shareProportion}}</span>
               </li>
               <li>
                 <label class="label_width_166">经营场所：</label>
-                <span>{{applyPrivateOwnersDT.businessPlaceTxt}}</span>
+                <span>{{applyPrivateOwnersDTO.businessPlaceTxt}}</span>
               </li>
               <li>
                 <label class="label_width_166">注册资金[万元]：</label>
-                <span>{{applyPrivateOwnersDT.regCapitalAmt |formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.regCapitalAmt |formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">企业净利润率：</label>
-                <span>{{applyPrivateOwnersDT.profitMargin}}</span>
+                <span>{{applyPrivateOwnersDTO.profitMargin}}</span>
               </li>
               <li>
                 <label class="label_width_166">每月净利润额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.profitMonthAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.profitMonthAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">营业执照编号：</label>
-                <span>{{applyPrivateOwnersDT.busiLicenceCode}}</span>
+                <span>{{applyPrivateOwnersDTO.busiLicenceCode}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">是否缴纳五险一金：</label>
-                <span>{{applyPrivateOwnersDT.payWealFlagTxt}}</span>
+                <span>{{applyPrivateOwnersDTO.payWealFlagTxt}}</span>
               </li>
               <li>
                 <label class="label_width_166">月还款额/月租金[万元]：</label>
-                <span>{{applyPrivateOwnersDT.monthRentAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.monthRentAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">营业面积：</label>
-                <span>{{applyPrivateOwnersDT.businessArea}}</span>
+                <span>{{applyPrivateOwnersDTO.businessArea}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li style='width:66.6%;height:auto;margin-top:5px;'>
                 <label>企业经营项目说明：</label>
-                <span class="text_area_span text_area_span_minus170">{{applyPrivateOwnersDT.projectManage}}</span>
+                <span class="text_area_span text_area_span_minus170">{{applyPrivateOwnersDTO.projectManage}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">淡季月份：</label>
-                <span>{{applyPrivateOwnersDT.slowMonth}}</span>
+                <span>{{applyPrivateOwnersDTO.slowMonth}}</span>
               </li>
               <li>
                 <label class="label_width_166">旺季月份：</label>
-                <span>{{applyPrivateOwnersDT.peakMonth}}</span>
+                <span>{{applyPrivateOwnersDTO.peakMonth}}</span>
               </li>
               <li>
                 <label class="label_width_166">平季月份：</label>
-                <span>{{applyPrivateOwnersDT.avgMonth}}</span>
+                <span>{{applyPrivateOwnersDTO.avgMonth}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">淡季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.slowMonthSaleAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.slowMonthSaleAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">旺季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.peakMonthSaleAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.peakMonthSaleAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">平季销售额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.avgMonthSaleAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.avgMonthSaleAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">企业近一年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.oneyearProfitAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.oneyearProfitAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近两年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.twoYearProfitAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.twoYearProfitAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近三年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDT.threeYearProfitAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.threeYearProfitAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">企业近一年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.oneYearTaxAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.oneYearTaxAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近两年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.twoYearTaxAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.twoYearTaxAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近三年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDT.threeYearTaxAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.threeYearTaxAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">第一供销商：</label>
-                <span>{{applyPrivateOwnersDT.firstSupplier}}</span>
+                <span>{{applyPrivateOwnersDTO.firstSupplier}}</span>
               </li>
               <li>
                 <label class="label_width_166">第二供销商：</label>
-                <span>{{applyPrivateOwnersDT.secondSupplier}}</span>
+                <span>{{applyPrivateOwnersDTO.secondSupplier}}</span>
               </li>
               <li>
                 <label class="label_width_166">第三供销商：</label>
-                <span>{{applyPrivateOwnersDT.thirdSupplier}}</span>
+                <span>{{applyPrivateOwnersDTO.thirdSupplier}}</span>
               </li>
             </div>
             <li>
               <label class="label_width_166">第一分销商：</label>
-              <span>{{applyPrivateOwnersDT.firstDistributor}}</span>
+              <span>{{applyPrivateOwnersDTO.firstDistributor}}</span>
             </li>
             <li>
               <label class="label_width_166">第二分销商：</label>
-              <span>{{applyPrivateOwnersDT.secondDistributor}}</span>
+              <span>{{applyPrivateOwnersDTO.secondDistributor}}</span>
             </li>
             <li>
               <label class="label_width_166">第三分销商：</label>
-              <span>{{applyPrivateOwnersDT.thirdDistributor}}</span>
+              <span>{{applyPrivateOwnersDTO.thirdDistributor}}</span>
             </li>
           </ul>
         </div>
@@ -475,34 +475,34 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">同业机构名称：</label>
-                <span>{{accepCusInterBankLoan.interBankTxt}}</span>
+                <span>{{applyInterbankDTO.interBankTxt}}</span>
               </li>
               <li>
                 <label class="label_width_166">贷款产品：</label>
-                <span>{{accepCusInterBankLoan.loanPro}}</span>
+                <span>{{applyInterbankDTO.loanPro}}</span>
               </li>
               <li>
                 <label class="label_width_166">贷款额度[元]：</label>
-                <span>{{accepCusInterBankLoan.loanTotalAmt}}</span>
+                <span>{{applyInterbankDTO.loanTotalAmt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">贷款生效日期：</label>
-                <span>{{accepCusInterBankLoan.loanEffectDate}}</span>
+                <span>{{applyInterbankDTO.loanEffectDate}}</span>
               </li>
               <li>
                 <label class="label_width_166">贷款总期限[月]：</label>
-                <span>{{accepCusInterBankLoan.loanPeriod}}</span>
+                <span>{{applyInterbankDTO.loanPeriod}}</span>
               </li>
               <li>
                 <label class="label_width_166">每月还款日：</label>
-                <span>{{accepCusInterBankLoan.eachPayDay}}</span>
+                <span>{{applyInterbankDTO.eachPayDay}}</span>
               </li>
             </div>
             <li>
               <label class="label_width_166">还款额度[元]：</label>
-              <span>{{accepCusInterBankLoan.repayAmt}}</span>
+              <span>{{applyInterbankDTO.repayAmt}}</span>
             </li>
           </ul>
         </div>
@@ -513,7 +513,7 @@
           <span class="collapse_title_text">保险信息</span>
         </template>
         <div class="height_auto">
-          <el-table :data="accepCusInsurances" style="width: 100%" border class="insur">
+          <el-table :data="applyInsuranceDTOs" style="width: 100%" border class="insur">
             <el-table-column type="index" :index='1' label="序号" min-width="50">
             </el-table-column>
             <el-table-column prop="insurCompanyName" label="保险公司" min-width="120">
@@ -854,11 +854,11 @@
         /*您的个人信息*/
         applyCustBasicInfoDTO: '',
         /*私人业主信息*/
-        applyPrivateOwnersDT: '',
+        applyPrivateOwnersDTO: '',
         /*同业贷情况*/
-        accepCusInterBankLoan: '',
+        applyInterbankDTO: '',
         /*保险信息*/
-        accepCusInsurances: [],
+        applyInsuranceDTOs: [],
         /*您的工作信息*/
         applyCustWorkDTO: '',
         /*联系人信息*/
@@ -964,28 +964,28 @@
               this.applyCustBasicInfoDTO.liveAddress = this.applyCustBasicInfoDTO.liveAddress.replace(reg, '');
             }
             /*私人业主信息*/
-            if (res.data.applyPrivateOwnersDT != null) {
-              this.applyPrivateOwnersDT = res.data.applyPrivateOwnersDT;
+            if (res.data.applyPrivateOwnersDTO != null) {
+              this.applyPrivateOwnersDTO = res.data.applyPrivateOwnersDTO;
               //占股比例
-              if (this.applyPrivateOwnersDT.shareProportion != null) {
-                this.applyPrivateOwnersDT.shareProportion = this._formatNumber(this.applyPrivateOwnersDT.shareProportion) +
+              if (this.applyPrivateOwnersDTO.shareProportion != null) {
+                this.applyPrivateOwnersDTO.shareProportion = this._formatNumber(this.applyPrivateOwnersDTO.shareProportion) +
                   "%";
               };
               //企业净利润率
-              if (this.applyPrivateOwnersDT.profitMargin != null) {
-                this.applyPrivateOwnersDT.profitMargin = this._formatNumber(this.applyPrivateOwnersDT.profitMargin) +
+              if (this.applyPrivateOwnersDTO.profitMargin != null) {
+                this.applyPrivateOwnersDTO.profitMargin = this._formatNumber(this.applyPrivateOwnersDTO.profitMargin) +
                   "%";
               };
               //营业面积
-              if (this.applyPrivateOwnersDT.businessArea != null) {
-                this.applyPrivateOwnersDT.businessArea = this._formatNumber(this.applyPrivateOwnersDT.businessArea) +
+              if (this.applyPrivateOwnersDTO.businessArea != null) {
+                this.applyPrivateOwnersDTO.businessArea = this._formatNumber(this.applyPrivateOwnersDTO.businessArea) +
                   "㎡";
               };
             };
             //同业贷情况
-            res.data.accepCusInterBankLoan ? this.accepCusInterBankLoan = res.data.accepCusInterBankLoan : '';
+            res.data.applyInterbankDTO ? this.applyInterbankDTO = res.data.applyInterbankDTO : '';
             //保险信息
-            res.data.accepCusInsurances ? this.accepCusInsurances = res.data.accepCusInsurances : '';
+            res.data.applyInsuranceDTOs ? this.applyInsuranceDTOs = res.data.applyInsuranceDTOs : '';
             /*您的工作信息*/
             if (res.data.applyCustWorkDTO != null) {
               this.applyCustWorkDTO = res.data.applyCustWorkDTO;
