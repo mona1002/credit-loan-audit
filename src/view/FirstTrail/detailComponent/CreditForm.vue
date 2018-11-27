@@ -11,7 +11,7 @@
           <div>
             <ul>
               <li class='clearFix'>
-                <el-form-item prop="wnetPhone" class="el_hint_word">
+                <el-form-item prop="wnetPhone">
                   <label class="blueC label_223" @click="NewPage(2)"><span class="required_Red"> * </span>网搜本人手机是否异常：</label>
                   <el-select v-model="checkData.wnetPhone" @change='checkData.wnetPhone==0?checkData.wnetPhonetxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
@@ -26,7 +26,7 @@
                 </el-form-item>
               </li>
               <li class='clearFix'>
-                <el-form-item prop="wnetEcutedBrea" class="el_hint_word">
+                <el-form-item prop="wnetEcutedBrea">
                   <label class="blueC label_223" @click="NewPage(1)"><span class="required_Red"> * </span>客户在失信网是否有失信记录：</label>
                   <el-select v-model="checkData.wnetEcutedBrea" @change='checkData.wnetEcutedBrea==0?checkData.wnetEcutedBreatxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
@@ -41,7 +41,7 @@
                 </el-form-item>
               </li>
               <li class='clearFix'>
-                <el-form-item prop="wnetCompany" class="el_hint_word">
+                <el-form-item prop="wnetCompany">
                   <label class="blueC label_223" @click="NewPage(3)"><span class="required_Red"> * </span>工商企业基本信息是否登记：</label>
                   <el-select v-model="checkData.wnetCompany" @change='checkData.wnetCompany==0?checkData.wnetCompanytxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
@@ -56,8 +56,8 @@
                 </el-form-item>
               </li>
               <li class='clearFix'>
-                <el-form-item prop="wbeexEcuted" class="el_hint_word">
-                  <label class="blueC label_223" @click="NewPage(0)"><span class="required_Red"> * </span>客户在法网是否有被执行信息：</label>
+                <el-form-item>
+                  <label class="blueC label_223" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
                   <el-select v-model="checkData.wbeexEcuted" @change='checkData.wbeexEcuted==0?checkData.wbeexEcutedtxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
@@ -177,6 +177,290 @@
                 </el-form-item>
               </li>
             </ul>
+          </div>
+        </el-collapse-item>
+        <!-- 贷款明细 -->
+        <el-collapse-item name="9">
+          <template slot="title">
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">贷款明细</span>
+            <div class="title_icon">
+              <span @click.stop="add_loanDetail">
+                <i class="title_icon_img addIcon"></i>
+                <span class="title_icon_span">添加</span>
+              </span>
+              <span @click.stop="delet_loanDetail">
+                <i class="title_icon_img deleteIcon"></i>
+                <span class="title_icon_span">删除</span>
+              </span>
+              <span @click.stop="countNum">
+                <i class="title_icon_img lineChartIcon"></i>
+                <span class="title_icon_span">统计</span>
+              </span>
+            </div>
+          </template>
+          <div class="height_auto">
+            <el-table :data="loanDetailList" style="width: 100%" highlight-current-row border @current-change="loanCurrentChange">
+              <el-table-column type="index" :index='1' label="序号" min-width="50">
+              </el-table-column>
+              <el-table-column prop="loanType" label="贷款种类" min-width="120">
+                <template slot-scope="scope">
+                  <span class="must">*</span>
+                  <el-tooltip class="item" effect="dark" :disabled="scope.row.loanType!=''" content="该项为必填项" placement="right">
+                    <el-select v-model="scope.row.loanType" placeholder="请选择">
+                      <el-option v-for="item in loanTypes" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column prop="guaranteeType" label="担保方式" min-width="120">
+                <template slot-scope="scope">
+                  <span class="must">*</span>
+                  <el-tooltip class="item" effect="dark" :disabled="scope.row.guaranteeType!=''" content="该项为必填项"
+                    placement="right">
+                    <el-select v-model="scope.row.guaranteeType" placeholder="请选择">
+                      <el-option v-for="item in guaranteeTypes" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column prop="accountStatus" label="账户状态" min-width="120">
+                <template slot-scope="scope">
+                  <span class="must">*</span>
+                  <el-tooltip class="item" effect="dark" :disabled="scope.row.accountStatus!=''" content="该项为必填项"
+                    placement="right">
+                    <el-select v-model="scope.row.accountStatus" placeholder="请选择">
+                      <el-option v-for="item in accountStatuss" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column prop="repayFrequency" label="还款频率" min-width="110">
+                <template slot-scope="scope">
+                  <el-select v-model="scope.row.repayFrequency" placeholder="请选择">
+                    <el-option v-for="item in repayFrequencys" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </template>
+              </el-table-column>
+              <el-table-column prop="loanBeginDate" label="贷款发放日期" min-width="140">
+                <template slot-scope="scope">
+                  <el-date-picker v-model="scope.row.loanBeginDate" type="date">
+                  </el-date-picker>
+                </template>
+              </el-table-column>
+              <el-table-column prop="loanExpireDate" label="贷款到期日期" min-width="140">
+                <template slot-scope="scope">
+                  <el-date-picker v-model="scope.row.loanExpireDate" type="date">
+                  </el-date-picker>
+                </template>
+              </el-table-column>
+              <el-table-column prop="loanContValue" label="贷款合同金额[元]" min-width="140">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.loanContValue" @blur="moneyBlur(scope.row,'loanContValue')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="loanRepayDate" label="应还款日期" min-width="140">
+                <template slot-scope="scope">
+                  <el-date-picker v-model="scope.row.loanRepayDate" type="date">
+                  </el-date-picker>
+                </template>
+              </el-table-column>
+              <el-table-column prop="loanBal" label="贷款余额[元]" min-width="110">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.loanBal" @blur="moneyBlur(scope.row,'loanBal')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="remainMonth" label="剩余还款月数" min-width="110">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.remainMonth" @blur="postcode(scope.row,'remainMonth')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="presentRepayAmt" label="本期应还款金额[元]" min-width="150">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.presentRepayAmt" @blur="moneyBlur(scope.row,'presentRepayAmt')"
+                    placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="curMonthRepayAmt" label="本期实际还款金额[元]" min-width="160">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.curMonthRepayAmt" @blur="moneyBlur(scope.row,'curMonthRepayAmt')"
+                    placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="lastRepayDate" label="最后一次还款日期" min-width="140">
+                <template slot-scope="scope">
+                  <el-date-picker v-model="scope.row.lastRepayDate" type="date">
+                  </el-date-picker>
+                </template>
+              </el-table-column>
+              <el-table-column prop="presentOverAmt" label="当前逾期金额" min-width="110">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.presentOverAmt" @blur="moneyBlur(scope.row,'presentOverAmt')"
+                    placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="overTimes" label="累计逾期次数" min-width="110">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.overTimes" @blur="postcode(scope.row,'overTimes')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="maxOverTimes" label="最高逾期期数" min-width="110">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.maxOverTimes" @blur="postcode(scope.row,'maxOverTimes')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-collapse-item>
+        <!-- 负债信息 -->
+        <el-collapse-item name="10">
+          <template slot="title">
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">负债信息</span>
+          </template>
+          <div>
+            <ul>
+              <li>
+                <el-form-item label="信用卡每月还款[元]：" :label-width='label_223'>
+                  <el-input v-on:blur="moneyBlur(borDebt.monthRepayAmt,'monthRepayAmt','debet')" v-model="borDebt.monthRepayAmt">
+                  </el-input>
+                </el-form-item>
+                <el-form-item label="信用贷每月还款额[元]：" :label-width='label_160'>
+                  <el-input v-model="borDebt.studentLoanAmt" v-on:blur="moneyBlur(borDebt.studentLoanAmt,'studentLoanAmt','debet')">
+                  </el-input>
+                </el-form-item>
+              </li>
+              <li>
+                <el-form-item label="房贷每月还款额[元]：" :label-width='label_223'>
+                  <el-input v-on:blur="moneyBlur(borDebt.houseLoanAmt,'houseLoanAmt','debet')" v-model="borDebt.houseLoanAmt">
+                  </el-input>
+                </el-form-item>
+                <el-form-item label="车贷每月还款额[元]：" :label-width='label_160'>
+                  <el-input v-on:blur="moneyBlur(borDebt.carLoanAmt,'carLoanAmt','debet')" v-model="borDebt.carLoanAmt">
+                  </el-input>
+                </el-form-item>
+              </li>
+              <li>
+                <el-form-item label="其他贷款每月还款额[元]：" :label-width='label_223'>
+                  <el-input v-on:blur="moneyBlur(borDebt.otherLoanAmt,'otherLoanAmt','debet')" v-model="borDebt.otherLoanAmt">
+                  </el-input>
+                </el-form-item>
+                <el-form-item label="负债合计[元]：" :label-width='label_160'>
+                  <el-input v-model="borDebt.totalLoan" disabled>
+                  </el-input>
+                </el-form-item>
+              </li>
+              <li>
+                <el-form-item label="最近三个月信用卡/贷款申请次数：" :label-width='label_223'>
+                  <el-input v-model="borDebt.loanNumber" v-on:blur="postcode(borDebt.loanNumber,'loanNumber')"></el-input>
+                </el-form-item>
+                <el-form-item label="文字说明：" :label-width='label_160'>
+                  <b v-show="borDebt.remark != null && borDebt.remark.length>=200" class="hint result_textarea">
+                    输入长度不能超过200</b>
+                  <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="borDebt.remark" :maxlength="200"
+                    resize="none">
+                  </el-input>
+                </el-form-item>
+              </li>
+            </ul>
+          </div>
+        </el-collapse-item>
+        <!-- 流水明细 -->
+        <el-collapse-item name="11">
+          <template slot="title">
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">流水明细</span>
+            <div class="title_icon">
+              <span @click.stop="add_turnover">
+                <i class="title_icon_img addIcon"></i>
+                <span class="title_icon_span">添加</span>
+              </span>
+              <span @click.stop="delet_turnover">
+                <i class="title_icon_img deleteIcon"></i>
+                <span class="title_icon_span">删除</span>
+              </span>
+            </div>
+          </template>
+          <div class='height_auto'>
+            <el-table :data="incomeList" style="width: 100%" class="income" highlight-current-row border
+              @current-change="incomeCurrentChange">
+              <el-table-column type="index" :index='1' label="序号" min-width="50">
+              </el-table-column>
+              <el-table-column prop="incomeType" label="流水类型" min-width="110">
+                <template slot-scope="scope">
+                  <span class="must">*</span>
+                  <el-tooltip class="item" effect="dark" :disabled="scope.row.incomeType!=''" content="该项为必填项"
+                    placement="right">
+                    <el-select v-model="scope.row.incomeType" placeholder="请选择">
+                      <el-option v-for="item in incomeTypes" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column prop="n" label="N" min-width="130">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.n" @blur="moneyBlur(scope.row,'n')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="n1" label="N-1" min-width="130">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.n1" @blur="moneyBlur(scope.row,'n1')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="n2" label="N-2" min-width="130">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.n2" @blur="moneyBlur(scope.row,'n2')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="n3" label="N-3" min-width="130">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.n3" @blur="moneyBlur(scope.row,'n3')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="n4" label="N-4" min-width="130">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.n4" @blur="moneyBlur(scope.row,'n4')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="n5" label="N-5" min-width="130">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.n5" @blur="moneyBlur(scope.row,'n5')" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column prop="count" label="计算" min-width="130">
+                <template slot-scope="scope">
+                  <img src="../../../../static/images/count.png" class="icon" @click="counted(scope.row)">
+                </template>
+              </el-table-column>
+              <el-table-column prop="avgIncome" label="平均收入[元]" min-width="130">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.avgIncome" @blur="moneyBlur(scope.row,'avgIncome')" placeholder="请输入内容"
+                    :disabled="true"></el-input>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-collapse-item>
+        <!-- 其他信息 -->
+        <el-collapse-item name="12">
+          <template slot="title">
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">其他信息</span>
+          </template>
+          <div class="CreditForm_result margin_bottom_10 clearFix">
+            <el-form-item class="one_row ">
+              <b v-show="otherInfo.content && otherInfo.content.length>=500" style="left:230px;" class="hint result_textarea">
+                输入长度不能超过500</b>
+              <label class="label_223">其他：</label>
+              <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="otherInfo.content" :maxlength="500"
+                resize="none">
+              </el-input>
+            </el-form-item>
           </div>
         </el-collapse-item>
         <!-- 核实身份 -->
@@ -475,7 +759,7 @@
           <div>
             <ul>
               <li class="clearFix">
-                <el-form-item prop="fbalance" class="el_hint_word">
+                <el-form-item prop="fbalance">
                   <label class="label_223"><span class="required_Red"> * </span> 可以承受的月还款[元]：</label>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="checkData.fbalance?checkData.fbalance=_formatNumber(checkData.fbalance):''">
                   </el-input>
@@ -755,10 +1039,9 @@
             <span class="collapse_title_text">审批结论</span>
           </template>
           <div class="CreditForm_result">
-            <el-form-item prop='oother' class="one_row el_hint_word">
-              <i class="hint" style="top:27px;">
-                <b v-show="checkData.oother && checkData.oother.length>=1000" class="result_textarea"> 输入长度不能超过1000</b>
-              </i>
+            <el-form-item prop='oother' class="one_row">
+              <b v-show="checkData.oother && checkData.oother.length>=1000" style="left:230px;" class="hint result_textarea">
+                输入长度不能超过1000</b>
               <label class="label_223"><span class="required_Red"> * </span>初审结果评价：</label>
               <el-input type="textarea" :rows="5" resize="none" :maxlength="1000" placeholder="请输入内容" v-model="checkData.oother">
               </el-input>
@@ -779,6 +1062,7 @@
         label_223: '223px',
         label_160: '160px',
         label_185: '185px',
+        regs: /\,/g,
         rules: {
           wnetEcutedBrea: [{
             required: true,
@@ -792,12 +1076,7 @@
           }],
           wnetCompany: [{
             required: true,
-            message: '请选择工商企业基本信息是否登记',
-            trigger: 'change'
-          }],
-          wbeexEcuted: [{
-            required: true,
-            message: '请选择客户在法网是否有被执行信息',
+            message: '请选择当地工商网查询企业基本信息中是否有登记',
             trigger: 'change'
           }],
           fbalance: [{
@@ -849,7 +1128,7 @@
         //   "接听是否本人", "是否申请借款", "是否私营业主", "婚姻状况", "配偶工作情况", "同城工作生活", "是否有子女", "是否支付生活费", "父母是否在世", "是否有兄弟姐妹",
         //   "是否为常住地址"
         // ],
-        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"],
+        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
         checkData: {},
         // -------网上查询信息------------
         YN: [{ //（网上查询信息）客户在人法网是否有被执行信
@@ -1265,6 +1544,123 @@
         //   value: '0',
         //   label: '否'
         // }],
+        //贷款种类
+        loanTypes: [{
+            'value': '01',
+            'label': '车贷'
+          },
+          {
+            'value': '02',
+            'label': '房贷'
+          },
+          {
+            'value': '03',
+            'label': '信用贷'
+          },
+          {
+            'value': '04',
+            'label': '其他贷款'
+          }
+        ], //担保方式
+        guaranteeTypes: [{
+            'value': '01',
+            'label': '信用'
+          },
+          {
+            'value': '02',
+            'label': '信用+抵押'
+          },
+          {
+            'value': '03',
+            'label': '抵押'
+          },
+          {
+            'value': '04',
+            'label': '质押'
+          },
+          {
+            'value': '05',
+            'label': '抵押+质押'
+          }
+        ], //账户状态
+        accountStatuss: [{
+            'value': '00',
+            'label': '正常'
+          },
+          {
+            'value': '01',
+            'label': '逾期'
+          },
+          {
+            'value': '02',
+            'label': '结清'
+          }
+        ], //还款频率
+        repayFrequencys: [{
+            'value': '01',
+            'label': '1个月'
+          },
+          {
+            'value': '02',
+            'label': '3个月'
+          },
+          {
+            'value': '03',
+            'label': '一次性还清'
+          }
+        ], //流水类型
+        incomeTypes: [{
+            'value': '01',
+            'label': '工资流水'
+          },
+          {
+            'value': '02',
+            'label': '常用流水'
+          },
+          {
+            'value': '03',
+            'label': '对公流水'
+          }
+        ],
+        // 借款人资料部分
+        // 贷款明细
+        loanDetailList: [],
+        currentRowLoan: {},
+        //车贷总笔数
+        k: 0,
+        //车贷现存笔数
+        l: 0,
+        //车贷结清笔数
+        m: 0,
+        //信用贷总笔数
+        n: 0,
+        //信用贷现存笔数
+        o: 0,
+        //信用贷结清笔数
+        p: 0,
+        //房贷总笔数
+        q: 0,
+        //房贷现存笔数
+        r: 0,
+        //房贷结清笔数
+        s: 0,
+        //其他总笔数
+        u: 0,
+        //其他现存笔数
+        v: 0,
+        //其他结清笔数
+        w: 0,
+        // 负债信息
+        borDebt: {},
+        arr: [0, 0, 0, 0, 0], //负债信息计算负债合计用
+        incomeList: [], // 流水明细
+        currentRowIncome: {},
+        // 其他信息
+        otherInfo: {
+          "id": '',
+          "applyId": this.applyId, // 申请单Id    
+          "content": "", // 其他内容
+        },
       }
     },
     methods: {
@@ -1371,7 +1767,7 @@
           parentCode: this.checkData.workProvince,
         }).then(res => {
           if (res.statusCode == 200) {
-            this.hireProvincd = res.data;
+            this.hireProvincd = res.data.ereaInfos;
             this.checkData.workCounty = "";
             this.checkData.workCountyName = "";
             this.hireTown = "";
@@ -1397,7 +1793,30 @@
       setCountry(item) {
         this.checkData.workCounty = item;
       },
+      blankHint(value) {
+        this.$confirm(value, '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          cancelButtonText: '取消',
+          showCancelButton: true
+        }).then(() => {}).catch(() => {});
+      },
       makeSureBtn(formName) {
+        // 原借款人资料部分校验
+        if (this.loanDetailList.length > 0) {
+          let loanLen = this.loanDetailList[this.loanDetailList.length - 1];
+          if (loanLen.loanType == '' || loanLen.guaranteeType == '' || loanLen.accountStatus == '') {
+            this.blankHint("贷款明细不能为空！")
+            return
+          }
+        }
+        if (this.incomeList.length > 0) {
+          let incomeLen = this.incomeList[this.incomeList.length - 1];
+          if (incomeLen.incomeType == '') {
+            this.blankHint("流水明细不能为空！")
+            return
+          }
+        }
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$confirm('您确定操作？', '提示', {
@@ -1422,7 +1841,13 @@
         this.checkData.workCountyName = this.$refs.country.selectedLabel;
         this.checkData.hirecomKind = this.$refs.industry.selectedLabel;
         this.btnnn();
-        this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
+        this.post("/creauditInfo/addOrUpdate", {
+          creauditInfoDto: this.checkData, //原信审表
+          loanDetailList: this.loanDetailList, // 贷款明细
+          borDebt: this.borDebt, // 负债信息
+          incomeList: this.incomeList, // 流水明细
+          otherInfo: this.otherInfo // 其他信息
+        }).then(res => {
           if (res.statusCode == 200) {
             this.AreaNPercent();
             this.$message({
@@ -1611,7 +2036,25 @@
           applyId: this.d.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
-            this.checkData = res.data;
+            let resp = res.data;
+            // 原借款人资料信息
+            this.loanDetailList = resp.loanDetailList ? resp.loanDetailList : []; // 贷款明细
+            // this.borDebt = resp.borDebt ? resp.borDebt : {}; // 负债信息
+            if(resp.borDebt&&JSON.Stringify(resp.borDebt)!='{}'){// 负债信息
+            this.borDebt = resp.borDebt;
+            this.arr[0] = this.borDebt.monthRepayAmt?this.borDebt.monthRepayAmt:0; //信用卡每月还款
+            this.arr[1] =this.borDebt.monthRepayAmt? this.borDebt.studentLoanAmt:0;//信用贷每月还款额
+            this.arr[2] =this.borDebt.monthRepayAmt? this.borDebt.houseLoanAmt:0;//房贷每月还款额
+            this.arr[3] = this.borDebt.monthRepayAmt?this.borDebt.carLoanAmt:0;//车贷每月还款额
+            this.arr[4] = this.borDebt.monthRepayAmt?this.borDebt.otherLoanAmt:0; //其他贷款每月还款额
+            }
+            this.incomeList = resp.incomeList ? resp.incomeList : []; //  流水明细
+            if (resp.otherInfo) { // 其他信息
+              this.otherInfo.id = resp.otherInfo.id ? resp.otherInfo.id : '';
+              this.otherInfo.content = resp.otherInfo.content ? resp.otherInfo.content : '';
+            }
+            // 原申请表信息
+            this.checkData = resp.creauditInfoDto;
             this.Percent = this.checkData.selfhasProportion
             this.acreage = this.checkData.selfpremisesArea;
             this.checkData.applyId = this.d.applyId;
@@ -1623,13 +2066,294 @@
             this.$message.error(res.msg);
           }
         });
-      }
+      },
+      // 借款人资料部分
+      postcode(value, flag) {
+        console.log(value, flag)
+        switch (flag) {
+          //剩余还款月数（贷款明细）
+          case 'remainMonth':
+            value.remainMonth = this._postcode(value.remainMonth);
+            break;
+          case 'overTimes':
+            value.overTimes = this._postcode(value.overTimes);
+            break; //累计逾期次数
+          case 'maxOverTimes':
+            value.maxOverTimes = this._postcode(value.maxOverTimes);
+            break; //最高逾期期数
+            //  负债信息
+          case 'loanNumber':
+            this.borDebt.loanNumber = this._postcode(value);
+            break; //最高逾期期数
+            // this. borDebt.
+        }
+      },
+      _postcode(value) {
+        if (value == '' || isNaN(value)) return value = '';
+        value = value * 1;
+        if (value <= 0) {
+          return value = 0;
+        } else if (value > 0 && value < 999) {
+          return value = Math.round(value);
+        } else if (value >= 999) {
+          return value = 999;
+        }
+      },
+      moneyBlur(value, flag, type) {
+        let regs = /\,/g;
+        console.log(1, value)
+        if (flag == 'loanContValue') value.loanContValue = this._moneyBlur(value.loanContValue); //贷款合同金额
+        if (flag == 'loanBal') value.loanBal = this._moneyBlur(value.loanBal); //贷款余额
+        if (flag == 'presentRepayAmt') value.presentRepayAmt = this._moneyBlur(value.presentRepayAmt); //本期应还款金额
+        if (flag == 'curMonthRepayAmt') value.curMonthRepayAmt = this._moneyBlur(value.curMonthRepayAmt); //本期实际还款金额
+        if (flag == 'presentOverAmt') value.presentOverAmt = this._moneyBlur(value.presentOverAmt); //当前逾期金额
+        //负债信息
+        if (type == 'debet') {
+          let _value = value;
+          value = this._moneyBlur(value);
+          if (flag == 'monthRepayAmt') {
+            this.borDebt.monthRepayAmt = value; //信用卡每月还款
+            this.arr[0] = _value;
+          }
+          if (flag == 'studentLoanAmt') {
+            this.borDebt.studentLoanAmt = value; //信用贷每月还款额
+            this.arr[1] = _value;
+          }
+          if (flag == 'houseLoanAmt') {
+            this.borDebt.houseLoanAmt = value //房贷每月还款额
+            this.arr[2] = _value * 0.6;
+          }
+          if (flag == 'carLoanAmt') {
+            this.borDebt.carLoanAmt = value //车贷每月还款额
+            this.arr[3] = _value * 0.6;
+          }
+          if (flag == 'otherLoanAmt') {
+            this.borDebt.otherLoanAmt = value //其他贷款每月还款额
+            this.arr[4] = _value * 0.5;
+          }
+          this.totalNum();
+        }
+        // if (flag == 'carLoanAmt') this.borDebt.carLoanAmt = this._moneyBlur(this.borDebt.carLoanAmt); //车贷每月还款额
+        // if (flag == 'carLoanAmt') this.borDebt.carLoanAmt = this._moneyBlur(this.borDebt.carLoanAmt); //车贷每月还款额
+      },
+      _moneyBlur(value) {
+        if (value == 0) return '0.00';
+        if (!value) return '';
+        let regs = /\,/g;
+        value = value.replace(regs, '') * 1;
+        if (isNaN(value)) return '0.00';
+        if (value > 99999999999999.98) {
+          value = '99,999,999,999,999.98';
+        } else {
+          value = this._formatNumber(value);
+        };
+        return value
+      },
+      // 贷款明细
+      totalNum() {
+        this.borDebt.totalLoan = 0;
+        for (var i = 0; i < this.arr.length; i++) {
+          // if (this.arr[i] == null) {
+          //   this.arr[i] = 0;
+          // } else if (this.arr[i] != null) {
+          // console.log(this.arr[i])
+          this.borDebt.totalLoan += this.arr[i] * 1;
+          // }
+        }
+        this.borDebt.totalLoan = this._formatNumber(this.borDebt.totalLoan);
+      },
+      add_loanDetail: function (event) {
+        event.stopPropagation();
+        let obj = {
+          "applyId": this.applyId, // 申请单Id
+          "loanType": "", // 贷款种类
+          "guaranteeType": "", // 担保方式
+          "accountStatus": "", // 账户状态
+          "repayFrequency": "", // 还款频率
+          "loanBeginDate": "", // 贷款发放日期
+          "loanExpireDate": "", // 贷款到期日
+          "loanContValue": "", // 贷款合同金额[元]
+          "loanRepayDate": "", // 应还款日期
+          "loanBal": "", // 贷款余额
+          "remainMonth": "", // 剩余还款月数
+          "presentRepayAmt": "", // 本期应还款金额[元]
+          "curMonthRepayAmt": "", // 本期实际还款金额[元]
+          "lastRepayDate": "", // 最后一次还款日期
+          "presentOverAmt": "", // 当前逾期金额[元]
+          "overTimes": "", // 累计逾期次数
+          "maxOverTimes": "", // 最高逾期期数
+        };
+        // if (this.loanDetailList.length >= 0) {
+        if (this.loanDetailList.length > 0 && (this.loanDetailList[this.loanDetailList.length - 1].loanType == '' ||
+            this.loanDetailList[this.loanDetailList
+              .length - 1].guaranteeType == '' || this.loanDetailList[this.loanDetailList.length - 1].accountStatus ==
+            '')) {
+          return
+        } else {
+          this.loanDetailList.push(obj);
+        }
+        // } 
+      },
+      delet_loanDetail(event) {
+        event.stopPropagation();
+        for (var i = 0; i < this.loanDetailList.length; i++) {
+          if (this.loanDetailList[i] == this.currentRowLoan) {
+            this.loanDetailList.splice(i, 1);
+          }
+        }
+      },
+      /*统计按钮*/
+      countNum(event) {
+        event.stopPropagation();
+        this.k = this.l = this.m = this.n = this.o = this.p = this.q = this.r = this.s = this.u = this.v = this.w = 0;
+        //车贷共有笔数
+        // this.k = this.l = this.m = 0;
+        // this.k = 0;
+        // this.l = 0;
+        // this.m = 0;
+        //信用贷共有笔数
+        // this.n = this.o = this.p = 0;
+        // this.n = 0;
+        //   this.o = 0;
+        //   this.p = 0;
+        //房贷共有笔数
+        // this.q = this.r = this.s = 0;
+        // this.q = 0;
+        // this.r = 0;
+        // this.s = 0;
+        //其他贷共有笔数
+        // this.u = this.v = this.w = 0;
+        // this.u = 0;
+        // this.v = 0;
+        // this.w = 0;
+        for (var i = 0; i < this.loanDetailList.length; i++) {
+          if (this.loanDetailList[i].loanType == '01') {
+            this.k += 1;
+            if (this.loanDetailList[i].accountStatus == '00') this.l += 1;
+            if (this.loanDetailList[i].accountStatus == '02') this.m += 1;
+          }
+          // if (this.loanDetailList[i].loanType == '01' && this.loanDetailList[i].accountStatus == '00') {
+          //   this.l += 1;
+          // }
+          // if (this.loanDetailList[i].loanType == '01' && this.loanDetailList[i].accountStatus == '02') {
+          //   this.m += 1;
+          // }
+          //信用贷
+          if (this.loanDetailList[i].loanType == '03') {
+            this.n += 1;
+            if (this.loanDetailList[i].accountStatus == '00') this.o += 1;
+            if (this.loanDetailList[i].accountStatus == '02') this.p += 1;
+          }
+          // if (this.loanDetailList[i].loanType == '03' && this.loanDetailList[i].accountStatus == '00') {
+          //   this.o += 1;
+          // }
+          // if (this.loanDetailList[i].loanType == '03' && this.loanDetailList[i].accountStatus == '02') {
+          //   this.p += 1;
+          // }
+          //房贷
+          if (this.loanDetailList[i].loanType == '02') {
+            this.q += 1;
+            if (this.loanDetailList[i].accountStatus == '00') this.r += 1;
+            if (this.loanDetailList[i].accountStatus == '02') this.s += 1;
+          }
+          // if (this.loanDetailList[i].loanType == '02' && this.loanDetailList[i].accountStatus == '00') {
+          //   this.r += 1;
+          // }
+          // if (this.loanDetailList[i].loanType == '02' && this.loanDetailList[i].accountStatus == '02') {
+          //   this.s += 1;
+          // }
+          //其他贷
+          if (this.loanDetailList[i].loanType == '04') {
+            this.u += 1;
+            if (this.loanDetailList[i].accountStatus == '00') this.v += 1;
+            if (this.loanDetailList[i].accountStatus == '02') this.w += 1;
+          }
+          // if (this.loanDetailList[i].loanType == '04' && this.loanDetailList[i].accountStatus == '00') {
+          //   this.v += 1;
+          // }
+          // if (this.loanDetailList[i].loanType == '04' && this.loanDetailList[i].accountStatus == '02') {
+          //   this.w += 1;
+          // }
+        };
+        //车贷
+        this.loanInfo.carLoanTotal = this.k;
+        this.loanInfo.carLoanNoPayoff = this.l;
+        this.loanInfo.carLoanPayoff = this.m;
+        //信用贷
+        this.loanInfo.studentLoanTotal = this.n;
+        this.loanInfo.studentLoanNoPayoff = this.o;
+        this.loanInfo.studentLoanPayoff = this.p;
+        //房贷
+        this.loanInfo.houseLoanTotal = this.q;
+        this.loanInfo.houseLoanNoPayoff = this.r;
+        this.loanInfo.houseLoanPayoff = this.s;
+        //其他贷
+        this.loanInfo.otherLoanTotal = this.u;
+        this.loanInfo.otherLoanNoPayoff = this.v;
+        this.loanInfo.otherLoanPayoff = this.w;
+      },
+      loanCurrentChange(val) {
+        if (val == null) {
+          this.currentRowLoan = '';
+        } else {
+          this.currentRowLoan = val;
+        };
+      },
+      // 流水明细
+      counted(row) {
+        if (row.incomeType == '') {
+          return
+        } else {
+          var totalNum = row.n.split(',').join("") * 1 + row.n1.split(',').join("") * 1 + row.n2.split(',').join("") *
+            1 + row.n3.split(',').join("") * 1 + row.n4.split(',').join("") * 1 + row.n5.split(',').join("") * 1;
+          row.avgIncome = totalNum / 6;
+          row.avgIncome = this._formatNumber(row.avgIncome);
+        }
+      },
+      incomeCurrentChange(val) {
+        if (val == null) {
+          this.currentRowIncome = '';
+        } else {
+          this.currentRowIncome = val;
+        };
+      },
+      add_turnover: function (event) {
+        event.stopPropagation();
+        let obj = {
+          "applyId": this.applyId, // 申请单Id    
+          "incomeType": "", // 流水类型
+          "n": "",
+          "n1": "",
+          "n2": "",
+          "n3": "",
+          "n4": "",
+          "n5": "",
+          "avgIncome": "" // 平均收入
+        };
+        // if (this.incomeList.length == 0) {
+        //   this.incomeList.push(obj);
+        // } else {
+        if (this.incomeList.length > 0 && this.incomeList[this.incomeList.length - 1].incomeType == '') {
+          return
+        } else {
+          this.incomeList.push(obj);
+          // }
+        };
+      },
+      delet_turnover(event) {
+        event.stopPropagation();
+        for (var i = 0; i < this.incomeList.length; i++) {
+          if (this.incomeList[i] == this.currentRowIncome) {
+            this.incomeList.splice(i, 1);
+          }
+        }
+      },
     },
     mounted() {
       this.mountedInf();
       // 省    
       this.post("/credit/queryProvince").then(res => {
-        this.hirecomAddress = res.data;
+        this.hirecomAddress = res.data.ereaInfos;
       });
       // 所属行业 
       this.post("/credit/industry").then(res => {
@@ -1684,6 +2408,10 @@
     margin: 20px 0 0 250px;
   }
 
+  /* .specialInput {
+    width: calc(100% - 230px);
+  } */
+
   .internet_textarea {
     padding-left: 8px;
   }
@@ -1694,10 +2422,6 @@
 
   .Working_right {
     padding-left: 150px;
-  }
-
-  .CreditForm_result {
-    height: 150px;
   }
 
 </style>
