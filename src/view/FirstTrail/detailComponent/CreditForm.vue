@@ -755,7 +755,7 @@
             <span class="collapse_title_text">审批结论</span>
           </template>
           <div class="CreditForm_result">
-            <el-form-item prop='oother' class="one_row">
+            <el-form-item prop='oother' class="one_row el_hint_word">
               <i class="hint" style="top:27px;">
                 <b v-show="checkData.oother && checkData.oother.length>=1000" class="result_textarea"> 输入长度不能超过1000</b>
               </i>
@@ -1334,7 +1334,7 @@
           this.checkData.selfempCount = "";
           this.checkData.profitamountmamt = "";
           this.checkData.firstDistributor = "";
-        } 
+        }
       },
       mountedInf() {
         this.d = JSON.parse(localStorage.getItem("taskInWaitting"));
@@ -1641,7 +1641,6 @@
 </script>
 
 <style scoped>
-
   .CreditForm input {
     border: 1px solid rgb(229, 229, 229);
     border-radius: 4px;
@@ -1681,7 +1680,7 @@
   }
 
 
- .btn {
+  .btn {
     margin: 20px 0 0 250px;
   }
 

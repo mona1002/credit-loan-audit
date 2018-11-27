@@ -16,7 +16,7 @@
         <span>上传日期</span>
       </p>
       <el-collapse accordion>
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind">
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" v-if="item.imageCount&&item.imageCount>0">
           <template slot="title">
             <p>
               <!-- 一级节点 -->
@@ -24,10 +24,12 @@
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
               <span>{{item.uploadDate }}</span>
+              <!-- {{item.imageCount}} -->
             </p>
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点  -->
+            <!-- {{item}} -->
             <p v-for="(items,inds) in item.child" :key="inds" @click.stop="getImg(inds,items)">
               <el-tooltip class="item" effect="dark" :content="items.arcName" placement="right-end">
                 <span style="width:135px;paddingLeft:20px;">{{items.arcName}}</span>

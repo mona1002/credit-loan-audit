@@ -14,7 +14,7 @@
         <span>页数</span>
       </p>
       <el-collapse accordion>
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind">
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" v-if="item.imageCount&&item.imageCount>0">
           <template slot="title">
             <p>
               <!-- 一级节点 -->
