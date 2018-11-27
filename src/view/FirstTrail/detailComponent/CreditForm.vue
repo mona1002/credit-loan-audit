@@ -1059,6 +1059,7 @@
   export default {
     data() {
       return {
+        applyId:'',
         label_223: '223px',
         label_160: '160px',
         label_185: '185px',
@@ -1733,7 +1734,7 @@
         }
       },
       mountedInf() {
-        this.d = JSON.parse(localStorage.getItem("taskInWaitting"));
+        this.applyId = JSON.parse(localStorage.getItem("taskInWaitting")).applyId;
         this.mountC();
       },
       NewPage(ind) {
@@ -2033,12 +2034,17 @@
       mountC() {
         // 获取查询列表数据
         this.post("/creauditInfo/queryCreauditInfoObj", {
-          applyId: this.d.applyId,
+          applyId: this.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
+            console.log(res)
+            console.log(11,res.data)
             let resp = res.data;
+            console.log(resp)
             // 原借款人资料信息
             this.loanDetailList = resp.loanDetailList ? resp.loanDetailList : []; // 贷款明细
+            console.log(1,this.loanDetailList)
+            console.log(2,resp.loanDetailList)
             // this.borDebt = resp.borDebt ? resp.borDebt : {}; // 负债信息
             if(resp.borDebt&&JSON.Stringify(resp.borDebt)!='{}'){// 负债信息
             this.borDebt = resp.borDebt;
@@ -2057,7 +2063,7 @@
             this.checkData = resp.creauditInfoDto;
             this.Percent = this.checkData.selfhasProportion
             this.acreage = this.checkData.selfpremisesArea;
-            this.checkData.applyId = this.d.applyId;
+            this.checkData.applyId = this.applyId;
             this.mountM();
             this.AreaNPercent();
             this.checkData.aaddress ? this.checkData.aaddress = this.checkData.aaddress.replace(/null/g, '') : this
