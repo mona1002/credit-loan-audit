@@ -1,8 +1,7 @@
 import apiService from '../../util/apiServer'
 import appConstant from '../../util/constant'
 
-var URL = {
-  // 工作流接口-------------------------------------------
+var URL = { 
   // 查询流程监控
   getProcessMonitorList: "/creauditInfo/approvalTrajectory",
   // 转分派任务轨迹
@@ -11,7 +10,6 @@ var URL = {
   getProcessTraceList: "get::/creauditInfo/getProcessTraceList",
   // 转办任务
   transmitTask: "/creauditInfo/transmitTask",
- 
 };
 
 // var processMoniSer = apiService(appConstant.baseUrl_common2).build(URL);

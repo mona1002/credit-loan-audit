@@ -14,11 +14,6 @@
   export default {
     // 递归组件必须有name
     name: 'navItem',
-    data() {
-      return {
-
-      }
-    },
     methods: {
       clickMenu(item) {
         if (item.indexOf('?') != -1) {

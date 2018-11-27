@@ -1,5 +1,5 @@
 <template>
-  <div class="CreditForm">
+  <div class="CreditForm" >
     <el-form :model="checkData" :rules="rules" ref="ruleForm" class="demo-ruleForm">
       <el-collapse v-model="activeNames">
         <!-- 网上查询信息 -->

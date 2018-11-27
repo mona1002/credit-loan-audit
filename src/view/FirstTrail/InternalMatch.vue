@@ -1,4 +1,4 @@
-<template>
+<template> 
   <div class="internalMatch-class">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="0">

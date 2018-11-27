@@ -1,4 +1,4 @@
-<!-- 信审 - 审批 -->
+<!-- 信审 - 审批  -->
 <template>
   <!-- common_component_width -->
   <div class=" creditApproval-class">

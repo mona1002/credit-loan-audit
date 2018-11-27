@@ -1,4 +1,4 @@
-<!-- 账务信息 -->
+<!-- 账务信息  -->
 <template>
   <div class="common_component_height">
     <el-collapse v-model="activeNames">
