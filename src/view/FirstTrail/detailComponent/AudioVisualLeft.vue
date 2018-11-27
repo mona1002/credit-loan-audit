@@ -24,7 +24,7 @@
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
-            <p v-for="(items,inds) in  item.child" :key="inds" @click.stop="getImg(inds,items)">
+            <p v-for="(items,inds) in  item.child" :key="inds" @click.stop="getImg(inds,items)"  v-if="items.imageCount&&items.imageCount>0">
               <el-tooltip class="item" effect="dark" :content="items.arcName" placement="right-end">
                 <span style="width:105px;marginLeft:20px;">{{items.arcName}}</span>
               </el-tooltip>

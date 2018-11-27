@@ -213,6 +213,9 @@ body .pre_wrap {
 }
 
 /*查看- label宽度 */
+.label_width_220 {
+  width: 220px;
+}
 .label_width_210 {
   width: 210px;
 }
