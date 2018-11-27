@@ -10,7 +10,7 @@
           </template>
           <div>
             <ul>
-              <li class='clearFix'>
+              <li class='clearFix el_hint_word'>
                 <el-form-item prop="wnetPhone">
                   <label class="blueC label_223" @click="NewPage(2)"><span class="required_Red"> * </span>网搜本人手机是否异常：</label>
                   <el-select v-model="checkData.wnetPhone" @change='checkData.wnetPhone==0?checkData.wnetPhonetxt="":""'>
@@ -25,7 +25,7 @@
                   </el-input>
                 </el-form-item>
               </li>
-              <li class='clearFix'>
+              <li class='clearFix el_hint_word'>
                 <el-form-item prop="wnetEcutedBrea">
                   <label class="blueC label_223" @click="NewPage(1)"><span class="required_Red"> * </span>客户在失信网是否有失信记录：</label>
                   <el-select v-model="checkData.wnetEcutedBrea" @change='checkData.wnetEcutedBrea==0?checkData.wnetEcutedBreatxt="":""'>
@@ -40,7 +40,7 @@
                   </el-input>
                 </el-form-item>
               </li>
-              <li class='clearFix'>
+              <li class='clearFix el_hint_word'>
                 <el-form-item prop="wnetCompany">
                   <label class="blueC label_223" @click="NewPage(3)"><span class="required_Red"> * </span>工商企业基本信息是否登记：</label>
                   <el-select v-model="checkData.wnetCompany" @change='checkData.wnetCompany==0?checkData.wnetCompanytxt="":""'>
@@ -55,9 +55,9 @@
                   </el-input>
                 </el-form-item>
               </li>
-              <li class='clearFix'>
-                <el-form-item>
-                  <label class="blueC label_223" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
+              <li class='clearFix el_hint_word'>
+                <el-form-item prop="wbeexEcuted">
+                  <label class="blueC label_223" @click="NewPage(0)"><span class="required_Red"> * </span>客户在法网是否有被执行信息：</label>
                   <el-select v-model="checkData.wbeexEcuted" @change='checkData.wbeexEcuted==0?checkData.wbeexEcutedtxt="":""'>
                     <el-option v-for="item in YN" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
@@ -763,7 +763,7 @@
           </template>
           <div>
             <ul>
-              <li class="clearFix">
+              <li class="clearFix el_hint_word">
                 <el-form-item prop="fbalance">
                   <label class="label_223"><span class="required_Red"> * </span> 可以承受的月还款[元]：</label>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="checkData.fbalance?checkData.fbalance=_formatNumber(checkData.fbalance):''">
@@ -1043,8 +1043,8 @@
             <i class="collapse_title_icon"></i>
             <span class="collapse_title_text">审批结论</span>
           </template>
-          <div class="CreditForm_result">
-            <el-form-item prop='oother' class="one_row">
+          <div class="CreditForm_result el_hint_word">
+            <el-form-item prop='oother' class="one_row" style="height:130px">
               <b v-show="checkData.oother && checkData.oother.length>=1000" style="left:230px;" class="hint result_textarea">
                 输入长度不能超过1000</b>
               <label class="label_223"><span class="required_Red"> * </span>初审结果评价：</label>
@@ -1082,12 +1082,17 @@
           }],
           wnetCompany: [{
             required: true,
-            message: '请选择当地工商网查询企业基本信息中是否有登记',
+            message: '请选择工商企业基本信息是否登记',
+            trigger: 'change'
+          }],
+          wbeexEcuted: [{
+            required: true,
+            message: '请选择客户在法网是否有被执行信息',
             trigger: 'change'
           }],
           fbalance: [{
             required: true,
-            message: '请输入金额',
+            message: '请输入可以承受的月还款',
             trigger: 'blur'
           }],
           oother: [{
@@ -1664,7 +1669,7 @@
         // 其他信息
         otherInfo: {
           "id": '',
-          "applyId": this.applyId, // 申请单Id    
+          "applyId": '', // 申请单Id    
           "content": "", // 其他内容
         },
       }
@@ -1846,6 +1851,7 @@
         this.checkData.workCityName = this.$refs.city.selectedLabel;
         this.checkData.workCountyName = this.$refs.country.selectedLabel;
         this.checkData.hirecomKind = this.$refs.industry.selectedLabel;
+        this.otherInfo.applyId = this.applyId;
         this.btnnn();
         this.post("/creauditInfo/addOrUpdate", {
           creauditInfoDto: this.checkData, //原信审表
@@ -2036,6 +2042,15 @@
         this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this._formatNumber(this.checkData.selfhasProportion, ) :
           this.checkData.selfhasProportion;
       },
+      borrM() {
+        this.borDebt.houseLoanAmt = this._formatNumber(this.borDebt.houseLoanAmt);
+        this.borDebt.carLoanAmt = this._formatNumber(this.borDebt.carLoanAmt);
+        this.borDebt.loanNumber = this._formatNumber(this.borDebt.loanNumber);
+        this.borDebt.monthRepayAmt = this._formatNumber(this.borDebt.monthRepayAmt);
+        this.borDebt.otherLoanAmt = this._formatNumber(this.borDebt.otherLoanAmt);
+        this.borDebt.studentLoanAmt = this._formatNumber(this.borDebt.studentLoanAmt);
+        this.borDebt.totalLoan = this._formatNumber(this.borDebt.totalLoan);
+      },
       mountC() {
         // 获取查询列表数据
         this.post("/creauditInfo/queryCreauditInfoObj", {
@@ -2051,13 +2066,14 @@
             console.log(1, this.loanDetailList)
             console.log(2, resp.loanDetailList)
             // this.borDebt = resp.borDebt ? resp.borDebt : {}; // 负债信息
-            if (resp.borDebt && JSON.Stringify(resp.borDebt) != '{}') { // 负债信息
+            if (resp.borDebt && JSON.stringify(resp.borDebt) != '{}') { // 负债信息
               this.borDebt = resp.borDebt;
               this.arr[0] = this.borDebt.monthRepayAmt ? this.borDebt.monthRepayAmt : 0; //信用卡每月还款
               this.arr[1] = this.borDebt.monthRepayAmt ? this.borDebt.studentLoanAmt : 0; //信用贷每月还款额
               this.arr[2] = this.borDebt.monthRepayAmt ? this.borDebt.houseLoanAmt : 0; //房贷每月还款额
               this.arr[3] = this.borDebt.monthRepayAmt ? this.borDebt.carLoanAmt : 0; //车贷每月还款额
               this.arr[4] = this.borDebt.monthRepayAmt ? this.borDebt.otherLoanAmt : 0; //其他贷款每月还款额
+              this.borrM();
             }
             this.incomeList = resp.incomeList ? resp.incomeList : []; //  流水明细
             if (resp.otherInfo) { // 其他信息
