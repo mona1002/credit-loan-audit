@@ -707,14 +707,11 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.AreaNPercent();
-            this.$message({
-              message: '提交成功!',
-              type: 'success'
-            });
+            this._succe('提交成功!');
             this.mountC();
           } else {
             // this.$message.error('提交失败，请稍后再试！');
-            this.$message.error(res.msg);
+            this._error(res.msg);
             this.mountC();
           }
         });
@@ -813,19 +810,20 @@
           applyId: this.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
-            this.FormData = res.data;
+            let resp = res.data;
+            this.FormData = resp.creauditInfoDto;
             this.AreaNPercent();
             this.formatSC();
             this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
               .aaddress;
-            this.mountJ(11, res.data.iisself);
-            this.mountJ(13, res.data.fmarrflag);
-            this.mountJ(14, res.data.spouseWork);
-            this.mountJ(15, res.data.spouseSamecity);
-            this.mountJ(16, res.data.childFlag);
-            this.mountJ(17, res.data.childIspaycost);
-            this.mountJ(18, res.data.parentIsliving);
-            this.mountJ(21, res.data.iloanBefore);
+            this.mountJ(11, this.FormData.iisself);
+            this.mountJ(13, this.FormData.fmarrflag);
+            this.mountJ(14, this.FormData.spouseWork);
+            this.mountJ(15, this.FormData.spouseSamecity);
+            this.mountJ(16, this.FormData.childFlag);
+            this.mountJ(17, this.FormData.childIspaycost);
+            this.mountJ(18, this.FormData.parentIsliving);
+            this.mountJ(21, this.FormData.iloanBefore);
           } else {
             this.$message.error(res.msg);
           }

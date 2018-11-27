@@ -87,7 +87,11 @@
 .margin_bottom_10 {
   margin-bottom: 10px;
 }
+/* absolute 定位 */
+.top{
 
+}
+/* line_height */
 .Abody .line_H_16_label label {
   line-height: 17px;
 }
@@ -240,9 +244,20 @@ body .pre_wrap {
 .label_width_110 {
   width: 110px;
 }
+
 .label_width_95 {
   width: 95px;
 }
+
+/* 标签前面的提示语（适用于表格等内涵文本框等内容） */
+.font_hint::before {
+  content: "*";
+  color: #ff7676;
+  position: absolute;
+  left: 0px;
+  /* top:0; */
+}
+
 /* el-item 前的红色*  去掉 */
 .clear_hint label::before {
   content: '' !important;
@@ -792,10 +807,6 @@ body .el-table_450_scroll .el-table__fixed-right {
   margin-top: 12px;
 }
 
-.CreditForm .top {
-  /* margin-top: 4px; */
-}
-
 .specialInput {
   width: calc(100% - 230px);
 }
@@ -1243,8 +1254,9 @@ border:3px solid red;
   font-weight: 800;
   margin: 5px 10px;
 }
-.creditApproval-class .CreditForm_div_border li div ,
-  .aAntiApplyInf .CreditForm_div_border li div {
+
+.creditApproval-class .CreditForm_div_border li div,
+.aAntiApplyInf .CreditForm_div_border li div {
   width: 260px;
   margin-left: auto;
   margin-right: auto;

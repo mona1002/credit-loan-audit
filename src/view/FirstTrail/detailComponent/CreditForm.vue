@@ -1,5 +1,5 @@
 <template>
-  <div class="CreditForm" >
+  <div class="CreditForm">
     <el-form :model="checkData" :rules="rules" ref="ruleForm" class="demo-ruleForm">
       <el-collapse v-model="activeNames">
         <!-- 网上查询信息 -->
@@ -199,46 +199,50 @@
               </span>
             </div>
           </template>
-          <div class="height_auto">
+          <div class="height_auto table_datePicker">
             <el-table :data="loanDetailList" style="width: 100%" highlight-current-row border @current-change="loanCurrentChange">
-              <el-table-column type="index" :index='1' label="序号" min-width="50">
+              <el-table-column type="index" :index='1' label="序号" width="55">
               </el-table-column>
-              <el-table-column prop="loanType" label="贷款种类" min-width="120">
+              <el-table-column prop="loanType" label="贷款种类" width="120">
                 <template slot-scope="scope">
-                  <span class="must">*</span>
-                  <el-tooltip class="item" effect="dark" :disabled="scope.row.loanType!=''" content="该项为必填项" placement="right">
-                    <el-select v-model="scope.row.loanType" placeholder="请选择">
-                      <el-option v-for="item in loanTypes" :key="item.value" :label="item.label" :value="item.value">
-                      </el-option>
-                    </el-select>
-                  </el-tooltip>
+                  <div class='font_hint'>
+                    <el-tooltip class="item" effect="dark" :disabled="scope.row.loanType!=''" content="该项为必填项"
+                      placement="right">
+                      <el-select v-model="scope.row.loanType" placeholder="请选择">
+                        <el-option v-for="item in loanTypes" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                      </el-select>
+                    </el-tooltip>
+                  </div>
                 </template>
               </el-table-column>
-              <el-table-column prop="guaranteeType" label="担保方式" min-width="120">
+              <el-table-column prop="guaranteeType" label="担保方式" width="120">
                 <template slot-scope="scope">
-                  <span class="must">*</span>
-                  <el-tooltip class="item" effect="dark" :disabled="scope.row.guaranteeType!=''" content="该项为必填项"
-                    placement="right">
-                    <el-select v-model="scope.row.guaranteeType" placeholder="请选择">
-                      <el-option v-for="item in guaranteeTypes" :key="item.value" :label="item.label" :value="item.value">
-                      </el-option>
-                    </el-select>
-                  </el-tooltip>
+                  <div class='font_hint'>
+                    <el-tooltip class="item" effect="dark" :disabled="scope.row.guaranteeType!=''" content="该项为必填项"
+                      placement="right">
+                      <el-select v-model="scope.row.guaranteeType" placeholder="请选择">
+                        <el-option v-for="item in guaranteeTypes" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                      </el-select>
+                    </el-tooltip>
+                  </div>
                 </template>
               </el-table-column>
-              <el-table-column prop="accountStatus" label="账户状态" min-width="120">
+              <el-table-column prop="accountStatus" label="账户状态" width="120">
                 <template slot-scope="scope">
-                  <span class="must">*</span>
-                  <el-tooltip class="item" effect="dark" :disabled="scope.row.accountStatus!=''" content="该项为必填项"
-                    placement="right">
-                    <el-select v-model="scope.row.accountStatus" placeholder="请选择">
-                      <el-option v-for="item in accountStatuss" :key="item.value" :label="item.label" :value="item.value">
-                      </el-option>
-                    </el-select>
-                  </el-tooltip>
+                  <div class='font_hint'>
+                    <el-tooltip class="item" effect="dark" :disabled="scope.row.accountStatus!=''" content="该项为必填项"
+                      placement="right">
+                      <el-select v-model="scope.row.accountStatus" placeholder="请选择">
+                        <el-option v-for="item in accountStatuss" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                      </el-select>
+                    </el-tooltip>
+                  </div>
                 </template>
               </el-table-column>
-              <el-table-column prop="repayFrequency" label="还款频率" min-width="110">
+              <el-table-column prop="repayFrequency" label="还款频率" width="120">
                 <template slot-scope="scope">
                   <el-select v-model="scope.row.repayFrequency" placeholder="请选择">
                     <el-option v-for="item in repayFrequencys" :key="item.value" :label="item.label" :value="item.value">
@@ -246,69 +250,69 @@
                   </el-select>
                 </template>
               </el-table-column>
-              <el-table-column prop="loanBeginDate" label="贷款发放日期" min-width="140">
+              <el-table-column prop="loanBeginDate" label="贷款发放日期" width="155">
                 <template slot-scope="scope">
                   <el-date-picker v-model="scope.row.loanBeginDate" type="date">
                   </el-date-picker>
                 </template>
               </el-table-column>
-              <el-table-column prop="loanExpireDate" label="贷款到期日期" min-width="140">
+              <el-table-column prop="loanExpireDate" label="贷款到期日期" width="155">
                 <template slot-scope="scope">
                   <el-date-picker v-model="scope.row.loanExpireDate" type="date">
                   </el-date-picker>
                 </template>
               </el-table-column>
-              <el-table-column prop="loanContValue" label="贷款合同金额[元]" min-width="140">
+              <el-table-column prop="loanContValue" label="贷款合同金额[元]" width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.loanContValue" @blur="moneyBlur(scope.row,'loanContValue')" placeholder="请输入内容"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="loanRepayDate" label="应还款日期" min-width="140">
+              <el-table-column prop="loanRepayDate" label="应还款日期" width="155">
                 <template slot-scope="scope">
                   <el-date-picker v-model="scope.row.loanRepayDate" type="date">
                   </el-date-picker>
                 </template>
               </el-table-column>
-              <el-table-column prop="loanBal" label="贷款余额[元]" min-width="110">
+              <el-table-column prop="loanBal" label="贷款余额[元]" width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.loanBal" @blur="moneyBlur(scope.row,'loanBal')" placeholder="请输入内容"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="remainMonth" label="剩余还款月数" min-width="110">
+              <el-table-column prop="remainMonth" label="剩余还款月数" width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.remainMonth" @blur="postcode(scope.row,'remainMonth')" placeholder="请输入内容"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="presentRepayAmt" label="本期应还款金额[元]" min-width="150">
+              <el-table-column prop="presentRepayAmt" label="本期应还款金额[元]" width="135">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.presentRepayAmt" @blur="moneyBlur(scope.row,'presentRepayAmt')"
                     placeholder="请输入内容"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="curMonthRepayAmt" label="本期实际还款金额[元]" min-width="160">
+              <el-table-column prop="curMonthRepayAmt" label="本期实际还款金额[元]" width="150">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.curMonthRepayAmt" @blur="moneyBlur(scope.row,'curMonthRepayAmt')"
                     placeholder="请输入内容"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="lastRepayDate" label="最后一次还款日期" min-width="140">
+              <el-table-column prop="lastRepayDate" label="最后一次还款日期" width="155">
                 <template slot-scope="scope">
                   <el-date-picker v-model="scope.row.lastRepayDate" type="date">
                   </el-date-picker>
                 </template>
               </el-table-column>
-              <el-table-column prop="presentOverAmt" label="当前逾期金额" min-width="110">
+              <el-table-column prop="presentOverAmt" label="当前逾期金额" width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.presentOverAmt" @blur="moneyBlur(scope.row,'presentOverAmt')"
                     placeholder="请输入内容"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="overTimes" label="累计逾期次数" min-width="110">
+              <el-table-column prop="overTimes" label="累计逾期次数" width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.overTimes" @blur="postcode(scope.row,'overTimes')" placeholder="请输入内容"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="maxOverTimes" label="最高逾期期数" min-width="110">
+              <el-table-column prop="maxOverTimes" label="最高逾期期数" min-width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.maxOverTimes" @blur="postcode(scope.row,'maxOverTimes')" placeholder="请输入内容"></el-input>
                 </template>
@@ -392,14 +396,15 @@
               </el-table-column>
               <el-table-column prop="incomeType" label="流水类型" min-width="110">
                 <template slot-scope="scope">
-                  <span class="must">*</span>
-                  <el-tooltip class="item" effect="dark" :disabled="scope.row.incomeType!=''" content="该项为必填项"
-                    placement="right">
-                    <el-select v-model="scope.row.incomeType" placeholder="请选择">
-                      <el-option v-for="item in incomeTypes" :key="item.value" :label="item.label" :value="item.value">
-                      </el-option>
-                    </el-select>
-                  </el-tooltip>
+                  <div class='font_hint'>
+                    <el-tooltip class="item" effect="dark" :disabled="scope.row.incomeType!=''" content="该项为必填项"
+                      placement="right">
+                      <el-select v-model="scope.row.incomeType" placeholder="请选择">
+                        <el-option v-for="item in incomeTypes" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                      </el-select>
+                    </el-tooltip>
+                  </div>
                 </template>
               </el-table-column>
               <el-table-column prop="n" label="N" min-width="130">
@@ -1059,7 +1064,7 @@
   export default {
     data() {
       return {
-        applyId:'',
+        applyId: '',
         label_223: '223px',
         label_160: '160px',
         label_185: '185px',
@@ -2038,21 +2043,21 @@
         }).then(res => {
           if (res.statusCode == 200) {
             console.log(res)
-            console.log(11,res.data)
+            console.log(11, res.data)
             let resp = res.data;
             console.log(resp)
             // 原借款人资料信息
             this.loanDetailList = resp.loanDetailList ? resp.loanDetailList : []; // 贷款明细
-            console.log(1,this.loanDetailList)
-            console.log(2,resp.loanDetailList)
+            console.log(1, this.loanDetailList)
+            console.log(2, resp.loanDetailList)
             // this.borDebt = resp.borDebt ? resp.borDebt : {}; // 负债信息
-            if(resp.borDebt&&JSON.Stringify(resp.borDebt)!='{}'){// 负债信息
-            this.borDebt = resp.borDebt;
-            this.arr[0] = this.borDebt.monthRepayAmt?this.borDebt.monthRepayAmt:0; //信用卡每月还款
-            this.arr[1] =this.borDebt.monthRepayAmt? this.borDebt.studentLoanAmt:0;//信用贷每月还款额
-            this.arr[2] =this.borDebt.monthRepayAmt? this.borDebt.houseLoanAmt:0;//房贷每月还款额
-            this.arr[3] = this.borDebt.monthRepayAmt?this.borDebt.carLoanAmt:0;//车贷每月还款额
-            this.arr[4] = this.borDebt.monthRepayAmt?this.borDebt.otherLoanAmt:0; //其他贷款每月还款额
+            if (resp.borDebt && JSON.Stringify(resp.borDebt) != '{}') { // 负债信息
+              this.borDebt = resp.borDebt;
+              this.arr[0] = this.borDebt.monthRepayAmt ? this.borDebt.monthRepayAmt : 0; //信用卡每月还款
+              this.arr[1] = this.borDebt.monthRepayAmt ? this.borDebt.studentLoanAmt : 0; //信用贷每月还款额
+              this.arr[2] = this.borDebt.monthRepayAmt ? this.borDebt.houseLoanAmt : 0; //房贷每月还款额
+              this.arr[3] = this.borDebt.monthRepayAmt ? this.borDebt.carLoanAmt : 0; //车贷每月还款额
+              this.arr[4] = this.borDebt.monthRepayAmt ? this.borDebt.otherLoanAmt : 0; //其他贷款每月还款额
             }
             this.incomeList = resp.incomeList ? resp.incomeList : []; //  流水明细
             if (resp.otherInfo) { // 其他信息

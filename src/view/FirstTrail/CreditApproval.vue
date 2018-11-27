@@ -900,7 +900,7 @@
                     this.maxAmounnt = res.data.maxAmounnt; // 最大
                     this.minAmount = res.data.minAmount; // 最小
                     this.debtRate = res.data.debtRate; //产品负债率
-                    this.creditExtensionLoanTerm = res.data.creditExtensionLoanTerm //授信期限[月]
+                    this.creditExtensionLoanTerm = res.data.creditExtensionLoanTerm==0?'':res.data.creditExtensionLoanTerm; //授信期限[月]
                     //获取批准期限
                     this.ploanTerms = res.data.returnList; //获取批准期限
                     if (this.judgeFlag == '02') this.creditExtensionBeginDate = res.data.creditExtensionBeginDate; //授信开始日期-初审返回值为空，不需赋值，设定默认是为当天。终审获取初审时间
