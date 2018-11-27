@@ -550,6 +550,10 @@
 .CreditForm .FinalConclution .el-textarea__inner {
   width: 100%;
 }
+/* el 必填项提示语 */
+.CreditForm .el_hint_word .el-form-item__error {
+  left: 230px;
+}
 
 /* 影像列表----缩略图按钮 */
 
@@ -577,16 +581,6 @@
   padding: 0 10px;
 }
 
-/* .AudioVisualLeft .posi .el-icon-arrow-right:before{
-  content:"\E604";
-  border:2px solid red;
-
-} */
-/* .AudioVisualLeft .posi .el-icon-arrow-right:before{
-  border:2px solid red;
-  
-} */
-/* .AudioVisualLeft .posi .el-collapse-item__header .el-collapse-item__arrow */
 /* 影像列表-左侧列表-title表头  */
 
 .AudioVisual .el-collapse-item__header p span,

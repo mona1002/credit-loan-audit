@@ -104,7 +104,7 @@
             <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.ApplyId'></AudioVisual>
           </keep-alive>
           <remark v-if=" this.tabContent2==1" :applyId='tastwaitingPass.ApplyId'></remark>
-          <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
+          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
           <keep-alive v-if="Routes.closed">
             <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.ApplyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
           </keep-alive>
@@ -112,7 +112,7 @@
           <PhoneCredit v-if=" this.tabContent2==5"  :applyId='tastwaitingPass.ApplyId'  :SubNo='tastwaitingPass.applySubNo' :addBtn="false"> 电话征信</PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <keep-alive v-if="Routes.closed">
-            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.ApplyId'></creditInvestigation>
           </keep-alive>
           <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'>
