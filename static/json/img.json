@@ -1,0 +1,89 @@
+{
+    "data": {
+        "total": 18,
+        "page": "1",
+        "items": [
+        {
+            "defaultGoodsId": 100100499,
+            "title":"影像资料",
+            "id": 100100494,
+            "ind":0,
+            "marketPrice": {
+                "type": "4",
+                "value": "40.00"
+            },
+            "pic": "http://pic10.cdn.3songshu.com:81//assets/upload/product/9eca9a6dbe8d477d9392153f3b12c0be_380x380.jpg",
+            "salesPrice": {
+                "type": "0",
+                "value": "12.90"
+            },
+            "tags": []
+        },
+        {
+            "defaultGoodsId": 100100402,
+            "title":"身份证明",
+            "id": 100100402,
+            "ind":1,
+            "marketPrice": {
+                "type": "4",
+                "value": "22.50"
+            },
+            "pic": "http://pic10.cdn.3songshu.com:81//assets/upload/product/89ce033bac894b59cf2a1322518eb01e_380x380.jpg",
+            "salesPrice": {
+                "type": "0",
+                "value": "12.90"
+            },
+            "tags": []
+        },
+        {
+            "defaultGoodsId": 100100401,
+            "title":"实地征信",
+            "id": 100100401,
+            "ind":2,
+            "marketPrice": {
+                "type": "4",
+                "value": "40.00"
+            },
+            "pic": "http://img07.tooopen.com/images/20170316/tooopen_sy_201956178977.jpg",
+            "salesPrice": {
+                "type": "0",
+                "value": "15.90"
+            },
+            "tags": []
+        },
+        {
+            "defaultGoodsId": 100100386,
+            "title":"不记得名字",
+            "id": 100100386,
+            "ind":3,
+            "marketPrice": {
+                "type": "4",
+                "value": "40.00"
+            },
+            "pic": "http://pic10.cdn.3songshu.com:81//assets/upload/product/e611473dbf16e4dc87585429636dbb6d_380x380.jpg",
+            "salesPrice": {
+                "type": "0",
+                "value": "12.90"
+            },
+            "tags": []
+        },
+        {
+            "defaultGoodsId": 100100384,
+            "title":"不知道叫啥",
+            "id": 100100384,
+            "ind":4,
+            "marketPrice": {
+                "type": "4",
+                "value": "13.30"
+            },
+            "pic": "http://pic10.cdn.3songshu.com:81//assets/upload/product/010394e9fb99d3c58003584c556f8b5e_380x380.jpg",
+            "salesPrice": {
+                "type": "0",
+                "value": "5.90"
+            },
+            "tags": []
+        }
+        ]
+    },
+    "stateCode": 0
+}

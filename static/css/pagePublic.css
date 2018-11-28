@@ -1,0 +1,1263 @@
+/*最小宽度 */
+.min_width_1100 {
+  min-width: 1100px;
+}
+
+.min_width_1200 {
+  min-width: 1200px;
+}
+
+.min_width_1550 {
+  min-width: 1550px;
+}
+
+/* 内边距 */
+.padding_5 {
+  padding: 5px;
+}
+
+.padding_left_5 {
+  padding-left: 5px;
+}
+
+.padding_left_235 {
+  padding-left: 235px;
+}
+
+.padding_bottom_10 {
+  padding-bottom: 10px;
+}
+
+/* 外边距 */
+/* .margin_5{
+  margin: 5px;
+} */
+.margin_10_5_0_5 {
+  margin: 10px 5px 0 5px;
+}
+
+.margin_top_5 {
+  margin-top: 5px;
+}
+
+.margin_top_15 {
+  margin-top: 15px;
+}
+
+.margin_top_20 {
+  margin-top: 20px;
+}
+
+.margin_top_100 {
+  margin-top: 100px;
+}
+
+.margin_right_5 {
+  margin-right: 5px;
+}
+
+.margin_left_5 {
+  margin-left: 5px;
+}
+
+.margin_left_0 {
+  margin-left: 0px;
+}
+
+.margin_left_15 {
+  margin-left: 15px;
+}
+
+.margin_left_30 {
+  margin-left: 30px;
+}
+
+.margin_left_75 {
+  margin-left: 75px;
+}
+
+.margin_left_600 {
+  margin-left: 600px;
+}
+
+.margin_left_735 {
+  margin-left: 735px;
+}
+
+.margin_bottom_10 {
+  margin-bottom: 10px;
+}
+
+/* line_height */
+.Abody .line_H_16_label label {
+  line-height: 17px;
+}
+
+/* label 宽度 */
+.label_85 {
+  width: 85px;
+}
+
+.label_140 {
+  width: 140px;
+}
+
+.label_150 {
+  width: 150px;
+}
+
+.label_223 {
+  width: 223px;
+}
+
+.label_185 {
+  width: 185px;
+}
+
+.width_33Per {
+  width: 33.3%
+}
+
+.width_66Per {
+  width: 66.6%
+}
+
+.width_40Per {
+  width: 40%
+}
+
+.width_60Per {
+  width: 60%
+}
+
+.width_20Per {
+  width: 20%
+}
+
+.width_50Per {
+  width: 50%
+}
+
+.width_400 {
+  width: 400px;
+}
+
+.width_480 {
+  width: 480px;
+}
+
+/* 高度 */
+body .Abody .height_60 {
+  height: 60px;
+}
+
+body .Abody .height_80 {
+  height: 80px;
+}
+
+body .Abody .height_120 {
+  height: 120px;
+}
+
+/* display  */
+.dis_inBlock {
+  display: inline-block
+}
+
+/* 垂直对齐 */
+.vertical_top {
+  vertical-align: top;
+}
+
+/* 定位 */
+.position_relative {
+  position: relative;
+}
+
+/* 文本对齐方式 */
+.text_align_right {
+  text-align: right;
+}
+
+.text_align_center {
+  text-align: center;
+}
+
+.float_left {
+  float: left;
+}
+
+body .pre_wrap {
+  white-space: pre-wrap;
+}
+
+/* 气泡 */
+.el-tooltip__popper {
+  max-width: 320px;
+  height: auto;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+/* 表格th */
+.table_th {
+  height: 35px;
+  border: 1px solid #d8dce5;
+  font-weight: 800;
+  padding-left: 5px;
+  color: #000;
+}
+
+/*查看- label宽度 */
+.label_width_220 {
+  width: 220px;
+}
+.label_width_210 {
+  width: 210px;
+}
+
+.label_width_200 {
+  width: 200px;
+}
+
+.label_width_195 {
+  width: 195px;
+}
+
+.label_width_190 {
+  width: 190px;
+}
+
+.label_width_166 {
+  width: 166px;
+}
+
+.label_width_145 {
+  width: 145px;
+}
+
+.label_width_130 {
+  width: 130px;
+}
+
+.label_width_110 {
+  width: 110px;
+}
+
+.label_width_95 {
+  width: 95px;
+}
+
+/* 标签前面的提示语（适用于表格等内涵文本框等内容） */
+.font_hint::before {
+  content: "*";
+  color: #ff7676;
+  position: absolute;
+  left: 0px;
+  /* top:0; */
+}
+
+/* el-item 前的红色*  去掉 */
+.clear_hint label::before {
+  content: '' !important;
+}
+
+/* 查看-label高度 */
+.checkedInf .label_height_48 {
+  height: 48px;
+}
+
+/* 查看-span宽度 */
+.checkedInf .text_area_span_minus220 {
+  width: calc(100% - 220px);
+}
+
+.checkedInf .text_area_span_minus170 {
+  width: calc(100% - 170px);
+}
+
+.checkedInf .text_area_span_minus150 {
+  width: calc(100% - 150px);
+}
+
+.checkedInf .text_area_span_minus115 {
+  width: calc(100% - 115px);
+}
+
+/* 查看-li宽度 */
+.checkedInf .li_one_row {
+  width: 100%;
+}
+
+.checkedInf .li_triplet_two_rows {
+  width: 66.6%;
+}
+
+.checkedInf .li_half_two_rows {
+  width: 50%;
+}
+
+.checkedInf .li_four_3rows {
+  width: 75%;
+}
+
+.checkedInf label {
+  float: left;
+  text-align: right;
+}
+
+/*查看部分 + 查看li宽度比例  */
+.checkedInf {
+  height: auto;
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.checkedInf_li_width_half li {
+  width: 50%;
+}
+
+.checkedInf_li_width_triplet li {
+  width: 33.3%;
+}
+
+.checkedInf_li_width_four li {
+  width: 25%;
+}
+
+.checkedInf li {
+  float: left;
+  min-width: 200px;
+  min-height: 24px;
+  margin-top: 4px;
+}
+
+.checkedInf .border_bottom_none {
+  border-bottom: none;
+}
+
+/* 编辑-带输入框部分 */
+.checkedInf .inputInf {
+  height: 35px;
+  line-height: 35px;
+}
+
+/*查看- 模拟文本域框 */
+.checkedInf .text_area_li {
+  height: 75px;
+}
+
+.checkedInf .text_area_li_5rows {
+  height: 120px;
+}
+
+.checkedInf .triplet_textarea_width {
+  width: 66.6%;
+}
+
+.checkedInf .text_area_span {
+  display: inline-block;
+  height: 75px;
+  overflow: auto;
+  padding-left: 10px;
+  border: 1px solid #d8dce5;
+  border-radius: 4px;
+}
+
+/* 列表 */
+.taskWatting {
+  width: 100%;
+  height: calc(100% - 90px);
+  background-color: #fafbfc;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.taskWatting .taskWinput {
+  background-color: #ffffff;
+  border: 1px solid #e6eaee;
+  margin-bottom: 20px;
+}
+
+.taskWattingContain {
+  width: 100%;
+}
+
+/* 高级查询下的input */
+.taskWatting .row {
+  margin-bottom: 20px;
+}
+
+.taskWatting .row1 {
+  margin-top: 20px;
+}
+
+/* 分页 */
+.page {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.page_top_bottom_10 {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.overFlow_x {
+  overflow-x: hidden;
+}
+
+.addIcon_search {
+  border: 1px solid #dcdfe6;
+  font-size: 18px;
+  border-radius: 6px;
+  padding: 2px;
+  position: absolute;
+  top: 4px;
+  cursor: pointer;
+}
+
+/* el-table特殊高度  +  带fixed属性 出滚动条时 fixed部分高度 */
+body .el-table_450_scroll .el-table {
+  height: 450px !important;
+}
+
+body .el-table_400_scroll .el-table {
+  height: 435px !important;
+}
+
+body .el-table_450_scroll .el-table__fixed,
+body .el-table_450_scroll .el-table__fixed-right {
+  height: 435px !important;
+}
+
+.el-talble_overflow_auto .el-table {
+  overflow: auto;
+}
+
+/* 借款台账中-下拉框中分页 */
+.select_pageination .el-pagination {
+  white-space: normal;
+}
+
+.select_pageination .el-pager li,
+.select_pageination .el-pagination button {
+  min-width: 16px;
+  padding: 0;
+}
+
+.select_pageination .el-pagination .btn-next,
+.select_pageination .el-pagination .btn-prev {
+  width: 20px;
+}
+
+.select_pageination .el-pagination .el-select .el-input {
+  margin: 0;
+  width: 82px;
+}
+
+.select_pageination .el-pagination__sizes {
+  padding-right: -5px;
+}
+
+.fixedWidth {
+  visibility: hidden;
+}
+
+.el-pagination button,
+.el-pagination span:not([class*=suffix]) {
+  display: inline;
+}
+
+.bankName_pagination_footer .el-pagination>span:nth-of-type(2)::before,
+.fixedWidth .el-pagination>span:nth-of-type(2)::before {
+  content: '';
+  display: block;
+  height: 0;
+}
+
+/* 分屏 */
+.SplitScreen {
+  height: calc(100% - 90px);
+  overflow-y: hidden;
+  padding: 0 9px;
+}
+
+.SplitScreen .tab1Default {
+  color: #bfcbd9;
+}
+
+.SplitScreen .tab1Act {
+  color: white;
+}
+
+.SplitScreen .tab2Default {
+  color: #bfcbd9;
+}
+
+.SplitScreen .tab2Act {
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+/* 对比弹出层关闭按钮 */
+.SplitScreen .compareClose {
+  position: absolute;
+  right: 40px;
+  bottom: 19px;
+  z-index: 1;
+}
+
+/* 全屏  --  分屏 图标 */
+.SplitScreen .icon_showHalf {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  /* top: 6px; */
+  left: 9px;
+  z-index: 3;
+  background: #4099ff url('../images/backcopy.png') no-repeat center center;
+  cursor: pointer;
+}
+
+.SplitScreen .icon_FullScreen {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: url('../images/backcopy 2.png') no-repeat center center;
+  right: 17px;
+  cursor: pointer;
+}
+
+.SplitScreen .showAllList {
+  position: absolute;
+  padding-top: 2px;
+  width: 55px;
+  height: 50px;
+  left: 0;
+  top: 0;
+}
+
+/* .SplitScreen_content {
+    border: 1px solid #0077ff;
+    height: calc(100% - 100px);
+    overflow: auto;
+    padding: 13px 9px;
+  } */
+/* 借款人详情 */
+.SplitScreen .PerDtl {
+  color: #0077ff;
+  background: white;
+  height: 30px;
+  line-height: 30px;
+  /* margin-bottom: 13px; */
+}
+
+.SplitScreen .PerDtl span {
+  display: inline-block;
+  letter-spacing: 0.1px;
+  font-size: 12px;
+  margin-right: 15px;
+}
+
+/* 左右分屏 */
+.SplitScreen .SplitScreen_wrap {
+  width: 100%;
+  height: calc(100% - 33px);
+  min-width: 1306px;
+  position: relative;
+}
+
+.SplitScreen .left,
+.SplitScreen .right
+
+/* .SplitScreen .AudioVisual_wrap_compare_left, */
+/* .SplitScreen .AudioVisual_wrap_compare_right  */
+  {
+  /* width: calc(50% ); */
+  width: 50%;
+  height: 100%;
+  overflow: auto;
+  background: #ffffff;
+  border: 1px solid #bfcbd9;
+  border-radius: 4px;
+  float: right;
+  position: relative;
+}
+
+/* 对比右侧弹出层2px间距 */
+/* .SplitScreen .AudioVisual_wrap_compare_right { */
+/* margin-left: 2px; */
+/* } */
+
+.SplitScreen .left,
+.SplitScreen .right {
+  position: absolute;
+  z-index: 0;
+}
+
+.SplitScreen .right {
+  left: 50%;
+}
+
+.SplitScreen .content_not_split .right {
+  width: 100%;
+}
+
+.SplitScreen .content_not_split .right {
+  left: 0;
+}
+
+/* 左屏 */
+/* 左侧列表  影像资料等 ul 外包   流 */
+.SplitScreen .left .Left_ul {
+  background: rgba(31, 45, 61, 0.59);
+  box-shadow: 0 5px 20px 0 #475669;
+  position: fixed;
+  left: -200px;
+  top: 120px;
+  z-index: 10;
+  padding: 20px 20px 0 20px;
+}
+
+.SplitScreen .left .Left_ul li {
+  font-size: 15px;
+  letter-spacing: 0.1px;
+  height: 21px;
+  line-height: 12px;
+  padding-bottom: 30px;
+}
+
+.SplitScreen .left .Left_ul li:hover,
+.SplitScreen .Right_tab_ul_wrap ul li:hover {
+  cursor: pointer;
+}
+
+/* 左侧详情 div  */
+.SplitScreen .Left_detail_div {
+  height: 100%;
+}
+
+/* 左侧详情 p标签  */
+.SplitScreen .Left_right_Title,
+.SplitScreen .right .Right_tab_title_div
+
+/* .SplitScreen .AudioVisual_wrap_compare_left>p, */
+/* .SplitScreen .AudioVisual_wrap_compare_right>p  */
+  {
+  font-size: 16px;
+  text-align: center;
+  background: rgba(0, 119, 255, 0.75);
+  height: 40px;
+  line-height: 40px;
+  color: #f8f9fd;
+  overflow: hidden;
+  position: relative;
+}
+
+/* .SplitScreen .AudioVisual_wrap_compare_right p {
+  text-align: right;
+  padding-right: 40px;
+} */
+/* 左侧详情 content div 内容  */
+.SplitScreen .Left_right_BigImg {
+  background: white;
+  height: calc(100% - 40px);
+  overflow: auto;
+}
+
+/* 右侧tab切换头外的ul  */
+.SplitScreen .Right_tab_ul_wrap {
+  overflow: hidden;
+  width: calc(100% - 100px);
+  margin-left: 50px;
+}
+
+.SplitScreen .Right_tab_ul_wrap ul {
+  min-width: 1061px;
+  height: 48px;
+  position: relative;
+  text-align: left;
+  z-index: 16;
+}
+
+.SplitScreen .Right_tab_ul_wrap ul li {
+  display: inline-block;
+  margin-right: 20px;
+  letter-spacing: 0.11px;
+  height: 38px;
+  line-height: 38px;
+}
+
+.SplitScreen .tab2_Content {
+  height: calc(100% - 40px);
+  overflow: auto;
+}
+
+/* 右侧tab切换头 左右滑动图标  流  */
+.SplitScreen .pre_next_btn_wrap {
+  position: absolute;
+  z-index: 2;
+  width: 25px;
+}
+
+.SplitScreen .pre_next_btn_wrap:nth-of-type(1) {
+  left: 10px;
+}
+
+.SplitScreen .pre_next_btn_wrap:nth-of-type(2) {
+  right: 10px;
+}
+
+/*  对比弹出层 外包 div 流 */
+.SplitScreen .AudioVisual_wrap_compare {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 22;
+  background: #ffffff;
+  border: 1px solid #bfcbd9;
+  border-radius: 4px;
+}
+
+/* 弹出层 - 两侧组件 content  流 */
+.SplitScreen .AlertContent {
+  height: calc(100% - 40px);
+  overflow: auto;
+}
+
+.AlertContent .AudioVisual_List .list_title {
+  background: #ebeef5;
+  color: #3b3b3b;
+  height: 35px;
+  line-height: 35px;
+}
+
+/* 对比弹出层客户名称=====================================待更改 */
+.customName {
+  text-align: right !important;
+  padding-right: 5px;
+}
+
+.customName .el-input {
+  width: 210px;
+}
+
+.customName .el-button {
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+}
+
+/* 折叠面板title */
+.Abody .headFont {
+  font-size: 14px !important;
+  font-weight: 800;
+}
+
+/* 查看-信审表-div设置border */
+.border_top {
+  /* border-top: 1px solid #d8dce5; */
+}
+
+.divWrap_Padding_top_4 {
+  padding-top: 4px;
+}
+
+.Padding_top_10 {
+  padding-top: 10px;
+}
+
+.Padding_top_4 {
+  padding-top: 4px;
+}
+
+.CreditForm_div_border {
+  /* border-bottom: 1px solid #d8dce5; */
+  /* border-bottom: 1px solid green; */
+}
+
+/* 借款人资料 */
+.borrowerInformationSetail {
+  width: 100%;
+  height: 100%;
+  min-width: 900px;
+}
+
+/* 信审表 */
+.CreditForm li {
+  /* padding-bottom: 4px; */
+  border: none;
+}
+
+/* 宽度 */
+.Abody .CreditForm .one_row {
+  width: 100%;
+}
+
+/* .phone_credit .el-form-item , */
+.CreditForm .el-form-item {
+  /* border:1px solid red; */
+  float: left;
+  width: 50%;
+  height: auto;
+  margin-bottom: 0;
+  margin-top: 12px;
+}
+
+.specialInput {
+  width: calc(100% - 230px);
+}
+
+.btn_wrap {
+  height: 60px;
+}
+
+/* .CreditForm li {
+  color: #475669;
+  font-size: 14px;
+  vertical-align: middle;
+  position: relative;
+  clear: both;
+} */
+/* ------------------------------上网查询 +核实身份--------------------------- */
+
+.CreditForm_check_reside li,
+.CreditForm_check_reside p {
+  width: 100%;
+  clear: both;
+  padding: 0;
+  margin: 4px 0;
+}
+
+.CreditForm .interMath li,
+.CreditForm .PhontConclution li,
+.CreditForm_result li {
+  margin-bottom: 5px;
+  width: 66.6%;
+}
+
+/* 私营企业-第一分销商  */
+.CreditForm .distributor {
+  width: calc(100% - 155px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.elips {
+  width: calc(100% - 225px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* 第一经销商 */
+.CreditForm .Suppliers {
+  width: calc(100% - 205px);
+}
+
+/* 工作信息-单位地址 + 私营企业-企业经营项目 */
+.CreditForm .ComAddr {
+  width: calc(100% - 225px);
+  vertical-align: top;
+  height: 60px;
+  overflow: auto;
+  border: 1px solid #d8dce5;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* --------------------------工作信息 + 私营企业--------------------- */
+.CreditForm label {
+  display: inline-block;
+  text-align: right;
+}
+
+.creditForm_Select_special span {
+  height: 28px;
+}
+
+/* 上网查询 */
+.blueC:hover {
+  color: rgba(0, 119, 255, 0.75);
+  cursor: pointer;
+}
+
+.blueC>label:hover {
+  color: rgba(0, 119, 255, 0.75);
+  cursor: pointer;
+}
+
+/*------------creditform------- 核对现住址-------------------------- */
+/* 
+    .CreditForm_check_reside li,
+    .CreditForm_check_reside p {
+      margin-bottom: 20px;
+    }
+   */
+.description {
+  clear: both;
+  margin: 4px 0;
+}
+
+/* 影像资料 */
+.icon_next {
+  position: absolute;
+  right: 24px;
+  z-index: 2;
+  top: 50%;
+}
+
+.icon_pre {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+}
+
+.BtnIcons img {
+  margin-right: 10px
+}
+
+/* 对比-按钮 */
+.showHidIcons {
+  display: none;
+}
+
+.hidDiv {
+  float: left;
+  height: 100%;
+  overflow: auto;
+  width: 20px;
+  background: #eef0f9;
+  margin-right: 11px;
+  border: 1px solid #bfcbd9;
+  position: relative;
+  z-index: 2;
+}
+
+.hidBtn {
+  position: absolute;
+  top: 10px;
+  z-index: 2;
+}
+
+.showBtn {
+  position: absolute;
+  right: 2px;
+}
+
+.BtnIcons {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% - 110px);
+  height: 52px;
+  background: rgba(71, 86, 105, 0.6);
+  box-shadow: 0 10px 20px 0 #47566942;
+  border-radius: 6px;
+  padding: 12px 0 11px 19px;
+}
+
+.small_pic_close {
+  position: absolute;
+  right: 18px;
+  top: 13px;
+}
+
+.NamParentNode {
+  margin-left: 20px;
+  display: block;
+  font-style: normal;
+  width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 折叠面板上面的四个 th 表头 */
+.AudioVisual .list_title span:nth-of-type(1),
+.AudioVisual .list_title_div p span:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 左侧折叠面板 */
+/* 折叠面板上面的四个 th 表头 */
+.AudioVisualLeft .list_title span:nth-of-type(1),
+.AudioVisualLeft .list_title_div p span:nth-of-type(1) {
+  width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-left: none;
+}
+
+.AudioVisualLeft .list_title span:nth-of-type(2),
+.AudioVisualLeft .list_title_div p span:nth-of-type(2),
+.AudioVisual .list_title span:nth-of-type(2),
+.AudioVisual .list_title_div p span:nth-of-type(2) {
+  border-right: none;
+  border-left: none;
+}
+
+.AudioVisualLeft .list_title span:nth-of-type(2),
+.AudioVisualLeft .list_title_div p span:nth-of-type(2) {
+  width: calc(100% - 125px);
+}
+
+/*  缩略图 figure 内 图片名字 p 标签 */
+.AudioVisual .small_pic_figure p,
+.AudioVisualLeft .small_pic_figure p {
+  height: 22px;
+  width: 186px;
+  line-height: 22px;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 16px;
+  color: #475669;
+  letter-spacing: 0.11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 缩略图 p 标签  title */
+.AudioVisualLeft .Small_pic_title,
+.AudioVisual .Small_pic_title {
+  font-size: 16px;
+  text-align: center;
+  background: rgba(0, 119, 255, 0.75);
+  height: 40px;
+  line-height: 40px;
+  color: #f8f9fd;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 缩略图片-figure-wrap */
+.AudioVisual .small_pic_figure,
+.AudioVisualLeft .small_pic_figure {
+  float: left;
+  width: 187px;
+  height: 200px;
+  margin: 0 0 0 18px;
+}
+
+.AudioVisual .AudioVisual_List,
+.AudioVisual .AudioVisual_Img,
+.AudioVisualLeft .AudioVisual_List,
+.AudioVisualLeft .AudioVisual_Img {
+  float: left;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.AudioVisual .AudioVisual_List,
+.AudioVisualLeft .AudioVisual_List {
+  background: #eef0f9;
+  border: 1px solid #bfcbd9;
+  margin-right: 11px;
+  position: relative;
+}
+
+/* 缩略图 各个 img 图片 */
+/* .AudioVisual .Small_pic,
+.AudioVisualLeft .Small_pic {
+  height: calc( 100% - 60px);
+  border-radius: 5px;
+  border: 2px solid #bfcbd9;
+  box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+  overflow: hidden;
+} */
+.AudioVisual .Small_pic,
+.AudioVisualLeft .Small_pic {
+  height: calc(100% - 60px);
+  overflow: hidden;
+}
+
+.AudioVisual .Small_pic img,
+.AudioVisualLeft .Small_pic img {
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  border: 2px solid #bfcbd9;
+  box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.Audio_thumb_img {
+  display: inline-block;
+  height: calc(100% - 60px);
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid #bfcbd9;
+  box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+  /* overflow: hidden; */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(../images/add.png)
+}
+
+/* 缩略图最外侧div */
+.AudioVisual .Small_pic_div,
+.AudioVisualLeft .Small_pic_div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  overflow: auto;
+  border: 1px solid #bfcbd9;
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+/* 缩略图 content */
+.AudioVisualLeft .small_pic_content,
+.AudioVisual .small_pic_content {
+  position: relative;
+  height: calc(100% - 40px);
+  overflow: auto;
+  padding-top: 30px;
+}
+
+.AudioVisual .list_title,
+.AudioVisualLeft .list_title {
+  line-height: 27px;
+}
+
+.AudioVisual .list_title span,
+.AudioVisual .list_title_div p span,
+.AudioVisualLeft .list_title span,
+.AudioVisualLeft .list_title_div p span {
+  height: 35px;
+  line-height: 35px;
+  display: block;
+  float: left;
+  border: 1px solid #e6ebf5;
+  border-bottom: none;
+  text-align: center;
+  position: relative;
+}
+
+.AudioVisualLeft .list_title span,
+.AudioVisual .list_title span {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.AudioVisual .list_title_div p span,
+.AudioVisualLeft .list_title_div p span {
+  font-size: 13px;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+}
+
+.audio_img {
+  display: block;
+  height: 200px;
+  width: 200px;
+  background-size: contain;
+  border: 1px solid red;
+}
+
+/* 电话征信公共样式 */
+.phone-credit label {
+  display: inline-block;
+  text-align: right;
+}
+
+.phone-credit .Phone_credit_Form_search_bottom {
+  margin-bottom: 8px;
+}
+
+/* 大数据风控 */
+.SSComp {
+  overflow-x: hidden;
+  height: calc(100% - 90px);
+  height: 100%;
+  background: #ffffff;
+}
+
+/* 大数据风控 社保公积金 */
+.PneCtrl .tab,
+.SocialSe .tab {
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.PneCtrl .outside,
+.SocialSe .outside {
+  margin: 9px;
+  height: calc(100% - 20px);
+  width: calc(100% - 18px);
+  border: 1px solid #bfcbd9;
+  border-radius: 4px;
+}
+
+.PneCtrl .title,
+.SocialSe .title {
+  font-size: 16px;
+  background: rgba(0, 119, 255, 0.75);
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+.PneCtrl .title li,
+.SocialSe .title li {
+  display: inline-block;
+  margin-left: 20px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.PneCtrl .wrap,
+.SocialSe .wrap {
+  height: calc(100% - 42px);
+}
+
+.PneCtrl .content,
+.SocialSe .content {
+  height: 100%;
+  overflow: auto;
+  background: #fff;
+}
+
+.PneCtrl .tabdefault,
+.SocialSe .tabdefault {
+  color: #bfcbd9;
+}
+
+.PneCtrl tr,
+.SocialSe tr {
+  height: 30px;
+}
+
+/* 反欺诈审批 */
+/* .approvalConclus_risk_select .el-select-dropdown {
+  width:calc(66.6% - 172px);
+border:3px solid red;
+} */
+/* 大数据h6 */
+.sort {
+  font-weight: 800;
+  margin: 5px 10px;
+}
+
+.creditApproval-class .CreditForm_div_border li div,
+.aAntiApplyInf .CreditForm_div_border li div {
+  width: 260px;
+  margin-left: auto;
+  margin-right: auto;
+}
