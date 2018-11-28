@@ -1,0 +1,421 @@
+@charset "utf-8";
+@media screen and (max-width: 1366px) {
+  .Abody {
+    min-width: 1366px;
+  }
+  html {
+    width: 1366px;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  html {
+    width: 100%;
+  }
+  .Abody {
+    min-width: 1366px;
+  }
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  font-weight: 400;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+li {
+  float: none;
+  font-weight: 400;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+input,
+button,
+textarea,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font: 12px/1.5 '微软雅黑', tahoma, arial, '\5b8b\4f53';
+  color: #3b3b3b;
+  border: none;
+  *line-height: 1.5;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+
+ul,
+ol,
+li,
+dl {
+  list-style: none;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+  font-style: normal;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: courier new, courier, monospace;
+}
+
+small {
+  font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+  color: #3a302e;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+sup {
+  vertical-align: text-top;
+}
+
+sub {
+  vertical-align: text-bottom;
+}
+
+legend {
+  color: #000;
+}
+
+fieldset,
+img {
+  border: 0;
+}
+
+button,
+select,
+textarea {
+  font-size: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.clearFix::after {
+  content: ",";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+.AudioVisualLeft_btn_wrap {
+  position: absolute;
+  bottom: 18px;
+  right: 17px;
+}
+
+.AudioVisualLeft_compareBtn {
+  color: #0077ff;
+  border: 1px solid #0077ff;
+  background: #eef0f9;
+}
+
+.AudioVisualLeft_compareIcon {
+  background: white;
+  color: #0077ff !important;
+  padding: 0 !important;
+  height: 38px;
+  width: 38px;
+  float: right;
+  margin: 6px 0 0 2px !important;
+}
+
+.AudioVisualLeft_compareIcon:hover {
+  background: rgba(255, 255, 255, .8) !important;
+}
+
+.CreditForm {
+  overflow: auto;
+  overflow-x: hidden;
+  min-width: 930px;
+  /* min-width: 1400px; */
+}
+
+.SP_middle {
+  width: 2px;
+  float: left;
+  height: 100%;
+  cursor: e-resize;
+  /* background: lightblue; */
+  /* background: white; */
+  position: absolute;
+  left: calc(50% - 2px);
+  z-index: 400;
+}
+
+.QT_btns_wrap {
+  vertical-align: top;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.QT_btns_wrap img {
+  vertical-align: middle;
+}
+
+.required_Red {
+  color: #ff7676;
+  font-weight: 700;
+  font-size: 16px;
+  vertical-align: middle;
+  font-style: normal;
+}
+/* 提示语 */
+.hint_word {
+  color: #ff7676;
+  font-size: 12px;
+  display: inline-block;
+  width: 100%;
+  font-style: normal;
+  position: absolute;
+  top: -20px;
+}
+
+.font_weight_800 {
+  font-weight: 800;
+}
+
+.submitPage_button {
+  margin-top: 100px;
+  width: 90%;
+  text-align: right;
+}
+
+.brk {
+  white-space: pre-wrap;
+}
+
+.audioInd {
+  color: white;
+  font-size: 18px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.flexible {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* new */
+
+.approve_btn_area {
+  clear: both;
+  height: 40px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.approve_btn_area_width_1050 {
+  width: 1050px;
+}
+
+.approve_btn_area_width_900 {
+  width: 900px;
+}
+
+.approve_btn_area_width_700 {
+  width: 700px;
+}
+
+.approve_btn_area .approve_item {
+  cursor: pointer;
+  margin-right: 14px;
+  float: left;
+  height: 35px;
+  line-height: 35px;
+}
+
+.approve_btn_area .approve_icon {
+  font-size: 24px;
+  color: #0077ff;
+  vertical-align: middle;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+
+.approve_btn_area .approve_text {
+  font-size: 14px;
+  color: #1f2d3d;
+  vertical-align: middle;
+}
+
+/* title按钮 */
+
+.Abody .title_icon {
+  float: right;
+  height: 30px;
+  margin-right: 15px;
+}
+
+.title_icon_img {
+  font-size: 24px;
+  color: #0077ff;
+  vertical-align: top;
+  height: 28px;
+  width: 28px;
+  display: inline-block;
+  background-size: contain;
+}
+
+.title_icon_span {
+  font-size: 14px;
+  color: #1f2d3d;
+  vertical-align: top;
+}
+
+.common_component_width {
+  min-width: 1366px;
+  height: auto;
+  background: #ffffff;
+}
+
+.common_component_height {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.clearFloat {
+  clear: both;
+}
+
+.AudioVisual_List .el-collapse-item__header {
+  position: relative;
+}
+
+  .AudioVisual_List .el-collapse-item__header .el-collapse-item__arrow {
+  position: absolute;
+  left: 10px;
+  top: 3px;
+  /* z-index: 1; */
+}
+
+.AudioVisual_List .el-icon-arrow-right:before{
+  content: url('../images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png');
+}
