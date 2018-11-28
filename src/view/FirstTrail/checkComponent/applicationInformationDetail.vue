@@ -1004,7 +1004,6 @@
               loanTypeTxt: this.accepApplyLoan.loanTypeTxt,
               productName: this.accepApplyLoan.productName
             };
-            console.log(query)
             localStorage.setItem("applicationInformationDetail", JSON.stringify(query));
             /*将房产信息保存到本地*/
             if (res.data.applyCustEstateDTOs != '') {

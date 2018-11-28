@@ -12,18 +12,18 @@
         <div class="checkedInf wid_670 checkedInf_li_width_half clearFix" style="margin:0 auto">
           <ul>
             <div class=" CreditForm_div_border clearFix">
-                <li>
-                  <div>
-                    <label class="label_width_95">客户名称：</label>
-                    <span>{{custName}}</span>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <label class="label_width_95">申请类型：</label>
-                    <span>{{applyTypeTxt}}</span>
-                  </div>
-                </li>
+              <li>
+                <div>
+                  <label class="label_width_95">客户名称：</label>
+                  <span>{{custName}}</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <label class="label_width_95">申请类型：</label>
+                  <span>{{applyTypeTxt}}</span>
+                </div>
+              </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
@@ -900,7 +900,7 @@
                     this.maxAmounnt = res.data.maxAmounnt; // 最大
                     this.minAmount = res.data.minAmount; // 最小
                     this.debtRate = res.data.debtRate; //产品负债率
-                    this.creditExtensionLoanTerm = res.data.creditExtensionLoanTerm==0?'':res.data.creditExtensionLoanTerm; //授信期限[月]
+                    this.creditExtensionLoanTerm = res.data.creditExtensionLoanTerm == 0 ? '' : res.data.creditExtensionLoanTerm; //授信期限[月]
                     //获取批准期限
                     this.ploanTerms = res.data.returnList; //获取批准期限
                     if (this.judgeFlag == '02') this.creditExtensionBeginDate = res.data.creditExtensionBeginDate; //授信开始日期-初审返回值为空，不需赋值，设定默认是为当天。终审获取初审时间
@@ -1458,6 +1458,7 @@
       },
       // 计算审批结论数据
       calculateByAuditInfo: function () {
+        if (!this.ploanAmt2 || !this.verIncome2 || !this.ploanTerm) return;
         this.post('/creauditOpinion/calculateByAuditInfo', {
           applyId: this.applyId,
           proId: this.proId,
@@ -1496,7 +1497,7 @@
       // 月核实收入[元]
       moneyBlur: function (val, flag) {
         let val2 = 0;
-        val.indexOf(',') != -1 ? val = val.replace(/,/g, '') : '';
+        val && val.indexOf(',') != -1 ? val = val.replace(/,/g, '') : '';
         if (isNaN(Number(val)) || val <= 0 || val == '') {
           val = '1.00';
           val2 = 1;

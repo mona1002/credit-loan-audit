@@ -852,6 +852,7 @@
       // 计算审批结论数据
       calculateByAuditInfo() {
         var reg = /,/g;
+        if (!this.ploanAmt || !this.verIncome || !this.ploanTerm) return;
         this.post('/creauditOpinion/calculateByAuditInfo', {
           applyId: this.applyId, //申请单ID
           proId: this.proId, //产品ID
