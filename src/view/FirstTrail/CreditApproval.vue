@@ -1458,7 +1458,7 @@
       },
       // 计算审批结论数据
       calculateByAuditInfo: function () {
-        if (!this.ploanAmt2 || !this.verIncome2 || !this.ploanTerm) return;
+        if (!this.ploanAmt2 || !this.verIncome2 || !this.ploanTerm) return;//入参必填全部填入值再调用
         this.post('/creauditOpinion/calculateByAuditInfo', {
           applyId: this.applyId,
           proId: this.proId,

@@ -23,6 +23,7 @@ if (host === productionEnv) {
   host = "http://codeplatform.nuoyuan.com.cn/";
 }else{
   host = "http://testplatform.nuoyuan.com.cn/";
+  host = "http://codeplatform.nuoyuan.com.cn/";
 }
 
 appConstantUser.path=host;
