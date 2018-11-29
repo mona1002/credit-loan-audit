@@ -434,7 +434,6 @@
           "value": "creditApp_apply",
           "type": "01"
         }]
-        //channel
         this.channel = '00';
       } else if (this.judgeFlag == '02') { // 终审取终审  taskId
         this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));

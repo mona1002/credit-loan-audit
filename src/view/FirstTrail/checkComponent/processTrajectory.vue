@@ -8,7 +8,7 @@
           <span class="collapse_title_text">信审流程轨迹</span>
         </template>
         <div class="hundred_percent">
-          <el-table :data="taskDetailList" style="width: 100%" highlight-current-row border>
+          <el-table :data="recordList" style="width: 100%" highlight-current-row border>
             <el-table-column type="index" :index="1" label="序号" width="55">
             </el-table-column>
             <el-table-column label="任务节点" prop="taskNodeNameTxt" width="170">
@@ -38,7 +38,7 @@
     data() {
       return {
         activeNames: ['1'],
-        taskDetailList: [],
+        recordList: [],
       }
     },
     props: {
@@ -57,10 +57,10 @@
           applyId: this.applyId,
         }).then(res => {
           if (res.statusCode == '200') {
-            this.taskDetailList = res.data.taskDetailList;
+            this.recordList = res.data.recordList;
             this.$parent.$data.loading = false;
           } else {
-            this.taskDetailList = [];
+            this.recordList = [];
             this.$message.error(res.msg);
           }
         })

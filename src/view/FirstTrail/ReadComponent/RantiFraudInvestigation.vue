@@ -248,7 +248,7 @@
                 .applyDesc == null) {
                 this.reason = '';
               } else {
-                this.reason = this.fraudApplyInfo.mainreaName + this.fraudApplyInfo.subreaName + this.fraudApplyInfo
+                this.reason = this.fraudApplyInfo.mainreaName + '' + this.fraudApplyInfo.subreaName + this.fraudApplyInfo
                   .applyDesc;
                 var reg = /null/g;
                 this.reason = this.reason.replace(reg, '');
@@ -321,8 +321,8 @@
       },
       handlDetail(index, row) {
         // let query={};
-      //  query.applyId = row.applyId;
-      //  query = Object.assign(query, row)
+        //  query.applyId = row.applyId;
+        //  query = Object.assign(query, row)
         this.$router.push({
           name: 'MatchingInfQuery',
           params: {
