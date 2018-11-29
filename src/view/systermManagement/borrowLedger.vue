@@ -798,6 +798,7 @@
   export default {
     data() {
       return {
+        ExcelParms: {},
         ininin: '',
         Routes: [],
         getData: {},
@@ -1136,43 +1137,35 @@
         return false;
       },
       getExcel() { //导出Excel
+        //无数据提示      
+        if (!this.tableData || this.tableData.length == 0) return this._error('无查询结果，无法导出数据！')
         // 校验：应还款日期： PaybackDate ,放款日期: loanDate  , 还款到期日期： expiritionDate
         if (this.userInf.userCode !== "superadmin") {
-          if (!this.PaybackDate && !this.loanDate && !this.expiritionDate) {
+          if (!this.ExcelParms.repayDate_le && !this.ExcelParms.loanDate_le && !this.ExcelParms.loanEndDate_le) {
             // 只要填了一项就提示这里，如果都没填就提示第一个
-            if (!this.PaybackDate) return this.$message.error('查询条件【应还款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+            if (!this.ExcelParms.repayDate_le) return this._error('查询条件【应还款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
           }
-          if (this.PaybackDate) {
-            let beginDate = new Date(this.PaybackDate[0].replace(/-/g, '/')).getTime(),
-              endDate = new Date(this.PaybackDate[1].replace(/-/g, '/')).getTime();
+          if (this.ExcelParms.repayDate_le) {
+            let beginDate = new Date(this.ExcelParms.repayDate_ge[0].replace(/-/g, '/')).getTime(),
+              endDate = new Date(this.ExcelParms.repayDate_le[1].replace(/-/g, '/')).getTime();
             var Payday = (endDate - beginDate) / (1000 * 3600 * 24);
           }
-          if (this.loanDate) {
-            let beginDate = new Date(this.loanDate[0].replace(/-/g, '/')).getTime(),
-              endDate = new Date(this.loanDate[1].replace(/-/g, '/')).getTime();
+          if (this.ExcelParms.loanDate_le) {
+            let beginDate = new Date(this.ExcelParms.loanDate_ge[0].replace(/-/g, '/')).getTime(),
+              endDate = new Date(this.ExcelParms.loanDate_le[1].replace(/-/g, '/')).getTime();
             var loanday = (endDate - beginDate) / (1000 * 3600 * 24);
           }
-          if (this.expiritionDate) {
-            let beginDate = new Date(this.expiritionDate[0].replace(/-/g, '/')).getTime(),
-              endDate = new Date(this.expiritionDate[1].replace(/-/g, '/')).getTime();
+          if (this.ExcelParms.loanEndDate_le) {
+            let beginDate = new Date(this.ExcelParms.loanEndDate_ge[0].replace(/-/g, '/')).getTime(),
+              endDate = new Date(this.ExcelParms.loanEndDate_le[1].replace(/-/g, '/')).getTime();
             var expday = (endDate - beginDate) / (1000 * 3600 * 24);
           }
           if (Payday > 31) return this._error('查询条件【应还款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
           if (loanday > 31) return this._error('查询条件【放款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
           if (expday > 31) return this._error('查询条件【还款到期日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
         }
-        // 日期入参
-        // 放款日期
-        this.params.loanDate_ge = this.loanDate[0];
-        this.params.loanDate_le = this.loanDate[1];
-        // 应还款日期
-        this.params.repayDate_ge = this.PaybackDate[0];
-        this.params.repayDate_le = this.PaybackDate[1];
-        // 还款到期日期
-        this.params.loanEndDate_ge = this.expiritionDate[0];
-        this.params.loanEndDate_le = this.expiritionDate[1];
         // 删除多余入参
-        let obj = Object.assign({}, this.params);
+        let obj = Object.assign({}, this.ExcelParms);
         delete obj.page;
         delete obj.rows;
         axios({
@@ -1580,8 +1573,8 @@
         // 还款到期日期
         this.params.loanEndDate_ge = this.expiritionDate[0];
         this.params.loanEndDate_le = this.expiritionDate[1];
-
         this.params.page = this.currentPage = 1;
+        this.ExcelParms = Object.assign({}, this.params)
         this.getInf(this.params);
       },
       getInf(pam) {
@@ -1655,7 +1648,6 @@
           }
         })
       },
-
     },
     created() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
