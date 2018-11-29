@@ -338,11 +338,9 @@
                 </div>
                 <div class="bfc">
                   <el-form-item class="presentation" label="授信开始日期：" :label-width="formApproLab">
-                    <!-- {{caculData.appmult}} -->
                     {{creditExtensionBeginDate}}
                   </el-form-item>
                   <el-form-item class="presentation" label="授信截止日期：" :label-width="formApproLab">
-                    <!-- {{caculData.eachTermamt }} -->
                     {{creditExtensionEndDate}}
                   </el-form-item>
                 </div>
@@ -358,16 +356,18 @@
                   <el-form-item class="presentation" label="内部负债率：" :label-width="formApproLab">
                     {{caculData.inteDebitrate | formatValue}}
                   </el-form-item>
-                  <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate>0">
+                  <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab">
                     {{caculData.creditDebitRate | formatValue}}
                   </el-form-item>
-                  <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate==0">
-                    0.00%
+                </div>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
+                    {{caculData.totalRate | formatValue}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="签约金额：" :label-width="formApproLab">
+                    {{caculData.signAmount   | formatMoney}}
                   </el-form-item>
                 </div>
-                <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
-                  {{caculData.totalRate | formatValue}}
-                </el-form-item>
                 <div class="bfc dialog_textarea alert_collapse_inputLabel mr" style="margin-bottom:10px;height:80px;">
                   <el-form-item label="意见说明：" :label-width="formApproLab">
                     <el-input type="textarea" resize="none" :rows="3" v-model="appConclusion"></el-input>
@@ -896,6 +896,7 @@
                     this.caculData.inteDebitrate = res.data.inteDebitrate; //内部负债率;
                     this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
                     this.caculData.totalRate = res.data.totalRate; //总负债率;
+                    this.caculData.signAmount   = res.data.signAmount  ; //签约金额;
                     this.appConclusion = res.data.appConclusion; //意见说明;
                     this.maxAmounnt = res.data.maxAmounnt; // 最大
                     this.minAmount = res.data.minAmount; // 最小
@@ -932,6 +933,7 @@
                   this.caculData.inteDebitrate = ''; //内部负债率;
                   this.caculData.creditDebitRate = ''; //总信用负债率;
                   this.caculData.totalRate = ''; //总负债率;
+                  this.caculData.signAmount   = ''; //签约金额;
                   this.appConclusion = ''; //意见说明;
                   this.maxAmounn = ''; // 最大
                   this.minAmount = ''; // 最小
@@ -1277,6 +1279,7 @@
           eachTermamt: this.caculData.eachTermamt, //每期还款额[元]
           inteDebitrate: this.caculData.inteDebitrate, //内部负债率
           totalRate: this.caculData.totalRate, // 总负债率
+          signAmount : this.caculData.signAmount  , // 签约金额
           appConclusion: this.appConclusion,
           newOldMainnos: '', //借新还旧进件编号集合
           applyMainNo: '', //主进件编号
@@ -1309,11 +1312,12 @@
           }
           if (res.statusCode == '200') {
             this._succe(res.msg);
-            this.verIncome = ''; // 核实收入
-            this.ploanAmt = ''; // 批准金额
-            this.appConclusion = ''; //审批结论内容（文本框）
-            this.srcPloanAmt = ''; // 信审批准额度
-            this.caculData.creditDebitRate = ''; // 信用负债率
+            // 已跳转无需此处
+            // this.verIncome = ''; // 核实收入
+            // this.ploanAmt = ''; // 批准金额
+            // this.appConclusion = ''; //审批结论内容（文本框）
+            // this.srcPloanAmt = ''; // 信审批准额度
+            // this.caculData.creditDebitRate = ''; // 信用负债率
             if (this.judgeFlag == '01') { // 初审 
               this.$router.push('/taskInWaitting');
               this._del('初审详情');
@@ -1458,7 +1462,7 @@
       },
       // 计算审批结论数据
       calculateByAuditInfo: function () {
-        if (!this.ploanAmt2 || !this.verIncome2 || !this.ploanTerm) return;//入参必填全部填入值再调用
+        if (!this.ploanAmt2 || !this.verIncome2 || !this.ploanTerm) return; //入参必填全部填入值再调用
         this.post('/creauditOpinion/calculateByAuditInfo', {
           applyId: this.applyId,
           proId: this.proId,

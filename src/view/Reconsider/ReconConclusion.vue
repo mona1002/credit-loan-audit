@@ -306,8 +306,16 @@
                   <el-form-item class="presentation" label="内部负债率：" :label-width="formApproLab">
                     {{caculData.inteDebitrate}}
                   </el-form-item>
+                  <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab">
+                    {{caculData.creditDebitRate | formatValue}}
+                  </el-form-item>
+                </div>
+                <div class="bfc">
                   <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
                     {{caculData.totalRate}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="签约金额：" :label-width="formApproLab">
+                    {{caculData.signAmount | formatMoney}}
                   </el-form-item>
                 </div>
                 <div class="bfc dialog_textarea_3rows alert_collapse_inputLabel mr">
@@ -444,7 +452,7 @@
             trigger: 'blur'
           }]
         },
-        creditDebitRate: null, //信用负债率
+        creditDebitRate: '', //信用负债率
         //申请单ID
         id: '',
         //初始化的页面数据
@@ -673,6 +681,8 @@
             //总负债率
             res.data.totalRate || res.data.totalRate == 0 ? this.caculData.totalRate = (res.data.totalRate * 100).toFixed(
               2) + "%" : '';
+               this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
+                this.caculData.signAmount   = res.data.signAmount  ; //签约金额;
             //月还款额
             res.data.eachTermamt || res.data.eachTermamt == 0 ? this.caculData.eachTermamt = this._formatNumber(res
               .data
@@ -763,6 +773,7 @@
             .inteDebitrate.replace("%", "") / 100, //内部负债率
           totalRate: (this.caculData.totalRate == 0 || this.caculData.totalRate == '') ? 0 : this.caculData.totalRate
             .replace("%", "") / 100, // 总负债率
+          signAmount: this.caculData.signAmount, // 签约金额
           appConclusion: this.appConclusion, //审批结论内容（文本框）
           newOldMainnos: '', //借新还旧进件编号集合
           applyMainNo: '', //主进件编号
@@ -852,7 +863,7 @@
       // 计算审批结论数据
       calculateByAuditInfo() {
         var reg = /,/g;
-        if (!this.ploanAmt || !this.verIncome || !this.ploanTerm) return;//入参必填全部填入值再调用
+        if (!this.ploanAmt || !this.verIncome || !this.ploanTerm) return; //入参必填全部填入值再调用
         this.post('/creauditOpinion/calculateByAuditInfo', {
           applyId: this.applyId, //申请单ID
           proId: this.proId, //产品ID
