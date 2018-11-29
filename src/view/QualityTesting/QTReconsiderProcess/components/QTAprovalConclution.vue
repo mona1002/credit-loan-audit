@@ -21,14 +21,14 @@
   export default {
     data() {
       return {
-        tastwaitingPass: '',
+        list: '',
         tableData: []
       }
     },
     mounted() {
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("QT")) //质检
+      this.list = JSON.parse(localStorage.getItem("QT")) //质检
       this.post("/fraudAuditOpinion/getAllApproveConclusionTrack", {
-        applyId: this.tastwaitingPass.matchApplyId,
+        applyId: this.list.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
           this.tableData = res.data;

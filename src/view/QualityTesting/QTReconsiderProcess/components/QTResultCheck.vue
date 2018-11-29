@@ -80,7 +80,8 @@
     methods: {
       getInf() { //查询信息
         this.get('/insReconApply/queryInsConclusionInfo', {
-          applyId: this.taskwaitting.ApplyId,
+          // applyId: this.taskwaitting.ApplyId,
+          applyId: this.taskwaitting.applyId,
         }).then(res => {
           this.tableData = [];
           this.baseInfo = res.data.applyBaseInfo; //基本信息
@@ -88,14 +89,16 @@
         })
       },
       ToReconsider() {
-        this.ToReconsiderParams.ApplyId = this.taskwaitting.ApplyId;
+        // this.ToReconsiderParams.ApplyId = this.taskwaitting.ApplyId;
+        this.ToReconsiderParams.applyId = this.taskwaitting.applyId;
         this.ToReconsiderParams.taskId = this.taskwaitting.taskId;
         localStorage.setItem('QTToReconsiderParams', JSON.stringify(this.ToReconsiderParams)); //工作台部分信息，带入workbenchPass
         this.$router.push('/ReApply');
       },
       NoReconsider() {
         this.post('/insReconApply/noNeedReview', {
-          applyId: this.taskwaitting.ApplyId,
+          // applyId: this.taskwaitting.ApplyId,
+          applyId: this.taskwaitting.applyId,
           taskId: this.taskwaitting.taskId,
           reconType: '00' //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
         }).then(res => {

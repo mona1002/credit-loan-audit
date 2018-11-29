@@ -130,7 +130,8 @@
       },
       getInf() { //查询页面信息
         this.get('/insReconApply/queryInsConclusionInfo', {
-          applyId: this.taskwaitting.ApplyId,
+          // applyId: this.taskwaitting.ApplyId,
+          applyId: this.taskwaitting.applyId,
         }).then(res => {
           this.tableData = [];
           this.applyInfoPool = res.data.applyBaseInfo; //基本信息
@@ -154,7 +155,8 @@
       },
       SaveInf() { //提交
         this.post("/insReconApply/saveInsReconApply", {
-          applyId: this.taskwaitting.ApplyId, //申请单id
+          // applyId: this.taskwaitting.ApplyId, //申请单id
+          applyId: this.taskwaitting.applyId, //申请单id
           // taskNode: '', //复议节点----暂时不入
           // taskNodeName: '', //复议节点名称----暂时不入
           reviewRemark: this.fraudAuditOpinion.auditDesc, //复议说明

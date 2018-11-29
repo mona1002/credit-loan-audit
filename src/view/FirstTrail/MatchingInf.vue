@@ -22,7 +22,7 @@
         </div>
         <div ref="Left_detail" class="Left_detail_div">
           <p class="Left_right_Title"> {{this.title}}
-            <span class="icon_FullScreen" @click="FullScreen"> </span>
+            <span class="icon_FullScreen" @click="FullScreen" v-if="FullScreenShow"> </span>
             <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
               <img src="../../../static/images/icon-02.png">
             </span>
@@ -36,19 +36,19 @@
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'>申请信息</capplicationInformationDetail>
             </keep-alive>
-            <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
-            <RPhoneCredit v-if=" this.tabContent1==5" :applyId='list.applyId'> 电话征信</RPhoneCredit>
-            <FCreditForm v-if=" this.tabContent1==6" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
+            <!-- <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail> -->
+            <RPhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId'> 电话征信</RPhoneCredit>
+            <FCreditForm v-if=" this.tabContent1==5" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
             <keep-alive v-if="Routes.closed">
-              <creditInvestigation v-if=" this.tabContent1==7" :applyId='list.applyId'>实地征信</creditInvestigation>
+              <creditInvestigation v-if=" this.tabContent1==6" :applyId='list.applyId'>实地征信</creditInvestigation>
             </keep-alive>
-            <aAntiApplyInf v-if=" this.tabContent1==8" :applyId='list.applyId'>反欺诈结论</aAntiApplyInf>
-            <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='list.applyId'>反欺诈调查</RantiFraudInvestigation>
+            <aAntiApplyInf v-if=" this.tabContent1==7" :applyId='list.applyId'>反欺诈结论</aAntiApplyInf>
+            <RantiFraudInvestigation v-if=" this.tabContent1==8" :isShow='false' :applyId='list.applyId'>反欺诈调查</RantiFraudInvestigation>
             <keep-alive v-if="Routes.closed">
-              <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
+              <RFinanceInformation v-if=" this.tabContent1==9">账务信息</RFinanceInformation>
             </keep-alive>
-            <processTrajectory v-if=" this.tabContent1==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
-            <aAprovalConclusion v-if=" this.tabContent1==12" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
+            <processTrajectory v-if=" this.tabContent1==10" :applyId='list.applyId'>流程轨迹</processTrajectory>
+            <aAprovalConclusion v-if=" this.tabContent1==11" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
           </div>
         </div>
       </div>
@@ -81,19 +81,19 @@
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='MatchingInf'>申请信息</capplicationInformationDetail>
           </keep-alive>
-          <RborrowerInformationSetail v-if=" this.tabContent2==4" >借款人资料</RborrowerInformationSetail>
-          <RPhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId'> 电话征信</RPhoneCredit>
-          <FCreditForm v-if=" this.tabContent2==6" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
-          <keep-alive v-if="Routes.closed">
+          <!-- <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail> -->
+          <RPhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId'> 电话征信</RPhoneCredit>
+          <FCreditForm v-if=" this.tabContent2==5" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
+          <!-- <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'>实地征信</creditInvestigation>
-          </keep-alive>
-          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='list.applyId'>反欺诈结论</aAntiApplyInf>
-          <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='list.applyId'>反欺诈调查</RantiFraudInvestigation>
+          </keep-alive> -->
+          <aAntiApplyInf v-if=" this.tabContent2==6" :applyId='list.applyId'>反欺诈结论</aAntiApplyInf>
+          <RantiFraudInvestigation v-if=" this.tabContent2==7" :isShow='false' :applyId='list.applyId'>反欺诈调查</RantiFraudInvestigation>
           <keep-alive v-if="Routes.closed">
-            <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
+            <RFinanceInformation v-if=" this.tabContent2==8">账务信息</RFinanceInformation>
           </keep-alive>
-          <processTrajectory v-if=" this.tabContent2==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
-          <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
+          <processTrajectory v-if=" this.tabContent2==9" :applyId='list.applyId'>流程轨迹</processTrajectory>
+          <aAprovalConclusion v-if=" this.tabContent2==10" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
         </div>
       </div>
       <!-- 对比弹出层 -->
@@ -129,7 +129,7 @@
   import AudioVisual from "./detailComponent/AudioVisual.vue";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft.vue";
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
-  import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
+  // // import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RantiFraudInvestigation from "./ReadComponent/RantiFraudInvestigation"; //反欺诈调查
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
@@ -155,14 +155,15 @@
         CompareAlert: false,
         title: "",
         isShow: false,
+        FullScreenShow: true,
         tabContent1: 0,
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息', "流程轨迹",
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息', "流程轨迹",
           '信审审批结论轨迹'
         ],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息', "流程轨迹",
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "反欺诈结论", '反欺诈调查', '账务信息', "流程轨迹",
           "信审审批结论轨迹"
         ],
         tab1Index: 0,
@@ -213,9 +214,11 @@
       },
       compBtnS() {
         this.CompareAlert = true;
+        this.FullScreenShow = false;
       },
       closeCompareBtn() {
         this.CompareAlert = false;
+        this.FullScreenShow = true;
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
@@ -241,14 +244,14 @@
         this.showHalfBtn = true;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-      this.$refs.rRight.style.width = "100%";
+        this.$refs.rRight.style.width = "100%";
         this.$refs.rRight.style.left = '0';
         this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
         this.$refs.rLeft.style.display = "block";
-      this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left =
+        this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left =
           "calc(50% - 2px)";
         this.$refs.rRight.style.left = '50%';
         this.midShow = true;
@@ -263,9 +266,8 @@
           this.flag2[i] = true;
         }
         this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act";
-        if (ind != 0 && ind != 8) {
-          this.flag2[ind] = false;
-        }
+        if (ind > 0 && ind < 6) this.flag2[ind] = false;
+        if (ind > 6) this.flag2[ind - 1] = false;
       },
       tab2(ev, ind, val) {
         this.tabContent2 = ind;
@@ -276,9 +278,8 @@
           this.flag1[i] = true;
         }
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
-        if (ind != 0 && ind != 8) {
-          this.flag1[ind] = false;
-        }
+        if (ind > 0 && ind < 6) this.flag1[ind] = false;
+        if (ind >= 6) this.flag1[ind + 1] = false;
       },
       MyMove() {
         var clickX, leftOffset, nextW2;
@@ -338,7 +339,7 @@
       AudioVisualLeft,
       FCreditForm,
       capplicationInformationDetail,
-      RborrowerInformationSetail, //借款人资料
+      // RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息
       aAprovalConclusion, //信审审批结论归结
       remark, // 备注信息

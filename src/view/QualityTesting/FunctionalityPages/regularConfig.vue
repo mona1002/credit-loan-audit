@@ -242,10 +242,6 @@
         adbtn: '确定',
         loadsitu: false,
         createTime: '',
-        query: {
-          id: '',
-          matchApplyId: "",
-        },
         userInf: null,
         tableData: [],
         tableDataTransform: [],

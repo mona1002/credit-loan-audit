@@ -79,7 +79,8 @@
       return {
         query: {
           id: '',
-          ApplyId: "",
+          // ApplyId: "",
+          applyId: "",
           taskId: '',
           processInstanceId: '',
           listType: '',
@@ -87,7 +88,7 @@
         },
         QTquery: {
           id: '',
-          matchApplyId: "",
+          // matchApplyId: "",
           applySubNo: '',
           businessId: '',
         },
@@ -147,7 +148,8 @@
           }
         }
         this.QTquery.id = this.query.id = val.id;
-        this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        // this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        this.query.applyId = val.applyId;
         this.QTquery.applySubNo = val.applySubno;
         this.QTquery.businessId = val.businessId;
         this.query.taskId = val.taskId;

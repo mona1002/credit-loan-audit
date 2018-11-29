@@ -25,53 +25,55 @@
         <!-- 左侧详情 -->
         <div ref="Left_detail" class="Left_detail_div">
           <p class="Left_right_Title"> {{this.title}}
-            <span class="icon_FullScreen" @click="FullScreen">
-            </span>
+            <span class="icon_FullScreen" @click="FullScreen" v-if="FullScreenShow"></span>
             <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
               <img src="../../../static/images/icon-02.png">
             </span>
           </p>
           <div class="Left_right_BigImg ">
             <keep-alive v-if="Routes.closed">
-              <AudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" :list='list' v-on:CompareShow="compBtnS" :comBtn='false'></AudioVisualLeft>
+              <AudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" :list='list' v-on:CompareShow="compBtnS"
+                :comBtn='false'></AudioVisualLeft>
             </keep-alive>
-            <remark v-if=" this.tabContent1==1" :applyId='tastwaitingPass.ApplyId'></remark>
+            <!--  ApplyId -->
+            <remark v-if=" this.tabContent1==1" :applyId='list.applyId'></remark>
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
             <keep-alive v-if="Routes.closed">
-              <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='tastwaitingPass.ApplyId'>申请信息</applicationInformationDetail>
+              <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'>申请信息</applicationInformationDetail>
             </keep-alive>
-            <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
-            <PhoneCredit v-if=" this.tabContent1==5"  :applyId='tastwaitingPass.ApplyId'  :SubNo='tastwaitingPass.applySubNo' :addBtn="false"> 电话征信</PhoneCredit>
-            <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
+            <!-- <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail> -->
+            <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false">
+              电话征信</PhoneCredit>
+            <FCreditForm v-if=" this.tabContent1==5" :applyId='list.applyId' :FinalConCheckShow='true'>信审表</FCreditForm>
             <keep-alive v-if="Routes.closed">
-              <creditInvestigation v-if=" this.tabContent1==7" :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>
+              <creditInvestigation v-if=" this.tabContent1==6" :applyId='list.applyId'>实地征信</creditInvestigation>
             </keep-alive>
-            <aAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aAntiApplyInf>
-            <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'>
+            <aAntiApplyInf v-if=" this.tabContent1==7" :applyId='list.applyId'>反欺诈结论</aAntiApplyInf>
+            <RantiFraudInvestigation v-if=" this.tabContent1==8" :isShow='false' :applyId='list.applyId'>
               反欺诈调查</RantiFraudInvestigation>
             <keep-alive v-if="Routes.closed">
-              <RFinanceInformation v-if=" this.tabContent1==10">财务信息</RFinanceInformation>
+              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
             </keep-alive>
             <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
               <!-- 专员部分 -->
-              <QTAprovalConclution v-if=" this.tabContent1==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <aAprovalConclusion v-if=" this.tabContent1==12 " :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
-              <processTrajectory v-if=" this.tabContent1==13" :applyId='tastwaitingPass.ApplyId'>流程轨迹</processTrajectory>
+              <QTAprovalConclution v-if=" this.tabContent1==10 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <aAprovalConclusion v-if=" this.tabContent1==11 " :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
+              <processTrajectory v-if=" this.tabContent1==12" :applyId='list.applyId'>流程轨迹</processTrajectory>
               <!-- <regularQT v-if=" this.tabContent1==14&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==14&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
             </div>
             <div class='tab2_Content_show' v-if="RoleSHow=='partTwo'">
               <!-- 主管部分 -->
-              <processTrajectory v-if=" this.tabContent1==11" :applyId='tastwaitingPass.ApplyId'>流程轨迹</processTrajectory>
+              <processTrajectory v-if=" this.tabContent1==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
               <!-- <regularQT v-if=" this.tabContent1==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
             </div>
             <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
               <!-- 质检部分 -->
               <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <aAprovalConclusion v-if=" this.tabContent1==12" :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
+              <aAprovalConclusion v-if=" this.tabContent1==12" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
               <ComplianceProcess v-if=" this.tabContent1==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-              <RulesReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
+              <RulesReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='list.applyId'>合规复议申请</RulesReApply>
               <!-- <regularQT v-if=" this.tabContent1==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
             </div>
@@ -101,45 +103,46 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.ApplyId'></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='list.applyId'></AudioVisual>
           </keep-alive>
-          <remark v-if=" this.tabContent2==1" :applyId='tastwaitingPass.ApplyId'></remark>
-          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
+          <remark v-if=" this.tabContent2==1" :applyId='list.applyId'></remark>
+          <InternalMatch v-if=" this.tabContent2==2" :listInf='list'></InternalMatch>
           <keep-alive v-if="Routes.closed">
-            <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='tastwaitingPass.ApplyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
+            <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
           </keep-alive>
-          <RborrowerInformationSetail v-if=" this.tabContent2==4" >借款人资料</RborrowerInformationSetail>
-          <PhoneCredit v-if=" this.tabContent2==5"  :applyId='tastwaitingPass.ApplyId'  :SubNo='tastwaitingPass.applySubNo' :addBtn="false"> 电话征信</PhoneCredit>
-          <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
-          <keep-alive v-if="Routes.closed">
-            <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.ApplyId'></creditInvestigation>
-          </keep-alive>
-          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aAntiApplyInf>
-          <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'>
+          <!-- <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail> -->
+          <PhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false">
+            电话征信</PhoneCredit>
+          <FCreditForm v-if=" this.tabContent2==5" :applyId='list.applyId' :FinalConCheckShow='true'>信审表</FCreditForm>
+          <!-- <keep-alive v-if="Routes.closed">
+            <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'></creditInvestigation>
+          </keep-alive> -->
+          <aAntiApplyInf v-if=" this.tabContent2==6" :applyId='list.applyId'>反欺诈结论</aAntiApplyInf>
+          <RantiFraudInvestigation v-if=" this.tabContent2==7" :isShow='false' :applyId='list.applyId'>
             反欺诈调查</RantiFraudInvestigation>
           <keep-alive v-if="Routes.closed">
-            <RFinanceInformation v-if=" this.tabContent2==10">财务信息</RFinanceInformation>
+            <RFinanceInformation v-if=" this.tabContent2==8">财务信息</RFinanceInformation>
           </keep-alive>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
             <!-- 专员部分 -->
-            <QTAprovalConclution v-if=" this.tabContent2==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <aAprovalConclusion v-if=" this.tabContent2==12 " :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
-            <processTrajectory v-if=" this.tabContent2==13" :applyId='tastwaitingPass.ApplyId'>流程轨迹</processTrajectory>
-            <regularQT v-if=" this.tabContent2==14&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-            <QTResultCheck v-if=" this.tabContent2==14&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            <QTAprovalConclution v-if=" this.tabContent2=9 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+            <aAprovalConclusion v-if=" this.tabContent2==10 " :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
+            <processTrajectory v-if=" this.tabContent2==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
+            <regularQT v-if=" this.tabContent2==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+            <QTResultCheck v-if=" this.tabContent2==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partTwo'">
             <!-- 主管部分 -->
-            <processTrajectory v-if=" this.tabContent2==11" :applyId='tastwaitingPass.ApplyId'>流程轨迹</processTrajectory>
+            <processTrajectory v-if=" this.tabContent2==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
             <regularQT v-if=" this.tabContent2==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
             <!-- 质检部分 -->
             <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='tastwaitingPass.ApplyId'>审批结论轨迹</aAprovalConclusion>
+            <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
             <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-            <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
+            <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark' :applyId='list.applyId'>合规复议申请</RulesReApply>
             <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
@@ -177,8 +180,8 @@
   import AudioVisual from "./detailComponent/AudioVisual.vue";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft.vue";
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
-  import processTrajectory from'./checkComponent/processTrajectory.vue';//流程轨迹
-  import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
+  import processTrajectory from './checkComponent/processTrajectory.vue'; //流程轨迹
+  // import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import applicationInformationDetail from "./checkComponent/applicationInformationDetail.vue"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import aAprovalConclusion from "../AntiFraud/components/aAprovalConclusion.vue"; //信审审批结论轨迹
@@ -197,8 +200,8 @@
     data() {
       return {
         accepCusBasicInfo: {},
-        tastwaitingPass: {},
         list: {},
+        // list: {},
         QTConclutionMark: "",
         TaskList: '',
         LocalList: '',
@@ -216,7 +219,7 @@
         CompareAlert: false,
         title: "",
         isShow: false,
-        flexible: true,
+        FullScreenShow: true,
         tabContent1: 0,
         tabContent2: 3,
         tabActiveInd1: 0,
@@ -224,12 +227,16 @@
         items1: [],
         items2: [],
         itemsTrial1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息',
-          "反欺诈审批结论轨迹", '信审审批结论轨迹','流程轨迹'
+          "反欺诈审批结论轨迹", '信审审批结论轨迹', '流程轨迹'
         ],
         itemsTrial2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
-          "反欺诈审批结论轨迹", "信审审批结论轨迹",'流程轨迹', '质检结论'],
-        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息','流程轨迹'],
-        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息','流程轨迹',
+          "反欺诈审批结论轨迹", "信审审批结论轨迹", '流程轨迹', '质检结论'
+        ],
+        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
+          '流程轨迹'
+        ],
+        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
+          '流程轨迹',
           '质检结论'
         ],
         itemsQT1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息',
@@ -243,8 +250,8 @@
         ],
         tab1Index: 0,
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true,true],
-        flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true], //16
+        flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], //16
         AlertSearch: "",
         midShow: true,
         QTC: {
@@ -267,13 +274,15 @@
         if (to.path === '/MatchingInfQT' && this.$route.meta.newOne) {
           this.Routes.closed = false;
           this.accepCusBasicInfo = {};
-          this.list = {};
+          // this.list = {};
           this.mountedInf();
           this.title = "影像资料";
           this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
-          this.flag1 = [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true,true];
-          this.flag2 = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true];
+          this.flag1 = [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true];
+          this.flag2 = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            true
+          ];
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
           this.CompareAlert = false; //关闭弹出层
@@ -293,9 +302,11 @@
       },
       compBtnS() {
         this.CompareAlert = true;
+        this.FullScreenShow = false;
       },
       closeCompareBtn() {
         this.CompareAlert = false;
+        this.FullScreenShow = true;
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
@@ -317,11 +328,9 @@
       },
       showList() {
         this.$refs.Left_title.style.left = "9px";
-        this.flexible = false;
       },
       hid() {
         this.$refs.Left_title.style.left = "-200px";
-        this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
@@ -353,9 +362,8 @@
           this.flag2[i] = true;
         }
         this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act";
-        if (ind != 0 && ind != 8) {
-          this.flag2[ind] = false;
-        }
+        if (ind > 0 && ind < 6) this.flag2[ind] = false;
+        if (ind > 6) this.flag2[ind - 1] = false; //点击tab1，tab2对应下标-1 不可点击，所以不用分角色
       },
       tab2(ev, ind, val) {
         this.tabContent2 = ind;
@@ -366,8 +374,14 @@
           this.flag1[i] = true;
         }
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
-        if (ind != 0 && ind != 8) {
-          this.flag1[ind] = false;
+        if (ind > 0 && ind < 6) this.flag1[ind] = false;
+        if (ind >= 6) {
+          let len = 0; //tab1的长度
+          if ((this.LocalList == 'QTTaskWait' || this.LocalList == 'QTManagerTW')) len = this.itemsTrial1.length - 1; //设置不可点击的下标--最后一位下标值   //专员、主管
+          else if (this.LocalList == 'QTSelfTW') len = this.itemsManager1.length - 1; //本人
+          else len = this.itemsQT1.length - 1;
+          // 选中最后结论页，左侧最后一位可点击
+          if (ind != len) this.flag1[ind + 1] = false;
         }
       },
       MyMove() {
@@ -458,11 +472,11 @@
         this.title = "影像资料";
         this.loading = true;
         this.initialInfo(); //判断角色   
-        this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
-        this.QTC.applyId = this.tastwaitingPass.ApplyId;
-        this.$set(this.list, 'applyId', this.tastwaitingPass.ApplyId); //将matchApplyId 赋值给 入参applyId
-        this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
-        this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
+        this.QTC.tastwaitingPass = this.list = JSON.parse(localStorage.getItem(this.LocalList));
+        this.QTC.applyId = this.list.applyId;
+        // this.$set(this.list, 'applyId', this.tastwaitingPass.applyId); //将matchApplyId 赋值给 入参applyId
+        // this.$set(this.list, 'applySubNo', this.tastwaitingPass.applySubNo);
+        // this.$set(this.list, 'certCode', this.tastwaitingPass.certCode);
       },
     },
     mounted() {
@@ -477,7 +491,7 @@
       processTrajectory,
       FCreditForm,
       applicationInformationDetail,
-      RborrowerInformationSetail, //借款人资料
+      // RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息
       aAprovalConclusion, //信审审批结论归结
       remark, // 备注信息

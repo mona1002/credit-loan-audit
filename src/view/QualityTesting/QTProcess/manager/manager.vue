@@ -111,7 +111,8 @@
         Date: this._getDate(),
         query: {
           id: '',
-          ApplyId: "",
+          // ApplyId: "",
+          applyId: "",
           taskId: '',
           processInstanceId: '',
           listType: '',
@@ -119,7 +120,7 @@
         },
         QTquery: {
           id: '',
-          matchApplyId: "",
+          // matchApplyId: "",
           applySubNo: ''
         },
         reg: /(\w{6})\w*(\w{4})/,
@@ -313,7 +314,8 @@
           }
         }
         this.QTquery.id = this.query.id = val.id;
-        this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        // this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        this.query.applyId = val.applyId;
         this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
