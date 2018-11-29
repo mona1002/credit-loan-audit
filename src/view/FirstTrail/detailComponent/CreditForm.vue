@@ -262,7 +262,7 @@
                   </el-date-picker>
                 </template>
               </el-table-column>
-              <el-table-column prop="loanContValue" label="贷款合同金额[元]" width="120">
+              <el-table-column prop="loanContValue" label="贷款合同金额[元]" width="130">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.loanContValue" @blur="moneyBlur(scope.row,'loanContValue')" placeholder="请输入内容"></el-input>
                 </template>
@@ -283,7 +283,7 @@
                   <el-input v-model="scope.row.remainMonth" @blur="postcode(scope.row,'remainMonth')" placeholder="请输入内容"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="presentRepayAmt" label="本期应还款金额[元]" width="135">
+              <el-table-column prop="presentRepayAmt" label="本期应还款金额[元]" width="145">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.presentRepayAmt" @blur="moneyBlur(scope.row,'presentRepayAmt')"
                     placeholder="请输入内容"></el-input>

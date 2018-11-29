@@ -164,7 +164,7 @@
             </el-table-column>
             <el-table-column prop="loanExpireDate" label="贷款到期日期" width="155">
             </el-table-column>
-            <el-table-column prop="loanContValue" label="贷款合同金额[元]" width="120">
+            <el-table-column prop="loanContValue" label="贷款合同金额[元]" width="130">
             </el-table-column>
             <el-table-column prop="loanRepayDate" label="应还款日期" width="155">
             </el-table-column>
@@ -172,7 +172,7 @@
             </el-table-column>
             <el-table-column prop="remainMonth" label="剩余还款月数" width="120">
             </el-table-column>
-            <el-table-column prop="presentRepayAmt" label="本期应还款金额[元]" width="135">
+            <el-table-column prop="presentRepayAmt" label="本期应还款金额[元]" width="145">
             </el-table-column>
             <el-table-column prop="curMonthRepayAmt" label="本期实际还款金额[元]" width="150">
             </el-table-column>

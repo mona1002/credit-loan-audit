@@ -58,7 +58,7 @@
         <el-col :span="6" class="search-item">
           <span class="keywordText">借款期限[月]： </span>
           <el-select v-model="params.loanTerm" placeholder="请选择">
-            <el-option v-for="item in loanExp" :key="item.appDuration" :label="item.appDuration" :value="item.appDuration">
+            <el-option v-for="item in loanExp" :key="item.code" :label="item.code" :value="item.code">
             </el-option>
           </el-select>
         </el-col>
@@ -1157,9 +1157,9 @@
               endDate = new Date(this.expiritionDate[1].replace(/-/g, '/')).getTime();
             var expday = (endDate - beginDate) / (1000 * 3600 * 24);
           }
-          if (Payday > 31) return this.$message.error('查询条件【应还款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
-          if (loanday > 31) return this.$message.error('查询条件【放款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
-          if (expday > 31) return this.$message.error('查询条件【还款到期日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+          if (Payday > 31) return this._error('查询条件【应还款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+          if (loanday > 31) return this._error('查询条件【放款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+          if (expday > 31) return this._error('查询条件【还款到期日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
         }
         // 日期入参
         // 放款日期
@@ -1603,7 +1603,7 @@
               this.getData = {};
             }
           } else {
-            this.$message.error(res.msg);
+            this._error(res.msg);
           }
         });
       },
@@ -1614,7 +1614,7 @@
               this.production.push(res.data[k])
             }
           } else {
-            this.$message.error(res.msg);
+            this._error(res.msg);
           }
         })
       },
@@ -1623,7 +1623,7 @@
           if (res.statusCode == 200) {
             this.loanExp = res.data;
           } else {
-            this.$message.error('获取借款期限失败！');
+            this._error('获取借款期限失败！');
           }
         })
       },
@@ -1637,7 +1637,7 @@
           if (res.statusCode == 200) {
             this.agency = res.data;
           } else {
-            this.$message.error('获取进件机构失败！');
+            this._error('获取进件机构失败！');
           }
         })
       },
@@ -1651,7 +1651,7 @@
             this.BankName = res.data.rows;
             this.BankTotal = res.data.total;
           } else {
-            this.$message.error('获取进件机构失败！');
+            this._error('获取进件机构失败！');
           }
         })
       },
