@@ -530,11 +530,13 @@
 .CreditForm .el-input__icon {
   line-height: 30px;
 }
+
 /*  */
-.CreditForm .table_datePicker .el-date-editor.el-input, 
-.CreditForm .table_datePicker .el-date-editor.el-input__inner{
-width:140px;
+.CreditForm .table_datePicker .el-date-editor.el-input,
+.CreditForm .table_datePicker .el-date-editor.el-input__inner {
+  width: 140px;
 }
+
 /* 信审表：初审结果评价textarea宽度 */
 
 .CreditForm .CreditForm_result .el-textarea {
@@ -554,6 +556,7 @@ width:140px;
 .CreditForm .FinalConclution .el-textarea__inner {
   width: 100%;
 }
+
 /* el 必填项提示语 */
 .CreditForm .el_hint_word .el-form-item__error {
   left: 230px;
@@ -1646,4 +1649,12 @@ body .el-menu--horizontal .el-menu .el-submenu__title {
 
 body .el-message {
   z-index: 9999 !important;
+}
+
+/* 可输入搜索框宽度调整，避免下拉框字段长折行（例如申请台账的进件机构查询条件），如测试有问题，需撤回此处（删掉下面的样式） */
+body .el-
+autocomplete-suggestion.el-popper.my-autocomplete {
+  max-width: 300px;
+  width: auto !important;
+  min-width: 200px;
 }

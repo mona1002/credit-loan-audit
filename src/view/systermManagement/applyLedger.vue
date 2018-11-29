@@ -75,7 +75,7 @@
         <el-col :span="6" class="search-item">
           <span class="keywordText">借款期限[月]： </span>
           <el-select v-model="params.loanTerm" placeholder="请选择">
-            <el-option v-for="item in loanExp" :key="item.appDuration" :label="item.appDuration" :value="item.appDuration">
+            <el-option v-for="item in loanExp" :key="item.code" :label="item.code" :value="item.code">
             </el-option>
           </el-select>
         </el-col>
