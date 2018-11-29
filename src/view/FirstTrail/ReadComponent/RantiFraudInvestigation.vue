@@ -9,15 +9,15 @@
         </template>
         <div class="height_auto">
           <el-table :data="tableData" style="width: 100%" @row-dblclick='searchInf' border>
-            <el-table-column prop="creatTime" label="提报时间" width="150">
+            <el-table-column prop="creatTime" label="提报时间" width="160">
             </el-table-column>
-            <el-table-column prop="applySubno" label="进件编号" width="160">
+            <el-table-column prop="applySubno" label="进件编号" width="170">
             </el-table-column>
             <el-table-column prop="caseNum" label="案件编号" width="175">
             </el-table-column>
             <el-table-column prop="applyCustName" label="客户姓名" width="100">
             </el-table-column>
-            <el-table-column prop="certCode" label="身份证号" width="160">
+            <el-table-column prop="certCode" label="身份证号" width="170">
             </el-table-column>
             <el-table-column prop="proName" label="申请产品" width="100">
             </el-table-column>

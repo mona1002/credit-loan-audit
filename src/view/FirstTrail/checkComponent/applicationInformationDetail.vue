@@ -1039,11 +1039,10 @@
               this.$router.push('/IntegratedQuery')
             } else if (this.roles == 'TaskManagement') { //审批任务管理-详情
               this.del('审批任务管理-详情');
-              // this.$router.push('/TaskManagementSplit')
-              window.history.go(-1);
+              this.$router.go(-1);
             } else if (this.roles == 'MatchingInf') { //匹配信息-查看
               this.del('匹配信息-查看');
-              this.$router.push('/MatchingInf')
+              this.$router.go(-1);
             } else if (this.roles == 'applyLedger') { //申请台账
               this.del('申请台账-详情');
               this.$router.push('/applyLedger')

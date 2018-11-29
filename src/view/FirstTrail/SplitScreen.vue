@@ -22,8 +22,7 @@
         </div>
         <div ref="Left_detail" class="Left_detail_div">
           <p class="Left_right_Title"> {{this.title}}
-            <span class="icon_FullScreen" @click="FullScreen">
-            </span>
+            <span class="icon_FullScreen" @click="FullScreen" v-if="FullScreenShow"> </span>
             <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
               <img src="../../../static/images/icon-02.png">
             </span>
@@ -37,13 +36,13 @@
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'></capplicationInformationDetail>
             </keep-alive>
-            <cborrowerInformationDetail v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
-            <PhoneCredit v-if=" this.tabContent1==5"  :applyId='list.applyId'   :SubNo='list.applySubNo'  :addBtn="false"></PhoneCredit>
-            <FCreditForm v-if=" this.tabContent1==6" :applyId='list.applyId' :PhoneAndInterShow="false"></FCreditForm>
+            <!-- <cborrowerInformationDetail v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail> -->
+            <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+            <FCreditForm v-if=" this.tabContent1==5" :applyId='list.applyId' :PhoneAndInterShow="false"></FCreditForm>
             <keep-alive v-if="Routes.closed">
-              <creditInvestigation v-if=" this.tabContent1==7" :applyId='list.applyId'></creditInvestigation>
+              <creditInvestigation v-if=" this.tabContent1==6" :applyId='list.applyId'></creditInvestigation>
             </keep-alive>
-            <processTrajectory v-if=" this.tabContent1==8" :applyId='list.applyId'></processTrajectory>
+            <processTrajectory v-if=" this.tabContent1==7" :applyId='list.applyId'></processTrajectory>
           </div>
         </div>
       </div>
@@ -78,14 +77,14 @@
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='creditApp_firstTrial'
               :btn="true"></capplicationInformationDetail>
           </keep-alive>
-          <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
-          <PhoneCredit v-if=" this.tabContent2==5"  :applyId='list.applyId'  :SubNo='list.applySubNo' :addBtn="true"></PhoneCredit>
-          <CreditForm  v-if=" this.tabContent2==6"></CreditForm>
-          <keep-alive v-if="Routes.closed">
-            <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'></creditInvestigation>
-          </keep-alive>
-          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='list.applyId'></aAntiApplyInf>
-          <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+          <!-- <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation> -->
+          <PhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="true"></PhoneCredit>
+          <CreditForm v-if=" this.tabContent2==5"></CreditForm>
+          <!-- <keep-alive v-if="Routes.closed">
+            <creditInvestigation v-if=" this.tabContent2==6" :applyId='list.applyId'></creditInvestigation>
+          </keep-alive> -->
+          <aAntiApplyInf v-if=" this.tabContent2==6" :applyId='list.applyId'></aAntiApplyInf>
+          <CreditApproval v-if=" this.tabContent2==7"></CreditApproval>
         </div>
       </div>
       <!-- 对比弹出层  -->
@@ -122,7 +121,7 @@
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
-  import borrowerInformation from "./detailComponent/borrowerInformation";
+  // // import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
   import FCreditForm from "../FinalTrial/FCreditForm.vue";
@@ -145,13 +144,13 @@
         CompareAlert: false,
         title: "",
         isShow: false,
-        flexible: true,
+        FullScreenShow: true,
         tabContent1: 0,
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹"],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "实地征信", "流程轨迹"],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "反欺诈结论", "信审审批"],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true],
@@ -210,9 +209,11 @@
       },
       compBtnS() {
         this.CompareAlert = true;
+        this.FullScreenShow = false;
       },
       closeCompareBtn() {
         this.CompareAlert = false;
+        this.FullScreenShow = true;
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
@@ -230,11 +231,9 @@
       },
       showList() {
         this.$refs.Left_title.style.left = "9px";
-        this.flexible = false;
       },
       hid() {
         this.$refs.Left_title.style.left = "-200px";
-        this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
@@ -264,7 +263,7 @@
           this.flag2[i] = true;
         }
         this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act";
-        if (ind != 0 && ind != 8) {
+        if (ind> 0 && ind < 6 ) {
           this.flag2[ind] = false;
         }
       },
@@ -277,7 +276,7 @@
           this.flag1[i] = true;
         }
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
-        if (ind != 0 && ind != 8) {
+        if (ind> 0 && ind < 6 ) {
           this.flag1[ind] = false;
         }
       },
@@ -336,7 +335,7 @@
       AudioVisualLeft,
       remark,
       InternalMatch,
-      borrowerInformation,
+      // borrowerInformation,
       PhoneCredit,
       CreditForm,
       FCreditForm,

@@ -22,8 +22,7 @@
         </div>
         <div ref="Left_detail" class="Left_detail_div">
           <p class="Left_right_Title"> {{this.title}}
-            <span class="icon_FullScreen" @click="FullScreen">
-            </span>
+            <span class="icon_FullScreen" @click="FullScreen" v-if="FullScreenShow"></span>
             <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
               <img src="../../../static/images/icon-02.png">
             </span>
@@ -32,19 +31,19 @@
             <keep-alive v-if="Routes.closed">
               <AudioVisualLeft v-if=" this.tabContent1==0" msg="FspLone" :list='list' v-on:CompareShow="compBtnS"></AudioVisualLeft>
             </keep-alive>
-            <remark v-if=" this.tabContent1==1" :applyId='list.applyId' ></remark>
-            <InternalMatch v-if=" this.tabContent1==2"  :listInf='list'></InternalMatch>
+            <remark v-if=" this.tabContent1==1" :applyId='list.applyId'></remark>
+            <InternalMatch v-if=" this.tabContent1==2" :listInf='list'></InternalMatch>
             <keep-alive v-if="Routes.closed">
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'></capplicationInformationDetail>
             </keep-alive>
-            <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-            <PhoneCredit v-if=" this.tabContent1==5"  :applyId='list.applyId'  :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
-            <FCreditForm v-if=" this.tabContent1==6" :applyId=' this.list.applyId' :TrilPersonShow='true'
+            <!-- <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail> -->
+            <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+            <FCreditForm v-if=" this.tabContent1==5" :applyId=' this.list.applyId' :TrilPersonShow='true'
               :FinalConCheckShow='true'></FCreditForm>
             <keep-alive v-if="Routes.closed">
-              <creditInvestigation v-if=" this.tabContent1==7" :applyId='list.applyId'></creditInvestigation>
+              <creditInvestigation v-if=" this.tabContent1==6" :applyId='list.applyId'></creditInvestigation>
             </keep-alive>
-            <processTrajectory v-if=" this.tabContent1==8" :applyId='list.applyId'></processTrajectory>
+            <processTrajectory v-if=" this.tabContent1==7" :applyId='list.applyId'></processTrajectory>
           </div>
         </div>
       </div>
@@ -70,36 +69,36 @@
         </div>
         <div class="tab2_Content">
           <keep-alive v-if="Routes.closed">
-            <AudioVisual v-if=" this.tabContent2==0"  :applyId='list.applyId'></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='list.applyId'></AudioVisual>
           </keep-alive>
-          <remark v-if=" this.tabContent2==1"  :btnShow='true' :applyId='list.applyId'></remark>
+          <remark v-if=" this.tabContent2==1" :btnShow='true' :applyId='list.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2" :listInf='list'></InternalMatch>
           <!-- ref="applicationInf" -->
           <keep-alive v-if="Routes.closed">
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='creditApp_finalTrial'
               :btn="true"></capplicationInformationDetail>
           </keep-alive>
-          <cborrowerInformationDetail v-if=" this.tabContent2==4" ></cborrowerInformationDetail>
-          <PhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId'  :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
-          <FCreditForm v-if=" this.tabContent2==6" :applyId=' list.applyId' :TrilPersonShow='true'
-            :FinalConEditShow='true' :makeSureBtnShow="true"></FCreditForm>
-          <keep-alive v-if="Routes.closed">
+          <!-- <cborrowerInformationDetail v-if=" this.tabContent2==4"></cborrowerInformationDetail> -->
+          <PhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+          <FCreditForm v-if=" this.tabContent2==5" :applyId=' list.applyId' :TrilPersonShow='true' :FinalConEditShow='true'
+            :makeSureBtnShow="true"></FCreditForm>
+          <!-- <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==7" :applyId=' list.applyId'></creditInvestigation>
-          </keep-alive>
-          <aAntiApplyInf v-if=" this.tabContent2==8" :applyId='list.applyId'></aAntiApplyInf>
-          <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+          </keep-alive> -->
+          <aAntiApplyInf v-if=" this.tabContent2==6" :applyId='list.applyId'></aAntiApplyInf>
+          <CreditApproval v-if=" this.tabContent2==7"></CreditApproval>
         </div>
       </div>
-          <!-- 对比弹出层-->
-    <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
-      <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
-      <!-- <div class="AudioVisual_wrap_compare_left ">
+      <!-- 对比弹出层-->
+      <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
+        <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
+        <!-- <div class="AudioVisual_wrap_compare_left ">
         <p>影像资料</p>
         <div class="AlertContent">
          <keep-alive v-if="Routes.closed"> <AudioVisualLeft  :list='list'   msg="FspLtwo" :comBtn='false'></AudioVisualLeft></keep-alive>
         </div>
       </div> -->
-      <!-- <div class="AudioVisual_wrap_compare_right "> -->
+        <!-- <div class="AudioVisual_wrap_compare_right "> -->
         <p class="customName Left_right_Title">客户名称：
           <el-input v-model="AlertSearch" :disabled="true"></el-input>
           <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
@@ -107,10 +106,12 @@
           </el-button>
         </p>
         <div class="AlertContent">
-         <keep-alive v-if="Routes.closed"> <AudioVisualLeft  ref="audioChild"  :list='list' v-on:inputInf="inputInner"  :comBtn='false' msg="FspLthree"></AudioVisualLeft></keep-alive>
+          <keep-alive v-if="Routes.closed">
+            <AudioVisualLeft ref="audioChild" :list='list' v-on:inputInf="inputInner" :comBtn='false' msg="FspLthree"></AudioVisualLeft>
+          </keep-alive>
         </div>
-      <!-- </div> -->
-    </div>
+        <!-- </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -120,7 +121,7 @@
   import AudioVisualLeft from '../FirstTrail/detailComponent/AudioVisualLeft';
   import remark from "../FirstTrail/detailComponent/remark.vue"; //备注信息-右-编辑
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息（左+右）
-  import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料（左+右）
+  // import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料（左+右）
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信（左右）
   import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹（左）
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
@@ -140,13 +141,13 @@
         CompareAlert: false,
         title: "",
         isShow: false,
-        flexible: true,
+        FullScreenShow: true,
         tabContent1: 0,
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹"],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "审核结论"],
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "实地征信", "流程轨迹"],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "反欺诈结论", "审核结论"],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true],
@@ -195,9 +196,11 @@
       },
       compBtnS() {
         this.CompareAlert = true;
+        this.FullScreenShow = false;
       },
       closeCompareBtn() {
         this.CompareAlert = false;
+        this.FullScreenShow = true;
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
@@ -215,11 +218,9 @@
       },
       showList() {
         this.$refs.Left_title.style.left = "9px";
-        this.flexible = false;
       },
       hid() {
         this.$refs.Left_title.style.left = "-200px";
-        this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
@@ -247,7 +248,7 @@
           this.flag2[i] = true;
         }
         this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act";
-        if (ind != 0 && ind != 8) {
+        if (ind> 0 && ind < 6 ) {
           this.flag2[ind] = false;
         }
       },
@@ -260,7 +261,7 @@
           this.flag1[i] = true;
         }
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
-        if (ind != 0 && ind != 8) {
+        if (ind> 0 && ind < 6 ) {
           this.flag1[ind] = false;
         }
       },
@@ -319,7 +320,7 @@
       AudioVisualLeft,
       AudioVisual,
       creditInvestigation,
-      cborrowerInformationDetail,
+      // cborrowerInformationDetail,
       capplicationInformationDetail,
       remark,
       processTrajectory,
