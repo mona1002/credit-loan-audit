@@ -108,7 +108,6 @@
         totalRecord: 0, //总条数
         Routes: this.$router.options.routes,
         subOrg: '',
-        orgCode: "",
         orgDatasEdit: [],
         defaultProps: {
           children: "children",
@@ -144,7 +143,7 @@
     methods: {
       getinstitution() {
         this.post('/credit/getSmOrg', {
-          orgCode: this.orgCode,
+          orgCode: '0',
           isCurrentOrgCode: '1',
           isVerifySysInfo: '01'
         }).then((res) => {
@@ -238,7 +237,6 @@
       },
     },
     created() {
-      this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
       this.getinstitution();
     }
   }
