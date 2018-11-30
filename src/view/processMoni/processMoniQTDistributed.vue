@@ -405,8 +405,8 @@
       getTransmitHistoryList(id) {
         processMoniSer.getTransmitHistoryList({
           params: {
-              processInstanceId: id,
-            }
+            processInstanceId: id,
+          }
         }).then(res => {
           this.transList = res.data.data.recordList;
         })
@@ -493,11 +493,9 @@
             return
           } else if (flag === 'assign') {
             var arr = this.multipleSelection;
-            var
-              fg = arr.every(function (item) {
-                return
-                item.taskNodeNameTxt === arr[0].taskNodeNameTxt
-              });
+            var fg = arr.every(function (item) {
+              return item.taskNodeNameTxt === arr[0].taskNodeNameTxt
+            });
             if (!fg) {
               this.alertMessage = "请选择相同 [任务节点] 的流程进行分派任务！ ";
               this.alertBox();
