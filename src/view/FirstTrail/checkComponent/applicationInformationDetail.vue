@@ -1156,6 +1156,14 @@
 
 </script>
 <style type="text/css" scoped>
+  .CreditForm_div_border {
+    border-bottom: 1px solid #eff2f6;
+  }
+
+  .checkedInf .text_area_span {
+    border: none;
+  }
+
   .ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;

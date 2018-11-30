@@ -360,7 +360,7 @@ body .pre_wrap {
   display: inline-block;
   height: 75px;
   overflow: auto;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   border: 1px solid #d8dce5;
   border-radius: 4px;
 }
@@ -775,7 +775,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 .CreditForm_div_border {
-  /* border-bottom: 1px solid #d8dce5; */
+  /* border-bottom: 1px solid #eff2f6; */
   /* border-bottom: 1px solid green; */
 }
 
