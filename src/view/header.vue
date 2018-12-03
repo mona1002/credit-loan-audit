@@ -90,7 +90,7 @@
         })
       },
       backLoin() {
-        window.location.href = UserURL + "#/workbench";
+        window.location.href = UserURL.path + "#/workbench";
         localStorage.clear();
       },
       le() {
