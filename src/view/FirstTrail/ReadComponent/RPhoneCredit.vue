@@ -1,4 +1,4 @@
-<!-- 电话征信  综合查询 -->
+<!-- 电话征信  综合查询  -->
 <template>
   <div class="phone-credit min_width_1200">
     <el-container style="height: 100%; border: 1px solid #eee">

@@ -1,4 +1,4 @@
-<!-- 信审 - 审批 -->
+<!-- 信审 - 审批  -->
 <template>
   <div class="common_component_width creditApproval-class">
     <el-collapse v-model="activeName">

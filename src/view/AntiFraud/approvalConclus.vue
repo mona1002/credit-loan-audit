@@ -1,4 +1,4 @@
-<!-- 反欺诈  审批结论 -->
+<!-- 反欺诈   审批结论 -->
 <template>
   <div class="approval-colun">
     <div class="address-title">

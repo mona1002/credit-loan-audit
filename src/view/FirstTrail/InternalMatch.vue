@@ -1,4 +1,4 @@
-<template>
+<template> 
   <div class="internalMatch-class">
     <el-collapse v-model="activeNames">
       <!-- 客户历史贷款信息 -->
