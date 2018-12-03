@@ -55,7 +55,9 @@
 .margin_right_5 {
   margin-right: 5px;
 }
-
+.margin_right_25 {
+  margin-right: 25px;
+}
 .margin_left_5 {
   margin-left: 5px;
 }
@@ -185,6 +187,9 @@ body .Abody .height_120 {
 
 .float_left {
   float: left;
+}
+.float_right {
+  float: right;
 }
 
 body .pre_wrap {

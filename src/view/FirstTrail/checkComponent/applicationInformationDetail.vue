@@ -126,7 +126,7 @@
                 <span>{{accepApplyLoan.maxEachTermAmt|formatMoney}}</span>
               </li>
             </div>
-            <div class=" CreditForm_div_border clearFix">
+            <div class=" clearFix">
               <li>
                 <label class="label_width_166">借款类型：</label>
                 <span>{{accepApplyLoan.loanTypeTxt}}</span>
@@ -140,7 +140,7 @@
                 <span>{{accepApplyLoan.repaySourceTxt}}</span>
               </li>
             </div>
-            <li style="width:66.6%;height:auto;margin-top:5px" v-if="accepApplyLoan.repaySource=='03'">
+            <li class="borr_demand" v-if="accepApplyLoan.repaySource=='03'">
               <label class="label_width_166">其他渠道还款说明：</label>
               <el-tooltip class="item" effect="dark" :content="accepApplyLoan.loanPurposeNote" :disabled="accepApplyLoan.loanPurposeNote==null"
                 placement="top-start">
@@ -772,8 +772,7 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-    <!-- <div v-show="this.judgeFlag.flag == '01' || this.judgeFlag.flag == '02'"> -->
-    <div v-show="this.btn">
+    <div v-show="this.btn" class="float_right margin_top_15 margin_right_25">
       <el-button type="primary" @click="maintenanceLog">维护日志</el-button>
     </div>
     <!-- 维护日志弹框 -->
@@ -1168,6 +1167,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .borr_demand {
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+    margin-top: 0;
+    border-top: 1px solid #eff2f6;
   }
 
   /* 维护日志 */

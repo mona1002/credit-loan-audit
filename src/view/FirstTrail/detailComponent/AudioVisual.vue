@@ -95,7 +95,6 @@
         litimgIndex: -1,
         litimgInd: -1,
         perfBtn: false, //功能按钮
-        picType: '',
         opendImg: [],
         closedImg: [],
         showListDiv: true,
@@ -108,13 +107,13 @@
         // imgPath: [],
         picArrays: [],
         // pdfArrys: [],
-        pngAyyrs: [],
-        myPng: false,
-        myPdf: false,
-        style: '',
+        // pngAyyrs: [],
+        // myPng: false,
+        // myPdf: false,
+        // style: '',
         // SmallmyPic: false,
         // SmallmyPdf: false,
-        pdfTitle: '',
+        // pdfTitle: '',
 
       }
     },
@@ -161,7 +160,6 @@
         this.SmallPicShow = false;
       },
       SmallpicAlert() {
-        if (this.picType == 'pdf') {} else {}
         this.SmallPicShow = true;
       },
       pre() {
@@ -240,11 +238,11 @@
       },
       defaultBigPicCss() {
         this.$nextTick(() => {
-          if (this.myPdf) {
-            this.$refs.img_wrap.style.left = 0;
-            this.$refs.img_wrap.style.top = 0;
-            return
-          }
+          // if (this.myPdf) {
+          //   this.$refs.img_wrap.style.left = 0;
+          //   this.$refs.img_wrap.style.top = 0;
+          //   return
+          // }
           if (this.$refs.Big_pic_ref && this.$refs.Big_pic_ref.length > 0) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             this.$refs.img_wrap.style.left = 0;
@@ -291,9 +289,9 @@
         };
       },
       Imgscroll() {
-        if (this.myPdf) {
-          return
-        };
+        // if (this.myPdf) {
+        //   return
+        // };
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {

@@ -24,12 +24,12 @@ if (host === productionEnv) {
   host = "http://codeplatform.nuoyuan.com.cn/";
   gate = 'http://test-gateway.nuoyuan.com.cn/';
 } else {
-  host = "http://testplatform.nuoyuan.com.cn/";
+  // host = "http://testplatform.nuoyuan.com.cn/";
   host = "http://codeplatform.nuoyuan.com.cn/";
   gate = 'http://test-gateway.nuoyuan.com.cn/';
 }
 
 appConstantUser.path = host;
-// appConstantUser.gate = gate + 'users/';
-appConstantUser.gate = host;
+appConstantUser.gate = gate + 'users/';
+// appConstantUser.gate = host;
 export default appConstantUser
