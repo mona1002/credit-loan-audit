@@ -30,5 +30,6 @@ if (host === productionEnv) {
 }
 
 appConstantUser.path = host;
-appConstantUser.gate = gate + 'users/';
+// appConstantUser.gate = gate + 'users/';
+appConstantUser.gate = host;
 export default appConstantUser
