@@ -48,7 +48,7 @@
       <div ref="img_wrap" style="position:relative; left:0; top:0;height:99%;" id='FirstAud'>
         <div v-for="(val,key) in picArrays" :key="key" v-if="key==smallPicInd" @mouseenter='PerBtn'>
           <!-- 图片 -->
-          <img ref="Big_pic_ref" :src="val.imagePath" v-if="val.imagePath.slice(-3)!='pdf'" @dblclick='next' />
+          <img ref="Big_pic_ref" :src="val.imagePath" v-if="val.imagePath.slice(-3)!='pdf'" style="width:auto;height:auto;"  @dblclick='next' />
           <!-- pdf -->
           <div class="big_pic_pdf" v-else @dblclick='next'>
             <iframe id='previewPdf' :src="val.imagePath" height="100%" width="100%"> </iframe>
@@ -76,10 +76,11 @@
         <!--  v-show="SmallmyPic" -->
         <figure v-for="(val,index) in picArrays" :key="index" class="small_pic_figure">
           <div class="Small_pic">
-            <img :src="val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
+            <img :src="val.imagePath" @click="ChangeCss(index)" ref="small_pic_ref"
               v-if="val.imagePath.slice(-3)!='pdf'" />
-            <iframe id='previewPdf' :src="val.imagePath" height="100%" width="100%" v-else ref="small_pic_ref">
+            <iframe id='previewPdf' :src="val.imagePath" height="100%" width="100%" scrolling="no" v-else ref="small_pic_ref">
             </iframe>
+             <div class="big_pic_pdf" @dblclick="smallPic(index)"> </div>
           </div>
           <p>{{val.arcSubType}}</p>
         </figure>
@@ -230,7 +231,7 @@
       ChangeCss(ind) {
         this.changeSmallPicCss(ind);
       },
-      smallPic(ev, ind) {
+      smallPic( ind) {
         this.smallPicInd = ind;
         this.showPage = ind + 1;
         this.SmallPicShow = false;
@@ -419,12 +420,6 @@
     border-left: none;
   }
 
-  .big_pic_pdf {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-  }
+
 
 </style>

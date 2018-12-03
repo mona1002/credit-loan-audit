@@ -14,7 +14,7 @@
         <span>页数</span>
       </p>
       <el-collapse accordion>
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" v-if="item.imageCount&&item.imageCount>0">
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind">
           <template slot="title">
             <p>
               <!-- 一级节点 -->
@@ -24,7 +24,7 @@
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
-            <p v-for="(items,inds) in  item.child" :key="inds" @click.stop="getImg(inds,items)"  v-if="items.imageCount&&items.imageCount>0">
+            <p v-for="(items,inds) in  item.child" :key="inds" @click.stop="getImg(inds,items)">
               <el-tooltip class="item" effect="dark" :content="items.arcName" placement="right-end">
                 <span style="width:105px;marginLeft:20px;">{{items.arcName}}</span>
               </el-tooltip>
@@ -40,10 +40,18 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div ref="img_wrap" style="position:relative;" :id='msg'>
-        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="val.imagePath"
-          v-if="key==smallPicInd" v-show="myPng" @dblclick='next' />
-        <p v-show="myPdf" is="pdfDivLeft" ID='firstTirlLeft' v-bind:title="pdfArrys"></p>
+      <div ref="img_wrap" style="position:relative; left:0; top:0;height:99%;" :id='msg'>
+        <!--  @mouseenter='PerBtn' -->
+        <div v-for="(val,key) in picArrays" :key="key" v-if="key==smallPicInd">
+          <!-- 图片 -->
+          <!-- <img ref="Big_pic_ref" :src="val.imagePath" v-if="val.imagePath.slice(-3)!='pdf'" @dblclick='next' /> -->
+          <img ref="Big_pic_ref" style="width:auto;height:auto;" :src="val.imagePath" v-if="val.imagePath.slice(-3)!='pdf' "
+            @dblclick='next' />
+          <!-- pdf -->
+          <div class="big_pic_pdf" v-else @dblclick='next'>
+            <iframe id='firstTirlLeft' :src="val.imagePath" height="100%" width="100%"> </iframe>
+          </div>
+        </div>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre"
@@ -62,22 +70,18 @@
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
       <div class="small_pic_content">
-        <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
+        <figure v-for="(val,index) in picArrays" :key="index" class="small_pic_figure">
           <div class="Small_pic">
-            <img :src="val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
+            <img :src="val.imagePath" @click="ChangeCss(index)" ref="small_pic_ref" v-if="val.imagePath.slice(-3)!='pdf'" />
+            <iframe id='firstTirlLeftSmall' ref="small_pic_ref" v-else scrolling="no" :src="val.imagePath" height="100%" width="100%"> </iframe>
+            <!-- 点击iframe/图片触发事件-iframe点击事件问题 -->
+            <div class="big_pic_pdf" @dblclick="smallPic(index)"> </div>
           </div>
-          <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
-        </figure>
-        <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
-          <div class="Small_pic" @dblclick="pdfClose()">
-            <p is="pdfDivLeft" ID='firstTirlLeftSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap"
-              v-bind:title="pdfArrys" @dblclick="pdfClose()"></p>
-          </div>
-          <p> {{pdfTitle}} </p>
+          <p> {{val.arcSubType}} </p>
         </figure>
       </div>
     </div>
-    <div v-show="dataa" class="posi">
+    <div v-show="searchAlert" class="posi">
       <p>内部匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:12px" @click="closeAlertSearch"></i>
       </p>
@@ -115,15 +119,11 @@
   </div>
 </template>
 <script>
-  import pdfDivLeft from '../../pdf'
+  // import pdfDivLeft from '../../pdf'
   export default {
     data() {
       return {
         perfBtn: true,
-        judgeFlag: '',
-        opendImg: [],
-        closedImg: [],
-        picType: '',
         showListDiv: true,
         show: true,
         showPage: 0,
@@ -131,24 +131,14 @@
         SmallPicShow: false,
         CompareAlert: true,
         ListParent: [],
-        imgPath: [],
-        imgPathDetail: [],
-        // ----------------------------------
+        picArrays: [],
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
-        dataa: false,
+        searchAlert: false,
         personal: [], // 匹配查询-个人
         others: [], // 匹配查询-他人
         currentRow: null,
         custName: '',
         custmatchApplySubNo: '',
-        AULwrapWidth: null,
-        pdfArrys: [],
-        pngAyyrs: [],
-        myPng: false,
-        myPdf: false,
-        SmallmyPdf: false,
-        SmallmyPic: false,
-        pdfTitle: '',
         applyId: this.list.applyId,
         applySubNo: this.list.applySubNo,
         certCode: this.list.certCode
@@ -182,9 +172,6 @@
         // 恢复到初始状态
         this.pngAyyrs = [];
         this.pdfArrys = [];
-        this.SmallmyPic = false;
-        this.SmallmyPdf = false;
-        this.myPdf = false;
         this.SmallPicShow = false; //缩略图
         // 父菜单
         this.get('/productArchive/productArchives/' + this.applyId).then(res => {
@@ -199,7 +186,7 @@
         });
       },
       closeAlertSearch() {
-        this.dataa = false;
+        this.searchAlert = false;
       },
       handleCurrentChange(val) {
         this.currentRow = val;
@@ -208,7 +195,7 @@
         this.perfBtn = true;
       },
       personalNunPerson() {
-        this.dataa = true;
+        this.searchAlert = true;
         // 个人进件        
         this.post("/internalMatch/getPersonalInternalMatchList", {
           applySubNo: this.applySubNo,
@@ -237,15 +224,11 @@
         });
       },
       getParentList(id) {
-        // this.post("/productArchive/getProductArchiveParentList", {
-        //   applyId: id, //上面删除后 此处打开
-        // }).then(res => {
         this.get('/productArchive/productArchives/' + id).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
             this.applyId = id;
-            this.myPng = this.dataa = false;
-            this.opendImg = []; //-----------------------------待更新
+            this.searchAlert = false;
             this.custName = this.currentRow.matchApplyCustName;
             this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
             this.$emit('inputInf', this.custName, this.custmatchApplySubNo)
@@ -254,37 +237,18 @@
           }
         });
       },
-      // getChildrenList(id, ind, item) {
-
-      // },
-      smallPic(ev, ind) {
+      smallPic(ind) {
+        console.log(ind)
+        console.log(22222)
         this.smallPicInd = ind;
         this.showPage = ind + 1;
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
-      pdfClose() {
-        this.SmallPicShow = false;
-        this.showPage = 1;
-      },
       getImg(ind, item) {
-
         this.picArrays = item.imagePaths;
-        this.picType = this.picArrays[0].imagePath.slice(-3);
-        if (this.picType == 'pdf') {
-          this.pdfArrys = this.picArrays;
-          this.myPdf = true;
-          this.myPng = false;
-        } else {
-          this.pngAyyrs = this.picArrays;
-          this.myPng = true;
-          this.myPdf = false;
-        }
-        // this.pdfArrys = [];
-        // this.pngAyyrs = [];
         this.smallPicInd = 0;
         this.showPage = 1;
-        this.imgPath = this.picArrays[0].imagePath;
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -305,33 +269,12 @@
       },
       SmallpicClose() {
         this.SmallPicShow = false;
-        this.SmallmyPdf = false;
-        this.SmallmyPic = false;
       },
       SmallpicAlert() {
-        // this.SmallPicShow = true;
-        // if (this.myPdf) { //显示pdf
-        //   this.SmallmyPdf = true;
-        //   this.SmallmyPic = false;
-        //   this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
-        // } else { //显示图片
-        //   this.SmallmyPic = true;
-        //   this.SmallmyPdf = false;
-        // }
-        if (this.picType == 'pdf') {
-          this.pdfArrys = this.picArrays;
-          this.SmallmyPdf = true;
-          this.SmallmyPic = false;
-          this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
-        } else {
-          this.pngAyyrs = this.picArrays;
-          this.SmallmyPdf = false;
-          this.SmallmyPic = true;
-        }
         this.SmallPicShow = true;
       },
       pre() {
-        if (this.pngAyyrs.length != 0) {
+        if (this.picArrays.length != 0) {
           this.smallPicInd--;
           this.showPage--;
           if (this.$refs.small_pic_ref) {
@@ -344,7 +287,7 @@
         }
       },
       next() {
-        if (this.pngAyyrs.length != 0) {
+        if (this.picArrays.length != 0) {
           this.smallPicInd++;
           this.showPage++;
           if (this.$refs.small_pic_ref) {
@@ -357,14 +300,14 @@
         }
       },
       larger() {
-        if (this.$refs.Big_pic_ref) {
+        if (this.$refs.Big_pic_ref && this.$refs.Big_pic_ref.length > 0) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
             100 + "px";
           this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       smaller() {
-        if (this.$refs.Big_pic_ref) {
+        if (this.$refs.Big_pic_ref && this.$refs.Big_pic_ref.length > 0) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
             100 + "px";
           this.$refs.Big_pic_ref[0].style.width = "auto";
@@ -372,7 +315,7 @@
         this.$refs.img_wrap.scrollIntoView()
       },
       clockWise() {
-        if (this.$refs.Big_pic_ref) {
+        if (this.$refs.Big_pic_ref && this.$refs.Big_pic_ref.length > 0) {
           if (this.$refs.Big_pic_ref[0].style.transform == "") {
             this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
           } else {
@@ -384,7 +327,7 @@
         }
       },
       AclockWise() {
-        if (this.$refs.Big_pic_ref) {
+        if (this.$refs.Big_pic_ref && this.$refs.Big_pic_ref.length > 0) {
           if (this.$refs.Big_pic_ref[0].style.transform == "") {
             this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
           } else {
@@ -400,12 +343,7 @@
       },
       defaultBigPicCss() {
         this.$nextTick(() => {
-          if (this.myPdf) {
-            this.$refs.img_wrap.style.left = 0;
-            this.$refs.img_wrap.style.top = 0;
-            return
-          }
-          if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref && this.$refs.Big_pic_ref.length > 0) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             this.$refs.img_wrap.style.left = 0;
             this.$refs.img_wrap.style.top = 0;
@@ -452,31 +390,32 @@
         };
       },
       Imgscroll() {
-        if (this.myPdf) {
-          return
-        }
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
             event = event || window.event;
             if (event.wheelDelta < 0) {
-              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0],
+                  false).height) -
                 100 + "px";
               this.$refs.Big_pic_ref[0].style.width = "auto"
             } else {
-              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0],
+                  false).height) +
                 100 + "px";
               this.$refs.Big_pic_ref[0].style.width = "auto"
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
             if (event.detail > 0) {
-              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0],
+                    false)
                   .height) -
                 100 + "px";
               this.$refs.Big_pic_ref[0].style.width = "auto"
             } else {
-              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0],
+                    false)
                   .height) +
                 100 + "px";
               this.$refs.Big_pic_ref[0].style.width = "auto"
@@ -499,9 +438,6 @@
       this.odivMove(this.msg);
       this.mountedInf();
     },
-    components: {
-      pdfDivLeft
-    }
   }
 
 </script>
@@ -530,6 +466,7 @@
 
   .icon_pre {
     left: 223px;
+    z-index: 112;
   }
 
   .AudioVisualLeft .AudioVisual_Img {

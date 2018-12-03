@@ -55,9 +55,11 @@
 .margin_right_5 {
   margin-right: 5px;
 }
+
 .margin_right_25 {
   margin-right: 25px;
 }
+
 .margin_left_5 {
   margin-left: 5px;
 }
@@ -188,6 +190,7 @@ body .Abody .height_120 {
 .float_left {
   float: left;
 }
+
 .float_right {
   float: right;
 }
@@ -218,6 +221,7 @@ body .pre_wrap {
 .label_width_220 {
   width: 220px;
 }
+
 .label_width_210 {
   width: 210px;
 }
@@ -973,6 +977,14 @@ body .el-table_450_scroll .el-table__fixed-right {
   top: 13px;
 }
 
+.big_pic_pdf {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .NamParentNode {
   margin-left: 20px;
   display: block;
@@ -1071,19 +1083,11 @@ body .el-table_450_scroll .el-table__fixed-right {
   position: relative;
 }
 
-/* 缩略图 各个 img 图片 */
-/* .AudioVisual .Small_pic,
-.AudioVisualLeft .Small_pic {
-  height: calc( 100% - 60px);
-  border-radius: 5px;
-  border: 2px solid #bfcbd9;
-  box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
-  overflow: hidden;
-} */
 .AudioVisual .Small_pic,
 .AudioVisualLeft .Small_pic {
   height: calc(100% - 60px);
   overflow: hidden;
+  position: relative;
 }
 
 .AudioVisual .Small_pic img,
