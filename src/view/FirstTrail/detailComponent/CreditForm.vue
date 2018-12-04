@@ -193,10 +193,10 @@
                 <i class="title_icon_img deleteIcon"></i>
                 <span class="title_icon_span">删除</span>
               </span>
-              <span @click.stop="countNum">
+              <!-- <span @click.stop="countNum">
                 <i class="title_icon_img lineChartIcon"></i>
                 <span class="title_icon_span">统计</span>
-              </span>
+              </span> -->
             </div>
           </template>
           <div class="height_auto table_datePicker">
@@ -2057,14 +2057,9 @@
           applyId: this.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
-            console.log(res)
-            console.log(11, res.data)
             let resp = res.data;
-            console.log(resp)
             // 原借款人资料信息
             this.loanDetailList = resp.loanDetailList ? resp.loanDetailList : []; // 贷款明细
-            console.log(1, this.loanDetailList)
-            console.log(2, resp.loanDetailList)
             // this.borDebt = resp.borDebt ? resp.borDebt : {}; // 负债信息
             if (resp.borDebt && JSON.stringify(resp.borDebt) != '{}') { // 负债信息
               this.borDebt = resp.borDebt;
@@ -2096,7 +2091,6 @@
       },
       // 借款人资料部分
       postcode(value, flag) {
-        console.log(value, flag)
         switch (flag) {
           //剩余还款月数（贷款明细）
           case 'remainMonth':
@@ -2128,7 +2122,6 @@
       },
       moneyBlur(value, flag, type) {
         let regs = /\,/g;
-        console.log(1, value)
         if (flag == 'loanContValue') value.loanContValue = this._moneyBlur(value.loanContValue); //贷款合同金额
         if (flag == 'loanBal') value.loanBal = this._moneyBlur(value.loanBal); //贷款余额
         if (flag == 'presentRepayAmt') value.presentRepayAmt = this._moneyBlur(value.presentRepayAmt); //本期应还款金额
@@ -2180,12 +2173,7 @@
       totalNum() {
         this.borDebt.totalLoan = 0;
         for (var i = 0; i < this.arr.length; i++) {
-          // if (this.arr[i] == null) {
-          //   this.arr[i] = 0;
-          // } else if (this.arr[i] != null) {
-          // console.log(this.arr[i])
           this.borDebt.totalLoan += this.arr[i] * 1;
-          // }
         }
         this.borDebt.totalLoan = this._formatNumber(this.borDebt.totalLoan);
       },
@@ -2229,99 +2217,53 @@
           }
         }
       },
-      /*统计按钮*/
-      countNum(event) {
-        event.stopPropagation();
-        this.k = this.l = this.m = this.n = this.o = this.p = this.q = this.r = this.s = this.u = this.v = this.w = 0;
-        //车贷共有笔数
-        // this.k = this.l = this.m = 0;
-        // this.k = 0;
-        // this.l = 0;
-        // this.m = 0;
-        //信用贷共有笔数
-        // this.n = this.o = this.p = 0;
-        // this.n = 0;
-        //   this.o = 0;
-        //   this.p = 0;
-        //房贷共有笔数
-        // this.q = this.r = this.s = 0;
-        // this.q = 0;
-        // this.r = 0;
-        // this.s = 0;
-        //其他贷共有笔数
-        // this.u = this.v = this.w = 0;
-        // this.u = 0;
-        // this.v = 0;
-        // this.w = 0;
-        console.log(this.loanDetailList)
-        for (var i = 0; i < this.loanDetailList.length; i++) {
-          if (this.loanDetailList[i].loanType == '01') {
-            this.k += 1;
-            if (this.loanDetailList[i].accountStatus == '00') this.l += 1;
-            if (this.loanDetailList[i].accountStatus == '02') this.m += 1;
-          }
-          // if (this.loanDetailList[i].loanType == '01' && this.loanDetailList[i].accountStatus == '00') {
-          //   this.l += 1;
-          // }
-          // if (this.loanDetailList[i].loanType == '01' && this.loanDetailList[i].accountStatus == '02') {
-          //   this.m += 1;
-          // }
-          //信用贷
-          if (this.loanDetailList[i].loanType == '03') {
-            this.n += 1;
-            if (this.loanDetailList[i].accountStatus == '00') this.o += 1;
-            if (this.loanDetailList[i].accountStatus == '02') this.p += 1;
-          }
-          // if (this.loanDetailList[i].loanType == '03' && this.loanDetailList[i].accountStatus == '00') {
-          //   this.o += 1;
-          // }
-          // if (this.loanDetailList[i].loanType == '03' && this.loanDetailList[i].accountStatus == '02') {
-          //   this.p += 1;
-          // }
-          //房贷
-          if (this.loanDetailList[i].loanType == '02') {
-            this.q += 1;
-            if (this.loanDetailList[i].accountStatus == '00') this.r += 1;
-            if (this.loanDetailList[i].accountStatus == '02') this.s += 1;
-          }
-          // if (this.loanDetailList[i].loanType == '02' && this.loanDetailList[i].accountStatus == '00') {
-          //   this.r += 1;
-          // }
-          // if (this.loanDetailList[i].loanType == '02' && this.loanDetailList[i].accountStatus == '02') {
-          //   this.s += 1;
-          // }
-          //其他贷
-          if (this.loanDetailList[i].loanType == '04') {
-            this.u += 1;
-            if (this.loanDetailList[i].accountStatus == '00') this.v += 1;
-            if (this.loanDetailList[i].accountStatus == '02') this.w += 1;
-          }
-          // if (this.loanDetailList[i].loanType == '04' && this.loanDetailList[i].accountStatus == '00') {
-          //   this.v += 1;
-          // }
-          // if (this.loanDetailList[i].loanType == '04' && this.loanDetailList[i].accountStatus == '02') {
-          //   this.w += 1;
-          // }
-        };
-        //车贷
-        console.log('k',this.k)
-        this.loanInfo.carLoanTotal = this.k;
-        this.loanInfo.carLoanNoPayoff = this.l;
-        this.loanInfo.carLoanPayoff = this.m;
-        //信用贷
-        this.loanInfo.studentLoanTotal = this.n;
-        this.loanInfo.studentLoanNoPayoff = this.o;
-        this.loanInfo.studentLoanPayoff = this.p;
-        //房贷
-        this.loanInfo.houseLoanTotal = this.q;
-        this.loanInfo.houseLoanNoPayoff = this.r;
-        this.loanInfo.houseLoanPayoff = this.s;
-        //其他贷
-        this.loanInfo.otherLoanTotal = this.u;
-        this.loanInfo.otherLoanNoPayoff = this.v;
-        this.loanInfo.otherLoanPayoff = this.w;
-        console.log(11111,this.loanInfo.carLoanTotal)
-      },
+      // 统计
+      // countNum(event) {
+          // event.stopPropagation();
+          //  //车贷共有笔数 k l m    信用贷共有笔数n o p  房贷共有笔数 q r s   其他贷共有笔数 u v w 
+          // this.k = this.l = this.m = this.n = this.o = this.p = this.q = this.r = this.s = this.u = this.v = this.w = 0;
+          // for (var i = 0; i < this.loanDetailList.length; i++) {
+          //   if (this.loanDetailList[i].loanType == '01') {
+          //     this.k += 1;
+          //     if (this.loanDetailList[i].accountStatus == '00') this.l += 1;
+          //     if (this.loanDetailList[i].accountStatus == '02') this.m += 1;
+          //   }
+          //   //信用贷
+          //   if (this.loanDetailList[i].loanType == '03') {
+          //     this.n += 1;
+          //     if (this.loanDetailList[i].accountStatus == '00') this.o += 1;
+          //     if (this.loanDetailList[i].accountStatus == '02') this.p += 1;
+          //   }
+          //   //房贷
+          //   if (this.loanDetailList[i].loanType == '02') {
+          //     this.q += 1;
+          //     if (this.loanDetailList[i].accountStatus == '00') this.r += 1;
+          //     if (this.loanDetailList[i].accountStatus == '02') this.s += 1;
+          //   }
+          //   //其他贷
+          //   if (this.loanDetailList[i].loanType == '04') {
+          //     this.u += 1;
+          //     if (this.loanDetailList[i].accountStatus == '00') this.v += 1;
+          //     if (this.loanDetailList[i].accountStatus == '02') this.w += 1;
+          //   }
+          // };
+          // //车贷
+          // this.loanInfo.carLoanTotal = this.k;
+          // this.loanInfo.carLoanNoPayoff = this.l;
+          // this.loanInfo.carLoanPayoff = this.m;
+          // //信用贷
+          // this.loanInfo.studentLoanTotal = this.n;
+          // this.loanInfo.studentLoanNoPayoff = this.o;
+          // this.loanInfo.studentLoanPayoff = this.p;
+          // //房贷
+          // this.loanInfo.houseLoanTotal = this.q;
+          // this.loanInfo.houseLoanNoPayoff = this.r;
+          // this.loanInfo.houseLoanPayoff = this.s;
+          // //其他贷
+          // this.loanInfo.otherLoanTotal = this.u;
+          // this.loanInfo.otherLoanNoPayoff = this.v;
+          // this.loanInfo.otherLoanPayoff = this.w;
+      // },
       loanCurrentChange(val) {
         if (val == null) {
           this.currentRowLoan = '';
