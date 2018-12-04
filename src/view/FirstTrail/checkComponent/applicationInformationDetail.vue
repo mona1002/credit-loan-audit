@@ -1015,61 +1015,61 @@
             this.$parent.$data.loading = false;
           } else {
             this.$message.error(res.msg);
-            if (this.roles == 'creditApp_firstTrial') { // 初审 
-              this.del('初审详情');
-              this.$router.push('/taskInWaitting?taskNodeName=creditApp_firstTrial&flag=01');
-            } else if (this.roles == 'creditApp_finalTrial') { // 终审
-              this.del('终审详情');
-              window.history.go(-1);
-            } else if (this.roles == 'antiFraudApp_commissioner') { //反欺诈专员
-              this.del('反欺诈详情');
-              this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_commissioner&flag=03');
-            } else if (this.roles == 'antiFraudApp_manager') { //反欺诈主管
-              this.del('反欺诈详情');
-              this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_manager&flag=04');
-            } else if (this.roles == 'reconsiderApp_commissioner') { //复议-专员
-              this.del('复议详情');
-              this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
-            } else if (this.roles == 'reconsiderApp_manager') { //复议
-              this.del('复议详情');
-              this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
-            } else if (this.roles == 'MatchingInfQuery') { //综合查询-详情
-              this.del('综合查询-详情');
-              this.$router.push('/IntegratedQuery')
-            } else if (this.roles == 'TaskManagement') { //审批任务管理-详情
-              this.del('审批任务管理-详情');
-              this.$router.go(-1);
-            } else if (this.roles == 'MatchingInf') { //匹配信息-查看
-              this.del('匹配信息-查看');
-              this.$router.go(-1);
-            } else if (this.roles == 'applyLedger') { //申请台账
-              this.del('申请台账-详情');
-              this.$router.push('/applyLedger')
-            } else if (this.roles == 'borrowLedger') { //借款台账
-              this.del('借款台账-申请信息');
-              this.$router.push('/borrowLedger')
-            } else if (this.roles == 'checkApp_apply') { //质检-专员
-              this.del('质检详情');
-              this.$router.push('/commissioner?taskNodeName=checkApp_apply&flag=07')
-            } else if (this.roles == 'checkApp_check_manager') { //质检-主管
-              this.del('质检详情');
-              this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
-            } else if (this.roles == 'checkApp_trial_self') { //质检-初终审本人
-              this.del('质检详情');
-              this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
-            } else if (this.roles == 'checkApp_trial_manager') { //质检-初终审主管
-              this.del('质检详情');
-              this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
-            } else if (this.roles == 'checkApp_check_recon_manager') { //质检-主管复核（首次）
-              this.del('质检详情');
-              this.$router.push('/ReManagerTaskList?taskNodeName=checkApp_check_recon_manager&flag=11')
-            } else if (this.roles == 'checkApp_regional_manager') { //质检-区域经理复核
-              this.del('质检详情');
-              this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12')
-            } else if (this.roles == 'checkApp_compliance_manager') { //质检-合规经理复核
-              this.del('质检详情');
-              this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13')
-            }
+            // if (this.roles == 'creditApp_firstTrial') { // 初审 
+            //   this.del('初审详情');
+            //   this.$router.push('/taskInWaitting?taskNodeName=creditApp_firstTrial&flag=01');
+            // } else if (this.roles == 'creditApp_finalTrial') { // 终审
+            //   this.del('终审详情');
+            //   window.history.go(-1);
+            // } else if (this.roles == 'antiFraudApp_commissioner') { //反欺诈专员
+            //   this.del('反欺诈详情');
+            //   this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_commissioner&flag=03');
+            // } else if (this.roles == 'antiFraudApp_manager') { //反欺诈主管
+            //   this.del('反欺诈详情');
+            //   this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_manager&flag=04');
+            // } else if (this.roles == 'reconsiderApp_commissioner') { //复议-专员
+            //   this.del('复议详情');
+            //   this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
+            // } else if (this.roles == 'reconsiderApp_manager') { //复议
+            //   this.del('复议详情');
+            //   this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
+            // } else if (this.roles == 'MatchingInfQuery') { //综合查询-详情
+            //   this.del('综合查询-详情');
+            //   this.$router.push('/IntegratedQuery')
+            // } else if (this.roles == 'TaskManagement') { //审批任务管理-详情
+            //   this.del('审批任务管理-详情');
+            //   this.$router.go(-1);
+            // } else if (this.roles == 'MatchingInf') { //匹配信息-查看
+            //   this.del('匹配信息-查看');
+            //   this.$router.go(-1);
+            // } else if (this.roles == 'applyLedger') { //申请台账
+            //   this.del('申请台账-详情');
+            //   this.$router.push('/applyLedger')
+            // } else if (this.roles == 'borrowLedger') { //借款台账
+            //   this.del('借款台账-申请信息');
+            //   this.$router.push('/borrowLedger')
+            // } else if (this.roles == 'checkApp_apply') { //质检-专员
+            //   this.del('质检详情');
+            //   this.$router.push('/commissioner?taskNodeName=checkApp_apply&flag=07')
+            // } else if (this.roles == 'checkApp_check_manager') { //质检-主管
+            //   this.del('质检详情');
+            //   this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
+            // } else if (this.roles == 'checkApp_trial_self') { //质检-初终审本人
+            //   this.del('质检详情');
+            //   this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
+            // } else if (this.roles == 'checkApp_trial_manager') { //质检-初终审主管
+            //   this.del('质检详情');
+            //   this.$router.push('/manager?taskNodeName=checkApp_check_manager&flag=08')
+            // } else if (this.roles == 'checkApp_check_recon_manager') { //质检-主管复核（首次）
+            //   this.del('质检详情');
+            //   this.$router.push('/ReManagerTaskList?taskNodeName=checkApp_check_recon_manager&flag=11')
+            // } else if (this.roles == 'checkApp_regional_manager') { //质检-区域经理复核
+            //   this.del('质检详情');
+            //   this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12')
+            // } else if (this.roles == 'checkApp_compliance_manager') { //质检-合规经理复核
+            //   this.del('质检详情');
+            //   this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13')
+            // }
             this.$parent.$data.loading = false;
           }
         });

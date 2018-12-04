@@ -67,7 +67,8 @@
                 <label class="label_width_190">
                   <i class="required_Red">* </i>欺诈上报描述：</label>
                 <span>
-                  <el-input v-model="applyDesc" style='width:calc( 50% + 170px);' type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
+                  <el-input v-model="applyDesc" style='width:calc( 50% + 170px);' type="textarea" :rows="5" resize=none
+                    :maxlength="500"></el-input>
                 </span>
               </li>
             </div>
@@ -142,7 +143,7 @@
       this.mountedInf();
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/AntiApplyEditf') {
           this.mountedInf();
           //编辑部分清空
@@ -161,7 +162,6 @@
         // 先判断是 初审 终审  /  专员  主管
         var judgeFlag = JSON.parse(localStorage.getItem('judge'));
         this.antiFlag = judgeFlag.flag;
-
         this.AntiApplyParams = JSON.parse(localStorage.getItem('AntiApplyParams'));
         // 获取到 id
         this.id = this.AntiApplyParams.id;
@@ -247,42 +247,45 @@
           })
           .then(res => {
             if (res.statusCode == 200) {
+              let resp = res.data.applyInfoPool;
+              let respFra = res.data.fraudApplyInfo
+              this.applyDesc = respFra && respFra.applyDesc ? respFra.applyDesc : '';
               // 进件编号
-              this.applySubno = res.data.applyInfoPool.applySubno;
+              this.applySubno = resp.applySubno;
               // 申请人code
-              this.applyCode = res.data.applyInfoPool.applyCode;
+              this.applyCode = resp.applyCode;
               // 申请人姓名
-              this.applyPersonName = res.data.applyInfoPool.applyPersonName;
+              this.applyPersonName = resp.applyPersonName;
               // 申请机构 code
-              this.appOrgCode = res.data.applyInfoPool.appOrgCode;
+              this.appOrgCode = resp.appOrgCode;
               // 申请机构名称
-              this.appOrgName = res.data.applyInfoPool.appOrgName;
+              this.appOrgName = resp.appOrgName;
               // 申请机构 id
-              this.appOrgId = res.data.applyInfoPool.appOrgId;
+              this.appOrgId = resp.appOrgId;
               // 申请机构科室id
-              this.appSuborgId = res.data.applyInfoPool.appSuborgId;
+              this.appSuborgId = resp.appSuborgId;
               // 申请机构科室code
-              this.appSuborgCode = res.data.applyInfoPool.appSuborgCode;
+              this.appSuborgCode = resp.appSuborgCode;
               // 申请机构科室名称
-              this.appSuborgName = res.data.applyInfoPool.appSuborgName;
+              this.appSuborgName = resp.appSuborgName;
               // 产品 id
-              this.proId = res.data.applyInfoPool.proId;
+              this.proId = resp.proId;
               // 产品 code
-              this.proCode = res.data.applyInfoPool.proCode;
+              this.proCode = resp.proCode;
               // 客户id
-              this.applyCustId = res.data.applyInfoPool.applyCustId;
+              this.applyCustId = resp.applyCustId;
               // 客户姓名
-              this.applyCustName = res.data.applyInfoPool.custName;
+              this.applyCustName = resp.custName;
               // 客户编号
-              this.applyCustNo = res.data.applyInfoPool.applyCustNo;
+              this.applyCustNo = resp.applyCustNo;
               // 证件号码
-              this.certCode = res.data.applyInfoPool.certCode;
+              this.certCode = resp.certCode;
               // 证件类型
-              this.certTypeTxt = res.data.applyInfoPool.certTypeTxt;
+              this.certTypeTxt = resp.certTypeTxt;
               // 移动电话
-              this.mobile = res.data.applyInfoPool.mobile;
+              this.mobile = resp.mobile;
               // 产品名称
-              this.proName = res.data.applyInfoPool.proName;
+              this.proName = resp.proName;
             }
           })
       },
@@ -375,8 +378,7 @@
                 }
               }
             })
-        }).catch(() => {
-        });
+        }).catch(() => {});
       },
       // 返回  上级路由
       backRoute() {

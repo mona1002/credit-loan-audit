@@ -59,8 +59,9 @@ Vue.filter('dateFilter', function (value, sec = false, twoDigitM = false, twoDig
 })
 // 信审审批 - 审批 计算倍数
 Vue.filter('formatValue', function (value) {
-  if (!value) return ''
-  return Number(value) > 0 ? Math.round(Number(value) * 10000) / 100 + '%' : '0.00%';
+  if (value == 0) return '0.00%';
+  if (!value) return '';
+  return Math.round(Number(value) * 10000) / 100 + '%';
 })
 // 金额过滤
 Vue.filter('formatMoney', function (value, point = true) {
@@ -115,7 +116,7 @@ Vue.filter('YesOrNo', function (value) {
   if (value == false) return '否';
 })
 // *100 之后，变百分号留两位小数
-Vue.filter("percent100", function (value,mark='%') {
+Vue.filter("percent100", function (value, mark = '%') {
   if (value == 0) return '0.00%';
   if (!value) return '';
   return (value * 100).toFixed(2) + mark;
