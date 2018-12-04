@@ -779,7 +779,7 @@
     <div class="weihurizhi">
       <el-dialog title='维护日志' :visible.sync="sldialogVisible" :modal="false" width="860px" top="5vh">
         <p style="margin-bottom:5px;">
-          <label @click="renovate">
+          <label @click="renovate" style="cursor:pointer">
             <i class="el-icon-refresh" style="color:#409eff"></i>
             <span>刷新</span>
           </label>
@@ -1081,7 +1081,6 @@
             if (res.data) {
               this.logDatas = res.data;
             }
-            this._succe("查询成功！")
           } else {
             this._error(res.msg);
           }

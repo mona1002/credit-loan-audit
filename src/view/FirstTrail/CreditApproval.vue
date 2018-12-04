@@ -365,7 +365,7 @@
                     {{caculData.totalRate | formatValue}}
                   </el-form-item>
                   <el-form-item class="presentation" label="签约金额：" :label-width="formApproLab">
-                    {{caculData.signAmount   | formatMoney}}
+                    {{caculData.signAmount | formatMoney}}
                   </el-form-item>
                 </div>
                 <div class="bfc dialog_textarea alert_collapse_inputLabel mr" style="margin-bottom:10px;height:80px;">
@@ -672,6 +672,7 @@
         params: '',
         mainReasonId: '', //主原因id
         subReasonId: '', //子原因id
+        FtaskNodeName: '', //终审的taskNodeName，跳转回页面判断的
       }
     },
     mounted() {
@@ -688,6 +689,7 @@
         let taskInWaitting = {};
         this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
         this.userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.FtaskNodeName = JSON.parse(localStorage.getItem('FtaskNodeName'));
         this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
         if (this.judgeFlag == '01') {
           taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
@@ -800,7 +802,7 @@
               this.$router.push('/taskInWaitting');
               this._del('初审详情');
             } else if (this.judgeFlag == '02') { // 终审
-              this.$router.push('/FtaskInWaitting' + this.routeParams);
+              this.$router.push('FtaskInWaitting?taskNodeName='+this.FtaskNodeName+'&flag=02');
               this._del('终审详情');
             }
           } else {
@@ -896,7 +898,7 @@
                     this.caculData.inteDebitrate = res.data.inteDebitrate; //内部负债率;
                     this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
                     this.caculData.totalRate = res.data.totalRate; //总负债率;
-                    this.caculData.signAmount   = res.data.signAmount  ; //签约金额;
+                    this.caculData.signAmount = res.data.signAmount; //签约金额;
                     this.appConclusion = res.data.appConclusion; //意见说明;
                     this.maxAmounnt = res.data.maxAmounnt; // 最大
                     this.minAmount = res.data.minAmount; // 最小
@@ -933,7 +935,7 @@
                   this.caculData.inteDebitrate = ''; //内部负债率;
                   this.caculData.creditDebitRate = ''; //总信用负债率;
                   this.caculData.totalRate = ''; //总负债率;
-                  this.caculData.signAmount   = ''; //签约金额;
+                  this.caculData.signAmount = ''; //签约金额;
                   this.appConclusion = ''; //意见说明;
                   this.maxAmounn = ''; // 最大
                   this.minAmount = ''; // 最小
@@ -1231,7 +1233,7 @@
               this._del('初审详情');
             }
             if (this.judgeFlag == '02') {
-              this.$router.push('/FtaskInWaitting' + this.routeParams);
+              this.$router.push('FtaskInWaitting?taskNodeName=' + this.FtaskNodeName + '&flag=02');
               this._del('终审详情');
             }
           } else {
@@ -1279,7 +1281,7 @@
           eachTermamt: this.caculData.eachTermamt, //每期还款额[元]
           inteDebitrate: this.caculData.inteDebitrate, //内部负债率
           totalRate: this.caculData.totalRate, // 总负债率
-          signAmount : this.caculData.signAmount  , // 签约金额
+          signAmount: this.caculData.signAmount, // 签约金额
           appConclusion: this.appConclusion,
           newOldMainnos: '', //借新还旧进件编号集合
           applyMainNo: '', //主进件编号
@@ -1322,7 +1324,7 @@
               this.$router.push('/taskInWaitting');
               this._del('初审详情');
             } else if (this.judgeFlag == '02') { // 终审
-              this.$router.push('/FtaskInWaitting' + this.routeParams);
+              this.$router.push('FtaskInWaitting?taskNodeName='+this.FtaskNodeName+'&flag=02');
               this._del('终审详情');
             }
           }

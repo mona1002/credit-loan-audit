@@ -23,7 +23,7 @@
         <li class="clearFix">
           <el-form-item class="width_33Per require_red" label='来源：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-              <el-select v-model="Hsource" placeholder="请选择来源" @change="changes('Hsource')">
+              <el-select v-model="Hsource" placeholder="请选择" @change="changes('Hsource')">
                 <el-option label="申请表" value="00"></el-option>
                 <el-option label="第三方查询" value="01"></el-option>
                 <el-option label="其他" value="02"></el-option>
@@ -32,7 +32,7 @@
           </el-form-item>
           <el-form-item class="width_33Per require_red" label='接听情况：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-              <el-select v-model="Hanswer" placeholder="请选择接听情况">
+              <el-select v-model="Hanswer" placeholder="请选择">
                 <el-option label="无人接" value="00"></el-option>
                 <el-option label="拒接" value="01"></el-option>
                 <el-option label="停机" value="02"></el-option>
@@ -43,7 +43,7 @@
           </el-form-item>
           <el-form-item class="width_33Per require_red" label='调查阶段：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-              <el-select v-model="HcheckStage" placeholder="请选择调查阶段">
+              <el-select v-model="HcheckStage" placeholder="请选择">
                 <el-option label="正在调查" value="00"></el-option>
                 <el-option label="完成调查" value="01"></el-option>
                 <el-option label="调查失败" value="02"></el-option>
@@ -133,7 +133,7 @@
         <li class="clearFix">
           <el-form-item class="width_40Per require_red" label='三方查询是否异常：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-              <el-select v-model="HthreeQueries" placeholder="请选择调查情况" @change="changes('HthreeQueries')">
+              <el-select v-model="HthreeQueries" placeholder="请选择" @change="changes('HthreeQueries')">
                 <el-option label="否" value="0"></el-option>
                 <el-option label="是" value="1"></el-option>
               </el-select>
@@ -146,7 +146,7 @@
         <li class="clearFix">
           <el-form-item class="width_40Per require_red" label='微信/支付宝是否异常：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-              <el-select v-model="Hmobilepayment" placeholder="请选择调查情况" @change="changes('Hmobilepayment')">
+              <el-select v-model="Hmobilepayment" placeholder="请选择" @change="changes('Hmobilepayment')">
                 <el-option label="否" value="0"></el-option>
                 <el-option label="是" value="1"></el-option>
               </el-select>
@@ -160,7 +160,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per" label='与借款人关系：' :label-width="label_160">
-            <el-select v-model="HrelBorrower" placeholder="请选择调查情况" @change="changes('HrelBorrower')">
+            <el-select v-model="HrelBorrower" placeholder="请选择" @change="changes('HrelBorrower')">
               <el-option label="父母" value="00"></el-option>
               <el-option label="爱人" value="01"></el-option>
               <el-option label="子女" value="02"></el-option>
@@ -173,7 +173,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per" label='与借款人联系是否频繁：' :label-width="label_160">
-            <el-select v-model="Hcontactfre" placeholder="请选择调查情况">
+            <el-select v-model="Hcontactfre" placeholder="请选择">
               <el-option label="频繁" value="00"></el-option>
               <el-option label="一般" value="01"></el-option>
               <el-option label="偶尔" value="02"></el-option>
@@ -183,7 +183,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per" label='核对工作情况：' :label-width="label_160">
-            <el-select v-model="HcheckWork" placeholder="请选择调查情况" @change="changes('HcheckWork')">
+            <el-select v-model="HcheckWork" placeholder="请选择" @change="changes('HcheckWork')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -196,7 +196,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per" label='核对婚姻情况：' :label-width="label_160">
-            <el-select v-model="HmaritalStatus" placeholder="请选择调查情况">
+            <el-select v-model="HmaritalStatus" placeholder="请选择">
               <el-option label="未婚" value="00"></el-option>
               <el-option label="已婚" value="01"></el-option>
               <el-option label="离异" value="02"></el-option>
@@ -238,7 +238,7 @@
           <div class="left-title">
             <span class="require-icon" style="left:0px;">* </span>三方查询是否异常：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="HthreeQueries" placeholder="请选择调查情况" @change="changes('HthreeQueries')">
+            <el-select v-model="HthreeQueries" placeholder="请选择" @change="changes('HthreeQueries')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -259,7 +259,7 @@
           <div class="left-title left-title2">
             <span class="require-icon" style="top:-5px;left:0px;">* </span>微信/支付宝是否异常：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="Hmobilepayment" placeholder="请选择调查情况" @change="changes('Hmobilepayment')">
+            <el-select v-model="Hmobilepayment" placeholder="请选择" @change="changes('Hmobilepayment')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -279,7 +279,7 @@
         <li class="item-column3">
           <div class="left-title">与借款人关系：</div>
           <div>
-            <el-select v-model="HrelBorrower" placeholder="请选择调查情况" @change="changes('HrelBorrower')">
+            <el-select v-model="HrelBorrower" placeholder="请选择" @change="changes('HrelBorrower')">
               <el-option label="父母" value="00"></el-option>
               <el-option label="爱人" value="01"></el-option>
               <el-option label="子女" value="02"></el-option>
@@ -298,7 +298,7 @@
         <li class="item-column3">
           <div class="left-title left-title2">与借款人联系是否频繁：</div>
           <div>
-            <el-select v-model="Hcontactfre" placeholder="请选择调查情况">
+            <el-select v-model="Hcontactfre" placeholder="请选择">
               <el-option label="频繁" value="00"></el-option>
               <el-option label="一般" value="01"></el-option>
               <el-option label="偶尔" value="02"></el-option>
@@ -321,7 +321,7 @@
         <li class="item-column3">
           <div class="left-title">核对工作情况：</div>
           <div>
-            <el-select v-model="HcheckWork" placeholder="请选择调查情况" @change="changes('HcheckWork')">
+            <el-select v-model="HcheckWork" placeholder="请选择" @change="changes('HcheckWork')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -340,7 +340,7 @@
         <li class="item-column3">
           <div class="left-title">核对婚姻情况：</div>
           <div>
-            <el-select v-model="HmaritalStatus" placeholder="请选择调查情况">
+            <el-select v-model="HmaritalStatus" placeholder="请选择">
               <el-option label="未婚" value="00"></el-option>
               <el-option label="已婚" value="01"></el-option>
               <el-option label="离异" value="02"></el-option>

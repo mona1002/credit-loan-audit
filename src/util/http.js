@@ -8,7 +8,7 @@ axios.defaults.baseURL = appConstant.baseUrl_common;
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(response => {
   if (response.data && response.data.statusCode == 900) {
-    // window.location.href = platforUrl.path + "#/";
+    window.location.href = platforUrl.path + "#/";
   };
   return response;
 }, error => {

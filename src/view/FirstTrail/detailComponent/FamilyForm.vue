@@ -122,7 +122,7 @@
       </ul>
       <div class="address-title">
         <i class="collapse_title_icon"></i>
-        <span class="collapse_title_text">录入家庭联系人电话调查信息</span>
+        <span class="collapse_title_text">录入家庭联系人调查信息</span>
       </div>
       <ul class="margin_left_5 margin_right_5">
         <li class="clearFix">

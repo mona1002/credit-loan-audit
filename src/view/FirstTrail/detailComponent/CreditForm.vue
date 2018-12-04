@@ -1863,7 +1863,7 @@
           if (res.statusCode == 200) {
             this.AreaNPercent();
             this.$message({
-              message: '提交成功!',
+              message: '保存成功!',
               type: 'success'
             });
             this.mountC();
@@ -2253,6 +2253,7 @@
         // this.u = 0;
         // this.v = 0;
         // this.w = 0;
+        console.log(this.loanDetailList)
         for (var i = 0; i < this.loanDetailList.length; i++) {
           if (this.loanDetailList[i].loanType == '01') {
             this.k += 1;
@@ -2303,6 +2304,7 @@
           // }
         };
         //车贷
+        console.log('k',this.k)
         this.loanInfo.carLoanTotal = this.k;
         this.loanInfo.carLoanNoPayoff = this.l;
         this.loanInfo.carLoanPayoff = this.m;
@@ -2318,6 +2320,7 @@
         this.loanInfo.otherLoanTotal = this.u;
         this.loanInfo.otherLoanNoPayoff = this.v;
         this.loanInfo.otherLoanPayoff = this.w;
+        console.log(11111,this.loanInfo.carLoanTotal)
       },
       loanCurrentChange(val) {
         if (val == null) {

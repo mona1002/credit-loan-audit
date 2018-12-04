@@ -89,6 +89,7 @@
           custName_la: '',
           certCode: ''
         },
+        taskNodeName: ''
       }
     },
     mounted() {
@@ -103,11 +104,11 @@
     },
     methods: {
       toinner() {
-        var par = '';
+        this.taskNodeName = '';
         if (this.$route.fullPath.indexOf('?') != -1) {
-          par = this.$route.fullPath.split('?')[1].split('&')[0].split('=')[1];
+          this.taskNodeName = this.$route.fullPath.split('?')[1].split('&')[0].split('=')[1];
         }
-        this.queryParam.taskNodeName = par || JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
+        this.queryParam.taskNodeName = this.taskNodeName || JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
         this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).processTemplateId;
         this.queryParam.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
         this.queryParam.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
@@ -177,6 +178,8 @@
           }
         });
         localStorage.setItem("FtaskInWaitting", JSON.stringify(row));
+        localStorage.setItem("FtaskNodeName", JSON.stringify(this.taskNodeName));
+        
       },
       handleSizeChange(val) {
         this.queryParam.pageSize = val;

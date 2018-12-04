@@ -128,7 +128,7 @@
         <li class="clearFix">
           <el-form-item class="width_40Per require_red margin_top_5" label='微信/支付宝是否异常：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-              <el-select v-model="mymobilepayment" placeholder="请选择调查情况" @change="changes('mymobilepayment')">
+              <el-select v-model="mymobilepayment" placeholder="请选择" @change="changes('mymobilepayment')">
                 <el-option label="否" value="0"></el-option>
                 <el-option label="是" value="1"></el-option>
               </el-select>
@@ -143,7 +143,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per" label='接电话人身份：' :label-width="label_160">
-            <el-select v-model="myanswerIdentity" placeholder="请选择调查情况" @change="changes('myanswerIdentity')">
+            <el-select v-model="myanswerIdentity" placeholder="请选择" @change="changes('myanswerIdentity')">
               <el-option label="同事" value="00"></el-option>
               <el-option label="本人" value="01"></el-option>
             </el-select>
