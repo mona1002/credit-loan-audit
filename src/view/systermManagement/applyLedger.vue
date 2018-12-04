@@ -236,6 +236,7 @@
   export default {
     data() {
       return {
+        ExcelParms: {},
         ininin: '',
         currentRow: {},
         userInf: null,
@@ -530,27 +531,18 @@
     methods: {
       getExcel() { //导出
         // 校验：
-        if (this.applyData && this.applyData.length > 0) {
-          let beginDate = new Date(this.applyData[0].replace(/-/g, '/')).getTime(),
-            endDate = new Date(this.applyData[1].replace(/-/g, '/')).getTime();
+         if (!this.tableData || this.tableData.length == 0) return this._error('无查询结果，无法导出数据！')
+       let start=this.ExcelParms.applyDateGe,end=this.ExcelParms.applyDateLe ;
+       if (start && end) {
+          let beginDate = new Date(start.replace(/-/g, '/')).getTime(),
+            endDate = new Date(end.replace(/-/g, '/')).getTime();
           var day = (endDate - beginDate) / (1000 * 3600 * 24);
         }
         if (this.userInf.userCode !== "superadmin" && (!day || day > 31)) {
           this.$message.error('查询条件【申请日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
           return
         }
-        // 日期入参
-        if (this.applyData.length > 0) {
-          this.params.applyDateGe = this.applyData[0];
-          this.params.applyDateLe = this.applyData[1];
-        }
-        // 授信日期
-        if (this.creditTime.length > 0) {
-          this.params.creditTime_ge = this.creditTime[0];
-          this.params.creditTime_le = this.creditTime[1];
-        }
-        // 删除多余入参
-        let obj = Object.assign({}, this.params);
+        let obj = Object.assign({}, this.ExcelParms);
         delete obj.pageNum;
         delete obj.pageSize;
         axios({
@@ -676,6 +668,7 @@
           this.params.creditTime_le = this.creditTime[1];
         }
         this.params.pageNum = this.currentPage = 1;
+        this.ExcelParms = Object.assign({}, this.params)
         this.getInf(this.params);
       },
       getInf(pam) {
