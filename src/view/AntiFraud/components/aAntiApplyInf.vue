@@ -33,7 +33,7 @@
                   <span>{{applyInfoPool.certCode}}</span> </div>
               </li>
             </div>
-            <div class=" CreditForm_div_border clearFix">
+            <div class="CreditForm_div_border bor_none clearFix">
               <li>
                 <div>
                   <label class="label_width_95">移动电话：</label>
@@ -66,14 +66,16 @@
                 <span class="text_area_span text_area_span_minus220">{{fraudApplyInfo.applyDesc}}</span>
               </li>
             </div>
-            <li class="clearFloat">
-              <div> <label class="label_width_166">反欺诈申请人：</label>
-                <span>{{fraudApplyInfo.applyPersonName}}</span></div>
-            </li>
-            <li>
-              <div> <label class="label_width_166">反欺诈申请日期：</label>
-                <span>{{fraudApplyInfo.appDate}}</span></div>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">反欺诈申请人：</label>
+                <span>{{fraudApplyInfo.applyPersonName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">反欺诈申请日期：</label>
+                <span>{{fraudApplyInfo.appDate}}</span>
+              </li>
+            </div>
             <li>
               <div> <label class="label_width_166">反欺诈申请机构：</label>
                 <span>{{fraudApplyInfo.appOrgName}}</span></div>
@@ -86,9 +88,10 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">反欺诈结论</span>
         </template>
+        <!-- CreditForm_div_border -->
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li class="text_area_li triplet_textarea_width" style="margin-top:5px;">
+            <li class="text_area_li triplet_textarea_width " style="margin-top:5px;">
               <label class="label_width_166">反欺诈决策反馈：</label>
               <span class="text_area_span text_area_span_minus220">{{fraudAuditOpinion.auditDesc}}</span>
             </li>

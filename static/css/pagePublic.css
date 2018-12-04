@@ -16,6 +16,10 @@
   padding: 5px;
 }
 
+.padding_0_10 {
+  padding: 0 10px;
+}
+
 .padding_left_5 {
   padding-left: 5px;
 }
@@ -152,6 +156,10 @@
 
 .width_480 {
   width: 480px;
+}
+
+.width_800 {
+  width: 800px;
 }
 
 /* 高度 */
@@ -374,7 +382,7 @@ body .pre_wrap {
   height: 75px;
   overflow: auto;
   /* padding-left: 10px; */
-  border: 1px solid #d8dce5;
+  /* border: 1px solid #d8dce5; */
   border-radius: 4px;
 }
 
@@ -788,8 +796,14 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 .CreditForm_div_border {
-  /* border-bottom: 1px solid #eff2f6; */
+  border-bottom: 1px solid #eff2f6;
   /* border-bottom: 1px solid green; */
+}
+/* .bor{
+  border: 1px solid #d8dce5;
+} */
+.bor_none {
+  border: none;
 }
 
 /* 借款人资料 */

@@ -1,4 +1,4 @@
-<template> 
+<template>
   <div class="internalMatch-class">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="0">
@@ -156,23 +156,37 @@
           </el-pagination>
         </div>
       </el-collapse-item>
+      <!-- 本次进件命中规则 -->
+      <el-collapse-item name="5">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">本次进件命中规则</span>
+        </template>
+        <div class="checkedInf margin_top_15 margin_left_30">
+          <span class="text_area_span  width_800 height_120 padding_0_10 " >看打卡进度款拉法基啊肯定是就发开了房间发剑飞  </span>
+        </div>
+      </el-collapse-item>
       <!-- 匹配结论 -->
       <el-collapse-item name="4">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">匹配结论</span>
         </template>
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="30px" class="">
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="30px" v-if="!read"> 
           <el-form-item prop="audit_desc" class="height_120 margin_top_15 margin_right_5">
             <b v-show="ruleForm.audit_desc&&ruleForm.audit_desc.length>=500" class="hint_word loca">
               输入长度不能超过500</b>
             <el-input type="textarea" class="txt_width" v-model="ruleForm.audit_desc" :readonly="read" resize="none"
               :rows="5" :maxlength="500"></el-input>
           </el-form-item>
-          <el-form-item v-if="!read">
+          <!-- v-if="!read" -->
+          <el-form-item >
             <el-button type="primary" class="margin_left_735" @click="submitForm('ruleForm')">确定</el-button>
           </el-form-item>
         </el-form>
+         <div class="checkedInf margin_top_15 margin_left_30" v-else>
+          <span class="text_area_span  width_800 height_120 padding_0_10 " >{{ruleForm.audit_desc}}</span>
+        </div>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -181,7 +195,7 @@
   export default {
     data() {
       return {
-        activeNames: ['0', '1', '2', '3', '4'],
+        activeNames: ['0', '1', '2', '3', '4', '5'],
         title1: "移动号码类(手机号和联系人)",
         title2: "固定电话类(家电、单电)",
         title3: "单位名称",

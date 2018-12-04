@@ -53,7 +53,7 @@
                 </div>
               </li>
             </div>
-            <div class=" CreditForm_div_border clearFix">
+            <div class=" CreditForm_div_border  clearFix">
               <li>
                 <div>
                   <label class="label_width_95">申请期限[月]：</label>

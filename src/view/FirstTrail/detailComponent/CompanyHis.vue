@@ -135,13 +135,13 @@
                 <span> {{comData.jobref2}}</span>
               </li>
             </div>
-            <div class="clearFix">
-               <li class="text_area_li">
-              <label class="label_width_166">其他说明：</label>
-              <span class="text_area_span text_area_span_minus170 pre_wrap"> {{comData.remark}}</span>
-            </li>
+            <div class="CreditForm_div_border clearFix">
+              <li class="text_area_li">
+                <label class="label_width_166">其他说明：</label>
+                <span class="text_area_span text_area_span_minus170 pre_wrap"> {{comData.remark}}</span>
+              </li>
             </div>
-            <li class="text_area_li">
+            <li class="text_area_li CreditForm_div_border''.''.,;'">
               <label class="label_width_166">调查结果：</label>
               <span class="text_area_span text_area_span_minus170 pre_wrap"> {{comData.conclusion}}</span>
             </li>
@@ -159,7 +159,7 @@
         // imageUrl: ''
       }
     },
-    props: ['comData'],//, 'isFull'
+    props: ['comData'], //, 'isFull'
     mounted() {
       // if (this.isFull == true) { // 全屏
       //   $(".textarea-class").css("minWidth", "500px");

@@ -141,7 +141,7 @@
                 <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.otherIncometxt}}</span>
               </li>
             </div>
-             <div class="clearFix">
+             <div class="clearFix CreditForm_div_border">
                <li class="text_area_li">
               <label class="label_width_166">其他说明：</label>
               <span class="text_area_span text_area_span_minus170 pre_wrap"> {{familyData.remark}}</span>

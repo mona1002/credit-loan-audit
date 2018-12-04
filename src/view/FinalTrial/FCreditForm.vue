@@ -129,7 +129,7 @@
                 <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetHirecomPhonetxt }} </span>
               </li>
             </div>
-            <div class=" CreditForm_div_border clearFix">
+            <div class=" clearFix">
               <li>
                 <label class=" label_width_220 blueC margin_right_5" @click="NewPage(2)">网搜单位地址是否异常：</label>
                 <span>{{this.FormData.wnetHirecomAddresstext }} </span>
@@ -195,7 +195,7 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <div class="clearFix">
+            <div class="CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_220">信用卡每月还款[元]：</label>
                 <span>{{borDebt.monthRepayAmt |formatMoney}}</span>
@@ -205,7 +205,7 @@
                 <span>{{borDebt.studentLoanAmt |formatMoney}}</span>
               </li>
             </div>
-            <div class="clearFix">
+            <div class="CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_220">房贷每月还款额[元]：</label>
                 <span>{{borDebt.houseLoanAmt |formatMoney}}</span>
@@ -215,7 +215,7 @@
                 <span>{{borDebt.carLoanAmt |formatMoney}}</span>
               </li>
             </div>
-            <div class="clearFix">
+            <div class="CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_220">其他贷款每月还款额[元]：</label>
                 <span>{{borDebt.otherLoanAmt |formatMoney}}</span>
@@ -274,7 +274,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">其他信息</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_triplet clearFix divWrap_Padding_top_4">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix margin_top_5 divWrap_Padding_top_4">
           <label class="label_width_220">其他：</label>
           <span class="text_area_span text_area_span_minus220" style="height:115px;"> {{otherInfo.content}}</span>
         </div>
@@ -401,7 +401,7 @@
                 <span>{{this.FormData.hirecomPaymentTypetext }} </span>
               </li>
             </div>
-            <div class=" CreditForm_div_border clearFix">
+            <div class=" clearFix">
               <li>
                 <label class=" label_width_220"> 单位地址邮编：</label>
                 <span>{{this.FormData.workZip }} </span>
