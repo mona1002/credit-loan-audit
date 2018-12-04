@@ -420,6 +420,4 @@
     border-left: none;
   }
 
-
-
 </style>

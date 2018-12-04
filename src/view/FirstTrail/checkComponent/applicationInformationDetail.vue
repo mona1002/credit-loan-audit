@@ -772,7 +772,7 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-    <div v-show="this.btn" class="float_right margin_top_15 margin_right_25">
+    <div v-show="this.btn" class="margin_10">
       <el-button type="primary" @click="maintenanceLog">维护日志</el-button>
     </div>
     <!-- 维护日志弹框 -->
