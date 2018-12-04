@@ -816,7 +816,7 @@ body .el-table_450_scroll .el-table__fixed-right {
   margin-top: 12px;
 }
 
-.specialInput {
+body .specialInput {
   width: calc(100% - 230px);
 }
 
