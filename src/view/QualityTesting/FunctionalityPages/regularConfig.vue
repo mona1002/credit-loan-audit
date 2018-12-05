@@ -473,14 +473,6 @@
 
 </script>
 <style scoped>
-  .taskWatting {
-    width: 100%;
-    background-color: #fafbfc;
-    overflow-y: auto;
-    overflow-x: hidden;
-    /* 统一导航 --去掉高度*/
-    height: 100%;
-  }
 
   .taskWatting label {
     font-size: 14px;
