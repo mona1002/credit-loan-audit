@@ -94,7 +94,7 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">是否加入保险计划：</label>
-                <span>{{accepApplyLoan.insurancePlanTxt}}</span>
+                <span>{{accepApplyLoan.insurancePlanFlagTxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -415,25 +415,25 @@
               </li>
               <li>
                 <label class="label_width_166">企业近两年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDTO.twoYearProfitAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.twoyearProfitAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近三年利润[万元]：</label>
-                <span>{{applyPrivateOwnersDTO.threeYearProfitAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.threeyearProfitAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">企业近一年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDTO.oneYearTaxAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.oneyearTaxAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近两年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDTO.twoYearTaxAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.twoyearTaxAmt|formatMoney}}</span>
               </li>
               <li>
                 <label class="label_width_166">企业近三年纳税额[万元]：</label>
-                <span>{{applyPrivateOwnersDTO.threeYearTaxAmt|formatMoney}}</span>
+                <span>{{applyPrivateOwnersDTO.threeyearTaxAmt|formatMoney}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
