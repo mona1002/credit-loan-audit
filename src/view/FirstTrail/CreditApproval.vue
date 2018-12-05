@@ -63,9 +63,9 @@
             </div>
           </ul>
         </div>
-        <!-- approve_btn_area_width_1050 -->
-        <div class="approve_btn_area " style="margin-top:100px; width:477px">
-          <div class="width_400 margin_left_75 clearFix">
+        <!-- approve_btn_area_width_1050 min-width:300px;-->
+        <div class="approve_btn_area CreditApproval_btn" >
+          <div>
             <span class="approve_item" @click="hangOoutBtn">
               <i class="approve_icon HangUpIcon"></i>
               <span class="approve_text">挂起</span>
@@ -91,7 +91,8 @@
               <span class="approve_text">审批</span>
             </span>
           </div>
-          <div class="width_480 margin_top_20">
+          <!-- margin_top_20 width_480-->
+          <div class="margin_top_20">
             <span class="approve_item" @click="coverFn('fqz')">
               <i class="approve_icon faqi"></i>
               <span class="approve_text">发起反欺诈</span>
@@ -802,7 +803,7 @@
               this.$router.push('/taskInWaitting');
               this._del('初审详情');
             } else if (this.judgeFlag == '02') { // 终审
-              this.$router.push('FtaskInWaitting?taskNodeName='+this.FtaskNodeName+'&flag=02');
+              this.$router.push('FtaskInWaitting?taskNodeName=' + this.FtaskNodeName + '&flag=02');
               this._del('终审详情');
             }
           } else {
@@ -1324,7 +1325,7 @@
               this.$router.push('/taskInWaitting');
               this._del('初审详情');
             } else if (this.judgeFlag == '02') { // 终审
-              this.$router.push('FtaskInWaitting?taskNodeName='+this.FtaskNodeName+'&flag=02');
+              this.$router.push('FtaskInWaitting?taskNodeName=' + this.FtaskNodeName + '&flag=02');
               this._del('终审详情');
             }
           }
@@ -1585,6 +1586,14 @@
   }
 
 
+  .CreditApproval_btn {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    width: 477px;
+    height: 100px;
+  }
 
   /* .creditApproval-class .creditApr_backoff label::before {
     content: '' !important;
