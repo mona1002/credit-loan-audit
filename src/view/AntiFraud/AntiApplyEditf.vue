@@ -41,7 +41,7 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <div class=" CreditForm_div_border clearFix">
+            <!-- <div class=" CreditForm_div_border clearFix"> -->
               <li class="inputInf">
                 <label class="label_width_190">
                   <i class="required_Red">* </i>反欺诈申请类型主原因：</label>
@@ -61,8 +61,8 @@
                   </el-select>
                 </span>
               </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
+            <!-- </div> -->
+            <!-- <div class=" CreditForm_div_border clearFix"> -->
               <li class="text_area_li_5rows triplet_textarea_width" style="margin-top:5px;">
                 <label class="label_width_190">
                   <i class="required_Red">* </i>欺诈上报描述：</label>
@@ -71,7 +71,7 @@
                     :maxlength="500"></el-input>
                 </span>
               </li>
-            </div>
+            <!-- </div> -->
             <li class='clearFloat'>
               <label class="label_width_190">反欺诈申请人：</label>
               <span>{{userCode}}</span>

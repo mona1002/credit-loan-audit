@@ -55,9 +55,10 @@
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">理由：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+              <span class="text_area_span text_area_span_minus170">{{reason}}</span>
+              <!-- <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
                 v-model="reason" disabled>
-              </el-input>
+              </el-input> -->
             </li>
           </ul>
         </div>
@@ -88,24 +89,27 @@
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li triplet_textarea_width">
                 <label class="label_width_166">网查：</label>
-                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                <span class="text_area_span text_area_span_minus170">{{fraudAuditInfo.netCheck}}</span>
+                <!-- <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
                   v-model="fraudAuditInfo.netCheck" disabled>
-                </el-input>
+                </el-input> -->
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li triplet_textarea_width margin_top_5">
                 <label class="label_width_166">114：</label>
-                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                <span class="text_area_span text_area_span_minus170">{{fraudAuditInfo.oof}}</span>
+                <!-- <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
                   v-model="fraudAuditInfo.oof" disabled>
-                </el-input>
+                </el-input> -->
               </li>
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">其他：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+              <span class="text_area_span text_area_span_minus170">{{fraudAuditInfo.other}}</span>
+              <!-- <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
                 v-model="fraudAuditInfo.other" disabled>
-              </el-input>
+              </el-input> -->
             </li>
           </ul>
         </div>

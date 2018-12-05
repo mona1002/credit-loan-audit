@@ -10,18 +10,20 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">进件编号：</label>
-              <span>{{applySubno}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">客户名称：</label>
-              <span>{{custName}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">证件类型：</label>
-              <span>{{certTypeTxt}}</span>
-            </li>
+            <div class=" CreditForm_div_border  clearFix">
+              <li>
+                <label class="label_width_166">进件编号：</label>
+                <span>{{applySubno}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">客户名称：</label>
+                <span>{{custName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">证件类型：</label>
+                <span>{{certTypeTxt}}</span>
+              </li>
+            </div>
             <li>
               <label class="label_width_166">证件号码：</label>
               <span>{{certCode}}</span>
@@ -40,23 +42,28 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
+            <div class=" CreditForm_div_border  clearFix">
+              <li>
+                <label class="label_width_166">反欺诈申请类型主原因：</label>
+                <span>{{mainreaName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">反欺诈申请类型子原因：</label>
+                <span>{{subreaName}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border  clearFix">
+              <li class="text_area_li_5rows triplet_textarea_width">
+                <label class="label_width_166">欺诈上报描述：</label>
+                <span class="text_area_span text_area_span_minus170 height_120">{{applyDesc}}</span>
+                <!-- <span > -->
+                <!-- <el-input v-model="applyDesc" style='width:calc( 100% - 170px)' type="textarea" :rows="5" resize=none
+                    :maxlength="500" :disabled="true">
+                  </el-input> -->
+                <!-- </span> -->
+              </li>
+            </div>
             <li>
-              <label class="label_width_166">反欺诈申请类型主原因：</label>
-              <span>{{mainreaName}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">反欺诈申请类型子原因：</label>
-              <span>{{subreaName}}</span>
-            </li>
-            <li class="text_area_li_5rows triplet_textarea_width">
-              <label class="label_width_166">欺诈上报描述：</label>
-              <span>
-                <el-input v-model="applyDesc" style='width:calc( 100% - 170px)' type="textarea" :rows="5" resize=none :maxlength="500"
-                  :disabled="true">
-                </el-input>
-              </span>
-            </li>
-            <li class='clearFloat'>
               <label class="label_width_166">反欺诈申请人：</label>
               <span>{{applyPersonName}}</span>
             </li>
@@ -95,7 +102,7 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/AntiApplyInf' && this.$route.params.newOne) {
           this.mountedInf();
         }

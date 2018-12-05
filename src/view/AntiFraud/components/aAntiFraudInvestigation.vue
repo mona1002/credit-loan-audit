@@ -9,15 +9,15 @@
         </template>
         <div class="height_auto">
           <el-table :data="tableData" style="width: 100%" @row-dblclick='searchInf' border>
-            <el-table-column prop="creatTime" label="提报时间" width="150">
+            <el-table-column prop="creatTime" label="提报时间" width="155">
             </el-table-column>
-            <el-table-column prop="applySubno" label="进件编号" width="160">
+            <el-table-column prop="applySubno" label="进件编号" width="165">
             </el-table-column>
             <el-table-column prop="caseNum" label="案件编号" width="175">
             </el-table-column>
             <el-table-column prop="applyCustName" label="客户姓名" width="100">
             </el-table-column>
-            <el-table-column prop="certCode" label="身份证号" width="160">
+            <el-table-column prop="certCode" label="身份证号" width="165">
             </el-table-column>
             <el-table-column prop="proName" label="申请产品" width="100">
             </el-table-column>
@@ -55,9 +55,10 @@
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">理由：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
+                <span class="text_area_span text_area_span_minus170">{{reason}}</span>
+              <!-- <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
                 v-model="reason" readonly>
-              </el-input>
+              </el-input> -->
             </li>
           </ul>
         </div>
@@ -85,22 +86,22 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <div class=" CreditForm_div_border clearFix">
+            <!-- <div class=" CreditForm_div_border clearFix"> -->
               <li class="text_area_li triplet_textarea_width">
                 <label class="label_width_166">网查：</label>
                 <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
                   :readonly=' !showBtn' v-model="fraudAuditInfo.netCheck">
                 </el-input>
               </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
+            <!-- </div> -->
+            <!-- <div class=" CreditForm_div_border clearFix"> -->
               <li class="text_area_li triplet_textarea_width margin_top_5">
                 <label class="label_width_166">114：</label>
                 <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
                   :readonly=' !showBtn' v-model="fraudAuditInfo.oof">
                 </el-input>
               </li>
-            </div>
+            <!-- </div> -->
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">其他：</label>
               <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"
