@@ -95,8 +95,8 @@
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span class="float_left">{{ item.orgName }}</span>
-              <span style="float: right;color: #8492a6; font-size: 13px;">{{ item.orgCode }}</span>
+              <span class="float_left" style="font-size:12px;">{{ item.orgName }}</span>
+              <span style="float: right;color: #8492a6; font-size: 12px;">{{ item.orgCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
