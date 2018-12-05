@@ -264,8 +264,6 @@
           this.nodeName = "反欺诈申请-添加";
         } else if (route.path == '/AntiApplyEditf') { //反欺诈申请-编辑  
           this.nodeName = "反欺诈申请-编辑";
-        } else if (route.path == '/AntiApplyEdit') { //反欺诈申请列表-编辑  
-          this.nodeName = "反欺诈申请列表-编辑";
         } else if (route.path == '/reconsiderList') { //复议审批
           if (this.taskNodeName == "reconsiderApp_commissioner") {
             this.nodeName = '复议专员审批';

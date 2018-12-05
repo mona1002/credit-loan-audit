@@ -161,7 +161,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_40Per line_H_16_label" label='是否与家庭联系人为同一接听人：' :label-width="label_160">
+          <el-form-item class="width_40Per line_H_16_label" label='与家庭联系人是否相同：' :label-width="label_160">
             <el-select v-model="FissameFam" @change="changes('FissameFam')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>

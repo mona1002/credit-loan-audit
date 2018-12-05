@@ -41,7 +41,7 @@
       <el-collapse-item name='2'>
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">录入家庭联系人电话调查信息</span>
+          <span class="collapse_title_text">录入家庭联系人调查信息</span>
         </template>
         <div class="checkedInf checkedInf_li_width_half clearFix">
           <ul>
@@ -72,8 +72,8 @@
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
-              <li class="clearFloat label_height_48">
-                <label class="label_width_166">是否与家庭联系人为同一接听人：</label>
+              <li>
+                <label class="label_width_166">与家庭联系人是否相同：</label>
                 <span> {{familyData.issameFamDes}}</span>
               </li>
               <li class="text_area_li" v-show="familyData.issameFam=='0'">

@@ -177,19 +177,8 @@
         //  再次请求
         this.queryList();
       },
-      // 反欺诈申请编辑
-      handleClickEdit(row) {
-        // row 有值, 跳编辑
-        if (row) {
-          // 跳转到编辑
-          this.$router.push({
-            name: 'AntiApplyEdit',
-            params: {
-              id: row.id,
-              flag: 'edit'
-            }
-          });
-        } else { // 否则是新增
+      // 反欺诈申请编辑 row
+      handleClickEdit() {
           this.$router.push({
             name: 'AntiApplyAdd',
             params: {
@@ -198,7 +187,6 @@
               newOne: true,
             }
           });
-        }
       },
       // 主管/专员审批 跳分屏  
       // 反欺诈申请列表  没有详情

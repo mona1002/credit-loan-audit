@@ -127,7 +127,7 @@
       <ul class="margin_left_5 margin_right_5">
         <li class="clearFix">
           <el-form-item class="height_80 width_66Per margin_top_5" label='第三方查询信息：' :label-width="label_160">
-            <el-input type="textarea" v-model="HthirdResult" :row="2" resize=none></el-input>
+            <el-input type="textarea" v-model="HthirdResult" :row="3" resize=none></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">

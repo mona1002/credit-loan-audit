@@ -10,20 +10,20 @@
       <!-- content-ul   -->
       <ul class="margin_10_5_0_5 el_form_item_height_35">
         <li class="clearFix">
-          <el-form-item class="width_33Per" label='电话名称：' :label-width="label_150">
+          <el-form-item class="width_33Per" label='电话名称：' :label-width="label_160">
             <el-input v-model="custName" :disabled="true"></el-input>
           </el-form-item>
-          <el-form-item class="width_33Per" label='电话类型：' :label-width="label_150">
+          <el-form-item class="width_33Per" label='电话类型：' :label-width="label_160">
             <el-select v-model="phoneType" :disabled="true">
               <el-option label="住址电话" value="01"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="width_33Per" label='电话号码：' :label-width="label_150">
+          <el-form-item class="width_33Per" label='电话号码：' :label-width="label_160">
             <el-input v-model="phoneNum" :disabled="true"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item class="width_33Per require_red" label='来源：' :label-width="label_150">
+          <el-form-item class="width_33Per require_red" label='来源：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-select v-model="Addsource" @change="changes('Addsource')">
                 <el-option label="申请表" value="00"></el-option>
@@ -32,7 +32,7 @@
               </el-select>
             </el-tooltip>
           </el-form-item>
-          <el-form-item class="width_33Per require_red" label='接听情况：' :label-width="label_150">
+          <el-form-item class="width_33Per require_red" label='接听情况：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-select v-model="Addanswer">
                 <el-option label="无人接" value="00"></el-option>
@@ -43,7 +43,7 @@
               </el-select>
             </el-tooltip>
           </el-form-item>
-          <el-form-item class="width_33Per require_red" label='调查阶段：' :label-width="label_150">
+          <el-form-item class="width_33Per require_red" label='调查阶段：' :label-width="label_160">
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-select v-model="AddcheckStage">
                 <el-option label="正在调查" value="00"></el-option>
@@ -55,7 +55,7 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item v-if="Addsource=='02'" class="width_40Per height_80 " label="其他来源说明：" :label-width="label_150">
+          <el-form-item v-if="Addsource=='02'" class="width_40Per height_80 " label="其他来源说明：" :label-width="label_160">
             <el-input v-model="AddsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
           </el-form-item>
         </li>
@@ -130,13 +130,13 @@
       <!-- <el-form :model="ruleForm" :rules="rules" ref="ruleForm"> -->
       <ul class="margin_left_5 margin_right_5">
         <li class="clearFix">
-          <el-form-item label="第三方查询结果：" class="height_80 width_66Per margin_top_5" :label-width="label_150">
+          <el-form-item label="第三方查询结果：" class="height_80 width_66Per margin_top_5" :label-width="label_160">
             <el-input v-model="AddthirdResult" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150"><span class="required_Red"> * </span>三方查询是否异常：</label>
+            <label class=" label_160"><span class="required_Red"> * </span>三方查询是否异常：</label>
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-select v-model="AddthreeQueries" @change="changes('AddthreeQueries')">
                 <el-option label="是" value="1"></el-option>
@@ -146,7 +146,7 @@
           </el-form-item>
           <!-- <el-form-item v-if="AddthreeQueries=='1'" class="width_60Per height_60" label="说明：" prop="AddexceptionState" :label-width="label_100"> -->
           <el-form-item v-if="AddthreeQueries=='1'" class="width_60Per height_60 require_red" label="说明：" :label-width="label_100">
-            <!-- <label class=" label_150">说明：</label> -->
+            <!-- <label class=" label_160">说明：</label> -->
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-input v-model="AddexceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
             </el-tooltip>
@@ -154,20 +154,20 @@
         </li>
         <li class="clearFix ">
           <el-form-item class="width_40Per line_H_16_label">
-            <label class=" label_150 vertical_top ">是否与家庭联系人为同一人接听：</label>
+            <label class=" label_160 vertical_top ">与家庭联系人是否相同：</label>
             <el-select v-model="AddissameFam" @change="changes('AddissameFam')">
               <el-option label="是" value="1"></el-option>
               <el-option label="否" value="0"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item v-show="AddissameFam=='0'" class="width_60Per" label="说明：" :label-width="label_100">
-            <!-- <label class=" label_150">说明：</label> -->
+            <!-- <label class=" label_160">说明：</label> -->
             <el-input v-model="AddissameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">与借款人关系：</label>
+            <label class=" label_160">与借款人关系：</label>
             <el-select v-model="AddrelBorrower" @change="changes('AddrelBorrower')">
               <el-option label="父母" value="00"></el-option>
               <el-option label="爱人" value="01"></el-option>
@@ -176,13 +176,13 @@
             </el-select>
           </el-form-item>
           <el-form-item v-show="AddrelBorrower=='03'" class="width_60Per height_60" label="说明：" :label-width="label_100">
-            <!-- <label class=" label_150">说明：</label> -->
+            <!-- <label class=" label_160">说明：</label> -->
             <el-input v-model="AddrelBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">核对工作情况：</label>
+            <label class=" label_160">核对工作情况：</label>
             <el-select v-model="AddcheckWork" @change="changes('AddcheckWork')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
@@ -191,13 +191,13 @@
             </el-select>
           </el-form-item>
           <el-form-item v-show="AddcheckWork=='01'" class="width_60Per height_60" label="说明：" :label-width="label_100">
-            <!-- <label class=" label_150">说明：</label> -->
+            <!-- <label class=" label_160">说明：</label> -->
             <el-input v-model="AddcheckWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">核对婚姻情况：</label>
+            <label class=" label_160">核对婚姻情况：</label>
             <el-select v-model="AddmaritalStatus">
               <el-option label="未婚" value="00"></el-option>
               <el-option label="已婚" value="01"></el-option>
@@ -216,7 +216,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">核对地址：</label>
+            <label class=" label_160">核对地址：</label>
             <el-select v-model="AddcheckAddr" @change="changes('AddcheckAddr')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
@@ -230,7 +230,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">核对房产：</label>
+            <label class=" label_160">核对房产：</label>
             <el-select v-model="AddcheckEstate" @change="changes('AddcheckEstate')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
@@ -245,7 +245,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">其他收入：</label>
+            <label class=" label_160">其他收入：</label>
             <el-select v-model="AddotherIncome" @change="changes('AddotherIncome')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
@@ -258,7 +258,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">近期大项开销：</label>
+            <label class=" label_160">近期大项开销：</label>
             <el-select v-model="AddrecentLargespend">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
@@ -271,7 +271,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">父母：</label>
+            <label class=" label_160">父母：</label>
             <el-select v-model="Addparents" @change="changes('Addparents')">
               <el-option label="退休" value="00"></el-option>
               <el-option label="在职" value="01"></el-option>
@@ -285,7 +285,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">是否有兄弟姐妹：</label>
+            <label class=" label_160">是否有兄弟姐妹：</label>
             <el-select v-model="Addbrother" @change="changes('Addbrother')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
@@ -298,7 +298,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">支付家庭生活费用：</label>
+            <label class=" label_160">支付家庭生活费用：</label>
             <el-select v-model="Addexpenses" @change="changes('Addexpenses')">
               <el-option label="需要" value="00"></el-option>
               <el-option label="不需要" value="01"></el-option>
@@ -311,7 +311,7 @@
         </li>
         <li class="clearFix">
           <el-form-item class="width_40Per">
-            <label class=" label_150">核对家庭固话：</label>
+            <label class=" label_160">核对家庭固话：</label>
             <el-select v-model="AddcheckHometel" @change="changes('AddcheckHometel')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
@@ -324,14 +324,14 @@
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item label="借款人爱好和品行：" class="height_80 width_66Per" :label-width="label_150">
-            <!-- <label class=" label_150">借款人爱好和品行：</label> -->
+          <el-form-item label="借款人爱好和品行：" class="height_80 width_66Per" :label-width="label_160">
+            <!-- <label class=" label_160">借款人爱好和品行：</label> -->
             <el-input v-model="AddhobbyandBehave" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
           </el-form-item>
         </li>
         <li class="clearFix">
-          <el-form-item label="调查结果：" class="height_120 require_red width_66Per" :label-width="label_150">
-            <!-- <label class=" label_150"><span class="required_Red"> * </span>调查结果：</label> -->
+          <el-form-item label="调查结果：" class="height_120 require_red width_66Per" :label-width="label_160">
+            <!-- <label class=" label_160"><span class="required_Red"> * </span>调查结果：</label> -->
             <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
               <el-input v-model="Addconclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
             </el-tooltip>
@@ -628,7 +628,7 @@
       return {
         phoneType: '01',
         label_100: '100px',
-        label_150: '150px',
+        label_160: '160px',
         Addsource: this.Addlist.source,
         Addanswer: this.Addlist.answer,
         AddcheckStage: this.Addlist.checkStage,

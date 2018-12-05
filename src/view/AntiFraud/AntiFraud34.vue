@@ -22,20 +22,6 @@
       </el-row>
     </div>
     <div>
-      <!-- 反欺诈申请 -->
-      <div class="title titleContainer edit-div" v-show="antiFlag!='03'&& antiFlag!='04'">
-        <span class="titleText">
-          <i class="el-icon title-icon"></i>
-          反欺诈申请列表
-        </span>
-        <span class="iconContainer">
-          <span class="icon-item" @click="handleClickEdit()">
-            <i class="el-icon addIcon"></i>
-            <span class="el-icon-text">添加</span>
-          </span>
-        </span>
-      </div>
-      <!-- 反欺诈专员审批  反欺诈主管审批 -->
       <div class="title titleContainer edit-div" v-show="antiFlag=='03'||antiFlag=='04'">
         <span class="titleText">
           <i class="el-icon title-icon"></i>
@@ -44,46 +30,6 @@
       </div>
     </div>
     <div class="listContainer">
-      <el-table :data="antiTableData.recordList" border fit height="510" highlight-current-row class="anti-table"
-        v-show="antiFlag!='03'&& antiFlag!='04'">
-        <el-table-column type="index" label="序号" width="50">
-        </el-table-column>
-        <el-table-column prop="applySubno" label="进件编号" min-width="170">
-        </el-table-column>
-        <el-table-column prop="appDate" label="申请日期" width="110">
-        </el-table-column>
-        <el-table-column prop="applyCustName" label="客户名称" width='130'>
-        </el-table-column>
-        <el-table-column prop="certTypeTxt" label="证件类型" width="110">
-        </el-table-column>
-        <el-table-column prop="certCode" label="证件号码" width="160">
-        </el-table-column>
-        <el-table-column prop="mainreaName" label="欺诈类型主原因" width="120">
-        </el-table-column>
-        <el-table-column prop="subreaName" label="子原因" width="80">
-        </el-table-column>
-        <el-table-column prop="applyDesc" label="反欺诈上报描述" width="180">
-        </el-table-column>
-        <el-table-column prop="applyPersonName" label="申请人" width='130'>
-        </el-table-column>
-        <el-table-column prop="appOrgCode" label="反欺诈申请机构" width="130">
-        </el-table-column>
-        <el-table-column prop="appOrgName" label="反欺诈申请机构名称" width="150">
-        </el-table-column>
-        <el-table-column prop="appSuborgCode" label="反欺诈申请机构科室" width="150">
-        </el-table-column>
-        <el-table-column prop="appSuborgName" label="反欺诈申请机构科室名称" width="180">
-        </el-table-column>
-        <el-table-column prop="fraudStateTxt" label="反欺诈状态" width="120">
-        </el-table-column>
-        <el-table-column label="操作" width="180" fixed="right">
-          <template slot-scope="scope">
-            <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
-            <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!-- 专员 -->
       <el-table :data="directorTableData.recordList" border fit height="510" highlight-current-row @row-dblclick="rowDbClick"
         v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
         <el-table-column type="index" :index="1" label="序号" width='50'>
@@ -304,26 +250,6 @@
         } else {
           // 再次请求
           this.queryList();
-        }
-      },
-      // 反欺诈申请编辑
-      handleClickEdit(row) {
-        // row 有值, 跳编辑
-        if (row) {
-          // 跳转到编辑
-          this.$router.push({
-            name: 'AntiApplyEdit',
-            params: {
-              id: row.id,
-            }
-          });
-        } else { // 否则是新增
-          this.$router.push({
-            name: 'AntiApplyAdd',
-            params: {
-              id: ''
-            }
-          });
         }
       },
       // 反欺诈申请查看

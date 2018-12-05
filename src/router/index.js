@@ -14,7 +14,7 @@ import AntiCaseNum from '../view/AntiFraud/AntiCaseNum' // 案件编号维护
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue' // 反欺诈 专员 / 主管
 import AntiFraud34 from '@/view/AntiFraud/AntiFraud34.vue' // 反欺诈 申请
 import AntiApplyEditf from '@/view/AntiFraud/AntiApplyEditf.vue' // 反欺诈申请列表
-import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
+import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'//         删掉用别的页面占位
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
 import AntiApplyAdd from '@/view/AntiFraud/AntiApplyAdd.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'

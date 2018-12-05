@@ -62,8 +62,8 @@
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
-              <li class="clearFloat label_height_48">
-                <label class="label_width_166">是否与家庭联系人为同一人接听：</label>
+              <li>
+                <label class="label_width_166">与家庭联系人是否相同：</label>
                 <span> {{mobileData.issameFamDes}}</span>
               </li>
               <li v-show="mobileData.issameFam=='0'" class="text_area_li margin_top_5">

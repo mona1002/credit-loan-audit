@@ -114,8 +114,9 @@
   width: 140px;
 }
 
-.label_150 {
-  width: 150px;
+.label_160 {
+  width: 160px;
+
 }
 
 .label_223 {
@@ -799,6 +800,7 @@ body .el-table_450_scroll .el-table__fixed-right {
   border-bottom: 1px solid #eff2f6;
   /* border-bottom: 1px solid green; */
 }
+
 /* .bor{
   border: 1px solid #d8dce5;
 } */
@@ -1199,8 +1201,8 @@ body .specialInput {
 
 /* 电话征信公共样式 */
 .phone-credit label {
-  display: inline-block;
   text-align: right;
+  float: left;
 }
 
 .phone-credit .Phone_credit_Form_search_bottom {
