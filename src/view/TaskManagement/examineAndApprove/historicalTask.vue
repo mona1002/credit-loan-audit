@@ -210,9 +210,9 @@
         this.post('/workFlowTaskQuery/getTaskHistoryList',
           param
         ).then(res => {
-          if (res.statusCode == 200 && res.data.taskDetailList != null) {
+          if (res.statusCode == 200 && res.data.recordList != null) {
             this.totals = res.data;
-            this.datas = res.data.taskDetailList;
+            this.datas = res.data.recordList;
             for (var i = 0; i < this.datas.length; i++) {
               if (this.datas[i].emerType == '00') { //00
                 this.datas[i].emerType = "普通";
