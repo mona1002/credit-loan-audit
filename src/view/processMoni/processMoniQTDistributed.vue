@@ -485,8 +485,7 @@
           this.alertBox();
           return
         }
-        if (this.multipleSelection.length >
-          1) {
+        if (this.multipleSelection.length > 1) {
           if (flag === 'trace') {
             this.alertMessage = "请选择一条记录查看流程轨迹！";
             this.alertBox();
