@@ -766,7 +766,7 @@
             </el-table-column>
             <el-table-column prop="companyTel" label="单位电话" min-width="100">
             </el-table-column>
-            <el-table-column prop="homeAddr" label="地址" min-width="200" show-overflow-tooltip>
+            <el-table-column prop="homeAddr" label="地址" min-width="195" show-overflow-tooltip>
             </el-table-column>
           </el-table>
         </div>

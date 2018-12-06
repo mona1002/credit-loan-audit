@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiConclusionPath">
-    <!-- 反欺诈审批结论轨迹-->
+    <!-- 反欺诈结论轨迹-->
     <el-table :data="tableData" style="width: 100%" border>
       <el-table-column prop="auditResultTxt" label="审批结果" min-width="160">
       </el-table-column>

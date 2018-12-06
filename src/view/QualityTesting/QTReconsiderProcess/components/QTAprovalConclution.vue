@@ -1,11 +1,11 @@
 <template>
-  <!-- 反欺诈审批结论轨迹  质检页面-->
+  <!-- 反欺诈结论轨迹  质检页面-->
   <div class="aAntiConclusionPath">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="0">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">反欺诈审批结论轨迹</span>
+          <span class="collapse_title_text">反欺诈结论轨迹</span>
         </template>
         <el-table :data="tableData" style="width: 100%" border>
           <el-table-column prop="auditResultTxt" label="审批结果" min-width="160">

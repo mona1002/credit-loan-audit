@@ -1,7 +1,7 @@
 <template>
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <!-- 质检详情-编辑部分- -->
-    <!--反欺诈审批结论轨迹，质检部分调另一个新鞋的接口库== 反欺诈-8.反欺诈查询所有审批轨迹 -->
+    <!--反欺诈结论轨迹，质检部分调另一个新鞋的接口库== 反欺诈-8.反欺诈查询所有审批轨迹 -->
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
@@ -54,7 +54,7 @@
             <keep-alive v-if="Routes.closed">
               <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
             </keep-alive>
-            <QTAprovalConclution v-if=" this.tabContent1==10 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+            <QTAprovalConclution v-if=" this.tabContent1==10 ">反欺诈结论轨迹 </QTAprovalConclution>
             <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
               <!-- 专员部分 -->
 
@@ -71,7 +71,7 @@
             </div>
             <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
               <!-- 质检部分 -->
-              <!-- <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution> -->
+              <!-- <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈结论轨迹 </QTAprovalConclution> -->
               <aAprovalConclusion v-if=" this.tabContent1==11" :applyId='list.applyId'>信审审批结论轨迹</aAprovalConclusion>
               <ComplianceProcess v-if=" this.tabContent1==12" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
               <RulesReApply v-if=" this.tabContent1==13" :propReApply='ReApplyMark' :applyId='list.applyId'>合规复议申请</RulesReApply>
@@ -123,7 +123,7 @@
           <keep-alive v-if="Routes.closed">
             <RFinanceInformation v-if=" this.tabContent2==8">财务信息</RFinanceInformation>
           </keep-alive>
-          <QTAprovalConclution v-if=" this.tabContent2==9 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+          <QTAprovalConclution v-if=" this.tabContent2==9 ">反欺诈结论轨迹 </QTAprovalConclution>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
             <!-- 专员部分 -->
             <aAprovalConclusion v-if=" this.tabContent2==10 " :applyId='list.applyId'>信审审批结论轨迹</aAprovalConclusion>
@@ -139,7 +139,7 @@
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
             <!-- 质检部分 -->
-            <!-- <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution> -->
+            <!-- <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈结论轨迹 </QTAprovalConclution> -->
             <aAprovalConclusion v-if=" this.tabContent2==10" :applyId='list.applyId'>信审审批结论轨迹</aAprovalConclusion>
             <ComplianceProcess v-if=" this.tabContent2==11" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
             <RulesReApply v-if=" this.tabContent2==12" :propReApply='ReApplyMark' :applyId='list.applyId'>合规复议申请</RulesReApply>
@@ -188,7 +188,7 @@
   import remark from "./detailComponent/remark.vue"; //备注信息
   import creditInvestigation from "./detailComponent/creditInvestigation.vue"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
-  import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
+  import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈结论轨迹--新写页面
   import regularQT from "../QualityTesting/QTProcess/components/regularQT.vue"; //质检结论
   import QTResultCheck from "../QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue"; //质检结论-本人结论页
   import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue'; //合规质检结论轨迹-prop
@@ -226,8 +226,8 @@
         tabActiveInd2: 3,
         items1: [],
         items2: [],
-        itemDefault1: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息', "反欺诈审批结论轨迹"],
-        itemDefault2: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", '反欺诈结论', '反欺诈调查', '账务信息', "反欺诈审批结论轨迹"],
+        itemDefault1: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息', "反欺诈结论轨迹"],
+        itemDefault2: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", '反欺诈结论', '反欺诈调查', '账务信息', "反欺诈结论轨迹"],
         itemsTrial1: ['信审审批结论轨迹', '流程轨迹'],
         itemsTrial2: ["信审审批结论轨迹", '流程轨迹', '质检结论'],
         itemsManager1: ['流程轨迹'],
@@ -492,7 +492,7 @@
       aAntiApplyInf, //反欺诈结论
       InternalMatch,
       PhoneCredit,
-      QTAprovalConclution, //反欺诈审批结论轨迹
+      QTAprovalConclution, //反欺诈结论轨迹
       regularQT, //  质检结论
       QTResultCheck,
       ComplianceProcess,

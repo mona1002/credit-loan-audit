@@ -163,7 +163,7 @@
           <span class="collapse_title_text">本次进件命中规则</span>
         </template>
         <div class="checkedInf margin_top_15 margin_left_30">
-          <span class="text_area_span  width_800 height_120 padding_0_10 " >看打卡进度款拉法基啊肯定是就发开了房间发剑飞  </span>
+          <span class="text_area_span  width_800 height_120 padding_0_10">{{ hitRulesTxt }} </span>
         </div>
       </el-collapse-item>
       <!-- 匹配结论 -->
@@ -172,7 +172,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">匹配结论</span>
         </template>
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="30px" v-if="!read"> 
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="30px" v-if="!read">
           <el-form-item prop="audit_desc" class="height_120 margin_top_15 margin_right_5">
             <b v-show="ruleForm.audit_desc&&ruleForm.audit_desc.length>=500" class="hint_word loca">
               输入长度不能超过500</b>
@@ -180,12 +180,12 @@
               :rows="5" :maxlength="500"></el-input>
           </el-form-item>
           <!-- v-if="!read" -->
-          <el-form-item >
+          <el-form-item>
             <el-button type="primary" class="margin_left_735" @click="submitForm('ruleForm')">确定</el-button>
           </el-form-item>
         </el-form>
-         <div class="checkedInf margin_top_15 margin_left_30" v-else>
-          <span class="text_area_span  width_800 height_120 padding_0_10 " >{{ruleForm.audit_desc}}</span>
+        <div class="checkedInf margin_top_15 margin_left_30" v-else>
+          <span class="text_area_span  width_800 height_120 padding_0_10 ">{{ruleForm.audit_desc}}</span>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -231,6 +231,7 @@
         fixTelLoading: false,
         companyLoading: false,
         auditId: '', // 匹配结论id
+        hitRulesTxt: ''
       };
     },
     props: {
@@ -270,6 +271,7 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.init = res.data;
+            this.hitRulesTxt = this.init.hitRulesTxt;
             this.applyInfoHistory = this.init.applyInfoHistory; //客户历史贷款信息  - 无分页
             this.mobileData = this.init.mobileInternalMatch; //移动号码类  
             this.fixTelData = this.init.fixTelInternalMatch; //固定电话类  
