@@ -425,7 +425,7 @@
           applyId: this.applyId
         }).then(res => {
           if (res.statusCode == 200) {
-            this.datas = res.data;
+            this.datas = res.data ? res.data : {};
             //(企业)收支[万元]
             if (this.datas.compPay != null) {
               this.datas.compPay = this.formatNumber(this.datas.compPay, 2, 0);

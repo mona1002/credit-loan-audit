@@ -231,8 +231,8 @@
           applyId: this.applyId
         }).then(res => {
           if (res.statusCode == 200 && res.data) {
-            this.tableData = res.data;
-            this.request(this.tableData[0].id);
+            this.tableData = res.data ? res.data : [];
+            if (this.tableData.length > 0) this.request(this.tableData[0].id);
           }
         });
       },

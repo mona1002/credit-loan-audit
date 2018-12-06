@@ -17,7 +17,7 @@
       <div class="left" ref="rLeft">
         <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
           <ul>
-            <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
+            <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1(index,val)"
               :class="{tab1Act:tab1Index==index}">
               {{val}}</li>
           </ul>
@@ -37,7 +37,7 @@
             </keep-alive>
             <!--  ApplyId -->
             <remark v-if=" this.tabContent1==1" :applyId='list.applyId'></remark>
-            <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
+            <InternalMatch v-if=" this.tabContent1==2" :listInf='list'>内部匹配</InternalMatch>
             <keep-alive v-if="Routes.closed">
               <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'>申请信息</applicationInformationDetail>
             </keep-alive>
@@ -54,10 +54,11 @@
             <keep-alive v-if="Routes.closed">
               <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
             </keep-alive>
+            <QTAprovalConclution v-if=" this.tabContent1==10 ">反欺诈审批结论轨迹 </QTAprovalConclution>
             <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
               <!-- 专员部分 -->
-              <QTAprovalConclution v-if=" this.tabContent1==10 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <aAprovalConclusion v-if=" this.tabContent1==11 " :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
+
+              <aAprovalConclusion v-if=" this.tabContent1==11 " :applyId='list.applyId'>信审审批结论轨迹</aAprovalConclusion>
               <processTrajectory v-if=" this.tabContent1==12" :applyId='list.applyId'>流程轨迹</processTrajectory>
               <!-- <regularQT v-if=" this.tabContent1==14&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==14&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
@@ -70,10 +71,10 @@
             </div>
             <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
               <!-- 质检部分 -->
-              <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <aAprovalConclusion v-if=" this.tabContent1==12" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
-              <ComplianceProcess v-if=" this.tabContent1==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-              <RulesReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='list.applyId'>合规复议申请</RulesReApply>
+              <!-- <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution> -->
+              <aAprovalConclusion v-if=" this.tabContent1==11" :applyId='list.applyId'>信审审批结论轨迹</aAprovalConclusion>
+              <ComplianceProcess v-if=" this.tabContent1==12" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+              <RulesReApply v-if=" this.tabContent1==13" :propReApply='ReApplyMark' :applyId='list.applyId'>合规复议申请</RulesReApply>
               <!-- <regularQT v-if=" this.tabContent1==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT> -->
               <!-- <QTResultCheck v-if=" this.tabContent1==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck> -->
             </div>
@@ -95,9 +96,8 @@
           <!-- tab 2 -->
           <div class="Right_tab_ul_wrap">
             <ul ref="right_tab_ul" style="left:0;right:0;width:2000px">
-              <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
-                :class="{tab2Act:tab2Index==index}">
-                {{val}}</li>
+              <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2(index,val)"
+                :class="{tab2Act:tab2Index==index}"> {{val}}</li>
             </ul>
           </div>
         </div>
@@ -123,28 +123,28 @@
           <keep-alive v-if="Routes.closed">
             <RFinanceInformation v-if=" this.tabContent2==8">财务信息</RFinanceInformation>
           </keep-alive>
+          <QTAprovalConclution v-if=" this.tabContent2==9 ">反欺诈审批结论轨迹 </QTAprovalConclution>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
             <!-- 专员部分 -->
-            <QTAprovalConclution v-if=" this.tabContent2=9 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <aAprovalConclusion v-if=" this.tabContent2==10 " :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
+            <aAprovalConclusion v-if=" this.tabContent2==10 " :applyId='list.applyId'>信审审批结论轨迹</aAprovalConclusion>
             <processTrajectory v-if=" this.tabContent2==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
             <regularQT v-if=" this.tabContent2==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
             <QTResultCheck v-if=" this.tabContent2==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partTwo'">
-            <!-- 主管部分 -->
-            <processTrajectory v-if=" this.tabContent2==11" :applyId='list.applyId'>流程轨迹</processTrajectory>
-            <regularQT v-if=" this.tabContent2==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-            <QTResultCheck v-if=" this.tabContent2==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            <!-- 主管部分 原来主管没有反欺诈审批结论轨迹 -->
+            <processTrajectory v-if=" this.tabContent2==10" :applyId='list.applyId'>流程轨迹</processTrajectory>
+            <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+            <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
           <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
             <!-- 质检部分 -->
-            <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <aAprovalConclusion v-if=" this.tabContent2==12" :applyId='list.applyId'>审批结论轨迹</aAprovalConclusion>
-            <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-            <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark' :applyId='list.applyId'>合规复议申请</RulesReApply>
-            <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-            <QTResultCheck v-if=" this.tabContent2==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            <!-- <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution> -->
+            <aAprovalConclusion v-if=" this.tabContent2==10" :applyId='list.applyId'>信审审批结论轨迹</aAprovalConclusion>
+            <ComplianceProcess v-if=" this.tabContent2==11" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+            <RulesReApply v-if=" this.tabContent2==12" :propReApply='ReApplyMark' :applyId='list.applyId'>合规复议申请</RulesReApply>
+            <regularQT v-if=" this.tabContent2==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+            <QTResultCheck v-if=" this.tabContent2==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
         </div>
       </div>
@@ -226,28 +226,14 @@
         tabActiveInd2: 3,
         items1: [],
         items2: [],
-        itemsTrial1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息',
-          "反欺诈审批结论轨迹", '信审审批结论轨迹', '流程轨迹'
-        ],
-        itemsTrial2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
-          "反欺诈审批结论轨迹", "信审审批结论轨迹", '流程轨迹', '质检结论'
-        ],
-        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
-          '流程轨迹'
-        ],
-        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
-          '流程轨迹',
-          '质检结论'
-        ],
-        itemsQT1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息',
-          "反欺诈审批结论轨迹", '信审审批结论轨迹',
-          '合规质检结论轨迹', '合规复议申请'
-        ],
-        itemsQT2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
-          "反欺诈审批结论轨迹", "信审审批结论轨迹",
-          '合规质检结论轨迹', '合规复议申请',
-          '质检结论'
-        ],
+        itemDefault1: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息', "反欺诈审批结论轨迹"],
+        itemDefault2: ["影像资料", "备注信息", "内部匹配", "申请信息", "电话征信", "信审表", '反欺诈结论', '反欺诈调查', '账务信息', "反欺诈审批结论轨迹"],
+        itemsTrial1: ['信审审批结论轨迹', '流程轨迹'],
+        itemsTrial2: ["信审审批结论轨迹", '流程轨迹', '质检结论'],
+        itemsManager1: ['流程轨迹'],
+        itemsManager2: ['流程轨迹', '质检结论'],
+        itemsQT1: ['信审审批结论轨迹', '合规质检结论轨迹', '合规复议申请'],
+        itemsQT2: ["信审审批结论轨迹", '合规质检结论轨迹', '合规复议申请', '质检结论'],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true],
@@ -352,7 +338,7 @@
         this.leftBtnMark = false;
         this.$refs.leftBtn.style.left = '10px';
       },
-      tab1(ev, ind, val) {
+      tab1(ind, val) {
         this.title = val;
         this.tabContent1 = ind;
         this.tab1Index = ind;
@@ -365,10 +351,10 @@
         if (ind > 0 && ind < 6) this.flag2[ind] = false;
         if (ind > 6) this.flag2[ind - 1] = false; //点击tab1，tab2对应下标-1 不可点击，所以不用分角色
       },
-      tab2(ev, ind, val) {
-        this.tabContent2 = ind;
-        this.tab2Index = ind;
-        this.tabActiveInd2 = ind;
+      tab2(ind, val) {
+        this.tabActiveInd2 = this.tab2Index = this.tabContent2 = ind;
+        // this.tab2Index = ind;
+        // this.tabActiveInd2 = ind;
         for (var i = 0; i < this.$refs.tabOne.length; i++) {
           this.$refs.tabOne[i].className = "tab1Default";
           this.flag1[i] = true;
@@ -377,12 +363,19 @@
         if (ind > 0 && ind < 6) this.flag1[ind] = false;
         if (ind >= 6) {
           let len = 0; //tab1的长度
-          if ((this.LocalList == 'QTTaskWait' || this.LocalList == 'QTManagerTW')) len = this.itemsTrial1.length - 1; //设置不可点击的下标--最后一位下标值   //专员、主管
-          else if (this.LocalList == 'QTSelfTW') len = this.itemsManager1.length - 1; //本人
-          else len = this.itemsQT1.length - 1;
+          if ((this.LocalList == 'QTTaskWait' || this.LocalList == 'QTManagerTW')) {
+            len = this.itemsTrial1.length - 1;
+          } //设置不可点击的下标--最后一位下标值   //专员、主管
+          else if (this.LocalList == 'QTSelfTW') {
+            len = this.itemsManager1.length - 1;
+          } //本人
+          else {
+            len = this.itemsQT1.length - 1
+          };
           // 选中最后结论页，左侧最后一位可点击
           if (ind != len) this.flag1[ind + 1] = false;
         }
+
       },
       MyMove() {
         var clickX, leftOffset, nextW2;
@@ -427,18 +420,18 @@
         if (Nodename === 'checkApp_apply') {
           // 专员-编辑
           this.LocalList = 'QTTaskWait'; //取本地存储
-          this.items1 = this.itemsTrial1; //12
-          this.items2 = this.itemsTrial2;
+          this.items1 = this.itemDefault1.concat(this.itemsTrial1); //12
+          this.items2 = this.itemDefault2.concat(this.itemsTrial2);
         } else if (Nodename === 'checkApp_check_manager') {
           // 主管-编辑
           this.LocalList = 'QTManagerTW';
-          this.items1 = this.itemsTrial1; //12
-          this.items2 = this.itemsTrial2;
+          this.items1 = this.itemDefault1.concat(this.itemsTrial1); //12
+          this.items2 = this.itemDefault2.concat(this.itemsTrial2);
         } else if (Nodename === 'checkApp_trial_self') {
           // 本人
           this.LocalList = 'QTSelfTW';
-          this.items1 = this.itemsManager1; //10
-          this.items2 = this.itemsManager2;
+          this.items1 = this.itemDefault1.concat(this.itemsManager1); //10
+          this.items2 = this.itemDefault2.concat(this.itemsManager2);
           this.Managermark = false; //
           this.RoleSHow = 'partTwo'
         } else if (Nodename === 'checkApp_trial_manager') {
@@ -465,8 +458,8 @@
         this.QTC.pageType = Nodename;
       },
       QTComponentsShow() {
-        this.items1 = this.itemsQT1;
-        this.items2 = this.itemsQT2;
+        this.items1 = this.itemDefault1.concat(this.itemsQT1);
+        this.items2 = this.itemDefault2.concat(this.itemsQT2);
       },
       mountedInf() {
         this.title = "影像资料";

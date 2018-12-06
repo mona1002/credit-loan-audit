@@ -958,7 +958,7 @@
             this.loanDetailList = resp.loanDetailList;
             this.borDebt = resp.borDebt ? resp.borDebt : {};
             this.incomeList = resp.incomeList;
-            this.otherInfo = resp.otherInfo;
+            this.otherInfo = resp.otherInfo? resp.otherInfo:{};
             // 原信审表
             this.FormData = resp.creauditInfoDto;
             this.AreaNPercent();
