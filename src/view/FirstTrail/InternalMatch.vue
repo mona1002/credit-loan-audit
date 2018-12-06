@@ -267,7 +267,8 @@
           applyId: this.listInf.applyId, //	申请单id
           applySubNo: this.listInf.applySubNo, //	进件编号
           name: this.listInf.custName, //	借款人名字
-          workName: this.workName //	单位名称
+          workName: this.workName, //	单位名称
+          certCode:this.listInf.certCode
         }).then(res => {
           if (res.statusCode == 200) {
             this.init = res.data;
