@@ -1125,7 +1125,7 @@
             if (res.statusCode == '200') {
               this.lcgjData = res.data;
             } else {
-              this.$message(res.msg);
+             this._error(res.msg);
             }
           })
       },

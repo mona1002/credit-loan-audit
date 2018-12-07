@@ -928,10 +928,7 @@
               this.lcgjLoading = false;
               this.lcgjData = res.data;
             } else {
-              this.$message({
-                message: res.msg,
-                type: 'warning'
-              });
+              this._error(res.msg);
             }
           })
       },
