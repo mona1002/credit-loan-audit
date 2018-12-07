@@ -4,7 +4,7 @@
       <div ref='tag_ref' class="tag_Ref" :style="{left:activeLeft+'px'}">
         <nobr>
           <div class="pai" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
-            <router-link :to='tag.StatefullPath' ref="tag_self">
+            <router-link :to='tag.StatefullPath' ref="tag_self" class="dis_inBlock">
               <p class="button_bottom" :class="[isActive(tag)?'active':'']">
                 <span v-show="tag.name!='工作台'" @click.stop.prevent="handleClose(tag,$event)" class="el-icon-close close_tag">
                 </span> {{tag.name}}
