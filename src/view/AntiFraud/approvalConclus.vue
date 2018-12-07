@@ -138,7 +138,6 @@
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('save')">保存</el-button>
       <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
-      <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
     </div> -->
     <div class="approve_btn_area approve_btn_area_width_700">
       <span class="approve_item" @click="open">
@@ -171,7 +170,6 @@
       </span>
       <!-- <span class="approve_item" @click="roSocialSecurity">
         <i class="approve_icon dataMaptIcon"></i>
-        <span class="approve_text">社保公积金{{social}}</span>
       </span> -->
     </div>
     <!-- 回退弹窗 -->
@@ -290,56 +288,27 @@
           caseDescs: ''
         },
         formLabelWidth: '85px',
-        caseNums: '',
-        caseDescs: '',
         taskName: '',
         coverShow: false, // 弹窗
-        products: [], // 审批产品
         dealroperDate: '',
-        loanAmt: '',
-        sqproName: '',
-        eachTermAmt: '',
-        loanType: '',
         applyId: '',
-        sproId: '',
         appOrgId: '',
-        quotaData: '',
-        creditScore: '',
-        fbalance: '',
-        fbalance2: '',
-        products: '',
         proCode: '',
-        verIncome2: '',
-        ploanAmt2: '',
-        caculData: '',
-        appConclusion: '',
         custNo: '',
-        applyConclusion: '',
-        srcPloanAmt: '',
-        creditDebitRate: '',
         proId: '',
-        taskId: '',
         showFlag: '',
         processTemplateId: '',
         taskStatus: '',
         lcgjLoading: '',
         reasonRemark: '',
-        issameFamtxt: '', // 风险项
-        relBorrowertxt: '', // 案件描述,
         rollbackNodeName: '', // 监听使用的回退节点
         options: [], // 回退节点的数组
         dealroperCode: '', // 经办人
-        loanTerm: '',
         judgeFlag: '',
-        verIncome: '',
         proName: '',
-        ploanTerm: '',
-        ploanTerms: '',
-        ploanAmt: '',
         lcgjData: [],
         auditResult: '', // 审核结论
         auditResulttext: '',
-        mainId: '', // 主原因 id
         secondId: '', // 子原因id
         riskSectionArr: [], // 风险项
         riskSection: [],
@@ -348,7 +317,6 @@
         taskNodeName: '', // 任务节点
         taskId: '', // 任务节点
         processInstanceId: '', // 流程实例id
-        caseOptions: [], // 请求回来的案件 
         caseNum: '', // 案件编号
         riskSections: [], // 请求回来的风险项
         custName: '', // 客户名
@@ -365,20 +333,17 @@
         lcgjShow: false, // 流程轨迹
         shenPiShow: false, // 审批结论轨迹
         shenPiBtnShow: false, // 审批 专员 BX22
-        social: '', // 社保/公积金  授权标志
         isEdit: false,
         mainReason: '', // 主原因
-        mainReasonT: '', // 主管临时变量
         mainReasons: [], // 主原因数组
         mainReasonName: '', // 主原因name
         secondReason: '', // 子原因
-        secondReasonT: '', //  主管临时变量
         subreaName: '', // 子原因name
         secondReasons: [],
         secondaryReason: '',
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
-        taskwaitting: '',
+        taskwaitting: {},
         //案件编号-新增弹框
         addLogVisible: false,
         //远程搜索案件编号
