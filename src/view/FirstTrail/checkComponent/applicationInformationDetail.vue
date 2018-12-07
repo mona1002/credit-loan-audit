@@ -234,7 +234,7 @@
             <div class=" CreditForm_div_border clearFix">
               <li style="width:66.6%">
                 <label class="label_width_166">现住宅地址：</label>
-                <span>{{applyCustBasicInfoDTO.liveAddress}}</span>
+                <span>{{applyCustBasicInfoDTO.liveDetailAddr}}</span>
               </li>
               <li>
                 <label class="label_width_166">优先联系地址：</label>
