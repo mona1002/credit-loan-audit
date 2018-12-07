@@ -2057,16 +2057,14 @@
       // 流程轨迹-工作流接口-查询流程轨迹
       getLcgjList() {
         this.lcdialogVisible = true;
-        this.get('/creauditInfo/getProcessTraceList', {
-            // processInstanceId: this.processInstanceIdParams,
-            // processStatus: '01'
-            params: {
-              processInstanceId: this.processInstanceIdParams,
-              processStatus: "02"
-            }
-          })
+        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceIdParams + '&' + Math.random())
           .then(res => {
-            this.lcgjData = res.taskDetailList;
+            if (res.statusCode == '200') {
+              this.lcgjData = res.data;
+            } else {
+              this.lcgjData = [];
+              this._error(res.msg);
+            }
           })
       },
       //大数据风控
