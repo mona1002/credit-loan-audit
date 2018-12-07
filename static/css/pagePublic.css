@@ -279,7 +279,10 @@ body .pre_wrap {
   left: 0px;
   /* top:0; */
 }
-
+.oper{
+  color:#409eff;
+  cursor: pointer;
+}
 /* el-item 前的红色*  去掉 */
 .clear_hint label::before {
   content: '' !important;

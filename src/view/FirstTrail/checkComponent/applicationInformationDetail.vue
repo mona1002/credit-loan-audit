@@ -777,29 +777,28 @@
     </div>
     <!-- 维护日志弹框 -->
     <div class="weihurizhi">
-      <el-dialog title='维护日志' :visible.sync="sldialogVisible" :modal="false" width="860px" top="5vh">
+      <el-dialog title='维护日志' :visible.sync="sldialogVisible" :modal="false" width="640px">
         <p style="margin-bottom:5px;">
           <label @click="renovate" style="cursor:pointer">
             <i class="el-icon-refresh" style="color:#409eff"></i>
             <span>刷新</span>
           </label>
         </p>
-        <div class="splcBody">
+        <div class="height_300">
           <el-table :data="logDatas.recordList" style="width: 100%" height="296" border>
-            <el-table-column type="index" label="序号" min-width="50">
+            <el-table-column type="index" label="序号" width="55">
             </el-table-column>
-            <el-table-column prop="number" label="修改个数" min-width="80">
+            <el-table-column prop="number" label="修改个数" width="80">
             </el-table-column>
-            <el-table-column prop="operTime" label="操作时间" min-width="120">
+            <el-table-column prop="operTime" label="操作时间" width="160">
             </el-table-column>
             <el-table-column prop="operUserCode" label="操作人员" min-width="120">
             </el-table-column>
-            <el-table-column prop="operOrgCode" label="操作人员机构" min-width="120">
+            <el-table-column prop="operOrgCode" label="操作人员机构" width="110">
             </el-table-column>
-            <el-table-column label="操作" min-width="80" fixed='right'>
+            <el-table-column label="操作" width="60">
               <template slot-scope="scope">
-                <el-button size="mini" @click="handlDetail(scope.$index, scope.row)">详情
-                </el-button>
+                <span @click="handlDetail(scope.$index, scope.row)" class="oper">详情</span>
               </template>
             </el-table-column>
           </el-table>
@@ -814,16 +813,16 @@
     </div>
     <!-- 维护日志-详情 弹框 -->
     <div class="weihurizhi">
-      <el-dialog title='浏览日志明细信息' :visible.sync="detailLogVisible" width="860px" top="20vh">
-        <div class="splcBody">
+      <el-dialog title='浏览日志明细信息' :visible.sync="detailLogVisible" :modal="false" width="640px">
+        <div class="height_300">
           <el-table :data="detailLogDatas.recordList" style="width: 100%" height="296" border>
-            <el-table-column type="index" label="序号" min-width="50">
+            <el-table-column type="index" label="序号" width="55">
             </el-table-column>
-            <el-table-column prop="fieldNameCN" label="字段名" min-width="120">
+            <el-table-column prop="fieldName" label="字段名" min-width="120">
             </el-table-column>
-            <el-table-column prop="oldValue" label="变更前" min-width="100">
+            <el-table-column prop="oldValue" label="变更前" width="140">
             </el-table-column>
-            <el-table-column prop="newValue" label="变更后" min-width="120">
+            <el-table-column prop="newValue" label="变更后" width="140">
             </el-table-column>
           </el-table>
           <div class="page">
@@ -870,6 +869,7 @@
         /*维护日志*/
         sldialogVisible: false,
         logDatas: {
+          // recordList:[{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},{operTime:"2018-12-05 10:10:11"},],
           totalRecord: 0
         },
         currentPage: 1, // 默认显示的当前页
@@ -878,8 +878,8 @@
         setPageSize1: 10,
         queryParam: {
           businessId: this.applyId, //申请单基本信息id
-          pageSize: '', //每页条数
-          pageNum: '', //页数
+          pageSize: 10, //每页条数
+          pageNum: 1, //页数
           sort: '', //排序字段
           order: '', //排序方式
         },
@@ -887,8 +887,8 @@
         detailLogDatas: '',
         detailParam: {
           operLogId: '', //日志id
-          pageSize: '', //每页条数
-          pageNum: '', //页数
+          pageSize: 10, //每页条数
+          pageNum: 1, //页数
         },
       };
     },
@@ -918,9 +918,7 @@
         }).then(res => {
           if (res.statusCode == 200) {
             let reg = /null/g;
-            // this.$parent.$data.customInf = res.data;
-            res.data.applyBasicInfoDTO ? this.$parent.$data.accepCusBasicInfo = res.data.applyBasicInfoDTO :
-              '';
+            res.data.applyBasicInfoDTO ? this.$parent.$data.accepCusBasicInfo = res.data.applyBasicInfoDTO : '';
             this.$parent.$data.accepCusBasicInfo.mobile = res.data.applyCustBasicInfoDTO.mobile;
             this.$parent.$data.accepCusBasicInfo.adminIntroduce = res.data.adminIntroduce;
             /*房产信息*/
@@ -1122,7 +1120,6 @@
             } else {
               this.detailLogDatas = '';
             };
-            this._succe("查询成功！");
           } else {
             this._error("查询失败！");
           }
@@ -1179,13 +1176,8 @@
   /* 维护日志 */
 
   .weihurizhi .page {
-    text-align: center;
-    padding: 10px 0;
-  }
-
-  .weihurizhi td button {
-    background: #0077FF;
-    color: #fff;
+    /* text-align: center; */
+    /* padding: 10px 0; */
   }
 
 </style>
