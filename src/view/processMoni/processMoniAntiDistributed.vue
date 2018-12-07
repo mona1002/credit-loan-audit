@@ -377,7 +377,6 @@
             }
           })
           .then(res => {
-            console.log(res)
             this.traceList = res.data.data;
           })
       },
@@ -497,7 +496,6 @@
             return
           }
         }
-        console.log(this.multipleSelection[0])
         if (flag === 'trace') {
           this.dialogTraceVisible = true;
           this.getProcessTraceList(this.multipleSelection[0].processInstanceId);

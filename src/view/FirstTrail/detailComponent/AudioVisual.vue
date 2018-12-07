@@ -167,7 +167,6 @@
         if (this.picArrays.length != 0) {
           this.smallPicInd--;
           this.showPage--;
-          console.log(this.$refs.small_pic_ref)
           if (this.$refs.small_pic_ref) {
             if (this.smallPicInd < 0) {
               this.smallPicInd = this.$refs.small_pic_ref.length - 1;

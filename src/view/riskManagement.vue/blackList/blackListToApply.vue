@@ -452,13 +452,11 @@
         this.addInfShow = false;
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
         this.params.pageParam.pageNum = 1; //	页码
         this.params.pageParam.pageSize = val; //	条数
         this.inquire();
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
         this.params.pageParam.pageNum = val; //	页码
         this.inquire();
       },

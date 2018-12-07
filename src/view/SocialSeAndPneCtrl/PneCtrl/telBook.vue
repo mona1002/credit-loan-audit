@@ -33,7 +33,6 @@
         this.get('/tripartiteData/' + this.applySubNo + '/getContactsInfo').then(res => {
         // this.get('/tripartiteData/201801080512013502/getContactsInfo?' + Math.random()).then(res => {
           if (res.statusCode==200) {
-            console.log()
             let resp=JSON.parse(res.data);
             this.tableData = resp.contactsInfo;
             if(resp.clientType){

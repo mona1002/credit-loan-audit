@@ -578,7 +578,6 @@
             break;
           case 'DanWanswerIdentity':
             if (this.DanWanswerIdentity == '01') {
-              console.log('qing')
               this.DanWanswertxt = '';
             }
             break;

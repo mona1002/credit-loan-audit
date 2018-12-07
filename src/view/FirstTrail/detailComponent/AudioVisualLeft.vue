@@ -119,7 +119,6 @@
   </div>
 </template>
 <script>
-  // import pdfDivLeft from '../../pdf'
   export default {
     data() {
       return {
@@ -238,8 +237,6 @@
         });
       },
       smallPic(ind) {
-        console.log(ind)
-        console.log(22222)
         this.smallPicInd = ind;
         this.showPage = ind + 1;
         this.SmallPicShow = false;

@@ -72,8 +72,6 @@
                 Object.assign(this.creditAccount, this.rawData)
               }
             }
-            // console.log('储蓄卡', this.debitCard);
-            // console.log('信用卡', this.creditCard);
           } else {
             this._error(res.msg);
           }

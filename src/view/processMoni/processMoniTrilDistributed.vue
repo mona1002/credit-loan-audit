@@ -411,7 +411,6 @@
             }
           })
           .then(res => {
-            console.log(res.data)
             this.transList = res.data.data.recordList;
           });
       },

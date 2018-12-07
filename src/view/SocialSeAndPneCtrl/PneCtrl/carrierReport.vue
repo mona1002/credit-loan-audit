@@ -47,10 +47,6 @@
               let resp = res.data;
               let report = res.data.reportData ? JSON.parse(resp.reportData) : {}; //报告数据
               let rawreport = res.data.rawData ? JSON.parse(resp.rawData) : {}; //原始数据
-              // console.log(res)
-              // console.log(resp)
-              // console.log(1, report);
-              // console.log(2, rawreport);
               let reportData = {};
               //  判断是聚立信还是立木
               if (resp.orgType == "jxl") { //聚立信
@@ -210,8 +206,6 @@
                 }
                 this.LM = lm;
               }
-              // console.log(this.JLX)
-              // console.log(this.LM)
             }
           }
         });

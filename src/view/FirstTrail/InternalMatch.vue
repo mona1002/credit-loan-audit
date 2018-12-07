@@ -257,7 +257,6 @@
     },
     methods: {
       mountedInf() {
-        console.log(this.listInf);
         // 初始化接口
         this.post('/internalMatch/getInternalMatchInfo', {
           pageParam: {
