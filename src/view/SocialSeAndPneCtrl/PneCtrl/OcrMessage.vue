@@ -94,7 +94,7 @@
       getInf() {
         // this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!notSession_getOcrMessage.action', {
         // this.get('tripartiteData/201801080512013502/getOcrInfo' //测试账号
-        this.get('/tripartiteData' + this.applySubNo + '/getOcrInfo').then(res => {
+        this.get('/tripartiteData/' + this.applySubNo + '/getOcrInfo').then(res => {
           if (res.statusCode == 200) {
             this.baseinfo = res.data[0];
             // 判断人脸信息格式

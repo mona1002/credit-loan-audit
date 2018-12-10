@@ -20,7 +20,7 @@
               </li>
               <li>
                 <label class="label_width_166">有无授权机构：</label>
-                <span>{{accepApplyLoan.authOrgFlagTxt}}</span>
+                <span>{{accepApplyLoan.authorgFlagTxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -550,7 +550,7 @@
             </el-table-column>
             <el-table-column prop="estateTypeTxt" label="房产类型" width="100">
             </el-table-column>
-            <el-table-column prop="propertyTypeTxt" label="产权性质" width="80">
+            <el-table-column prop="estatePropertyTxt" label="产权性质" width="80">
             </el-table-column>
             <el-table-column prop="coveredArea" label="建筑面积[m²]" width="110">
             </el-table-column>
@@ -649,7 +649,7 @@
             <div class=" CreditForm_div_border clearFix">
               <li style="width:66.6%;">
                 <label class="label_width_166">单位地址：</label>
-                <span>{{applyCustWorkDTO.companyAddr}}</span>
+                <span>{{applyCustWorkDTO.workDetailAddr}}</span>
               </li>
               <li>
                 <label class="label_width_166">单位地址邮编：</label>
@@ -727,7 +727,7 @@
             </div>
             <li>
               <label class="label_width_166">前单位电话：</label>
-              <span>{{applyCustWorkDTO.befworkTel}}</span>
+              <span>{{applyCustWorkDTO.befWorkTel}}</span>
             </li>
 
             <li>
@@ -986,7 +986,7 @@
             /*您的工作信息*/
             if (res.data.applyCustWorkDTO != null) {
               this.applyCustWorkDTO = res.data.applyCustWorkDTO;
-              this.applyCustWorkDTO.companyAddr ? this.applyCustWorkDTO.companyAddr = this.applyCustWorkDTO.companyAddr
+              this.applyCustWorkDTO.workDetailAddr ? this.applyCustWorkDTO.workDetailAddr = this.applyCustWorkDTO.workDetailAddr
                 .replace(reg, '') : ''; //单位地址
             }
             /*联系人信息*/
