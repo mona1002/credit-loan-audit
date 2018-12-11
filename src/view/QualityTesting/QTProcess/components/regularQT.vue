@@ -555,14 +555,11 @@
             </p>
             <!-- insTelVerifyList -->
             <el-table :data="TelData(this.ind)" border style="width: 100%">
-              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <el-table-column prop="telName" label="姓名" align="center" width="160">
-              </el-table-column>
-              <el-table-column prop="relation" label="关系" align="center" width="160">
-              </el-table-column>
-              <el-table-column prop="telNum" label="电话号码" align="center" width="105">
-              </el-table-column>
-              <el-table-column label="电话录音" align="center" width="100">
+              <el-table-column label='序号'  type="index" width="50"> </el-table-column>
+              <el-table-column prop="telName" label="姓名"  width="80"> </el-table-column>
+              <el-table-column prop="relation" label="关系"  width="80">  </el-table-column>
+              <el-table-column prop="telNum" label="电话号码"  width="105"></el-table-column>
+              <el-table-column label="电话录音"  width="80">
                 <template slot-scope="scope">
                   <!-- <span>{{ scope.row.telRecord}}</span>
                   <audio controls="controls" height="100" width="100">
@@ -577,20 +574,20 @@
                   </audio> -->
                 </template>
               </el-table-column>
-              <el-table-column prop="sourceTxt" label="来源" align="center" width="70">
+              <el-table-column prop="sourceTxt" label="来源"  width="70">
               </el-table-column>
-              <el-table-column prop="checkTime" label="最新调查时间" align="center" width="180">
+              <el-table-column prop="checkTime" label="最新调查时间"  width="150">
               </el-table-column>
-              <el-table-column prop="answerTxt" label="最新接听情况" align="center" width="180">
+              <el-table-column prop="answerTxt" label="最新接听情况"  width="100">
               </el-table-column>
-              <el-table-column prop="checkStageTxt" label="最新调查阶段" align="center" width="180">
+              <el-table-column prop="checkStageTxt" label="最新调查阶段"  width="100">
               </el-table-column>
-              <el-table-column label="调查结论" align="center" width="180">
+              <el-table-column label="调查结论"  width="180">
                 <template slot-scope="scope">
                   <span class="pre_wrap">{{ scope.row.conclusion}}</span>
                 </template>
               </el-table-column>
-              <el-table-column label="质检结果" align="center" width="180">
+              <el-table-column label="质检结果"  width="170">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
                     <b class="required_Red"> * </b>
@@ -601,7 +598,7 @@
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="备注" align="center" min-width="180">
+              <el-table-column label="备注"  min-width="160">
                 <template slot-scope="scope">
                   <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
                   <el-input class='margin_top_15' type="textarea" :readonly='PhoneCredit' v-if="scope.row.insResult=='01'"
@@ -671,7 +668,7 @@
             </el-table-column>
             <el-table-column prop="checkResultTxt" width="180" label="质检结果">
             </el-table-column>
-            <el-table-column prop="approverUserCode" width="180" label="审批人">
+            <el-table-column prop="approverUserCode" width="180" label="经办人">
             </el-table-column>
             <el-table-column prop="approverDate" width="180" label="审批时间">
             </el-table-column>

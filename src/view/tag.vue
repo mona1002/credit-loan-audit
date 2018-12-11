@@ -281,7 +281,7 @@
         } else if (route.path == '/doTheTask') { // 任务管理- 信审已办任务
           this.nodeName = "审批已办任务";
         } else if (route.path == '/TaskManagementSplit') { // 任务管理- 信审历史任务-详情
-          this.nodeName = "审批任务管理-详情";
+          this.nodeName = "任务管理-详情";
         } else if (route.path == '/aDoneTask') { // 任务管理- 反欺诈已办任务
           this.nodeName = "反欺诈已办任务";
         } else if (route.path == '/aHistoryTask') { // 任务管理- 反欺诈历史任务
