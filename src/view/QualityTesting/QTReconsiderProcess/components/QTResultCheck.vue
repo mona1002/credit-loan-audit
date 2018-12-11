@@ -103,13 +103,11 @@
           reconType: '00' //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
         }).then(res => {
           if (res.statusCode == 200) {
-            this.$message({
-              message: '提交成功',
-              type: 'success'
-            })
+            this._succe('提交成功')
             this.$router.push('/SelfTaskList?taskNodeName=checkApp_apply&flag=09')
+            this._del('质检详情');
           } else {
-            this.$message.error(res.msg)
+            this._error(res.msg)
           }
         })
       },
@@ -128,12 +126,12 @@
       },
       //大数据风控
       RiskControl() {
-          this.$router.push({
-            name: 'PneCtrl',
-            params: {
-              newOne: true,
-            }
-          });
+        this.$router.push({
+          name: 'PneCtrl',
+          params: {
+            newOne: true,
+          }
+        });
       },
     },
     mounted() {

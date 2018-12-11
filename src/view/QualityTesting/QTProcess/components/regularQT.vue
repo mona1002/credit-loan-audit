@@ -1712,25 +1712,15 @@
             taskId: this.propQTconclution.tastwaitingPass.taskId,
           }).then(res => {
             if (res.statusCode == 200) {
-              this.$message({
-                type: 'success',
-                message: type + '成功！'
-              })
-              if (type == '提交') {
-                this.propQTconclution.pageType == 'checkApp_apply' ? this.$router.push(
-                  '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
-                this.$store.dispatch('delVisitedViews', {
-                  name: '质检详情'
-                }).then((views) => {
-                  const latestView = views.slice(-1)[0]
-                  if (latestView) {
-                    this.$router.push(latestView.StatefullPath);
-                  } else {
-                    this.$router.push('/')
-                  }
-                })
-              }
-              this.referPort(); //保存之后要查询最新信息，否则一直为入参会一直为原始信息，id第二次保存的时候或者提交的时候依旧会为空（应该有值）
+              this._succe(type + '成功！')
+              let nodeP = this.propQTconclution.pageType;
+              // 主管保存按钮，专员提交按钮 删除页签 跳转页面
+              if (type == '提交' && nodeP == 'checkApp_apply') this.$router.push(
+                '/commissioner?taskNodeName=checkApp_apply&flag=07')
+              if (type == '保存' && nodeP == 'checkApp_check_manager') this.$router.push(
+                '/manager?taskNodeName=checkApp_check_manager&flag=08')
+              this._del('质检详情');
+              // this.referPort(); //保存之后要查询最新信息，否则一直为入参会一直为原始信息，id第二次保存的时候或者提交的时候依旧会为空（应该有值）
             } else {
               this.$message.error(res.msg);
             }
@@ -1812,27 +1802,15 @@
           this.post("/insConclusion/addOrSubmit", this.SaveInfParams)
             .then(res => {
               if (res.statusCode == 200) {
-                this.$message({
-                  type: 'success',
-                  message: type + '成功！'
-                })
-                // 保存获取最新信息，提交跳转
-                // type == '保存' ? this.referPort() : ''; // 点保存重新获取信息
-                if (type == '提交') {
-                  this.propQTconclution.pageType == 'checkApp_apply' ? this.$router.push(
-                    '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
-                  this.$store.dispatch('delVisitedViews', {
-                    name: '质检详情'
-                  }).then((views) => {
-                    const latestView = views.slice(-1)[0]
-                    if (latestView) {
-                      this.$router.push(latestView.StatefullPath);
-                    } else {
-                      this.$router.push('/')
-                    }
-                  })
-                }
-                this.referPort(); //同上
+                this._succe(type + '成功！')
+                let nodeP = this.propQTconclution.pageType;
+                // 主管保存按钮，专员提交按钮 删除页签 跳转页面
+                if (type == '提交' && nodeP == 'checkApp_apply') this.$router.push(
+                  '/commissioner?taskNodeName=checkApp_apply&flag=07')
+                if (type == '保存' && nodeP == 'checkApp_check_manager') this.$router.push(
+                  '/manager?taskNodeName=checkApp_check_manager&flag=08')
+                this._del('质检详情');
+                // this.referPort(); //同上
               } else {
                 this.$message.error(res.msg);
               }
@@ -1847,26 +1825,15 @@
           reconType: this.propQTconclution.tastwaitingPass.reconType,
         }).then(res => {
           if (res.statusCode == 200) {
-            this.$message({
-              type: 'success',
-              message: '提交成功！'
-            });
-            this.propQTconclution.pageType == 'checkApp_trial_manager' ? this.$router.push(
-              'ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10') : '';
-            this.propQTconclution.pageType == 'checkApp_regional_manager' ? this.$router.push(
-              'ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12') : '';
-            this.$store.dispatch('delVisitedViews', {
-              name: '质检详情'
-            }).then((views) => {
-              const latestView = views.slice(-1)[0]
-              if (latestView) {
-                this.$router.push(latestView.StatefullPath);
-              } else {
-                this.$router.push('/')
-              }
-            })
+            this._succe('提交成功！');
+            let nodeP = this.propQTconclution.pageType;
+            // 初终审主管 
+            if (nodeP == 'checkApp_trial_manager') this.$router.push('ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10');
+            //  区域
+            if (nodeP == 'checkApp_regional_manager') this.$router.push('ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12');
+            this._del('质检详情');
           } else {
-            this.$message.error(res.msg);
+            this._error(res.msg);
           }
         });
       },
@@ -1930,16 +1897,7 @@
             })
             this.ReconsiderDes = ''; //请空复议说明输入框
             this.$router.push('/ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10');
-            this.$store.dispatch('delVisitedViews', {
-              name: '质检详情'
-            }).then((views) => {
-              const latestView = views.slice(-1)[0]
-              if (latestView) {
-                this.$router.push(latestView.StatefullPath);
-              } else {
-                this.$router.push('/')
-              }
-            })
+            this._del('质检详情');
           } else {
             this.$message.error(res.msg);
           }
@@ -1973,16 +1931,7 @@
             this.ToAteaApprovalParams.reviewResult = ''; //复议结果
             this.ToAteaApprovalParams.reviewRemark = ''; //复议说明
             this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12'); //区域经理提交成功-成功跳转到列表页
-            this.$store.dispatch('delVisitedViews', {
-              name: '质检详情'
-            }).then((views) => {
-              const latestView = views.slice(-1)[0]
-              if (latestView) {
-                this.$router.push(latestView.StatefullPath);
-              } else {
-                this.$router.push('/')
-              }
-            })
+            this._del('质检详情');
           } else {
             this.$message.error(res.msg);
           }
@@ -2038,16 +1987,7 @@
               'ReManagerTaskList?taskNodeName=checkApp_check_recon_manager&flag=11') : ''; //复议首次-成功跳转到列表页
             this.propQTconclution.pageType == 'checkApp_compliance_manager' ? this.$router.push(
               'ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13') : ''; //合规经理结论点击审批-成功跳转到列表页
-            this.$store.dispatch('delVisitedViews', {
-              name: '质检详情'
-            }).then((views) => {
-              const latestView = views.slice(-1)[0]
-              if (latestView) {
-                this.$router.push(latestView.StatefullPath);
-              } else {
-                this.$router.push('/')
-              }
-            })
+            this._del('质检详情');
           } else {
             this.$message.error(res.msg);
           }
