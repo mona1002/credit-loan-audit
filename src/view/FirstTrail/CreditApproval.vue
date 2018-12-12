@@ -119,7 +119,7 @@
     </el-collapse>
     <!-- 回退弹窗 -->
     <div class="Height_240 return_back">
-      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false " width='620px'>
+      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false " width='630px'>
         <el-form :label-width="LabelWidth">
           <el-form-item label="回退节点：">
             <el-select @change="backSelectChange" v-model="rollbackNodeName">
@@ -456,7 +456,7 @@
         creditExtensionLoanTerm: '',
         activeName: ['1'],
         formLabelWidth: '85px',
-        LabelWidth: '95px',
+        LabelWidth: '100px',
         formApproLabLeft: "100px",
         formApproLab: "123px",
         formApproLabelWidth: "200px",
