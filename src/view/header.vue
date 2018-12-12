@@ -164,6 +164,7 @@
     width: calc(100% - 324px);
     height: 100%;
     float: left;
+    overflow: hidden;
   }
 
   .mheader .navContain {
