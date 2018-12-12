@@ -956,9 +956,9 @@
                 this.insurAddr ? this.insurAddr = this.insurAddr.replace(reg, '') : '';
               }
               //户口所在地
-              this.applyCustBasicInfoDTO.homeDetailAddr = this.applyCustBasicInfoDTO.homeDetailAddr.replace(reg, '');
+              this.applyCustBasicInfoDTO.homeDetailAddr = this.applyCustBasicInfoDTO.homeDetailAddr?this.applyCustBasicInfoDTO.homeDetailAddr.replace(reg, ''):'';
               //现住宅地址
-              this.applyCustBasicInfoDTO.liveAddress = this.applyCustBasicInfoDTO.liveAddress.replace(reg, '');
+              this.applyCustBasicInfoDTO.liveAddress = this.applyCustBasicInfoDTO.liveAddress? this.applyCustBasicInfoDTO.liveAddress.replace(reg, ''):'';
             }
             /*私人业主信息*/
             if (res.data.applyPrivateOwnersDTO != null) {
