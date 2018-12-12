@@ -11,33 +11,28 @@
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <div>
-                  <label class="label_width_95">进件编号：</label>
-                  <span>{{applyInfoPool.applySubno}}</span></div>
+                <label class="label_width_166">进件编号：</label>
+                <span>{{applyInfoPool.applySubno}}</span>
               </li>
               <li>
-                <div>
-                  <label class="label_width_95">客户名称：</label>
-                  <span>{{applyInfoPool.custName}}</span> </div>
+                <label class="label_width_166">客户名称：</label>
+                <span>{{applyInfoPool.custName}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <div>
-                  <label class="label_width_95">证件类型：</label>
-                  <span>{{applyInfoPool.certTypeTxt}}</span> </div>
+                <label class="label_width_166">证件类型：</label>
+                <span>{{applyInfoPool.certTypeTxt}}</span>
               </li>
               <li>
-                <div>
-                  <label class="label_width_95">证件号码：</label>
-                  <span>{{applyInfoPool.certCode}}</span> </div>
+                <label class="label_width_166">证件号码：</label>
+                <span>{{applyInfoPool.certCode}}</span>
               </li>
             </div>
             <div class="CreditForm_div_border bor_none clearFix">
               <li>
-                <div>
-                  <label class="label_width_95">移动电话：</label>
-                  <span>{{applyInfoPool.mobile}}</span> </div>
+                <label class="label_width_166">移动电话：</label>
+                <span>{{applyInfoPool.mobile}}</span>
               </li>
             </div>
           </ul>
