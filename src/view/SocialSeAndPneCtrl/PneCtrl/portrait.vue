@@ -1,6 +1,6 @@
 <template>
   <!-- 同盾设备画像 -->
-  <div class="SocialSecurity min_width_1550">
+  <div class="SocialSecurity">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -373,13 +373,13 @@
             </el-table-column>
             <el-table-column prop="phoneType" label="通话类型" width="80">
             </el-table-column>
-            <el-table-column prop="mnc" label="mnc" width="180">
+            <el-table-column prop="mnc" label="mnc" width="160">
             </el-table-column>
             <el-table-column prop="phoneNumber" label="电话" width="180">
             </el-table-column>
-            <el-table-column prop="countryIso" label="国家" width="100">
+            <el-table-column prop="countryIso" label="国家" width="80">
             </el-table-column>
-            <el-table-column prop="simOperator" label="sim卡类型" width="100">
+            <el-table-column prop="simOperator" label="sim卡类型" width="85">
             </el-table-column>
             <el-table-column prop="imei" label="imei" width="160">
             </el-table-column>

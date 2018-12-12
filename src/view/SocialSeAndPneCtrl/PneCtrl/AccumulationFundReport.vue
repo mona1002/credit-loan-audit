@@ -1,13 +1,13 @@
 <template>
   <!-- 公积金报告 -->
-  <div class="SocialSecurity min_width_1550">
+  <div class="SocialSecurity">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">报告信息</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_four clearFix">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
@@ -22,12 +22,12 @@
                 <label class="label_width_195">用户填写姓名：</label>
                 <span>{{fundReport.user_name}}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">用户填写身份证号：</label>
                 <span>{{fundReport.user_idcard}}</span>
               </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">用户填写手机号：</label>
                 <span>{{fundReport.user_phone}}</span>
@@ -36,6 +36,8 @@
                 <label class="label_width_195">姓名是否一致：</label>
                 <span>{{fundReport.name_match}}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">身份证是否一致：</label>
                 <span>{{fundReport.idcard_match}}</span>
@@ -44,12 +46,12 @@
                 <label class="label_width_195">预估月收入[元]：</label>
                 <span>{{parseInt(fundReport.monthly_income)/ 100 | formatMoney }}</span>
               </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">公积金账号：</label>
                 <span>{{fundReport.customer_id}}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">机构类型：</label>
                 <span>{{fundReport.organization_type}}</span>
@@ -58,12 +60,12 @@
                 <label class="label_width_195">账户状态：</label>
                 <span>{{fundReport.status}}</span>
               </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">当前缴存单位：</label>
                 <span>{{fundReport.company}}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">缴存单位规模：</label>
                 <span>{{fundReport.corp_scale}}</span>
@@ -90,12 +92,12 @@
                 <label class="label_width_195">当前公司连续缴存月份(预估)：</label>
                 <span>{{fundReport.current_corp_continuous_deposit_month}}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">最近一次缴存时间：</label>
                 <span>{{fundReport.last_record_date}}</span>
               </li>
-            </div>
-            <div>
               <li>
                 <label class="label_width_195">最长连续缴存月份：</label>
                 <span>{{fundReport.continuous_deposit_month}}</span>
@@ -104,6 +106,8 @@
                 <label class="label_width_195">最近连续缴存月份：</label>
                 <span>{{fundReport.last_deposit_month}}</span>
               </li>
+            </div>
+            <div>
               <li>
                 <label class="label_width_195">公积金贷款笔数：</label>
                 <span>{{fundReport.loan_count}}</span>
@@ -121,7 +125,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">账户信息</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_four clearFix">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
@@ -136,12 +140,12 @@
                 <label class="label_width_195">姓名：</label>
                 <span>{{accounts.name}}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">身份证号：</label>
                 <span>{{accounts.idcard}}</span>
               </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">当前账户状态：</label>
                 <span>{{accounts.status}}</span>
@@ -150,6 +154,8 @@
                 <label class="label_width_195">当前账户余额[元]：</label>
                 <span>{{parseInt(accounts.balance)/ 100 | formatMoney }}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">最近一次缴存日期：</label>
                 <span>{{accounts.last_record_date}}</span>
@@ -158,12 +164,12 @@
                 <label class="label_width_195">当前缴存公司名称：</label>
                 <span>{{accounts.company}}</span>
               </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">月缴存金额[元]：</label>
                 <span>{{parseInt(accounts.deposit_amount)/ 100 | formatMoney }}</span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">月缴存基数[元]：</label>
                 <span>{{parseInt(accounts.deposit_base)/ 100 | formatMoney }}</span>
@@ -177,7 +183,7 @@
                 <span>{{accounts.person_rate}}</span>
               </li>
             </div>
-            <div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">房补缴存金额[元]：</label>
                 <span>{{parseInt(accounts.housing_supplement_base)/ 100 | formatMoney }}</span>
@@ -190,6 +196,9 @@
                 <label class="label_width_195">开户日期：</label>
                 <span>{{accounts.init_date}}</span>
               </li>
+            </div>
+
+            <div>
               <li>
                 <label class="label_width_195">一次性补贴余额[元]：</label>
                 <span>{{parseInt(accounts.once_balance)/ 100 | formatMoney }}</span>
