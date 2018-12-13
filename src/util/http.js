@@ -7,6 +7,7 @@ import platforUrl from './constantUser'
 axios.defaults.baseURL = appConstant.baseUrl_common;
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(response => {
+  console.log(1,response)
   if (response.data && response.data.statusCode == 900) {
     window.location.href = platforUrl.path + "#/";
   };
@@ -14,7 +15,6 @@ axios.interceptors.response.use(response => {
 }, error => {
   return Promise.reject(error);
 });
-
 export default {
   install(Vue, options) {
     Vue.prototype.get = function (url, params = {}) {
@@ -34,9 +34,10 @@ export default {
             .then(response => {
               resolve(response.data);
             }, err => {
+              console.log(err,77)
               reject(err);
             })
-            .catch((error) => {})
+            .catch((error) => {console.log('catch',error)})
         })
       },
       Vue.prototype.Delete = function (url, data = {}) {

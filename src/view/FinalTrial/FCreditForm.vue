@@ -353,7 +353,6 @@
                 <label class="label_width_220">所属行业：</label>
                 <span>{{this.FormData.hirecomKind}} </span>
               </li>
-
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
@@ -382,30 +381,32 @@
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
-              <li>
+              <li class="li_one_row">
                 <label class="label_width_220">前单位名称：</label>
                 <span class="detail_inf elips">{{this.FormData.hirelastComname }} </span>
-              </li>
-              <li>
-                <label class="label_width_220">所在部门： </label>
-                <span>{{this.FormData.hiredepartment }} </span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
+                <label class="label_width_220">所在部门： </label>
+                <span>{{this.FormData.hiredepartment }} </span>
+              </li>
+              <li>
                 <label class=" label_width_220"> 入职时间： </label>
                 <span>{{this.FormData.entryDate }} </span>
               </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class=" label_width_220">工资发放形式： </label>
                 <span>{{this.FormData.hirecomPaymentTypetext }} </span>
               </li>
-            </div>
-            <div class=" clearFix">
               <li>
                 <label class=" label_width_220"> 单位地址邮编：</label>
                 <span>{{this.FormData.workZip }} </span>
               </li>
+            </div>
+            <div class=" clearFix">
               <li>
                 <label class=" label_width_220 "> 是否为私营业主： </label>
                 <span>{{this.FormData.privateOwnerFlagtext}} </span>
@@ -958,7 +959,7 @@
             this.loanDetailList = resp.loanDetailList;
             this.borDebt = resp.borDebt ? resp.borDebt : {};
             this.incomeList = resp.incomeList;
-            this.otherInfo = resp.otherInfo? resp.otherInfo:{};
+            this.otherInfo = resp.otherInfo ? resp.otherInfo : {};
             // 原信审表
             this.FormData = resp.creauditInfoDto;
             this.AreaNPercent();

@@ -64,7 +64,7 @@
           </ul>
         </div>
         <!-- approve_btn_area_width_1050 min-width:300px;-->
-        <div class="approve_btn_area CreditApproval_btn" >
+        <div class="approve_btn_area CreditApproval_btn">
           <div>
             <span class="approve_item" @click="hangOoutBtn">
               <i class="approve_icon HangUpIcon"></i>
@@ -982,9 +982,11 @@
             this._error('请选择回退节点!')
             return;
           }
-          if (this.checkBox && this.checkedCities.length == 0) {
-            this._error('请勾选补充授权项！!')
-            return;
+          if (this.judgeFlag == '01') {//初审需要判断此处必填，终审没有
+            if (this.checkBox && this.checkedCities.length == 0) {
+              this._error('请勾选补充授权项！!')
+              return;
+            }
           }
         }
         if (flag != '03') {

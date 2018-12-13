@@ -9,7 +9,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">客户名称：</span>
-          <el-input v-model.trim="params.custName_la" placeholder="请输入客户名称"></el-input>
+          <el-input v-model.trim="params.custName" placeholder="请输入客户名称"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">证件号码：</span>
@@ -250,7 +250,7 @@
           directSalesCode: '', //	直销人员
           emergencyType: '', //	紧急程度
           applyCustServCode: '', //	进件客服
-          custName_la: '', //	客户名称（输入客户编号）
+          custName: '', //	客户名称（输入客户编号）
           productCode: '', //	产品名称（输入产品编号）
           loanPurpose: '', //	借款用途
           applyOrgCode: '', //	进件机构
@@ -631,7 +631,7 @@
         this.params.directSalesCode = ''; //	直销人员
         this.params.emergencyType = ''; //	紧急程度
         this.params.applyCustServCode = ''; //	进件客服
-        this.params.custName_la = ''; //	客户名称
+        this.params.custName = ''; //	客户名称
         this.params.productCode = ''; //	产品名称（输入产品编号）
         this.params.loanPurpose = ''; //	借款用途
         this.params.applyOrgCode = ''; //	进件机构

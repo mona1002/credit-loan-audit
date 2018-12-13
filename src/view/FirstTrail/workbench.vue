@@ -124,7 +124,8 @@
           if (res.statusCode == 200) {
             this.tableData = res.data;
           } else {
-            this.$message.error(res.msg);
+             this.tableData =[];
+            this._error(res.msg);
           }
         });
       },
@@ -137,15 +138,7 @@
       refresh() {
         this.rot += 360;
         this.$refs.worktask.style.transform = "rotate(" + this.rot + "deg)";
-        this.post("/workFlowTaskQuery/getTaskProfile", {
-          taskStatus: "01",
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.tableData = res.data;
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
+       this.mountedInf();
       },
       handleCurrentChange(val) {
         this.currentRow = val;
@@ -250,15 +243,7 @@
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
         localStorage.setItem("userc", JSON.stringify(response.data.orgLevel));
         localStorage.setItem("userctcode", JSON.stringify(response.data.subOrgCode));
-        this.post("/workFlowTaskQuery/getTaskProfile", {
-          taskStatus: "01",
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.tableData = res.data;
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
+        this.mountedInf();
       });
     },
   }
