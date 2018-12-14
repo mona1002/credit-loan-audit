@@ -178,7 +178,7 @@
         <el-form>
           <el-form-item class="alert_collapse_inputLabel" label="回退节点：" :label-width="formLabelWidth">
             <el-select @change="backSelectChange" v-model="rollbackNodeName">
-              <el-option v-for="item in options" :label="item.label" :value="item" :key="item.value">
+              <el-option v-for="item in options" :label="item.label" :value="item.value" :key="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -199,7 +199,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="huiTuiShow=false">取 消</el-button>
-          <el-button type="primary" @click="submitFn('02')" :loading="isLoading"> {{loadingTitle}}</el-button>
+          <el-button type="primary" @click="submitFn" :loading="isLoading"> {{loadingTitle}}</el-button>
         </div>
       </el-dialog>
     </div>
@@ -381,98 +381,101 @@
     },
     mounted() {
       // 取出 审批结论 所需数据
-      this.auditCode = JSON.parse(localStorage.getItem('userInf')).userCode;
+      // this.auditCode = JSON.parse(localStorage.getItem('userInf')).userCode;
       // 回退 拒绝  审批
       // 经办人 登录用户名
       this.userInfo = JSON.parse(localStorage.getItem('userInf'));
       this.dealroperCode = this.userInfo.userCode;
       this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
-      if (this.judgeFlag == '01') { // 初审 任务 id  taskId
-        this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-        this.custName = this.taskInWaitting.custName;
-        this.certCode = this.taskInWaitting.certCode;
-        // 挂起 任务id
-        this.taskId = this.taskInWaitting.taskId;
-        this.opinionFlag = '00';
-        this.options = [{
-          "label": "申请登记",
-          "value": "creditApp_apply",
-          "type": "01"
-        }]
-        this.channel = '00';
-      } else if (this.judgeFlag == '02') { // 终审取终审  taskId
-        this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-        this.custName = this.FtaskInWaitting.custName;
-        this.certCode = this.FtaskInWaitting.certCode;
-        // 挂起 任务id
-        this.taskId = this.FtaskInWaitting.taskId;
-        this.opinionFlag = '01'; // 终审
-        this.options = [{
-            "label": "申请登记",
-            "value": "creditApp_apply",
-            "type": "01"
-          },
-          {
-            "label": "初审审批",
-            "value": "creditApp_firstTrial",
-            "type": "02"
-          }
-        ]
-        this.channel = '00';
-      } else if (this.judgeFlag == '03' || this.judgeFlag == '04') {
-        this.taskwaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
-        this.custName = this.taskwaitting.custName;
-        this.certCode = this.taskwaitting.certCode;
-        this.taskName = this.taskwaitting.taskName;
-        this.taskId = this.taskwaitting.taskId;
-        this.applyId = this.taskwaitting.applyId;
-        this.processInstanceId = this.taskwaitting.processInstanceId;
-        this.taskNodeName = this.taskwaitting.taskNodeName;
-        this.taskStatus = this.taskwaitting.taskStatus;
-        var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
-        if (insertObj != undefined) {
-          this.auditResult = insertObj.auditResult; // 审核结论
-          this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
-          this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
-          this.mainReasonName = insertObj.mainreaName, // 欺诈主原因名称
-            this.secondReason = insertObj.subreasonId; // 欺诈子原因id
-          this.subreaName = insertObj.subreaName, // 欺诈子原因名称
-            this.riskSection = insertObj.riskSection; // 风险项
-          this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
-          this.caseNum = insertObj.caseNum; // 案件编号 caseNum
-          this.caseDesc = insertObj.caseDesc; // 案件描述
-        }
-        // 请求风险项
-        this.getRiskItems();
-        // 专员主管区分
-        if (this.taskName == 'antiFraudApp_commissioner') { // 专员
-          this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
-          this.isEdit = true;
-          if (this.userInfo.roleCodesList) {
-            for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
-              if (this.userInfo.roleCodesList[i] == 'BX22')
-                if (this.judgeFlag == '03')
-                  this.shenPiBtnShow = true;
-          }
-          this.queryCaseNumList();
-        } else if (this.taskName == 'antiFraudApp_manager') { //主管
-          this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
-          this.options = [{
-            "label": "反欺诈专员审批",
-            "value": "antiFraudApp_commissioner",
-            "type": ''
-          }]
-          if (!insertObj) {
-            // 反欺诈主管 请求 反欺诈历史信息
-            this.queryCreauditOpinionObj();
-          }
-        }
-      } else if (this.judgeFlag == '05' || this.judgeFlag == '06') {
-        this.channel = '04';
-      } else if (this.judgeFlag == '07' || this.judgeFlag == '08' || this.judgeFlag == '10' || this.judgeFlag == '11' ||
-        this.judgeFlag == '12' || this.judgeFlag == '13') {
-        this.channel = '03';
+      // if (this.judgeFlag == '01') { // 初审 任务 id  taskId
+      //   this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+      //   this.custName = this.taskInWaitting.custName;
+      //   this.certCode = this.taskInWaitting.certCode;
+      //   // 挂起 任务id
+      //   this.taskId = this.taskInWaitting.taskId;
+      //   this.opinionFlag = '00';
+      //   this.options = [{
+      //     "label": "申请登记",
+      //     "value": "creditApp_apply",
+      //     "type": "01"
+      //   }]
+      //   this.channel = '00';
+      // } else if (this.judgeFlag == '02') { // 终审取终审  taskId
+      //   this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+      //   this.custName = this.FtaskInWaitting.custName;
+      //   this.certCode = this.FtaskInWaitting.certCode;
+      //   // 挂起 任务id
+      //   this.taskId = this.FtaskInWaitting.taskId;
+      //   this.opinionFlag = '01'; // 终审
+      //   this.options = [{
+      //       "label": "申请登记",
+      //       "value": "creditApp_apply",
+      //       "type": "01"
+      //     },
+      //     {
+      //       "label": "初审审批",
+      //       "value": "creditApp_firstTrial",
+      //       "type": "02"
+      //     }
+      //   ]
+      //   this.channel = '00';
+      // } else 
+      // if (this.judgeFlag == '03' || this.judgeFlag == '04') {
+      this.taskwaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
+      this.custName = this.taskwaitting.custName;
+      this.certCode = this.taskwaitting.certCode;
+      this.taskName = this.taskwaitting.taskName;
+      this.taskId = this.taskwaitting.taskId;
+      this.applyId = this.taskwaitting.applyId;
+      this.processInstanceId = this.taskwaitting.processInstanceId;
+      this.taskNodeName = this.taskwaitting.taskNodeName;
+      this.taskStatus = this.taskwaitting.taskStatus;
+      var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
+      if (insertObj != undefined) {
+        this.auditResult = insertObj.auditResult; // 审核结论
+        this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
+        this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
+        this.mainReasonName = insertObj.mainreaName, // 欺诈主原因名称
+          this.secondReason = insertObj.subreasonId; // 欺诈子原因id
+        this.subreaName = insertObj.subreaName, // 欺诈子原因名称
+          this.riskSection = insertObj.riskSection; // 风险项
+        this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
+        this.caseNum = insertObj.caseNum; // 案件编号 caseNum
+        this.caseDesc = insertObj.caseDesc; // 案件描述
       }
+      // 请求风险项
+      this.getRiskItems();
+      // 专员主管区分
+      if (this.taskName == 'antiFraudApp_commissioner') { // 专员
+        this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+        this.isEdit = true;
+        if (this.userInfo.roleCodesList) {
+          for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+            if (this.userInfo.roleCodesList[i] == 'BX22')
+              if (this.judgeFlag == '03')
+                this.shenPiBtnShow = true;
+        }
+        this.queryCaseNumList();
+      } else if (this.taskName == 'antiFraudApp_manager') { //主管
+        this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+        this.options = [{
+          "label": "反欺诈专员审批",
+          "value": "antiFraudApp_commissioner",
+          "type": ''
+        }];
+        this.rollbackNodeName = 'antiFraudApp_commissioner';
+        if (!insertObj) {
+          // 反欺诈主管 请求 反欺诈历史信息
+          this.queryCreauditOpinionObj();
+        }
+      }
+      // } 
+      // else if (this.judgeFlag == '05' || this.judgeFlag == '06') {
+      //   this.channel = '04';
+      // } else if (this.judgeFlag == '07' || this.judgeFlag == '08' || this.judgeFlag == '10' || this.judgeFlag == '11' ||
+      //   this.judgeFlag == '12' || this.judgeFlag == '13') {
+      //   this.channel = '03';
+      // }
     },
     methods: {
       open() { //挂起
@@ -489,23 +492,13 @@
             busiState: this.busiState,
             applyId: this.applyId, // 申请单id
           }).then(res => {
-            if (res.statusCode == '200') {
-              this.$message({
-                type: 'success',
-                message: '挂起成功'
-              });
-              this.$router.push('/AntiFraud34');
-            } else {
-              this.$message(res.msg);
-            }
+            this.FinProcess(res, '挂起成功');
           });
         }).catch(() => {});
       },
       // 请求系统时间
       getSystemDate() {
-        // 获取系统时间
         this.get('system/getSystemDate?' + Math.random()).then(res => {
-          // 请求系统时间
           this.dealroperDate = res.data;
         })
       },
@@ -664,22 +657,10 @@
               busiState: this.busiState, //  状态
               processTemplateId: this.processTemplateId // 流程模版Id
             }).then(res => {
-              if (res.statusCode == '200') {
-                this.resMsg = res.msg;
-                this.$message({
-                  type: 'success',
-                  message: '反欺诈审批成功!'
-                });
-                this.$router.push('/AntiFraud34');
-              } else {
-                this.$message({
-                  type: 'warning',
-                  message: res.msg
-                });
-              }
+              this.FinProcess(res, '反欺诈审批成功!');
             })
           }).catch(() => {});
-        } else {
+        } else { //提交
           this.$confirm('您确定操作？', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
@@ -708,19 +689,7 @@
               processTemplateId: this.processTemplateId, // 流程模版Id
               channel: this.channel
             }).then(res => {
-              if (res.statusCode == '200') {
-                this.resMsg = res.msg;
-                this.$message({
-                  type: 'success',
-                  message: '反欺诈审批成功!'
-                });
-                this.$router.push('/AntiFraud34');
-              } else {
-                this.$message({
-                  type: 'warning',
-                  message: res.msg
-                });
-              }
+              this.FinProcess(res, '反欺诈提交成功!')
             })
           }).catch(() => {});
         }
@@ -733,24 +702,16 @@
             this.huiTuiShow = true;
             this.showFlag = '02';
             // 获取系统时间
-            this.get('system/getSystemDate?' + Math.random()).then(res => {
-              // 请求系统时间
-              this.dealroperDate = res.data;
-            })
+            this.getSystemDate();
             break;
-
           case 'lcgj':
             this.lcgjShow = true;
             this.lcgjLoading = true;
             this.getLcgjList();
             break;
-
           case 'showDetail':
             if (!this.caseNum) {
-              this.$message({
-                type: 'warning',
-                message: '请选择案件编号!'
-              });
+              this._error('请选择案件编号!');
               return;
             }
             this.coverShow = true;
@@ -777,10 +738,7 @@
             localStorage.setItem('saveInsertObj', JSON.stringify(tempObj));
             // 保存 成功
             if (localStorage.getItem('saveInsertObj') != undefined) {
-              this.$message({
-                message: "保存成功!",
-                type: 'success'
-              });
+              this._succe("保存成功!");
               return;
             }
         }
@@ -807,46 +765,28 @@
         this.pageNum = val;
         this.queryDetailList();
       },
-      submitFn(flag) {
-        // 手动赋值  经办人
-        this.dealroperCode = this.dealroperCode;
-        switch (flag) {
-          case '02':
-            // 进行必填校验
-            // 回退节点
-            if (this.rollbackNodeName.length == 0) {
-              this.$message({
-                message: "提示：请选择回退节点!",
-                type: 'warning'
-              });
-              return;
-            }
-            // 原因说明
-            if (!this.reasonRemark) {
-              this.$message({
-                message: "提示：请填写原因说明!",
-                type: 'warning'
-              });
-              return;
-            }
-            this.coverShow = false;
-            this.showFlag = 0;
-            // 回退节点 使用了监听,所以单独赋值
-            this.rollbackNodeName = this.rollbackNodeName.value;
-            this.creauditAppOperate = 'check_Back';
-            this.approvalFn();
-            break;
+      submitFn() {
+        // 校验
+        if (!this.rollbackNodeName) {
+          this._error('请选择回退节点!');
+          return;
         }
+        if (!this.reasonRemark) {
+          this._error('请填写原因说明!');
+          return;
+        }
+        this.coverShow = false;
+        this.showFlag = 0;
+        this.creauditAppOperate = 'check_Back';
+        this.approvalFn();
+
       },
-      // 回退/拒绝/放弃
+      // 回退
       approvalFn() {
         this.isLoading = true;
         this.loadingTitle = '提交中';
-        // 判断终审的 opinionFlag 
-        // 点击 确定 提交 方法
         this.post("/fraudAuditOpinion/approval", {
-          // 挂起 taskId 任务id
-          taskId: this.taskId,
+          taskId: this.taskId, // 挂起 taskId 任务id
           custName: this.custName, // 客户名称
           custNo: this.custNo, // 客户code
           certType: this.certType, // 证件类型
@@ -862,27 +802,11 @@
           reasonRemark: this.reasonRemark, // 意见描述/原因说明
           appOrgId: this.appOrgId, // 进件机构id
           applyId: this.applyId, // 申请单id
-          rollbackNodeName: this.rollbackNodeName, // 回退节点名称
+          rollbackNodeName: this.rollbackNodeName, // 回退节点key值
           dealroperDate: this.dealroperDate, // 经办时间
           creauditAppOperate: this.creauditAppOperate // 操作类型
         }).then(res => {
-          this.huiTuiShow = false;
-
-          if (res.statusCode != '200') {
-            this.$message({
-              message: res.msg,
-              type: 'warning'
-            })
-            return;
-          }
-          if (res.statusCode == '200') {
-            this.$message({
-              message: res.msg,
-              type: 'success'
-            })
-            this.$router.push('/AntiFraud34');
-            this.del();
-          }
+          this.FinProcess(res)
         });
       },
       // 流程轨迹
@@ -939,7 +863,7 @@
       },
       // 回退节点改变 请求主原因
       backSelectChange: function (val) {
-        this.getReason('main', val.type);
+        // this.getReason('main', val.type);
       },
       // 通过监听请求主原因
       // flag 主/子
@@ -1008,8 +932,6 @@
             this.caseNum = res.data.caseNum;
             // 案件描述
             this.caseDesc = res.data.caseDesc;
-            // 请求风险项
-            this.getRiskItems();
             // 请求案件编号
             this.queryCaseNumList();
           }
@@ -1017,11 +939,11 @@
       },
       //大数据风控
       tobigData() {
-          this.$router.push({
-            name: 'PneCtrl',
-            params: {
-              newOne: true,
-            }
+        this.$router.push({
+          name: 'PneCtrl',
+          params: {
+            newOne: true,
+          }
         });
       },
       // 修改 按钮
@@ -1064,22 +986,14 @@
                 caseDesc: this.ruleFormAdd.caseDescs
               }
             }).then(res => {
-              if (res.statusCode != 200) {
-                this.$message({
-                  showClose: true,
-                  message: res.msg,
-                  type: 'warning'
-                });
-                return;
-              } else {
-                this.$message({
-                  type: 'success',
-                  message: '新增成功！'
-                })
+              if (res.statusCode == 200) {
+                this._succe('新增成功！')
                 this.addLogVisible = false;
                 this.caseNum = this.ruleFormAdd.caseNums;
                 this.caseDesc = this.ruleFormAdd.caseDescs;
                 this.queryCaseNumList();
+              } else {
+                this._error(res.msg);
               }
             })
           } else {
@@ -1097,17 +1011,18 @@
             break;
         }
       },
-      del() {
-        this.$store.dispatch('delVisitedViews', {
-          name: '反欺诈详情'
-        }).then((views) => {
-          const latestView = views.slice(-1)[0]
-          if (latestView) {
-            this.$router.push(latestView.StatefullPath);
-          } else {
-            this.$router.push('/')
+      FinProcess(res, succe = res.msg) {
+        if (res.statusCode == '200') {
+          this._succe(succe);
+          this._del('反欺诈详情');
+          if (this.judgeFlag == '03') { //专员
+            this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_commissioner&flag=03');
+          } else { //主管
+            this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_manager&flag=04');
           }
-        })
+        } else {
+          this._error(res.msg);
+        }
       }
     },
   }

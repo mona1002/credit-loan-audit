@@ -230,8 +230,8 @@
       }
     },
     mounted() {
-      // 统一登录平台  
-      this.get(UserURL.gate + 'remote/user/getUserInfo?' + Math.random()).then(response => {
+      // 统一登录平台  ?' + Math.random()
+      this.get(UserURL.gate + 'remote/user/getUserInfo').then(response => {
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,

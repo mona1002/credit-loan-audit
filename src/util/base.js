@@ -27,8 +27,8 @@ exports.install = function (Vue, options) {
       m = time.getMonth() + month + 1; //获取当前月份的日期 d
     }
     d = time.getDate();
-    if (MonBoo)  m = m.toString().length == 1 ? '0' + m : m;
-    if (DayBoo)  d = d.toString().length == 1 ? '0' + d : d;
+    if (MonBoo) m = m.toString().length == 1 ? '0' + m : m;
+    if (DayBoo) d = d.toString().length == 1 ? '0' + d : d;
     return y + "-" + m + "-" + d;
   }
   // 错误提示语
