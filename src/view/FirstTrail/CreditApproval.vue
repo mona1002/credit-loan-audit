@@ -123,7 +123,7 @@
         <el-form :label-width="LabelWidth">
           <el-form-item label="回退节点：">
             <el-select @change="backSelectChange" v-model="rollbackNodeName">
-              <el-option v-for="item in options" :label="item.label" :key='item.value' :value="item">
+              <el-option v-for="item in options" :label="item.label" :key='item.value' :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -167,7 +167,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="huiTuiShow=false">取 消</el-button>
-          <el-button type="primary" :loading="isLoading" @click="submitFn( '02', 'ruleFormReturn') "> {{loadingTitle}}</el-button>
+          <el-button type="primary" :loading="isLoading" @click="submitFn( '02') "> {{loadingTitle}}</el-button>
         </div>
       </el-dialog>
     </div>
@@ -699,6 +699,7 @@
             "value": "creditApp_apply",
             "type": "01"
           }]
+          this.rollbackNodeName = 'creditApp_apply'; //只有一个节点默认显示此节点，多个节点需手动选择（删除此行）
           this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus; // 任务状态
           // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
           if (this.userInfo.roleCodesList) {
@@ -717,6 +718,7 @@
             "value": "creditApp_firstTrial",
             "type": "02"
           }];
+          this.rollbackNodeName = 'creditApp_firstTrial';
           this.findSmFlowRole();
           // 拒绝按钮根据 角色判断 BX20
           if (this.userInfo.roleCodesList) {
@@ -835,7 +837,8 @@
               this.checkedCities = []; //清空复选框
               this.secondaryReason = ''; //清空子原因
               this.getSystemDate();
-              this.getReason('main', '01')
+              // 初审回退到申请登记 01   终审会退到初审审批 02
+              this.judgeFlag == '01' ? this.getReason('main', '01') : this.getReason('main', '02');
               break;
             case '01':
               this.juJueShow = true;
@@ -978,11 +981,11 @@
         // 回退、拒绝、放弃
         //必填校验
         if (flag == '02') {
-          if (this.rollbackNodeName.length == 0) {
+          if (!this.rollbackNodeName) {
             this._error('请选择回退节点!')
             return;
           }
-          if (this.judgeFlag == '01') {//初审需要判断此处必填，终审没有
+          if (this.judgeFlag == '01') { //初审需要判断此处必填，终审没有
             if (this.checkBox && this.checkedCities.length == 0) {
               this._error('请勾选补充授权项！!')
               return;
@@ -1007,8 +1010,8 @@
           } else if (this.judgeFlag == '02') {
             if (flag == '01') this.busiState = '12';
             if (flag == '02') {
-              this.rollbackNodeName.value == 'creditApp_apply' ? this.busiState = '00' : ''; //申请登记
-              this.rollbackNodeName.value == 'creditApp_firstTrial' ? this.busiState = '10' : ''; //初审审批
+              this.rollbackNodeName == 'creditApp_apply' ? this.busiState = '00' : ''; //申请登记
+              this.rollbackNodeName == 'creditApp_firstTrial' ? this.busiState = '10' : ''; //初审审批
             }
             if (flag == '07') this.busiState = '13';
           }
@@ -1061,120 +1064,6 @@
           this.judgeFlag == '01' ? this.busiState = '04' : this.busiState = '14';
           this.saveCreaduit();
         }
-        // switch (flag) {
-        // case '01':
-        // 必填校验
-        // if (!this.mainReason) {
-        //   this._error('请选择主原因!')
-        //   return;
-        // }
-        // if (!this.reasonRemark) {
-        //   this._error('请填写原因说明!')
-        //   return;
-        // }
-        // this.creauditAppOperate = 'check_Refuse';
-        // 区分初审/终审
-        // if (this.judgeFlag == '01') {
-        //   this.busiState = '02';
-        // } else if (this.judgeFlag == '02') {
-        //   this.busiState = '12'
-        // }
-        // this.approvalFn();
-        // break;
-        // case '02':
-        // 进行必填校验
-        // 回退节点
-        // if (this.rollbackNodeName.length == 0) {
-        //   this._error('请选择回退节点!')
-        //   return;
-        // }
-        // if (!this.mainReason) {
-        //   this._error('请选择主原因!')
-        //   return;
-        // }
-        // if (!this.reasonRemark) {
-        //   this._error('请填写原因说明!')
-        //   return;
-        // }
-        // this.creauditAppOperate = 'check_Back';
-        // 区分初审/终审
-        // if (this.judgeFlag == '01') {
-        //   // this.busiState = '00';
-        // } else if (this.judgeFlag == '02') {
-        //   if (this.rollbackNodeName.value == 'creditApp_apply') { //申请登记
-        //     this.busiState = '00'
-        //   } else if (this.rollbackNodeName.value == 'creditApp_firstTrial') { //初审审批
-        //     this.busiState = '10'
-        //   }
-        // }
-        // this.approvalFn();
-        // break;
-        // case '07':
-        // if (!this.mainReason) {
-        //   this._error('请选择主原因!')
-        //   return;
-        // }
-        // if (!this.reasonRemark) {
-        //   this._error('请填写原因说明!')
-        //   return;
-        // }
-        // this.creauditAppOperate = 'check_Abandon';
-        // 区分初审/终审
-        // if (this.judgeFlag == '01') {
-        //   this.busiState = '03';
-        // } else if (this.judgeFlag == '02') {
-        //   this.busiState = '13'
-        // }
-        // this.approvalFn();
-        // break;
-        // case '03':
-        // 校验必填项
-        // 假如没有  核实可接受最高每期还款额 , 提示
-        // if (!this.fbalance2) {
-        //   this._error('请完善信审表中可承受的月还款金额！')
-        //   return;
-        // }
-        // if (!this.verIncome) {
-        //   this._error('请填月核实收入!')
-        //   this.verIncomError = true;
-        //   return;
-        // }
-        // if (!this.proId) {
-        //   this._error('请选择批准产品!')
-        //   return;
-        // }
-        // if (!this.ploanTerm) {
-        //   this._error('请选择批准期限!')
-        //   this.ploanTermError = true;
-        //   return;
-        // }
-        // if (!this.ploanAmt) {
-        //   this._error('请填写批准金额!')
-        //   this.ploanAmtError = true;
-        //   return;
-        // }
-        // if (this.ploanAmt) {
-        //   var regs = /\,/g;
-        //   var newPloanAmt = this.ploanAmt.replace(regs, '') * 1;
-        //   if (newPloanAmt > this.maxAuditAmt && this.opinionFlag == '00') {
-        //     this._error('大于当前审批人最高审批金额权限，请选择请求更高级审批!');
-        //     return;
-        //   };
-        // };
-        // if (!this.appConclusion) {
-        //   this._error("请填写意见说明!");
-        //   return;
-        // }
-        // // 区分初审/终审
-        // if (this.judgeFlag == '01') {
-        //   this.busiState = '04';
-        // } else if (this.judgeFlag == '02') {
-        //   this.busiState = '14'
-        // }
-        // // 保存审批信息
-        // this.saveCreaduit();
-        // break;
-        // }
       },
       // 回退/拒绝/放弃
       approvalFn() {
@@ -1215,7 +1104,7 @@
           reasonRemark: this.reasonRemark, // 意见描述/原因说明
           appOrgId: this.appOrgId, // 进件机构id
           applyId: this.applyId, // 申请单id
-          rollbackNodeName: this.rollbackNodeName.value, // 回退节点名称
+          rollbackNodeName: this.rollbackNodeName, // 回退节点名称
           dealroperDate: this.dealroperDate, // 经办时间
           creauditAppOperate: this.creauditAppOperate, // 操作类型
           busiState: this.busiState,
@@ -1224,12 +1113,12 @@
           this.fangQiShow = this.juJueShow = this.huiTuiShow = this.isLoading = false;
           this.loadingTitle = '提交';
           if (res.statusCode == '200') {
-            this.mainReason = ''; // 回退主原因
-            this.secondaryReason = ''; // 回退子原因
-            this.reasonRemark = ''; // 意见描述/原因说明
-            this.rollbackNodeName = ''; // 回退节点名称
-            this.dealroperDate = ''; // 经办时间
-            this.creauditAppOperate = ''; // 操作类型
+            // this.mainReason = ''; // 回退主原因
+            // this.secondaryReason = ''; // 回退子原因
+            // this.reasonRemark = ''; // 意见描述/原因说明
+            // // this.rollbackNodeName = ''; // 回退节点名称
+            // this.dealroperDate = ''; // 经办时间
+            // this.creauditAppOperate = ''; // 操作类型
             this._succe(res.msg)
             if (this.judgeFlag == '01') {
               this.$router.push('/taskInWaitting');
@@ -1427,11 +1316,12 @@
             }
           })
       },
-      // 回退节点改变 请求主原因
+      // 回退节点改变 请求主原因-只有一个节点，不需要change请求
       backSelectChange: function (val) {
-        this.getReason('main', val.type);
-        // 清空主原因 子原因
-        this.mainReason = this.mainId = this.secondaryReason = '';
+
+        // this.getReason('main', val.type);
+        // // 清空主原因 子原因
+        // this.mainReason = this.mainId = this.secondaryReason = '';
       },
       // 回退/拒绝 主原因 select - change
       selectChange: function (val) {

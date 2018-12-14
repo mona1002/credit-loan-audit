@@ -34,21 +34,21 @@
         v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
         <el-table-column type="index" :index="1" label="序号" width='50'>
         </el-table-column>
-        <el-table-column prop="taskTypeTxt" label="任务类型" width="120">
+        <el-table-column prop="taskTypeTxt" label="任务类型" width="140">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" width="170">
         </el-table-column>
         <el-table-column prop="appDate" label="申请日期" width="110">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称" width="100">
+        <el-table-column prop="custName" label="客户名称" width="140">
         </el-table-column>
         <el-table-column prop="certTypeTxt" label="证件类型" width="80">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码" width="160">
+        <el-table-column prop="certCode" label="证件号码" width="170">
         </el-table-column>
         <el-table-column prop="appOrgName" label="进件机构" width="160">
         </el-table-column>
-        <el-table-column prop="proName" label="产品名称" width="80">
+        <el-table-column prop="proName" label="产品名称" width="120">
         </el-table-column>
         <el-table-column prop="activationTime" label="进入本环节时间" min-width="160">
         </el-table-column>
