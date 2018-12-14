@@ -1113,12 +1113,6 @@
           this.fangQiShow = this.juJueShow = this.huiTuiShow = this.isLoading = false;
           this.loadingTitle = '提交';
           if (res.statusCode == '200') {
-            // this.mainReason = ''; // 回退主原因
-            // this.secondaryReason = ''; // 回退子原因
-            // this.reasonRemark = ''; // 意见描述/原因说明
-            // // this.rollbackNodeName = ''; // 回退节点名称
-            // this.dealroperDate = ''; // 经办时间
-            // this.creauditAppOperate = ''; // 操作类型
             this._succe(res.msg)
             if (this.judgeFlag == '01') {
               this.$router.push('/taskInWaitting');

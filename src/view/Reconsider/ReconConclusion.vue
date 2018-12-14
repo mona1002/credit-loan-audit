@@ -955,11 +955,7 @@
       },
       //回退节点
       backNode() {
-        this.get('/credit/firstNodeReason?reasonType=01' + '&' + Math.random()).then(res => {
-          if (res.statusCode == '200') {
-            this.mainResions = res.data;
-          }
-        })
+        // this.getMReason('01');
       },
       // 获取授信期限
       creditPeriod() {
@@ -971,7 +967,14 @@
           }
         });
       },
-      //主原因
+      getMReason(type) {
+        this.get('/credit/firstNodeReason?reasonType=' + type + '&' + Math.random()).then(res => {
+          if (res.statusCode == '200') {
+            this.mainResions = res.data;
+          }
+        })
+      },
+      //主原因获取子原因
       mainReason($event, flag) {
         //"mainback":回退
         //"mainrefuse":拒绝

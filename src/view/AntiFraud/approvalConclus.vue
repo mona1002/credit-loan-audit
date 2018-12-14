@@ -836,7 +836,6 @@
               }
             }
           }
-
         }
       },
       // 获取主原因
@@ -844,12 +843,11 @@
         this.secondReason = '';
         // 在主原因改变的时候请求子原因
         this.getReason('main', val, false);
-
-        if (val == '00') {
-          this.getReason('main', '08', false);
-        } else if (val == '01') {
-          this.getReason('main', '09', false);
-        } else if (val == '02') {}
+        // if (val == '00') {
+        //   this.getReason('main', '08', false);
+        // } else if (val == '01') {
+        //   this.getReason('main', '09', false);
+        // } else if (val == '02') {}
       },
       selectChange: function (val) {
         var id = val.id; // 主原因的 id
