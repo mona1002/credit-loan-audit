@@ -112,16 +112,6 @@
     watch: {
       '$route'(to, from) {
         if (to.path === '/') {
-               this.get(UserURL.gate + 'remote/user/getUserInfo').then(response => {
-        this.userInf = {
-          userCode: response.data.userCode,
-          orgCode: response.data.orgCode,
-          orgId: response.data.orgId,
-          userName: response.data.userName,
-          roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
-          flowRoleCodesList: response.data.flowRoleCodesList
-        }
-               });
           this.mountedInf();
         }
       }
@@ -240,8 +230,8 @@
       }
     },
     mounted() {
-      // 统一登录平台  ?' + Math.random()
-      this.get(UserURL.gate + 'remote/user/getUserInfo').then(response => {
+      // 统一登录平台  
+      this.get(UserURL.gate + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,

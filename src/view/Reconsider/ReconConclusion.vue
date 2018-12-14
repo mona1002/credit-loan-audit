@@ -190,7 +190,7 @@
               {{dealroperCode}}
             </el-form-item>
             <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
-              {{jdealroperDate | dateFilter}}
+              {{dealroperDate | dateFilter}}
             </el-form-item>
           </div>
         </el-form>
@@ -474,17 +474,17 @@
         rsubReasonName: '',
         rchildReasons: [],
         options: [],
-        options1: [{ //复议专员用
-          value: 'reconsiderApp_apply',
-          label: '复议申请'
-        }],
-        options2: [{ //复议经理用
-          value: 'reconsiderApp_commissioner',
-          label: '复议专员审批'
-        }],
+        // options1: [{ //复议专员用
+        //   value: 'reconsiderApp_apply',
+        //   label: '复议申请'
+        // }],
+        // options2: [{ //复议经理用
+        //   value: 'reconsiderApp_commissioner',
+        //   label: '复议专员审批'
+        // }],
         //经办时间
         dealroperDate: '',
-        jdealroperDate: '',
+        // jdealroperDate: '',
         //原因说明
         reasonRemark: '',
         rreasonRemark: '',
@@ -568,16 +568,24 @@
       this.orgId = this.userInf.orgId;
       //流程模版ID
       if (this.type == 'commissioner') { //复议专员
-        this.options = this.options1;
+        this.options = [{
+          value: 'reconsiderApp_apply',
+          label: '复议申请'
+        }];
+        this.FormReturn.rollbackNodeName = 'reconsiderApp_apply';
         this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId; //专员
       } else { //复议经理
-        this.options = this.options2;
+        this.options = [{
+          value: 'reconsiderApp_commissioner',
+          label: '复议专员审批'
+        }];
+        this.FormReturn.rollbackNodeName = 'reconsiderApp_commissioner';
         this.processTemplateId = JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).processTemplateId; //主管
       }
       //流程实例id
-      this.processInstanceId = JSON.parse(localStorage.getItem('RtaskInWaitting')).processInstanceId;
+      this.processInstanceId = this.RtaskInWaitting.processInstanceId;
       //任务id
-      this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
+      this.taskId = this.RtaskInWaitting.taskId;
       this.creditPeriod(); //授信期限下拉-审批按钮弹窗
     },
     methods: {
@@ -598,6 +606,12 @@
           }
         })
       },
+      // 获取时间
+      getSystemDate() {
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
+          this.dealroperDate = res.data;
+        })
+      },
       //回退:back、拒绝:refuse
       coverFn(flag) {
         switch (flag) {
@@ -605,19 +619,13 @@
             this.huituiLoading = false;
             this.huituiFont = '提交';
             this.dialogVisible = true;
-            this.get('system/getSystemDate?' + Math.random()).then(res => {
-              // 请求系统时间
-              this.dealroperDate = res.data;
-            })
+            this.getSystemDate();
             break;
           case 'refuse':
             this.jujueLoading = false;
             this.jujueFont = '提交';
             this.jdialogVisible = true;
-            this.get('system/getSystemDate?' + Math.random()).then(res => {
-              // 请求系统时间
-              this.jdealroperDate = res.data;
-            });
+            this.getSystemDate();
             this.get('/credit/firstNodeReason?reasonType=03' + '&' + Math.random()).then(res => {
               if (res.statusCode == '200') {
                 this.rmainResions = res.data;
@@ -674,8 +682,8 @@
             //总负债率
             res.data.totalRate || res.data.totalRate == 0 ? this.caculData.totalRate = (res.data.totalRate * 100).toFixed(
               2) + "%" : '';
-               this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
-                this.caculData.signAmount   = res.data.signAmount  ; //签约金额;
+            this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
+            this.caculData.signAmount = res.data.signAmount; //签约金额;
             //月还款额
             res.data.eachTermamt || res.data.eachTermamt == 0 ? this.caculData.eachTermamt = this._formatNumber(res
               .data
@@ -787,18 +795,7 @@
           opinionFlag: '00', // 任务类型  初审 00 
           busiState: '21' //复议审批
         }).then(res => {
-          if (res.statusCode == '200') {
-            this._succe(res.msg);
-            if (this.type == 'commissioner') {
-              this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
-            } else {
-              this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
-            }
-            this.del();
-          } else {
-            this._error(res.msg)
-          }
-          this.sdialogVisible = false;
+          this.FinProcess(res);
         })
 
       },
@@ -819,18 +816,12 @@
             break;
           case 'ploanAmt':
             if (val * 1 > this.maxAmounnt) {
-              this.$message({
-                message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
-                type: 'warning'
-              });
+              this._error('批准金额不能大于产品最高上限' + this.maxAmounnt + '元');
               this.creditExtensionLoanAmt = this.ploanAmt = '';
               return
             };
             if (val * 1 < this.minAmount) {
-              this.$message({
-                message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
-                type: 'warning'
-              });
+              this._error('批准金额不能小于产品最低下限' + this.minAmount + '元');
               this.creditExtensionLoanAmt = this.ploanAmt = '';
               return
             };
@@ -909,47 +900,14 @@
               appOrgId: this.appOrgId, // 进件机构id
               applyId: this.applyId, // 申请单id
               rollbackNodeName: '', // 回退节点名称(没有回退节点) 
-              dealroperDate: this.jdealroperDate, // 经办时间
+              dealroperDate: this.dealroperDate, // 经办时间
               creauditAppOperate: '01', // 复议 拒绝creauditAppOperate: 'check_Refuse'
               busiState: '22', //复议审批中（回退）
               dealroperCode: this.dealroperCode, //经办人
               applySubNo: this.datas.applySubNo, //复议申请单ID
               userInf: {},
             }).then(res => {
-              this.jdialogVisible = false;
-              if (res.statusCode != '200') {
-                this.$message({
-                  message: res.msg,
-                  type: 'warning'
-                })
-                return;
-              }
-              if (res.statusCode == '200') {
-                // this.taskId = '';
-                this.datas.custName = ''; // 客户名称
-                this.custNo = ''; // 客户code
-                this.datas.certTypeTxt = ''; // 证件类型
-                this.datas.certCode = ''; // 证件号码
-                this.emerType = ''; // 紧急程度
-                this.appOrgCode, // 门店代码
-                  this.datas.proName, // 产品名称
-                  this.proId = ''; // 产品id
-                this.opinionFlag = ''; // 标志任务类型
-                this.mainReason = ''; // 回退主原因
-                this.secondaryReason = ''; // 回退子原因
-                this.FormReject.rreasonRemark = ''; // 意见描述/原因说明
-                this.appOrgId = ''; // 进件机构id
-                this.rollbackNodeName = ''; // 回退节点名称
-                this.dealroperDate = ''; // 经办时间
-                this.dealroperCode = ''; //经办人
-                this.creauditAppOperate = ''; // 操作类型
-                this.$message({
-                  message: res.msg,
-                  type: 'success'
-                })
-                this.$router.push('/reconsiderList');
-                this.del();
-              }
+              this.FinProcess(res);
             });
           } else {
             return false;
@@ -981,46 +939,14 @@
               reasonRemark: this.reasonRemark, // 意见描述/原因说明
               appOrgId: this.appOrgId, // 进件机构id
               applyId: this.applyId, // 申请单id
-              rollbackNodeName: this.type == 'commissioner' ? 'reconsiderApp_apply' : 'reconsiderApp_commissioner', // 回退节点名称
+              rollbackNodeName: this.FormReturn.rollbackNodeName, // 回退节点名称
               dealroperDate: this.dealroperDate, // 经办时间
               creauditAppOperate: '02', //check_Back
               busiState: '20', //复议审批中（回退） // 复议经理 回退
               applySubNo: this.datas.applySubNo, //复议申请单ID    
               dealroperCode: this.dealroperCode, //经办人
             }).then(res => {
-              this.dialogVisible = false;
-              if (res.statusCode != '200') {
-                this.$message({
-                  message: res.msg,
-                  type: 'warning'
-                })
-              } else {
-                // this.taskId = '';
-                this.datas.custName = ''; // 客户名称
-                this.custNo = ''; // 客户code
-                this.datas.certTypeTxt = ''; // 证件类型
-                this.datas.certCode = ''; // 证件号码
-                this.emerType = ''; // 紧急程度
-                this.appOrgCode = ''; // 门店代码
-                this.proCode = ''; //  产品代码
-                this.proId = ''; // 产品id
-                this.opinionFlag = ''; // 标志任务类型
-                this.mainReason = ''; // 回退主原因
-                this.secondaryReason = ''; // 回退子原因
-                this.reasonRemark = ''; // 意见描述/原因说明
-                //  this.FormReturn.reasonRemark = ''; // 意见描述/原因说明z
-                this.appOrgId = ''; // 进件机构id
-                this.rollbackNodeName = ''; // 回退节点名称
-                this.dealroperDate = ''; // 经办时间
-                this.dealroperCode = ''; //经办人
-                this.creauditAppOperate = ''; // 操作类型
-                this.$message({
-                  message: res.msg,
-                  type: 'success'
-                })
-                this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
-                this.del();
-              }
+              this.FinProcess(res);
             });
           } else {
             return false;
@@ -1103,7 +1029,7 @@
             this.loading = false;
             this.tableData = res.data;
           } else {
-            this.$message(res.msg);
+            this._error(res.msg);
           }
         })
       },
@@ -1115,7 +1041,7 @@
             if (res.statusCode == '200') {
               this.lcgjData = res.data;
             } else {
-             this._error(res.msg);
+              this._error(res.msg);
             }
           })
       },
@@ -1128,17 +1054,18 @@
           }
         });
       },
-      del() {
-        this.$store.dispatch('delVisitedViews', {
-          name: '复议详情'
-        }).then((views) => {
-          const latestView = views.slice(-1)[0]
-          if (latestView) {
-            this.$router.push(latestView.StatefullPath);
+      FinProcess(res) {
+        if (res.statusCode == '200') {
+          this._succe(res.msg);
+          if (this.type == 'commissioner') {
+            this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
           } else {
-            this.$router.push('/')
+            this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
           }
-        })
+          this._del('复议详情');
+        } else {
+          this._error(res.msg)
+        }
       }
     },
   }
