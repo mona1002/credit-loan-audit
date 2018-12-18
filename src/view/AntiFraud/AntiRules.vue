@@ -54,13 +54,13 @@
       </el-table>
     </div>
     <!-- 添加 -->
-    <el-dialog title="添加反欺诈规则"  :visible.sync="dialogFormVisible">
+    <el-dialog title="添加反欺诈规则" :visible.sync="dialogFormVisible">
       <el-form :model="form" ref="ruleFormAdd">
         <el-form-item label="规则编号：" :label-width="formLabelWidth">
           <el-input readonly v-model="form.ruleNum"></el-input>
         </el-form-item>
         <div class="dialog_textarea">
-        <el-form-item  label="内容规则：" prop="caseDesc" :label-width="formLabelWidth">
+          <el-form-item label="内容规则：" prop="caseDesc" :label-width="formLabelWidth">
             <el-input readonly v-model="form.ruleContent" type='textarea' resize="none" :rows="2"></el-input>
           </el-form-item>
         </div>
@@ -135,6 +135,15 @@
       }
     },
     methods: {
+      mountedInf() {
+        this.post("/antiFraud/getAntiFraudRuleList", {}).then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       Rsearch() {
         this.post("/antiFraud/getAntiFraudRuleList", {
           ruleNum: this.rules
@@ -171,13 +180,7 @@
               type: 'success'
             });
             //   查询接口
-            this.post("/antiFraud/getAntiFraudRuleList", {}).then(res => {
-              if (res.statusCode == 200) {
-                this.tableData = res.data;
-              } else {
-                this.$message.error(res.msg);
-              }
-            });
+            this.mountedInf();
           } else {
             this.$message.error(res.msg);
           }
@@ -185,13 +188,8 @@
       }
     },
     mounted() {
-      this.post("/antiFraud/getAntiFraudRuleList", {}).then(res => {
-        if (res.statusCode == 200) {
-          this.tableData = res.data;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.mountedInf();
     },
   }
+
 </script>

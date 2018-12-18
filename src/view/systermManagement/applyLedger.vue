@@ -110,7 +110,7 @@
         <el-col :span="6" class="search-item">
           <span class="keywordText">业务状态： </span>
           <el-select v-model="params.busiState" placeholder="请选择">
-            <el-option v-for="item in Status" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in Status" :key="item.code" :label="item.name" :value="item.code">
             </el-option>
           </el-select>
         </el-col>
@@ -276,7 +276,7 @@
         selectedProName: "",
         agencyCode: '',
         selectedAgenName: "",
-        applyData: [this._getDate(0,-6), this._getDate()],
+        applyData: [this._getDate(0, -6), this._getDate()],
         creditTime: '', //授信日期
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
@@ -398,117 +398,118 @@
             label: '其他'
           }
         ],
-        Status: [ //业务状态
-          {
-            value: "00",
-            label: "申请登记",
-          }, {
-            value: "01",
-            label: "申请登记-放弃",
-          }, {
-            value: "02",
-            label: "申请登记-拒绝",
-          }, {
-            value: "03",
-            label: "质检复核",
-          }, {
-            value: "04",
-            label: "初审-待处理",
-          }, {
-            value: "05",
-            label: "申请登记-暂存",
-          }, {
-            value: "07",
-            label: "初审-拒绝",
-          }, {
-            value: "08",
-            label: "初审-放弃",
-          }, {
-            value: "09",
-            label: "初审-回退补充材料",
-          }, {
-            value: "12",
-            label: "终审-待处理",
-          }, {
-            value: "15",
-            label: "终审-拒绝"
-          }, {
-            value: "16",
-            label: "终审-放弃"
-          }, {
-            value: "17",
-            label: "终审-回退门店补充材料"
-          }, {
-            value: "20",
-            label: "终审-回退初审重审"
-          }, {
-            value: "21",
-            label: "终审通过-待签约"
-          }, {
-            value: "22",
-            label: "协议签订"
-          }, {
-            value: "23",
-            label: "协议审核"
-          }, {
-            value: "24",
-            label: "协议签订-放弃"
-          }, {
-            value: "25",
-            label: "协议签订-拒绝"
-          }, {
-            value: "26",
-            label: "等待放款",
-          }, {
-            value: "27",
-            label: "放款处理",
-          }, {
-            value: "28",
-            label: "放款成功-借据生效",
-          }, {
-            value: "29",
-            label: "提前结清"
-          }, {
-            value: "30",
-            label: "到期结清"
-          }, {
-            value: "31",
-            label: "决策通过-待签约"
-          }, {
-            value: "32",
-            label: "决策拒绝"
-          }, {
-            value: "33",
-            label: "超时拒绝"
-          }, {
-            value: "34",
-            label: "协议拟制"
-          }, {
-            value: "35",
-            label: "等待匹配"
-          }, {
-            value: "36",
-            label: "门店待评估"
-          }, {
-            value: "37",
-            label: "总部待评估"
-          }, {
-            value: "38",
-            label: "总部评估-回退"
-          }, {
-            value: "39",
-            label: "终审-回退总部待评估"
-          }, {
-            value: "40",
-            label: "权证登记"
-          }, {
-            value: "41",
-            label: "权证入库"
-          }, {
-            value: "42",
-            label: "回退-权证登记"
-          },
-        ],
+        Status: [], //业务状态
+        // Status: [ //业务状态
+        //   {
+        //     value: "00",
+        //     label: "申请登记",
+        //   }, {
+        //     value: "01",
+        //     label: "申请登记-放弃",
+        //   }, {
+        //     value: "02",
+        //     label: "申请登记-拒绝",
+        //   }, {
+        //     value: "03",
+        //     label: "质检复核",
+        //   }, {
+        //     value: "04",
+        //     label: "初审-待处理",
+        //   }, {
+        //     value: "05",
+        //     label: "申请登记-暂存",
+        //   }, {
+        //     value: "07",
+        //     label: "初审-拒绝",
+        //   }, {
+        //     value: "08",
+        //     label: "初审-放弃",
+        //   }, {
+        //     value: "09",
+        //     label: "初审-回退补充材料",
+        //   }, {
+        //     value: "12",
+        //     label: "终审-待处理",
+        //   }, {
+        //     value: "15",
+        //     label: "终审-拒绝"
+        //   }, {
+        //     value: "16",
+        //     label: "终审-放弃"
+        //   }, {
+        //     value: "17",
+        //     label: "终审-回退门店补充材料"
+        //   }, {
+        //     value: "20",
+        //     label: "终审-回退初审重审"
+        //   }, {
+        //     value: "21",
+        //     label: "终审通过-待签约"
+        //   }, {
+        //     value: "22",
+        //     label: "协议签订"
+        //   }, {
+        //     value: "23",
+        //     label: "协议审核"
+        //   }, {
+        //     value: "24",
+        //     label: "协议签订-放弃"
+        //   }, {
+        //     value: "25",
+        //     label: "协议签订-拒绝"
+        //   }, {
+        //     value: "26",
+        //     label: "等待放款",
+        //   }, {
+        //     value: "27",
+        //     label: "放款处理",
+        //   }, {
+        //     value: "28",
+        //     label: "放款成功-借据生效",
+        //   }, {
+        //     value: "29",
+        //     label: "提前结清"
+        //   }, {
+        //     value: "30",
+        //     label: "到期结清"
+        //   }, {
+        //     value: "31",
+        //     label: "决策通过-待签约"
+        //   }, {
+        //     value: "32",
+        //     label: "决策拒绝"
+        //   }, {
+        //     value: "33",
+        //     label: "超时拒绝"
+        //   }, {
+        //     value: "34",
+        //     label: "协议拟制"
+        //   }, {
+        //     value: "35",
+        //     label: "等待匹配"
+        //   }, {
+        //     value: "36",
+        //     label: "门店待评估"
+        //   }, {
+        //     value: "37",
+        //     label: "总部待评估"
+        //   }, {
+        //     value: "38",
+        //     label: "总部评估-回退"
+        //   }, {
+        //     value: "39",
+        //     label: "终审-回退总部待评估"
+        //   }, {
+        //     value: "40",
+        //     label: "权证登记"
+        //   }, {
+        //     value: "41",
+        //     label: "权证入库"
+        //   }, {
+        //     value: "42",
+        //     label: "回退-权证登记"
+        //   },
+        // ],
       }
     },
     watch: {
@@ -519,9 +520,9 @@
             this.params.pageNum = this.currentPage = 1;
             this.params.pageSize = this.pageCount = 10;
             this.Rreset();
-            this.applyData = [this._getDate(0,-6), this._getDate()];
+            this.applyData = [this._getDate(0, -6), this._getDate()];
             this.creditTime = '';
-            this.params.applyDateGe = this._getDate(0,-6);
+            this.params.applyDateGe = this._getDate(0, -6);
             this.params.applyDateLe = this._getDate();
             this.Routes[3].closed = true;
           }
@@ -531,15 +532,16 @@
     methods: {
       getExcel() { //导出
         // 校验：
-         if (!this.tableData || this.tableData.length == 0) return this._error('无查询结果，无法导出数据！')
-       let start=this.ExcelParms.applyDateGe,end=this.ExcelParms.applyDateLe ;
-       if (start && end) {
+        if (!this.tableData || this.tableData.length == 0) return this._error('无查询结果，无法导出数据！')
+        let start = this.ExcelParms.applyDateGe,
+          end = this.ExcelParms.applyDateLe;
+        if (start && end) {
           let beginDate = new Date(start.replace(/-/g, '/')).getTime(),
             endDate = new Date(end.replace(/-/g, '/')).getTime();
           var day = (endDate - beginDate) / (1000 * 3600 * 24);
         }
         if (this.userInf.userCode !== "superadmin" && (!day || day > 31)) {
-          this.$message.error('查询条件【申请日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+          this._error('查询条件【申请日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
           return
         }
         let obj = Object.assign({}, this.ExcelParms);
@@ -673,7 +675,8 @@
       },
       getInf(pam) {
         this.currentRow = {}; //清空选中行        
-        this.productCode != this.selectedProName ? (this.productCode = this.selectedProName = this.params.productCode = "") :
+        this.productCode != this.selectedProName ? (this.productCode = this.selectedProName = this.params.productCode =
+            "") :
           "";
         this.agencyCode != this.selectedAgenName ? (this.agencyCode = this.selectedAgenName = this.params.agencyCode =
           "") : "";
@@ -687,7 +690,7 @@
               this.totalRecord = 0;
             }
           } else {
-            this.$message.error(res.msg);
+            this._error(res.msg);
           }
         });
       },
@@ -698,7 +701,7 @@
               this.production.push(res.data[k])
             }
           } else {
-            this.$message.error(res.msg);
+            this._error(res.msg);
           }
         })
       },
@@ -707,7 +710,7 @@
           if (res.statusCode == 200) {
             this.loanExp = res.data;
           } else {
-            this.$message.error('获取借款期限失败！');
+            this._error('获取借款期限失败！');
 
           }
         })
@@ -720,10 +723,18 @@
           if (res.statusCode == 200) {
             this.agency = res.data;
           } else {
-            this.$message.error('获取进件机构失败！');
-
+            this._error('获取进件机构失败！');
           }
         })
+      },
+      getStatus() {
+        this.get('/credit/getAllBusiStates?' + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.Status = res.data;
+          } else {
+            this._error('获取业务状态失败！');
+          }
+        });
       },
     },
     created() {
@@ -744,6 +755,7 @@
       this.getProducts();
       this.getloanTime();
       this.getAgency();
+      this.getStatus();
     },
   }
 

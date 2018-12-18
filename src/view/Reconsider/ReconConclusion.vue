@@ -570,14 +570,14 @@
       if (this.type == 'commissioner') { //复议专员
         this.options = [{
           value: 'reconsiderApp_apply',
-          label: '复议申请'
+          label: '复议申请' // '01'
         }];
         this.FormReturn.rollbackNodeName = 'reconsiderApp_apply';
         this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId; //专员
       } else { //复议经理
         this.options = [{
           value: 'reconsiderApp_commissioner',
-          label: '复议专员审批'
+          label: '复议专员审批' //  '02'
         }];
         this.FormReturn.rollbackNodeName = 'reconsiderApp_commissioner';
         this.processTemplateId = JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).processTemplateId; //主管
@@ -619,6 +619,8 @@
             this.huituiLoading = false;
             this.huituiFont = '提交';
             this.dialogVisible = true;
+            // 获取主原因  commissioner专员01   主管： 02  
+            this.type == 'commissioner' ? this.getMReason('01') : this.getMReason('02');
             this.getSystemDate();
             break;
           case 'refuse':
@@ -626,11 +628,8 @@
             this.jujueFont = '提交';
             this.jdialogVisible = true;
             this.getSystemDate();
-            this.get('/credit/firstNodeReason?reasonType=03' + '&' + Math.random()).then(res => {
-              if (res.statusCode == '200') {
-                this.rmainResions = res.data;
-              }
-            });
+            // 获取主原因
+            this.getMReason('03');
             break;
         }
       },
