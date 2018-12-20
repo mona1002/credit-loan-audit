@@ -110,7 +110,7 @@
             this.tableData = res.data.recordList;
             this.totalRecord = res.data.totalRecord; //总记录数
           } else {
-            this.$message.error(res.msg);
+            this._error(res.msg);
           }
         });
       },
@@ -157,13 +157,10 @@
         }
         this.post("/sendErrorController/sendErrorMsg", this.selectedListParams).then(res => {
           if (res.statusCode == 200) {
-            this.$message({
-              type: 'success',
-              message: res.msg
-            })
+            this._succe( res.msg)
             this.inquire(this.params);
           } else {
-            this.$message.error(res.msg);
+            this._error(res.msg);
           }
         })
       },

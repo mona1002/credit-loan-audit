@@ -153,9 +153,9 @@
       <el-table :data="tableData" style="width: 100%" height="410" highlight-current-row border @row-click='selectRow'>
         <el-table-column type="index" label=序号 fixed width="50">
         </el-table-column>
-        <el-table-column prop="applySubNo" label="主进件编号" fixed width="185">
+        <el-table-column prop="applySubNo" label="主进件编号" fixed width="165">
         </el-table-column>
-        <el-table-column prop="applySubNo" label="进件编号" fixed width="185">
+        <el-table-column prop="applySubNo" label="进件编号" fixed width="165">
         </el-table-column>
         <el-table-column prop="creditTime" label="授信日期" fixed width="100">
         </el-table-column>
@@ -167,12 +167,12 @@
         </el-table-column>
         <el-table-column prop="certTypeTxt" label="证件类型" fixed width="105">
         </el-table-column>
-        <el-table-column label="证件号码" fixed width="160">
+        <el-table-column label="证件号码" fixed width="150">
           <template slot-scope='scope'>
             {{ scope.row.certCode | cerCodeStar }}
           </template>
         </el-table-column>
-        <el-table-column label="手机号码" width="115">
+        <el-table-column label="手机号码" width="105">
           <template slot-scope='scope'>
             {{ scope.row.mobile | MobileStar }}
           </template>
@@ -181,7 +181,7 @@
         </el-table-column>
         <el-table-column prop="borrowTypeTxt" label="借款人类型" width="90">
         </el-table-column>
-        <el-table-column prop="emergencyTypeTxt" label="紧急程度" align='center' width="80">
+        <el-table-column prop="emergencyTypeTxt" label="紧急程度"  width="75">
         </el-table-column>
         <el-table-column prop="productTypeTxt" label="产品类型" width="80">
         </el-table-column>
@@ -211,7 +211,7 @@
         </el-table-column>
         <el-table-column prop="subOrgName" label="进件团队名称" width="100">
         </el-table-column>
-        <el-table-column prop="applyCustServCode" label="进件客服" width="100">
+        <el-table-column prop="applyCustServCode" label="进件客服" width="105">
         </el-table-column>
         <el-table-column prop="applyCustServName" label="进件客服名称" width="100">
         </el-table-column>
@@ -727,6 +727,7 @@
           }
         })
       },
+      // 获取业务状态
       getStatus() {
         this.get('/credit/getAllBusiStates?' + Math.random()).then(res => {
           if (res.statusCode == 200) {

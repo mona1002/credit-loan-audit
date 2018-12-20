@@ -7,7 +7,6 @@ import platforUrl from './constantUser'
 axios.defaults.baseURL = appConstant.baseUrl_common;
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(response => {
-  console.log(1,response)
   if (response.data && response.data.statusCode == 900) {
     window.location.href = platforUrl.path + "#/";
   };

@@ -53,7 +53,7 @@
           </el-table-column>
           <el-table-column prop="activationTime" label="进入本环节时间" min-width="170">
           </el-table-column>
-          <el-table-column prop="approveTimeLong" label="进入本环节时长（小时）" min-width="180">
+          <el-table-column prop="approveTimeLong" label="进入信审时长（小时）" min-width="180">
           </el-table-column>
         </el-table>
         <div class="page">
