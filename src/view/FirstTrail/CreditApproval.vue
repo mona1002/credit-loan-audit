@@ -489,25 +489,27 @@
           auditDate: 'auditDate'
         }],
         checkList: '',
-        lists: [{
-          label: '公积金',
-          value: '00'
-        }, {
-          label: '社保',
-          value: '01'
-        }, {
-          label: '运营商',
-          value: '02'
-        }, {
-          label: '网银',
-          value: '03'
-        }, {
-          label: '简版征信',
-          value: '04'
-        }, {
-          label: '设备画像',
-          value: '05'
-        }],
+        // checkedCities
+        lists: [],
+        // lists: [{
+        //   label: '公积金',
+        //   value: '00'
+        // }, {
+        //   label: '社保',
+        //   value: '01'
+        // }, {
+        //   label: '运营商',
+        //   value: '02'
+        // }, {
+        //   label: '网银',
+        //   value: '03'
+        // }, {
+        //   label: '简版征信',
+        //   value: '04'
+        // }, {
+        //   label: '设备画像',
+        //   value: '05'
+        // }],
         //  checkAll: false,
         checkedCities: [],
         checkBox: false,
@@ -1085,7 +1087,7 @@
         // return
         this.post("/creauditInfo/approval", {
           // 挂起 taskId 任务id
-          authCredits: this.checkedCities.join(','),
+          authCredits: this.checkedCities.join(','),//补充授权项
           taskId: this.taskId,
           custName: this.custName, // 客户名称
           custNo: this.custNo, // 客户code
@@ -1216,6 +1218,16 @@
           }
         })
       },
+      getBackSeReason(id, appSN) {
+        this.get('/credit/findNodeFirstChildren?id=' + id + '&applySubNo=' + appSN + '&' + Math.random()).then(res => {
+          if (res.statusCode == '200') {
+            this.secondeReasons = res.data.reasonList;
+            res.data.relations?this.lists= res.data.relations:'';
+          } else {
+            this.secondeReasons = [];
+          }
+        })
+      },
       // 获取主次原因
       getReason(flag, type) {
         if (flag == 'main') {
@@ -1323,8 +1335,8 @@
         this.mainReason = val.reasonName;
         this.secondaryReason = '';
         this.mainId = val.id; // 主原因的 id
-        // 在主原因改变的时候请求子原因
-        this.getReason('second', this.mainId);
+        // 在主原因改变的时候请求子原因 ,判断是否选中的是大数据 （显示补充授权项勾选框），接口入参不同格式也不同
+        val.reasonCode == 'r011507'? this.getBackSeReason(this.mainId, this.applySubNo):this.getReason('second', this.mainId);
       },
       getCheckBox(value) {
         //主原因：大数据爬取信息，子原因:授权项缺失/空白 时显示复选框
@@ -1441,6 +1453,7 @@
       handleCheckedCitiesChange(value) {
         let checkedCount = value.length;
         this.checkAll = checkedCount === this.lists.length;
+        // checkedCities
         // this.isIndeterminate = checkedCount > 0 && checkedCount < this.lists.length;
       },
       //大数据风控

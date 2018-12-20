@@ -541,10 +541,8 @@
             <ul>
               <li>
                 <el-form-item label="工作单位：" :label-width='label_223' class="one_row">
-                  <i class="hint">
-                    <b v-show="checkData.hirecomName&&checkData.hirecomName.length>=50" class="Working_input">
-                      输入长度不能超过50</b>
-                  </i>
+                  <b v-show="checkData.hirecomName&&checkData.hirecomName.length>=50" class="hint Working_input">
+                    输入长度不能超过50</b>
                   <!-- class： specialInput -->
                   <input type="text" class="one_row" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirecomName">
                 </el-form-item>
@@ -565,17 +563,13 @@
               </li>
               <li>
                 <el-form-item label="职位级别：" :label-width='label_223'>
-                  <i class="hint">
-                    <b v-show="checkData.workPost&&checkData.workPost.length>=20" class="Working_input"> 输入长度不能超过20</b>
-                  </i>
+                  <b v-show="checkData.workPost&&checkData.workPost.length>=20" class="hint Working_input"> 输入长度不能超过20</b>
                   <el-input type="text" :maxlength="this.shotInputL" placeholder="请输入内容" v-model="checkData.workPost">
                   </el-input>
                 </el-form-item>
                 <el-form-item label="单位电话：" :label-width='label_160'>
-                  <i class="hint">
-                    <span class="padding_left_235" v-show="this.reg.mphoneM">请输入：区号+5-8位数字</span>
-                    <span class="padding_left_235" v-show="this.reg.mphoneR">不可输入：11111，12345等</span>
-                  </i>
+                  <span class="hint" v-show="this.reg.mphoneM">请输入：区号+5-8位数字</span>
+                  <span class="hint" v-show="this.reg.mphoneR">不可输入：11111，12345等</span>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.workTel" @blur="mPhone(checkData.workTel,$event)">
                   </el-input>
                 </el-form-item>
@@ -586,18 +580,14 @@
                   </el-input>
                 </el-form-item>
                 <el-form-item label="每月发薪日：" :label-width='label_160'>
-                  <i class="hint" v-show="reg.mpayDay">
-                    <span class="padding_left_235"> 请填入1-31之间的数字</span>
-                  </i>
+                  <b class="hint" v-show="reg.mpayDay"> 请填入1-31之间的数字</b>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.payDay" @blur="mday(checkData.payDay,$event)">
                   </el-input>
                 </el-form-item>
               </li>
               <li>
                 <el-form-item label="单位地址：" :label-width='label_223' class="one_row">
-                  <i class="hint">
-                    <b v-show="checkData.workAddress&&checkData.workAddress.length>=100" class="comaddressb" style="paddingLeft:826px">输入长度不能超过100</b>
-                  </i>
+                  <b v-show="checkData.workAddress&&checkData.workAddress.length>=100" class="hint" style="paddingLeft:525px">输入长度不能超过100</b>
                   <!-- 一级 -->
                   <el-select ref="province" v-model="checkData.workProvinceName" placeholder="请选择" @change="setProvince">
                     <el-option v-for="item in	hirecomAddress" :key="item.id" :label="item.areaName" :value="item.id">
@@ -646,7 +636,7 @@
               </li>
               <li class='clearFix margin_bottom_10'>
                 <el-form-item label="单位地址邮编：" :label-width='label_223'>
-                  <b v-show="this.reg.mpostCode" class="hint Working_middle Working_right">请输入6位邮编</b>
+                  <b v-show="this.reg.mpostCode" class="hint">请输入6位邮编</b>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.workZip" @blur="postCode(checkData.workZip,$event)">
                   </el-input>
                 </el-form-item>
@@ -703,9 +693,7 @@
               </li>
               <li>
                 <el-form-item label="企业经营项目：" :label-width='label_223' class="one_row">
-                  <i class="hint">
-                    <b v-show="checkData.projectManage&&checkData.projectManage.length>=200" class="Working_input">输入长度不能超过200</b>
-                  </i>
+                  <b v-show="checkData.projectManage&&checkData.projectManage.length>=200" class="hint Working_input">输入长度不能超过200</b>
                   <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容"
                     v-model="checkData.projectManage">
                   </el-input>
@@ -729,25 +717,19 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="员工人数：" :label-width='label_160'>
-                  <i class="hint">
-                    <b v-show="this.workInf.empNumber" class="Working_middle Working_right">输入内容不得大于5位数</b>
-                  </i>
+                  <b v-show="this.workInf.empNumber" class="hint">输入内容不得大于5位数</b>
                   <el-input type="text" placeholder="请输入内容" v-model="checkData.selfempCount" @blur="EmpNum(checkData.selfempCount)">
                   </el-input>
                 </el-form-item>
               </li>
               <li class='clearFix margin_bottom_10'>
                 <el-form-item label="第一供销商：" :label-width='label_223'>
-                  <i class="hint">
-                    <b v-show="checkData.firstSuppliers&&checkData.firstSuppliers.length>=50" class="Working_middle">输入长度不能超过50</b>
-                  </i>
+                  <b v-show="checkData.firstSuppliers&&checkData.firstSuppliers.length>=50" class="hint">输入长度不能超过50</b>
                   <el-input type="text" placeholder="请输入内容" :maxlength=" this.longInputL" v-model="checkData.firstSuppliers">
                   </el-input>
                 </el-form-item>
                 <el-form-item label="第一分销商：" :label-width='label_160'>
-                  <i class="hint">
-                    <b v-show="checkData.firstDistributor&&checkData.firstDistributor.length>=50" class="Working_middle Working_right">输入长度不能超过50</b>
-                  </i>
+                  <b v-show="checkData.firstDistributor&&checkData.firstDistributor.length>=50" class="hint">输入长度不能超过50</b>
                   <el-input type="text" placeholder="请输入内容" :maxlength=" this.longInputL" v-model="checkData.firstDistributor">
                   </el-input>
                 </el-form-item>
@@ -2219,50 +2201,50 @@
       },
       // 统计
       // countNum(event) {
-          // event.stopPropagation();
-          //  //车贷共有笔数 k l m    信用贷共有笔数n o p  房贷共有笔数 q r s   其他贷共有笔数 u v w 
-          // this.k = this.l = this.m = this.n = this.o = this.p = this.q = this.r = this.s = this.u = this.v = this.w = 0;
-          // for (var i = 0; i < this.loanDetailList.length; i++) {
-          //   if (this.loanDetailList[i].loanType == '01') {
-          //     this.k += 1;
-          //     if (this.loanDetailList[i].accountStatus == '00') this.l += 1;
-          //     if (this.loanDetailList[i].accountStatus == '02') this.m += 1;
-          //   }
-          //   //信用贷
-          //   if (this.loanDetailList[i].loanType == '03') {
-          //     this.n += 1;
-          //     if (this.loanDetailList[i].accountStatus == '00') this.o += 1;
-          //     if (this.loanDetailList[i].accountStatus == '02') this.p += 1;
-          //   }
-          //   //房贷
-          //   if (this.loanDetailList[i].loanType == '02') {
-          //     this.q += 1;
-          //     if (this.loanDetailList[i].accountStatus == '00') this.r += 1;
-          //     if (this.loanDetailList[i].accountStatus == '02') this.s += 1;
-          //   }
-          //   //其他贷
-          //   if (this.loanDetailList[i].loanType == '04') {
-          //     this.u += 1;
-          //     if (this.loanDetailList[i].accountStatus == '00') this.v += 1;
-          //     if (this.loanDetailList[i].accountStatus == '02') this.w += 1;
-          //   }
-          // };
-          // //车贷
-          // this.loanInfo.carLoanTotal = this.k;
-          // this.loanInfo.carLoanNoPayoff = this.l;
-          // this.loanInfo.carLoanPayoff = this.m;
-          // //信用贷
-          // this.loanInfo.studentLoanTotal = this.n;
-          // this.loanInfo.studentLoanNoPayoff = this.o;
-          // this.loanInfo.studentLoanPayoff = this.p;
-          // //房贷
-          // this.loanInfo.houseLoanTotal = this.q;
-          // this.loanInfo.houseLoanNoPayoff = this.r;
-          // this.loanInfo.houseLoanPayoff = this.s;
-          // //其他贷
-          // this.loanInfo.otherLoanTotal = this.u;
-          // this.loanInfo.otherLoanNoPayoff = this.v;
-          // this.loanInfo.otherLoanPayoff = this.w;
+      // event.stopPropagation();
+      //  //车贷共有笔数 k l m    信用贷共有笔数n o p  房贷共有笔数 q r s   其他贷共有笔数 u v w 
+      // this.k = this.l = this.m = this.n = this.o = this.p = this.q = this.r = this.s = this.u = this.v = this.w = 0;
+      // for (var i = 0; i < this.loanDetailList.length; i++) {
+      //   if (this.loanDetailList[i].loanType == '01') {
+      //     this.k += 1;
+      //     if (this.loanDetailList[i].accountStatus == '00') this.l += 1;
+      //     if (this.loanDetailList[i].accountStatus == '02') this.m += 1;
+      //   }
+      //   //信用贷
+      //   if (this.loanDetailList[i].loanType == '03') {
+      //     this.n += 1;
+      //     if (this.loanDetailList[i].accountStatus == '00') this.o += 1;
+      //     if (this.loanDetailList[i].accountStatus == '02') this.p += 1;
+      //   }
+      //   //房贷
+      //   if (this.loanDetailList[i].loanType == '02') {
+      //     this.q += 1;
+      //     if (this.loanDetailList[i].accountStatus == '00') this.r += 1;
+      //     if (this.loanDetailList[i].accountStatus == '02') this.s += 1;
+      //   }
+      //   //其他贷
+      //   if (this.loanDetailList[i].loanType == '04') {
+      //     this.u += 1;
+      //     if (this.loanDetailList[i].accountStatus == '00') this.v += 1;
+      //     if (this.loanDetailList[i].accountStatus == '02') this.w += 1;
+      //   }
+      // };
+      // //车贷
+      // this.loanInfo.carLoanTotal = this.k;
+      // this.loanInfo.carLoanNoPayoff = this.l;
+      // this.loanInfo.carLoanPayoff = this.m;
+      // //信用贷
+      // this.loanInfo.studentLoanTotal = this.n;
+      // this.loanInfo.studentLoanNoPayoff = this.o;
+      // this.loanInfo.studentLoanPayoff = this.p;
+      // //房贷
+      // this.loanInfo.houseLoanTotal = this.q;
+      // this.loanInfo.houseLoanNoPayoff = this.r;
+      // this.loanInfo.houseLoanPayoff = this.s;
+      // //其他贷
+      // this.loanInfo.otherLoanTotal = this.u;
+      // this.loanInfo.otherLoanNoPayoff = this.v;
+      // this.loanInfo.otherLoanPayoff = this.w;
       // },
       loanCurrentChange(val) {
         if (val == null) {
