@@ -2,7 +2,7 @@
   <!-- 申请台账详情 -->
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <p class="PerDtl">
-          <span> 借款人：{{accepCusBasicInfo.custName}}</span>
+      <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{accepCusBasicInfo.applyMainNo}}</span>
       <span> 证件号码：{{accepCusBasicInfo.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
@@ -14,14 +14,8 @@
     <div class="SplitScreen_wrap content_not_split">
       <div class="right" ref="rRight">
         <div class="Right_tab_title_div">
-          <span class="pre_next_btn_wrap" @click="leftMovingBtn">
-            <img src="../../../../static/images/Shape@1x.png">
-          </span>
-          <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
-            <img src="../../../../static/images/Shaperight@1x.png">
-          </span>
-          <div class="Right_tab_ul_wrap">
-            <ul ref="right_tab_ul" style="left:0;right:0;">
+          <div class="Right_tab_ul_wrap" style="margin-left:15px">
+            <ul ref="right_tab_ul">
               <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)"
                 :class="{tab2Act:tab2Index==index}">
                 {{val}}</li>
@@ -51,11 +45,9 @@
     data() {
       return {
         loading: false,
-        accepCusBasicInfo: {},
-        // 进件人信息
+        accepCusBasicInfo: {}, // 进件人信息
         tastwaitingPass: {}, //详情列表页信息--(含)取applyId
         tabContent2: 0,
-        tabActiveInd2: 0,
         items2: ["申请信息", "实地征信", "影像资料"],
         tab2Index: 0,
         Routes: this.$router.options.routes[32],
@@ -67,7 +59,7 @@
           this.Routes.closed = false;
           this.accepCusBasicInfo = {};
           this.mountedInf();
-          this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 0;
+          this.tab2Index = this.tabContent2 = 0;
         }
       }
     },
@@ -79,24 +71,9 @@
         this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("appLedgerTW")); //申请台账id就为applyid
       },
-      leftMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
-          this.$refs.right_tab_ul.style.left = "0"
-        } else {
-          this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) + 50 + "px";
-        }
-      },
-      rightMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -300) {
-          this.$refs.right_tab_ul.style.left = "-300px";
-        } else {
-          this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
-        }
-      },
       tab(ev, ind, val) {
         this.tabContent2 = ind;
         this.tab2Index = ind;
-        this.tabActiveInd2 = ind;
       }
     },
     created() {
