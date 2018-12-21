@@ -146,7 +146,7 @@
           <div class="bfc" v-if="checkBox&&judgeFlag == '01'">
             <el-form-item class="fl" label="补充授权项：">
               <el-checkbox-group v-model="checkedCities" class="creditApr_backoff clear_hint">
-                <el-checkbox v-for="val in lists" :label="val.name" :key="val.code">{{val.label}}</el-checkbox>
+                <el-checkbox v-for="val in lists" :label="val.name" :key="val.code">{{val.name}}</el-checkbox>
               </el-checkbox-group>
             </el-form-item>
           </div>
