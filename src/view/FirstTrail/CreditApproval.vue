@@ -989,7 +989,7 @@
           }
           if (this.judgeFlag == '01') { //初审需要判断此处必填，终审没有
             if (this.checkBox && this.checkedCities.length == 0) {
-              this._error('请勾选补充授权项！!')
+              this._error('请勾选补充授权项！')
               return;
             }
           }
