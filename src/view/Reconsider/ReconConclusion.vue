@@ -168,7 +168,7 @@
           <div class="bfc">
             <el-form-item class="fl" label="主原因：" :label-width="formLabelWidth" prop="rmainReasonName">
               <el-select ref="rmainReasonName" v-model="FormReject.rmainReasonName" placeholder="请选择" @change="mainReason($event,'mainrefuse')">
-                <el-option v-for="item in rmainResions" :key="item.id" :label="item.reasonName" :value="item.id">
+                <el-option v-for="item in mainResions" :key="item.id" :label="item.reasonName" :value="item.id">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -469,7 +469,7 @@
         childReasons: [],
         //拒绝主原因
         rmainReasonName: '',
-        rmainResions: [],
+        // rmainResions: [],
         //拒绝子原因
         rsubReasonName: '',
         rchildReasons: [],
