@@ -10,11 +10,11 @@
           <!--  v-loading="mobileLoading" -->
           <el-table :data="applyInfoHistory" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickMobiel"
             highlight-current-row>
-            <el-table-column prop="applySubno" label="进件编号" width="160">
+            <el-table-column prop="applySubno" label="进件编号" width="165">
             </el-table-column>
             <el-table-column prop="custName" label="客户名称" width="80">
             </el-table-column>
-            <el-table-column prop="certCode" label="身份证号" width="160">
+            <el-table-column prop="certCode" label="身份证号" width="165">
             </el-table-column>
             <el-table-column prop="appDate" label="申请日期" width="105">
             </el-table-column>
@@ -55,17 +55,17 @@
             </el-table-column>
             <el-table-column prop="matchTelTypeTxt" label="电话类型" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplySubNo" label="进件编号" width="160">
+            <el-table-column prop="matchApplySubNo" label="进件编号" width="165">
             </el-table-column>
             <el-table-column prop="matchApplyCustName" label="客户名称" width="80">
             </el-table-column>
-            <el-table-column prop="certCode" label="身份证号" width="160">
+            <el-table-column prop="certCode" label="身份证号" width="165">
             </el-table-column>
             <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
             </el-table-column>
-            <el-table-column prop="hitRulesTxt" label="命中规则" width="110">
+            <el-table-column prop="hitRulesTxt" label="命中规则" width="180">
             </el-table-column>
             <el-table-column prop="remark" fit="false" class="mark-cell" label="备注" show-overflow-tooltip min-width="100">
             </el-table-column>
@@ -94,17 +94,17 @@
             </el-table-column>
             <el-table-column prop="matchTelTypeTxt" label="电话类型" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplySubNo" label="进件编号" width="160">
+            <el-table-column prop="matchApplySubNo" label="进件编号" width="165">
             </el-table-column>
             <el-table-column prop="matchApplyCustName" label="客户名称" width="80">
             </el-table-column>
-            <el-table-column prop="certCode" label="身份证号" width="160">
+            <el-table-column prop="certCode" label="身份证号" width="165">
             </el-table-column>
             <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
             </el-table-column>
-            <el-table-column prop="hitRulesTxt" label="命中规则" width="110">
+            <el-table-column prop="hitRulesTxt" label="命中规则" width="180">
             </el-table-column>
             <el-table-column prop="remark" min-width="100" fit="false" class="mark-cell" label="备注"
               show-overflow-tooltip>
@@ -132,17 +132,17 @@
             </el-table-column>
             <el-table-column prop="applyTelTypeTxt" label="电话类型" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplySubNo" label="进件编号" width="160">
+            <el-table-column prop="matchApplySubNo" label="进件编号" width="165">
             </el-table-column>
             <el-table-column prop="matchApplyCustName" label="客户名称" width="80">
             </el-table-column>
-            <el-table-column prop="certCode" label="身份证号" width="160">
+            <el-table-column prop="certCode" label="身份证号" width="165">
             </el-table-column>
             <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
             </el-table-column>
-            <el-table-column prop="hitRulesTxt" label="命中规则" width="110">
+            <el-table-column prop="hitRulesTxt" label="命中规则" width="180">
             </el-table-column>
             <el-table-column prop="remark" min-width="100" fit="false" class="mark-cell" label="备注"
               show-overflow-tooltip>
