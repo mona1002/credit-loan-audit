@@ -715,7 +715,7 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">工资发放形式：</label>
-                <span>{{applyCustWorkDTO.payFormTxt}}</span>
+                <span>{{applyCustWorkDTO.wageFormTxt}}</span>
               </li>
               <li style="width:66.6%;">
                 <label class=" label_width_166 ellipsis">前单位名称：</label>

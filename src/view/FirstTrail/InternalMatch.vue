@@ -58,7 +58,7 @@
             <el-table-column prop="matchApplySubNo" label="进件编号" width="165">
             </el-table-column>
             <el-table-column prop="matchApplyCustName" label="客户名称" width="80">
-            </el-table-column>
+            </el-table-column> 
             <el-table-column prop="certCode" label="身份证号" width="165">
             </el-table-column>
             <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
