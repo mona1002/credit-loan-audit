@@ -142,9 +142,9 @@
             </div>
             <li class="borr_demand" v-if="accepApplyLoan.repaySource=='03'">
               <label class="label_width_166">其他渠道还款说明：</label>
-              <el-tooltip class="item" effect="dark" :content="accepApplyLoan.loanPurposeNote" :disabled="accepApplyLoan.loanPurposeNote==null"
+              <el-tooltip class="item" effect="dark" :content="accepApplyLoan.repaySourceRemark" :disabled="accepApplyLoan.repaySourceRemark==null"
                 placement="top-start">
-                <span class="text_area_span text_area_span_minus170">{{accepApplyLoan.loanPurposeNote}}</span>
+                <span class="text_area_span text_area_span_minus170">{{accepApplyLoan.repaySourceRemark}}</span>
               </el-tooltip>
             </li>
           </ul>
@@ -766,7 +766,7 @@
             </el-table-column>
             <el-table-column prop="companyTel" label="单位电话" min-width="100">
             </el-table-column>
-            <el-table-column prop="homeAddr" label="地址" min-width="195" show-overflow-tooltip>
+            <el-table-column prop="companyAddr" label="单位地址" min-width="195" show-overflow-tooltip>
             </el-table-column>
           </el-table>
         </div>

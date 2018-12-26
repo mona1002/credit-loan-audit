@@ -70,7 +70,7 @@
             <span>{{ scope.row.mobile |MobileStar }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="hirecomName" label="单位名称" width="150">
+        <el-table-column prop="hirecomName" label="单位名称" width="180">
         </el-table-column>
         <el-table-column prop="workTel" label="单位电话" width="120">
         </el-table-column>

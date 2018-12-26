@@ -38,8 +38,8 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3" :applyId='list.applyId'
               :roles='Flag=="03"?"antiFraudApp_commissioner":"antiFraudApp_manager" '></capplicationInformationDetail>
           </keep-alive>
-          <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
-          <PhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+          <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail> 
+          <PhoneCredit v-if=" this.tabContent2==5" :applyId='list.applyId' :addBtn="false"></PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='list.applyId'
             :FinalConCheckShow='true'></FCreditForm>
           <keep-alive v-if="Routes.closed">

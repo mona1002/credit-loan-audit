@@ -37,7 +37,8 @@
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'></capplicationInformationDetail>
             </keep-alive>
             <!-- <cborrowerInformationDetail v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail> -->
-            <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+           <!-- :SubNo='list.applySubNo' -->
+            <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId'  :addBtn="false"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==5" :applyId='list.applyId' :PhoneAndInterShow="false"></FCreditForm>
             <keep-alive v-if="Routes.closed">
               <creditInvestigation v-if=" this.tabContent1==6" :applyId='list.applyId'></creditInvestigation>

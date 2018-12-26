@@ -37,7 +37,7 @@
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'></capplicationInformationDetail>
             </keep-alive>
             <!-- <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail> -->
-            <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId' :addBtn="false"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==5" :applyId=' this.list.applyId' :TrilPersonShow='true'
               :FinalConCheckShow='true'></FCreditForm>
             <keep-alive v-if="Routes.closed">
@@ -79,7 +79,7 @@
               :btn="true"></capplicationInformationDetail>
           </keep-alive>
           <!-- <cborrowerInformationDetail v-if=" this.tabContent2==4"></cborrowerInformationDetail> -->
-          <PhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId' :SubNo='list.applySubNo' :addBtn="false"></PhoneCredit>
+          <PhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId' :addBtn="false"></PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==5" :applyId=' list.applyId' :TrilPersonShow='true' :FinalConEditShow='true'
             :makeSureBtnShow="true"></FCreditForm>
           <!-- <keep-alive v-if="Routes.closed">
