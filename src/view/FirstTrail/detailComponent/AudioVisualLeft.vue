@@ -463,7 +463,6 @@
 
   .icon_pre {
     left: 223px;
-    z-index: 112;
   }
 
   .AudioVisualLeft .AudioVisual_Img {

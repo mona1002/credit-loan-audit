@@ -365,7 +365,6 @@
 
   .icon_pre {
     left: 417px;
-    z-index: 112;
   }
 
   .AudioVisual .AudioVisual_List {
