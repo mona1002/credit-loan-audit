@@ -4,11 +4,6 @@
     <el-container style="height: 100%; border: 1px solid #eee">
       <!-- 左侧 导航列表 -->
       <el-aside style="width:210px;">
-        <!-- 手风琴效果 -->
-        <!-- no-key 每个树节点用来作为唯一标识的属性,整棵树应是唯一的 -->
-        <!-- renderContent 指定渲染函数,该函数返回需要的节点区内容即可 -->
-        <!-- highlight-current 是否高亮当前选中项 -->
-        <!-- 更改电话树 start-->
         <el-collapse class="phone-tree" v-model="activeTrees">
           <el-collapse-item :title="treeData[0].label" name="1">
             <div v-for="item in treeData[0].children" :key='item.id'>
@@ -77,8 +72,6 @@
             </div>
           </el-collapse-item>
         </el-collapse>
-        <!-- 更改电话树 end -->
-        <!-- 备选  折叠面板- 手风琴效果 -->
       </el-aside>
       <!-- 右侧 表单内容 -->
       <el-container>
@@ -92,7 +85,6 @@
                   <i class="collapse_title_icon"></i>
                   <span class="collapse_title_text">历史调查日志</span>
                 </template>
-                <!-- 历史记录 -->
                 <div>
                   <div class="height_auto">
                     <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick"
@@ -258,7 +250,7 @@
         treeFlag: '', // 用来标志  电话树是否需要更新
         listFlag: '', // 用来标志  历史调查日志, 
         //是否需要更新  在子组件操作的时候, $emit 
-        applySubNo: '', // 进件编号
+        // applySubNo: '', // 进件编号
         // 历史数据
         mobileData: [],
         comData: [],
@@ -282,7 +274,7 @@
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '确定', // 默认btn title
         judgeFlag: '',
-        taskInWaitting: ''
+        // taskInWaitting: ''
       }
     },
     props: {
@@ -293,10 +285,6 @@
       },
     },
     mounted() {
-      // 组件 创建 估计完成后获取数据
-      // 此时 data 已经被 observed 了
-      this.applySubNo = this.taskInWaitting.applySubNo;
-      // 电话树数据
       this.fetchData();
     },
     methods: {
@@ -321,9 +309,6 @@
           // 电话号码
           this.phoneNum = data.telNum;
           this.queryTelLogByPage();
-          this.hisShow = true;
-          // 编辑的时候 历史调查日志不展开
-          // this.activeNames = [];
         }
       },
       queryTelLogByPage() {
@@ -352,7 +337,7 @@
           } else {
             this.hisShow = false;
             this.listData.recordList = [];
-            this.$message.error(res.msg)
+            this._error(res.msg)
           }
         })
       },
@@ -367,7 +352,7 @@
       },
       rowDbClick(row) {
         // 先让表单消失
-        this.hisShow = false;
+        // this.hisShow = false;
         // 历史列表  点击每一行
         this.id = row.id;
         // 点击行显示

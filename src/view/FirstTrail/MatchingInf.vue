@@ -37,7 +37,7 @@
               <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'>申请信息</capplicationInformationDetail>
             </keep-alive>
             <!-- <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail> -->
-            <RPhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId'> 电话征信</RPhoneCredit>
+            <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId'  :addBtn="false" :showSel='true'> </PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==5" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
             <keep-alive v-if="Routes.closed">
               <creditInvestigation v-if=" this.tabContent1==6" :applyId='list.applyId'>实地征信</creditInvestigation>
@@ -82,7 +82,7 @@
             <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='MatchingInf'>申请信息</capplicationInformationDetail>
           </keep-alive>
           <!-- <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail> -->
-          <RPhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId'> 电话征信</RPhoneCredit>
+          <PhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId'  :addBtn="false" :showSel='true'> 电话征信</PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==5" :applyId='list.applyId' :FinalConCheckShow="true">信审表</FCreditForm>
           <!-- <keep-alive v-if="Routes.closed">
             <creditInvestigation v-if=" this.tabContent2==7" :applyId='list.applyId'>实地征信</creditInvestigation>
@@ -140,6 +140,7 @@
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   import InternalMatch from "./InternalMatch";
   import RPhoneCredit from "./ReadComponent/RPhoneCredit.vue"; //电话征信
+  import PhoneCredit from "./PhoneCredit.vue"; //电话征信
   export default {
     data() {
       return {
@@ -346,7 +347,7 @@
       creditInvestigation, //实地征信
       aAntiApplyInf, //反欺诈结论
       InternalMatch,
-      RPhoneCredit,
+      PhoneCredit,PhoneCredit,
       processTrajectory,
       RantiFraudInvestigation, //反欺诈调查
     }
