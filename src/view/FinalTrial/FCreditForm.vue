@@ -735,15 +735,15 @@
             <label class="label_width_220">初审结果评价：</label>
             <span class="text_area_span text_area_span_minus220" style="height:115px;">{{this.FormData.oother}} </span>
           </div>
-          <div v-if="FinalConEditShow" class="  clearFix  Padding_top_10" style="position:relative">
-            <i class="hint" style='top:-5px;left:220px;'>
-              <b v-show="FormData.ootherfinal&&FormData.ootherfinal.length>=500">输入长度不能超过500</b>
-            </i>
+          <div v-if="FinalConEditShow" class="clearFix padding_top_10" style="position:relative">
             <label class="label_width_220">
               <span style="color:#ff7676;"> * </span>终审结果评价：</label>
             <el-input type="textarea" class="specialInput" :rows="5" resize="none" :maxlength="500" placeholder="请输入内容"
               v-model="FormData.ootherfinal" name="Finalconclusion" v-validate="'required'">
             </el-input>
+            <i class="hint">
+              <b v-show="FormData.ootherfinal&&FormData.ootherfinal.length>=500">输入长度不能超过500</b>
+            </i>
           </div>
           <div class="clearFix" v-if="FinalConCheckShow">
             <label class="label_width_220">终审结果评价：</label>
@@ -1018,10 +1018,7 @@
 <style scoped>
   /* 最下面的 弹窗样式 */
   /* 上网信息-两行select下拉 居中 */
-
   .hint {
-    display: inline-block;
-    font-style: normal;
     left: 205px;
   }
 
