@@ -616,7 +616,7 @@
                   <input type="text" class="one_row" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirelastComname">
                 </el-form-item>
                 <el-form-item label="所在部门：" :label-width='label_160'>
-                  <b v-show="checkData.hiredepartment&&checkData.hiredepartment.length>=20" class="hint Working_middle Working_right">输入长度不能超过20</b>
+                  <b v-show="checkData.hiredepartment&&checkData.hiredepartment.length>=20" class="hint">输入长度不能超过20</b>
                   <el-input type="text" placeholder="请输入内容" :maxlength="this.shotInputL" v-model="checkData.hiredepartment">
                   </el-input>
                 </el-form-item>
@@ -1131,98 +1131,6 @@
           value: '0',
           label: '否'
         }],
-        // beexEcuted: [{ //（网上查询信息）客户在人法网是否有被执行信
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netHirecom: [{ //（网上查询信息）单位在人法网是否有被执行信
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netEcutedBrea: [{ //（网上查询信息）客户在失信网是否有失信记录
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netHirecomBrea: [{ //（网上查询信息）单位在失信网是否有失信记录  4
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netPhone: [{ //（网上查询信息）网搜借款人的手机是否有异常信息 5
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netHirecomName: [{ //（网上查询信息）网搜单位名称是否有异常  6
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netHirecomPhone: [{ //（网上查询信息）网搜单位电话是否有异常  7
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netAddrandEstate: [{ //（网上查询信息）网搜借款人现居住地址和房产地址是否有异常  8
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netHirecomAddress: [{ //（网上查询信息）网搜单位地址是否有异常   9
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netCompany: [{ //（网上查询信息）当地工商网查询企业基本信息中是否有登记
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // netAddrstate: [{ //（网上查询信息）客户工作单位在全国组织代码查询中是否存在  11
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // // ---------------- 核实身份  ------------
-        // isself: [{ //  接听者是否是借款人本人：
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // loanBefore: [{ // 是否在我司申请借款：
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
         loanPurpose: [{ //借款用途：
             value: '01',
             label: '日常生活消费'
@@ -1322,13 +1230,6 @@
           label: '网银+现金'
         }],
         // ------------------------------私营企业信息------------------------
-        // privateOwnerFlag: [{
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }, ],
         compType: [{ // 企业类型
           value: '01',
           label: '独资'
@@ -1401,20 +1302,6 @@
           value: '04',
           label: '民营企业'
         }],
-        // spouseSamecity: [{ //是否在同一个城市工作生活
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // childFlag: [{ // 是否有子女
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
         childStatus: [{ // 子女现状
           value: '00',
           label: '婴幼儿'
@@ -1431,27 +1318,6 @@
           value: '04',
           label: '工作'
         }],
-        // childTogether: [{ //子女是否在身边
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // childIspaycost: [{ // 是否支付其生活费
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-        // parentIsliving: [{ // 父母是否在世
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
         parentHealth: [{ // 父母身体状况
           value: '1',
           label: '疾病'
@@ -1459,13 +1325,6 @@
           value: '0',
           label: '健康'
         }],
-        // parentPayalimony: [{ // 父母是否需要赡养
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
         parentWork: [{ //父母工作情况
           value: '00',
           label: '在职'
@@ -1834,6 +1693,15 @@
         this.checkData.workCountyName = this.$refs.country.selectedLabel;
         this.checkData.hirecomKind = this.$refs.industry.selectedLabel;
         this.otherInfo.applyId = this.applyId;
+        // 负债信息去掉，
+        for (let key of Object.keys(this.borDebt)) {
+          if (key !== ('remark' && 'loanNumber')) {
+            if (this.borDebt[key]) {
+              this.borDebt[key] = this.borDebt[key].replace(this.regs, '');
+            }
+          }
+        }
+        this.borDebt && this.borDebt.applyId ? '' : this.borDebt.applyId = this.applyId;//第一次入参无applyId时传入
         this.btnnn();
         this.post("/creauditInfo/addOrUpdate", {
           creauditInfoDto: this.checkData, //原信审表
@@ -1844,10 +1712,7 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.AreaNPercent();
-            this.$message({
-              message: '保存成功!',
-              type: 'success'
-            });
+            this._succe('保存成功!');
             this.mountC();
             // 非必填项提示是语去掉
             // 单位电话：
@@ -2027,7 +1892,6 @@
       borrM() {
         this.borDebt.houseLoanAmt = this._formatNumber(this.borDebt.houseLoanAmt);
         this.borDebt.carLoanAmt = this._formatNumber(this.borDebt.carLoanAmt);
-        this.borDebt.loanNumber = this._formatNumber(this.borDebt.loanNumber);
         this.borDebt.monthRepayAmt = this._formatNumber(this.borDebt.monthRepayAmt);
         this.borDebt.otherLoanAmt = this._formatNumber(this.borDebt.otherLoanAmt);
         this.borDebt.studentLoanAmt = this._formatNumber(this.borDebt.studentLoanAmt);
@@ -2051,6 +1915,8 @@
               this.arr[3] = this.borDebt.monthRepayAmt ? this.borDebt.carLoanAmt : 0; //车贷每月还款额
               this.arr[4] = this.borDebt.monthRepayAmt ? this.borDebt.otherLoanAmt : 0; //其他贷款每月还款额
               this.borrM();
+            } else { //保存成功未返回值时清空
+              this.borDebt = {};
             }
             this.incomeList = resp.incomeList ? resp.incomeList : []; //  流水明细
             if (resp.otherInfo) { // 其他信息
@@ -2348,15 +2214,6 @@
     color: #b4bccc;
     font-size: 14px;
   }
-
-  .hint {
-    color: #ff7676;
-    font-size: 12px;
-    width: 100%;
-    position: absolute;
-    top: -22px;
-  }
-
 
   .btn {
     margin: 20px 0 0 250px;

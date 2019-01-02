@@ -20,6 +20,14 @@
   padding: 0 10px;
 }
 
+.padding_top_4 {
+  padding-top: 4px;
+}
+
+.padding_top_10 {
+  padding-top: 10px;
+}
+
 .padding_left_5 {
   padding-left: 5px;
 }
@@ -279,10 +287,12 @@ body .pre_wrap {
   left: 0px;
   /* top:0; */
 }
-.oper{
-  color:#409eff;
+
+.oper {
+  color: #409eff;
   cursor: pointer;
 }
+
 /* el-item 前的红色*  去掉 */
 .clear_hint label::before {
   content: '' !important;
@@ -782,33 +792,26 @@ body .el-table_450_scroll .el-table__fixed-right {
   font-weight: 800;
 }
 
+/* 信审表 */
 /* 查看-信审表-div设置border */
 .border_top {
   /* border-top: 1px solid #d8dce5; */
 }
 
-.divWrap_Padding_top_4 {
-  padding-top: 4px;
-}
-
-.Padding_top_10 {
-  padding-top: 10px;
-}
-
-.Padding_top_4 {
-  padding-top: 4px;
-}
-
 .CreditForm_div_border {
   border-bottom: 1px solid #eff2f6;
-  /* border-bottom: 1px solid green; */
 }
 
-/* .bor{
-  border: 1px solid #d8dce5;
-} */
 .bor_none {
   border: none;
+}
+
+.hint {
+  color: #ff7676;
+  font-size: 12px;
+  width: 100%;
+  position: absolute;
+  bottom: -20px;
 }
 
 /* 借款人资料 */

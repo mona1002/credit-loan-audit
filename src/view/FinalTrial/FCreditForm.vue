@@ -274,7 +274,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">其他信息</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_triplet clearFix margin_top_5 divWrap_Padding_top_4">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix margin_top_5 padding_top_4">
           <label class="label_width_220">其他：</label>
           <span class="text_area_span text_area_span_minus220" style="height:115px;"> {{otherInfo.content}}</span>
         </div>
@@ -690,7 +690,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">电话征信结论</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_triplet clearFix divWrap_Padding_top_4">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix padding_top_4">
           <div class=" CreditForm_div_border clearFix">
             <label class="label_width_220 ">住址电话调查结论：</label>
             <span class="text_area_span text_area_span_minus220">{{this.FormData.hometelConclusion }} </span>
@@ -719,7 +719,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">内部匹配结论</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_triplet clearFix divWrap_Padding_top_4">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix padding_top_4">
           <label class="label_width_220">匹配调查结论：</label>
           <span class="text_area_span text_area_span_minus220">{{this.FormData.auditDesc }} </span>
         </div>
@@ -730,7 +730,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">审批结论</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_triplet clearFix divWrap_Padding_top_4">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix padding_top_4">
           <div class=" CreditForm_div_border clearFix">
             <label class="label_width_220">初审结果评价：</label>
             <span class="text_area_span text_area_span_minus220" style="height:115px;">{{this.FormData.oother}} </span>
@@ -1020,13 +1020,8 @@
   /* 上网信息-两行select下拉 居中 */
 
   .hint {
-    color: #ff7676;
-    font-size: 12px;
     display: inline-block;
-    width: 100%;
     font-style: normal;
-    position: absolute;
-    top: -20px;
     left: 205px;
   }
 
