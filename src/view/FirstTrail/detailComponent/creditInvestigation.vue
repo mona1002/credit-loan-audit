@@ -15,14 +15,14 @@
                 <span>{{datas.creditDate}} </span>
               </li>
               <li>
-                <label class="label_width_200">实地人员1：</label>
-                <span>{{bb}} </span>
+                <label class="label_width_200">实地人员：</label>
+                <span>{{datas.fieldUserNames}} </span>
               </li>
             </div>
             <div class="CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_200">是否核对借款人有效证件：</label>
-                <span>{{datas.IsCheckDocTxt}} </span>
+                <span>{{datas.checkDocFlagTxt}} </span>
               </li>
               <li>
                 <p v-show="datas.IsCheckDocTxt=='否'">
@@ -36,11 +36,11 @@
             </div>
             <li>
               <label class="label_width_200">实地场所：</label>
-              <span>{{aa}} </span>
+              <span>{{datas.fieldAreaTxt }} </span>
             </li>
             <li>
               <label class="label_width_200">实地发起源：</label>
-              <span>{{cc}} </span>
+              <span>{{datas.fieldSendOriginTxt }} </span>
             </li>
           </ul>
         </div>
@@ -71,10 +71,10 @@
             <div class="CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_200">是否核对借款人房产证件：</label>
-                <span>{{datas.checkEstateLicenseReason}}</span>
+                <span>{{datas.checkEstateLicenseFlagTxt }}</span>
               </li>
               <li>
-                <p v-show="datas.checkEstateLicenseReason == '否'">
+                <p v-show="datas.checkEstateLicenseFlagTxt  == '否'">
                   <label class="label_width_200">不核对借款人房产证件原因：</label>
                   <el-tooltip class="item" effect="dark" :content="datas.homeHouseInfo" :disabled="datas.homeHouseInfo==null"
                     placement="top">
@@ -193,16 +193,16 @@
             <div class="CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_200">是否查验企业有效证件：</label>
-                <span>{{datas.compCheckDocFlag}}</span>
+                <span>{{datas.compCheckDocFlagTxt}}</span>
               </li>
               <li>
                 <label class="label_width_200">各项材料原件是否收齐比对：</label>
-                <span>{{datas.creditDate}}</span>
+                <span>{{datas.compMaterialCompFlagTxt}}</span>
               </li>
             </div>
             <li>
               <label class="label_width_200">企业是否存在：</label>
-              <span>{{datas.creditDate}}</span>
+              <span>{{datas.compExistFlagTxt}}</span>
             </li>
           </ul>
         </div>
@@ -226,7 +226,7 @@
             </div>
             <li>
               <label class="label_width_200">办公场所面积：</label>
-              <span>{{datas.compSignPlace}}</span>
+              <span>{{datas.compOfficeArea}}</span>
             </li>
           </ul>
         </div>
@@ -255,7 +255,7 @@
               </li>
               <li>
                 <label class="label_width_200">办公区工位数情况：</label>
-                <span>{{ee}}</span>
+                <span>{{datas.compWorkshopStationNum}}</span>
               </li>
             </div>
             <li>
@@ -264,7 +264,7 @@
             </li>
             <li>
               <label class="label_width_200">工位上是否有电话：</label>
-              <span>{{ff}}</span>
+              <span>{{datas.compWorkshopTelFlagTxt }}</span>
             </li>
           </ul>
         </div>
@@ -279,26 +279,26 @@
             <div class="CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_200">是否开工中：</label>
-                <span>{{datas.compIsStart}}</span>
+                <span>{{datas.compIsStartTxt}}</span>
               </li>
               <li>
                 <label class="label_width_200">见到办公人数：</label>
-                <span>{{datas.compWorkerStationNum}}</span>
+                <span>{{datas.compWorkerNum}}</span>
               </li>
             </div>
             <div class="CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_200">是否统一着装：</label>
-                <span>{{datas.compUniformFlag}}</span>
+                <span>{{datas.compUniformFlagTxt}}</span>
               </li>
               <li>
                 <label class="label_width_200">工位上是否有电话：</label>
-                <span>{{hh}}</span>
+                <span>{{datas.compWorkerTelFlagTxt }}</span>
               </li>
             </div>
             <li>
               <label class="label_width_200">办公区工位数情况：</label>
-              <span>{{gg}}</span>
+              <span>{{datas.compWorkerStationNum }}</span>
             </li>
           </ul>
         </div>
@@ -394,14 +394,6 @@
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         datas: '',
-        aa: '',
-        bb: '',
-        cc: '',
-        dd: '',
-        ee: '',
-        ff: '',
-        gg: '',
-        hh: '',
         taskInWaitting: '',
         judgeFlag: '',
       };
@@ -428,64 +420,64 @@
             this.datas = res.data ? res.data : {};
             //(企业)收支[万元]
             if (this.datas.compPay != null) {
-              this.datas.compPay = this.formatNumber(this.datas.compPay, 2, 0);
+              this.datas.compPay = this._formatNumber(this.datas.compPay);
             };
             //(企业)毛利[万元]
             if (this.datas.compGroosmargin != null) {
-              this.datas.compGroosmargin = this.formatNumber(this.datas.compGroosmargin, 2, 0);
+              this.datas.compGroosmargin = this._formatNumber(this.datas.compGroosmargin);
             };
             //(企业)纯利[万元]
             if (this.datas.compNetProfit != null) {
-              this.datas.compNetProfit = this.formatNumber(this.datas.compNetProfit, 2, 0);
+              this.datas.compNetProfit = this._formatNumber(this.datas.compNetProfit);
             };
             //(企业)应收账款[万元]
             if (this.datas.compCollection != null) {
-              this.datas.compCollection = this.formatNumber(this.datas.compCollection, 2, 0);
+              this.datas.compCollection = this._formatNumber(this.datas.compCollection);
             };
             //(企业)应付账款
             if (this.datas.compPayables != null) {
-              this.datas.compPayables = this.formatNumber(this.datas.compPayables, 2, 0);
+              this.datas.compPayables = this._formatNumber(this.datas.compPayables);
             };
             //办公环境 办公场所面积
             if (this.datas.compOfficeArea != null) {
-              this.datas.compOfficeArea = this.formatNumber(this.datas.compOfficeArea, 2, 0).replace(/,/g, '') +
+              this.datas.compOfficeArea = this._formatNumber(this.datas.compOfficeArea).replace(/,/g, '') +
                 '㎡';
             };
             //库房/车间 厂房面积
             if (this.datas.compArea != null) {
-              this.datas.compArea = this.formatNumber(this.datas.compArea, 2, 0).replace(/,/g, '') + '㎡';
+              this.datas.compArea = this._formatNumber(this.datas.compArea).replace(/,/g, '') + '㎡';
             };
 
           };
         });
       },
       //保留两位小数 整数千分位
-      formatNumber(num, cent, isThousand) {
-        num = num.toString().replace(/\$|\,/g, '');
-        // 检查传入数值为数值类型
-        if (isNaN(num))
-          num = "0";
-        // 获取符号(正/负数)
-        let sign = (num == (num = Math.abs(num)));
-        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
-        let cents = num % Math.pow(10, cent); // 求出小数位数值
-        num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
-        cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-        // 补足小数位到指定的位数
-        while (cents.length < cent)
-          cents = "0" + cents;
-        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
-          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-        if (cent > 0) {
-          if (sign == true) {
-            return (((sign) ? '' : '-') + num + '.' + cents);
-          } else if (sign == false) {
-            return '0.00'
-          }
-        } else {
-          return (((sign) ? '' : '-') + num);
-        }
-      },
+      // formatNumber(num, cent, isThousand) {
+      //   num = num.toString().replace(/\$|\,/g, '');
+      //   // 检查传入数值为数值类型
+      //   if (isNaN(num))
+      //     num = "0";
+      //   // 获取符号(正/负数)
+      //   let sign = (num == (num = Math.abs(num)));
+      //   num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
+      //   let cents = num % Math.pow(10, cent); // 求出小数位数值
+      //   num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
+      //   cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
+      //   // 补足小数位到指定的位数
+      //   while (cents.length < cent)
+      //     cents = "0" + cents;
+      //   for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+      //     num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+      //   if (cent > 0) {
+      //     if (sign == true) {
+      //       return (((sign) ? '' : '-') + num + '.' + cents);
+      //     } else if (sign == false) {
+      //       return '0.00'
+      //     }
+      //   } else {
+      //     return (((sign) ? '' : '-') + num);
+      //   }
+      // },
     }
   }
 
