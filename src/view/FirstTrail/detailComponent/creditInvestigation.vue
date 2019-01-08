@@ -25,7 +25,7 @@
                 <span>{{datas.checkDocFlagTxt}} </span>
               </li>
               <li>
-                <p v-show="datas.IsCheckDocTxt=='否'">
+                <p v-show="datas.checkDocFlagTxt=='否'">
                   <label class="label_width_200">不核对借款人有效证件原因：</label>
                   <el-tooltip class="item" effect="dark" :content="datas.notCheckBorrowerDocReason" :disabled="datas.notCheckBorrowerDocReason==null"
                     placement="top">
@@ -76,9 +76,9 @@
               <li>
                 <p v-show="datas.checkEstateLicenseFlagTxt  == '否'">
                   <label class="label_width_200">不核对借款人房产证件原因：</label>
-                  <el-tooltip class="item" effect="dark" :content="datas.homeHouseInfo" :disabled="datas.homeHouseInfo==null"
+                  <el-tooltip class="item" effect="dark" :content="datas.checkEstateLicenseReason" :disabled="datas.checkEstateLicenseReason==null"
                     placement="top">
-                    <span>{{datas.homeHouseInfo}}</span>
+                    <span>{{datas.checkEstateLicenseReason}}</span>
                   </el-tooltip>
                 </p>
               </li>
