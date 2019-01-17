@@ -7,35 +7,23 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">基本信息</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_half clearFix">
-          <ul>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_166">进件编号：</label>
-                <span>{{applyInfoPool.applySubno}}</span>
-              </li>
-              <li>
-                <label class="label_width_166">客户名称：</label>
-                <span>{{applyInfoPool.custName}}</span>
-              </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_166">证件类型：</label>
-                <span>{{applyInfoPool.certTypeTxt}}</span>
-              </li>
-              <li>
-                <label class="label_width_166">证件号码：</label>
-                <span>{{applyInfoPool.certCode}}</span>
-              </li>
-            </div>
-            <div class="CreditForm_div_border bor_none clearFix">
-              <li>
-                <label class="label_width_166">移动电话：</label>
-                <span>{{applyInfoPool.mobile}}</span>
-              </li>
-            </div>
-          </ul>
+        <div class="height_auto">
+          <el-table :data="tableData" style="width: 100%" border @row-dblclick="getDetail">
+            <el-table-column prop="auditTime" label="结论时间">
+            </el-table-column>
+            <el-table-column prop="applySubno" label="进件编号">
+            </el-table-column>
+            <el-table-column prop="custName" label="客户名称">
+            </el-table-column>
+            <el-table-column prop="客户名称" label="身份证号">
+            </el-table-column>
+            <el-table-column prop="applyPersonName" label="申请人">
+            </el-table-column>
+            <el-table-column prop="appDate" label="申请日期">
+            </el-table-column>
+            <el-table-column prop="appOrgName" label="申请机构">
+            </el-table-column>
+          </el-table>
         </div>
       </el-collapse-item>
       <el-collapse-item name="2">
@@ -88,7 +76,7 @@
           <ul>
             <li class="text_area_li triplet_textarea_width " style="margin-top:5px;">
               <label class="label_width_166">反欺诈决策反馈：</label>
-              <span class="text_area_span text_area_span_minus220">{{fraudAuditOpinion.auditDesc}}</span>
+              <span class="text_area_span text_area_span_minus220">{{fraudApplyInfo.auditDesc}}</span>
             </li>
           </ul>
         </div>
@@ -100,27 +88,32 @@
   export default {
     data() {
       return {
+        tableData: [],
         activeNames: ['1', '2', '3'],
-        applyInfoPool: {},
         fraudApplyInfo: {},
-        fraudAuditOpinion: {},
-        tastwaitingPass: '',
       }
     },
     methods: {
-      mountedInf() {
-        //基本信息:applyInfoPool
-        // 反欺诈申请信息 fraudApplyInfo
-        // 反欺诈结论 fraudAuditOpinion 
-        this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
-          applyId: this.applyId
-        }).then(res => {
+      getDetail(row) {
+        this.get('/fraudAuditOpinion/getOpinion/' + row.id).then(res => {
           if (res.statusCode == 200) {
-            this.applyInfoPool = res.data.applyInfoPool;
-            this.fraudApplyInfo = res.data.fraudApplyInfo;
-            this.fraudAuditOpinion = res.data.fraudAuditOpinion;
+            this.fraudApplyInfo = res.data;
           } else {
-            this.$message.error(res.msg);
+            this._error(res.msg);
+            this.fraudApplyInfo = {};
+          }
+        });
+      },
+      mountedInf() {
+        this.get('/fraudAuditOpinion/getOpinions/' + this.applyId).then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+            if (this.tableData.length > 0) {
+              this.getDetail(this.tableData[0]);
+            }
+          } else {
+            this._error(res.msg);
+            this.tableData = [];
           }
         });
       }
