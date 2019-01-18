@@ -13,9 +13,9 @@
             </el-table-column>
             <el-table-column prop="applySubno" label="进件编号">
             </el-table-column>
-            <el-table-column prop="custName" label="客户名称">
+            <el-table-column prop="applyCustName" label="客户名称">
             </el-table-column>
-            <el-table-column prop="客户名称" label="身份证号">
+            <el-table-column prop="certCode" label="身份证号">
             </el-table-column>
             <el-table-column prop="applyPersonName" label="申请人">
             </el-table-column>
@@ -94,8 +94,8 @@
       }
     },
     methods: {
-      getDetail(row) {
-        this.get('/fraudAuditOpinion/getOpinion/' + row.id).then(res => {
+      getDetail({id}) {
+        this.get('/fraudAuditOpinion/getOpinion/' + id).then(res => {
           if (res.statusCode == 200) {
             this.fraudApplyInfo = res.data;
           } else {
