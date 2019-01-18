@@ -36,7 +36,7 @@
             <remark v-if=" this.tabContent1==1" :applyId='list.applyId'></remark>
             <InternalMatch v-if=" this.tabContent1==2"  :listInf='list'>内部匹配</InternalMatch>
             <keep-alive v-if="Routes.closed">
-              <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'>申请信息</capplicationInformationDetail>
+              <capplicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId' :btn="true">申请信息</capplicationInformationDetail>
             </keep-alive>
             <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId'  :addBtn="false" :showSel='true'> 电话征信</PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==5" :applyId='list.applyId' :FinalConCheckShow='true'>信审表</FCreditForm>
@@ -80,7 +80,7 @@
           <remark v-if=" this.tabContent2==1" :applyId='list.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2"  :listInf='list'>内部匹配</InternalMatch>
           <keep-alive v-if="Routes.closed">
-            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='MatchingInfQuery'>申请信息</capplicationInformationDetail>
+            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' roles='MatchingInfQuery' :btn="true">申请信息</capplicationInformationDetail>
           </keep-alive>
           <PhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId' :addBtn="false" :showSel='true'> </PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==5" :applyId='list.applyId' :FinalConCheckShow='true'>信审表</FCreditForm>
