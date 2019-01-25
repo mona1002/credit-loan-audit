@@ -35,7 +35,7 @@
           <remark v-if=" this.tabContent2==1" :applyId='list.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2"  :listInf='list'></InternalMatch>
           <keep-alive v-if="Routes.closed">
-            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3" :applyId='list.applyId'
+            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3" :applyId='list.applyId' :btn="true"
               :roles='Flag=="03"?"antiFraudApp_commissioner":"antiFraudApp_manager" '></capplicationInformationDetail>
           </keep-alive>
           <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail> 

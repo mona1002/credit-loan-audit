@@ -33,7 +33,7 @@
         if (res.statusCode == 200) {
           this.tableData = res.data;
         } else {
-          this.$message.error(res.msg);
+          this._error(res.msg);
         }
       });
     }

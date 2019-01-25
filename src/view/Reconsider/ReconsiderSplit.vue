@@ -35,7 +35,7 @@
           <remark v-if=" this.tabContent2==1" :applyId='list.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
           <keep-alive v-if="Routes.closed">
-            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' :roles='Flag=="05"?"reconsiderApp_commissioner":"reconsiderApp_manager" '></capplicationInformationDetail>
+            <capplicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' :btn="true" :roles='Flag=="05"?"reconsiderApp_commissioner":"reconsiderApp_manager" '></capplicationInformationDetail>
           </keep-alive>
           <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
           <PhoneCredit v-if=" this.tabContent2==5"  :applyId='list.applyId' :addBtn="false"></PhoneCredit>

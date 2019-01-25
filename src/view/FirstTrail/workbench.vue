@@ -124,7 +124,7 @@
           if (res.statusCode == 200) {
             this.tableData = res.data;
           } else {
-             this.tableData =[];
+            this.tableData = [];
             this._error(res.msg);
           }
         });
@@ -138,7 +138,7 @@
       refresh() {
         this.rot += 360;
         this.$refs.worktask.style.transform = "rotate(" + this.rot + "deg)";
-       this.mountedInf();
+        this.mountedInf();
       },
       handleCurrentChange(val) {
         this.currentRow = val;

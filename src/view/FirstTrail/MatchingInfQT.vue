@@ -39,7 +39,7 @@
             <remark v-if=" this.tabContent1==1" :applyId='list.applyId'></remark>
             <InternalMatch v-if=" this.tabContent1==2" :listInf='list'>内部匹配</InternalMatch>
             <keep-alive v-if="Routes.closed">
-              <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId'>申请信息</applicationInformationDetail>
+              <applicationInformationDetail v-if=" this.tabContent1==3" :applyId='list.applyId' :btn="true">申请信息</applicationInformationDetail>
             </keep-alive>
             <!-- <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail> -->
             <PhoneCredit v-if=" this.tabContent1==4" :applyId='list.applyId' :addBtn="false">  </PhoneCredit>
@@ -107,7 +107,7 @@
           <remark v-if=" this.tabContent2==1" :applyId='list.applyId'></remark>
           <InternalMatch v-if=" this.tabContent2==2" :listInf='list'></InternalMatch>
           <keep-alive v-if="Routes.closed">
-            <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' :roles="QTC.pageType ">申请信息</applicationInformationDetail>
+            <applicationInformationDetail v-if=" this.tabContent2==3" :applyId='list.applyId' :btn="true" :roles="QTC.pageType ">申请信息</applicationInformationDetail>
           </keep-alive>
           <!-- <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail> -->
           <PhoneCredit v-if=" this.tabContent2==4" :applyId='list.applyId' :addBtn="false"></PhoneCredit>
@@ -199,7 +199,6 @@
       return {
         accepCusBasicInfo: {},
         list: {},
-        // list: {},
         QTConclutionMark: "",
         TaskList: '',
         LocalList: '',
